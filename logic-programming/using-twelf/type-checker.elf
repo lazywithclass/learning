@@ -1,0 +1,47 @@
+ty  : type.
+nty : ty.
+sty : ty.
+
+string : type.
+nat    : type.
+
+% examples
+
+1 : nat.
+2 : nat.
+3 : nat.
+
+s1 : string.
+s2 : string.
+s3 : string.
+
+% give constructor declarations for expressions
+% this is what it would look like in F#
+% type exp =
+%        | K of int
+%        | S of string
+%        | Plus of exp * exp
+%        | Concat of exp * exp
+%        | Len of exp
+
+exp : type.
+kOfInt : nat -> exp.
+sOfString : string -> exp.
+plus : exp -> exp -> exp.
+concat : exp -> exp -> exp.
+len : exp -> exp.
+
+% examples
+
+k1 = kOfInt 1.
+k2 = kOfInt 2.
+sum1 = plus k1 k2.
+
+typecheck : exp -> ty -> type.
+typecheck\int : typecheck (kOfInt _) nty.
+typecheck\string : typecheck (sOfString _) sty.
+%query 1 1 typecheck (kOfInt 2) I.
+%query 1 1 typecheck (sOfString s1) S.
+typecheck\sum : typecheck E1 nty -> typecheck E2 nty -> typecheck (plus E1 E2) nty.
+typecheck\concat : typecheck E1 sty -> typecheck E2 sty -> typecheck (concat E1 E2) sty.
+typecheck\len : typecheck E1 sty -> typecheck (len E1) nty.
