@@ -1,0 +1,96 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <title>Arkanoid</title>
+        <script src="https://livejs.com/live.js"></script>
+        <style>
+
+         html, body {
+             height: 100%;
+         }
+
+         body {
+             background: black;
+             display: flex;
+             align-items: center;
+             justify-content: center;
+         }
+
+         canvas {
+             border: 1px solid white;
+         }
+
+        </style>
+    <body>
+        <canvas id="game" width="400" height="500"></canvas>
+
+        <script>
+         // let's get the canvas and the "brush"
+         let canvas = document.getElementById("game")
+         let context = canvas.getContext("2d")
+
+         let platform = {
+             x: 50,
+             y: 400,
+             speed: 3,
+             height: 15,
+             width: 50,
+             color: "red"
+         }
+
+         let ball = {
+             x: 50,
+             y: 100,
+             speedX: 2,
+             speedY: 2,
+             height: 15,
+             width: 15,
+             color: "grey"
+         }
+
+         function gameLoop() {
+             requestAnimationFrame(gameLoop)
+
+             context.clearRect(0, 0, canvas.width, canvas.height)
+
+             // move the ball
+             ball.x = ball.x + ball.speedX
+             ball.y = ball.y + ball.speedY
+             // draw the ball
+             context.fillStyle = ball.color
+             context.fillRect(ball.x, ball.y, ball.width, ball.height)
+
+             // COLLISIONS!
+             // Next time, going to stop here for now
+
+             // move the platform
+             platform.x = platform.x + platform.speed
+             // handle the collision with wall
+             if (platform.x <= 0) {
+                 platform.x = 0
+             }
+             if (platform.x + platform.width >= canvas.width) {
+                 platform.x = canvas.width - platform.width
+             }
+             // draw the platform
+             context.fillStyle = platform.color
+             context.fillRect(platform.x, platform.y, platform.width, platform.height)
+
+         }
+
+         requestAnimationFrame(gameLoop)
+
+
+         document.addEventListener("keydown", function(e) {
+             switch (e.key) {
+                 case "ArrowLeft":
+                     platform.speed = -platform.speed
+                     break;
+                 case "ArrowRight":
+                     platform.speed = Math.abs(platform.speed)
+                     break;
+             }
+         })
+        </script>
+    </body>
+</html>
