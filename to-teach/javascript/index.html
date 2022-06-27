@@ -61,11 +61,42 @@
              context.fillRect(ball.x, ball.y, ball.width, ball.height)
 
              // COLLISIONS!
-             // Next time, going to stop here for now
+             // platform
+             if (ball.y + ball.height >= platform.y &&
+                 ball.x + ball.width >= platform.x &&
+                 ball.x <= platform.x + platform.width) {
+                 ball.y = platform.y - ball.height
+                 ball.speedY = -ball.speedY
+             }
+
+             // right wall
+             if (ball.x + ball.width >= canvas.width) {
+                 ball.x = canvas.width - ball.width
+                 ball.speedX = -ball.speedX
+             }
+
+             // top wall
+             if (ball.y <= 0) {
+                 ball.y = 0
+                 ball.speedY = -ball.speedY
+             }
+
+             // left wall
+             if (ball.x <= 0) {
+                 ball.x = 0
+                 ball.speedX = -ball.speedX
+             }
+
+
+             // sooo... I've decided to stop here with these silent videos :D
+             // next up I will explain whatever I am writing, this is not
+             // really working for me! And I also believe that it will be more
+             // helpful for everyone watching
+             // see you soon!
 
              // move the platform
              platform.x = platform.x + platform.speed
-             // handle the collision with wall
+             // handle the collision with walls
              if (platform.x <= 0) {
                  platform.x = 0
              }
