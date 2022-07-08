@@ -1,0 +1,150 @@
+nat : type.
+succ : nat -> nat.
+0 : nat.
+1 = succ 0.
+2 = succ 1.
+3 = succ 2.
+4 = succ 3.
+5 = succ 4.
+6 = succ 5.
+7 = succ 6.
+8 = succ 7.
+9 = succ 8.
+
+% define equality
+equal : nat -> nat -> type.
+equal\base : equal 0 0.
+equal\rec : equal A B -> equal (succ A) (succ B).
+%mode equal +A +B.
+%query 0 * equal 1 2.
+%query 1 * equal 1 1.
+
+equalBetter : nat -> nat -> type.
+equalBetter\fact : equalBetter A A.
+%mode equalBetter +A +B.
+%query 1 * equalBetter 2 2.
+%query 0 * equalBetter 1 2.
+
+% define inequality
+notequal : nat -> nat -> type.
+notequal\0 : notequal 0 (succ A).
+notequal\1 : notequal (succ A) 0.
+notequal\rec : notequal A B -> notequal (succ A) (succ B).
+%mode notequal +A +B.
+%query 0 * notequal 1 1.
+%query 1 * notequal 1 2.
+
+sum : nat -> nat -> nat -> type.
+sum\base : sum A 0 A.
+sum\rec : sum A B C -> sum A (succ B) (succ C).
+%mode sum +A +B -C.
+%query 1 * sum 1 2 C.
+
+% define multiplication
+mul : nat -> nat -> nat -> type.
+mul\0 : mul A 0 0.
+mul\rec : sum C A D -> mul A B C -> mul A (succ B) D.
+%mode mul +A +B -C.
+%query 1 * mul 2 3 C.
+
+% define factorial (without accumulator)
+fact : nat -> nat -> type.
+fact\0 : fact 0 1.
+fact\rec : mul (succ A) B C -> fact A B -> fact (succ A) C.
+%mode fact +A -B.
+%query 1 * fact 0 B.
+%query 1 * fact 1 B.
+%query 1 * fact 2 B.
+%query 1 * fact 3 B.
+
+% define subtraction
+sub : nat -> nat -> nat -> type.
+sub\0 : sub A 0 A.
+sub\rec : sub A B (succ C) -> sub A (succ B) C.
+%mode sub +A +B -C.
+%query 1 * sub 4 2 C.
+
+% define
+% sumList : natList -> nat -> type.
+% that given a natList returns the sum of all its items
+
+natList : type.
+cons : nat -> natList -> natList.
+nil : natList.
+
+l = cons 1 (cons 2 (cons 3 nil)).
+l' = cons 1 (cons 2 nil).
+
+sumList : natList -> nat -> type.
+sumList\base : sumList nil 0.
+sumList\rec : sum N S S' -> sumList L S -> sumList (cons N L) S'.
+%mode sumList +L -S.
+%query 1 * sumList l S.
+%query 1 * sumList l' S.
+
+isEven : nat -> type.
+isEven\0 : isEven 0.
+isEven\rec : isEven A -> isEven (succ (succ A)).
+%mode isEven +A.
+%query 1 * isEven 2.
+%query 0 * isEven 1.
+
+filterEven : natList -> natList -> type.
+filterEven\nil : filterEven nil nil.
+filterEven\recEven : isEven N ->
+                                 filterEven L EL ->
+                                 filterEven (cons N L) (cons N EL).
+filterEven\recOdd : isEven N ->
+                                 filterEven L EL ->
+                                 filterEven (cons (succ N) L) EL.
+%mode filterEven +L -EL.
+%query 1 * filterEven l EL.
+%query 1 * filterEven l' EL.
+
+% write sumList with an accumulator
+sumListAcc : natList -> nat -> nat -> type.
+sumListAcc\base : sumListAcc nil 0 0.
+sumListAcc\rec : sum N S S' -> sumListAcc L Acc S -> sumListAcc (cons N L) S' S'.
+%mode sumListAcc +L -Acc -S.
+%query 1 * sumListAcc l A S.
+
+% assume nat also includes negative numbers
+neg : nat -> nat.
+-1 = neg 1.
+-2 = neg 2.
+-3 = neg 3.
+-4 = neg 4.
+-5 = neg 5.
+-6 = neg 6.
+-7 = neg 7.
+-8 = neg 8.
+-9 = neg 9.
+
+gte : nat -> nat -> type.
+gte\eq : gte A 0.
+gte\gt : gte A B -> gte (succ A) (succ B).
+gte\posNeg : gte (succ P) (neg N).
+gte\negNeg : gte N' N -> gte (neg N) (neg N').
+%mode gte +A +B.
+%query 1 * gte 2 0.
+%query 1 * gte 0 0.
+%query 0 * gte 0 1.
+%query 1 * gte -1 -3.
+%query 1 * gte -1 -1.
+
+sum' : nat -> nat -> nat -> type.
+sum'\posPos : sum P P' S -> sum' P P' S.
+sum'\negNeg : sum N N' S -> sum' (neg N) (neg N') (neg S).
+sum'\posNeg : gte N P -> sub N P S -> sum' P (neg N) (neg S).
+sum'\posNeg' : gte P N -> sub P N S -> sum' P (neg N) S.
+sum'\negPos : gte P N -> sub P N S -> sum' (neg N) P S.
+sum'\negPos' : gte N P -> sub N P S -> sum' (neg N) P (neg S).
+%mode sum' +A +B -S.
+%query 1 * sum' 1 2 S.
+%query 1 * sum' 4 -2 S.
+%query 1 * sum' 1 -2 S.
+%query 1 * sum' -3 -2 S.
+% not really sure why I get 2 solutions
+%query 2 * sum' -1 2 S.
+%query 2 * sum' -2 1 S.
+%query 2 * sum' -7 8 S.
