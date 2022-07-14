@@ -71,12 +71,13 @@ A logic program is composed by clauses.<br />
 All declarations should end with a `.`<br />
 We don't have functions, but relations, and they are lowercase, variables are uppercase.<br />
 
-"<-" is the implication. The following is read as "grandfather X Y, if father X Z and parent Z Y"
+"<-" is the implication. The following is read as "grandfather X Y, if father X Z and if parent Z Y" or "to prove that X is Y's grandfather we have to find Z such that 
+X is Z's father and Z is the parent"
 
 ``` twelf
-gf: grandfather X Y
-    <- father X Z
-    <- parent Z Y.
+gf: grandfather X Y  % head of the clause
+    <- father X Z    % body of 
+    <- parent Z Y.   % the clause
 ```
 
 Where
