@@ -43,6 +43,8 @@ bottom-up or forward-reasoning means that we work forwards from the axioms apply
 
 ### Substitution
 
+A substitution is a list of assignments in the form `X` = `t`, where `X` is a variable and `t` a term in the language of the program.
+
 Computation happens through substitutions, which are equalities.
 
 Since we don't want circular substitutions we can change a rule variables' considering what's called as a variant of the rule.
@@ -91,6 +93,19 @@ parent Z Y   father X Z
 ------------------------ R
     grandfather X Y
 ```
+
+Generally speaking we have
+
+```twelf
+c : H <- B1
+      <- B2
+      ...
+      <- Bn
+```
+
+Read as "H if B1 if B2 ... if Bn" or "If B1 B2 ... Bn hold then H".
+
+Where `c` is a label identifying the clause, `H` is an atomic formula (head of c), B1, ..., Bn are atomic formulas (body of c)
 
 ``` twelf
 nat : type.
