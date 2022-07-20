@@ -53,7 +53,10 @@ Substitutions happen simultaneously.
 
 ### Unification
 
-I did not get this.
+Given a goal `G` and a goal `H` (in a rule `r`), a unifier between `G` and `H` is a substitution
+`s` such that `Gs = Hs`.
+
+The interesting point is that I can use `r` to prove `Gs`, so I can use "the other one".
 
 ### Terminology:
 
@@ -127,6 +130,14 @@ plus/s : plus (s X) Y (s Z)
 
 `plus` is a binary relation, that binds two `nat`
 
+### Proof search: how the interpreter builds derivations to solve queries
+
+Clauses have to be written in such a way so that the interpreter could build derivations.
+
+I look for all rules that unify with my goal to understand how the interpreter will proceed;
+careful to follow rules in the same order as they are written.
+
+
 ### Syntax
 
 `nat : type.` - is a type declaration
@@ -136,6 +147,8 @@ plus/s : plus (s X) Y (s Z)
 
 Useful commands 
 
+`C-c C-d` - check declaration
 `C-c C-c` - check configuration
 `C-c C-u` - server display
 `top` - in \*twelf server\* to evaluate queries
+`M-x twelf-trace-trace-all` followed by `C-c C-d` - traces the proofs search tree followed by the interpreter
