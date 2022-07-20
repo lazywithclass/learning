@@ -137,6 +137,13 @@ Clauses have to be written in such a way so that the interpreter could build der
 I look for all rules that unify with my goal to understand how the interpreter will proceed;
 careful to follow rules in the same order as they are written.
 
+```
+parent adam Z   ancestor Z Y
+----------------------------- R
+    ancestor adam Y
+```
+
+To find `Y` I first have to find a `Z` such that `parent adam Z`, then I have to find `Y` such that `ancestor Z Y`.
 
 ### Syntax
 
