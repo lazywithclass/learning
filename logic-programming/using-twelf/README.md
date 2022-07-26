@@ -6,7 +6,6 @@ Functional programming refinement.
 
 Requires a debugger to understand how expressions are evaluated.
 
-
 ## Basics
 
 In logic programming we only specify what is true.
@@ -43,7 +42,7 @@ bottom-up or forward-reasoning means that we work forwards from the axioms apply
 
 ### Substitution
 
-A substitution is a list of assignments in the form `X` = `t`, where `X` is a variable and `t` a term in the language of the program.
+A substitution is a list of assignments in the form `X = t`, where `X` is a variable and `t` a term in the language of the program.
 
 Computation happens through substitutions, which are equalities.
 
@@ -145,6 +144,18 @@ parent adam Z   ancestor Z Y
 
 To find `Y` I first have to find a `Z` such that `parent adam Z`, then I have to find `Y` such that `ancestor Z Y`.
 
+Example
+
+Given the following query: `Q = plus (s z) (s z) Z` we start with the proof tree `T0 = Q`
+ * Goal1 is `plus (s z) (s z) Z`
+ * which unifies with 
+```
+ plus X Y Z1
+-------------------- pluss
+plus (s X) Y (s Z1)
+```
+having `u1 = [ X = z; Y = s z; Z = s Z1 ]` as substitutions
+
 ### Syntax
 
 `nat : type.` - is a type declaration
@@ -152,10 +163,11 @@ To find `Y` I first have to find a `Z` such that `parent adam Z`, then I have to
 
 ## Emacs integration
 
-Useful commands 
+Useful commands, especially `twelf-trace-break-all` to understand how the proof search is performed
 
 `C-c C-d` - check declaration
 `C-c C-c` - check configuration
 `C-c C-u` - server display
 `top` - in \*twelf server\* to evaluate queries
 `M-x twelf-trace-trace-all` followed by `C-c C-d` - traces the proofs search tree followed by the interpreter
+`M-x twelf-trace-break-all` followed by `C-c C-d` - stops after each step
