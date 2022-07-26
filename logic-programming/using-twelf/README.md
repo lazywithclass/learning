@@ -146,15 +146,41 @@ To find `Y` I first have to find a `Z` such that `parent adam Z`, then I have to
 
 Example
 
+Given 
+```Twelf
+plus/z : plus z Y Y.
+plus/s : plus (s X) Y (s Z)
+           <- plus X Y Z.
+```
+
 Given the following query: `Q = plus (s z) (s z) Z` we start with the proof tree `T0 = Q`
- * Goal1 is `plus (s z) (s z) Z`
- * which unifies with 
+ * Goal1 is `plus (s z) (s z) Z`, which unifies with (above we have the premise, below the goal)
 ```
  plus X Y Z1
 -------------------- pluss
 plus (s X) Y (s Z1)
 ```
-having `u1 = [ X = z; Y = s z; Z = s Z1 ]` as substitutions
+having `u1 = [ X = z; Y = s z; Z = s Z1 ]` as substitutions, so we get
+
+```
+ plus z (s z) Z1
+-------------------- pluss
+plus (s z) (s z) (s Z1)
+```
+ * next Goal2 is `plus z (s z) Z1`, which unifies with 
+```
+------------ plusz
+ plus z Y Y
+```
+having `u2 = [ Y = s z; Z1 = Y ]` (substitutions can happen both ways as happend to `Z1`), so we get 
+```
+-------------------- plusz
+ plus z (s z) (s z)
+------------------------ pluss
+ plus (s z) (s z) (s (s z))
+```
+
+which yields a solution to `Q = plus (s z) (s z) Z`.
 
 ### Syntax
 
