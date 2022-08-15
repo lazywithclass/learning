@@ -191,9 +191,9 @@ which yields a solution to `Q = plus (s z) (s z) Z`.
 
 Useful commands, especially `twelf-trace-break-all` to understand how the proof search is performed
 
-`C-c C-d` - check declaration
-`C-c C-c` - check configuration
-`C-c C-u` - server display
-`top` - in \*twelf server\* to evaluate queries
-`M-x twelf-trace-trace-all` followed by `C-c C-d` - traces the proofs search tree followed by the interpreter
-`M-x twelf-trace-break-all` followed by `C-c C-d` - stops after each step
+* `C-c C-d` - check declaration
+* `C-c C-c` - check configuration
+* `C-c C-u` - server display
+* `top` - in \*twelf server\* to evaluate queries
+* `M-x twelf-trace-trace-all` followed by `C-c C-d` - traces the proofs search tree followed by the interpreter
+* `M-x twelf-trace-break-all` followed by `C-c C-d` - stops after each step
