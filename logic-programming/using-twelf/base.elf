@@ -1,0 +1,49 @@
+nat : type.
+z : nat.
+succ : nat -> nat.
+
+0 = z.
+1 = succ z.
+2 = succ 1.
+3 = succ 2.
+4 = succ 3.
+5 = succ 4.
+6 = succ 5.
+7 = succ 6.
+8 = succ 7.
+9 = succ 8.
+10 = succ 9.
+11 = succ 10.
+12 = succ 11.
+13 = succ 12.
+14 = succ 13.
+15 = succ 14.
+16 = succ 15.
+17 = succ 16.
+18 = succ 17.
+19 = succ 18.
+20 = succ 19.
+
+natlist : type.
+nil : natlist.
+# : nat -> natlist -> natlist.  %infix right 6 #.
+
+% this is general enough that fits here
+% we don't need eq since that's taken care by Twelf itself
+neq : nat -> nat -> type.
+neq_1 : neq (succ _) 0.
+neq_2 : neq 0 (succ _).
+neq_n : neq (succ A) (succ B)
+         <- neq A B.
+%mode neq +A +B.
+%query 1 1 neq 1 0.
+%query 1 1 neq 0 1.
+%query 1 1 neq 10 1.
+%query 1 1 neq 1 10.
+%query 0 * neq 0 0.
+
+eq : nat -> nat -> type.
+eq_ : eq A A.
+%mode eq +A +B.
+%query 1 1 eq 1 1.
+%query 1 0 eq 1 2.

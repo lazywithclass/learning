@@ -1,0 +1,107 @@
+plus : nat -> nat -> nat -> type.
+plus_z : plus z Y Y.
+plus_s : plus (succ X) Y (succ Z)
+         <- plus X Y Z.
+%mode plus +X +Y -Z.
+%query 1 1 plus z z R.
+%query 1 1 plus z (succ z) R.
+%query 1 1 plus (succ z) (succ z) R.
+
+minus : nat -> nat -> nat -> type.
+minus_s : minus Z Y X
+          <- plus X Y Z.
+%mode plus -Z +X +Y.
+%mode minus +X +Y -Z.
+%query 1 1 minus z z R.
+%query 0 * minus z (succ z) R.
+%query 1 1 minus 1 1 R.
+%query 1 1 minus 4 1 R.
+
+% minus without plus
+minuswp : nat -> nat -> nat -> type.
+minuswp_0 : minuswp N 0 N.
+minuswp_r : minuswp N (succ M) R
+             <- minuswp N M (succ R).
+%mode minuswp +N +M -R.
+%query 1 1 minuswp 4 3 R.
+%query 1 1 minuswp 10 5 R.
+
+greater : nat -> nat -> type.
+greater_z : greater (succ N) z.
+greater_s : greater (succ N) (succ M)
+            <- greater N M.
+%query 1 1 greater (succ z) z.
+%query 0 1 greater z (succ z).
+
+product : nat -> nat -> nat -> type.
+product_0 : product N z z.
+product_r : product N (succ M) P'
+             <- plus P N P'
+             <- product N M P.
+%mode plus -N +M -R.
+%mode product +N +M -P.
+%query 1 1 product 2 2 P.
+%query 1 1 product 4 4 P.
+
+pow : nat -> nat -> nat -> type.
+pow_0 : pow N 0 1.
+pow_1 : pow N 1 N.
+pow_r : pow N (succ M) R
+         <- pow N M R'
+         <- product R' N R.
+%mode pow +N +M -P.
+%query 1 1 pow 2 4 P.
+%query 1 1 pow 3 2 P.
+
+% actually division
+%mode product +N -M +P.
+%query 1 1 product 2 D 4.
+
+% note how < and > only differ in the order
+< : nat -> nat -> type. %infix right 6 <.
+<_0 : 0 < (succ _).
+<_r : (succ A) < (succ B)
+        <- A < B.
+%mode < +A +B.
+%query 1 1 1 < 2.
+%query 0 * 2 < 1.
+%query 0 * 0 < 0.
+%query 1 1 2 < 5.
+
+> : nat -> nat -> type. %infix right 6 >.
+>_0 : (succ _) > 0.
+>_r : (succ A) > (succ B)
+       <- A > B.
+%mode > +A +B.
+%query 1 1 5 > 4.
+%query 0 * 1 > 3.
+%query 1 1 3 > 2.
+
+neq : nat -> nat -> type.
+neq_0 : neq 0 (succ _).
+neq_0' : neq (succ _) 0.
+neq_r : neq (succ A) (succ B)
+         <- neq A B.
+%mode neq +A +B.
+%query 1 1 neq 4 5.
+%query 1 1 neq 5 4.
+%query 0 * neq 1 1.
+%query 0 * neq 0 0.
+
+isEven : nat -> type.
+isEven_0 : isEven 0.
+isEven_r : isEven (succ (succ A))
+            <- isEven A.
+%mode isEven +A.
+%query 1 1 isEven 0.
+%query 1 1 isEven 4.
+%query 0 * isEven 1.
+%query 0 * isEven 3.
+
+isOdd : nat -> type.
+isOdd_0 : isOdd 1.
+isOdd_r : isOdd (succ (succ A))
+           <- isOdd A.
+%mode isOdd +A.
+%query 1 1 isOdd 3.
+%query 0 * isOdd 4.

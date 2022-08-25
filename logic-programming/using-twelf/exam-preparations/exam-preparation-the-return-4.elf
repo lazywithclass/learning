@@ -64,3 +64,19 @@ gt\rec : gt A B -> gt (succ A) (succ B).
 %query 0 * gt 0 0.
 %query 0 * gt 0 3.
 
+% first nat is the amount of nat to remove TR,
+% second nat is the amount of nats removed RD,
+% third nat is the nat to remove R
+
+% I did not manage to make this work
+removeFirstN : nat -> nat -> nat -> natList -> natList -> type.
+removeFirstN\eq : lte RD TR -> removeFirstN TR (succ RD) R (R # Xs) Xs.
+removeFirstN\rec : lte RD TR ->
+                     removeFirstN TR RD R Xs Ys ->
+                     removeFirstN TR (succ RD) R (R # Xs) Ys.
+removeFirstN\rec' : lte RD TR ->
+                     neq R O ->
+                     removeFirstN TR RD R Xs Ys ->
+                     removeFirstN TR RD R (O # Xs) (O # Ys).
+%mode removeFirstN +TR +RD +R +Xs -Ys.
+%query 1 * removeFirstN 3 1 2 (1 # 2 # 1 # 2 # 2 # 2 # 2 # nil) Ys.
