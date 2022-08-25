@@ -6,7 +6,6 @@ Functional programming refinement.
 
 Requires a debugger to understand how expressions are evaluated.
 
-
 ## Basics
 
 In logic programming we only specify what is true.
@@ -43,7 +42,7 @@ bottom-up or forward-reasoning means that we work forwards from the axioms apply
 
 ### Substitution
 
-A substitution is a list of assignments in the form `X` = `t`, where `X` is a variable and `t` a term in the language of the program.
+A substitution is a list of assignments in the form `X = t`, where `X` is a variable and `t` a term in the language of the program.
 
 Computation happens through substitutions, which are equalities.
 
@@ -53,7 +52,10 @@ Substitutions happen simultaneously.
 
 ### Unification
 
-I did not get this.
+Given a goal `G` and a goal `H` (in a rule `r`), a unifier between `G` and `H` is a substitution
+`s` such that `Gs = Hs`.
+
+The interesting point is that I can use `r` to prove `Gs`, so I can use "the other one".
 
 ### Terminology:
 
@@ -127,6 +129,59 @@ plus/s : plus (s X) Y (s Z)
 
 `plus` is a binary relation, that binds two `nat`
 
+### Proof search: how the interpreter builds derivations to solve queries
+
+Clauses have to be written in such a way so that the interpreter could build derivations.
+
+I look for all rules that unify with my goal to understand how the interpreter will proceed;
+careful to follow rules in the same order as they are written.
+
+```
+parent adam Z   ancestor Z Y
+----------------------------- R
+    ancestor adam Y
+```
+
+To find `Y` I first have to find a `Z` such that `parent adam Z`, then I have to find `Y` such that `ancestor Z Y`.
+
+Example
+
+Given 
+```Twelf
+plus/z : plus z Y Y.
+plus/s : plus (s X) Y (s Z)
+           <- plus X Y Z.
+```
+
+Given the following query: `Q = plus (s z) (s z) Z` we start with the proof tree `T0 = Q`
+ * Goal1 is `plus (s z) (s z) Z`, which unifies with (above we have the premise, below the goal)
+```
+ plus X Y Z1
+-------------------- pluss
+plus (s X) Y (s Z1)
+```
+having `u1 = [ X = z; Y = s z; Z = s Z1 ]` as substitutions, so we get
+
+```
+ plus z (s z) Z1
+-------------------- pluss
+plus (s z) (s z) (s Z1)
+```
+ * next Goal2 is `plus z (s z) Z1`, which unifies with 
+```
+------------ plusz
+ plus z Y Y
+```
+having `u2 = [ Y = s z; Z1 = Y ]` (substitutions can happen both ways as happend to `Z1`), so we get 
+```
+-------------------- plusz
+ plus z (s z) (s z)
+------------------------ pluss
+ plus (s z) (s z) (s (s z))
+```
+
+which yields a solution to `Q = plus (s z) (s z) Z`.
+
 ### Syntax
 
 `nat : type.` - is a type declaration
@@ -134,8 +189,11 @@ plus/s : plus (s X) Y (s Z)
 
 ## Emacs integration
 
-Useful commands 
+Useful commands, especially `twelf-trace-break-all` to understand how the proof search is performed
 
-`C-c C-c` - check configuration
-`C-c C-u` - server display
-`top` - in \*twelf server\* to evaluate queries
+* `C-c C-d` - check declaration
+* `C-c C-c` - check configuration
+* `C-c C-u` - server display
+* `top` - in \*twelf server\* to evaluate queries
+* `M-x twelf-trace-trace-all` followed by `C-c C-d` - traces the proofs search tree followed by the interpreter
+* `M-x twelf-trace-break-all` followed by `C-c C-d` - stops after each step
