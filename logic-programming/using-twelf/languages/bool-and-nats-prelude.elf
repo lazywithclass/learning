@@ -1,0 +1,89 @@
+% we use nats instead of integers
+nat : type.  %name nat N.
+z : nat.
+s : nat -> nat.
+
+
+plus : nat -> nat -> nat -> type.
+p_z : plus z Y Y.
+p_s : plus (s X) Y (s Z)
+       <- plus X Y Z.
+
+% recall: plus is a relation, albeit a functional one.
+%mode plus +N1 +N2 -N.
+%worlds () (plus N _ _).
+%total N (plus N _ _).
+
+
+% abbreviations
+
+1 = s z.
+2 = s 1.
+3 = s 2.
+4 = s 3.
+5 = s 4.
+6 = s 5.
+10 = (s (s (s (s 6)))).
+
+%% boolans
+
+bool: type. 
+true: bool.
+false: bool.
+
+
+diffb  : bool -> bool ->  type.
+%mode diffb +B1 +B2.
+nb1 : diffb true false.
+nb2 : diffb false true.
+%terminates X (diffb X Y).
+
+eqb : bool -> bool -> bool ->  type.
+%mode eqb +B1 +B2 -B.
+
+reflb : eqb B B  true.
+nreflb : eqb B B1  false
+	  <- diffb B B1.
+%terminates X (eqb X Y _).
+
+diffn  : nat -> nat ->  type.
+%mode diffn +B1 +B2.
+nb1 : diffn z (s _).
+nb2 : diffn (s _) z.
+nb3 : diffn (s N1) (s N2)
+       <- diffn N1 N2.
+
+%terminates X (diffn X Y).
+eqn : nat -> nat -> bool -> type.
+%mode eqn +B1 +B2 -B.
+
+refln : eqn N N true.
+nrefl : eqn N M false
+	 <- diffn N M.
+%terminates X (eqn X Y _) .
+
+not : bool -> bool -> type.
+%mode not +B1 -B2.
+
+ntf : not true false.
+nft : not false true.
+%terminates B (not B B').
+
+less: nat -> nat -> bool -> type.       
+%mode less +X +Y -Z.
+
+l_z1 : less z (s X) true.
+l_z2 : less X z false.
+l_ss : less (s X) (s Y) B
+	<- less X Y B.
+%terminates X (less X Y _).
+
+
+% a type for variables
+vname : type.   %name vname X.
+
+% we parachute some variables
+vx : vname.
+vy : vname.
+vz : vname.
+vw : vname.
