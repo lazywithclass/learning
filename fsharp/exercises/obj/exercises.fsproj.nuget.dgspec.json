@@ -1,0 +1,64 @@
+{
+  "format": 1,
+  "restore": {
+    "/home/lazywithclass/workspace/learning/fsharp/exercises/exercises.fsproj": {}
+  },
+  "projects": {
+    "/home/lazywithclass/workspace/learning/fsharp/exercises/exercises.fsproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/lazywithclass/workspace/learning/fsharp/exercises/exercises.fsproj",
+        "projectName": "exercises",
+        "projectPath": "/home/lazywithclass/workspace/learning/fsharp/exercises/exercises.fsproj",
+        "packagesPath": "/home/lazywithclass/.nuget/packages/",
+        "outputPath": "/home/lazywithclass/workspace/learning/fsharp/exercises/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/lazywithclass/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "/usr/share/dotnet/sdk/6.0.300/FSharp/library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "FSharp.Core": {
+              "include": "Runtime, Compile, Build, Native, Analyzers, BuildTransitive",
+              "target": "Package",
+              "version": "[6.0.4, )",
+              "generatePathProperty": true
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.300/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
