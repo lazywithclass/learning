@@ -2,7 +2,7 @@
 
 ### Operational semantics
 
-https://www.youtube.com/watch?v=exhwykjH_z4
+[Basic Mechanics of Operational Semantics](https://www.youtube.com/watch?v=exhwykjH_z4) gives an intro to the semantics. Great as quick reference thanks to the explanations.
 
 Used for 
  * specify a programming language
@@ -32,4 +32,8 @@ ______________________
 
 is like saying `H1 ∧ H2 ∧ ... ∧ Hn ⇒ C`
 
-###
+### Natural semantics of A
+
+Define the meaning of a program. Proof trees are built using these to prove that a given expression evaluates to a given number.
+
+So for example one can show that `Plus(4, Succ(2))` by combining the correct rules.
