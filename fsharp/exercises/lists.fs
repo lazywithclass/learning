@@ -178,21 +178,3 @@ module Lists =
                 | y :: ys ->
                     if p y then loop ys (fun r -> k (y ::r)) else (k  [])
         loop xs (fun r -> Some r)
-
-//             torre di hanoi
-//             risoluzione ricorsiva
-
-//             (a b c) -> 8 elementi
-//             (b c) -> dato per assodato
-//                     mi rimane da mettere a nel risultato dell'assunzione
-//                     () -> a
-//                     (b) -> etc
-//                     map append head
-
-// - write -> a function powerset : int list -> int list list
-
-// that takes a set S represented as a list without repetitions and returns the set of all subsets of S.
-// The order of subsets in the powerset and the order of elements in the subsets do not matter.
-
-// Hint: Consider the recursive structure of this problem. Suppose you already have p, such that p = powerset s.
-// How could you use p to compute powerset (x :: s)?
