@@ -49,3 +49,26 @@ let rec make_sum_str1 n =
 let rec sum_n n =
     let sum, str = make_sum_str1 n
     str + " = " + (string sum)
+
+// declare a function sum: int * int -> int where
+// sum(m, n) = m + (m+1) + (m+2) + ... (m+(n-1)) + (m+n)
+let rec sumUntil (m, n) =
+    match n with
+        | 0 -> m
+        | _ -> (m + n) + sumUntil (m, n - 1)
+
+let sumj (m, n) =
+    let rec loop m n acc =
+        match (m, n) with
+            | i, 0 -> acc + m
+            | _ -> loop (m + 1) (n - 1) (m + acc)
+    loop m n 0
+
+// declare a continuation-based version of the factorial function
+let rec fact = function
+    | 0 | 1 -> 1
+    | n -> n * (fact (n - 1))
+
+let rec factCont k = function
+    | 0 | 1 -> k 1
+    | n -> factCont (fun m -> k (n * m)) (n - 1)
