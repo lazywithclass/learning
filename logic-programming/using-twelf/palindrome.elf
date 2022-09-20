@@ -19,12 +19,12 @@ nil : word.
 
 % define snoc
 % which takes a symbol S and a word W and generates the word appending S to W
-snoc : symbol -> word -> word -> type.
-snoc\base : snoc S nil (S # nil).
-snoc\rec : snoc S Wt Wr -> snoc S (T # Wt) (T # Wr).
-%mode snoc +S +W -R.
-%query 1 1 snoc c (a # b # nil) W.
-%query 1 1 snoc c (b # nil) W.
+ snoc : symbol -> word -> word -> type.
+snoc\nil : snoc S nil (S # nil).
+snoc\rec : snoc S (T # W) (T # WS)
+            <- snoc S W WS.
+%mode snoc +S +W -WS.
+%query 1 1 snoc a (c # b # nil) W.
 
 
 % using natural numbers

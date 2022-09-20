@@ -170,8 +170,6 @@ insertR_rec_neq : insertR X Y (Y' # Xs) (Y' # Ys)
 %query 1 1 insertR 2 1 (1 # 3 # nil) Ys.
 %query 1 1 insertR 2 1 (2 # 3 # nil) Ys.
 
-
-% % relations I wasn't able to implement
-% % write a relation that removes just the nth occurrence of a nat
-
-% % write a relation that removes n occurrences of a nat
+% relations I wasn't able to implement
+% write a relation that removes just the nth occurrence of a nat
+% write a relation that removes n occurrences of a nat
