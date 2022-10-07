@@ -1,16 +1,23 @@
-const makeWindowArray = (array, windowLength, start = 0) => ({
-  moveWindow: (shift = 0) => {
+function makeWindowArray(array, windowLength) {
+  let start = 0
+  return function(shift) {
     start += shift
-    return array.slice(start, start + windowLength)
-  },
-  setStart: newStart => start = newStart
-})
+    return array.slice(start, start + windowLength);
+  }
+}
 
-let windowArray = makeWindowArray([3, 4, 1, 5, 7, 9, 0, 8], 4)
-console.log(windowArray.moveWindow())
-console.log(windowArray.moveWindow(1))
-console.log(windowArray.moveWindow(-1))
-console.log(windowArray.moveWindow(2))
+let moveWindow = makeWindowArray([ 3, 4, 1, 5, 7, 9, 0, 8 ], 4)
+// console.log(moveWindow(1))
+// console.log(moveWindow(1))
+// console.log(moveWindow(1))
+// console.log(moveWindow(1))
+// console.log(moveWindow(-2))
 
-windowArray.setStart(0)
-console.log(windowArray.moveWindow())
+function moveWindow2(array, start, windowLength) {
+  return array.slice(start, start + windowLength);
+}
+
+let start = 0
+console.log(moveWindow2([ 3, 4, 1, 5, 7, 9, 0, 8 ], start, 4))
+start += 2
+console.log(moveWindow2([ 3, 4, 1, 5, 7, 9, 0, 8 ], start, 4))
