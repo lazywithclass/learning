@@ -5,6 +5,32 @@ public class Main {
     public static void main(String[] args) {
         System.out.println(new Main().solve(new int[]{0, -3, 5, -4, -2, 3, 1, 0}));
         System.out.println(new Main().solveBetter(new int[]{0, -3, 5, -4, -2, 3, 1, 0}));
+        System.out.println(new Main().solveWishful(new int[]{0, -3, 5, -4, -2, 3, 1, 0}));
+    }
+
+    // wishful programming - wishful thinking
+    private boolean isBalanced(int[] array, int index) {
+        int sumBefore = 0;
+        for (int i = 0; i < index; i++) {
+            sumBefore += array[i];
+        }
+
+        int sumAfter = 0;
+        for (int i = index + 1; i < array.length; i++) {
+            sumAfter += array[i];
+        }
+
+        return sumBefore == sumAfter;
+    }
+
+    public List<Integer> solveWishful(int[] numbers) {
+        List<Integer> solutions = new ArrayList<>();
+        for (int i = 0; i < numbers.length; i++) {
+            if (isBalanced(numbers, i)) {
+                solutions.add(i);
+            }
+        }
+        return solutions;
     }
 
     public List<Integer> solveBetter(int[] numbers) {
