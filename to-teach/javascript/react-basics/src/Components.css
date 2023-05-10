@@ -1,0 +1,26 @@
+li {
+    list-style-type: none;
+}
+.sidebar {
+    display: flex;
+}
+.sidebar > nav {
+    margin-right: 25px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+}
+.todo.done {
+    opacity: 0.5;
+}
+
+.products {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+.product > img {
+    width: 100px;
+}
