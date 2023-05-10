@@ -68,7 +68,7 @@ let reduceWithFold f xs = function
     | [] -> raise EmptyListException
     | x::xs -> List.fold f x xs
 
-// implement tryFind with fold
+// implement tryFind with reduce
 // "This is a life lesson" -- JessiBit
 let tryFindWithReduce pred = function
     | [] -> None

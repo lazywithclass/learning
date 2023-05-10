@@ -26,7 +26,7 @@ let rec splitEvenOdd xs =
         | 1 -> xs, []
         | 2 -> [List.head xs], List.tail xs
         | _ -> let even, odd = splitEvenOdd (List.tail (List.tail xs))
-            List.head xs :: even, List.head (List.tail xs) :: odd
+               List.head xs :: even, List.head (List.tail xs) :: odd
 
 let rec splitEvenOddBetter xs =
     match xs with
@@ -93,6 +93,11 @@ let rec takeBetter n xs =
     match n, xs with
         | _, [] | 0, _ -> []
         | _, x::xs -> x :: takeBetter (n - 1) xs
+
+let rec takeWhile pred xs =
+    match xs with
+        | x :: xs when pred x -> x :: (takeWhile pred xs)
+        | _ -> []
 
 let rec drop n xs =
     match xs with
