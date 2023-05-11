@@ -4,16 +4,6 @@
 
 import { useState, useEffect } from 'react'
 
-function Todo({ checked, onChange }) {
-  return (
-    <input
-      type="checkbox"
-      checked={checked}
-      onChange={onChange}
-    />
-  )
-}
-
 export function TodoList() {
   const [todos, setTodos] = useState([])
 
@@ -29,7 +19,10 @@ export function TodoList() {
   const handleCheckboxClick = (id) => {
     setTodos((prevTodos) =>
       prevTodos.map((todo) =>
-        todo.id === id ? { ...todo, completed: !todo.completed } : todo
+        todo.id === id ? {
+          ...todo,
+          completed: !todo.completed
+        } : todo
       )
     )
   }
@@ -38,13 +31,16 @@ export function TodoList() {
   const incompleteTodos = todos.filter((todo) => !todo.completed)
   const reorderedTodos = incompleteTodos.concat(completedTodos)
 
+  console.log(reorderedTodos)
+
   return (
     <div className="container">
       <h2>Todo List</h2>
       <ul className="todo">
         {reorderedTodos.map((todo) => (
           <li key={todo.id} style={{ opacity: todo.completed ? 0.5 : 1 }}>
-            <Todo
+            <input
+              type="checkbox"
               checked={todo.completed}
               onChange={() => handleCheckboxClick(todo.id)}
             />
