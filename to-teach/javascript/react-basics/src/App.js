@@ -4,9 +4,11 @@ import './Components.css'
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { Outlet, Link } from "react-router-dom"
 
+import { WhyLoopingWithMap } from './components/WhyLoopingWithMap'
 import { SimplerTodoList } from './components/SimplerTodoList'
 import { TodoList } from './components/TodoList'
 import { AsyncCall } from './components/AsyncCall'
+import { WhyUseState } from './components/WhyUseState'
 import { UseStateAsyncNature } from './components/UseStateAsyncNature'
 import { UseStateFunctionCallback } from './components/UseStateFunctionCallback'
 import { UseStateUseEffect } from './components/UseStateUseEffect'
@@ -23,9 +25,11 @@ function Main() {
       <div className="sidebar">
         <nav>
           <ul>
+            <li><Link to="/whyloopingwithmap">WhyLoopingWithMap</Link></li>
             <li><Link to="/simplertodolist">SimplerTodoList</Link></li>
             <li><Link to="/todolist">TodoList</Link></li>
             <li><Link to="/asynccall">AsyncCall</Link></li>
+            <li><Link to="/whyusestate">WhyUseState</Link></li>
             <li><Link to="/usestateasyncnature">UseStateAsyncNature</Link></li>
             <li><Link to="/usestatefunctioncallback">UseStateFunctionCallback</Link></li>
             <li><Link to="/usestateuseffect">UseStateUseEffect</Link></li>
@@ -45,9 +49,11 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Main />}>
+          <Route index path="whyloopingwithmap" element={<WhyLoopingWithMap />} />
           <Route index path="simplertodolist" element={<SimplerTodoList />} />
           <Route path="todolist" element={<TodoList />} />
           <Route path="asynccall" element={<AsyncCall />} />
+          <Route path="whyusestate" element={<WhyUseState />} />
           <Route path="usestateasyncnature" element={<UseStateAsyncNature />} />
           <Route path="usestatefunctioncallback" element={<UseStateFunctionCallback/>} />
           <Route path="usestateuseffect" element={<UseStateUseEffect />} />

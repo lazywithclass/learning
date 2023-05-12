@@ -7,10 +7,12 @@ export function UseStateUseEffect() {
 
   function onClick() {
     setCount(count + 1)
+    // count here has the "old" value
   }
 
   useEffect(() => {
     console.log(`useEffect: ${count}`);
+    // count's value is up to date
   }, [count])
 
   return (
