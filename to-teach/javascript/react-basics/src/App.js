@@ -15,6 +15,7 @@ import { UseStateUseEffect } from './components/UseStateUseEffect'
 import { UseStateUseEffectWhy } from './components/UseStateUseEffectWhy'
 import { TooManyReRenders } from './components/TooManyReRenders'
 import { DynamicInputs } from './components/DynamicInputs'
+import { SimpleChat } from './components/SimpleChat'
 
 function Main() {
   return (
@@ -36,6 +37,7 @@ function Main() {
             <li><Link to="/usestateuseffectwhy">UseStateUseEffectWhy</Link></li>
             <li><Link to="/toomanyrerenders">TooManyReRenders</Link></li>
             <li><Link to="/dynamicinputs">DynamicInputs</Link></li>
+            <li><Link to="/simplechat">SimpleChat</Link></li>
           </ul>
         </nav>
         <Outlet />
@@ -60,6 +62,7 @@ function App() {
           <Route path="usestateuseffectwhy" element={<UseStateUseEffectWhy />} />
           <Route path="toomanyrerenders" element={<TooManyReRenders/>} />
           <Route path="dynamicinputs" element={<DynamicInputs />} />
+          <Route path="simplechat" element={<SimpleChat/>} />
         </Route>
       </Routes>
     </BrowserRouter>
