@@ -15,10 +15,18 @@
 5 + "5" // "55"
 true + 5 // 6, ma non affidatevi a questi comportamenti poco leggibili, in particolare
 // quando state "facendo una operazione tra pere e mele" alzate le antenne
+25 % 2 // 1 operatore resto
+
+"a" < "b" // true
+"Z" < "b" // true
+
 5 || true // true
 0 || true // true
 0 || false // false
 true || 0 // true
+
+// or e and come operatori di selezione
+false || 25 // vi ritorna, seleziona, 25
 
 // falsey, tutto cio' che non e' qua sotto e' truthy
 // [] e {} non sono falsey
@@ -70,6 +78,35 @@ if (false) {
     console.log(3)
 } else {
     console.log(4)
+}
+
+// perche' usare else if?
+let numero = 10
+// mutualmente esclusivo!
+if (numero < 20) {
+
+} else if (numero < 15) {
+
+} else {
+
+}
+
+// ... che e' molto diverso da
+if (numero < 20) {
+
+}
+if (numero < 15) {
+
+}
+// else?
+
+// ... che e' molto diverso da
+if (numero < 20) {
+    if (numero < 15) {
+
+    }
+} else {
+
 }
 
 // evitare annidamenti che portano alla "forma a freccia"
@@ -173,6 +210,7 @@ function quellAltra() {
 const arrowFunction = () => "arrow"
 const circleArea = r => 3.14 * r * r
 
+// importanza delle parentesi graffe, sempre!
 let qualcosa = ""
 if (qualcosa)
     console.log(qualcosa)
@@ -221,6 +259,41 @@ let tabellina = [
     n => n * 10
 ]
 
+// da molti a 1
+[1,2,3].reduce((s, n) => s + n, 0) // 6
+// esempio di reduce implementata da noi
+function reduce(arr, fn, initial) {
+    const res = initial
+    for (let i = 0; i < arr.length; i++) {
+        res = fn(arr[i], res)
+    }
+    return res
+}
+
+// da molti a molti, non cambia mai la dimensione dell'array
+[1,2,3].map(n => n * 2) // [2,4,6]
+// esempio di map implementata da noi
+function map(arr, fn) {
+    const res = []
+    for (let i = 0; i < arr.length; i++) {
+        res.push(fn(arr[i]))
+    }
+    return res
+}
+
+// da molti a range 0 -> molti
+[1,2,3].filter(n => n % 2 == 0) // [2]
+function filter(arr, fn) {
+    const res = []
+    for (let i = 0; i < arr.length; i++) {
+        if (fn(arr[i])) {
+            res.push(arr[i])
+        }
+    }
+    return res
+}
+
+
 // map
 
 // rappresentano una relazione tra la chiave e il valore
@@ -242,6 +315,12 @@ map.get("chiave")
 
 // per impostare un valore alla chiave specificata
 map.set("chiave", "valore")
+// se eseguita un'altra volta semplicemente va in override con la precedente
+// quindi avro' sempre una sola "chiave" che punta ad un solo "valore"
+map.set("chiave", "valore")
+// se invece faccio
+map.set("chiave", "valore2")
+// allora ottengo un aggiornamento del valore associato a "chiave"
 
 // oggetti
 
