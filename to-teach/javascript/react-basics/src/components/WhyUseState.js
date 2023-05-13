@@ -29,6 +29,13 @@ export function WhyUseState() {
         // 2) invoke the setter function
         setCount(count + 1)
         console.log(count)
+
+        // or we could use
+        // setCount(prev => {
+        //   let newCount = prev + 1
+        //   console.log(newCount)
+        //   return newCount
+        // })
       }}>Click me!</button>
       {count}
     </div>
