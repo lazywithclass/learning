@@ -4,6 +4,7 @@ import './Components.css'
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { Outlet, Link } from "react-router-dom"
 
+import { RefactoringFetch } from './components/RefactoringFetch'
 import { WhyLoopingWithMap } from './components/WhyLoopingWithMap'
 import { SimplerTodoList } from './components/SimplerTodoList'
 import { TodoList } from './components/TodoList'
@@ -16,6 +17,7 @@ import { UseStateUseEffectWhy } from './components/UseStateUseEffectWhy'
 import { TooManyReRenders } from './components/TooManyReRenders'
 import { DynamicInputs } from './components/DynamicInputs'
 import { SimpleChat } from './components/SimpleChat'
+import { ProductColumns } from './components/ProductColumns'
 
 function Main() {
   return (
@@ -26,6 +28,7 @@ function Main() {
       <div className="sidebar">
         <nav>
           <ul>
+            <li><Link to="/refactoringfetch">RefactoringFetch</Link></li>
             <li><Link to="/whyloopingwithmap">WhyLoopingWithMap</Link></li>
             <li><Link to="/simplertodolist">SimplerTodoList</Link></li>
             <li><Link to="/todolist">TodoList</Link></li>
@@ -38,6 +41,7 @@ function Main() {
             <li><Link to="/toomanyrerenders">TooManyReRenders</Link></li>
             <li><Link to="/dynamicinputs">DynamicInputs</Link></li>
             <li><Link to="/simplechat">SimpleChat</Link></li>
+            <li><Link to="/productcolumns">ProductColumns</Link></li>
           </ul>
         </nav>
         <Outlet />
@@ -51,6 +55,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Main />}>
+          <Route index path="refactoringfetch" element={<RefactoringFetch />} />
           <Route index path="whyloopingwithmap" element={<WhyLoopingWithMap />} />
           <Route index path="simplertodolist" element={<SimplerTodoList />} />
           <Route path="todolist" element={<TodoList />} />
@@ -63,6 +68,7 @@ function App() {
           <Route path="toomanyrerenders" element={<TooManyReRenders/>} />
           <Route path="dynamicinputs" element={<DynamicInputs />} />
           <Route path="simplechat" element={<SimpleChat/>} />
+          <Route path="productcolumns" element={<ProductColumns/>} />
         </Route>
       </Routes>
     </BrowserRouter>
