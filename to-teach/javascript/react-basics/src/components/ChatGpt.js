@@ -18,7 +18,7 @@ export function ChatGpt() {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
           Authorization:
-            "Bearer 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"
+            "Bearer sk-xxx"
         }
       })
       const json = await res.json()
