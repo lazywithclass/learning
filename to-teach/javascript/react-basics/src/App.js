@@ -18,6 +18,7 @@ import { TooManyReRenders } from './components/TooManyReRenders'
 import { DynamicInputs } from './components/DynamicInputs'
 import { SimpleChat } from './components/SimpleChat'
 import { ProductColumns } from './components/ProductColumns'
+import { ChatGpt } from './components/ChatGpt'
 
 function Main() {
   return (
@@ -42,6 +43,7 @@ function Main() {
             <li><Link to="/dynamicinputs">DynamicInputs</Link></li>
             <li><Link to="/simplechat">SimpleChat</Link></li>
             <li><Link to="/productcolumns">ProductColumns</Link></li>
+            <li><Link to="/chat-gpt">Chat GPT</Link></li>
           </ul>
         </nav>
         <Outlet />
@@ -55,9 +57,10 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Main />}>
-          <Route index path="refactoringfetch" element={<RefactoringFetch />} />
-          <Route index path="whyloopingwithmap" element={<WhyLoopingWithMap />} />
-          <Route index path="simplertodolist" element={<SimplerTodoList />} />
+          <Route index element={<TodoList/>} />
+          <Route path="refactoringfetch" element={<RefactoringFetch />} />
+          <Route path="whyloopingwithmap" element={<WhyLoopingWithMap />} />
+          <Route path="simplertodolist" element={<SimplerTodoList />} />
           <Route path="todolist" element={<TodoList />} />
           <Route path="asynccall" element={<AsyncCall />} />
           <Route path="whyusestate" element={<WhyUseState />} />
@@ -69,6 +72,7 @@ function App() {
           <Route path="dynamicinputs" element={<DynamicInputs />} />
           <Route path="simplechat" element={<SimpleChat/>} />
           <Route path="productcolumns" element={<ProductColumns/>} />
+          <Route path="chat-gpt" element={<ChatGpt/>} />
         </Route>
       </Routes>
     </BrowserRouter>
