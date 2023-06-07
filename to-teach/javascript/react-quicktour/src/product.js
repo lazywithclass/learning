@@ -1,8 +1,12 @@
-function Product(props) {
+function Product({ title, image }) {
+
+  let answer = 42
+
   return (
     <div>
-      <span>{props.title}</span>
-      <img src={props.image} />
+      <span>{title}</span>
+      <img className="product-image" src={image} />
+      <span>{answer}</span>
     </div>
   )
 }
