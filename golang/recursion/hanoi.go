@@ -5,7 +5,7 @@ import (
 )
 
 func main() {
-	Hanoi(3, "sx", "centro", "destra")
+	Hanoi(8, "sx", "centro", "destra")
 }
 
 func Hanoi(n int, origine, appoggio, destinazione string) {
