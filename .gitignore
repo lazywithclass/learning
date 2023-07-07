@@ -1,7 +1,1 @@
-.Makefile.swo
-.vscode
-.classpath
-.project
-.settings
-node_modules/
-.log
+.direnv
