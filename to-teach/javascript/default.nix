@@ -14,17 +14,20 @@ let
     sha256 = "g+AzgeJx8aVhkYjnrqnYXZt+EvW+KijOt41ySe0it/E=";
   };
 
-  NPM_CONFIG_PREFIX = toString ./npm_config_prefix;
+  # NPM_CONFIG_PREFIX = toString ./npm_config_prefix;
 
 in pkgs.mkShell {
   packages = with pkgs; [
+    python3
+    deno
     nodejs
     nodePackages.npm
+    nodePackages.typescript
   ];
 
-  inherit NPM_CONFIG_PREFIX;
+  # inherit NPM_CONFIG_PREFIX;
 
-  shellHook = ''
-    export PATH="${NPM_CONFIG_PREFIX}/bin:$PATH"
-  '';
+  # shellHook = ''
+    # export PATH="${NPM_CONFIG_PREFIX}/bin:$PATH"
+  # '';
 }
