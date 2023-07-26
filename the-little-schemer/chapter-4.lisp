@@ -48,3 +48,4 @@
     (T (cons (+ (car tup1) (car tup2)) (addtup2 (cdr tup1) (cdr tup2))))))
 
 (addtup2 '(1 2 3) '(3 2 1)) ; '(4 4 4)
+
