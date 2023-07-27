@@ -49,3 +49,5 @@
 
 (addtup2 '(1 2 3) '(3 2 1)) ; '(4 4 4)
 
+
+; I skipped the other functions as they were simple variations of what I already did
