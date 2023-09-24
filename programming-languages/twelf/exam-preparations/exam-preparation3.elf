@@ -1,0 +1,68 @@
+%{  DUTCH NATIONAL FLAG  (DNF)
+Sort colors so that red comes before white and white comes before blue.
+}%
+
+col : type.
+r : col.
+w : col.
+b : col.
+
+collist : type.
+nil  : collist.
+#  : col -> collist -> collist. %infix right 6 #.
+
+%{
+From
+w # b # w # r # b # b # r # w # w # r # nil
+we have to get
+r # r # r # w # w # w # w # b # b # b # nil
+
+r < w < b
+}%
+dnf : collist -> collist -> type.
+
+leq : col -> col -> type.
+leq\rw : leq r w.
+leq\rb : leq r b.
+leq\wb : leq w b.
+leq\= : leq C C.
+%mode leq -C1 +C2.
+
+colinsert : col -> collist -> collist -> type.
+colinsert\nil : colinsert C nil (C # nil).
+colinsert\1 : leq C C1 -> colinsert C (C1 # Cs) (C # C1 # Cs).
+colinsert\2 : colinsert C Xs Ys -> leq C1 C -> colinsert C (C1 # Xs) (C1 # Ys).
+%mode colinsert +C +Xs -R.
+%query 1 1 colinsert r (w # b # nil) R.
+
+colsort : collist -> collist -> type.
+colsort\base : colsort nil nil.
+colsort\rec : colinsert C Xs Ys -> colsort Ks Xs -> colsort (C # Ks) Ys.
+%mode colsort +Cs -R.
+%query 1 1 colsort (w # b # w # r # b # b # r # w # w # r # nil) R.
+
+
+%{
+Define a predicate that checks if a collist is sorted by r < w < b
+isDnf : collist -> type
+
+These are sorted
+r # r # w # b # nil
+w # b # b # nil
+r # r # r # b # b # nil
+
+These are not sorted
+w # w # r # b # nil
+b # b # w # nil
+}%
+
+isDnf : collist -> type.
+isDnf\base : isDnf nil.
+isDnf\base2 : isDnf (C # nil).
+isDnf\rec : isDnf (C1 # Cs) -> leq C1 C2 -> isDnf (C1 # C2 # Cs).
+%mode isDnf +Cs.
+%query 1 1 isDnf (r # r # w # b # nil).
+%query 1 1 isDnf (w # b # b # nil).
+%query 1 1 isDnf (r # r # r # b # b # nil).
+%query 0 1 isDnf (w # w # r # b # nil).
+%query 0 1 isDnf (b # b # w # nil).

@@ -1,0 +1,61 @@
+% MU game
+%
+% We start from the string MI
+%
+% There are three rules:
+% Rule I   - if we have a string that ends with I, we can add U at the end
+% Rule II  - if we have Mx, we can produce Mxx
+% Rule III - if we have III, we can replace them with U
+%
+% where x represents a generic string.
+
+mu-el : type.
+m     : mu-el.
+i     : mu-el.
+u     : mu-el.
+
+mu-list : type.
+nil     : mu-list.
+% cons
+#       : mu-el -> mu-list -> mu-list. %infix right 6 #.
+% append
+@       : mu-list -> mu-list -> mu-list -> type.
+@\nil   : @ nil Ms Ms.
+@\rec   : @ (X # Xs) Ys (X # Zs)
+           <- @ Xs Ys Zs.
+%mode @ +Xs +Ys -Zs.
+
+% cant really do this
+% Mx     : type.
+% MxI    : type.
+% MxUx   : type.
+% MxIU   : type.
+% MxIIIx : type.
+
+% rule1   : MxI -> MxIU.
+rule1 : mu-list -> mu-list -> type.
+r1    : rule1 MxI MxIU
+         <- @ MxI (u # nil) MxIU
+         <- @ Ms (i # nil) MxI.
+
+% rule2 : Mx -> Mx -> type.
+rule2 : mu-list -> mu-list -> type.
+r2    : rule2 (m # X) MX
+         <- @ (m # X) X MX.
+
+% rule3 : MxIIIx -> MxUx -> type.
+rule3 : mu-list -> mu-list -> type.
+r3    : rule3 XTrisY Z
+         <- @ X' X'' Z
+         <- @ X' (i # (i # (i # X''))) X
+         <- rule2 (m # X) MX.
+
+%query 0 5 rule3 (m # (i # N)) (m # (u # nil)).
+
+% query 0 * rule3 (m # (i # nil)) (m # (u # nil)).
+
+% I believe checking rule2 could be skipped as it will never bring us down
+% to a situation where we have MU
+% And all possible expansions are captured by the logic variables
+
+% query 0 5 rule3 (m # (M # (i # N))) (m # (u # nil)).

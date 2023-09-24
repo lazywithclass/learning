@@ -1,0 +1,245 @@
+%% A language with bool and nats
+
+%{
+
+type exp =
+  | I of int                 (* integers *)
+  | V of vname               (* vars *)
+  | Sum of exp * exp         (* addition *)
+  | B of bool                (* true/false         *)
+  | Eq of exp * exp          (* equality     *)
+  | Neg of  exp              (* negation     *)
+  | Less of exp * exp;;      (* less *)
+}%
+
+abexp : type.
+vV : vname -> abexp.
+nN : nat -> abexp. 
+bB : bool -> abexp.
+eEq : abexp -> abexp -> abexp.
+sSum : abexp -> abexp -> abexp.
+lLess : abexp -> abexp -> abexp.
+nNot : abexp ->  abexp.
+ite : abexp -> abexp -> abexp -> abexp.
+
+env : vname -> abexp -> type.
+
+ex : env vx (nN 1).
+ey : env vy (nN 10).
+ez : env vz (nN 5).
+ew : env vw (bB true).
+
+%mode env +E -M.
+%terminates E (env E N).
+
+%{
+
+let rec eval e env =
+    match e with
+    | I n      ->  I n
+    | B b     ->  B b
+    | V s      -> Map.find s env
+    | Sum(e1,e2) -> 
+        let (I n1) = eval e1 env
+        let (I n2) = eval e2 env
+        I (n1 + n2)
+    | Eq(n,m) -> 
+        let v1 = eval n env
+        let v2 = eval m env
+        B (v1 = v2) 
+    | Less(n,m) ->  
+        let (I v1) = eval n env
+        let (I v2) = eval m env
+        B (v1 < v2) 
+    | Neg b ->  
+        let (B nb) = eval b env
+        B (not nb);;   
+}%
+
+
+abeval : abexp -> abexp -> type.
+%mode abeval +E -V.
+
+e/n : abeval (nN N) (nN N).
+e/b : abeval (bB B) (bB B).
+e/v : abeval (vV X)  V
+       <- env X V.
+
+e/s : abeval (sSum E1 E2) (nN N)
+       <- abeval E1 (nN N1)
+       <- abeval E2 (nN N2)
+       <- plus N1 N2 N.
+
+e/nt : abeval (nNot E) (bB NB)
+        <- abeval E (bB B)
+        <- not B NB.
+
+e/ls : abeval (lLess E1 E2) (bB B)
+        <- abeval E1 (nN N1)
+        <- abeval E2 (nN N2)
+        <- less N1 N2 B.  % a version of less that returns a bool, rather than the predicate see prelude
+
+% we need two clauses, since equality is monomorphic, first for nats
+e/en : abeval (eEq E1 E2) (bB B)
+      <- abeval E1 (nN N1)
+      <- abeval E2 (nN N2)
+      <- eqn N1 N2 B.  % same deal than less
+
+e/eb : abeval (eEq E1 E2) (bB B)
+      <- abeval E1 (bB B1)
+      <- abeval E2 (bB B2)
+      <- eqb B1 B2 B.
+
+e/ite-t : abeval (ite E E1 E2) V1
+           <- abeval E (bB true)
+           <- abeval E1 V1.
+
+e/ite-f : abeval (ite E E1 E2) V2
+           <- abeval E (bB false)
+           <- abeval E2 V2.
+
+
+
+%terminates E (abeval E N).
+
+
+% 1 < ( 1  + 1)
+ab1 = (lLess (nN 1) (sSum (nN 1) (nN 1))).
+
+%query 1 *
+M : abeval ab1 V.
+
+% ill-typed 
+ab2 = (lLess (bB _) (sSum (nN 1) (nN 1))).
+
+% no evaluation of an ill-typed term
+%query 0 1
+M : abeval ab2 V.
+
+ift = ite ab1 (nN 2) (nN 1).
+%query 1 *
+M : abeval ift V.
+
+%{ evaluation a straightforward rendition of the rules. Note, we don't
+have to worry about non-exhaustive pattern matching, or write a
+defensive interpreter. The rules just state what holds and anything
+not mentioned is assumed to be false.
+
+This is called the "Closed world assumption" and corresponds to the
+(often omitted) closure condition of inductive definition. Example:
+
+1. 0 is even
+2 for all n, if n is even, so is n + 2
+3 nothing else is  even
+
+You do not have to say that (even 1) is false as in FP.
+
+Similarly for typing. Just write the typing rule. We do not have to
+account for failure (no options), since a term is ill-typed if it
+fails to have a derivation from the program.
+
+}%
+
+ty : type.
+nty : ty.
+bty : ty.
+
+tenv : vname -> ty -> type.
+%mode tenv +E -T.
+t1: tenv vx nty.
+t2: tenv vy nty.
+t3: tenv vz nty.
+t4: tenv vw bty.
+
+%terminates E (tenv E T).
+
+tpck : abexp -> ty -> type.
+%mode tpck +E -T.
+
+t/b  : tpck (bB _) bty.
+t/n  : tpck (nN _) nty.
+
+% for a change, we write this case in rule format, by switching the arrow
+
+t/v : tenv X T ->
+ % ----------------------
+       tpck (vV X) T.
+
+
+t/nn : tpck E bty ->
+% -----------------------
+	  tpck (nNot E) bty.
+
+t/s  : 
+       tpck E1 nty ->
+       tpck E2 nty ->
+% --------------------------------------
+     tpck (sSum E1 E2) nty.
+
+t/l : 
+       tpck E1 nty ->
+       tpck E2 nty ->
+% --------------------------------------
+     tpck (lLess E1 E2) bty.
+
+t/e :
+       tpck E1 T ->
+	   tpck E2 T ->
+% --------------------------------------
+	  tpck (eEq E1 E2) bty.
+
+t/ite :
+         tpck E bty ->
+         tpck E1 T ->
+         tpck E2 T ->
+% --------------------------------------
+       tpck (ite E E1 E2) T.
+
+% here we can quantify over T and have one rule.
+
+% the program is terminating as it it decreasing wrt the expression E.
+%terminates E (tpck E T).
+
+
+%query 1 1
+tpck (sSum (vV vy) (sSum (vV vz) (nN 10))) T.
+
+%query 1 1
+tpck ift T.
+
+
+%{
+What about type preservation? In F#, we used PBT to *test* that
+
+if e : t and e >> v, then v : t
+
+is not false. In Twelf we could carry out the proof formally and have
+the system check it. This is well beyond the scope of this course, but
+we just give the statement and refer to
+http://twelf.org/wiki/Proving_metatheorems:Proving_metatheorems_about_the_STLC
+for who's interested }%
+
+tps : tpck E T -> abeval E V -> tpck V T -> type.
+
+% here we should add a logic programs which transforms a proof of 
+% tpck E T and of abeval E V in a proof of tpck V T
+
+% one case: for booleans
+tps/b : tps t/b e/b  t/b.
+       
+%{ EXERCISE:
+
+- write some more type checking queries
+
+- add a new constructor for ite (if-then-else) of type
+  abexp -> abexp -> abexp -> abexp with the following behaviour
+
+- evaluating (ite e e1 e2) yields a value v1 if e evaluates to true and
+  e1 to v2: symmetrically for false
+
+- the type of (ite e e1 e2) is T if the type of e is a boolean and both
+  e1 and e2 have type T
+}%
+
+
+% note from me: ite implemented above

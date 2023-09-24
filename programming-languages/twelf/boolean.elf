@@ -1,0 +1,10 @@
+boolean : type.
+true : boolean.
+false : boolean.
+
+or : boolean -> boolean -> type.
+or\t1 : or true true.
+or\t2 : or true false.
+or\t3 : or false true.
+% in logic programming we only specify what is true
+%query 1 1 or true false.

@@ -1,0 +1,38 @@
+% type of individuals
+i  : type.
+i1 : i.
+i2 : i.
+
+% tags
+tag : type.
+
+a : tag.  % int
+b : tag.  % float
+c : tag.  % string
+
+% types
+ty : type.
+
+int : ty.
+float : ty.
+string : ty.
+
+texp : type.
+
+atom : tag -> i -> texp.
+pair : texp -> texp -> texp.
+
+tyck : texp -> ty -> type.
+tyck_i : tyck (atom a _) int.
+tyck_f : tyck (atom b _) float.
+tyck_s : tyck (atom c _) string.
+tyck_rec : tyck (pair TEXP1 TEXP2) TY
+            <- tyck TEXP1 TY
+            <- tyck TEXP2 TY.
+%mode tyck +E -TY.
+
+s1 = pair (atom a i1) (atom a i2).
+ill = pair (atom b i1) (atom a i2).
+%query 1 1 tyck s1 TY.
+%query 0 1 tyck ill TY.
+
