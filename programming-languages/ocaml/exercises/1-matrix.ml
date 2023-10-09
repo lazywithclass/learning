@@ -1,39 +1,41 @@
-let print m =
-  let rec print_rec i j =
-    if i = j then
-      ()
-    else (
-      print_endline (Array.fold_left (fun acc n -> acc^" "^(string_of_int n)) "" m.(i));
-      print_rec (i + 1) j
+let print matrix =
+  let rec print_row i =
+    if i < (List.length matrix) then (
+      print_endline (List.fold_left (fun acc n -> acc^"\t"^(string_of_int n)) "" (List.nth matrix i));
+      print_row (i + 1)
     )
   in
-  print_rec 0 (Array.length m)
+  print_row 0
 
-let zeroes n m =
-  let matrix = Array.make n [||] in
-  let rec fill_rows i =
-    match i with
-        | -1 -> ()
-        | _ ->
-           matrix.(i) <- Array.make m 0;
-           fill_rows (i - 1)
+let zeroes size =
+  let rec row i j =
+    if i = j then
+      []
+    else
+      0 :: (row (i + 1) j)
+  and matrix i j =
+    if i = j then
+      []
+    else
+      (row 0 j) :: (matrix (i + 1) j)
   in
-  fill_rows (n - 1);
-  matrix
+  matrix (-1) size
 
-(* Or better: Array.make_matrix 5 4 0 *)
+(* lol? Array.make_matrix 5 4 0 *)
 
-let identity n =
-  let matrix = zeroes n n in
-  let rec fill_diagonal n m =
-    match n with
-        | -1 -> ()
-        | _ ->
-           matrix.(n).(m) <- 1;
-           fill_diagonal (n - 1) (m - 1)
+let identity size =
+  let rec row i length line =
+    if i = length then
+      []
+    else
+      (if i = line then 1 else 0) :: (row (i + 1) length line)
+  and matrix i j line =
+    if i = j then
+      []
+    else
+      (row 0 j line) :: (matrix (i + 1) j (line + 1))
   in
-  fill_diagonal (n - 1) (n - 1);
-  matrix
+  matrix 0 size 0
 
 let init size =
   let rec row i j curr =
@@ -49,8 +51,33 @@ let init size =
   in
   matrix (-1) size 0
 
-let res = init 5
+(*
+i is the index representing the i-th sublist
+j is the index representing the j-th element in the sublist
+*)
+let transpose matrix =
+  let rec row i j =
+    if i = (List.length matrix) || j = (List.length (List.nth matrix i)) then
+      []
+    else
+      (List.nth (List.nth matrix i) j) :: row (i + 1) j
+  and column i j =
+    if j = (List.length matrix) then
+      []
+    else
+      (row i j) :: (column i (j + 1))
+  in
+  column 0 0
 
-let matrix = zeroes 5 4 in print matrix
+(* transpose and init seem to share a lot of similarities, could we do something about this? *)
 
-let matrix2 = identity 5 in print matrix2
+(* tests *)
+
+let _ = init 5 |> print
+
+let _ = init 5 |> transpose |> print
+
+let _ = zeroes 5 |> print
+
+let _ = identity 6 |> print
+
