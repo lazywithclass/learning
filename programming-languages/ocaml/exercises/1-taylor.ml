@@ -15,8 +15,8 @@ let sin x n =
         else
             let curr = (x ** (float_of_int approx)) /. (float_of_int (fact approx)) in
             if (approx - 1) mod 4 = 0
-            then (sin x (approx - 2)) +. curr
-            else (sin x (approx - 2)) -. curr
+            then (loop (approx - 2)) +. curr
+            else (loop (approx - 2)) -. curr
     in
     loop ((n * 2) + 1)
 
