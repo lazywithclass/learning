@@ -1,12 +1,9 @@
 let fact n =
-    let rec loop i acc =
-        if i > n then acc
-        else
-          match n with
-            | 1 | 2 -> acc
-            | _ -> loop (i + 1) (acc * i)
+    let rec loop n acc =
+        if n <= 1 then acc
+        else loop (n - 1) (acc * n)
     in
-    loop 2 1
+    loop n 1
 
 let _ = fact 10
 
