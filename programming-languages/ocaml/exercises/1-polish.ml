@@ -1,34 +1,42 @@
-let expr_of_string string =
-  let parse_single s =
-    match int_of_string_opt s with
-      | Some _ -> Some s
-      | None ->
-          if s = "+" || s = "-" || s = "*" || s = "/" || s = "**" then
-              Some s
-          else
-              None
-  in
-  let rec parse i stack =
-    if i = (String.length string) then
-        stack
-    else
-        match parse_single (String.sub string i 1) with
-          | None -> parse (i + 1) stack
-          | Some s -> (Stack.push s stack); parse (i + 1) stack
-  in
-  let stack = parse 0 (Stack.create ())
-  in
-  let buildExpr =
+#load "str.cma"
 
-  
-let s = expr_of_string "1 + 2"
-let _ =
+(* ---------------- *)
+(* TYPES *)
+(* ---------------- *)
 
 type expr =
     | Unary of op * expr
     | Binary of expr * op * expr
     | Value of int
 and op = Pls | Min | Mul | Div | Pow
+
+(* ---------------- *)
+(* PARSER *)
+(* ---------------- *)
+
+let expr_of_string str =
+  let tokens = Str.split (Str.regexp " ") str in
+  let stack = Stack.create () in
+  let parse_op = function
+      | "+" -> Pls
+      | "-" -> Min
+      | "*" -> Mul
+      | "/" -> Div
+  in
+  List.iter (fun token ->
+      match int_of_string_opt token with
+        | Some n -> Stack.push (Value n) stack
+        | None ->
+            let op = parse_op token in
+            let e2 = Stack.pop stack in
+            let e1 = Stack.pop stack in
+            Stack.push (Binary (e1, op, e2)) stack
+    ) tokens;
+  Stack.pop stack
+
+(* ---------------- *)
+(* EVAL *)
+(* ---------------- *)
 
 let rec eval = function
     | Value v             -> v
@@ -41,9 +49,13 @@ and evalo = function
     | Div -> (/)
 (* | Pow -> ( ** ) OVER INTEGER! NO NEED FOR FLOATS *)
 
-let e = Binary ((Value 5), Pls, (Value 1))
-let e = Unary (Pls, (Value 4))
-let e = Binary (Binary ((Value 4), Mul, (Value 3)), Pls, (Value 30))
+(* ---------------- *)
+(* TEST *)
+(* ---------------- *)
 
-let _ = eval e
+let _ = Binary ((Value 5), Pls, (Value 1)) |> eval
+let _ = Unary (Pls, (Value 4)) |> eval
+let _ = Binary (Binary ((Value 4), Mul, (Value 3)), Pls, (Value 30)) |> eval
 
+let _ = expr_of_string "3 4 + 5 *" |> eval
+let _ = expr_of_string "3 4 + 5 * 30 -" |> eval
