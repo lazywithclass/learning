@@ -5,32 +5,34 @@
 (* ---------------- *)
 
 type expr =
-    | Unary of op * expr
-    | Binary of expr * op * expr
-    | Value of int
+  | Unary of op * expr
+  | Binary of expr * op * expr
+  | Value of int
 and op = Pls | Min | Mul | Div | Pow
 
 (* ---------------- *)
 (* PARSER *)
 (* ---------------- *)
 
+(* Feels a bit weird they've coded Stack to have side effects, why is it this way? *)
+
 let expr_of_string str =
   let tokens = Str.split (Str.regexp " ") str in
   let stack = Stack.create () in
   let parse_op = function
-      | "+" -> Pls
-      | "-" -> Min
-      | "*" -> Mul
-      | "/" -> Div
+    | "+" -> Pls
+    | "-" -> Min
+    | "*" -> Mul
+    | "/" -> Div
   in
   List.iter (fun token ->
       match int_of_string_opt token with
-        | Some n -> Stack.push (Value n) stack
-        | None ->
-            let op = parse_op token in
-            let e2 = Stack.pop stack in
-            let e1 = Stack.pop stack in
-            Stack.push (Binary (e1, op, e2)) stack
+      | Some n -> Stack.push (Value n) stack
+      | None ->
+        let op = parse_op token in
+        let e2 = Stack.pop stack in
+        let e1 = Stack.pop stack in
+        Stack.push (Binary (e1, op, e2)) stack
     ) tokens;
   Stack.pop stack
 
@@ -39,14 +41,14 @@ let expr_of_string str =
 (* ---------------- *)
 
 let rec eval = function
-    | Value v             -> v
-    | Unary (op, e)       -> (evalo op) (eval e) 0
-    | Binary (e1, op, e2) -> (evalo op) (eval e1) (eval e2)
+  | Value v             -> v
+  | Unary (op, e)       -> (evalo op) (eval e) 0
+  | Binary (e1, op, e2) -> (evalo op) (eval e1) (eval e2)
 and evalo = function
-    | Pls -> (+)
-    | Min -> (-)
-    | Mul -> ( * )
-    | Div -> (/)
+  | Pls -> (+)
+  | Min -> (-)
+  | Mul -> ( * )
+  | Div -> (/)
 (* | Pow -> ( ** ) OVER INTEGER! NO NEED FOR FLOATS *)
 
 (* ---------------- *)

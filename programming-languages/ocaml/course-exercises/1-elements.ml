@@ -31,9 +31,9 @@ let rec merge els1 els2 =
   | els1, [] -> els1
   | [], els2 -> els2
   | head1 :: tail1, head2 :: tail2 ->
-      let Element (num1, name1) = head1 in
-      let Element (num2, name2) = head2 in
-      if num1 <= num2 then head1 :: (merge tail1 els2)
-      else head2 :: (merge els1 tail2)
+    let Element (num1, name1) = head1 in
+    let Element (num2, name2) = head2 in
+    if num1 <= num2 then head1 :: (merge tail1 els2)
+    else head2 :: (merge els1 tail2)
 
-let res = merge elements nobleGases;;
+let res = merge elements nobleGases

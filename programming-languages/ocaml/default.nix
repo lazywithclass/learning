@@ -20,6 +20,7 @@ in pkgs.mkShell {
   packages = with pkgs; [
     ocaml
     ocamlPackages.ocaml-lsp
+    ocamlPackages.ocp-indent
     python3
     deno
     nodejs

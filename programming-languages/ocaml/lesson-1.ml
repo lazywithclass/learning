@@ -81,9 +81,9 @@ _ e' un catch all
 *)
 
 let invert x =
-  match
-    | true -> false
-    | false -> true
+  match x with
+  | true -> false
+  | false -> true
 
 let invert = function
     true -> false | false -> true
