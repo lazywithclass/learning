@@ -59,3 +59,4 @@ And the interesting fact is that you can start off with a continuation that resu
 `(f v) = (fC v id)` where `f` is the function, `v` the value, `fC` the lifted function to work with continuations, `id` the identity function.
 
 TODO VAI A VEDERE ALLINIZIO DOVE DICE CHE CON L'ACC NON E' GARANTITO ... QUALCOSA
+

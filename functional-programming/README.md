@@ -1,5 +1,10 @@
 ## Learning Function Programming
 
+### Arguments
+
+ * [Continuation Passing Style](continuation-passing-style.md)
+
+
 https://fsharpforfunandprofit.com/posts/recursive-types-and-folds/
 
 
