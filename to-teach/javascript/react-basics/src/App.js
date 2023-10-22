@@ -8,6 +8,7 @@ import { RefactoringFetch } from './components/RefactoringFetch'
 import { WhyLoopingWithMap } from './components/WhyLoopingWithMap'
 import { SimplerTodoList } from './components/SimplerTodoList'
 import { TodoList } from './components/TodoList'
+import { TodoListComponents } from './components/TodoListComponents'
 import { AsyncCall } from './components/AsyncCall'
 import { WhyUseState } from './components/WhyUseState'
 import { UseStateAsyncNature } from './components/UseStateAsyncNature'
@@ -33,6 +34,7 @@ function Main() {
             <li><Link to="/whyloopingwithmap">WhyLoopingWithMap</Link></li>
             <li><Link to="/simplertodolist">SimplerTodoList</Link></li>
             <li><Link to="/todolist">TodoList</Link></li>
+            <li><Link to="/todolistcomponents">TodoListComponents</Link></li>
             <li><Link to="/asynccall">AsyncCall</Link></li>
             <li><Link to="/whyusestate">WhyUseState</Link></li>
             <li><Link to="/usestateasyncnature">UseStateAsyncNature</Link></li>
@@ -62,6 +64,7 @@ function App() {
           <Route path="whyloopingwithmap" element={<WhyLoopingWithMap />} />
           <Route path="simplertodolist" element={<SimplerTodoList />} />
           <Route path="todolist" element={<TodoList />} />
+          <Route path="todolistcomponents" element={<TodoListComponents />} />
           <Route path="asynccall" element={<AsyncCall />} />
           <Route path="whyusestate" element={<WhyUseState />} />
           <Route path="usestateasyncnature" element={<UseStateAsyncNature />} />

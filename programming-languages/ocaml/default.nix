@@ -11,10 +11,8 @@ let
   nodejs = buildNodeJs {
     enableNpm = true;
     version = nodejsVersion;
-    sha256 = "g+AzgeJx8aVhkYjnrqnYXZt+EvW+KijOt41ySe0it/E=";
+    sha256 = "cct13FkNZ21eAs6IPUPr6Dn0gM5KsAuDwt7GNjfHDXg=";
   };
-
-  # NPM_CONFIG_PREFIX = toString ./npm_config_prefix;
 
 in pkgs.mkShell {
   packages = with pkgs; [

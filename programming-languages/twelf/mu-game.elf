@@ -32,17 +32,25 @@ nil     : mu-list.
 % MxIU   : type.
 % MxIIIx : type.
 
+% Rule I   - if we have a string that ends with I, we can add U at the end
 % rule1   : MxI -> MxIU.
 rule1 : mu-list -> mu-list -> type.
 r1    : rule1 MxI MxIU
          <- @ MxI (u # nil) MxIU
          <- @ Ms (i # nil) MxI.
+%query 0 * rule1 (m # nil) M.
+%query 0 * rule1 (m # i # u # nil) M.
+%query 1 * rule1 (m # i # nil) M.
 
+% Rule II  - if we have Mx, we can produce Mxx
 % rule2 : Mx -> Mx -> type.
 rule2 : mu-list -> mu-list -> type.
 r2    : rule2 (m # X) MX
          <- @ (m # X) X MX.
+%query 1 * rule2 (m # u # nil) M.
+%query 1 * rule2 (m # u # i # nil) M.
 
+% Rule III - if we have III, we can replace them with U
 % rule3 : MxIIIx -> MxUx -> type.
 rule3 : mu-list -> mu-list -> type.
 r3    : rule3 XTrisY Z
