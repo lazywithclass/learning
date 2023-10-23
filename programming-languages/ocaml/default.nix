@@ -10,8 +10,8 @@ let
 
   nodejs = buildNodeJs {
     enableNpm = true;
-    version = nodejsVersion;
-    sha256 = "cct13FkNZ21eAs6IPUPr6Dn0gM5KsAuDwt7GNjfHDXg=";
+    version = "18.17.1";
+    sha256 = "8hXPA9DwDwesC2dMaBn4BMFULhbxUtoEmAAirsz15lo=";
   };
 
 in pkgs.mkShell {
