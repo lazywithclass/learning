@@ -1,0 +1,22 @@
+{
+  "name": "array-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon -w index.js index.js",
+    "unit-test-watch": "nodemon -w test/unit.js -w routes.js test/unit.js",
+    "unit-test": "node test/unit.js",
+    "integration-test": "node test/integration.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "express": "^4.18.2"
+  }
+}
