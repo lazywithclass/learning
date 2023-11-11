@@ -21,4 +21,4 @@ let tl (Cons (_, t)) = t ()
 let rec take n s =
   if n = 0 then [] else hd s :: take (n - 1) (tl s)
 
-let _ = take 5 nats
+let _ = take 4 nats

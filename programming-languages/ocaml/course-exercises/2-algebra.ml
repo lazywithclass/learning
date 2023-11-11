@@ -39,14 +39,15 @@ module Natural : Monoid with type t = int = struct
 end
 
 
+(* test this using cartesian product *)
 
 (* even though we have Seqs we property test on a finite subset *)
 module Tester(M: Monoid) = struct
 
-  let rec take seq n =
-    match (seq, n) with
-    | (_, 0)      -> []
-    | Seq.Cons (x, seq) -> []
+  (* let rec take seq n = *)
+  (*   match (seq, n) with *)
+  (*   | (_, 0)      -> [] *)
+  (*   | Seq.Cons (x, seq) -> [] *)
 
 
 

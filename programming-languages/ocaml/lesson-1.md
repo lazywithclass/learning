@@ -1,6 +1,6 @@
-(*
+# Lesson 1
+
 "Programmazione Dichiarativa e' una settimana del mio corso"
--- Cazzola
 
 functional programming
 
@@ -39,8 +39,9 @@ interprete e compiler
 
 OCaML
 Object CambridgeMetaLanguage
- *)
 
+
+```Ocaml
 let main() = print_string("Hello world");;
 main();;
 
@@ -56,22 +57,21 @@ succ 2;;
 (*
 l'associativita' e' da sx verso dx, quindi sto passando la funzione
 meno alla funzione succ, il che da errore
+succ -1;; 
 *)
-(* succ -1;; *)
 
 succ (- 1);;
 
-(*
+```
+
 sono nomi non sono variabili, non sono locazioni di memoria
 che puntano a qualcosa, servono solo a semplificarci cio' che scriviamo
-*)
 
-(*
 riuso di un nome nasconde il nome precedente
 static binding! una funzione prende il valore di eventuali variabili libere
 quando viene definita
-*)
 
+```Ocaml
 let compose f g x = f (g x);;
 let compose' (f, g) x = f (g x);; (* si passa una tupla *)
 
@@ -87,3 +87,4 @@ let invert x =
 
 let invert = function
     true -> false | false -> true
+```
