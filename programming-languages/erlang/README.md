@@ -1,10 +1,4 @@
 # Erlang
 
-## Lesson
+Theory notes and study materials could be found [here](https://github.com/lazywithclass/learning/tree/master/to-study/obsidian-vault).
 
-[Lesson 1](lesson-1.md)
-[Lesson 2](lesson-2.md)
-Lesson 3
-Lesson 4
-Lesson 5
-Lesson 6
