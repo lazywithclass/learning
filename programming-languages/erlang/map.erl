@@ -1,4 +1,4 @@
--module(mapList).
+-module(map).
 -export([map/2]).
 
 map(_, []) -> [];
