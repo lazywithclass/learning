@@ -1,10 +1,16 @@
 -module(master_process).
--export([loop/2, reverse/3, long_reverse_string/2, decompose/3]).
+-export([main/0, loop/3, reverse/3, long_reverse_string/2, decompose/3]).
 
+
+%% meant to be invoked from the CLI
+main() -> long_reverse_string(read_lines("INPUT"), 10).
+read_lines(FileName) ->
+    {ok, BinaryData} = file:read_file(FileName),
+    binary_to_list(BinaryData).
 
 long_reverse_string(String, ChunkLength) ->
     Decomposed = decompose(String, 0, ChunkLength),
-    Pid = spawn(fun() -> loop(length(Decomposed), []) end),
+    Pid = spawn(fun() -> loop(1, "", length(Decomposed)) end),
     register(master, Pid),
 
     Indexes = lists:seq(1, length(Decomposed)),
@@ -14,19 +20,14 @@ long_reverse_string(String, ChunkLength) ->
               spawn(master_process, reverse, [El, [], Index])
       end, WithIndexes).
 
-loop(Chunks, Received) ->
-    case length(Received) < Chunks of
-        true ->
-            receive
-                {Index, Reversed} ->
-                    io:format("received ~p from ~p~n", [Reversed, Index]),
-                    loop(Chunks, [{Index, Reversed}|Received])
-            end;
-        false ->
-            io:format("~p~n", [Received]),
-            Reverse = reconstruct(Received),
-            io:format("~p~n", [Reverse]),
-            unregister(master)
+loop(Index, Received, Tot) ->
+    receive
+        {Index, Reversed} ->
+            %% io:format("received ~p from ~p~n", [Reversed, Index]),
+            case Index == Tot of
+                true -> io:format("~p~n", [Reversed++Received]);
+                false -> loop(Index+1, Reversed++Received, Tot)
+            end
     end.
 
 decompose(String, From, Length) ->
@@ -36,16 +37,11 @@ decompose(String, From, Length) ->
         false -> [Slice]
     end.
 
-reconstruct(Received) ->
-    Sorted = lists:sort(
-               fun({IndexA, _}, {IndexB, _}) -> IndexA < IndexB end
-              , Received),
-    lists:foldl(fun({_, El}, Reversed) -> El++Reversed end, "", Sorted).
-
 reverse(Chunk, Reversed, Index) ->
     case Chunk of
-        [] -> io:format("~p is sending reversed ~p~n", [Index, Reversed]),
-              master ! {Index, Reversed};
+        [] ->
+            %% io:format("~p is sending reversed ~p~n", [Index, Reversed]),
+            master ! {Index, Reversed};
         [H|T] -> reverse(T, [H|Reversed], Index)
     end.
 

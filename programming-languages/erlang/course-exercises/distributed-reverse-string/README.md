@@ -8,3 +8,15 @@ a server process (MasterProcess) provides a service called long_reverse_string()
 the service long_reversed_string() decomposes the input w into 10 strings w⁰, ..., w⁹ with the following lengths (# represents the operator length of a string, and n=#w%10): #w⁰=...=#wⁿ=#w/10+1 e #wⁿ⁺¹=...=#w⁹=#w/10 and forwards to 10 distinct actors (SlaveProcess) to reverse the 10 substrings w⁰, ..., w⁹ (service reverse_string()) and joins the 10 results.
 the client process (ClientProcess) just ask for the service on a given string.
 When done with the exercise try to relax the constraint on the number of substrings from ten to a generic M passed as an input to the long_reversed_string service.
+
+## Run
+
+``` shell
+# actors
+$ erlc master_process.erl && erl -noshell -s master_process main -s init stop
+
+# simple
+$ erlc simple.erl && erl -noshell -s simple main -s init stop
+```
+
+To see the improvement though I would have to spawn nodes on different machines to run on their CPUs
