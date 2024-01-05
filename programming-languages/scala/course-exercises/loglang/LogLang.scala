@@ -17,17 +17,18 @@ case class RENAME(from: String, to: String) extends INSTRUCTION
 import scala.util.parsing.combinator._
 
 
-// TODO guarda JavaTokenParsers
-
+// I could've used scala.util.parsing.combinator.JavaTokenParsers
+// which allow for easier parsing
 object LogLangLexer extends RegexParsers {
 
   def apply(code: String) = {
-    val parsers = task ~> taskId ~ rep(remove | rename | merge | backup)
+    val instrs = remove | rename | merge | backup
+    val parsers = task ~> taskId ~ ("{" ~> rep(instrs) <~ "}")
     val res = parse(parsers ^^ { case id ~ instrs => (id, instrs) }, code)
     res match {
-      case Success(matched, _) => LogLangEval(matched)
-      case Failure(msg, _) => println(s"lexer failed: $msg")
-      case Error(msg, _) => println(s"lexer failed: $msg")
+      case Success(matched, _) => Some(matched)
+      case Failure(msg, _) => None
+      case Error(msg, _) => None
     }
   }
 
@@ -36,10 +37,9 @@ object LogLangLexer extends RegexParsers {
 
   def taskId: Parser[TASK_ID] = """[a-z-A-Z]+""".r ^^ { id => TASK_ID(id) }
 
-
   // Instructions
-  // TODO error handling
-  def filename: Parser[String] = """"[a-zA-Z_+][a-z-A-Z_+0-9]*\.[a-z]+"""".r
+  // error handling is missing, maybe next time
+  def filename: Parser[String] = """"[a-zA-Z_+][a-z-A-Z_+0-9.]*[a-z]+"""".r
 
   def remove: Parser[REMOVE] =
     "remove" ~> filename ^^ { case name => REMOVE(name) }
@@ -54,19 +54,21 @@ object LogLangLexer extends RegexParsers {
     "backup" ~> rep(filename) ^^ { case ns => BACKUP(ns(0), ns(1)) }
 }
 
-object LogLangEval {
+object LogLangEvaluator {
 
-  def apply(task: Tuple2[TASK_ID, List[INSTRUCTION]]) = {
-    val taskId = task._1
-    val instructions = task._2
-    eval(instructions)
+  def main(args: Array[String]) = {
+    val input = """
+task TaskOne {
+ remove "application.debug.old"
+ rename "application.debug" "application.debug.old"
+}
+"""
+    val Some((taskId, instrs)) = LogLangLexer(input)
+    println(instrs)
+
   }
 
-  def eval(instrs: List[INSTRUCTION]): Unit = {
-    instrs match {
-      case head :: tail => println(s"diomadonna $head")
-                           eval(tail)
-      case List()       => println("done")
-    }
-  }
+  // here I would ideally run the commands etc
+  // I am more interested in the parsing bit
+
 }
