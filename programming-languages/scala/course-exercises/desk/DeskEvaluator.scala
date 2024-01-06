@@ -1,62 +1,38 @@
 import scala.util.parsing.combinator._
-import scala.collection.mutable.HashMap
+import scala.collection.mutable._
 
-class DeskParser extends JavaTokenParsers {
+// the idea here is to wrap the computation in functions so that
+// we prepare them (as thunks) depending on whether they are a number, or a variable
+class DeskParser(var table : HashMap[String, Int] = new HashMap[String, Int]) extends JavaTokenParsers{
 
-  override val whiteSpace = " ".r
-  override def skipWhitespace = false
-
-  def intv = wholeNumber ^^ { s => s.toInt }
-  def expr = ("[a-z]".r | intv)~"[+-]?".r
-  def init = (ident<~" ?= ?".r)~intv<~",? ?".r
-
-  def program = ("print "~>rep(expr)<~" where ")~rep(init) ^^ {
-    case exprs ~ e => {
-      val env = tohashmap(e)
-      var tot = 0
-      for (e <- exprs) {
-        val fn = lookup(e, env)
-        tot = fn(tot)
-      }
-      println(tot)
-      println(env)
-    }
+  def program = "print" ~> exprs ~ ("where" ~> variables) ^^ {
+    case exprs ~ _ => println(exprs())
+                      table
   }
 
-  def tohashmap(env: List[String ~ Int]): HashMap[String, Int] = {
-    env.foldLeft(new HashMap[String, Int]())((newenv, e) => {
-                                               e match {
-                                                 case k~v => newenv(k) = v
-                                               }
-                                               newenv
-                                             })
+  def exprs: Parser[() => Int] = expr ~ ("+" ~> exprs) ^^ {
+    case f1 ~ f2 => () => f1() + f2()
+  } | expr
+  def expr = number | value
+  def variables = rep(variable)
+  def variable = (ident <~ "=") ~ wholeNumber <~ ",?".r ^^ {
+    case s ~ n => table += (s -> n.toInt)
   }
 
-  def lookup(expr: Any ~ Any, env: HashMap[String, Int]): Int => Int = {
-    expr match {
-      case (s: String) ~ "+" => (x: Int) => x + env(s)
-      case (s: String) ~ "-" => (x: Int) => x - env(s)
-      case (n: Int) ~ "+"    => (x: Int) => x + n
-      case (n: Int) ~ "-"    => (x: Int) => x - n
-      case "+" ~ (n: Int)    => (x: Int) => x + n
-      case "-" ~ (n: Int)    => (x: Int) => x - n
-      case x => println(s"DIOMADONNA $x")
-                (x: Int) => x
-    }
-  }
+  def value = ident ^^ { s => () => table(s) }
+  def number = wholeNumber ^^ { n => () => n.toInt }
 }
 
-object DeskEvaluator {
-  def main(args: Array[String]) = {
-    // val code = """print x+y+z+1+x+-3 where x = 25, y = 1, z=-7"""
-    val code = """print x+y+1+x+-3 where x = 25, y = 1"""
+object DeskEvaluator{
 
-    val parser = new DeskParser()
-    val res = parser.parseAll(parser.program, code)
-    res match {
-      case parser.Success(parsed, _) => println(parsed)
-      case parser.Failure(msg, _) => println(s"Failure: $msg")
-      case parser.Error(msg, _) => println(s"Error: $msg")
+  def main(args: Array[String]): Unit = {
+
+    val code = "print x+y+z+1+x+-3 where x = 25, y = 1, z=-7"
+    val p = new DeskParser()
+
+    p.parseAll(p.program, code) match {
+      case p.Success(a,_) => println(a)
+      case x => println(x)
     }
   }
 }

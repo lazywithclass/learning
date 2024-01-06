@@ -1,1 +1,1 @@
-print 1 where x = 7
+print -1 where x = 7
