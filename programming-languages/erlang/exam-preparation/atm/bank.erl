@@ -3,12 +3,9 @@
 
 start() ->
     Pid = spawn(fun() -> loop(5000, 0) end),
-    %% TODO in obsidian metti note su questo ping e netamd
     global:register_name(bank@nixos, Pid),
     ok.
 
-%% TODO
-%% balance sync? che vuol dire?
 
 loop(Balance, Seq) ->
     receive
