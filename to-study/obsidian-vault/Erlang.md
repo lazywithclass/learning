@@ -3,15 +3,11 @@ cssclasses:
   - cornell-note
 tags:
   - programming-languages/erlang
-  - category-theory
+  - concurrency
+  - parallelism
+  - purely-functional
 ---
 
-TODO 
-- [ ] write a simple chat server with 3 commands
-	- [ ] join
-	- [ ] send message
-	- [ ] leave
- 
 ## Erlang Master Class
 
 https://www.cs.kent.ac.uk/ErlangMasterClasses/
@@ -22,7 +18,7 @@ Course is hosted on Youtube and taught by:
 
 In the first part they talk about interpreters. Pretty interesting, not really tied to Erlang though so I'd skip it if you were not interested.
 
-Second part is about concurrency and its patterns (rpc, Futures.
+Second part is about concurrency and its patterns (rpc, Futures, ...).
 
 ## The language
 
@@ -110,6 +106,13 @@ contains(X, [X|Xs]) -> true;
 contains(X, [_|Xs]) -> contains(X, Xs).
 ```
 
+You could have guards like so:
+
+```erlang
+foo(A, B) when A == B -> equal;
+foo(A, B)             -> not_equal;
+```
+
 ## Running Erlang
 
 ```shell
@@ -162,7 +165,7 @@ loop_receiving(Senders) ->
   receive
     {Msg, From} -> 
       io:format("received ~p from ~p~n", [Msg, From]),
-      loop_receiving([State|Senders])
+      loop_receiving([From|Senders])
     %% more code
   end.
 ```
@@ -202,12 +205,13 @@ io:format("done").
 
 * [`spawn`](https://www.erlang.org/doc/reference_manual/processes.html#process-creation) -  creates actors
 * [`!`](https://www.erlang.org/doc/reference_manual/processes.html#sending-signals) - sends messages
-* [`spawn_link`](https://www.erlang.org/doc/man/erlang#spawn_link-4) spawns and then link [link](#link)
+* [`spawn_link`](https://www.erlang.org/doc/man/erlang#spawn_link-4) spawns and then [[#Link]]
 * pattern match - works through the message queue, messages are ordered by [sent order](https://www.erlang.org/blog/message-passing/)
 * `self()` - gives the PID of the current actor
 * `register(an_atom, Pid)` 
 * `unregister(an_atom)` 
 * `whereis(an_atom) -> Pid|undefined`
+* `global:whereis_name(an_atom) -> Pid|undefined`, remember to `net_adm:ping(Host)` (see [[#Useful stuff]])
 * `registered()`
 
 <aside>why register</aside>
@@ -222,7 +226,44 @@ $ erl +p $NUM_PROCESSES
 
 ### Group leader
 
-Each output is associated to a certain group_leader, you could pass it as first argument of the `io:format` like so `global:where_is(YourRegisteredAtom)`.
+Each output is associated to a certain group_leader, you configure to have `io:format` output to go on a certain node by using `group_leader(whereis(user), self())`.
+
+### Nodes
+
+You could start a node with (note that the hostname is `hostname`)
+
+```bash
+$ erl -sname server
+```
+
+which contains this code
+
+```erlang
+-module(server).
+-export([start/0, loop/0]).
+
+
+start() -> Pid = spawn(fun() -> loop() end),
+           register(server, Pid).
+
+loop() ->
+    receive
+        Msg -> io:format("node received ~p\n", [Msg]),
+               loop()
+    end.
+```
+
+and then when you to send messages to that node you could do
+
+```erlang
+{server, server@hostname} ! "test".
+```
+
+where `server` is how you registered the pid of the process, this line basically means "send `"test"` to the node identified by `server` in the host called `server@hostname`"; so that tuple could be generally viewed as `{registered_name,node_name}`.
+
+	So if you know the pid of a process, the "!" operator can be used to send it a message disregarding if the process is on the same node or on a different node.
+
+More on this [in the docs](https://www.erlang.org/doc/getting_started/conc_prog#distributed-programming)
 
 ## Error handling
 
@@ -253,21 +294,6 @@ Asymmetric link, one stares at the other, but that's it, just the stared one die
 monitor(process, B)
 ```
 
-### An example to tie it all together
-
-TODO!!!!!!!!!!!!!!!!!!!!!!!!!
-
-## IRC example
-
-Group manager handles all discussions about a single topic
-
-client si connette, c'e' gia' il group? se si si attacca se no lo crea
-
-
-
-TODO section about lib_chan
-how to use it, how to install it
-
 ## Useful stuff
 
 `badmatch` usually means you are redefining a variable, you can't.
@@ -283,7 +309,9 @@ perms(L)  -> [[H|T] || H <- L, T <- perms(L--[H])].
 
 "Why do I have to export the function used by spawn?", none other than Robert Virding [answers](https://stackoverflow.com/questions/19671081/why-we-have-to-export-the-function-used-by-spawn#comment29251924_19676612): "Sorry `spawn` is a language construct. It might be in the `erlang` module but it is part of the erlang language, just one that looks like a function call".
 
-Calling with a `:` in the string like so `io:format("loop: looping again")` will color `"loop"` in the console, it's a small but helpful thing.
+Calling with a `:` in the string like so `io:format("loop: looping again")` will color `"loop"` in the console, it's a small but helpful thing (or at least that's happening in my Emacs setup).
+
+Nodes are loosely coupled so to make them aware of each other you could `net_adm:ping(Host)` to create a connection, remember to expect `pong` as an answer and not `pang`, which means that the other side was not found.
 
 ## Dyalizer
 
@@ -293,13 +321,10 @@ Calling with a `:` in the string like so `io:format("loop: looping again")` will
 
 [[Testing]] Erlang could be done via [[Rebar3]]
 
-
+f
 
 https://duckduckgo.com/?q=how+to+deal+with+erlang+purity+when+modifying+stuff&atb=v340-1&ia=web
 https://user.it.uu.se/~kostis/Papers/purity.pdf
-
-
-https://www.cs.kent.ac.uk/ErlangMasterClasses/
 
 
 

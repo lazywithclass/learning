@@ -1,0 +1,14 @@
+.markdown-preview-view.cornell-note .markdown-preview-sizer,
+.markdown-source-view.cornell-note .markdown-preview-sizer {
+    width: 85%;
+}
+
+.cornell-note aside {
+  float: right;
+  border: 1px solid lightgrey;
+  padding: 5px;
+  position: relative;
+  left: 170px;
+  width: 150px;
+  box-shadow: 5px 8px grey;
+} 

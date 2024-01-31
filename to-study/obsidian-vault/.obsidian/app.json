@@ -1,0 +1,9 @@
+{
+  "promptDelete": false,
+  "newFileLocation": "current",
+  "attachmentFolderPath": "/attachments",
+  "livePreview": false,
+  "vimMode": true,
+  "readableLineLength": false,
+  "alwaysUpdateLinks": false
+}

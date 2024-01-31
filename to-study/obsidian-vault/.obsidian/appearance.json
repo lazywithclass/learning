@@ -1,0 +1,15 @@
+{
+  "accentColor": "",
+  "enabledCssSnippets": [
+    "youtube",
+    "cornell",
+    "cornell-note",
+    "cornell-note2"
+  ],
+  "baseFontSize": 21,
+  "monospaceFontFamily": "Monaco",
+  "textFontFamily": "Monaco",
+  "translucency": false,
+  "cssTheme": "Typewriter",
+  "theme": "obsidian"
+}
