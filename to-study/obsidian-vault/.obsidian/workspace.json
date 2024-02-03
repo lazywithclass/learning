@@ -4,70 +4,59 @@
     "type": "split",
     "children": [
       {
-        "id": "193986acebb310a2",
-        "type": "tabs",
+        "id": "60c6b88e986afae9",
+        "type": "split",
         "children": [
           {
-            "id": "d130936318086c88",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Erlang.md",
-                "mode": "source",
-                "source": true
+            "id": "29e2aac77d68fcb9",
+            "type": "tabs",
+            "dimension": 59.351851851851855,
+            "children": [
+              {
+                "id": "de8e47ef6bc07164",
+                "type": "leaf",
+                "state": {
+                  "type": "markdown",
+                  "state": {
+                    "file": "Relational algebra.md",
+                    "mode": "preview",
+                    "source": true
+                  }
+                }
+              },
+              {
+                "id": "dcf57d17970481c2",
+                "type": "leaf",
+                "state": {
+                  "type": "markdown",
+                  "state": {
+                    "file": "Micia ideas.md",
+                    "mode": "source",
+                    "source": true
+                  }
+                }
               }
-            }
+            ]
           },
           {
-            "id": "7c516e968beb4620",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "BNF.md",
-                "mode": "source",
-                "source": true
+            "id": "1df292d4178c4941",
+            "type": "tabs",
+            "dimension": 40.64814814814815,
+            "children": [
+              {
+                "id": "f9e0fd8ac6f3a24c",
+                "type": "leaf",
+                "state": {
+                  "type": "image",
+                  "state": {
+                    "file": "attachments/relational-algebra-politicians.png"
+                  }
+                }
               }
-            }
-          },
-          {
-            "id": "52162b0bd41153bf",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Scala.md",
-                "mode": "source",
-                "source": true
-              }
-            }
-          },
-          {
-            "id": "f5a1a00fb6bc1a91",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "videos/Understanding parser combinators, a deep dive by Scott Wlaschin.md",
-                "mode": "source",
-                "source": true
-              }
-            }
-          },
-          {
-            "id": "9ec7fa5e2eb26ff8",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "PostgreSQL.md",
-                "mode": "source",
-                "source": true
-              }
-            }
+            ]
           }
-        ]
+        ],
+        "direction": "horizontal"
       }
     ],
     "direction": "vertical"
@@ -130,7 +119,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Erlang.md",
+                "file": "Relational algebra.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -142,7 +131,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Erlang.md",
+                "file": "Relational algebra.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -159,7 +148,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Erlang.md"
+                "file": "Relational algebra.md"
               }
             }
           }
@@ -167,7 +156,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 294.5,
+    "width": 344.5,
     "collapsed": true
   },
   "right": {
@@ -189,40 +178,46 @@
       "daily-notes:Open today's daily note": false
     }
   },
-  "active": "d130936318086c88",
+  "active": "de8e47ef6bc07164",
   "lastOpenFiles": [
-    "Untitled.md",
+    "Micia ideas.md",
+    "Relational algebra.md",
+    "Operational semantics.md",
+    "attachments/relational-algebra-politicians.png",
+    "attachments/relational-algebra-in-short.png",
+    "PostgreSQL.md",
+    "attachments/relational-algebra-division.png",
+    "attachments/relational-algebra-cartesian-product.png",
+    "_images",
+    "attachments/Pasted image 20240201221133.png",
+    "attachments/Pasted image 20240201195400.png",
+    "attachments/Pasted image 20240112223842.png",
+    "attachments/Pasted image 20240203132243.png",
+    "attachments/Pasted image 20240203132248.png",
+    "attachments/Pasted image 20240203132253.png",
+    "videos/Functors.md",
+    "videos/Removing TypeScript - DHH.md",
+    "Scala.md",
+    "videos-to-sort.md",
+    "videos/Understanding parser combinators, a deep dive by Scott Wlaschin.md",
+    "TODO.md",
     "Untitled 1.md",
-    "Erlang.md",
+    "Untitled.canvas",
     "BNF.md",
+    "videos/Roger Penrose - Is Mathematics Invented or Discovered?.md",
+    "videos/The Zen of Erlang.md",
+    "Erlang.md",
+    "videos/Garrett Smith - Why The Cool Kids Don't Use Erlang.md",
+    "videos/GNU Parallel.md",
     "Contravariance.md",
     "videos/Why Study Programming Languages?.md",
-    "Scala.md",
-    "videos/Understanding parser combinators, a deep dive by Scott Wlaschin.md",
-    "attachments/Pasted image 20240112223842.png",
-    "Pasted image 20240112223810.png",
     "attachments",
-    "Pasted image 20240112223207.png",
-    "Pasted image 20240112223252.png",
-    "Operational semantics.md",
     "videos/Thoughts About Unit Testing.md",
-    "PostgreSQL.md",
-    "Untitled.canvas",
     "videos/Why OCaml.md",
     "videos/How to Avoid Unnecessary Dopamine Peaks With \"Dopamine Stacking\".md",
     "Covariance.md",
-    "TODO.md",
-    "videos/Roger Penrose - Is Mathematics Invented or Discovered?.md",
     "videos/The Functional Toolkit - Scott Wlaschin.md",
     "videos/Haskell Is Faster Than C.md",
-    "videos/GNU Parallel.md",
-    "videos/How to Stop Procrastination & Increase Motivation.md",
-    "videos/Researchers Use Group Theory to Speed Up Algorithms - Introduction to Groups.md",
-    "not-sorted/Dopamine System, Craving & Pursuit Explained.md",
-    "videos/How Fasting & Caloric Restriction Impact Health.md",
-    "not-sorted/NSDR.md",
-    "not-sorted/test.md",
-    "not-sorted/Reading list.md",
     "not-sorted",
     "Untitled 1.canvas",
     "Recording 20231114220943.webm",

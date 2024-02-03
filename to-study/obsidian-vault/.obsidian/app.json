@@ -5,5 +5,5 @@
   "livePreview": false,
   "vimMode": true,
   "readableLineLength": false,
-  "alwaysUpdateLinks": false
+  "alwaysUpdateLinks": true
 }

@@ -4,7 +4,10 @@
     "youtube",
     "cornell",
     "cornell-note",
-    "cornell-note2"
+    "cornell-note2",
+    "flex",
+    "media-grid",
+    "media-grid-snippet"
   ],
   "baseFontSize": 21,
   "monospaceFontFamily": "Monaco",

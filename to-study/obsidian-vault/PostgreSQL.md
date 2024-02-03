@@ -8,6 +8,11 @@ tags:
   - subquery
 ---
 
+
+
+
+
+
 # Practice
 
 These are mainly exercises along with some explanations in preparation for a database exam I have coming along.

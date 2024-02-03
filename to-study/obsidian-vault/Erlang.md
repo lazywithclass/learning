@@ -321,16 +321,7 @@ Nodes are loosely coupled so to make them aware of each other you could `net_adm
 
 [[Testing]] Erlang could be done via [[Rebar3]]
 
-f
 
 https://duckduckgo.com/?q=how+to+deal+with+erlang+purity+when+modifying+stuff&atb=v340-1&ia=web
 https://user.it.uu.se/~kostis/Papers/purity.pdf
-
-
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/4ZIPijEqrNI?si=dR1Z25aNtvvwdXLZ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-
-The idea of having processes tied together is at the core of the language
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/3MvKLOecT1I?si=bZx1UkxSh7FAiV1h" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
