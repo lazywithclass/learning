@@ -6,6 +6,8 @@ I've used these datasets:
 
 [Here](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/#dvd-rental-er-model) you can find the ER.
 
+I've also used [leetcode](https://leetcode.com/tag/database/)
+
 ### Emacs instructions
 
 ```
