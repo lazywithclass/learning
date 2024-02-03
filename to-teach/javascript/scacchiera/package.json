@@ -1,0 +1,17 @@
+{
+  "name": "scacchiera",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "pedine.js",
+  "scripts": {
+    "zip": "node scripts/zip.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "prettier": "3.2.4",
+    "zip-a-folder": "^3.1.6"
+  }
+}
