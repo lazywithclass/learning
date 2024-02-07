@@ -1,6 +1,6 @@
 # Melange
 
-![melange](img/melange.jpeg|500)
+![melange](img/melange.jpeg)
 
 [The parsing must flow](https://fictionhorizon.com/the-meaning-of-dunes-the-spice-must-flow-quote/)
 
