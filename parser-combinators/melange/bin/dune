@@ -1,0 +1,4 @@
+(executable
+ (public_name melange)
+ (name main)
+ (libraries melange))

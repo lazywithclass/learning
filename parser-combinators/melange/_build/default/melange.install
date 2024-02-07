@@ -1,0 +1,8 @@
+lib: [
+  "_build/install/default/lib/melange/META"
+  "_build/install/default/lib/melange/dune-package"
+  "_build/install/default/lib/melange/opam"
+]
+bin: [
+  "_build/install/default/bin/melange"
+]
