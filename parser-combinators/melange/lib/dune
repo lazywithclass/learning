@@ -1,2 +1,3 @@
 (library
- (name melange))
+ (name melange)
+ (public_name melange))

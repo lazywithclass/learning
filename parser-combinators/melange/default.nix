@@ -20,6 +20,7 @@ in pkgs.mkShell {
     ocamlPackages.ocaml-lsp
     ocamlPackages.ocp-indent
     dune_3
+    opam
     python3
     deno
     nodejs

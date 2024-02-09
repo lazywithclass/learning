@@ -1,8 +1,15 @@
 lib: [
   "_build/install/default/lib/melange/META"
   "_build/install/default/lib/melange/dune-package"
+  "_build/install/default/lib/melange/melange.a"
+  "_build/install/default/lib/melange/melange.cma"
+  "_build/install/default/lib/melange/melange.cmi"
+  "_build/install/default/lib/melange/melange.cmt"
+  "_build/install/default/lib/melange/melange.cmx"
+  "_build/install/default/lib/melange/melange.cmxa"
+  "_build/install/default/lib/melange/melange.ml"
   "_build/install/default/lib/melange/opam"
 ]
-bin: [
-  "_build/install/default/bin/melange"
+libexec: [
+  "_build/install/default/lib/melange/melange.cmxs"
 ]

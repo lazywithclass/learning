@@ -12,6 +12,9 @@ bug-reports: "https://github.com/username/reponame/issues"
 depends: [
   "ocaml"
   "dune" {>= "3.8"}
+  "batteries"
+  "qcheck"
+  "alcotest"
   "odoc" {with-doc}
 ]
 build: [

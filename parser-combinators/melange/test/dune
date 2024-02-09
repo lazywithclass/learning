@@ -1,2 +1,3 @@
 (test
- (name melange))
+ (name test_melange)
+ (libraries melange qcheck batteries alcotest))
