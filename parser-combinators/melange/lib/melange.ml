@@ -46,13 +46,12 @@ let choice parsers =
 let anyOf listOfChars =
   listOfChars |> List.map pchar |> choice
 
-let pmap mapper p =
+let pmap f p =
   let inner input =
     match run p input with
-        | Ok (c, rest) -> Ok ((mapper c), rest)
-        | fail         -> fail
+    | Ok (c, rest) -> let res = f c in Ok (res, rest)
+    | Fail msg     -> Fail msg
   in (Parser inner)
-
 
 (* ------------------------------ *)
 (* Mapping *)
@@ -63,12 +62,8 @@ module Melange =
     let pchar c = pchar c
     let run parser input = run parser input
 
-    let (-^-) p1 p2 = andThen p1 p2
+    let (-&-) p1 p2 = andThen p1 p2
     let (-|-) p1 p2 = orElse p1 p2
     let (-?-) cs = anyOf cs
+    let pmap mapper p = pmap mapper p
   end
-
-let (-^-) p1 p2 = andThen p1 p2
-let parseDigit = anyOf ['1'; '2'; '3']
-let parse3Digits = parseDigit -^- parseDigit -^- parseDigit
-let _ = run parse3Digits ['3';'2';'1']

@@ -1,6 +1,0 @@
-description = ""
-requires = ""
-archive(byte) = "melange.cma"
-archive(native) = "melange.cmxa"
-plugin(byte) = "melange.cma"
-plugin(native) = "melange.cmxs"
