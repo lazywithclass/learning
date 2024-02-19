@@ -4,59 +4,83 @@
     "type": "split",
     "children": [
       {
-        "id": "60c6b88e986afae9",
-        "type": "split",
+        "id": "29e2aac77d68fcb9",
+        "type": "tabs",
         "children": [
           {
-            "id": "29e2aac77d68fcb9",
-            "type": "tabs",
-            "dimension": 59.351851851851855,
-            "children": [
-              {
-                "id": "de8e47ef6bc07164",
-                "type": "leaf",
-                "state": {
-                  "type": "markdown",
-                  "state": {
-                    "file": "Relational algebra.md",
-                    "mode": "preview",
-                    "source": true
-                  }
-                }
-              },
-              {
-                "id": "dcf57d17970481c2",
-                "type": "leaf",
-                "state": {
-                  "type": "markdown",
-                  "state": {
-                    "file": "Micia ideas.md",
-                    "mode": "source",
-                    "source": true
-                  }
-                }
+            "id": "de8e47ef6bc07164",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Relational algebra.md",
+                "mode": "source",
+                "source": true
               }
-            ]
+            }
           },
           {
-            "id": "1df292d4178c4941",
-            "type": "tabs",
-            "dimension": 40.64814814814815,
-            "children": [
-              {
-                "id": "f9e0fd8ac6f3a24c",
-                "type": "leaf",
-                "state": {
-                  "type": "image",
-                  "state": {
-                    "file": "attachments/relational-algebra-politicians.png"
-                  }
-                }
+            "id": "2412919b5c187b80",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Micia ideas.md",
+                "mode": "source",
+                "source": true
               }
-            ]
+            }
+          },
+          {
+            "id": "9997f9f443ef2161",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "not-sorted/Dependent types.md",
+                "mode": "source",
+                "source": true
+              }
+            }
+          },
+          {
+            "id": "035fedcb069d78ee",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "CPS - Continuation Passing Style.md",
+                "mode": "source",
+                "source": true
+              }
+            }
+          },
+          {
+            "id": "61e3c02f2e38973f",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "SOLID.md",
+                "mode": "source",
+                "source": true
+              }
+            }
+          },
+          {
+            "id": "09951ecb3ca90435",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Recursion.md",
+                "mode": "source",
+                "source": true
+              }
+            }
           }
         ],
-        "direction": "horizontal"
+        "currentTab": 5
       }
     ],
     "direction": "vertical"
@@ -119,7 +143,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Relational algebra.md",
+                "file": "Recursion.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -131,7 +155,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Relational algebra.md",
+                "file": "Recursion.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -148,7 +172,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Relational algebra.md"
+                "file": "Recursion.md"
               }
             }
           }
@@ -156,8 +180,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 344.5,
-    "collapsed": true
+    "width": 344.5
   },
   "right": {
     "id": "4ebf7b594d449203",
@@ -178,27 +201,35 @@
       "daily-notes:Open today's daily note": false
     }
   },
-  "active": "de8e47ef6bc07164",
+  "active": "09951ecb3ca90435",
   "lastOpenFiles": [
+    "SOLID.md",
+    "Recursion.md",
+    "CPS - Continuation Passing Style.md",
+    "Untitled",
+    "not-sorted/Dependent types.md",
+    "Abstraction.md",
+    "videos/Functional programming design patterns by Scott Wlaschin.md",
+    "videos/Functors.md",
+    "PostgreSQL.md",
     "Micia ideas.md",
     "Relational algebra.md",
+    "attachments/monoid.png",
+    "Scala.md",
+    "not-sorted/Programming Languages - Lesson 3.md",
     "Operational semantics.md",
+    "attachments/Pasted image 20240112223842.png",
     "attachments/relational-algebra-politicians.png",
     "attachments/relational-algebra-in-short.png",
-    "PostgreSQL.md",
     "attachments/relational-algebra-division.png",
     "attachments/relational-algebra-cartesian-product.png",
     "_images",
     "attachments/Pasted image 20240201221133.png",
     "attachments/Pasted image 20240201195400.png",
-    "attachments/Pasted image 20240112223842.png",
     "attachments/Pasted image 20240203132243.png",
     "attachments/Pasted image 20240203132248.png",
-    "attachments/Pasted image 20240203132253.png",
-    "videos/Functors.md",
     "videos/Removing TypeScript - DHH.md",
-    "Scala.md",
-    "videos-to-sort.md",
+    "not-sorted/videos-to-sort.md",
     "videos/Understanding parser combinators, a deep dive by Scott Wlaschin.md",
     "TODO.md",
     "Untitled 1.md",
@@ -209,15 +240,9 @@
     "Erlang.md",
     "videos/Garrett Smith - Why The Cool Kids Don't Use Erlang.md",
     "videos/GNU Parallel.md",
-    "Contravariance.md",
+    "not-sorted/Contravariance.md",
     "videos/Why Study Programming Languages?.md",
     "attachments",
-    "videos/Thoughts About Unit Testing.md",
-    "videos/Why OCaml.md",
-    "videos/How to Avoid Unnecessary Dopamine Peaks With \"Dopamine Stacking\".md",
-    "Covariance.md",
-    "videos/The Functional Toolkit - Scott Wlaschin.md",
-    "videos/Haskell Is Faster Than C.md",
     "not-sorted",
     "Untitled 1.canvas",
     "Recording 20231114220943.webm",

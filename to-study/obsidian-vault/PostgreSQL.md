@@ -5,15 +5,66 @@ tags:
   - sql
   - postgres
   - postgresql
-  - subquery
+  - query
 ---
 
+## Notes
 
+### Subtraction
 
+In [[Relational algebra]] we can do the subtraction, in SQL this could be achieved using
+* `NOT IN`
+```sql
+SELECT C.iso3 
+FROM imdb.country AS C
+WHERE C.iso3 NOT IN (
+SELECT DISTINCT P.country FROM imdb.produced as P)
+)
+```
+* `EXCEPT`
+```sql
+SELECT C.iso3 FROM imdb.country AS C
+EXCEPT
+SELECT DISTINCT P.country FROM imdb.produced as P
+```
 
+A comparison between relational algebra's operators and sql's:
+* `UNION` $\rightarrow$ $\cup$
+* `INTERSECT` $\rightarrow$ $\cap$
+* `EXCEPT` $\rightarrow$ $-$
 
+### Finding the `Max`
 
-# Practice
+Find the movie with the greatest score
+
+Using `ANY`
+```sql
+SELECT *
+FROM imdb.ratings AS R2
+WHERE R2.score >= ANY (SELECT R.score FROM imdb.ratings AS R)
+```
+
+or using `MAX`
+```sql
+SELECT *
+FROM imdb.ratings AS R2
+WHERE R2.score >= (SELECT MAX(R.score) FROM imdb.ratings AS R)
+```
+
+Do not do this, as it just returns the first, even though there might be more than 1 with the same value
+
+```sql
+SELECT *
+FROM imdb.ratings AS R
+ORDER BY R.score DESC
+LIMIT 1
+```
+
+### `SELECT` and aggregation operators
+
+`SELECT`s work on single rows, aggregation operators work on a set of rows.
+
+## Practice
 
 These are mainly exercises along with some explanations in preparation for a database exam I have coming along.
 

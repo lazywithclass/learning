@@ -53,6 +53,31 @@ let pmap f p =
     | Fail msg     -> Fail msg
   in (Parser inner)
 
+let preturn c =
+  let inner input = Ok (c, input)
+  in (Parser inner)
+
+let papply fp p =
+  andThen fp p |> pmap (fun (f, x) -> f x)
+
+let lift2 f p1 p2 =
+   (papply (papply (preturn f) p1) p2)
+
+let lift3 f p1 p2 p3 =
+   (papply (papply (papply (preturn f) p1) p2) p3)
+
+let rec seq ps =
+  let cons h t = h :: t in
+  let pcons = lift2 cons in
+  match ps with
+      | []    -> preturn []
+      | h :: t -> pcons h (seq t)
+
+let pstring str =
+  let charListToStr cs = String.of_seq (List.to_seq cs) in
+
+  str |> String.to_seq |> List.of_seq |> List.map pchar |> seq |> pmap charListToStr
+
 (* ------------------------------ *)
 (* Mapping *)
 (* ------------------------------ *)
@@ -60,10 +85,11 @@ let pmap f p =
 module Melange =
   struct
     let pchar c = pchar c
+    let pstring s = pstring s
     let run parser input = run parser input
 
     let (-&-) p1 p2 = andThen p1 p2
     let (-|-) p1 p2 = orElse p1 p2
-    let (-?-) cs = anyOf cs
-    let pmap mapper p = pmap mapper p
+    let (->>-) mapper p = pmap mapper p
+    let (-*-) fp p = papply fp p
   end

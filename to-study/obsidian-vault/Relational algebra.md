@@ -4,6 +4,7 @@ cssclasses:
   - flex
 tags:
   - relational-algebra
+  - sql
 ---
 
 Allows to understand 
@@ -24,7 +25,7 @@ Domains of the tables should be the same for the operations to be performed.
 * $\bowtie_{\theta}$ theta-join : which is a $\sigma$ applied to a Cartesian product, example $\bowtie_\theta{id=category}$, used to match tuples with others
 * $\bowtie$ equi-join : get together tuples with same values on shared attributes
 * $\rho$ rename : for example $\rho_{a\rightarrow b}$ 
-* $\div$ division : given $R_{1}$ and $R_{2}$ by doing $R_{1} /div R_{2}$ we get all tuples in $R_{1}$ that combine with $R_{2}$, which is the inverse of Cartesian product 
+* $\div$ division : given $R_{1}$ and $R_{2}$ by doing $R_{1} \div R_{2}$ we get all tuples in $R_{1}$ that combine with $R_{2}$, which is the inverse of Cartesian product 
 
 ### On division
 
@@ -47,6 +48,7 @@ Following examples use this schema:
 <aside>writing a query</aside>
 How to approach writing a query:
 
+* imagine the data I need, what characteristics does it have? 
 * which tables do we need?
 * which attributes do we need? selections
 * when dealing with negation first find the query without the negation then subtract
@@ -130,11 +132,19 @@ $\sigma_{C.country \neq P.birth\_place}(Politician \bowtie_{P.id=C.head}City)$
 or
 $Politician \bowtie_{P.id=C.head \wedge C.country \neq P.birth\_place}City$
 
-2. Find continents where there aren't women in charge.
-I will need politician for the gender, city for the in charge part, part_of to get the continent
+2. Find cities that have a greater population than their nearby cities
+$NEARBY\_CITIES = \pi_{id,population}City_{1} \bowtie_{C_{1}.id=CB.city_a} City\_Borders \bowtie_{C_{2}.id=CB.city_b} City_{2}$
+$NEARBY\_CITIES\_NOT\_GREATER = \sigma_{C_{2}.population \gt C_{1}.population}$
+So these are the cities for which there exists another nearby city with a greater population, which is what I DO NOT want, so now I just need to subtract
+$\pi_{id}Cities - \pi_{C_{1}.id}(NEARBY\_CITIES\_NOT\_GREATER)$
 
-$WomenPoliticianCities = \($
-$Part\_Of \bowtie WomenPoliticianCities$
+3. Find nations in which there are no cities ruled by politicians born before 1960
+I will find countries where there is a politician born before 1960 and then I subtract from the list of countries.
+$COUNTRIES = \pi_{country}(\sigma_{birth\_date<01.01.1960}Politician \bowtie_{P.id=C.head} City)$
+$\pi_{C.id}Country - COUNTRIES$
+
+4. Find politicians that are head in more than one city
+$\pi_{C_{1}.head}(City_1 \bowtie_{City_1.id \neq City_2.id \wedge City_1.head = City_2.head} City_2)$
 
 ## The need for subtraction
 
@@ -146,10 +156,6 @@ To return a valid result I would have to take into account all continents ($C$ b
 
 $CFH = \sigma_{P.gender=female}Politician \bowtie_{P.id=C.head} City \bowtie Part\_Of$
 $\pi_{id}Continent - \pi_{continent}CFH$
-
-
-
-
 
 ## Notes
 

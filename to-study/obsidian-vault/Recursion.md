@@ -1,3 +1,4 @@
+
 aggiungere link alla ricorsione visiva fatta con p5js
 
 aggiungere una parte su ycombinator e come derivarla

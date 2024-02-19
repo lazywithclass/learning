@@ -1,7 +1,7 @@
 open Melange
 
 
-let string_to_list s = String.to_seq s |> List.of_seq
+let string_to_list s = s |> String.to_seq |> List.of_seq
 
 let test_pchar () =
   let result = run (pchar 'h') (string_to_list "hello world")
@@ -30,6 +30,18 @@ let test_andthen () =
       | Ok (cs, _) -> Alcotest.(check (list char)) "" ['3'; '1'; '2'] cs
       | Fail msg  -> failwith msg
 
+let test_syntax () =
+  let open Melange in
+  let combinator = (
+   (fun ((c1, c2), c3) -> [c1; c2; c3])
+    ->>-
+   ((anyOf ['1';'2';'3']) -&- (anyOf ['1';'2';'3']) -&- (anyOf ['1';'2';'3']))
+  ) in
+  let result = run combinator (string_to_list "312") in
+  match result with
+      | Ok (cs, _) -> Alcotest.(check (list char)) "" ['3'; '1'; '2'] cs
+      | Fail msg  -> failwith msg
+
 
 let () =
   let open Alcotest in
@@ -37,7 +49,8 @@ let () =
     "matchers", [
       test_case "pchar" `Quick test_pchar;
       test_case "anyOf" `Quick test_anyof;
-      test_case "andThen" `Quick test_andthen
+      test_case "andThen" `Quick test_andthen;
+      test_case "syntax" `Quick test_syntax
     ];
     "combinators", [
 
