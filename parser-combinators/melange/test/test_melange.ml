@@ -42,12 +42,20 @@ let test_syntax () =
       | Ok (cs, _) -> Alcotest.(check (list char)) "" ['3'; '1'; '2'] cs
       | Fail msg  -> failwith msg
 
+let test_pstring () =
+  let open Melange in
+  let result = run (pstring "ABC") (string_to_list "ABCDE") in
+  match result with
+      | Ok (ss, rest) -> let _ = Alcotest.(check string) "" "ABC" ss in
+                        Alcotest.(check (list char)) "" ['D'; 'E'] rest
+      | Fail msg  -> failwith msg
 
 let () =
   let open Alcotest in
   run "Melange" [
     "matchers", [
       test_case "pchar" `Quick test_pchar;
+      test_case "pstring" `Quick test_pstring;
       test_case "anyOf" `Quick test_anyof;
       test_case "andThen" `Quick test_andthen;
       test_case "syntax" `Quick test_syntax

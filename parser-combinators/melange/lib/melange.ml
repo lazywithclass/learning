@@ -11,13 +11,6 @@ let pchar c =
     | []               -> Fail "empty input"
   in (Parser inner)
 
-
-(* TODO the plan was to use this in the choice combinator, but does not work *)
-(* let alwaysOk _ = *)
-(*   let inner = function *)
-(*     | xs -> Ok (xs, xs) *)
-(*   in (Parser inner) *)
-
 let run parser input =
   let (Parser innerFn) = parser in
   innerFn input
@@ -75,8 +68,18 @@ let rec seq ps =
 
 let pstring str =
   let charListToStr cs = String.of_seq (List.to_seq cs) in
-
   str |> String.to_seq |> List.of_seq |> List.map pchar |> seq |> pmap charListToStr
+
+let zeroOrMore p =
+  let rec inner input =
+  match run p input with
+      | Fail _       -> Ok ([], input)
+      | Ok (c, rest) -> match inner rest with
+                           | Fail _         -> Ok (c, rest)
+                           | Ok (c', rest') -> Ok (c @ c', rest')
+  in (Parser inner)
+
+
 
 (* ------------------------------ *)
 (* Mapping *)
