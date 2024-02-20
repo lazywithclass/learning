@@ -70,16 +70,23 @@ let pstring str =
   let charListToStr cs = String.of_seq (List.to_seq cs) in
   str |> String.to_seq |> List.of_seq |> List.map pchar |> seq |> pmap charListToStr
 
-let zeroOrMore p =
-  let rec inner input =
-  match run p input with
-      | Fail _       -> Ok ([], input)
-      | Ok (c, rest) -> match inner rest with
-                           | Fail _         -> Ok (c, rest)
-                           | Ok (c', rest') -> Ok (c @ c', rest')
+let rec zeroOrMore p input =
+    match run p input with
+        | Fail _       -> ([], input)
+        | Ok (c, rest) -> let (c', rest') = zeroOrMore p rest in
+                         (c :: c', rest')
+
+let pZeroOrMore p =
+  let inner input = Ok (zeroOrMore p input)
   in (Parser inner)
 
-
+let pOneOrMore p =
+  let inner input =
+    match run p input with
+        | Fail msg -> Fail msg
+        | Ok (c, rest) -> let (c', rest') = zeroOrMore p rest in
+                         Ok (c :: c', rest')
+  in (Parser inner)
 
 (* ------------------------------ *)
 (* Mapping *)
@@ -89,6 +96,8 @@ module Melange =
   struct
     let pchar c = pchar c
     let pstring s = pstring s
+    let pZeroOrMore p = pZeroOrMore p
+    let pOneOrMore p = pOneOrMore p
     let run parser input = run parser input
 
     let (-&-) p1 p2 = andThen p1 p2

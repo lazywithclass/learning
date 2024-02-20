@@ -28,7 +28,7 @@ let test_andthen () =
   let result = run flattened (string_to_list "312") in
   match result with
       | Ok (cs, _) -> Alcotest.(check (list char)) "" ['3'; '1'; '2'] cs
-      | Fail msg  -> failwith msg
+      | Fail msg   -> failwith msg
 
 let test_syntax () =
   let open Melange in
@@ -40,7 +40,7 @@ let test_syntax () =
   let result = run combinator (string_to_list "312") in
   match result with
       | Ok (cs, _) -> Alcotest.(check (list char)) "" ['3'; '1'; '2'] cs
-      | Fail msg  -> failwith msg
+      | Fail msg   -> failwith msg
 
 let test_pstring () =
   let open Melange in
@@ -48,7 +48,44 @@ let test_pstring () =
   match result with
       | Ok (ss, rest) -> let _ = Alcotest.(check string) "" "ABC" ss in
                         Alcotest.(check (list char)) "" ['D'; 'E'] rest
-      | Fail msg  -> failwith msg
+      | Fail msg      -> failwith msg
+
+let test_zeroOrMore_not_matching () =
+  let open Melange in
+  let parseDigit = anyOf ['1'; '2'; '3'] in
+  let result = run (pZeroOrMore parseDigit) (string_to_list "456")  in
+  match result with
+      | Ok (cs, rest) -> let _ = Alcotest.(check (list char)) "" [] cs in
+                        Alcotest.(check (list char)) "" ['4'; '5'; '6'] rest
+      | Fail msg      -> failwith msg
+
+let test_zeroOrMore_matching () =
+  let open Melange in
+  let parseDigit = anyOf ['1'; '2'; '3'] in
+  let result = run (pZeroOrMore parseDigit) (string_to_list "111")  in
+  match result with
+      | Ok (cs, rest) -> let _ = Alcotest.(check (list char)) "" ['1'; '1'; '1'] cs in
+                        Alcotest.(check (list char)) "" [] rest
+      | Fail msg      -> failwith msg
+
+let test_oneOrMore_not_matching () =
+  let open Melange in
+  let parseDigit = anyOf ['1'; '2'; '3'] in
+  let result = run (pOneOrMore parseDigit) (string_to_list "456")  in
+  match result with
+      | Ok (_, _) -> failwith "Should never happen (TM)"
+      | Fail msg  -> Alcotest.(check string) "" "'3' not found, got '4'." msg
+
+let test_oneOrMore_matching () =
+  let open Melange in
+  let parseDigit = anyOf ['1'; '2'; '3'] in
+  let result = run (pZeroOrMore parseDigit) (string_to_list "111")  in
+  match result with
+      | Ok (cs, rest) -> let _ = Alcotest.(check (list char)) "" ['1'; '1'; '1'] cs in
+                        Alcotest.(check (list char)) "" [] rest
+      | Fail msg      -> failwith msg
+
+
 
 let () =
   let open Alcotest in
@@ -58,7 +95,11 @@ let () =
       test_case "pstring" `Quick test_pstring;
       test_case "anyOf" `Quick test_anyof;
       test_case "andThen" `Quick test_andthen;
-      test_case "syntax" `Quick test_syntax
+      test_case "syntax" `Quick test_syntax;
+      test_case "zeroOrMore" `Quick test_zeroOrMore_not_matching;
+      test_case "zeroOrMore" `Quick test_zeroOrMore_matching;
+      test_case "oneOrMore" `Quick test_oneOrMore_not_matching;
+      test_case "oneOrMore" `Quick test_oneOrMore_matching;
     ];
     "combinators", [
 
