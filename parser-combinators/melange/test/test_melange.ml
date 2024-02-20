@@ -86,7 +86,6 @@ let test_oneOrMore_matching () =
       | Fail msg      -> failwith msg
 
 
-
 let () =
   let open Alcotest in
   run "Melange" [
@@ -105,19 +104,3 @@ let () =
 
     ];
   ]
-
-
-(* let parseH = pchar 'h' *)
-(* let parseE = pchar 'e' *)
-(* let parseHThenE = parseH -&- parseE *)
-(* let _ = run parseHThenE input *)
-
-(* let parseHOrE = parseH -|- parseE *)
-(* let parseEOrH = parseE -|- parseH *)
-(* let _ = run parseHOrE input *)
-
-(* let parseLowercaseVowel = anyOf ['a'; 'e'; 'i'; 'o'; 'u'] *)
-(* let _ = run parseLowercaseVowel input *)
-
-(* let parseLetters = anyOf ['h'; 'e'; 'l'; 'l'; 'o'] *)
-(* let _ = run parseLetters input *)
