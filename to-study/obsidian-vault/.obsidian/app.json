@@ -7,5 +7,6 @@
   "readableLineLength": false,
   "alwaysUpdateLinks": true,
   "useTab": false,
-  "autoPairMarkdown": false
+  "autoPairMarkdown": false,
+  "useMarkdownLinks": false
 }

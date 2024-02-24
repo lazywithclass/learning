@@ -4,83 +4,22 @@
     "type": "split",
     "children": [
       {
-        "id": "29e2aac77d68fcb9",
+        "id": "f537e15e1c3b91d6",
         "type": "tabs",
         "children": [
           {
-            "id": "de8e47ef6bc07164",
+            "id": "cb17a55895eb49ef",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Relational algebra.md",
-                "mode": "source",
-                "source": true
-              }
-            }
-          },
-          {
-            "id": "2412919b5c187b80",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Micia ideas.md",
-                "mode": "source",
-                "source": true
-              }
-            }
-          },
-          {
-            "id": "9997f9f443ef2161",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "not-sorted/Dependent types.md",
-                "mode": "source",
-                "source": true
-              }
-            }
-          },
-          {
-            "id": "035fedcb069d78ee",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "CPS - Continuation Passing Style.md",
-                "mode": "source",
-                "source": true
-              }
-            }
-          },
-          {
-            "id": "61e3c02f2e38973f",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "SOLID.md",
-                "mode": "source",
-                "source": true
-              }
-            }
-          },
-          {
-            "id": "09951ecb3ca90435",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Recursion.md",
+                "file": "Computer architecture.md",
                 "mode": "source",
                 "source": true
               }
             }
           }
-        ],
-        "currentTab": 5
+        ]
       }
     ],
     "direction": "vertical"
@@ -100,6 +39,16 @@
               "type": "file-explorer",
               "state": {
                 "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "75d5601b376a7786",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Computer architecture.md"
               }
             }
           },
@@ -143,7 +92,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Recursion.md",
+                "file": "Computer architecture.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -155,7 +104,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Recursion.md",
+                "file": "Computer architecture.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -163,16 +112,6 @@
                 "searchQuery": "",
                 "backlinkCollapsed": false,
                 "unlinkedCollapsed": false
-              }
-            }
-          },
-          {
-            "id": "75d5601b376a7786",
-            "type": "leaf",
-            "state": {
-              "type": "outline",
-              "state": {
-                "file": "Recursion.md"
               }
             }
           }
@@ -201,10 +140,28 @@
       "daily-notes:Open today's daily note": false
     }
   },
-  "active": "09951ecb3ca90435",
+  "active": "cb17a55895eb49ef",
   "lastOpenFiles": [
-    "SOLID.md",
+    "attachments/cpu-phases.png",
+    "attachments/cpu-phases.png",
+    "Computer architecture.md",
+    "attachments/Pasted image 20240112223842.png",
+    "attachments/Pasted image 20240201195400.png",
+    "test.md",
+    "attachments/d-latch.png",
+    "clock-square-wave.md",
+    "attachments/flip-flop.png",
+    "attachments/bistable-level-sensitive.png",
+    "attachments/bistable.gif",
+    "attachments/avoid-transparency-left-open.png",
+    "attachments/avoid-transparency-right-open.png",
+    "attachments/Pasted image 20240221231254.png",
+    "Erlang.md",
+    "attachments/latch-d.gif:Zone.Identifier",
+    "attachments/latch-d.gif:shield",
+    "Combinators.md",
     "Recursion.md",
+    "SOLID.md",
     "CPS - Continuation Passing Style.md",
     "Untitled",
     "not-sorted/Dependent types.md",
@@ -214,20 +171,10 @@
     "PostgreSQL.md",
     "Micia ideas.md",
     "Relational algebra.md",
-    "attachments/monoid.png",
     "Scala.md",
     "not-sorted/Programming Languages - Lesson 3.md",
     "Operational semantics.md",
-    "attachments/Pasted image 20240112223842.png",
-    "attachments/relational-algebra-politicians.png",
-    "attachments/relational-algebra-in-short.png",
-    "attachments/relational-algebra-division.png",
-    "attachments/relational-algebra-cartesian-product.png",
     "_images",
-    "attachments/Pasted image 20240201221133.png",
-    "attachments/Pasted image 20240201195400.png",
-    "attachments/Pasted image 20240203132243.png",
-    "attachments/Pasted image 20240203132248.png",
     "videos/Removing TypeScript - DHH.md",
     "not-sorted/videos-to-sort.md",
     "videos/Understanding parser combinators, a deep dive by Scott Wlaschin.md",
@@ -236,12 +183,6 @@
     "Untitled.canvas",
     "BNF.md",
     "videos/Roger Penrose - Is Mathematics Invented or Discovered?.md",
-    "videos/The Zen of Erlang.md",
-    "Erlang.md",
-    "videos/Garrett Smith - Why The Cool Kids Don't Use Erlang.md",
-    "videos/GNU Parallel.md",
-    "not-sorted/Contravariance.md",
-    "videos/Why Study Programming Languages?.md",
     "attachments",
     "not-sorted",
     "Untitled 1.canvas",

@@ -9,7 +9,7 @@
     "media-grid",
     "media-grid-snippet"
   ],
-  "baseFontSize": 21,
+  "baseFontSize": 20,
   "monospaceFontFamily": "Monaco",
   "textFontFamily": "Monaco",
   "translucency": false,
