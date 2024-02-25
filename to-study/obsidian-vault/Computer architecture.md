@@ -124,15 +124,42 @@ These are the 5 different phases
 
 ### Instruction formats
 
-#### R - register
+It this not required to remember $OPCODE$s and $funct$s values, if needed at the exams table are going to be provided.
+
+#### R - Register
 
 Instructions that operate on registers.
 
-#### I - immediate
+$add \, r_d,\, r_s,\, r_t$ - adds $r_s$ and $r_t$, puts result in $r_d$ 
+$sub \, r_d,\, r_s,\, r_t$ - subtracts $r_s$ and $r_t$, puts result in $r_d$ 
+$and \, r_d,\, r_s,\, r_t$ - ands bit by bit $r_s$ and $r_t$, puts result in $r_d$ 
+$or \, r_d,\, r_s,\, r_t$ - ors bit by bit $r_s$ and $r_t$, puts result in $r_d$ 
+$slt \, r_d,\, r_s,\, r_t$ - loads $1$ in $r_d$ if the contents of $r_s$ is $\lt$ $r_t$
 
-Instructions that operate on costants.
+| OPCODE | $r_s$ | $r_t$ | $r_d$ | shamt | funct |
+| --- | --- | --- | --- | --- | --- |
+| 000000 | 5 bit | 5 bit | 5 bit | 5 bit | 6 bit |
+| 000000 | 12 | 16 | 5 | 00000 | and |
 
-#### J - jump
+The second line is an example and it means $and \, r_4, \, r_12, \, r_6$: loads in $r_5$ the and bit by bit in registers $r_12$ and $r_16$.
+$shamt$ is never used, $OPCODE$ is always $0$ for this format.
+
+#### I - Immediate
+
+Instructions that operate on constants, which are inside the very instruction.
+
+$lw\, r_{t}, \, OFFSET(r_s)$: loads in $r_t$ the word at address $r_s + OFFSET$
+$sw\, r_{t}, \, OFFSET(r_s)$: moves the contents of $r_t$ in the word at address $r_s + OFFSET$
+$beq\, r_{s} \, r_{t}, \, OFFSET$: if the contents of $r_s$ and $r_t$ are the same jump at the instruction at address $PC$ $+$ $OFFSET$, else proceed normally ($PC + 4$)
+
+| OPCODE | $r_s$ | $r_t$ | IMMEDIATE |
+| --- | --- | --- | --- |
+| 6 bit | 5 bit | 5 bit | 16 bit |
+| lw | 14 | 5 | 240 |
+
+The second line is an example and it means $lw \, r_5, \, 240(r_w)$
+
+#### J - Jump
 
 Instructions for non conditional jumps.
 
@@ -147,3 +174,34 @@ Based on the endianness, the first byte, the most meaningful one:
 * little endian: is the right-most, or the one with the lower address
 
 which dictates where to start reading from.
+
+#### Instruction memory
+
+Reads only. This circuit gets asked the next instruction (32 bit) given its address.
+
+#### Data memory
+
+Reads and writes, never both in the same clock cycle.
+
+### Register file
+
+Very fast and small memory. Most used data are stored in registers, which make up the register file.
+Reads and writes, also in the same clock cycle. Register file always reads from its inputs, if write signal is at $1$ it also writes.
+
+Data is read into the register file before it is processed, then the instruction is executed, then data is written back to memory.
+
+### Signals
+
+| Name | Size | 0 | 1 |
+| --- | --- | --- | --- |
+| AluCtrl | ? | ? | ? |
+| AluOp | ? | ? | ? |
+| AluSrc | ? | ? | ? |
+| MemRead | 1 | rest | read |
+| MemToReg | 1 | rest | read |
+| MemWrite | 1 | rest | write |
+| RegWrite | 1 | read | write |
+| RegDst | 1 | read | write |
+
+
+

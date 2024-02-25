@@ -14,7 +14,7 @@
               "type": "markdown",
               "state": {
                 "file": "Computer architecture.md",
-                "mode": "source",
+                "mode": "preview",
                 "source": true
               }
             }
@@ -119,7 +119,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 344.5
+    "width": 344.5,
+    "collapsed": true
   },
   "right": {
     "id": "4ebf7b594d449203",
@@ -142,9 +143,11 @@
   },
   "active": "cb17a55895eb49ef",
   "lastOpenFiles": [
-    "attachments/cpu-phases.png",
-    "attachments/cpu-phases.png",
+    "a.md",
     "Computer architecture.md",
+    "ari.md",
+    "attachments/cpu-phases.png",
+    "attachments/cpu-phases.png",
     "attachments/Pasted image 20240112223842.png",
     "attachments/Pasted image 20240201195400.png",
     "test.md",
@@ -155,7 +158,6 @@
     "attachments/bistable.gif",
     "attachments/avoid-transparency-left-open.png",
     "attachments/avoid-transparency-right-open.png",
-    "attachments/Pasted image 20240221231254.png",
     "Erlang.md",
     "attachments/latch-d.gif:Zone.Identifier",
     "attachments/latch-d.gif:shield",
@@ -182,7 +184,6 @@
     "Untitled 1.md",
     "Untitled.canvas",
     "BNF.md",
-    "videos/Roger Penrose - Is Mathematics Invented or Discovered?.md",
     "attachments",
     "not-sorted",
     "Untitled 1.canvas",
