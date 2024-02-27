@@ -7,22 +7,20 @@ function Products() {
 
   useEffect(() => {
     async function call() {
-      let res = await fetch('https://fakestoreapi.com/products')
+      let res = await fetch('https://fakestoreapi.com/products', {
+	      method: 'GET'
+      })
       let json = await res.json()
       setProducts(json)
     }
 
     call()
-  })
-
+  }, [])
 
   return (
     <div>
       <div>PRODUCTS <span>({products.length})</span></div>
-
-      {products.map(p => {
-        return <Product title={p.title} image={p.image} />
-      })
+      {products.map((p, i) => <Product title={p.title} image={p.image} key={i} />)
       }
     </div>
   );
