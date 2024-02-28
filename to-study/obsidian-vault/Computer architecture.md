@@ -7,6 +7,10 @@ tags:
   - flip-flop
 ---
 
+## Online Logisim
+
+To test circuits I've created an [online project](https://circuitverse.org/simulator/edit/ca2-e811e6cd-45c0-40a4-825e-1a2804239403).
+
 ## Sequential circuits
 
 Why using sequential circuits?
@@ -114,7 +118,7 @@ If we have a combinatoric circuit that takes more that a CPU cycle to perform it
 
 ## Single cycle CPU
 
-1 ISA (Instruction Set Architecture) MIPS instruction per 1 clock cycle. Where instruction is a sequence of $0$s and $1$s and represents a requests for a certain task. The CPU knows how to decode this sequence and execute it.
+1 ISA MIPS (Instruction Set Architecture) instruction per 1 clock cycle. Where instruction is a sequence of $0$s and $1$s and represents a requests for a certain task. The CPU knows how to decode this sequence and execute it.
 
 ISA is the language the computer speaks to the compiler.
 
@@ -163,6 +167,10 @@ The second line is an example and it means $lw \, r_5, \, 240(r_w)$
 
 Instructions for non conditional jumps.
 
+| OPCODE | PSEUDO-ADDRESS |
+| --- | --- |
+| 6 bit | 26 bit |
+
 ### Memory
 
 Address are aligned, which means they are multiple of $4$, which means the end with $00$.
@@ -190,6 +198,10 @@ Reads and writes, also in the same clock cycle. Register file always reads from 
 
 Data is read into the register file before it is processed, then the instruction is executed, then data is written back to memory.
 
+### Notes
+
+During the execute phase we calculate the address of the next instruction, we can't use the ALU since it's busy so we just use a circuit that only performs additions. 
+
 ### Signals
 
 | Name | Size | 0 | 1 |
@@ -203,5 +215,6 @@ Data is read into the register file before it is processed, then the instruction
 | RegWrite | 1 | read | write |
 | RegDst | 1 | read | write |
 
+### Schema 
 
-
+![[single-cycle-cpu-schema.png]]

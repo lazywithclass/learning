@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "f537e15e1c3b91d6",
+        "id": "3c1bb36512d57f5b",
         "type": "tabs",
         "children": [
           {
-            "id": "cb17a55895eb49ef",
+            "id": "4ec1110611401cb0",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -119,8 +119,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 344.5,
-    "collapsed": true
+    "width": 344.5
   },
   "right": {
     "id": "4ebf7b594d449203",
@@ -141,16 +140,18 @@
       "daily-notes:Open today's daily note": false
     }
   },
-  "active": "cb17a55895eb49ef",
+  "active": "4ec1110611401cb0",
   "lastOpenFiles": [
-    "a.md",
+    "attachments/single-cycle-cpu-schema.png",
+    "test.md",
+    "2024-02-27.md",
     "Computer architecture.md",
+    "a.md",
     "ari.md",
     "attachments/cpu-phases.png",
     "attachments/cpu-phases.png",
     "attachments/Pasted image 20240112223842.png",
     "attachments/Pasted image 20240201195400.png",
-    "test.md",
     "attachments/d-latch.png",
     "clock-square-wave.md",
     "attachments/flip-flop.png",
@@ -181,9 +182,7 @@
     "not-sorted/videos-to-sort.md",
     "videos/Understanding parser combinators, a deep dive by Scott Wlaschin.md",
     "TODO.md",
-    "Untitled 1.md",
     "Untitled.canvas",
-    "BNF.md",
     "attachments",
     "not-sorted",
     "Untitled 1.canvas",
