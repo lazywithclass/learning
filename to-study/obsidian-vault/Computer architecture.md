@@ -9,7 +9,19 @@ tags:
 
 ## Online Logisim
 
-To test circuits I've created an [online project](https://circuitverse.org/simulator/edit/ca2-e811e6cd-45c0-40a4-825e-1a2804239403).
+To test some of the circuits I've created an [online project](https://circuitverse.org/simulator/edit/ca2-e811e6cd-45c0-40a4-825e-1a2804239403).
+
+## Miscellanea
+
+### Sign extension and shift
+
+Sign extension means replicating to the left the Most Significant Digit, to the desired length
+
+![[sign-extension.png|700]]
+
+Shift means moving the $n$ bit to the left or to the right by $k$ positions; if bits represent a natural number and no $1$ are deleted $\lt\lt k$ is equivalent to $2^{k}$.
+
+![[shift.png|700]]
 
 ## Sequential circuits
 
@@ -152,9 +164,13 @@ $shamt$ is never used, $OPCODE$ is always $0$ for this format.
 
 Instructions that operate on constants, which are inside the very instruction.
 
-$lw\, r_{t}, \, OFFSET(r_s)$: loads in $r_t$ the word at address $r_s + OFFSET$
-$sw\, r_{t}, \, OFFSET(r_s)$: moves the contents of $r_t$ in the word at address $r_s + OFFSET$
+$lw\, r_{t}, \, OFFSET(r_s)$: loads in $r_t$ the in memory word at address $r_s + OFFSET$
+$sw\, r_{t}, \, OFFSET(r_s)$: moves the contents of $r_t$ in the in memory word at address $r_s + OFFSET$
 $beq\, r_{s} \, r_{t}, \, OFFSET$: if the contents of $r_s$ and $r_t$ are the same jump at the instruction at address $PC$ $+$ $OFFSET$, else proceed normally ($PC + 4$)
+
+<aside>immediate differences lw/sw and beq</aside>
+
+In $beq$ $OFFSET$ means offset in terms of numbers of instructions, instead in $lw$ and $sw$ offset represents bytes.
 
 | OPCODE | $r_s$ | $r_t$ | IMMEDIATE |
 | --- | --- | --- | --- |
@@ -170,6 +186,10 @@ Instructions for non conditional jumps.
 | OPCODE | PSEUDO-ADDRESS |
 | --- | --- |
 | 6 bit | 26 bit |
+
+$Zero$ signal coming from the ALU is:
+* $0$ if the contents of the two registers is different 
+* $1$ if the contents of the two registers is equal ($r_s-r_t$ is $0$)
 
 ### Memory
 
@@ -204,16 +224,7 @@ During the execute phase we calculate the address of the next instruction, we ca
 
 ### Signals
 
-| Name | Size | 0 | 1 |
-| --- | --- | --- | --- |
-| AluCtrl | ? | ? | ? |
-| AluOp | ? | ? | ? |
-| AluSrc | ? | ? | ? |
-| MemRead | 1 | rest | read |
-| MemToReg | 1 | rest | read |
-| MemWrite | 1 | rest | write |
-| RegWrite | 1 | read | write |
-| RegDst | 1 | read | write |
+![[signals.png]]
 
 ### Schema 
 
