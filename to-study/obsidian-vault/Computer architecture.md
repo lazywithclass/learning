@@ -76,7 +76,7 @@ Circuit changes when clock:
 Bistable sensitive to the level:
 ![[bistable-level-sensitive.png|700]]
 
-Being sensitive to levels means that a circuit is available for a longer period of time, so in the end it is as if the sequential circuits are not there, because the signal is passing through all of them, as it did with combinatoric circuits.
+Being sensitive to levels means that a circuit is available for a longer period of time, so in the end it is as if the sequential circuits are not there, because the signal is passing through all of them, as it did with combinational circuits.
 
 <aside>Transparency problem</aside>
 
@@ -118,13 +118,13 @@ The signal of the clock then goes down suddenly, in that very little time span
 
 The important idea to grasp is that master and slave present stable data as their output, this is because
 * when the output gate is open the input is closed, and
-* the circuit is combinatoric and as such its output is a function of the input, so since the input doesn't change also the output does not change
+* the circuit is combinational and as such its output is a function of the input, so since the input doesn't change also the output does not change
 
 State changes only happen during a rising or falling edge (see [[#Clock square wave]]).
 
 So we have two components sensitive to levels, but from the exterior the whole flip flop component is sensitive to edges. So, we have solved the transparency problem.
 
-If we have a combinatoric circuit that takes more that a CPU cycle to perform its task, then we could divide it in chunks and have each of them carry out a single sub-task, all coordinated via sequential circuits.
+If we have a combinational circuit that takes more that a CPU cycle to perform its task, then we could divide it in chunks and have each of them carry out a single sub-task, all coordinated via sequential circuits.
 
 ---
 
@@ -229,3 +229,28 @@ During the execute phase we calculate the address of the next instruction, we ca
 ### Schema 
 
 ![[single-cycle-cpu-schema.png]]
+
+## Multiple cycle CPU
+
+### Single cycle CPU recap
+
+Pros
+* simple: $1$ clock cycle $1$ instruction, CU is a combinational circuit
+
+Cons
+* inefficient: if each instruction takes a time $T_{ck}$ I have to set the clock duration to the longest one, even if some instructions might take less
+* components duplication (ALUs and memories)
+
+Instructions and required phases
+* AL: IF $\rightarrow$ ID $\rightarrow$ EX $\rightarrow$ WB
+* lw: IF $\rightarrow$ ID $\rightarrow$ EX $\rightarrow$ MEM $\rightarrow$ WB
+* sw: IF $\rightarrow$ ID $\rightarrow$ EX $\rightarrow$ MEM
+* beq: IF $\rightarrow$ ID $\rightarrow$ EX  
+* beq: IF $\rightarrow$ ID
+
+### Idea
+
+For each clock we execute a single phase, so, different phases will take a different number of clock cycles.
+In the end we save time and components, but the architecture becomes more complex.
+
+Between a cycle and the next the CPU has to remember that there is an instruction that hasn't been finished yet.
