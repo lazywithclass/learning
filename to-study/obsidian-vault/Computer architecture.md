@@ -254,3 +254,30 @@ For each clock we execute a single phase, so, different phases will take a diffe
 In the end we save time and components, but the architecture becomes more complex.
 
 Between a cycle and the next the CPU has to remember that there is an instruction that hasn't been finished yet.
+
+### Instruction fetch
+
+There is just one memory, we don't have an instruction memory and a memory as separated circuits.
+Same for the ALU, just one, shared between different instructions (and so differenct clock cycles).
+
+Memory can't read and write in the same clock cycle.
+Register file can. 
+
+![[multiple-cycle-if.png|700]]
+
+### Instruction decode
+
+<aside>BTA anticipation</aside>
+
+Calculate Branch Target Address, regardless of the instruction type.
+If we have a $branch$ then we will need what we just calculated, if not no problem, just discard it.
+
+### Instruction execute
+
+$beq$ needs to use ALU twice:
+ * $PC + SignExt(OFFSET) \ \times \ 4$
+ * to check for $rs - rt == 0$
+
+We don't want to add a new ALU, so, idea: during decode nobody is using ALU so use it to calculate BTA.
+
+![[multiple-cycle-cpu-alu-usage.png|700]]

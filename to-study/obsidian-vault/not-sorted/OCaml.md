@@ -10,5 +10,9 @@ Weak type variables https://ocamlverse.net/content/weak_type_variables.html
 Sort this out https://caml.inria.fr/pub/papers/garrigue-value_restriction-fiwflp04.pdf
 
 
+https://cs3110.github.io/textbook/chapters/interp/inference.html
 
-Snip me! 
+https://cs3110.github.io/textbook/chapters/correctness/intro.html
+
+https://courses.cs.cornell.edu/cs3110/2021sp/textbook/intro/intro.html
+

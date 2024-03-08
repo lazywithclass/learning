@@ -4,22 +4,47 @@
     "type": "split",
     "children": [
       {
-        "id": "3c1bb36512d57f5b",
+        "id": "7cc07af9bf6f3c32",
         "type": "tabs",
         "children": [
           {
-            "id": "4ec1110611401cb0",
+            "id": "b16c90921532f020",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Databases.md",
+                "mode": "source",
+                "source": true
+              }
+            }
+          },
+          {
+            "id": "528d83cc23a9727a",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Combinators.md",
+                "mode": "preview",
+                "source": true
+              }
+            }
+          },
+          {
+            "id": "4c8644baa1622015",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
                 "file": "Computer architecture.md",
-                "mode": "source",
+                "mode": "preview",
                 "source": true
               }
             }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -140,11 +165,36 @@
       "daily-notes:Open today's daily note": false
     }
   },
-  "active": "4ec1110611401cb0",
+  "active": "4c8644baa1622015",
   "lastOpenFiles": [
+    "attachments/multiple-cycle-cpu-alu-usage.png",
+    "attachments/multiple-cycle-if.png",
+    "Databases.md",
+    "Combinators.md",
+    "Erlang.md",
+    "Relational algebra.md",
+    "PostgreSQL.md",
+    "videos/Understanding parser combinators, a deep dive by Scott Wlaschin.md",
+    "videos/Removing TypeScript - DHH.md",
+    "videos/MIT Godel Escher Bach Lectures.md",
+    "videos/Thoughts About Unit Testing.md",
+    "videos/NixOS Everything Everywhere All At Once.md",
+    "videos/Untitled 1.md",
+    "not-sorted/The Curry-Howard Correspondence.md",
+    "videos/Dana Scott - Theory and Models of Lambda Calculus Untyped and Typed - Part 1 of 5 - λC 2017.md",
+    "videos/\"What Is a Strange Loop and What is it Like To Be One?\" by Douglas Hofstadter (2013).md",
+    "videos/2 Regrets From 55 Year Old Programmer.md",
+    "not-sorted/Homotopy type theory.md",
+    "not-sorted/Lambda calculus.md",
+    "not-sorted/Logic Programming.md",
+    "not-sorted/Functional Programming.md",
+    "not-sorted/OCaml.md",
+    "not-sorted/State monad.md",
+    "not-sorted/NSDR.md",
+    "not-sorted/Eta-expansion.md",
+    "videos/The Functional Toolkit - Scott Wlaschin.md",
+    "videos/Functional Programming Patterns for Mere Mortals - Daniel Chambers.md",
     "attachments/signals.png",
-    "CPS - Continuation Passing Style.md",
-    "Computer architecture.md",
     "attachments/shift.png",
     "attachments/shift.png",
     "attachments/sign-extension.png",
@@ -153,35 +203,10 @@
     "attachments/Pasted image 20240301152702.png",
     "attachments/Pasted image 20240112223842.png",
     "attachments/Pasted image 20240201195400.png",
-    "attachments/Pasted image 20240201221133.png",
-    "attachments/Pasted image 20240221165152.png",
-    "sign-extension.md",
-    "test.md",
-    "2024-02-27.md",
-    "a.md",
-    "ari.md",
-    "clock-square-wave.md",
-    "Erlang.md",
     "attachments/latch-d.gif:Zone.Identifier",
     "attachments/latch-d.gif:shield",
-    "Combinators.md",
-    "Recursion.md",
-    "SOLID.md",
     "Untitled",
-    "not-sorted/Dependent types.md",
-    "Abstraction.md",
-    "videos/Functional programming design patterns by Scott Wlaschin.md",
-    "videos/Functors.md",
-    "PostgreSQL.md",
-    "Micia ideas.md",
-    "Relational algebra.md",
-    "Scala.md",
-    "not-sorted/Programming Languages - Lesson 3.md",
-    "Operational semantics.md",
     "_images",
-    "videos/Removing TypeScript - DHH.md",
-    "not-sorted/videos-to-sort.md",
-    "videos/Understanding parser combinators, a deep dive by Scott Wlaschin.md",
     "Untitled.canvas",
     "attachments",
     "not-sorted",
