@@ -5,5 +5,5 @@ Expect text in Italian here and there even if I strive to have everythingin Engl
 
 ## Structure of the repo
 
-- [to-study](#to-study) contains notes, flashcards, and everything that has to do with the subject
+- [to-study](to-study) contains notes, flashcards, and everything that has to do with the subject
 - anything else is mostly exercises
