@@ -1,0 +1,25 @@
+.App {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 300px;
+}
+
+.login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid gray;
+  padding: 10px;
+  background-color: #ccc;
+}
+.login > button {
+  width: 50%;
+}
+
+.error {
+  color: red;
+}
