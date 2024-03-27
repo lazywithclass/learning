@@ -9,8 +9,9 @@ export default function Login() {
   const [errorMessage, setErrorMessage] = useState("")
 
   async function login() {
-    const res = await fetch("http://localhost:3001/login", {
+    const res = await fetch("http://localhost:3001/sessions", {
       method: "POST",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
