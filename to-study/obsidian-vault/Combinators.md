@@ -6,10 +6,7 @@ tags:
   - higher-order-functions
 ---
 
-
 # [To Mock a Mockingbird](https://en.wikipedia.org/wiki/To_Mock_a_Mockingbird)
-
-
 
 $A$ and $B$ are two birds.
 We call $B$ to $A$.
@@ -18,21 +15,25 @@ This creates a new bird called $AB$. Or in other words "$A$'s response to hearin
 $A(BC)$ is "$A$'s response to the bird $BC$".
 $AB$ is not necessarily the same as $BA$ and $A(BC)$ is not necessarily the same as $(AB)C$.
 
-Bird $C$ compose $A$ with $B$ if for every bird $x$ this holds: $Cx = A(Bx)$
+### Properties of birds
+
+**Composition**: bird $C$ composes $A$ with $B$ if for every bird $x$ this holds: $Cx = A(Bx)$
+**Fondness**: bird $AB$ is the same as bird $B$ if $A$ is fond of $B$, or $AB = B$ 
 
 ## Birds
 
-Mockingbird: $Mx = xx$
+Mockingbird: $Mx = xx$ - its response to $x$ is the same as $x$'s response to itself
 
 ## The significance of the Mockingbird
 
 $C_1$: for any two birds $A$ and $B$ there is a bird $C$ that for any bird $x$, $Cx = A(Bx)$
 $C_2$: the forest contains a mockingbird $M$
 
-If you call $B$ to $A$ it could happen that $A$ might call $B$ back to you, if this happens then $A$ is fond of $B$: $AB = B$.
-
 One rumor has it that every bird of the forest is fond of at least one bird.
 Another rumor has it that there is at least one bird that is not fond of any bird.
+
+Given $A$
+
 
 ---
 

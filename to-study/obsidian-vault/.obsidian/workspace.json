@@ -20,19 +20,31 @@
             }
           },
           {
-            "id": "528d83cc23a9727a",
+            "id": "a7b52f7873d077e1",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Combinators.md",
-                "mode": "preview",
+                "file": "videos/The Lies Of 100% Code Coverage Prime Reacts.md",
+                "mode": "source",
                 "source": true
               }
             }
           },
           {
-            "id": "4c8644baa1622015",
+            "id": "1328da769af0d483",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "videos/Happy path enemy.md",
+                "mode": "source",
+                "source": true
+              }
+            }
+          },
+          {
+            "id": "e6ac9e59bfc82848",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -44,7 +56,7 @@
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -165,12 +177,23 @@
       "daily-notes:Open today's daily note": false
     }
   },
-  "active": "4c8644baa1622015",
+  "active": "e6ac9e59bfc82848",
   "lastOpenFiles": [
+    "videos/Happy path enemy.md",
+    "videos/The Lies Of 100% Code Coverage Prime Reacts.md",
+    "IDEAS",
+    "videos/The Functional Toolkit - Scott Wlaschin.md",
+    "videos/Dana Scott - Theory and Models of Lambda Calculus Untyped and Typed - Part 1 of 5 - λC 2017.md",
+    "Databases.md",
+    "Computer architecture.md",
+    "attachments/cpu-pipeline-schema.png",
+    "videos/Roger Penrose - Is Mathematics Invented or Discovered?.md",
+    "videos/Sequelitis - Mega Man Classic vs. Mega Man X.md",
+    "attachments/multiple-cycle-cpu-schema.png",
+    "Combinators.md",
+    "attachments/multiple-cycle-cpu-mem.png",
     "attachments/multiple-cycle-cpu-alu-usage.png",
     "attachments/multiple-cycle-if.png",
-    "Databases.md",
-    "Combinators.md",
     "Erlang.md",
     "Relational algebra.md",
     "PostgreSQL.md",
@@ -181,7 +204,6 @@
     "videos/NixOS Everything Everywhere All At Once.md",
     "videos/Untitled 1.md",
     "not-sorted/The Curry-Howard Correspondence.md",
-    "videos/Dana Scott - Theory and Models of Lambda Calculus Untyped and Typed - Part 1 of 5 - λC 2017.md",
     "videos/\"What Is a Strange Loop and What is it Like To Be One?\" by Douglas Hofstadter (2013).md",
     "videos/2 Regrets From 55 Year Old Programmer.md",
     "not-sorted/Homotopy type theory.md",
@@ -189,23 +211,13 @@
     "not-sorted/Logic Programming.md",
     "not-sorted/Functional Programming.md",
     "not-sorted/OCaml.md",
-    "not-sorted/State monad.md",
-    "not-sorted/NSDR.md",
-    "not-sorted/Eta-expansion.md",
-    "videos/The Functional Toolkit - Scott Wlaschin.md",
-    "videos/Functional Programming Patterns for Mere Mortals - Daniel Chambers.md",
     "attachments/signals.png",
     "attachments/shift.png",
     "attachments/shift.png",
     "attachments/sign-extension.png",
     "attachments/Pasted image 20240301152750.png",
-    "attachments/Pasted image 20240301152723.png",
-    "attachments/Pasted image 20240301152702.png",
-    "attachments/Pasted image 20240112223842.png",
-    "attachments/Pasted image 20240201195400.png",
     "attachments/latch-d.gif:Zone.Identifier",
     "attachments/latch-d.gif:shield",
-    "Untitled",
     "_images",
     "Untitled.canvas",
     "attachments",

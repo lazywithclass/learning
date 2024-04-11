@@ -33,9 +33,9 @@ let test_andthen () =
 let test_syntax () =
   let open Melange in
   let combinator = (
-   (fun ((c1, c2), c3) -> [c1; c2; c3])
-    ->>-
    ((anyOf ['1';'2';'3']) -&- (anyOf ['1';'2';'3']) -&- (anyOf ['1';'2';'3']))
+   |>>
+   (fun ((c1, c2), c3) -> [c1; c2; c3])
   ) in
   let result = run combinator (string_to_list "312") in
   match result with
@@ -53,7 +53,7 @@ let test_pstring () =
 let test_zeroOrMore_not_matching () =
   let open Melange in
   let parseDigit = anyOf ['1'; '2'; '3'] in
-  let result = run (pZeroOrMore parseDigit) (string_to_list "456")  in
+  let result = run (pZeroOrMore parseDigit) (string_to_list "456") in
   match result with
       | Ok (cs, rest) -> let _ = Alcotest.(check (list char)) "" [] cs in
                         Alcotest.(check (list char)) "" ['4'; '5'; '6'] rest
@@ -62,7 +62,7 @@ let test_zeroOrMore_not_matching () =
 let test_zeroOrMore_matching () =
   let open Melange in
   let parseDigit = anyOf ['1'; '2'; '3'] in
-  let result = run (pZeroOrMore parseDigit) (string_to_list "111")  in
+  let result = run (pZeroOrMore parseDigit) (string_to_list "111") in
   match result with
       | Ok (cs, rest) -> let _ = Alcotest.(check (list char)) "" ['1'; '1'; '1'] cs in
                         Alcotest.(check (list char)) "" [] rest
@@ -71,7 +71,7 @@ let test_zeroOrMore_matching () =
 let test_oneOrMore_not_matching () =
   let open Melange in
   let parseDigit = anyOf ['1'; '2'; '3'] in
-  let result = run (pOneOrMore parseDigit) (string_to_list "456")  in
+  let result = run (pOneOrMore parseDigit) (string_to_list "456") in
   match result with
       | Ok (_, _) -> failwith "Should never happen (TM)"
       | Fail msg  -> Alcotest.(check string) "" "'3' not found, got '4'." msg
@@ -79,26 +79,46 @@ let test_oneOrMore_not_matching () =
 let test_oneOrMore_matching () =
   let open Melange in
   let parseDigit = anyOf ['1'; '2'; '3'] in
-  let result = run (pZeroOrMore parseDigit) (string_to_list "111")  in
+  let result = run (pZeroOrMore parseDigit) (string_to_list "111") in
   match result with
       | Ok (cs, rest) -> let _ = Alcotest.(check (list char)) "" ['1'; '1'; '1'] cs in
                         Alcotest.(check (list char)) "" [] rest
       | Fail msg      -> failwith msg
+
+let test_pint () =
+  let open Melange in
+  let result = run pint (string_to_list "111") in
+  match result with
+      | Ok (i, rest) -> let _ = Alcotest.(check int) "" 1 i in
+                       Alcotest.(check (list char)) "" ['1'; '1'] rest
+      | Fail msg     -> failwith msg
+
+let test_opt_pint () =
+  let open Melange in
+  let ps = opt (pchar '-') -&- pint in
+  match run ps (string_to_list "-11") with
+      | Ok ((Some c, i), rest) -> let _ = Alcotest.(check char) "" '-' c in
+                                 let _ = Alcotest.(check int) "" 1 i in
+                                 Alcotest.(check (list char)) "" ['1'] rest
+      | Fail msg               -> failwith msg
+      | _                      -> failwith "Should never happen (TM)"
 
 
 let () =
   let open Alcotest in
   run "Melange" [
     "matchers", [
-      test_case "pchar" `Quick test_pchar;
-      test_case "pstring" `Quick test_pstring;
-      test_case "anyOf" `Quick test_anyof;
-      test_case "andThen" `Quick test_andthen;
-      test_case "syntax" `Quick test_syntax;
+      test_case "pchar"      `Quick test_pchar;
+      test_case "pstring"    `Quick test_pstring;
+      test_case "anyOf"      `Quick test_anyof;
+      test_case "andThen"    `Quick test_andthen;
+      test_case "syntax"     `Quick test_syntax;
       test_case "zeroOrMore" `Quick test_zeroOrMore_not_matching;
       test_case "zeroOrMore" `Quick test_zeroOrMore_matching;
-      test_case "oneOrMore" `Quick test_oneOrMore_not_matching;
-      test_case "oneOrMore" `Quick test_oneOrMore_matching;
+      test_case "oneOrMore"  `Quick test_oneOrMore_not_matching;
+      test_case "oneOrMore"  `Quick test_oneOrMore_matching;
+      test_case "pint"       `Quick test_pint;
+      test_case "opt pint"   `Quick test_opt_pint;
     ];
     "combinators", [
 

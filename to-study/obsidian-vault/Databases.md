@@ -1,7 +1,7 @@
 ---
 cssclasses:
   - cornell-note
-tags:c
+tags:
   - databases
 ---
 
@@ -44,6 +44,74 @@ A predicate that for each instance could return true or false.
 * domain constraints - for example $year \geq 1950 \ AND \ year \leq 2015$
 * row constraints - express conditions on attributes on a row, domain constraints are row constraints that operate on a single attribute
 * key constraints
+
+## Functional dependency
+
+A dependency $FD: X \rightarrow \ Y$ means that the values of $Y$ are determined by the values of $X$.
+
+"Which are the minimum attributes I need to determine that attribute?"
+
+This allows to determine which attributes go in which tables.
+
+Of course we could only recognize functional dependencies if we know the domain of the application, if we don't know anything it's very hard to do a good job in identifying them.
+
+<aside>key concept</aside>
+
+Key question to ask ourself to see if there's a functional dependency: "left side of this hypothetical dependency identifies precisely the right side?" if not then there isn't a functional dependency.
+
+## Normal forms
+
+We want to avoid redundancy in the information.
+
+A database is well formed if it has 1NF, 2NF, 3NF.
+As a rule of thumb:
+* we want lots of writes $\rightarrow$ more normalization
+* we want lots of reads $\rightarrow$ less normalization
+
+### 1NF
+
+Only atomic attributes.
+We don't have a relational database if we don't have this NF.
+
+### 2NF
+
+Depends on 1NF.
+
+Every non-key attribute must depend on the primary key, as a whole, and not just on a subset of it.
+Normalization: put the subset of the key and the attribute in a new table.
+
+If the key is a single attribute then we always have 2NF.
+
+### 3NF
+
+Depends on 2NF.
+
+Transitive dependency: $X \rightarrow Y$ is transitive if a set of attributes $Z$ (not key and not subset of a key) exists such that $X \rightarrow Z$ and $Z \rightarrow Y$. 
+2NF and no non-prime attribute in $R$ depends in a transitive way on the primary key.
+
+In other words: we don't want two non-key attributes on the left AND on the right of a functional dependency. They all have to be on the left side.
+
+### BCNF
+
+What is key in the decomposed relations must be a super-key in the original relation. 
+
+## Using normal forms to decompose relations
+
+Goal is to start from a big universal relation and finish to a scheme with multiple relations, which respect the normal forms.
+
+There is a procedure to follow, which has 3 rules:
+* preserve attributes
+* preserve functional dependencies
+* lossless joins - we don't want joins to that create data that was not present in the original relations
+
+The algorithm is:
+1. define functional dependencies
+2. minimize functional dependencies
+3. for each functional dependency $X \rightarrow Y$, create a new relation where we have $X$ and all dependencies on the right side that have $X$ on the left side 
+4. attributes left out go in a relation of their own
+
+
+
 
 ## Logic model
 

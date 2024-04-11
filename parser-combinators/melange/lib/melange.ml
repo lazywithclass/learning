@@ -88,6 +88,18 @@ let pOneOrMore p =
                          Ok (c :: c', rest')
   in (Parser inner)
 
+(* TODO applying pOneOrMore to digit did not work, further investigate *)
+let pint =
+  let to_int c = int_of_char c - int_of_char '0' in
+  let digit = anyOf ['0'; '1'; '2'; '3'; '4'; '5'; '6'; '7'; '8'; '9'] in
+  digit |> pmap to_int
+
+let opt p =
+  (* TODO why do I have to write this? *)
+  let some = pmap (fun a -> Some a) p in
+  let none = preturn None in
+  orElse none some
+
 (* ------------------------------ *)
 (* Mapping *)
 (* ------------------------------ *)
@@ -96,12 +108,15 @@ module Melange =
   struct
     let pchar c = pchar c
     let pstring s = pstring s
+    let pint = pint
     let pZeroOrMore p = pZeroOrMore p
     let pOneOrMore p = pOneOrMore p
+    let opt p = opt p
     let run parser input = run parser input
 
+    (* TODO use the same symbols as in the text *)
+    let (|>>) p mapper = pmap mapper p
     let (-&-) p1 p2 = andThen p1 p2
     let (-|-) p1 p2 = orElse p1 p2
-    let (->>-) mapper p = pmap mapper p
     let (-*-) fp p = papply fp p
   end

@@ -281,3 +281,38 @@ $beq$ needs to use ALU twice:
 We don't want to add a new ALU, so, idea: during decode nobody is using ALU so use it to calculate BTA.
 
 ![[multiple-cycle-cpu-alu-usage.png|700]]
+
+### Mem
+
+Memory module has three modes: read, write, rest (doesn't do anything).
+
+ ![[multiple-cycle-cpu-mem.png]]
+
+### Write back
+
+### Schema
+
+![[multiple-cycle-cpu-schema.png]]
+
+## Pipeline CPU
+
+Metaphor of the assembly line.
+Phases happen in parallel, differently from what happened with the previous two CPUs.
+
+### Time
+
+Where $N$ is the number of instructions in the program, and $t$ the time for a single phase, how much time it will take to run?
+
+| cpu type | total time | brief explanation | constraint |
+| --- | --- | --- | --- |
+| single cycle | $N5t$ | $5t$ is the length of a single clock cycle | $T_{ck} \ge 5t$ |
+| multiple cycle | $\sum_{i=1}^{N} \ \sum_{j=1}^{5} f(i, j)t$ | the sum for all instructions ($i$), for all phases ($j$), of the application of $f$ | $T_{ck} \ge t$ |
+| pipeline | $5t + t(N - 1)$ | only the first pays $5t$ time, the others ($N - 1$) take $t$ | $T_{ck} \ge t$ |
+
+where $f$ is
+
+$f(i, j) = \begin{cases} 1, \ \text{instruction i needs phase j} \\ 0, \text{\ else}\end{cases}$
+
+## Schema
+
+![[cpu-pipeline-schema.png]]
