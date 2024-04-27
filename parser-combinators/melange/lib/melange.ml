@@ -98,7 +98,7 @@ let opt p =
   (* TODO why do I have to write this? *)
   let some = pmap (fun a -> Some a) p in
   let none = preturn None in
-  orElse none some
+  orElse some none
 
 (* ------------------------------ *)
 (* Mapping *)

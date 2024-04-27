@@ -96,12 +96,14 @@ let test_pint () =
 let test_opt_pint () =
   let open Melange in
   let ps = opt (pchar '-') -&- pint in
-  match run ps (string_to_list "-11") with
+  let result = run ps (string_to_list "-11") in
+
+  match result with
       | Ok ((Some c, i), rest) -> let _ = Alcotest.(check char) "" '-' c in
                                  let _ = Alcotest.(check int) "" 1 i in
                                  Alcotest.(check (list char)) "" ['1'] rest
+      | Ok _                   -> failwith "Should not get here"
       | Fail msg               -> failwith msg
-      | _                      -> failwith "Should never happen (TM)"
 
 
 let () =
