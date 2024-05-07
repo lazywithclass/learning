@@ -1,0 +1,37 @@
+{
+  "posts": [
+    {
+      "title": "un titolo",
+      "views": 101,
+      "id": "1"
+    },
+    {
+      "id": "2",
+      "title": "another title",
+      "views": 200
+    },
+    {
+      "id": "baed",
+      "title": "un altro post"
+    },
+    {
+      "id": "c700",
+      "title": "un altro post ancora"
+    }
+  ],
+  "comments": [
+    {
+      "id": "1",
+      "text": "a comment about post 1",
+      "postId": "1"
+    },
+    {
+      "id": "2",
+      "text": "another comment about post 1",
+      "postId": "1"
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}
