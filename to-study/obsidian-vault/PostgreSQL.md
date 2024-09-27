@@ -6,6 +6,7 @@ tags:
   - postgres
   - postgresql
   - query
+  - databases
 ---
 
 ## Notes

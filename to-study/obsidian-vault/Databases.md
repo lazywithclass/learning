@@ -93,7 +93,9 @@ In other words: we don't want two non-key attributes on the left AND on the righ
 
 ### BCNF
 
-What is key in the decomposed relations must be a super-key in the original relation. 
+All non prime attributes must depend on a super-key.
+
+The key in the decomposed relations must be a super-key in the original relation. 
 
 ## Using normal forms to decompose relations
 
@@ -110,8 +112,9 @@ The algorithm is:
 3. for each functional dependency $X \rightarrow Y$, create a new relation where we have $X$ and all dependencies on the right side that have $X$ on the left side 
 4. attributes left out go in a relation of their own
 
+## Normalization
 
+Anomalies and redundancies arise when we have functional dependencies like $X \rightarrow Y$, where $X$ is not a superkey (a subset of the key). 
+To avoid redundancies and anomalies, we have to put our relation in BCNF. 
 
-
-## Logic model
 

@@ -7,6 +7,8 @@ tags:
   - flip-flop
 ---
 
+> [!warning] This is far from complete and will probably never be
+
 ## Online Logisim
 
 To test some of the circuits I've created an [online project](https://circuitverse.org/simulator/edit/ca2-e811e6cd-45c0-40a4-825e-1a2804239403).
@@ -316,3 +318,25 @@ $f(i, j) = \begin{cases} 1, \ \text{instruction i needs phase j} \\ 0, \text{\ e
 ## Schema
 
 ![[cpu-pipeline-schema.png]]
+
+## Hazards
+
+### Data hazards
+
+Forward unit is in EX, Hazard unit is as soon as possible, so ID
+
+|     | Value produced in | Between                                             |
+| --- | ----------------- | --------------------------------------------------- |
+| A/L | EX                | Current and previous, current and previous previous |
+| lw  | MEM               | Current and previous                                |
+|     |                   |                                                     |
+When there is a lw hazard a nop has to be injected from ID, EX will execute it, MEM and WB proceed as usual.
+
+IF stall:
+* PCWrite 0, repeat IF
+* IF/IDWrite 0, repeat ID
+* nop 1, write 0 into ID/EX 
+
+### Control hazards
+
+Enter dynamic branch prediction.

@@ -8,48 +8,48 @@
         "type": "tabs",
         "children": [
           {
-            "id": "b16c90921532f020",
+            "id": "e05970d0e06af076",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Databases.md",
+                "file": "0 How to study.md",
+                "mode": "preview",
+                "source": true
+              }
+            }
+          },
+          {
+            "id": "fa77683b4ae58e80",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Algoritmi e strutture dati.md",
+                "mode": "preview",
+                "source": true
+              }
+            }
+          },
+          {
+            "id": "b0b9a6c4d2fa2955",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Software engineering.md",
                 "mode": "source",
                 "source": true
               }
             }
           },
           {
-            "id": "a7b52f7873d077e1",
+            "id": "4919405d895154bf",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "videos/The Lies Of 100% Code Coverage Prime Reacts.md",
-                "mode": "source",
-                "source": true
-              }
-            }
-          },
-          {
-            "id": "1328da769af0d483",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "videos/Happy path enemy.md",
-                "mode": "source",
-                "source": true
-              }
-            }
-          },
-          {
-            "id": "e6ac9e59bfc82848",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Computer architecture.md",
+                "file": "Erlang.md",
                 "mode": "preview",
                 "source": true
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Computer architecture.md"
+                "file": "Erlang.md"
               }
             }
           },
@@ -129,7 +129,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Computer architecture.md",
+                "file": "Erlang.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -141,7 +141,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Computer architecture.md",
+                "file": "Erlang.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -156,7 +156,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 381.5
+    "width": 258.5
   },
   "right": {
     "id": "4ebf7b594d449203",
@@ -177,55 +177,56 @@
       "daily-notes:Open today's daily note": false
     }
   },
-  "active": "e6ac9e59bfc82848",
+  "active": "4919405d895154bf",
   "lastOpenFiles": [
+    "Software engineering.md",
+    "Erlang.md",
+    "Algoritmi e strutture dati.md",
+    "0 How to study.md",
+    "Databases.md",
+    "PostgreSQL.md",
+    "Combinators.md",
+    "Scala.md",
+    "Relational algebra.md",
+    "rsync.md",
+    "Abstraction.md",
+    "CPS - Continuation Passing Style.md",
+    "attachments/Pasted image 20240909193731.png",
+    "Operational semantics.md",
     "videos/Happy path enemy.md",
+    "BNF.md",
+    "SOLID.md",
+    "Recursion.md",
+    "Computer architecture.md",
+    "Onirica.md",
+    "Untitled.canvas",
+    "Untitled 2.canvas",
+    "videos/How to study.md",
+    "Untitled 1.canvas",
+    "not-sorted/videos-to-sort.md",
+    "Micia ideas.md",
+    "Untitled",
+    "attachments/architecture-sensitivity-problem.png",
+    "videos/How to Practice, Build Skills & the Role of Flow State Dr. Cal Newport & Dr. Andrew Huberman.md",
+    "videos/How to Optimize Your Water Quality & Intake for Health Huberman Lab Podcast.md",
+    "attachments/derived-data.png",
     "videos/The Lies Of 100% Code Coverage Prime Reacts.md",
     "IDEAS",
     "videos/The Functional Toolkit - Scott Wlaschin.md",
-    "videos/Dana Scott - Theory and Models of Lambda Calculus Untyped and Typed - Part 1 of 5 - λC 2017.md",
-    "Databases.md",
-    "Computer architecture.md",
     "attachments/cpu-pipeline-schema.png",
-    "videos/Roger Penrose - Is Mathematics Invented or Discovered?.md",
-    "videos/Sequelitis - Mega Man Classic vs. Mega Man X.md",
     "attachments/multiple-cycle-cpu-schema.png",
-    "Combinators.md",
     "attachments/multiple-cycle-cpu-mem.png",
     "attachments/multiple-cycle-cpu-alu-usage.png",
     "attachments/multiple-cycle-if.png",
-    "Erlang.md",
-    "Relational algebra.md",
-    "PostgreSQL.md",
-    "videos/Understanding parser combinators, a deep dive by Scott Wlaschin.md",
-    "videos/Removing TypeScript - DHH.md",
-    "videos/MIT Godel Escher Bach Lectures.md",
-    "videos/Thoughts About Unit Testing.md",
-    "videos/NixOS Everything Everywhere All At Once.md",
-    "videos/Untitled 1.md",
-    "not-sorted/The Curry-Howard Correspondence.md",
-    "videos/\"What Is a Strange Loop and What is it Like To Be One?\" by Douglas Hofstadter (2013).md",
-    "videos/2 Regrets From 55 Year Old Programmer.md",
-    "not-sorted/Homotopy type theory.md",
-    "not-sorted/Lambda calculus.md",
-    "not-sorted/Logic Programming.md",
-    "not-sorted/Functional Programming.md",
-    "not-sorted/OCaml.md",
     "attachments/signals.png",
     "attachments/shift.png",
-    "attachments/shift.png",
-    "attachments/sign-extension.png",
-    "attachments/Pasted image 20240301152750.png",
     "attachments/latch-d.gif:Zone.Identifier",
     "attachments/latch-d.gif:shield",
     "_images",
-    "Untitled.canvas",
     "attachments",
     "not-sorted",
-    "Untitled 1.canvas",
     "Recording 20231114220943.webm",
     "Recording 20231114220957.webm",
-    "templates",
-    "videos"
+    "templates"
   ]
 }

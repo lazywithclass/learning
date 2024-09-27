@@ -8,7 +8,34 @@ tags:
   - purely-functional
 ---
 
-## Erlang Master Class
+- [[#Tutorials|Tutorials]]
+	- [[#Tutorials#Erlang Master Class|Erlang Master Class]]
+	- [[#Tutorials#Erlang Express Course|Erlang Express Course]]
+- [[#The language|The language]]
+- [[#The syntax|The syntax]]
+	- [[#The syntax#Punctuation|Punctuation]]
+	- [[#The syntax#Rounding|Rounding]]
+	- [[#The syntax#A recursive function|A recursive function]]
+	- [[#The syntax#Reversing a list|Reversing a list]]
+	- [[#The syntax#Tuples and records|Tuples and records]]
+	- [[#The syntax#Pattern matching|Pattern matching]]
+- [[#Running Erlang|Running Erlang]]
+- [[#Shell commands|Shell commands]]
+- [[#Actors|Actors]]
+	- [[#Actors#Receive|Receive]]
+	- [[#Actors#Functions that work at the actor level|Functions that work at the actor level]]
+	- [[#Actors#Group leader|Group leader]]
+	- [[#Actors#Nodes|Nodes]]
+- [[#Error handling|Error handling]]
+	- [[#Error handling#Link|Link]]
+	- [[#Error handling#Monitor|Monitor]]
+- [[#Useful stuff|Useful stuff]]
+- [[#Dyalizer|Dyalizer]]
+- [[#Testing|Testing]]
+
+## Tutorials
+
+### Erlang Master Class
 
 https://www.cs.kent.ac.uk/ErlangMasterClasses/
 
@@ -19,6 +46,12 @@ Course is hosted on Youtube and taught by:
 In the first part they talk about interpreters. Pretty interesting, not really tied to Erlang though so I'd skip it if you were not interested.
 
 Second part is about concurrency and its patterns (rpc, Futures, ...).
+
+### Erlang Express Course
+
+https://www.youtube.com/watch?v=aEyQcZg-Njs&list=PLoFxPv8jwGVVlajiMxaW9zG1IZgHODTuq
+
+Much longer than the [[Erlang#Erlang Master Class]]. High quality content, taught by [Simon Thompson](https://www.kent.ac.uk/computing/people/3164/thompson-simon).
 
 ## The language
 
@@ -37,6 +70,9 @@ Being [[stateless]] it has a huge advantage when dealing with [[concurrency]] si
 
 [[Beam]] is the VM on top of which Erlang runs.
 
+<aside>Mind blowing integers</aside>
+Integers in Erlang have arbitrary precision.
+
 ## The syntax
 
 `=` is not assignment, it is always pattern matching, to see it in action try to create a variable with a value and then re-assign it. Read the error message.
@@ -49,6 +85,28 @@ test
              % the atom test, notice the 
              % uppercase
 test
+```
+
+Also
+
+```erlang
+1> {F,F,G} = {23,24,12}
+```
+
+Gives an error, as the same `F` can't be both 23 and 24.
+
+### Punctuation
+
+At first Erlang syntax looks a bit alien, especially with `,`, `;`, and `.`, use English as an analogy:
+* `,` separates expressions within a clause expressions
+* `;` separates parts of a sentence (clauses in Erlang)
+* `.` ends a sentence (function)
+
+### Rounding
+
+```erlang
+1> round(1.0).
+1
 ```
 
 ### A recursive function
@@ -123,6 +181,14 @@ $ erl
 2> fact:fact(7).
 5040
 ```
+
+## Shell commands
+
+* help() - prints out a list of shell commands
+* h() - history, print the last 20 commands
+* b() - bindings, see all variable bindings
+* f() - forget, forget all variable bindings
+* f(X) - forget, forget the binding of variable X
 
 ## Actors
 

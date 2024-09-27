@@ -1,18 +1,21 @@
 {
   "accentColor": "",
   "enabledCssSnippets": [
-    "youtube",
     "cornell",
-    "cornell-note",
     "cornell-note2",
     "flex",
     "media-grid",
-    "media-grid-snippet"
+    "text",
+    "cornell-note",
+    "media-grid-snippet",
+    "youtube",
+    "no-space-over-table"
   ],
   "baseFontSize": 20,
   "monospaceFontFamily": "Monaco",
   "textFontFamily": "Monaco",
   "translucency": false,
   "cssTheme": "Typewriter",
-  "theme": "obsidian"
+  "theme": "obsidian",
+  "interfaceFontFamily": "Monaco"
 }
