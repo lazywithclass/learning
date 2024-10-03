@@ -14,7 +14,7 @@ The directory structure when working with modules should be
 ├── __init__.py
 ```
 
-From this folder by running the following command, you should see "oh hai" printed to the console
+From inside the example folder by running the following command, you should see "oh hai" printed to the console
 
 ```bash
 $ python -m example_user.hello
