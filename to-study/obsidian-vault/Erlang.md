@@ -19,6 +19,7 @@ tags:
 	- [[#The syntax#Reversing a list|Reversing a list]]
 	- [[#The syntax#Tuples and records|Tuples and records]]
 	- [[#The syntax#Pattern matching|Pattern matching]]
+	- [[#The syntax#Libraries|Libraries]]
 - [[#Running Erlang|Running Erlang]]
 - [[#Shell commands|Shell commands]]
 - [[#Actors|Actors]]
@@ -171,6 +172,19 @@ foo(A, B) when A == B -> equal;
 foo(A, B)             -> not_equal;
 ```
 
+Use 
+* `,` if all guards have to succeed
+* `;` if one guard has to succeed
+
+### Libraries
+
+Common libraries
+
+* io.erl - i/o functionality
+* file.erl - filesystem
+* lists.erl - standard list processing
+* code.erl - load test manipulate code
+
 ## Running Erlang
 
 ```shell
@@ -203,6 +217,8 @@ Erlang achieves concurrency via actors which communicate with messages, each act
 
 Actors are not processes, they run on the [BEAM](https://en.wikipedia.org/wiki/BEAM_(Erlang_virtual_machine)), not on the OS.
 
+Lightweight, you can easily run 20k 30k in a VM. They don't share memory, they interact by sending messages.
+
 ```erlang
 -module(processes_demo). 
 -export([start/2, loop/2]). 
@@ -214,10 +230,21 @@ loop(N,A) -> io:format("~p(~p) ~p~n", [A, self(), N]), loop(N-1,A).
 
 You could use `?MODULE` to reference to the module you're in instead of, for example, `processes_demo`.
 
+`spawn` returns a process identifier, which is the only knowledge you get about that process; to `spawn` something you need to `export` it.
+
+### Send
+
+To send a message to a PID you use the `!` construct: `Pid ! {self(), something}`
+
+Sending a message will never fail, messages sent to non existing processes are thrown away, received messages are stored in the process mailbox.
+
 ### Receive 
+
+A pattern and a body to execute if that pattern is matched
 
 ```erlang
 receive
+  {something, MoreSpecific} -> % do something specific;
   Msg -> % do something with Msg
 end
 ```

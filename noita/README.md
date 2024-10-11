@@ -52,3 +52,7 @@ Great chance to build awesome wands. Died in the Dragon Cave.
 
 Glass cannon in the second biome.
 Good wands in the second and third biomes.
+
+### 2037988593
+
+Machine gun wand available, good perks, light sabre wand available.

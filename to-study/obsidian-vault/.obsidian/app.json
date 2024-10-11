@@ -8,5 +8,6 @@
   "alwaysUpdateLinks": true,
   "useTab": false,
   "autoPairMarkdown": false,
-  "useMarkdownLinks": false
+  "useMarkdownLinks": true,
+  "spellcheck": true
 }

@@ -89,5 +89,3 @@ async function sumAll() {
   return somma
 }
 
-console.log(await sumAll())
-getPostsV2()

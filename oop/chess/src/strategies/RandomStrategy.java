@@ -1,2 +1,4 @@
-package strategies;public class RandomStrategy {
+package strategies;
+
+public class RandomStrategy extends Strategy {
 }

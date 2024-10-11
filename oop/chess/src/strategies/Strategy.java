@@ -1,2 +1,4 @@
-package PACKAGE_NAME;public class Strategy {
+package strategies;
+
+public abstract class Strategy {
 }

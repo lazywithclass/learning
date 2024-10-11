@@ -16,6 +16,6 @@
   "textFontFamily": "Monaco",
   "translucency": false,
   "cssTheme": "Typewriter",
-  "theme": "obsidian",
+  "theme": "system",
   "interfaceFontFamily": "Monaco"
 }
