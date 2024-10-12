@@ -1,0 +1,10 @@
+.gradle
+build/
+.idea
+*.iws
+out/
+bin/
+
+.DS_Store
+
+
