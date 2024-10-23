@@ -55,6 +55,7 @@ public class ForthInterpreter implements Interpreter {
                 Integer arg2 = stack.pop();
                 stack.push(algebraicOp.apply(arg2, arg1));
             } else {
+                // wrong, could be done better
                 if (token.length() > 1) {
                     throw new IllegalArgumentException("Token error '" + token + "'");
                 }

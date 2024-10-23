@@ -6,31 +6,6 @@ tags:
   - italian
 ---
 
-- [[#Refresher sui logaritmi|Refresher sui logaritmi]]
-- [[#Lezione 1 - 25/09|Lezione 1 - 25/09]]
-	- [[#Lezione 1 - 25/09#Fasi|Fasi]]
-		- [[#Fasi#Case study - Commesso Viaggiatore|Case study - Commesso Viaggiatore]]
-	- [[#Lezione 1 - 25/09#Perche' studiare l'algoritmica?|Perche' studiare l'algoritmica?]]
-		- [[#Perche' studiare l'algoritmica?#Esempio di problema|Esempio di problema]]
-- [[#Lezione 2 - 27/09|Lezione 2 - 27/09]]
-	- [[#Lezione 2 - 27/09#Analisi|Analisi]]
-		- [[#Analisi#Esempio moltiplicazione - 1|Esempio moltiplicazione - 1]]
-		- [[#Analisi#Esempio moltiplicazione - 2|Esempio moltiplicazione - 2]]
-		- [[#Analisi#Esempio moltiplicazione - 3|Esempio moltiplicazione - 3]]
-			- [[#Esempio moltiplicazione - 3#Dimostrazione per induzione su i|Dimostrazione per induzione su i]]
-- [[#Lezione 3 - 30/09|Lezione 3 - 30/09]]
-	- [[#Lezione 3 - 30/09#Esempio potenza - 1|Esempio potenza - 1]]
-	- [[#Lezione 3 - 30/09#Esempio potenza con equazione di ricorrenza - 2|Esempio potenza con equazione di ricorrenza - 2]]
-		- [[#Esempio potenza con equazione di ricorrenza - 2#Equazione di ricorrenza|Equazione di ricorrenza]]
-- [[#Lezione 4 - 02/10|Lezione 4 - 02/10]]
-	- [[#Lezione 4 - 02/10#Modello di calcolo astratto|Modello di calcolo astratto]]
-- [[#Lezione 5 - 04/10|Lezione 5 - 04/10]]
-- [[#Lezione 6 - Algoritmi di ricerca - 07/10|Lezione 6 - Algoritmi di ricerca - 07/10]]
-	- [[#Lezione 6 - Algoritmi di ricerca - 07/10#Ricerca sequenziale|Ricerca sequenziale]]
-	- [[#Lezione 6 - Algoritmi di ricerca - 07/10#Ricerca binaria o dicotomica|Ricerca binaria o dicotomica]]
-		- [[#Ricerca binaria o dicotomica#Versione ricorsiva|Versione ricorsiva]]
-		- [[#Ricerca binaria o dicotomica#Versione iterativa|Versione iterativa]]
-
 
 ## Refresher sui logaritmi
 TODO
@@ -891,3 +866,80 @@ C(n) <= C(N) = Nlog_2N - N + 1 < 2n(log_22n) -n + 1
 = 2n(1+log_2n) - n + 1 = $n+2nlog_2n+1$
 
 = $\theta(nlogn)$ anche in generale
+
+
+## Lezione 9
+
+
+## Lezione 10 - Divide et impera, moltiplicazione matrici 16/10
+
+INTEGRARE CON SLIDE
+
+Prodotto tra due matrici M x N
+
+Se N = 1 e' facile: C = (a_{11} * b_{11})
+Se n > 1 l'idea e' dividere le matrici in quarti e alla fine rimetto tutto assieme
+
+Controllo se ho guadagnato qualcosa con questo approccio:
+
+T(n) = operazioni effettuate su matrici n x n
+
+Equazione di ricorrenza
+
+T(n) = 1 se n = 1
+T(n) = 8T(n/2) + n^2 altrimenti
+
+Spiegazione
+
+Devo fare 8 prodotti di matrici n/2 * n/2
+8T(n/2)
+e 4 somme di matrici
+4(n/2)^2 = n^2
+
+T(n) = theta(n^3)
+
+Vedi algoritmo di Strassen
+
+<aside>teorema fondamentale / master theorem</aside>
+
+Da una idea dell'ordine di grandezza per un algoritmo ricorsivo
+
+Equazioni di ricorrenza VEDI SLIDE su teorema fondamentale
+Vedi anche esempi sulla slide
+
+<aside>QuickSort</aside>
+
+https://tobinatore.github.io/algovis/quicksort.html
+
+QuickSort
+
+Idea e' partizionare l'array rispetto ad un pivot, ordino ricorsivamente quelli piu' piccoli e ricorsivamente quelli piu' grandi.
+
+```java linenos:1
+ALGORITMO quickSort(Array A) 
+    IF lunghezza A > 1 THEN
+        scegli un elemento x di A
+        B <- { y appartiene A | y < x }
+        C <- { y appartiene A | y > x }
+        quickSort(B)
+        quickSort(C)
+        a <- concatenazione di B, x, C
+```
+
+Non vogliamo fare copie dell'array, quindi scriviamo un algoritmo che partizioni un array usando i puntatori.
+Dopo la partizione il perno raggiunge la sua posizione definitiva.
+
+```java linenos:1
+ALGORITMO partiziona(Array A, indice i, indice f) -> indice
+    perno <- A[i]
+    dx <- f
+    sx <-i
+    WHILE sx < dx DO
+        DO dx <- dx - 1 WHILE A[dx] > perno
+        DO sx <- sx + 1 WHILE sx < dx AND A[sx] <= perno
+        IF sx < dx THEN 
+            scambio A[sx] con A[dx]
+    scambia A[i] con A[dx]
+    RETURN dx
+
+```

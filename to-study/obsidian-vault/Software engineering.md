@@ -6,21 +6,11 @@ tags:
   - italian
 ---
 
-- [[#Refresh di Programmazione II|Refresh di Programmazione II]]
-- [[#Domande orale|Domande orale]]
-- [[#Lezione 1 - 25/09|Lezione 1 - 25/09]]
-	- [[#Lezione 1 - 25/09#Logistica|Logistica]]
-	- [[#Lezione 1 - 25/09#Problemi|Problemi]]
-	- [[#Lezione 1 - 25/09#Qualita'|Qualita']]
-		- [[#Qualita'#Funzionare|Funzionare]]
-			- [[#Funzionare#Correttezza|Correttezza]]
-			- [[#Funzionare#Affidabilita'|Affidabilita']]
-			- [[#Funzionare#Innocuita' / robustezza|Innocuita' / robustezza]]
-		- [[#Qualita'#Bello|Bello]]
-		- [[#Qualita'#Farmi ricco|Farmi ricco]]
-	- [[#Lezione 1 - 25/09#Processo|Processo]]
+> [!warning] 
+> Questo documento e' incompleto, alcuni concetti che gia' conosco sono stati saltati
 
 
+FLASHCARDS
 
 SISTEMARE DOPO LAB
 
@@ -33,18 +23,48 @@ SISTEMARE DOPO LAB
 // privilegiare assert, il compilatore le leva direttamente in prod  
 // flag EA del compiler
 
+
+non si fa in nessun caso commit diretto su develop.
+
+Si apre sempre una nuova feature.
+
+Nel caso 2 e 3 si parte con un test (anche nel due: infatti se hai trovato un bug...scrivi per prima cosa un test che lo verifica, commit del rosso e solo dopo applichi il fix)
+
+Nel caso 1... se il refactoring si tradurrà in un unico commit... gitflow di default applicherà fast forward (sempre che nessuno nel frattempo non abbia integrato qualcosa di nuovo...). Quindi magari sembrerà che sia un commit diretto su develop, ma appunto sarà un caso speciale (singolo commit e no overlapping con altri developer)
+
+
+
 https://www.memory.com/courses/dashboard/ingegneria-del-software-it-it--ao8b_1695973981615185115_73/Italian/Italian
 
 # Refresh di Programmazione II
 
+## Nested classes
+
+Sono di 4 tipi
+
+### Static member classes
+
+Se una istanza di questa classe puo' esistere indipendentemente da una istanza della classe contenitrice.
+Se non si richiede accesso all'istanza della classe contenitrice allora sempre mettere `static`
+
+### Nonstatic member classes
+
+Ogni istanza di questa classe e' associata ad una istanza della classe contenitrice
+
+### Anonymous classes
+
+### Local classes
+
+
+---
+
+Cio' che segue e' ancora tutto da sistemare
+
 https://prog2unimi-temi-svolti.netlify.app/
 
-********************
+---
 
-Orali 26/01
-
-
-
+https://martinfowler.com/bliki/TellDontAsk.html
 
 Review del codice
 “Controllato in costruzione” non “preservato in costruzione”
@@ -55,9 +75,6 @@ Coerenza documentazione - codice
 Ritiene appropriato lanciare una eccezione se non trova un elemento in una lista?
 List.copyOf cosa ritorna?
 Cosa sono le eccezioni cosa servono quando e’ opportuno sollevare checked e unchecked?
-
-
-
 
 Review del codice
         Catch di Exception “e’ bruttarello”
@@ -125,7 +142,6 @@ capitoli 13 - 14 - 15 da leggere e basta
 
 Equals e ereditarieta' che lo rompe
 
-
 Differenza tra avere assert in dev e non averla in prod
 Discorso dell'assunzione
 
@@ -158,70 +174,89 @@ https://prog2-unimi.github.io/notes/CED.html
     
 - alcuni **criteri di valutazione della qualità** del progetto di codice _object oriented_ (come l'_incapsulamento_, il _data hiding_, la _manutenibilità_, il _riuso_ e l'_estendibilità_),
 
-
 - per quanto concerne il libro di testo [Effective Java](http://www.informit.com/store/effective-java-9780134685991) i capitoli 2, 3, 4, 5 (eccetto gli _item_ 32 e 33), 8 (eccetto gli _item_ 53 e 55), 9 (eccetto l'_item_ 66), 10;
 
-# Domande orale
+# Esame
 
-- due principi solid (approfondimento poi sui due principi)
-- stime di tempi nell'ambito di un progetto
-- quando un criterio di selezione è valido e quando è affidabile 
-- relazioni di conflitto tra transizioni
+## Commenti su esami ed errori comuni
 
-primo
-- liskov substitution principle
-- interface segregation
+https://www.youtube.com/watch?v=7vb089FkfiI
+
+
+Stazione dei treni
+https://www.youtube.com/watch?v=Oq1EnhTgTyQ
+https://www.youtube.com/watch?v=AswqBpGB6BE
+
+Sapore di sale
+https://www.youtube.com/watch?v=39hEK_YDOvw
+
+Principi SOLID 
+Single Responsibility 
+Open-Closed 
+Liskov Substitution Interface 
+Segregation 
+Dependency Inversion 
+Testing Unità 
+* copertura di comandi e decisioni/condizioni 
+* isolamento e mocking 
+Processo TDD 
+* gitflow e feature 
+* refactoring 
+Patterns 
+* MVP 
+* Template e/o Strategy 
+* Singleton 
+* Builder 
+* Chain of Responsibility 
+* Adapter 
+appropriate data structures 
+nullability 
+encapsulation 
+no escaping reference 
+readability (clean code)
+
+
+### Domande orale
+
+* principi SOLID, con approfondimento su qualcuno di questi (+)
+* stime di tempi nell'ambito di un progetto, problemi e come risolverli (+)
+* interface segregation (+)
+* refactoring
+* modelli di sviluppo, a spirale; modello prototipale vs modello incrementale (+)
+* modelli di ciclo di vita del software
+* parlami positivamente del modello a cascata, come nasce il modello a cascata?
+* mocking, differenza tra stub e mock (+)
+* meta-pattern, pattern decorator, pattern composite, pattern strategy, chain of responsability (+++++)
+* cosa e' un test ideale? (+)
+* perche' TDD e' una buona tecnica? Tecnica di requisiti o tecnica di design o di progettazione? Cos'e'? (+)
+* mi parli di criterio di selezione. Che cos’è? Perché dobbiamo scegliere nei test un sottoinsieme del loro domino (cioè non seleziono tutti i test, ma solo alcuni)
+* differenza tra tecnica di design e tecnica di progettazione
+* due pratiche XP per convincere il manager (+)
+* da dove derivano, chi è che scrive le specifiche? Dopo averle raccolte cosa devi fare prima di implementarle?
+* differenza tra merge e pull request
+
+UNSORTED
+- quando un criterio di selezione è valido e quando è affidabile
+- relazioni di conflitto tra transizioni 
 - problemi nella stima dei tempi e come risolverli
 - parlami di analisi statica e analisi data flow
 - legame tra limitatezza e conservatività
-
-secondo
 - legame tra limitatezza e conservatività (continua...)
-- cosa è refactoring?
 - terminologia degli errori
-- modelli di sviluppo a spirale
-
-terzo
-- mocking e differenza tra stub e mock
-- modello prototipale vs modello incrementale
-- meta-pattern e pattern composite
 - albero di copertura vs abero di raggiungibilità
-
-quarto
-- cosa è un test ideale?
 - criteri di selezione: proprietà
 - tell dont ask
-- due pratiche xp per convincere il manager
 - differenza semantica debole e forte
-
-1 orale (28 -> bocciato):
-- pattern decorator
-- pattern composite
-
-2 orale (24 -> 23):
-- la parte di processi. Cos’è il tdd e perché è una buona tecnica
-  - tecnica di requisiti o tecnica di design o di progettazione
-  - cosa vuol dire che ho fatto uno sviluppo tdd e poi mi trovo una copertura al 70% del codice
 - differenza tra verifica e convalida
-- pattern strategy
-  - Quale anti-pattern cerca di risolvere?
-  - Quali sono i 5 principi solidi?
-  - perché l’open closed principal è legato a questo pattern
+- Che cos’è la nullability? Perché è importante? Qual è la caratteristica del valore null che “da fastidio”?
 - disegnato una rete di petri, fare l’albero di copertura
   - scrivere formalmente la regola di abilitazione
-
-3 orale (28 -> bocciato):
-- pattern decorator:
-  - domande sulle frecce ecc.
-  - quale problema risolve?
-
-4 orale (bocciato):
-- scegli due pratiche xp per convinvermi che è una buona cosa:
-- cosa si intende per test ideale e perché ne abbiamo parlato?
-  - quali caratteristiche?
 - diagrammi di sequenza
+- Terminologia di base di verifica e convalida. Sbaglio, errore, difetto, anomalia…, esempio in cui si presenta anomalia ma non (difetto o errore (?))
+- Prova a scrivermi la relazione di conflitto, relazione di concorrenza (fai esempi e scrivi in maniera formale) evidenzia strutturale/effettivo
+- Inserisco un valore che sfora, dove limito questo inserimento (model o presenter?Andava messo nel model)
+- Esempio di rete limitata.
 
-Primo orale: 1. Che cos’è la nullability? Perché è importante? Qual è la caratteristica del valore null che “da fastidio”? 2. Processi, parlami positivamente del modello a cascata. Modelli di ciclo del software (descrittivo). Come nasce il modello a cascata? 3. Terminologia di base di verifica e convalida. Sbaglio, errore, difetto, anomalia…, esempio in cui si presenta anomalia ma non (difetto o errore (?)) 4. Prova a scrivermi la relazione di conflitto, relazione di concorrenza (fai esempi e scrivi in maniera formale) evidenzia strutturale/effettivo Secondo orale: 1. Inserisco un valore che sfora, dove limito questo inserimento (model o presenter?Andava messo nel model) 2. Mi parli di criterio di selezione. Che cos’è? Perché dobbiamo scegliere nei test un sottoinsieme del loro domino (cioè non seleziono tutti i test, ma solo alcuni)? Divagato su definizione di criterio valido. La parola criterio l’abbiamo usata in altri contesti, quali? Criteri di copertura dei comandi/decisioni ecc. dimmi qualcosa su uno di questi. Esempio dove “un criterio è soddisfatto e l’altro no” 3. Da dove derivano, chi è che le scrive le specifiche? Dopo averle raccolte cosa devi fare prima di implementarle? Terzo orale: 1. Pattern, chain of responsability, interface segregation 2. Modelli iterativi e modelli sequenziali, prototipale (?) 3. boh... di una transizione. È una caratteristica strutturale? 4. Che è il TDD, come funziona? È una tecnica di specifica? Quarto orale: 1. Esempio di rete limitata. 2. Differenza tra merge e pull request. 3. Testing funzionale Quinto orale: 1. Cosa sono gli STUB? Quando devo “mockkare”? Perché non voglio usare le altre classi già presenti? Quando invece NON POSSO usare le altre classi? Problemi uso mock (ad esempio di performance, perché non simula reale tempo di risposta). Dumming/stubbing. Che funzioni usi per fare stubbing con mockito? 2. Albero di raggiungibilità vs albero di copertura. Cosa rappresenta Ω? Vari esempi 3. Onesto non ho capito, un esempio su relazioni aziendali (?)
 
 # Lezione 1 - 25/09
 
@@ -256,7 +291,7 @@ Next step, definisco un tool che controlli il rispetto di queste metriche.
 
 Un buon processo puo' produrre un prodotto di qualita'.
 
-[CMMI](https://en.wikipedia.org/wiki/Capability_Maturity_Model_Integration)
+[CMMI](https://en.wikipedia.org/wiki/Capability_Maturity_Model_Integration) - standardizzazione del livello di qualita' di una ditta
 Programma a livelli per stabilire il grado di maturita' di un gruppo di lavoro.
 0 - dipendenza dall'eroe, come se avessi Achille come programmatore, ma cosa succede se sparisce? Dipendo da lui?
 1 - ...
@@ -572,6 +607,10 @@ fine 1990
 
 eXtreme Programming
 
+<aside>mappa XP</aside>
+
+http://www.extremeprogramming.org/map/project.html
+
 Nascono dal basso, dagli sviluppatori, non da teorici.
 Design emergente. Quindi una critica che si muove a XP e' che non c'e' un design up-front.
 
@@ -693,9 +732,16 @@ Sviluppatori:
 Manager:
 * prende le carte e puo' decidere quali schede verranno implementate nella prossima iterazione
 
+Far parlare tutti prima di iniziare la procedura, anche solo per dire il proprio nome, sblocca quelle persone in modo tale che poi avranno meno problemi a parlare.
+
 #### Stime
 
+<aside>Stime</aside>
+
+"Non e' un consuntivo, e' una stima"
 "Quante cose riusciamo a mettere dentro l'iterazione?"
+
+L'incertezza c'e' sulla prima stima, poi la metodologia "ingrana".
 
 La stima non è personale, ma del team. Questo perché chiunque può trovarsi a farla.
 Come faccio a mettere assieme stime molto differenti quindi? Perché è difficile per chi ha stimato più alto scendere ad esempio.
@@ -708,6 +754,10 @@ Non si possono fare stime per cui ognuno dice la sua, perche' altrimenti il prim
 Non si parla di ore / uomo se non esattamente alla fine per evitare 
 * stime che si discostano dalla realta' (7 ore)
 * per incasellare le stime possibili in range (ad esempio secondo planning poker usando i numeri di [Fibonacci arrotondati (vedi Equipment sul perche' arrotondati)](https://en.wikipedia.org/wiki/Planning_poker))
+
+<aside>The Mythical Man Month</aside>
+
+[The Mythical Man-Month](The%20Mythical%20Man-Month.md)
 
 ##### Planning poker
 
@@ -796,6 +846,8 @@ Graduale ma
 
 ### Pair programming
 
+"Durante pair programming siamo una singola entita' e come tale abbiamo problemi condivisi, idee, etc"
+
 Il manager dice "pago due persone perche' solo uno lavori".
 
 Invece:
@@ -835,3 +887,231 @@ Aiuta
 * refactoring
 * pair programming
 * proprieta' collettiva
+
+# Lezione 5 - 09/10
+
+## Fasi
+
+### Requirements
+
+Dal momento che il cliente fa parte del team di sviluppo (lavora assieme) puo' spiegare le storie che ha scritto direttamente ai programmatori.
+
+Consegne incrementali e pianificazioni continue.
+
+### Design
+
+ESPANDERE
+Una metafora come visione unificante del progetto
+
+Refactoring.
+Presumere la semplicita', contrapposta a "design for change".
+ESPANDERE QUESTA ULTIMA COSA
+
+### Code
+
+Programmare a coppie modifica completamente l'approccio al codice.
+Proprieta' collettiva "non ho codice su cui non posso lavorare".
+Integrazioni continue.
+
+### Test
+
+Testing di unita' continuo, da scrivere prima del codice.
+Test funzionale scritto dagli utenti.
+
+## Documentazione
+
+Use stories
+ESPANDERE CON LA DIFFERENZA CON USE CASES DI UML
+
+Codice e test sono la documentazione.
+"Test e' la traduzione in linguaggio formale delle use stories e di cio' che ci siamo detti verbalmente".
+
+Ha un valore documentale molto piu' forte della documentazione scritta.
+
+Le persone sono la documentazione.
+
+## Quando non si puo' usare XP?
+
+Ambienti che
+* non permettono di testare e avere un feedback immediato (es: codice che gira in un acceleratore di particelle del CERN)
+* non permettono di avere uno sviluppo incrementale (es: centrale nucleare)
+* frappongono barriere di tipo manageriale o burocratico (es: team troppo grossi non suddivisibili)
+* frappongono barriere di tipo fisico (es: elementi del team divisi)
+
+## Critiche
+
+ESPANDERE
+Sottovalutazione dell'up-front
+Sopravvalutazione delle user stories
+Mancata evidenziazione dipendenze tra user stories
+TDD puo' portare a visione troppo ristretta
+In team con competenze diverse puo' esserci un problema
+
+ESPANDERE CON ![](Pasted%20image%2020241012211104.png)
+
+## Open source process
+
+ESPANDERE
+
+### The Cathedral and the Bazaar
+
+<aside>the cathedral and the bazaar</aside>
+
+http://www.catb.org/~esr/writings/cathedral-bazaar/ ([Audiobook](https://www.youtube.com/watch?v=qpyewW09HXo))
+
+"Ogni buon lavoro software inizia dalla frenesia personale di uno sviluppatore"
+
+Sono entrambi due esempi positivi
+
+Cattedrale: ideata da uno o da pochi eletti, ben strutturata
+Bazaar: funzionale e pratico, ma e' un po' un casino, chiunque puo' dire la sua e contribuire
+
+La bonta' del codice non e' una caratteristica essenziale, se ci sono problemi, se non e' perfetto crea comunicazione e una voglia di guardarci dentro per sistemare.
+
+19 Lessons:
+1. Every good work of software starts by scratching a developer's personal itch.
+2. Good programmers know what to write. Great ones know what to rewrite (and reuse).
+3. Plan to throw one [version] away; you will, anyhow (copied from Frederick Brooks's _[The Mythical Man-Month](https://en.wikipedia.org/wiki/The_Mythical_Man-Month "The Mythical Man-Month")_).
+4. If you have the right attitude, interesting problems will find you.
+5. When you lose interest in a program, your last duty to it is to hand it off to a competent successor.
+6. Treating your users as co-developers is your least-hassle route to rapid code improvement and effective debugging.
+7. [Release early. Release often.](https://en.wikipedia.org/wiki/Release_early,_release_often "Release early, release often") And listen to your customers.
+8. Given a large enough beta-tester and co-developer base, almost every problem will be characterized quickly and the fix obvious to someone.
+9. Smart data structures and dumb code works a lot better than the other way around.
+10. If you treat your beta-testers as if they're your most valuable resource, they will respond by becoming your most valuable resource.
+11. The next best thing to having good ideas is recognizing good ideas from your users. Sometimes the latter is better.
+12. Often, the most striking and innovative solutions come from realizing that your concept of the problem was wrong.
+13. Perfection (in design) is achieved not when there is nothing more to add, but rather when there is nothing more to take away. (Attributed to [Antoine de Saint-Exupéry](https://en.wikipedia.org/wiki/Antoine_de_Saint-Exup%C3%A9ry "Antoine de Saint-Exupéry"))
+14. Any tool should be useful in the expected way, but a truly great tool lends itself to uses you never expected.
+15. When writing gateway software of any kind, take pains to disturb the data stream as little as possible—and never throw away information unless the recipient forces you to!
+16. When your language is nowhere near [Turing-complete](https://en.wikipedia.org/wiki/Turing_completeness "Turing completeness"), [syntactic sugar](https://en.wikipedia.org/wiki/Syntactic_sugar "Syntactic sugar") can be your friend.
+17. A security system is only as secure as its secret. Beware of pseudo-secrets.
+18. To solve an interesting problem, start by finding a problem that is interesting to you.
+19. Provided the development coordinator has a communications medium at least as good as the Internet, and knows how to lead without coercion, many heads are inevitably better than one.
+
+### [Care and Feeding of FOSS](https://web.archive.org/web/20081015010505/http://www.moonviewscientific.com/essays/software_lifecycle.htm)
+
+TODO
+
+### [The Emerging Economic Paradigm of Open Source](http://web.archive.org/web/20120724095330/http://perens.com/works/articles/Economic.html)
+
+TODO
+
+"Perche' una azienda dovrebbe pagare i propri dipendenti per sviluppare open source?"
+
+
+### An empirical study of open-source and closed-source software products by J.W. Paulson et al.
+
+https://ieeexplore.ieee.org/abstract/document/1274044
+
+# Lezione 6 - Git - 14/10
+
+Integra dal libro di Git
+
+INSERISCI DA TABLET
+
+# Lezione 7 - Git segue - 16/10
+
+git merge
+git reset
+git amend
+
+## git flow (AVH)
+
+ESPANDERE GIT FLOW
+
+<aside>git flow</aside>
+
+main / master - cio' che viene consegnato al cliente
+develop - dove si mettono le modifiche in comune con gli altri sviluppatori, da dove parto con lo sviluppo di una feature
+
+`git flow feature start $featname`:
+* `git checkout develop`
+* `git branch $featname`
+* `git checkout $featname`
+
+Feature parte dell'ultima situazione stabile sul develop.
+
+`git flow feature finish $featname`:
+* `git checkout develop`
+* `git merge --no-ff $featname` (--no-ff vuol dire forzare a fare un commit)
+* `git branch -d $featname`
+Il motivo per cui si usa `--no-ff` e' che nel branch di develop non ho i "rossi" che invece avvengono dentro la branch di feature.
+
+`git flow release start ver`
+Congelo le feature che dovranno esserci nella prossima release.
+* `git checkout -b ver develop`
+
+`git flow release finish ver`
+* git checkout master
+* git merge --no-ff release-ver
+* git tag -a ver
+* git checkout develop
+* git merge --no-ff release-ver
+* git branch -d release-ver
+Non si puo' aprire una release se ce ne e' gia' una precedente aperta.
+
+Riparazione veloce di difetti urgenti senza aspettare la prossima release
+`git flow hotfix start ver`
+* `git checkout -b ver master`
+
+`git flow hotfix finish ver`
+* `git checkout master`
+* `git merge --no-ff ver`
+* `git checkout develop`
+* `git merge --no-ff ver`
+* `git branch -d ver`
+
+## Mancanze di Git
+
+No livelli di autorizzazione (i commit possono essere firmati)
+Soluzione: fork.
+
+No livelli di review, c'e' `git request-pull <start> <url> [<end>]` per preparare cio'che poi mandero' perche' ne venga fatta review.
+
+I grandi progetti non sono clonati lato Github, ma esistono una volta e poi sono linkati quando clonati.
+
+Aggiungere Gerrit
+
+## Build automation
+
+Come mi proteggo da checkin di una versione non funzionante?
+Automatizzo:
+* compilazione
+* testing
+
+"Da cosa dipende il fatto che io possa eseguire il mio programma?"
+
+
+# Lezione 8 - Progettazione - 16/10
+
+<aside>visibilita' nei test</aside>
+
+Avere una struttura di questo tipo
+
+```
+└── src
+    ├── main
+    │   └── java
+    │       └── it
+    │           └── unimi
+    │               └── di
+    │                   └── sweng
+    │                       ├── DoublyLinkedList.java
+    │                       └── Node.java
+    └── test
+        └── java
+            └── it
+                └── unimi
+                    └── di
+                        └── sweng
+                            └── DoublyLinkedListTest.java
+```
+
+consente di sfruttare la visibilita' a livello di package dei componenti delle classi, per averli disponibili nel test.
+
+INSERIRE delle note tra i processi per "Unified process"
+https://youtu.be/jNqgozh_7x8?t=1999 (un po' prima di questo minuto)
+
+Spostare queste due parti altrove e partire da 0 qua con la PROGETTAZIONE
+

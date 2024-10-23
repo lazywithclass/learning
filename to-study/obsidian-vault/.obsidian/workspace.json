@@ -20,18 +20,6 @@
             }
           },
           {
-            "id": "e1a56ae3770e6bce",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Latex.md",
-                "mode": "preview",
-                "source": true
-              }
-            }
-          },
-          {
             "id": "988b6f2f1714ab0c",
             "type": "leaf",
             "state": {
@@ -56,12 +44,24 @@
             }
           },
           {
-            "id": "ded8509cc3a31a17",
+            "id": "798f5d0622a057fc",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
                 "file": "Software engineering.md",
+                "mode": "source",
+                "source": true
+              }
+            }
+          },
+          {
+            "id": "5657488ce8188420",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Git flow.md",
                 "mode": "source",
                 "source": true
               }
@@ -90,21 +90,9 @@
                 "source": true
               }
             }
-          },
-          {
-            "id": "f2634f4c8f242a8e",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Minerva.md",
-                "mode": "preview",
-                "source": true
-              }
-            }
           }
         ],
-        "currentTab": 2
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -133,7 +121,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Algoritmi e strutture dati.md"
+                "file": "Software engineering.md"
               }
             }
           },
@@ -177,7 +165,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Algoritmi e strutture dati.md",
+                "file": "Software engineering.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -189,7 +177,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Algoritmi e strutture dati.md",
+                "file": "Software engineering.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -200,11 +188,12 @@
               }
             }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "horizontal",
-    "width": 353.5
+    "width": 200
   },
   "right": {
     "id": "4ebf7b594d449203",
@@ -222,29 +211,41 @@
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
       "audio-recorder:Start/stop recording": false,
-      "daily-notes:Open today's daily note": false
+      "daily-notes:Open today's daily note": false,
+      "templater-obsidian:Templater": false,
+      "publish:Publish changes...": false
     }
   },
-  "active": "988b6f2f1714ab0c",
+  "active": "798f5d0622a057fc",
   "lastOpenFiles": [
-    "Latex.md",
-    "Algoritmi e strutture dati.md",
-    "Minerva.md",
-    "attachments/photo_2024-10-11_11-36-56.jpg",
-    "attachments/Pasted image 20241011113559.png",
-    "Algoritmi e strutture dati - lab.md",
-    "attachments/Pasted image 20240112223842.png",
-    "0 How to study.md",
+    "PostgreSQL.md",
     "Software engineering.md",
-    "TDD.md",
     "Erlang.md",
-    "attachments/tdd-titanic.png",
-    "attachments/relational-algebra-cartesian-product.png",
-    "attachments/single-cycle-cpu-schema.png",
-    "attachments/sign-extension.png",
-    "attachments/signals.png",
-    "attachments/shift.png",
-    "attachments/Pasted image 20240221165152.png",
+    "Minerva.md",
+    "TDD.md",
+    "Algoritmi e strutture dati - lab.md",
+    "Algoritmi e strutture dati.md",
+    "Git flow.md",
+    "attachments/no-ff.png",
+    "attachments/gitflow.png",
+    "books/The Mythical Man-Month.md",
+    "books",
+    "attachments/Pasted image 20241018140706.png",
+    "attachments/Pasted image 20241017104005.png",
+    "attachments/Pasted image 20241017103959.png",
+    "templates/header.md",
+    "templates/bold.md",
+    "Untitled 1.md",
+    "templates/test.md",
+    "templates",
+    "attachments/Pasted image 20241014182839.png",
+    "attachments/Pasted image 20241012211104.png",
+    "attachments/Pasted image 20240112223842.png",
+    "().md",
+    "attachments/Pasted image 20241012211101.png",
+    "attachments/Pasted image 20241012211037.png",
+    "Latex.md",
+    "0 How to study.md",
     "templates/Table of Content - All.md",
     "templates",
     "scripts/toc.js",
@@ -254,26 +255,16 @@
     "BNF.md",
     "Petri nets.md",
     "Databases.md",
-    "PostgreSQL.md",
     "Combinators.md",
     "Scala.md",
     "Relational algebra.md",
     "rsync.md",
-    "Abstraction.md",
-    "CPS - Continuation Passing Style.md",
-    "Operational semantics.md",
-    "videos/Happy path enemy.md",
-    "SOLID.md",
-    "Recursion.md",
-    "Computer architecture.md",
     "Untitled.canvas",
     "Untitled 2.canvas",
     "Untitled 1.canvas",
     "IDEAS",
     "attachments/latch-d.gif:Zone.Identifier",
     "attachments/latch-d.gif:shield",
-    "_images",
-    "attachments",
-    "not-sorted"
+    "_images"
   ]
 }

@@ -8,5 +8,7 @@
   "obsidian-contextual-typography",
   "hk-code-block",
   "obsidian-plugin-toc",
-  "floating-toc"
+  "floating-toc",
+  "templater-obsidian",
+  "obsidian-completr"
 ]
