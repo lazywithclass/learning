@@ -1,77 +1,153 @@
-## Single Responsibility Principle
- 
+---
+cssclasses:
+  - cornell-note
+tags:
+  - sweng
+  - solid
+  - italian
+---
 
-The S of SOLID.
+TODO!!!!!!!!!!!!!!!!
+FINISH extracting
+https://condor.depaul.edu/dmumaugh/OOT/Design-Principles/
+https://ieeexplore.ieee.org/author/37291880700
+https://en.wikipedia.org/wiki/Robert_C._Martin
+https://web.archive.org/web/20150906155800/http://www.objectmentor.com/resources/articles/Principles_and_Patterns.pdf
+https://www.youtube.com/results?search_query=barbara+liskov
+https://www.youtube.com/watch?v=v-2yFMzxqwU
+https://duckduckgo.com/?q=Barbara+Liskov%2C+%E2%80%9CData+Abstraction+and+Hierarchy%2C%E2%80%9D+SIGPLAN+Notices%2C+23%2C5+(May%2C+1988).&atb=v340-1&ia=web
+https://se.inf.ethz.ch/~meyer/publications/old/dbc_chapter.pdf
+https://en.wikipedia.org/wiki/SOLID#cite_note-11
+https://vimeo.com/97514630
+https://www.youtube.com/watch?v=TMuno5RZNeE
+https://www.youtube.com/watch?v=BSaAMQVq01E
 
-  
+http://butunclebob.com/ArticleS.UncleBob.PrinciplesOfOod
+
+> When considering whether a particular design is appropriate or not, one must not simply view the solution in isolation. One must view it in terms of the reasonable assumptions that will be made by the users of that design.
+
+-- [Validity is not Intrinsic](cpp-report_engineering-notebook_liskov-substitution-principle.pdf)
+
+# Single responsibility principle
+
+[single-responsibility-principle](single-responsibility-principle.pdf)
+
+> A class should have one, and only one, reason to change
+
+> Why was it important to separate these two responsibilities into separate classes? Because each responsibility is an axis of change. 
+  When the requirements change, that change will be manifest through a change in responsibility amongst the classes. If a class assumes more than one responsibility, then there will be more than one reason for it to change. If a class has more then one responsibility, then the responsibilities become coupled. Changes to one responsibility may impair or inhibit the class’ ability to meet the others. This kind of coupling leads to fragile designs that break in unexpected ways when changed.
 
 "Each software module should have one and only one reason to change", but then "What defines a reason to change?".
 
-  
-
 "This principle is about people."
 
-  
-
-[...]
-
-  
-
-This is the reason we do not put SQL in JSPs. This is the reason we do not generate HTML in the modules that compute results. This is the reason that business rules should not know the database schema. This is the reason we separate concerns."
-
-  
+This is the reason we do not put SQL in JSPs. This is the reason we do not generate HTML in the modules that compute results. This is the reason that business rules should not know the database schema. This is the reason we separate concerns.
 
 "Gather together the things that change for the same reasons. Separate those things that change for different reasons."
 
-  
+* the secret which I am guaranteeing for, and for which I manage evolution over time; or
+* the single reason why I should change
 
 ["A good system should be high on cohesion and low on coupling"](https://www.enjoyalgorithms.com/blog/single-responsibility-principle-in-oops)
 
-  
+![img|300](https://cdn-images-1.medium.com/max/640/0*11cZSBOkR82nknwy.png)
 
-![img](https://cdn-images-1.medium.com/max/640/0*11cZSBOkR82nknwy.png)
+# Open-Closed principle
 
-  
+[Engineering Notebook columns for The C++ Report - The Open-Closed Principle](cpp-report_engineering-notebook_open-closed-principle.pdf)
 
-### In web development
+> The foundation for building code that is maintanable and resusable
 
-  
+-- [see introduction](cpp-report_engineering-notebook_liskov-substitution-principle.pdf)
 
-We have multi-tier architectures that allow different people to work on different parts of the application: frontend, backend, and database for example. A bug fix
+> You should be able to extend a classes behavior, without modifying it
 
-in the backend code should not affect the other two parts.
+* the behaviour of the module could be extended
+* the source code of such mode is inviolate 
 
-  
-  
+> When the creation of a derived class causes us to make changes to the base class, it often implies that the design is fault, indeed it violates the Open-Closed principle
 
-### KWIC index exercise
+Permette di chiamare codice non ancora scritto 
+VEDI NOTE DI JESSICA 
 
-  
+# Liskov substitution principle
 
-In [the whitepaper mentioned in Uncle Bob's article](https://dl.acm.org/doi/pdf/10.1145/361598.361623) the author studies the problem using this production system.
+> methods that use references to base classes must be able to use objects of derived classes without knowing it
 
-  
+Voglio evitare che chi cita una classe e vede una possibilita' (metodo), si ritrovi con una classe figlia che questa possibilita' non ce l'ha.
 
-"The KWIC index system accepts an ordered set of lines, each line is an ordered set of words,
+If a function violates LSP then that function uses a reference to a base class, but must know about all the derivatives of that base class.
 
-and each word is an ordered set of characters. Any line may be "circularly shifted" by repeatedly removing the
+# Open-Closed Principle and Liskov Substitution Principle
 
-first word and appending it at the end of the line. The KWIC index system outputs a listing of all circular shifts
+<aside>OOD is-a relationship pertains to behavior</aside>
 
-of all lines in alphabetical order."
+> In order for the LSP to hold, and with it the Open-Closed principle, all derivatives must conform to the behavior that clients expect of the base classes that they use.
 
-  
+Siamo interessati al comportamento dei moduli tra di loro, comportamento su cui gli utilizzatori dipendono.
 
-### A personal note
+# Design by Contract and Liskov Substituion Principle
 
-  
+In Design by Contract (Bertrand Meyer) methods declare preconditions and postconditions:
+* preconditions must be true before method invocation
+* postconditions are guaranteed by method invocation
 
-Feels to me that the S in SOLID is extremely more important than the other "letters", and way more difficult to explain and reason with. IMHO SOLID should be
+The rule for these conditions, for derivatives, is:
 
-more something like S-and-olid. Or something more clever than this silly name I've come up.
+> ...when redefining a routine in a derivative, you may only replace its precondition by a weaker one, and its postcondition by a stronger one.
 
+So:
+* when using an object through its base class $\rightarrow$ the client knows only the preconditions and postconditions of the base class $\rightarrow$ derived objects must not expect such clients to obey preconditions that are stronger that those required by the base class
+  <u>They must accept anything that the base class accepts</u>
+* derived classes must conform to all the postconditions of the base $\rightarrow$ their behaviours and outputs must not violate any of the contraints established for the base class; users of the base class must not be confused by the output of the derived class
 
+# Interface segregation
 
-## Dependency inversion
+> Make fine grained interfaces that are client specific
+
+"Offer different views of the same type."
+
+> "Polimorfismo e' un modo per esprimere di fronte alla stessa interfaccia comportamenti diversi. Grazie al polimorfismo possiamo mostrare lo stesso cosa nascondendo diversi come."
+-- Jessica Vecchia
+
+Fa in modo che il client ottenga la dipendenza <span class="b">minima</span> dalla classe che vuole utilizzare, vuole utilizzare solo certi aspetti che la classe implementa, non tutti.
+
+Questo principio permette di raggiungere un grado basso di accoppiamento tra gli oggetti. 
+
+![](interface-segregation-example.png)
+
+# Dependency inversion
+
+> Depend on abstractions, not on concretions
+
+"Depend on stuff more concrete than me"
 
 This is pure gold: https://blog.cleancoder.com/uncle-bob/2016/01/04/ALittleArchitecture.html
+
+# Esempi
+
+## Dependency Inversion e Open Close
+
+> Identificare gli aspetti della applicazione che cambiano e separarli da cio' che rimane fisso
+
+In questo caso usiamo due volte lo [Strategy](Design%20Pattern.md#Strategy).
+
+![strategy|300](di-oc-example.png)
+
+Fin qua tutto ok.
+
+![strategy-problem|300](di-oc-problem.png)
+
+Il problema nasce quando si aggiunge `RubberDuck` e successivamente si aggiunge un metodo `fly()` a `Duck`: `RubberDuck` si ritrova a poter volare!
+
+Override non e' una soluzione perche' mi ritrovo a dover implementare uno "stub" dentro `RubberDuck`, sto violando [Liskov substitution principle](SOLID.md#Liskov%20substitution%20principle): ho una sottoclasse che non sa fare qualcosa che la superclasse sa fare.
+
+Definire diverse interfacce come `Quackable`, `Swimmable`, ..., con metodi di default e' meglio ma devo far implementare a `MallardDuck` e `RedheadDuck` le interfacce in base a cosa possono fare, ma mi porta a duplicazione.
+
+Delego!
+![pattern-strategy-ducks|500](di-oc-solution.png)
+`Duck` contiene (aggrega) al suo interno come si comporta rispetto al fare "quack".
+
+<aside>single responsibility</aside>
+
+Quindi non devo avere piu' ragioni per cambiare: "cambia modo di fare quack o di volare?" se sono nella classe sono due motivi diversi per cambiare la classe.

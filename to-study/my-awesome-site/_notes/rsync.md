@@ -1,0 +1,1 @@
+It syncs left to right, not both ways.

@@ -7,14 +7,6 @@
       "key": "R"
     }
   ],
-  "insert-template": [
-    {
-      "modifiers": [
-        "Mod"
-      ],
-      "key": "I"
-    }
-  ],
   "editor:toggle-italics": [],
   "editor:toggle-bold": [],
   "templater-obsidian:templates/bold.md": [
@@ -23,6 +15,14 @@
         "Mod"
       ],
       "key": "B"
+    }
+  ],
+  "templater-obsidian:insert-templater": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "I"
     }
   ]
 }

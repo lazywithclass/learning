@@ -9,30 +9,20 @@ tags:
 > [!warning] 
 > Questo documento e' incompleto, alcuni concetti che gia' conosco sono stati saltati
 
+Correzione 
+https://www.youtube.com/watch?v=7vb089FkfiI&sttick=0
+file:///C:/Users/monte/Downloads/Telegram%20Desktop/slides%20(2).pdf
+
+
+TODO 
+difference use story e user story
+
+Vedere assertj come usa la reflection e fai degli esempi
+
+Prendere dalle slide di lab i code smell
+
 
 FLASHCARDS
-
-SISTEMARE DOPO LAB
-
-// null? code smell  
-// nested classes  
-// metodi per esplicitare cosa stiamo facendo  
-// posso avere un nodo che non contiene un valore? meglio di no  
-// Objects.requireNonNull  
-  
-// privilegiare assert, il compilatore le leva direttamente in prod  
-// flag EA del compiler
-
-
-non si fa in nessun caso commit diretto su develop.
-
-Si apre sempre una nuova feature.
-
-Nel caso 2 e 3 si parte con un test (anche nel due: infatti se hai trovato un bug...scrivi per prima cosa un test che lo verifica, commit del rosso e solo dopo applichi il fix)
-
-Nel caso 1... se il refactoring si tradurrà in un unico commit... gitflow di default applicherà fast forward (sempre che nessuno nel frattempo non abbia integrato qualcosa di nuovo...). Quindi magari sembrerà che sia un commit diretto su develop, ma appunto sarà un caso speciale (singolo commit e no overlapping con altri developer)
-
-
 
 https://www.memory.com/courses/dashboard/ingegneria-del-software-it-it--ao8b_1695973981615185115_73/Italian/Italian
 
@@ -176,6 +166,54 @@ https://prog2-unimi.github.io/notes/CED.html
 
 - per quanto concerne il libro di testo [Effective Java](http://www.informit.com/store/effective-java-9780134685991) i capitoli 2, 3, 4, 5 (eccetto gli _item_ 32 e 33), 8 (eccetto gli _item_ 53 e 55), 9 (eccetto l'_item_ 66), 10;
 
+# Punti di attenzione dal lab
+
+## Approccio ai parziali ed in generale all'implementazione di un programma
+
+Planning: "cosa riesco a fare?", "era impossibile farlo in 4 ore" $\rightarrow$ non si e' capito cosa e' un modello incrementale
+"Cosa riesco a fare in 4 ore che da piu' valore al cliente?"
+
+## try with resources
+
+```java linenos:1
+// ci assicura che lo scanner venga chiuso
+try (Scanner sc = new Scanner(input)) {
+  // code
+}
+```
+
+## gitflow
+
+Utilizzare assolutamente la funzionalita' dentro l'IDE.
+
+## ParameterizedTest
+
+https://www.baeldung.com/parameterized-tests-junit-5#6-methods
+
+Un ottimo modo per evitare duplicazione all'interno dei test. Anche i test sono codice.
+
+## Code smells
+
+ISTEMARE DOPO LAB
+
+// null? code smell  
+// nested classes  
+// metodi per esplicitare cosa stiamo facendo  
+// posso avere un nodo che non contiene un valore? meglio di no  
+// Objects.requireNonNull  
+  
+// privilegiare assert, il compilatore le leva direttamente in prod  
+// flag EA del compiler
+
+
+non si fa in nessun caso commit diretto su develop.
+
+Si apre sempre una nuova feature.
+
+Nel caso 2 e 3 si parte con un test (anche nel due: infatti se hai trovato un bug...scrivi per prima cosa un test che lo verifica, commit del rosso e solo dopo applichi il fix)
+
+Nel caso 1... se il refactoring si tradurrà in un unico commit... gitflow di default applicherà fast forward (sempre che nessuno nel frattempo non abbia integrato qualcosa di nuovo...). Quindi magari sembrerà che sia un commit diretto su develop, ma appunto sarà un caso speciale (singolo commit e no overlapping con altri developer)
+
 # Esame
 
 ## Commenti su esami ed errori comuni
@@ -217,6 +255,8 @@ readability (clean code)
 
 
 ### Domande orale
+
+Nullability e mocking vengono chiesti molto spesso, sia allo scritto che all'orale.
 
 * principi SOLID, con approfondimento su qualcuno di questi (+)
 * stime di tempi nell'ambito di un progetto, problemi e come risolverli (+)
@@ -846,6 +886,9 @@ Graduale ma
 
 ### Pair programming
 
+> Given enough eyeballs, all bugs are shallow
+-- Eric S. Raymond
+
 "Durante pair programming siamo una singola entita' e come tale abbiamo problemi condivisi, idee, etc"
 
 Il manager dice "pago due persone perche' solo uno lavori".
@@ -1115,3 +1158,206 @@ https://youtu.be/jNqgozh_7x8?t=1999 (un po' prima di questo minuto)
 
 Spostare queste due parti altrove e partire da 0 qua con la PROGETTAZIONE
 
+Come si condivide l'informazione?
+
+Metodi (TDD)
+Design pattern
+Principi - giudicare e capire se e' necessario modificare qualcosa
+
+Un linguaggio per potersi definire ad oggetti deve avere:
+* ereditarieta'
+* polimorfismo
+* collegamento dinamico
+
+## Encapsulation and information hiding
+
+[Encapsulation and information hiding](Encapsulation%20and%20information%20hiding.md)
+
+# Lezione 9 - Pattern - 23/10/2024
+
+## Collegamento dinamico / statico
+
+Statico: il compilatore guarda il tipo dell'oggetto e chiama il metodo corretto
+Dinamico: a runtime c'e' un collegamento all'implementazione concreta
+
+ESPANDERE
+
+## UML
+
+![](uml.png)
+
+
+`T` nel rettangolo tratteggiato rappresenta un type parameter.
+static: sottolineato
+abstract: corsivo
+
+## Pattern
+
+Situazioni ricorrenti di cui do una soluzione architetturale.
+
+Meta pattern hanno due elementi di base:
+* HookMethod, metodo astratto che determinato il comportamento specifico nelle sottoclassi: "dimmi tu come e' fatto nel tuo caso questo metodo"
+* TemplateMethod: invariabile del pattern, coordina piu' hookmethod
+
+Come si classificano i pattern in base alla relazione tra hook e template: unification, connection, recursive connection
+![](metapattern.png)
+
+Categorie di pattern in base all'output
+* creazionali
+* comportamentali
+* strutturali
+
+### Singleton
+
+<aside>singleton</aside>
+
+Voglio ottenere un oggetto e non una classe.
+Voglio rendere la classe responsabile del fatto che non puo' esistere piu' di una istanza.
+
+![](singleton-pattern.png)
+
+Costruttore protected per dare l'opportunita' a chi sub-classa di creare una istanza.
+
+In realta' questa e' l'implementazione migliore:
+
+```java linenos:1
+public enum MySingleton {
+    INSTANCE;
+    public void sampleOp() {...}
+}
+
+MySingleton.INSTANCE.sampleOp();
+```
+
+ESPANDI CON EFFECTIVE JAVA
+
+### Iteratore
+
+<aside>iterator</aside>
+
+![](iterator-pattern.png)
+
+Fornisce un modo di accedere agli elementi di un oggetto aggregatore in maniera sequenziale senza esporre la rappresentazione interna
+
+ESPANDI JAva defaultr
+
+# Lezione 10 - 28/10/2024
+
+Nullability
+ * contract based 
+ * programmazione difensiva
+
+ESPANERE
+
+> Un codice non dovrebbe far uso di `null` nelle parti visibili, di interfaccia 
+
+Fail fast: `Objects.requireNonNull` esplicita che non accetto qualcosa come `null`, gestendolo sollevando una `NullPointerException`
+
+```java linenos:1
+public Card(Rank rank, Suit suit) {
+    this.rank = Object.requireNonNull(rank);
+    this.suit = Object.requireNonNull(suit);
+  }
+}
+```
+
+
+Il seguente codice e' completamente sbagliato, perche' viene comunque creato un oggetto con le variabili d'istanza a `null`
+
+```java linenos:1
+public Card(Rank rank, Suit suit) {
+  if (rank != null && suit != null) {
+    this.rank = rank;
+    this.suit = suit;
+  }
+}
+```
+
+Difensiva: gestione esplicita dei `null`, "sono capace di gestire `null`", programmazione difensiva
+
+```java linenos:1
+public Card(Rank rank, Suit suit) {
+  if (rank == null || suit == null) {
+    throw new IllegalArgumentException();
+  }
+  
+  this.rank = rank;
+  this.suit = suit;
+}
+```
+
+Mi assicuro che in sviluppo non mi arrivi un `null`, ma non e' compito mio:
+
+```java linenos:1
+public Card(Rank rank, Suit suit) {
+  assert rank != null && suit != null;
+  this.rank = rank;
+  this.suit = suit;
+}
+```
+
+Intellij puo' generare `if` in questo caso, inoltre lascia aperta la porta a tool che potrebbero fare analisi statica grazie alla mia dichiarazione di intento:
+
+```java linenos:1
+private final @NotNull Rank rank;
+private final @NotNull Suit suit;
+
+public Card(@NotNull Rank rank, @NotNull Suit suit) {
+  this.rank = rank;
+  this.suit = suit;
+}
+```
+
+`Optional`? Quasi, non e' molto differente da controllare se qualcosa e' `null`.
+
+## Pattern
+
+<aside>null object pattern</aside>
+
+### Null Object Pattern
+
+"Vogliamo creare un oggetto che corrisponda al concetti "nessun valore" o "valore neutro".
+
+ESPANDERE https://youtu.be/i5yG8Q6u8ic?t=1831
+
+
+# Lezione 11 - 01/11/2024
+
+# Lezione 12 - 04/11/2024
+
+# Lezione 13 - 06/11/2024
+
+# Lezione 14 - 11/11/2024
+
+`assert` vuol dire stabilire un contratto con il chiamante; per questo puo' sparire una volta in produzione.
+
+# Lezione 15 - 09/11/2024
+
+Stato concreto e astratto
+* concreto dipende dalla sua implementazione, ad esempio se ho due interi e' $2^_{32} * 2^{32}$
+* astratto e' un sottoinsieme (meglio se significativo) degli stati concreti
+
+Oggetti senza stato possono essere gli oggetti funzione.
+Oggetti con un solo stato sono gli oggetti immutabili.
+
+NB: una classe immutabile non ha un solo stato, sono le sue istanze che una volta create non possono piu' cambiarlo.
+
+## State diagram
+
+Un automa e' una n-upla <S, I, U; $\delta$, $\tau$, $s_0$>, dove
+* S insieme finito e non vuoto degli stati
+* I l'insieme finito dei possibili ingressi
+* U l'insieme finito delle possibili uscite
+* $\delta$ la funzione di transizione
+* $\tau$ la funzione di uscita
+* $S_0$ lo stato iniziale
+
+La funzione di transizione definisce i passaggi da uno stato all'altro $\delta: S \times I \rightarrow S$, puo' essere una funzione parziale, cioe' non essere definita per tutte le possibili coppie.
+
+Un automi a stati finiti non e' un buon metodo se abbiamo un alto numero di stati significativi.
+
+ESPANDERE
+
+Superstate
+
+TODO fare musica maestro kata!!!!!

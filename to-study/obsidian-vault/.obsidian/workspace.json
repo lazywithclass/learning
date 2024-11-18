@@ -16,35 +16,27 @@
                 "file": "0 How to study.md",
                 "mode": "preview",
                 "source": true
-              }
+              },
+              "icon": "lucide-file",
+              "title": "0 How to study"
             }
           },
           {
-            "id": "988b6f2f1714ab0c",
+            "id": "d79f4597c1241068",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Algoritmi e strutture dati.md",
+                "file": "Exception.md",
                 "mode": "source",
                 "source": true
-              }
+              },
+              "icon": "lucide-file",
+              "title": "Exception"
             }
           },
           {
-            "id": "cf2c1ab269bc8807",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Algoritmi e strutture dati - lab.md",
-                "mode": "source",
-                "source": true
-              }
-            }
-          },
-          {
-            "id": "798f5d0622a057fc",
+            "id": "fa21909d5b03545f",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -52,7 +44,93 @@
                 "file": "Software engineering.md",
                 "mode": "source",
                 "source": true
-              }
+              },
+              "icon": "lucide-file",
+              "title": "Software engineering"
+            }
+          },
+          {
+            "id": "9e20753de823bb45",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Design Pattern.md",
+                "mode": "source",
+                "source": true
+              },
+              "icon": "lucide-file",
+              "title": "Design Pattern"
+            }
+          },
+          {
+            "id": "48a06f77bd816561",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "SOLID.md",
+                "mode": "source",
+                "source": true
+              },
+              "icon": "lucide-file",
+              "title": "SOLID"
+            }
+          },
+          {
+            "id": "7ac22ad479765e03",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "TDD.md",
+                "mode": "source",
+                "source": true
+              },
+              "icon": "lucide-file",
+              "title": "TDD"
+            }
+          },
+          {
+            "id": "12186a43122d75b7",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Polimorphism.md",
+                "mode": "source",
+                "source": true
+              },
+              "icon": "lucide-file",
+              "title": "Polimorphism"
+            }
+          },
+          {
+            "id": "543f59a8888ec4e1",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Inheritance.md",
+                "mode": "preview",
+                "source": true
+              },
+              "icon": "lucide-file",
+              "title": "Inheritance"
+            }
+          },
+          {
+            "id": "95e151f82099bda6",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Encapsulation and information hiding.md",
+                "mode": "source",
+                "source": true
+              },
+              "icon": "lucide-file",
+              "title": "Encapsulation and information hiding"
             }
           },
           {
@@ -64,35 +142,13 @@
                 "file": "Git flow.md",
                 "mode": "source",
                 "source": true
-              }
-            }
-          },
-          {
-            "id": "ed045703b9f6c943",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "TDD.md",
-                "mode": "source",
-                "source": true
-              }
-            }
-          },
-          {
-            "id": "66943e34284f7ecc",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Erlang.md",
-                "mode": "source",
-                "source": true
-              }
+              },
+              "icon": "lucide-file",
+              "title": "Git flow"
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 5
       }
     ],
     "direction": "vertical"
@@ -112,7 +168,9 @@
               "type": "file-explorer",
               "state": {
                 "sortOrder": "alphabetical"
-              }
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
             }
           },
           {
@@ -121,8 +179,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Software engineering.md"
-              }
+                "file": "Design Pattern.md"
+              },
+              "icon": "lucide-list",
+              "title": "Outline of Design Pattern"
             }
           },
           {
@@ -137,7 +197,9 @@
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical"
-              }
+              },
+              "icon": "lucide-search",
+              "title": "Search"
             }
           },
           {
@@ -145,7 +207,9 @@
             "type": "leaf",
             "state": {
               "type": "bookmarks",
-              "state": {}
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
             }
           },
           {
@@ -156,7 +220,9 @@
               "state": {
                 "sortOrder": "frequency",
                 "useHierarchy": true
-              }
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
             }
           },
           {
@@ -165,10 +231,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Software engineering.md",
+                "file": "Design Pattern.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
-              }
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from Design Pattern"
             }
           },
           {
@@ -177,7 +245,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Software engineering.md",
+                "file": "Design Pattern.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -185,15 +253,16 @@
                 "searchQuery": "",
                 "backlinkCollapsed": false,
                 "unlinkedCollapsed": false
-              }
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for Design Pattern"
             }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 313.5
   },
   "right": {
     "id": "4ebf7b594d449203",
@@ -212,59 +281,59 @@
       "command-palette:Open command palette": false,
       "audio-recorder:Start/stop recording": false,
       "daily-notes:Open today's daily note": false,
-      "templater-obsidian:Templater": false,
-      "publish:Publish changes...": false
+      "templater-obsidian:Templater": false
     }
   },
-  "active": "798f5d0622a057fc",
+  "active": "7ac22ad479765e03",
   "lastOpenFiles": [
-    "PostgreSQL.md",
+    "Design Pattern.md",
     "Software engineering.md",
-    "Erlang.md",
-    "Minerva.md",
-    "TDD.md",
-    "Algoritmi e strutture dati - lab.md",
-    "Algoritmi e strutture dati.md",
+    "Untitled.md",
+    "attachments/state-pattern.png",
     "Git flow.md",
-    "attachments/no-ff.png",
-    "attachments/gitflow.png",
+    "SOLID.md",
+    "TDD.md",
+    "attachments/observer-pattern.png",
+    "attachments/observer-pattern-problem.png",
+    "attachments/Pasted image 20241110222356.png",
+    "attachments/observer-example.png",
+    "attachments/esempio-decorator.png",
+    "Inheritance.md",
+    "pdfs/cpp-report_engineering-notebook_liskov-substitution-principle.pdf",
+    "Polimorphism.md",
+    "pdfs/cpp-report_engineering-notebook_open-closed-principle.pdf",
+    "pdfs/single-responsibility-principle.pdf",
+    "not-sorted/videos-to-sort.md",
+    "Encapsulation and information hiding.md",
+    "pdfs",
     "books/The Mythical Man-Month.md",
-    "books",
-    "attachments/Pasted image 20241018140706.png",
-    "attachments/Pasted image 20241017104005.png",
-    "attachments/Pasted image 20241017103959.png",
+    "Enums.md",
+    "Exception.md",
+    "attachments/pattern-decorator.png",
+    "attachments/pattern-iterator.png",
+    "0 How to study.md",
+    "attachments/pattern-composite.png",
+    "attachments/object-adapter.png",
+    "templates/info.md",
     "templates/header.md",
     "templates/bold.md",
+    "Scala.md",
+    "Algoritmi e strutture dati.md",
+    "Algoritmi e strutture dati - lab.md",
+    "templates/o.md",
+    "NixOS.md",
+    "PostgreSQL.md",
+    "Erlang.md",
+    "Minerva.md",
+    "books",
     "Untitled 1.md",
-    "templates/test.md",
     "templates",
-    "attachments/Pasted image 20241014182839.png",
-    "attachments/Pasted image 20241012211104.png",
-    "attachments/Pasted image 20240112223842.png",
-    "().md",
-    "attachments/Pasted image 20241012211101.png",
-    "attachments/Pasted image 20241012211037.png",
-    "Latex.md",
-    "0 How to study.md",
-    "templates/Table of Content - All.md",
     "templates",
     "scripts/toc.js",
     "scripts/New Text Document.txt",
-    "scripts/Untitled.md",
     "scripts",
-    "BNF.md",
-    "Petri nets.md",
-    "Databases.md",
-    "Combinators.md",
-    "Scala.md",
-    "Relational algebra.md",
-    "rsync.md",
     "Untitled.canvas",
     "Untitled 2.canvas",
-    "Untitled 1.canvas",
-    "IDEAS",
-    "attachments/latch-d.gif:Zone.Identifier",
-    "attachments/latch-d.gif:shield",
-    "_images"
+    "Untitled 1.canvas"
   ]
 }

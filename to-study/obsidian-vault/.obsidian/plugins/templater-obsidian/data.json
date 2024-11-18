@@ -28,10 +28,7 @@
   ],
   "syntax_highlighting": true,
   "syntax_highlighting_mobile": false,
-  "enabled_templates_hotkeys": [
-    "templates/bold.md",
-    "templates/header.md"
-  ],
+  "enabled_templates_hotkeys": [],
   "startup_templates": [
     ""
   ]

@@ -1,1 +1,1 @@
-<span class="b"><% tp.file.cursor(1) %></span>
+<span class="b"><% tp.file.cursor() %></span>
