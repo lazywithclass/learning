@@ -1,4 +1,4 @@
-package chainOfResponsibility;
+package chainOfResponsibility.support;
 
 public class Main {
 

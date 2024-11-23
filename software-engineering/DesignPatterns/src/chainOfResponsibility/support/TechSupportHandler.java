@@ -1,4 +1,4 @@
-package chainOfResponsibility;
+package chainOfResponsibility.support;
 
 public class TechSupportHandler implements SupportHandler {
 
@@ -12,5 +12,10 @@ public class TechSupportHandler implements SupportHandler {
             System.out.println("TechSupportHandler: Passing request to next handler..");
             next.handleRequest(request);
         }
+    }
+
+    @Override
+    public void setNext(SupportHandler next) {
+        this.next = next;
     }
 }
