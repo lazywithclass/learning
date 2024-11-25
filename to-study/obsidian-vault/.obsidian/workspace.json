@@ -91,23 +91,9 @@
               "icon": "lucide-file",
               "title": "SOLID"
             }
-          },
-          {
-            "id": "778491111d9869cf",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "videos/The Flaws of Inheritance.md",
-                "mode": "source",
-                "source": true
-              },
-              "icon": "lucide-file",
-              "title": "The Flaws of Inheritance"
-            }
           }
         ],
-        "currentTab": 5
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -138,10 +124,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "videos/The Flaws of Inheritance.md"
+                "file": "SOLID.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of The Flaws of Inheritance"
+              "title": "Outline of SOLID"
             }
           },
           {
@@ -190,12 +176,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "videos/The Flaws of Inheritance.md",
+                "file": "SOLID.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from The Flaws of Inheritance"
+              "title": "Outgoing links from SOLID"
             }
           },
           {
@@ -204,7 +190,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "videos/The Flaws of Inheritance.md",
+                "file": "SOLID.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -214,7 +200,7 @@
                 "unlinkedCollapsed": false
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for The Flaws of Inheritance"
+              "title": "Backlinks for SOLID"
             }
           }
         ]
@@ -243,19 +229,21 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "778491111d9869cf",
+  "active": "e4b1383be1991d9c",
   "lastOpenFiles": [
-    "attachments/inheritance-move-up.gif",
+    "prova.md",
+    "SOLID.md",
+    "prova.md",
+    "videos/prova.md",
     "videos/The Flaws of Inheritance.md",
+    "attachments/inheritance-move-up.gif",
     "0 Study.canvas",
     "Learning how to learn.md",
-    "SOLID.md",
     "1 Computer Science.canvas",
     "Law of Demeter.md",
     "Inheritance.md",
     "Software engineering.md",
     "Verifica e convalida.md",
-    "Untitled.md",
     "Design Pattern.md",
     "UML.md",
     "attachments/component-diagram.png",
@@ -286,7 +274,6 @@
     "Enums.md",
     "templates/info.md",
     "templates/header.md",
-    "templates/bold.md",
     "books",
     "templates",
     "templates",
