@@ -1,0 +1,22 @@
+{
+	"nodes":[
+		{"id":"6c5022354f67adce","x":-234,"y":-172,"width":400,"height":400,"type":"file","file":"How to study.md"},
+		{"id":"7ba4ea33ea811443","x":400,"y":-572,"width":400,"height":400,"type":"file","file":"videos/Dr. Terry Sejnowski How to Improve at Learning Using Neuroscience & AI.md"},
+		{"id":"21a6a4453cd2cb66","x":560,"y":80,"width":400,"height":400,"type":"file","file":"Learning how to learn.md"},
+		{"id":"b06f1449f914d5b1","x":560,"y":-22,"width":400,"height":50,"type":"text","text":"Practice makes permanent"},
+		{"id":"24824db7561ff38b","x":-234,"y":280,"width":250,"height":50,"type":"text","text":"Never cram."},
+		{"id":"b0979df8e8cec477","x":1120,"y":-80,"width":509,"height":160,"type":"text","text":"Pomodoro\nTry with 25/5, in those resting minute do something fun, go on with the DM screen project for example"},
+		{"id":"701c96459e9fd487","x":1250,"y":198,"width":250,"height":60,"type":"text","text":"Physical activity"},
+		{"id":"84743a0f1442fff4","type":"text","text":"Go over the material right before sleep to strengthen learning.","x":1175,"y":360,"width":400,"height":120},
+		{"id":"f2667d81a200b13d","x":1250,"y":600,"width":250,"height":80,"type":"text","text":"Have at least 8 hours sleep"},
+		{"id":"9d6b33a2ab1e1992","x":1720,"y":-22,"width":298,"height":50,"type":"text","text":"Analogy + metaphor"}
+	],
+	"edges":[
+		{"id":"652f235aa459e751","fromNode":"6c5022354f67adce","fromSide":"top","toNode":"7ba4ea33ea811443","toSide":"left","label":"Test yourself"},
+		{"id":"4187cd171b5f7b47","fromNode":"6c5022354f67adce","fromSide":"right","toNode":"21a6a4453cd2cb66","toSide":"left"},
+		{"id":"27223decec4cd53e","fromNode":"21a6a4453cd2cb66","fromSide":"right","toNode":"b0979df8e8cec477","toSide":"top"},
+		{"id":"512b08188761e7c7","fromNode":"b0979df8e8cec477","fromSide":"bottom","toNode":"701c96459e9fd487","toSide":"top"},
+		{"id":"2d0ed13af5cb6e23","fromNode":"701c96459e9fd487","fromSide":"bottom","toNode":"84743a0f1442fff4","toSide":"top"},
+		{"id":"247208a574866af1","fromNode":"84743a0f1442fff4","fromSide":"bottom","toNode":"f2667d81a200b13d","toSide":"top"}
+	]
+}

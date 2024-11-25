@@ -15,10 +15,13 @@ tags:
 
 * possibilita' di evoluzione: perche' il fatto che nessuno conosca come faccio qualcosa all'interno, a parita' di effetti esterni, mi da liberta' di cambiare scelta.
 * facilitare la comprensione del codice: isolo la parte di codice in cui devo cercare, solo certe parti del codice hanno permesso di scrivere in quella variabile (definisco le responsabilita': [Single responsibility principle](SOLID.md#Single%20responsibility%20principle))
+* "A class is more reusable when you minimize the assumptions other classes must make to use it"
 
 # Reference escaping
 
-Reference escaping - pensavo di essere protetto dall'encapsulation, ma invece e' peggio perche' e' difficile da trovare
+Reference escaping - "pensavo di essere protetto dall'encapsulation, ma invece e' peggio perche' e' difficile da trovare"
+
+Non sempre c'e' reference escaping, dipende se cio' che sto passando e' o meno un segreto, se non e' un segreto o se e' immutabile allora non c'e'.
 
 ## Variabili di istanza non private
 

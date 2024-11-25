@@ -256,6 +256,8 @@ readability (clean code)
 
 ### Domande orale
 
+Puo' chiedere di scrivere un diagramma delle classi di qualunque cosa vista a lezione (tipicamente design pattern) e puo' chiedere di leggere qualsiasi diagramma.
+
 Nullability e mocking vengono chiesti molto spesso, sia allo scritto che all'orale.
 
 * principi SOLID, con approfondimento su qualcuno di questi (+)
@@ -1331,7 +1333,7 @@ ESPANDERE https://youtu.be/i5yG8Q6u8ic?t=1831
 
 `assert` vuol dire stabilire un contratto con il chiamante; per questo puo' sparire una volta in produzione.
 
-# Lezione 15 - 09/11/2024
+# Lezione 15 - 13/11/2024
 
 Stato concreto e astratto
 * concreto dipende dalla sua implementazione, ad esempio se ho due interi e' $2^_{32} * 2^{32}$
@@ -1361,3 +1363,7 @@ ESPANDERE
 Superstate
 
 TODO fare musica maestro kata!!!!!
+
+# Lezione 16 - 18/11/2024
+
+# Lezione 17 - 20/11/2024

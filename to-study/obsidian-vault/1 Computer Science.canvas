@@ -1,0 +1,14 @@
+{
+	"nodes":[
+		{"id":"85dd640905a2b3bb","x":-3120,"y":-986,"width":2080,"height":1826,"type":"group","label":"Software engineering"},
+		{"id":"b0347299040bae97","x":-5200,"y":-280,"width":1049,"height":689,"type":"group","label":"Java"},
+		{"id":"1d96b754faeaee28","type":"file","file":"Exception.md","x":-5138,"y":-191,"width":400,"height":400},
+		{"id":"7b56a502ad3fb7fc","x":-3040,"y":-880,"width":400,"height":402,"type":"file","file":"Design Pattern.md"},
+		{"id":"4f1cb2aca91aaf7a","x":-2360,"y":-880,"width":400,"height":400,"type":"file","file":"Encapsulation and information hiding.md"},
+		{"id":"a83c9bac82882194","x":-2628,"y":-85,"width":400,"height":400,"type":"file","file":"Verifica e convalida.md"},
+		{"id":"d7901ebc7ac6d58f","x":-1688,"y":123,"width":400,"height":400,"type":"file","file":"Inheritance.md"},
+		{"id":"dea8b742a229aa25","x":-1640,"y":-625,"width":400,"height":400,"type":"file","file":"Law of Demeter.md"},
+		{"id":"9c8caae7182b4d20","x":-3040,"y":440,"width":400,"height":400,"type":"file","file":"SOLID.md"}
+	],
+	"edges":[]
+}

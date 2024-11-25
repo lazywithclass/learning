@@ -39,6 +39,8 @@ http://butunclebob.com/ArticleS.UncleBob.PrinciplesOfOod
 
 "Each software module should have one and only one reason to change", but then "What defines a reason to change?".
 
+"Incoraggia un'alta coesione interna (tutti i metodi hanno a che fare con lo stesso obiettivo) e un alto disaccoppiamento esterno, porta ad una buona modularizzazione"
+
 "This principle is about people."
 
 This is the reason we do not put SQL in JSPs. This is the reason we do not generate HTML in the modules that compute results. This is the reason that business rules should not know the database schema. This is the reason we separate concerns.
@@ -51,6 +53,12 @@ This is the reason we do not put SQL in JSPs. This is the reason we do not gener
 ["A good system should be high on cohesion and low on coupling"](https://www.enjoyalgorithms.com/blog/single-responsibility-principle-in-oops)
 
 ![img|300](https://cdn-images-1.medium.com/max/640/0*11cZSBOkR82nknwy.png)
+
+## Related patterns
+
+* [Decorator](Design%20Pattern.md#Decorator): per decentralizzare le varie aggiunte, ognuna in una classe decoratrice
+* [Strategy](Design%20Pattern.md#Strategy): per scegliere quale algoritmo usare
+* [Factory](Design%20Pattern.md#Factory): delego la creazione di ogni specifico oggetto
 
 # Open-Closed principle
 
@@ -69,6 +77,11 @@ This is the reason we do not put SQL in JSPs. This is the reason we do not gener
 
 Permette di chiamare codice non ancora scritto 
 VEDI NOTE DI JESSICA 
+
+## Related patterns
+
+* [Template](Design%20Pattern.md#Template): definisce lo scheletro di un algoritmo in una classe base, alcuni passaggi vengono lasciati da implementare alle sottoclassi, senza modificare la classe originale
+* [Adapter - page 139](Design%20Pattern.md#Adapter%20-%20page%20139): riusare classi in nuovi contesti senza modificarle direttamente
 
 # Liskov substitution principle
 
@@ -114,15 +127,28 @@ Fa in modo che il client ottenga la dipendenza <span class="b">minima</span> dal
 
 Questo principio permette di raggiungere un grado basso di accoppiamento tra gli oggetti. 
 
-![](interface-segregation-example.png)
+![interface-segregation|400](interface-segregation-example.png)
+
+## Related patterns
+
+* [Observer](Design%20Pattern.md#Observer): un solo metodo `update()` che e' l'unico interesse del Subject
 
 # Dependency inversion
 
 > Depend on abstractions, not on concretions
 
+I moduli di alto livello non dovrebbero dipendere dai moduli di basso livello: entrambi dovrebbero dipendere da astrazioni.
+Le astrazioni non dovrebbero dipendere dai dettagli. Programmare verso le interfacce.
+
 "Depend on stuff more concrete than me"
 
 This is pure gold: https://blog.cleancoder.com/uncle-bob/2016/01/04/ALittleArchitecture.html
+
+## Related patterns
+
+* [Factory method](Design%20Pattern.md#Factory%20method): definisce una interfaccia per la creazione di un oggetto, ma consente alle sottoclassi di decidere quale classe istanziare
+* [Abstract factory](Design%20Pattern.md#Abstract%20factory): fornisce un'interfaccia per la creazione di famiglie di oggetti correlati o dipendenti senza specificare le loro classi concrete
+* [Composite](Design%20Pattern.md#Composite): trattare uniformemente parti e insiemi, il client non sa se sta parlando con una parte o un insieme
 
 # Esempi
 
