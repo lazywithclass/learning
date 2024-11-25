@@ -1,4 +1,0 @@
----
-title: "Videos"
-layout: folder 
----

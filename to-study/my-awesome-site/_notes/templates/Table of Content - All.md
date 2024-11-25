@@ -1,1 +1,0 @@
-<% tp.user.toc(tp) %>

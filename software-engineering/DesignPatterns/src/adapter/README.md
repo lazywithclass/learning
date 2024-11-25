@@ -1,0 +1,1 @@
+The idea is that we have a client that uses a library that is not compatible with the client's interface. We can create an adapter that will adapt the service to the client's interface. This way, the client can use the service without any problems.
