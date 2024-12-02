@@ -10,7 +10,7 @@ TODO PRENDERE INFO EXTRA DA
 * test driven development by example di Beck
 * e dal GOF
 
-All pages are from [GoF's](https://en.wikipedia.org/wiki/Design_Patterns).
+All page numbers (i.e. pag.) are from [GoF's](https://en.wikipedia.org/wiki/Design_Patterns).
 
 # Abstract factory
 
@@ -190,6 +190,10 @@ Implementa quindi la Strategy di gestione di un evento. A seconda del Controller
 Viene rimossa la dipendenza circolare.
 Molto piu' facile da testare.
 
+Il Presenter ha un riferimento a View e Model, agendo da middle man.
+
+Vedi [Modalita'](Design%20Pattern.md#Modalita') di Observer.
+
 # NullObject
 
 > Vogliamo creare un oggetto che corrisponda al concetto "nessun valore" o "valore neutro"
@@ -235,6 +239,49 @@ public class State {
     }
 }
 ```
+
+## Modalita' - pag 298 
+
+E' possibile avere due modalita' per avvertire gli observer di un cambiamento: pull e push
+
+```java linenos:1
+@Override
+public void setTemp(double temp) {
+    if (this.temp != temp) {
+        this.temp = temp;
+        notifyObservers();
+    }
+}
+
+@Override
+public void notifyObservers() {
+    for (Observer<Double> obs : observers) {
+        obs.update(this, temp); // qui si rendono disponibili entrambe le modalita'
+    }
+}
+```
+
+Stato semplice $\rightarrow$ push.
+Stato complesso o parzialmente rilevante $\rightarrow$ pull.
+
+### Modalita' pull
+
+Il subject fornisce metodi (getter) per accedere al proprio stato, lasciando agli observer il compito di scegliere cosa consultare.
+Vantaggi: Più flessibile, perché ogni observer può decidere cosa gli serve. Ideale per stati complessi.
+
+### Modalita' push
+
+Il subject invia lo stato agli observer.
+Vantaggi: semplice da implementare se lo stato è compatto e se gli observer richiedono tutte le informazioni.
+Svantaggi: inefficiente se lo stato è complesso e gli observer sono interessati solo a una parte, o se vogliono solo essere notificati del cambiamento senza conoscerne i dettagli.
+
+```java linenos:1
+@Override
+public void update(@Nullable Observable<Double> subject, @NotNull Double state) {
+    view.setValue(String.format("%.2f", strategy.convertFromCelsius(state)));
+}
+```
+
 
 # Singleton
 

@@ -6,6 +6,10 @@ tags:
   - italian
 ---
 
+
+
+
+
 TODO!!!!!!!!!!!!!
 continuare
 https://www.baeldung.com/mockito-series
@@ -20,6 +24,15 @@ https://www.baeldung.com/mockito-series
 -- Dijkstra
 
 > Write tests until fear is transformed into boredom
+
+# Test
+
+Always use `SUT` as variable name for the Subject Under Test, as there could be only one SUT for a single test.
+
+IN test unitari mai avere due classi reali, sempre almeno una SUT che DEVE Essere mockata
+si puo' non mockare
+* enum
+* lambda
 
 # Red green refactor
 

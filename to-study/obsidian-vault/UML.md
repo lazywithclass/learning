@@ -71,6 +71,8 @@ Recuperare dalle slide
 
 # Diagramma di sequenza
 
+![](sequence-diagram.png)
+
 Recuperare dalle slide
 
 # Diagramma delle attivita'

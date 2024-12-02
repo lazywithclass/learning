@@ -6,7 +6,7 @@ tags:
 ---
 
 [[Relational algebra]]
-[[PostgreSQL]]
+[[PostgreSQL exercises]]
 
 # Relational model
 
