@@ -167,7 +167,16 @@ Definisce un'interfaccia per creare un oggetto ma lascia alle sottoclassi la sce
 
 # Model View Controller
 
-C'e' una circolarita' di comunicazione.
+![](mvc.png)
+
+L'MVC e' un set di pattern che collaborano assieme nello stesso design: Composite (view), Strategy (quale Controller iniettare, il Controller e' lo Strategy per la View), Observer (il Model e' observable e View e Controller sono observer).
+
+> The best way to think of MVC is as set of principles including the separation of presentation from domain logic and synchronizing presentation state through events (the observer pattern)
+-- Martin Fowler
+
+About "handling the triggering of synchronization between screen state and session state", MVC does it by making updates on the model and then relying of the observer relationship to update the views that are observing that model.
+
+Il problema e' che c'e' una circolarita' di comunicazione, quindi si potrebbe preferire per questo l'MVP.
 
 ## Model
 
@@ -185,6 +194,8 @@ Implementa quindi la Strategy di gestione di un evento. A seconda del Controller
 
 # Model View Presenter
 
+https://martinfowler.com/eaaDev/uiArchs.html#Model-view-presentermvp
+
 ![mvc-mvp|400](mvc-mvp.png)
 
 Viene rimossa la dipendenza circolare.
@@ -192,7 +203,46 @@ Molto piu' facile da testare.
 
 Il Presenter ha un riferimento a View e Model, agendo da middle man.
 
-Vedi [Modalita'](Design%20Pattern.md#Modalita') di Observer.
+Per ogni View c'e' un Presenter.????????????????????????????????????????
+Si intende quindi 1 classe View e 1 istanza Presenter, 1 classe View e 1 classe Presenter, o entrambe?
+
+Vedi [Modalita' - pag 298](Design%20Pattern.md#Modalita'%20-%20pag%20298) di Observer.
+
+## Interface Segregation sul Presenter
+
+Non sempre voglio che tutti i Presenter implementino lo stesso `Presenter`, ricordarsi di specializzare sfruttando l'eredita' multipla sulle interfacce.
+
+## Da dove si parte nell'implementazione?
+
+Si puo' approcciare da diversi lati, ad esempio con diversi sotto-team che si avvicinano assieme al risultato.
+
+O inizio dal Presenter (top down). Piuttosto che dal Model (bottom up).
+
+TODO RIMANDO A IMMUTABILITA'
+Favorire un design con immutabilita' nel Model, per evitare deep copies.
+
+## Gestione degli errori
+
+Nel Presenter (ma...).
+Importante che una volta validato il dato questa validazione non sia fatta, se si usa il contract based allora si puo' costruire un tipo che assume per costruzione la validazione del dato, es:
+
+```java linenos:1
+public record TimeOfRun(@NotNull String name, @NotNull Double time) {
+  public TimeOfRun {
+    if (name.isBlank) throw
+    if (time < 0) throw
+  }
+}
+```
+
+E' il Presenter che istruisce la vista sul suo stato di errore.
+
+Ma anche nel Model (...!).
+Dipende da dove ha senso, ad esempio se ho un Model che gestisce due manche di sciatori, e mi arriva nel Model un nome di uno sciatore non presente nella prima manche allora questo lo posso gestire solo nel Model.
+
+## Deregistrarsi dagli observer
+
+Puo' avere senso ad un certo stato di avanzamento nell'applicazione per qualcuno di deregistrarsi.
 
 # NullObject
 
@@ -216,7 +266,7 @@ public interface CardSource {
 }
 ```
 
-# Observer
+# Observer - pag 293
 
 Diversi modi di presentare una informazione, esempio
 ![observer|300](observer-example.png)
@@ -281,7 +331,6 @@ public void update(@Nullable Observable<Double> subject, @NotNull Double state) 
     view.setValue(String.format("%.2f", strategy.convertFromCelsius(state)));
 }
 ```
-
 
 # Singleton
 

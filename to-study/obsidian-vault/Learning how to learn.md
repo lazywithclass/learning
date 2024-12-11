@@ -7,6 +7,8 @@ tags:
   - spaced-repetition
 ---
 
+https://www.coursera.org/learn/learning-how-to-learn
+
 Learn through metaphore and analogy.
 
 Focused mode and diffuse mode, you can't be in both modes at the same time.
@@ -60,3 +62,51 @@ Strengthen areas we might need or want.
 
 Plant the seeds for diffuse mode by engaging in focus mode: go over what you're learning right before a nap or before going to sleep, you've got increased chances of dreaming about it. A step further is setting in mind the will to dream about that material.
 Dreaming about what you're studying can substantially enhance the ability to understand.
+
+# Chunking
+
+Unite bits of information together through mearning.
+
+Chunks are pieces of information. Bound together through meaning or use.
+Conceptual chunks are mental leaps that unite scattered bits of information through meaning.
+
+> Focusing your attention to connect parts of the brain to tie together ideas is an important part of the focused mode of learning. It is also often what helps get you started in creating a chunk
+
+![|200](chunking-octopus.png)
+
+Picture an octopus, the octopus of attention that slips its tentacles through those slots of working memory when necessary to help you make connections to information that you might have in various parts of your brain.
+
+## How to make a chunk
+
+Learn little by little then piece together everything.
+
+As an example in learning math: focus on "why is this the next thing I should do", rather then "why does this step work?".
+
+1. focus undivided attentions to what you're learning - the Chunking-Octopus can't reach very well into the slots of working memory
+![|200](chunking-octopus-failing.png)
+2. understanding the basic idea of what you're trying to chunk
+3. practice
+
+Context means learning when to use (and when not to use) the technique instead of some other. An example is when you skim through a chapter to get a big picture understanding of what you're about to read.
+![](learning-context.png)
+
+ This is a top down approach. While chunking is bottom up. Both are critical to understanding.
+
+Chunking means learning how to use the technique instead of some other.
+
+# Recall
+
+<aside>This is how we learn</aside>
+
+After you've read, look away and see what you remember of what you've just read.
+
+Do the recall in different locations so that you're not bound to the visual cues of the environment where learning happens.
+
+## Illusions of competence in learning
+
+Looking at a solution is not enough to grasping it.
+Keeping the book opened in front of us when repeating gives the illusion we got the concepts, it gives a false sense of knowing what the subject is about.
+
+## Self test yourself
+
+It allows to make repairs in your thinking flaws. Mistakes help correct your thinking.

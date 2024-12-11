@@ -1,7 +1,6 @@
 ---
 cssclasses:
   - cornell-note
-tags:
   - software-engineering
   - italian
 ---
