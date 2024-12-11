@@ -1,4 +1,9 @@
-import typing
+from typing import NewType
 
 
 def sum(n: int, m: int) -> int: ...
+
+NonEmptyString = NewType('NonEmptyString', str)
+def check_non_empty_string(s: str) -> NonEmptyString: ...
+
+def has_all_vowels(s: NonEmptyString) -> bool: ...
