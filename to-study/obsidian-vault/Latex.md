@@ -13,6 +13,8 @@ $\lfloor a \rfloor$
 
 $\lceil a \rceil$
 
+$
+
 $$
 \begin{equation}
     T(x,y) =

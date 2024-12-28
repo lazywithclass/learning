@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Erlang</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h1 id="tutorials">Tutorials</h1>
+<h2 id="erlang-master-class">Erlang Master Class</h2>
+<p>https://www.cs.kent.ac.uk/ErlangMasterClasses/</p>
+<p>Course is hosted on Youtube and taught by: * Simon Thompson,
+Professor of Logic and Computation at the University of Kent * Joe
+Armstrong, is one of the “gang of three” Erlang inventors, and is also
+professor at KTH. Stockholm</p>
+<p>In the first part they talk about interpreters. Pretty interesting,
+not really tied to Erlang though so I’d skip it if you were not
+interested.</p>
+<p>Second part is about concurrency and its patterns (rpc, Futures,
+…).</p>
+<h2 id="erlang-express-course">Erlang Express Course</h2>
+<p>https://www.youtube.com/watch?v=aEyQcZg-Njs&amp;list=PLoFxPv8jwGVVlajiMxaW9zG1IZgHODTuq</p>
+<p>Much longer than the <a
+href="Erlang#Erlang%20Master%20Class.md">Erlang#Erlang Master Class</a>.
+High quality content, taught by <a
+href="https://www.kent.ac.uk/computing/people/3164/thompson-simon">Simon
+Thompson</a>.</p>
+<h1 id="the-language">The language</h1>
+<p>Exercises, exam attempted solutions, and the likes could be found <a
+href="https://github.com/lazywithclass/learning/tree/master/programming-languages/erlang">here</a>.</p>
+<p>Dynamically typed purely functional programming language. Fault
+tolerant, supports hot code swapping.</p>
+<p>Being stateless it has a huge advantage when dealing with concurrency
+since there is no need to lock the state.</p>
+<aside>
+concurrent programs
+</aside>
+<ul>
+<li>concurrency - same computer, competition for the CPU resource</li>
+<li>distributed - among different computers</li>
+<li>parallelism - on the same computer, with more CPUs</li>
+</ul>
+<p>Beam is the VM on top of which Erlang runs.</p>
+<aside>
+Mind blowing integers
+</aside>
+<p>Integers in Erlang have arbitrary precision.</p>
+<h1 id="the-syntax">The syntax</h1>
+<p><code>=</code> is not assignment, it is always pattern matching, to
+see it in action try to create a variable with a value and then
+re-assign it. Read the error message.</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode erlang"><code class="sourceCode erlang"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="op">&gt;</span> <span class="ch">test</span><span class="fu">.</span> <span class="co">% an atom called test, notice the  </span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>         <span class="co">% lowercase</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ch">test</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="op">&gt;</span> <span class="va">T</span> <span class="op">=</span> <span class="ch">test</span><span class="fu">.</span> <span class="co">% a variable called T that contains </span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>             <span class="co">% the atom test, notice the </span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>             <span class="co">% uppercase</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="ch">test</span></span></code></pre></div>
+<p>Also</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode erlang"><code class="sourceCode erlang"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="op">&gt;</span> <span class="fu">{</span><span class="va">F</span><span class="fu">,</span><span class="va">F</span><span class="fu">,</span><span class="va">G</span><span class="fu">}</span> <span class="op">=</span> <span class="fu">{</span><span class="dv">23</span><span class="fu">,</span><span class="dv">24</span><span class="fu">,</span><span class="dv">12</span><span class="fu">}</span></span></code></pre></div>
+<p>Gives an error, as the same <code>F</code> can’t be both 23 and
+24.</p>
+<h2 id="punctuation">Punctuation</h2>
+<p>At first Erlang syntax looks a bit alien, especially with
+<code>,</code>, <code>;</code>, and <code>.</code>, use English as an
+analogy: * <code>,</code> separates expressions within a clause
+expressions * <code>;</code> separates parts of a sentence (clauses in
+Erlang) * <code>.</code> ends a sentence (function)</p>
+<h2 id="rounding">Rounding</h2>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode erlang"><code class="sourceCode erlang"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="op">&gt;</span> <span class="fu">round(</span><span class="fl">1.0</span><span class="fu">).</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span></span></code></pre></div>
+<h2 id="a-recursive-function">A recursive function</h2>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode erlang"><code class="sourceCode erlang"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">-module</span><span class="fu">(</span><span class="ch">fact</span><span class="fu">).</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">-export</span><span class="fu">([</span><span class="ch">fact</span><span class="op">/</span><span class="dv">1</span><span class="fu">]).</span> <span class="co">% 1 is the arity</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">% different clauses are separated by ;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">fact(</span><span class="dv">0</span><span class="fu">)</span> <span class="op">-&gt;</span> <span class="dv">1</span><span class="fu">;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu">fact(</span><span class="va">N</span><span class="fu">)</span> <span class="op">-&gt;</span> <span class="va">N</span> <span class="op">*</span> <span class="fu">fact(</span><span class="va">N</span><span class="op">-</span><span class="dv">1</span><span class="fu">).</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode erlang"><code class="sourceCode erlang"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="op">&gt;</span> <span class="dv">$A</span><span class="fu">.</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="dv">65</span> <span class="fu">#</span> <span class="va">ASCII</span></span></code></pre></div>
+<h2 id="reversing-a-list">Reversing a list</h2>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode erlang"><code class="sourceCode erlang"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">-module</span><span class="fu">(</span><span class="ch">exercise</span><span class="fu">).</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">-export</span><span class="fu">([</span><span class="ch">reverse</span><span class="op">/</span><span class="dv">1</span><span class="fu">]).</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">reverse([])</span> <span class="op">-&gt;</span> <span class="fu">[];</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">reverse(</span><span class="va">Arr</span><span class="fu">)</span> <span class="op">-&gt;</span> <span class="fu">reverse(</span><span class="va">Arr</span><span class="fu">,</span> <span class="fu">[]).</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="fu">reverse([],</span> <span class="va">Acc</span><span class="fu">)</span> <span class="op">-&gt;</span> <span class="va">Acc</span><span class="fu">;</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="fu">reverse([</span><span class="va">H</span><span class="fu">|</span><span class="va">T</span><span class="fu">],</span> <span class="va">Acc</span><span class="fu">)</span> <span class="op">-&gt;</span> <span class="fu">reverse(</span><span class="va">T</span><span class="fu">,</span> <span class="fu">[</span><span class="va">H</span><span class="fu">|</span><span class="va">Acc</span><span class="fu">]).</span></span></code></pre></div>
+<p>Different cases in a function declaration are separated with
+<code>;</code>, once you’re done finish it with <code>.</code>.</p>
+<aside>
+lists 1-based
+</aside>
+<p>Careful, lists in Erlang are 1-based!</p>
+<h2 id="tuples-and-records">Tuples and records</h2>
+<p>Tuples could be used to pass around structured information:
+<code>{ msgname, msgbody, extra }</code>; for records look into <a
+href="https://github.com/lazywithclass/learning/blob/master/programming-languages/erlang/course-exercises/counting.erl">this
+exercise</a>.</p>
+<h2 id="pattern-matching">Pattern matching</h2>
+<p>Besides the usual structural pattern matching on arrays
+(<code>[H|T]</code>) or tuples (<code>{a, b, _}</code>) you could
+also:</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode erlang"><code class="sourceCode erlang"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">alternate_index(</span><span class="va">Prev</span><span class="fu">,</span> <span class="va">Prev</span><span class="fu">)</span> <span class="op">-&gt;</span> <span class="dv">1</span><span class="fu">;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">alternate_index(</span><span class="va">Prev</span><span class="fu">,</span> <span class="va">_</span><span class="fu">)</span> <span class="op">-&gt;</span> <span class="va">Prev</span> <span class="op">+</span> <span class="dv">1</span><span class="fu">.</span></span></code></pre></div>
+<p>That means if we get the same value in <code>Prev</code> then the
+first case will match, another example:</p>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode erlang"><code class="sourceCode erlang"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">contains(</span><span class="va">X</span><span class="fu">,</span> <span class="fu">[])</span>     <span class="op">-&gt;</span> <span class="ch">false</span><span class="fu">;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">contains(</span><span class="va">X</span><span class="fu">,</span> <span class="fu">[</span><span class="va">X</span><span class="fu">|</span><span class="va">Xs</span><span class="fu">])</span> <span class="op">-&gt;</span> <span class="ch">true</span><span class="fu">;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">contains(</span><span class="va">X</span><span class="fu">,</span> <span class="fu">[</span><span class="va">_</span><span class="fu">|</span><span class="va">Xs</span><span class="fu">])</span> <span class="op">-&gt;</span> <span class="fu">contains(</span><span class="va">X</span><span class="fu">,</span> <span class="va">Xs</span><span class="fu">).</span></span></code></pre></div>
+<p>You could have guards like so:</p>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode erlang"><code class="sourceCode erlang"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">foo(</span><span class="va">A</span><span class="fu">,</span> <span class="va">B</span><span class="fu">)</span> <span class="ch">when</span> <span class="va">A</span> <span class="op">==</span> <span class="va">B</span> <span class="op">-&gt;</span> <span class="ch">equal</span><span class="fu">;</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">foo(</span><span class="va">A</span><span class="fu">,</span> <span class="va">B</span><span class="fu">)</span>             <span class="op">-&gt;</span> <span class="ch">not_equal</span><span class="fu">;</span></span></code></pre></div>
+<p>Use * <code>,</code> if all guards have to succeed * <code>;</code>
+if one guard has to succeed</p>
+<h2 id="libraries">Libraries</h2>
+<p>Common libraries</p>
+<ul>
+<li>io.erl - i/o functionality</li>
+<li>file.erl - filesystem</li>
+<li>lists.erl - standard list processing</li>
+<li>code.erl - load test manipulate code</li>
+</ul>
+<h1 id="running-erlang">Running Erlang</h1>
+<pre class="shell"><code>$ erl
+# output removed
+1&gt; c(fact). % this way you compile your module
+{ok,fact}
+2&gt; fact:fact(7).
+5040</code></pre>
+<h1 id="shell-commands">Shell commands</h1>
+<ul>
+<li>help() - prints out a list of shell commands</li>
+<li>h() - history, print the last 20 commands</li>
+<li>b() - bindings, see all variable bindings</li>
+<li>f() - forget, forget all variable bindings</li>
+<li>f(X) - forget, forget the binding of variable X</li>
+</ul>
+<h1 id="actors">Actors</h1>
+<p>Actor model explained in under 5 minutes:</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ELwEdb_pD0k?si=kRuxinyLZoH6DCbO" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
+</iframe>
+<aside>
+mailbox + behaviour
+</aside>
+<p>Erlang achieves concurrency via actors which communicate with
+messages, each actor has * a message queue * a way to send messages to
+other actors</p>
+<p>Actors are not processes, they run on the <a
+href="https://en.wikipedia.org/wiki/BEAM_(Erlang_virtual_machine)">BEAM</a>,
+not on the OS.</p>
+<p>Lightweight, you can easily run 20k 30k in a VM. They don’t share
+memory, they interact by sending messages.</p>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode erlang"><code class="sourceCode erlang"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">-module</span><span class="fu">(</span><span class="ch">processes_demo</span><span class="fu">).</span> </span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="kw">-export</span><span class="fu">([</span><span class="ch">start</span><span class="op">/</span><span class="dv">2</span><span class="fu">,</span> <span class="ch">loop</span><span class="op">/</span><span class="dv">2</span><span class="fu">]).</span> </span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">start(</span><span class="va">N</span><span class="fu">,</span><span class="va">A</span><span class="fu">)</span> <span class="op">-&gt;</span> <span class="fu">spawn</span> <span class="fu">(</span><span class="ch">processes_demo</span><span class="fu">,</span> <span class="ch">loop</span><span class="fu">,</span> <span class="fu">[</span><span class="va">N</span><span class="fu">,</span><span class="va">A</span><span class="fu">]).</span> </span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">loop(</span><span class="dv">0</span><span class="fu">,</span><span class="va">A</span><span class="fu">)</span> <span class="op">-&gt;</span> <span class="fu">io:format(</span><span class="st">&quot;~p(~p) ~p~n&quot;</span><span class="fu">,</span> <span class="fu">[</span><span class="va">A</span><span class="fu">,</span> <span class="fu">self(),</span> <span class="ch">stops</span><span class="fu">]);</span> </span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="fu">loop(</span><span class="va">N</span><span class="fu">,</span><span class="va">A</span><span class="fu">)</span> <span class="op">-&gt;</span> <span class="fu">io:format(</span><span class="st">&quot;~p(~p) ~p~n&quot;</span><span class="fu">,</span> <span class="fu">[</span><span class="va">A</span><span class="fu">,</span> <span class="fu">self(),</span> <span class="va">N</span><span class="fu">]),</span> <span class="fu">loop(</span><span class="va">N</span><span class="op">-</span><span class="dv">1</span><span class="fu">,</span><span class="va">A</span><span class="fu">).</span></span></code></pre></div>
+<p>You could use <code>?MODULE</code> to reference to the module you’re
+in instead of, for example, <code>processes_demo</code>.</p>
+<p><code>spawn</code> returns a process identifier, which is the only
+knowledge you get about that process; to <code>spawn</code> something
+you need to <code>export</code> it.</p>
+<h2 id="send">Send</h2>
+<p>To send a message to a PID you use the <code>!</code> construct:
+<code>Pid ! {self(), something}</code></p>
+<p>Sending a message will never fail, messages sent to non existing
+processes are thrown away, received messages are stored in the process
+mailbox.</p>
+<h2 id="receive">Receive</h2>
+<p>A pattern and a body to execute if that pattern is matched</p>
+<div class="sourceCode" id="cb12"><pre
+class="sourceCode erlang"><code class="sourceCode erlang"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">receive</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">{</span><span class="ch">something</span><span class="fu">,</span> <span class="va">MoreSpecific</span><span class="fu">}</span> <span class="op">-&gt;</span> <span class="co">% do something specific;</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="va">Msg</span> <span class="op">-&gt;</span> <span class="co">% do something with Msg</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div>
+<p>After receiving a message you tipically want the actor to start
+listening again so this would be a way to do it (notice the recursion
+with the updated list)</p>
+<div class="sourceCode" id="cb13"><pre
+class="sourceCode erlang"><code class="sourceCode erlang"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">% this is started by calling loop_receiving([])</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">loop_receiving(</span><span class="va">Senders</span><span class="fu">)</span> <span class="op">-&gt;</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">receive</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span><span class="va">Msg</span><span class="fu">,</span> <span class="va">From</span><span class="fu">}</span> <span class="op">-&gt;</span> </span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">io:format(</span><span class="st">&quot;received ~p from ~p~n&quot;</span><span class="fu">,</span> <span class="fu">[</span><span class="va">Msg</span><span class="fu">,</span> <span class="va">From</span><span class="fu">]),</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>      <span class="fu">loop_receiving([</span><span class="va">From</span><span class="fu">|</span><span class="va">Senders</span><span class="fu">])</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">%% more code</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="kw">end</span><span class="fu">.</span></span></code></pre></div>
+<p><code>loop_receiving</code> keeps a state of what it received in
+<code>Senders</code>.</p>
+<p>Messages that haven’t yet been handled by the <code>receive</code>
+loop are kept in the waiting line, and whenever the <code>receive</code>
+is ready to handle them they will be processed, for example if we have
+to receive messages in a certain order we could do</p>
+<div class="sourceCode" id="cb14"><pre
+class="sourceCode erlang"><code class="sourceCode erlang"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">loop(</span><span class="va">MsgIndex</span><span class="fu">)</span> <span class="op">-&gt;</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">receive</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">MsgIndex</span> <span class="op">-&gt;</span> </span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>            <span class="co">%% do something with the index</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>            <span class="fu">loop(</span><span class="va">MsgIndex</span><span class="op">+</span><span class="dv">1</span><span class="fu">)</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">end</span><span class="fu">.</span></span></code></pre></div>
+<p>This way all messages will be properly handled without any auxiliary
+data structure.</p>
+<aside>
+receive blocks
+</aside>
+<p><code>receive</code> blocks the execution, meaning that unless a
+message that could be handled is received nothing else is being
+processed by that actor; one way to not block the execution is to
+<code>spawn</code>, so the following would block</p>
+<div class="sourceCode" id="cb15"><pre
+class="sourceCode erlang"><code class="sourceCode erlang"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">loop_receiving([]),</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">io:format(</span><span class="st">&quot;done&quot;</span><span class="fu">).</span></span></code></pre></div>
+<p>while this would print <code>"done"</code> right away and then enter
+in the <code>receive</code> loop, asynchronously</p>
+<div class="sourceCode" id="cb16"><pre
+class="sourceCode erlang"><code class="sourceCode erlang"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">spawn(</span><span class="ch">module</span><span class="fu">,</span> <span class="ch">loop_receiving</span><span class="fu">,</span> <span class="fu">[]),</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">io:format(</span><span class="st">&quot;done&quot;</span><span class="fu">).</span></span></code></pre></div>
+<h2 id="functions-that-work-at-the-actor-level">Functions that work at
+the actor level</h2>
+<ul>
+<li><a
+href="https://www.erlang.org/doc/reference_manual/processes.html#process-creation"><code>spawn</code></a>
+- creates actors</li>
+<li><a
+href="https://www.erlang.org/doc/reference_manual/processes.html#sending-signals"><code>!</code></a>
+- sends messages</li>
+<li><a
+href="https://www.erlang.org/doc/man/erlang#spawn_link-4"><code>spawn_link</code></a>
+spawns and then <a href="#Link.md">#Link</a></li>
+<li>pattern match - works through the message queue, messages are
+ordered by <a href="https://www.erlang.org/blog/message-passing/">sent
+order</a></li>
+<li><code>self()</code> - gives the PID of the current actor</li>
+<li><code>register(an_atom, Pid)</code></li>
+<li><code>unregister(an_atom)</code></li>
+<li><code>whereis(an_atom) -&gt; Pid|undefined</code></li>
+<li><code>global:whereis_name(an_atom) -&gt; Pid|undefined</code>,
+remember to <code>net_adm:ping(Host)</code> (see <a
+href="#Useful%20stuff.md">#Useful stuff</a>)</li>
+<li><code>registered()</code></li>
+</ul>
+<aside>
+why register
+</aside>
+<p><code>register</code> is useful in those situations where you don’t
+want to specify a Pid, maybe because you don’t have in that portion of
+code, but still you want to send a message.</p>
+<p>The following allows to extend the max number of processes, you can
+get the max with <code>erlang:system_info(process_limit)</code>.</p>
+<div class="sourceCode" id="cb17"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> erl +p <span class="va">$NUM_PROCESSES</span></span></code></pre></div>
+<h2 id="group-leader">Group leader</h2>
+<p>Each output is associated to a certain group_leader, you configure to
+have <code>io:format</code> output to go on a certain node by using
+<code>group_leader(whereis(user), self())</code>.</p>
+<h2 id="nodes">Nodes</h2>
+<p>You could start a node with (note that the hostname is
+<code>hostname</code>)</p>
+<div class="sourceCode" id="cb18"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> erl <span class="at">-sname</span> server</span></code></pre></div>
+<p>which contains this code</p>
+<div class="sourceCode" id="cb19"><pre
+class="sourceCode erlang"><code class="sourceCode erlang"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">-module</span><span class="fu">(</span><span class="ch">server</span><span class="fu">).</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="kw">-export</span><span class="fu">([</span><span class="ch">start</span><span class="op">/</span><span class="dv">0</span><span class="fu">,</span> <span class="ch">loop</span><span class="op">/</span><span class="dv">0</span><span class="fu">]).</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="fu">start()</span> <span class="op">-&gt;</span> <span class="va">Pid</span> <span class="op">=</span> <span class="fu">spawn(</span><span class="kw">fun</span><span class="fu">()</span> <span class="op">-&gt;</span> <span class="fu">loop()</span> <span class="kw">end</span><span class="fu">),</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>           <span class="fu">register(</span><span class="ch">server</span><span class="fu">,</span> <span class="va">Pid</span><span class="fu">).</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="fu">loop()</span> <span class="op">-&gt;</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">receive</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>        <span class="va">Msg</span> <span class="op">-&gt;</span> <span class="fu">io:format(</span><span class="st">&quot;node received ~p\n&quot;</span><span class="fu">,</span> <span class="fu">[</span><span class="va">Msg</span><span class="fu">]),</span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>               <span class="fu">loop()</span></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">end</span><span class="fu">.</span></span></code></pre></div>
+<p>and then when you to send messages to that node you could do</p>
+<div class="sourceCode" id="cb20"><pre
+class="sourceCode erlang"><code class="sourceCode erlang"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span><span class="ch">server</span><span class="fu">,</span> <span class="ch">server@hostname</span><span class="fu">}</span> <span class="op">!</span> <span class="st">&quot;test&quot;</span><span class="fu">.</span></span></code></pre></div>
+<p>where <code>server</code> is how you registered the pid of the
+process, this line basically means “send <code>"test"</code> to the node
+identified by <code>server</code> in the host called
+<code>server@hostname</code>”; so that tuple could be generally viewed
+as <code>{registered_name,node_name}</code>.</p>
+<pre><code>So if you know the pid of a process, the &quot;!&quot; operator can be used to send it a message disregarding if the process is on the same node or on a different node.</code></pre>
+<p>More on this <a
+href="https://www.erlang.org/doc/getting_started/conc_prog#distributed-programming">in
+the docs</a></p>
+<h1 id="error-handling">Error handling</h1>
+<p>On <a
+href="https://www.erlang.org/doc/reference_manual/processes#receiving-exit-signals">receiving
+exit signals</a>.</p>
+<h2 id="link">Link</h2>
+<p>Symmetric, when <code>B</code> dies an exit signal is sent to
+<code>A</code></p>
+<div class="sourceCode" id="cb22"><pre
+class="sourceCode erlang"><code class="sourceCode erlang"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">% inside A</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">link(</span><span class="va">B</span><span class="fu">)</span></span></code></pre></div>
+<aside>
+trap
+</aside>
+<p>We can create a system process if we don’t want it to die when it
+receives the signal: <code>process_flag(trap_exit, true)</code>, it will
+be treated as a message.</p>
+<h2 id="monitor">Monitor</h2>
+<p>Asymmetric link, one stares at the other, but that’s it, just the
+stared one dies.</p>
+<p><img src="https://i.imgflip.com/86l0zp.jpg"
+     height=250/></p>
+<div class="sourceCode" id="cb23"><pre
+class="sourceCode erlang"><code class="sourceCode erlang"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">% inside A</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">monitor(</span><span class="ch">process</span><span class="fu">,</span> <span class="va">B</span><span class="fu">)</span></span></code></pre></div>
+<h1 id="useful-stuff">Useful stuff</h1>
+<p><code>badmatch</code> usually means you are redefining a variable,
+you can’t.</p>
+<p>Literally put
+<code>io:format("Received ~p from ~p~n", [Msg, Pid]).</code> everywhere
+to understand what’s going on in your programs, otherwise it’s easy to
+lose yourself between all communications.</p>
+<p>This is the code to get all permutations of a list using list
+comprehensions, from <a
+href="https://www.erlang.org/doc/programming_examples/list_comprehensions.html">the
+docs</a>:</p>
+<div class="sourceCode" id="cb24"><pre
+class="sourceCode erlang"><code class="sourceCode erlang"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">perms([])</span> <span class="op">-&gt;</span> <span class="fu">[[]];</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">perms(</span><span class="va">L</span><span class="fu">)</span>  <span class="op">-&gt;</span> <span class="fu">[[</span><span class="va">H</span><span class="fu">|</span><span class="va">T</span><span class="fu">]</span> <span class="fu">||</span> <span class="va">H</span> <span class="op">&lt;-</span> <span class="va">L</span><span class="fu">,</span> <span class="va">T</span> <span class="op">&lt;-</span> <span class="fu">perms(</span><span class="va">L</span><span class="op">--</span><span class="fu">[</span><span class="va">H</span><span class="fu">])].</span></span></code></pre></div>
+<p>“Why do I have to export the function used by spawn?”, none other
+than Robert Virding <a
+href="https://stackoverflow.com/questions/19671081/why-we-have-to-export-the-function-used-by-spawn#comment29251924_19676612">answers</a>:
+“Sorry <code>spawn</code> is a language construct. It might be in
+the <code>erlang</code> module but it is part of the erlang language,
+just one that looks like a function call”.</p>
+<p>Calling with a <code>:</code> in the string like so
+<code>io:format("loop: looping again")</code> will color
+<code>"loop"</code> in the console, it’s a small but helpful thing (or
+at least that’s happening in my Emacs setup).</p>
+<p>Nodes are loosely coupled so to make them aware of each other you
+could <code>net_adm:ping(Host)</code> to create a connection, remember
+to expect <code>pong</code> as an answer and not <code>pang</code>,
+which means that the other side was not found.</p>
+<h2 id="dyalizer">Dyalizer</h2>
+<p>TODO</p>
+<h2 id="testing">Testing</h2>
+<p>Testing Erlang could be done via Rebar3.</p>
+</body>
+</html>

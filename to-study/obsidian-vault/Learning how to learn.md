@@ -102,6 +102,8 @@ After you've read, look away and see what you remember of what you've just read.
 
 Do the recall in different locations so that you're not bound to the visual cues of the environment where learning happens.
 
+Flashcards are the best way to do retrieval practice.
+
 ## Illusions of competence in learning
 
 Looking at a solution is not enough to grasping it.

@@ -140,7 +140,7 @@ parseAll(silly, code) match {
 ```
 
 When writing a parser for a language I've found it useful to 
-* first write the [[BNF]] list of derivation rules
+* first write the [BNF](BNF.md) list of derivation rules
 * for each derivation rule write a parser combinator
 
 ## Functions and methods

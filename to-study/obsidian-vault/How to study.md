@@ -19,9 +19,8 @@ Strain is good. It's a cue that neuroplasticity needs to take place.
 10 minutes / day mindfulness meditation increases focus.
 Bring back attention to what you're doing to train to stay focused.
 
-TODO link to mindfulness meditation
-TODO link to nsdr
-
+TODO link to mindfulness meditation!
+TODO link to nsdr!
 
 Study 3 or 4 hours per day max.
 
@@ -45,7 +44,7 @@ Read material and then test yourself on what you've read.
 
 <aside>Exit low level dopamine situation</aside>
 
-![[Pasted image 20240909193731.png|300]]
+![Pasted image 20240909193731.png|300](Pasted%20image%2020240909193731.png%7C300.md)
 
 On the x axis there's time, on the y axis there's dopamine level: there is a steep spike followed by a sudden decrease, the amount of time it takes to exit the low dopamine level is proportional to how steep the increase was; to get out of such a situation one has to engage in an activity much harder than the one they're struggling to start, for example a cold shower.
 

@@ -56,8 +56,8 @@ This is the reason we do not put SQL in JSPs. This is the reason we do not gener
 
 ## Related patterns
 
-* [Decorator](Design%20Pattern.md#Decorator): per decentralizzare le varie aggiunte, ognuna in una classe decoratrice
-* [Strategy](Design%20Pattern.md#Strategy): per scegliere quale algoritmo usare
+* [Decorator](Design%20Pattern.md#Decorator): per decentralizzare le varie aggiunte, ognuna in una classe decoratrice, invece di avere una god class
+* [Strategy](Design%20Pattern.md#Strategy): per scegliere quale algoritmo usare, la strategia si occupa di un certo compito, ignorando cio' che ha attorno
 * [Factory](Design%20Pattern.md#Factory): delego la creazione di ogni specifico oggetto
 
 # Open-Closed principle
@@ -86,6 +86,10 @@ VEDI NOTE DI JESSICA
 # Liskov substitution principle
 
 > methods that use references to base classes must be able to use objects of derived classes without knowing it
+
+`S` sottotipo di `T`:
+* precondizioni dei metodi di `S` non devono essere piu' stringenti delle precondizioni dei metodi di `T`
+* postcondizioni dei metodi di `S` non devono essere piu' larghe delle postcondizioni dei metodi di `T`
 
 Voglio evitare che chi cita una classe e vede una possibilita' (metodo), si ritrovi con una classe figlia che questa possibilita' non ce l'ha.
 

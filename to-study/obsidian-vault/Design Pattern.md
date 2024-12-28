@@ -203,10 +203,35 @@ Molto piu' facile da testare.
 
 Il Presenter ha un riferimento a View e Model, agendo da middle man.
 
-Per ogni View c'e' un Presenter.????????????????????????????????????????
-Si intende quindi 1 classe View e 1 istanza Presenter, 1 classe View e 1 classe Presenter, o entrambe?
+Per ogni View c'e' un Presenter.
+Si puo' intendere quindi 1 classe View e 1 istanza Presenter, 1 classe View e 1 classe Presenter, tenendo presente i principi di buona scrittura del software.
 
 Vedi [Modalita' - pag 298](Design%20Pattern.md#Modalita'%20-%20pag%20298) di Observer.
+
+## Diverse relazioni
+
+### Presenter $\rightarrow$ Model
+
+Il Presenter viene aggiunto come ascoltatore di cambi di stato sul Model.
+
+```java
+model.addObserver(presenter)
+```
+
+### Presenter $\rightarrow$ View
+
+Il presente viene aggiunto come gestore degli eventi sulle View
+
+```java
+view.addHandler(presenter)
+```
+
+## Suddivisione tra Model e State
+
+Puo' essere una buona idea operare una divisione di questo tipo:
+
+State: rappresenta lo stato all'interno del pattern.
+Model: e' [Class Adapter](Design%20Pattern.md#Class%20Adapter) dello State aggiungendo capacita' di [Observer - pag 293](Design%20Pattern.md#Observer%20-%20pag%20293).
 
 ## Interface Segregation sul Presenter
 
@@ -217,6 +242,7 @@ Non sempre voglio che tutti i Presenter implementino lo stesso `Presenter`, rico
 Si puo' approcciare da diversi lati, ad esempio con diversi sotto-team che si avvicinano assieme al risultato.
 
 O inizio dal Presenter (top down). Piuttosto che dal Model (bottom up).
+In questo senso una buona strategia puo' essere partire dal Model delineando in una interfaccia quali sono i metodi che verranno implementati.
 
 TODO RIMANDO A IMMUTABILITA'
 Favorire un design con immutabilita' nel Model, per evitare deep copies.

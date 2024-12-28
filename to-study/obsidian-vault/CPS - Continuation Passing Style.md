@@ -28,8 +28,7 @@ Continuations allow you to
 The recursive call is in tail position and we pass the result of the partial computation into an accumulator
 
   
-
-``` f#
+```ocaml
 
 let rec fact n =
 
@@ -67,7 +66,7 @@ so we could run out of space very quickly.
 
   
 
-``` f#
+```ocaml
 
 let rec factCps n k =
 

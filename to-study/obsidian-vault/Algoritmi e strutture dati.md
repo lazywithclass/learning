@@ -107,7 +107,7 @@ Efficienza - una volta fatto il punto precedente, valuto la quantita' di risorse
 
 #### Esempio moltiplicazione - 1
 
-```
+```code
      19 * 
     114 =
 ---------
@@ -160,7 +160,7 @@ Algoritmo "alla russa"
 
 $19 * 114$
 
-```
+```code
 * 2     / 2
 19      114
 38       57 <- 
@@ -235,7 +235,7 @@ Totale <= 5u + 3
 
 Quanto vale u?
 
-```
+```code
 b     u
 0     0
 1     1

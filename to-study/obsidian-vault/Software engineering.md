@@ -349,7 +349,7 @@ Esterne: visibili agli utenti
 Interne: visibili agli sviluppatori
 
 Un programma deve: 
-* [[Software engineering#Funzionare]]
+* [Software engineering#Funzionare](Software%20engineering#Funzionare.md)
 * essere bello
 * farmi ricco
 
@@ -1335,7 +1335,7 @@ ESPANDERE https://youtu.be/i5yG8Q6u8ic?t=1831
 # Lezione 15 - 13/11/2024
 
 Stato concreto e astratto
-* concreto dipende dalla sua implementazione, ad esempio se ho due interi e' $2^_{32} * 2^{32}$
+* concreto dipende dalla sua implementazione, ad esempio se ho due interi e' $2^_{32} * 2^_{32}$
 * astratto e' un sottoinsieme (meglio se significativo) degli stati concreti
 
 Oggetti senza stato possono essere gli oggetti funzione.

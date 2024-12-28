@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>TDD</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<p>COMMIT DEL main GIUSTIFICATO DAL ROSSO DEL TEST DI INTEGRAZIONE</p>
+<p>TODO!!!!!!!!!!!!! continuare
+https://www.baeldung.com/mockito-series</p>
+<blockquote>
+<p>TDD e’ una metodologia di sviluppo software, non di testing</p>
+</blockquote>
+<blockquote>
+<p>TDD is an awareness of the gap between decision and feedback during
+programming, and techniques to control that gaps – Kent Beck</p>
+</blockquote>
+<blockquote>
+<p>Testing shows the presence, not the absence of bugs. – Dijkstra</p>
+</blockquote>
+<blockquote>
+<p>Write tests until fear is transformed into boredom</p>
+</blockquote>
+<h1 id="test">Test</h1>
+<p>Always use <code>SUT</code> as variable name for the Subject Under
+Test, as there could be only one SUT for a single test.</p>
+<p>IN test unitari mai avere due classi reali, sempre almeno una SUT che
+DEVE Essere mockata si puo’ non mockare * enum * lambda</p>
+<h1 id="red-green-refactor">Red green refactor</h1>
+<p>ESPANDERE CON LA PARTE RELATIVA AL FORZARE UN TEST ROSSO</p>
+<aside>
+failure is progress
+</aside>
+<p>Ask myself: “What set of tests, when passed, will demonstrate the
+presence of code we are confident will compute as expected?”</p>
+<p>The rhythm of TDD: * quickly add a test * run <span
+class="b">all</span> tests and see the new one fail * make a little
+change * run <span class="b">all</span> tests and se them all succeed *
+refactor to remove duplication</p>
+<p>If in need to have a test go red use the triangulation technique, for
+example suppose the first expectation was the only one then we add the
+second:</p>
+<p><code>java linenos:1 public vid testEquality() {   assertTrue(new Dollar(5).equals(new Dollar(5)));   assertTrue(new Dollar(5).equals(new Dollar(6))); // triangulation }</code></p>
+<h1 id="tempo">Tempo</h1>
+<p>Un rosso deve essere ragionevolmente breve, indicativamente minore di
+10’ - 15’. Trovarsi bloccati in questa fase puo’ voler dire che si e’
+approcciato un problema troppo difficile, trovare una via piu’
+semplice.</p>
+<h1 id="test-double">Test double</h1>
+<p><a href="http://xunitpatterns.com/Test%20Double.html">Test double</a>
+- controfigura per il testing: si mette al posto di DOC (dependent-on
+component) per testare in isolamento il SUT (system under test); utile
+quando DOC: * non esiste * fornisce dati non deterministici / non
+prevedibili * presentare situazioni difficilmente riproducibili
+(trasmissione, memoria, …) * e’ lento * potrebbe introdurre errori che
+non voglio considerare mentre testo SUT</p>
+<p>ESPANDERE https://www.baeldung.com/spock-stub-mock-spy
+https://martinfowler.com/articles/mocksArentStubs.html</p>
+<h2 id="mock-stub">Mock / Stub</h2>
+<p>Crea un oggetto. Dichiaro cosa voglio che questo oggetto sappia
+fare.</p>
+<p>Instrumentano il DOC, instrumentati per essere interrogabili in
+merito a cosa gli e’ successo: “chi ti ha chiamato?”, “in che ordine?”,
+“quante volte?”, …</p>
+<p><code>java linenos:1 when(mockedObj.methodName(args)).thenXXX(values); // usare questo</code></p>
+<p>Per verificare quante volte un metodo viene chiamato</p>
+<p><code>java linenos:1 verify(mockedClass, times(1)).methodName(args) // oppure ArgumentCaptor&lt;Person&gt; arg = ArgumentCaptor.forClass(Person.class); verify(mock).doSomething(arg.capture()); assertEquals("John", arg.getValue().getName());</code></p>
+<p>Per evitare di “consumare l’iteratore” si puo’ utilizzare questo
+metodo di utilita’:</p>
+<p>```java linenos:1 public static <T> void whenIterated(Iterable<T> p,
+T… d) { when(p.iterator()) .thenAnswer((Answer&lt;Iterator<T>&gt;)
+invocation -&gt; List.of(d).iterator()); }</p>
+<pre><code>
+Per mockare un costruttore 
+
+```java linenos:1
+// si puo&#39; passare a mockConstruction una serie di parametri per mockare
+// ad esempio eventuali altri metodi che vengono usati nel costruttore di Tavolo
+try (var mocked = Mockito.mockConstruction(Tavolo.class)) {
+  Partita p = new Partita();
+  Card c = mock();
+  Tavolo t = mocked.constructed().getFirst();
+  // ...
+}
+</code></pre>
+<h2 id="spy">Spy</h2>
+<p>Wrappa un oggetto reale. Dichiaro cosa voglio che non sappia fare
+(svuoto).</p>
+<p>Se il soggetto e’ l’oggetto under test allora &gt; stub : spy =
+riempire : svuotare</p>
+<p>Meglio partire dal vuoto, cioe’ stub.</p>
+<h1 id="assertions">Assertions</h1>
+<p>Ricordati che</p>
+<ul>
+<li><code>AssertionsForClassTypes</code> e’ per</li>
+<li>ESPANDERE</li>
+</ul>
+<h1 id="testare-metodi-privati">Testare metodi privati</h1>
+<p>Sono testati indirettamente, a fronte di chiamate dall’esterno.
+Voglio poter cambiare i metodi privati senza troppo sforzo, in modo da
+fare refactor senza incorrere in grossi attriti.</p>
+<p>Usare <code>extracting</code> quando si vuole testare una proprieta’
+privata, e
+<code>AssertionsForClassTypes.assertThat(player).extracting("personalDeck", as(LIST)).containsExactly(Card.of("1B"), Card.of("2B"));</code>
+quando si sta testando una classe che implementa interfacce, perche’
+altrimenti l’<code>assertThat</code> “solito” non riesce a estrarre la
+proprieta’.</p>
+<h1 id="esporre-variabili-distanza-metodi">Esporre variabili d’istanza /
+metodi</h1>
+<p><code>java linenos:1 var m = Game.class.getDeclaredMethod("distributeInitialCards");   m.setAccessible(true);   m.invoke(game);</code></p>
+<p>Da farsi solo in test, perche’ altrimenti a causa della reflection
+puo’ rompere tutte le astrazioni.</p>
+<p>CsVSource(textBlock = ““” ‘4B,5B’,0 … “““) voi testGetPoints(String
+cards, int expectedPoints) {</p>
+<p>}</p>
+<p>CsVSource(delimiter=“|”, textBlock = ““” ‘4B,5B’ | 0 … “““) voi
+testGetPoints(String cards, int expectedPoints) {</p>
+<p>} Viene molto utile avere un TestUtils.cardsFrom che crea una
+<code>List&lt;Card&gt;</code> da <code>cards</code></p>
+<p>Perche’ occhio che il codice duplicato e’ anche dentro i test, non
+solo nel sorgente!</p>
+<h1 id="patterns">Patterns</h1>
+<h2 id="isolation">Isolation</h2>
+<p>Good tests are written in isolation, so if one fails the rest will
+continue as if nothing happened: the idea is not to pollute a global
+state from which tests take their fixtures.</p>
+<p>One broken test <span class="math inline">→</span> one problem. Two
+broken tests <span class="math inline">→</span> two problems.</p>
+<p>If tests are written in isolation then the order in which they’re run
+does not matter.</p>
+<h2 id="test-list">Test list</h2>
+<p>Offload your brain list into a written one, on paper, jot down
+critical issues, pain points, etc… ; you don’t want to put the list into
+tests right away, always follow the “climber rule”: out of four among
+feet and hands always have at least three attached to the wall.</p>
+<h2 id="assert-first">Assert first</h2>
+<p>Write the assert first and then work your way upwards through the
+test. This approach allows to concentrate on the goal and force the
+preconditions to come out almost on their own.</p>
+<h2 id="data">Data</h2>
+<p>Make use of data to tell a clearer story, make your intentions
+evident. For example split whole numbers in elementary operations to
+make the reader aware of “where did that 372.68 come from?”.</p>
+<h1 id="gestione-situazioni-critiche">Gestione situazioni critiche</h1>
+<p>ESPANDERE DA LEZIONE</p>
+<h2
+id="mi-sono-dimenticato-di-aprire-una-feature-con-gitflow-senza-aver-committato">Mi
+sono dimenticato di aprire una feature con gitflow (senza aver
+committato)</h2>
+<p>Posso aprirla senza problemi perche’ e’ effettivamente la creazione
+di un branch.</p>
+<h2 id="mi-sono-dimenticato-di-committare-rosso">Mi sono dimenticato di
+committare ROSSO</h2>
+<p>Basta committare prima test ROSSO e poi implementazione VERDE</p>
+<h2
+id="committato-rosso-ma-mi-sono-accorto-che-il-test-non-era-scritto-giusto">Committato
+ROSSO ma mi sono accorto che il test non era scritto giusto</h2>
+<p>Modifico il test in regime di rosso.</p>
+<h2
+id="ho-committato-il-rosso-ma-mi-accorgo-che-prima-era-necessario-fare-unaltra-feature-sbagliato-ordine">Ho
+committato il ROSSO ma mi accorgo che prima era necessario fare un’altra
+feature (sbagliato ordine)</h2>
+<h2
+id="ho-committato-rosso-ma-mi-accorgo-che-e-necessario-fare-refactoring-prima">Ho
+committato ROSSO ma mi accorgo che e’ necessario fare REFACTORING
+prima</h2>
+<h1 id="ariadnes-thread">Ariadne’s thread</h1>
+<p>Keep a todo list of things that need to be addressed while
+programming. So that you don’t lose yourself in the sea of changes.</p>
+<p>SISTEMARE!!!!!!!!!!!!!!!!!!!!!</p>
+<p>Per ogni test ci deve essere una sola esecuzione del metodo che sto
+testando, cosi che quando qualcosa fallisce so esattamente dove andare a
+guardare, e non ci sono test che “falliscono a meta’”.</p>
+<p>book test: tiro un libro sulla tastiera perche’ cosi genero un input
+non aspettato, il software deve continuare a funzionare</p>
+<p>Tecnica di progettazione guidata dai test che guida verso il design
+piu’ semplice. Non e’ test. BDD Behavioral Driven Development, potrebbe
+essere una definizione migliore.</p>
+<p>Red Green Refactor Red …</p>
+<p>Refactoring - modifiche del codice senza cambiare funzionalita’, per
+modificare qualche qualita’ interna Avviene dopo il Green perche’ se
+ottengo un Red dopo un Refactoring sono nell’incertezza.</p>
+<p>TDD = test first + baby steps</p>
+<p>Continuare a fare refactoring senza pieta’. Perche’ per farlo ci
+vuole coraggio.</p>
+<p>“Scrivo il test e tra 5 10 minuti il test passa”</p>
+<aside>
+problema degli unit test
+</aside>
+<figure>
+<img src="tdd-titanic.png" alt="test|400" />
+<figcaption aria-hidden="true">test|400</figcaption>
+</figure>
+<p>Sempre bene usare test di integrazione per asserire riguardo la
+correttezza del programma.</p>
+<aside>
+Red green green … wat?
+</aside>
+<p>A volte puo’ succedere che eseguendo un nuovo test (scommentato ad
+esempio come vediamo a laboratorio), questo passi senza aver seguito il
+red green refactor red etc. Vuol dire che magari la mia soluzione
+probabilmente ha implementato piu’ del necessario. Quindi vuol dire che
+non ho scritto la soluzione piu’ semplice per far passare il test.</p>
+<p>Chiarirsi il giro RED GREEN REFACTOR e cosa succede negli edge case
+Cercare online una guida in merito</p>
+<p>Smell: Non ci dovrebbero essere commit non etichettati Non ci può
+essere un refactoring se non si parte da verde Nei refactoring non si
+possono modificare funzionalità Nei verdi non si possono modificare i
+test Nei rossi non si dovrebbe modificare codice produzione (solo minimo
+per fare compilare)</p>
+<p>Refactoring Migliorare codice senza cambiare funzionalita’! Preparare
+il design per un funzionalita’ che non si integra bene con il design
+attuale Eliminare debolezze (debito tecnico)</p>
+<p>Code smell - refactoring.guru/refactoring/smells,
+luzkan.github.io/smells codice duplicato metodo troppo lungo troppi
+livelli di indentazione (2 massimo 3) troppi attributi o responsabilita’
+lunghe sequenze di if lista di parametri troppo lunga (che non vuol dire
+metterli in un oggetto) numeri magici commenti nomi oscuri o
+inconsistenti codice morto, che non verra’ mai eseguito getter e setter
+test simili</p>
+<p>Gitflow una feature e’ una use story * autocontenuta * significativa
+* consegnabile * piccola ma non dell’ordine dei 10 minuti</p>
+<p>VEDI la slide</p>
+<p>Usare <span class="citation"
+data-cites="ParameterizedTest">@ParameterizedTest</span> e <span
+class="citation" data-cites="ValueSource">@ValueSource</span>(ints =
+{1,2,3}) Per testare un metodo in tre casi, per evitare duplicazione.
+Infatti raggruppando piu’ esecuzioni e controlli diminuiscono le info
+che il test mi da.</p>
+<p>Vedi kata calistenici per forzare i livelli di indentazione</p>
+<p>Evitare regressioni facendo andare anche il test globale prima di
+ogni commit</p>
+</body>
+</html>

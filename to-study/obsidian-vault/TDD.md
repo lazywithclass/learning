@@ -6,18 +6,12 @@ tags:
   - italian
 ---
 
-
-
 COMMIT DEL main
 GIUSTIFICATO DAL ROSSO DEL TEST DI INTEGRAZIONE
-
-
-
 
 TODO!!!!!!!!!!!!!
 continuare
 https://www.baeldung.com/mockito-series
-
 
 > TDD e' una metodologia di sviluppo software, non di testing
 
@@ -61,6 +55,11 @@ public vid testEquality() {
   assertTrue(new Dollar(5).equals(new Dollar(6))); // triangulation
 }
 ```
+
+# Tempo
+
+Un rosso deve essere ragionevolmente breve, indicativamente minore di 10' - 15'.
+Trovarsi bloccati in questa fase puo' voler dire che si e' approcciato un problema troppo difficile, trovare una via piu' semplice.
 
 # Test double
 

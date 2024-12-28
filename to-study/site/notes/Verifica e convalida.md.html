@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Verifica e convalida</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<p>Debuggare o capire codice e’ 3 volte piu’ difficile che scrivere
+codice, quindi se qualcuno scrive codice al massimo della sua capacita’
+e’ per definizione incapace di debuggarlo o capirlo. Quindi scrivi
+codice semplice.</p>
+<h1 id="terminologia">Terminologia</h1>
+<p><span class="b">Convalida</span>: confronto del software con i
+requisiti informali posti dal committente. Test di accettazione.</p>
+<p><span class="b">Verifica</span>: confronto del software con le
+specifiche formali prodotte dall’analista. Test di unita’.</p>
+<h2 id="bug">“Bug”</h2>
+<p><span class="b">Malfunzionamento (failure)</span>: funzionamento non
+corretto del programma, non del suo codice. Quindi dire “c’e’ un
+malfunzionamento alla riga 42 e’ un uso improprio del termine”. Dire
+“invocando somma con 1 e 2 produce un malfunzionamento perche’ si
+ottiene 2” Non e’ il comportamento previsto. Ad esempio l’Ariane 5 che
+esplode e’ chiaro sia un malfunzionamento.</p>
+<p><span class="b">Difetto o anomalia (fault)</span>: legato al codice,
+e’ condizione necessaria (ma non sufficiente) per il verificarsi di un
+malfunzionamento. Ad esempio se ho una funzione raddoppia che fa
+<code>java linenos:1 int raddoppia(int n) {   return n * n; }</code> non
+sempre ritorna un risultato sbagliato, per <code>2</code> e’ corretta,
+per <code>3</code> no. Pericolose perche’ sembra stiano funzionando.
+Sempre in Ariane 5 anomalia e’ stata la conversione di un 64bit a 16bit
+del valore della velocita’ orizzontale.</p>
+<p><span class="b">Sbaglio (mistake)</span>: causa di una anomalia. In
+genere si tratta di un errore umano (concettuale, battitura, scarsa
+conoscenza del linguaggio). Il riutilizzo della parte incriminata
+dall’Ariane 4 per l’Ariane 5, perche’ Ariane 4 raggiungeva velocita’
+orizzontali non rappresentabili con 16bit. E’ possibile evitare che si
+ripeta, con dei processi.</p>
+<h2 id="tecniche">Tecniche</h2>
+<p><span class="b">Tecniche statiche</span>: basate sull’analisi del
+codice: * metodi formali * analisi data flow * modelli statistici</p>
+<p><span class="b">Tecniche dinamiche</span>: basate sull’esecuzione del
+programma eseguibile * testing * debugging (non di verifica)</p>
+<p>Classificazione delle tecniche: * simplified properties: una versione
+semplificata del programma e’ corretto * optimistic inaccuracy: “non
+sono sicuro, ma se non riesco a dimostrarti che non va bene allora va
+bene”, che e’ cio’ che fa il testing * pessimistic inaccuracy: “se non
+riesco a dimostrarti formalmente che non c’e’ quell’errore per me e’
+come se ci fosse”, metodi formali</p>
+<p>Metodi formali: tecniche che si prefiggono di provare l’assenza di
+anomalie nel prodotto finale Testing: tecniche che si prefiggono di
+rilevare malfunzionamenti, o fornire fiducia nel prodotto Debugging:
+tecniche che si prefiggono di localizzare le anomalie che causano
+malfunzionamenti rilevati in precedenza</p>
+<h1 id="testing">Testing</h1>
+<p>Testing e’ verifica di correttezza o validazione di
+affidabilita’.</p>
+<p>Un programma si puo’ dire corretto se aderisce alle specifiche per
+ogni dato appartenente al dominio di ingresso.</p>
+<p>Un test ha successo quando riesce a rilevare uno o piu’
+malfunzionamenti presenti nel programma che non fossero gia’ noti. Test
+ideale: se il superamento del test (quindi il suo non successo) implica
+la correttezza del programma.</p>
+<h2 id="criterio-di-selezione-test">Criterio di selezione test</h2>
+<p>Presi due test un criterio si dice <span class="b">affidabile</span>
+se entrambi i test hanno successo o entrambi falliscono.</p>
+<p><span class="math inline">$affidabile(C, P) \leftrightarrow \newline
+(\forall T_{1} \in C, \forall T_{2} \in C \ successo(T_{1}, P)
+\leftrightarrow successo(T_{2},P))$</span></p>
+<p>Presi due test un criterio si dice <span class="b">valido</span> se,
+qualora <span class="math inline"><em>P</em></span> non sia corretto,
+allora esiste almeno un <span class="math inline"><em>T</em></span>
+selezionato in base a <span class="math inline"><em>C</em></span> che a
+successo per il programma <span
+class="math inline"><em>P</em></span>.</p>
+<p><span
+class="math inline"><em>v</em><em>a</em><em>l</em><em>i</em><em>d</em><em>o</em>(<em>C</em>,<em>P</em>) ↔︎ (¬<em>o</em><em>k</em>(<em>P</em>,<em>D</em>)→∃<em>T</em>∈<em>C</em><em>s</em><em>u</em><em>c</em><em>c</em><em>e</em><em>s</em><em>s</em><em>o</em>(<em>T</em>,<em>P</em>))</span></p>
+<h3 id="esempio">Esempio</h3>
+<p>Dato</p>
+<p><code>java linenos:1 int raddoppia(int n) {   return n * n; }</code></p>
+<p>Un criterio che seleziona sottoinsiemi di <span
+class="math inline">{0, 2}</span> e’ affidabile ma non valido. Un
+criterio che seleziona sottoinsiemi di <span
+class="math inline">$\set{0,1,2,3,4}$</span> e’ non affidabile ma
+valido. Un criterio che seleziona sottoinsiemi finiti di <span
+class="math inline"><em>D</em></span> con almeno un valore maggiore di
+<span class="math inline">18</span> e’ affidabile e valido.</p>
+<h2 id="utilita-di-un-test">Utilita’ di un test</h2>
+<p>Dobbiamo trovare una metrica che misuri la copertura di un criterio e
+ci permetta di * decidere quando smettere * decidere quale altro caso di
+test aggiungere per aumentare la copertura * confrontare la bonta’ di
+test diversi</p>
+<p>Un caso di test per evidenziare un malfunzionamento causato da una
+anomalia deve: 1. eseguire il comando che contiene l’anomalia 2. il
+punto precedente deve portare il sistema in uno stato scorretto 3. il
+punto prececente deve portare a produrre un output diverso da quello
+atteso</p>
+<p>Deriva dal punto 1. che voglio assicurarmi di stimolare tutti i
+comandi.</p>
+</body>
+</html>

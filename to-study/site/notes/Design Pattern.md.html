@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Design Pattern</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<p>TODO PRENDERE INFO EXTRA DA * test driven development by example di
+Beck * e dal GOF</p>
+<p>All page numbers (i.e. pag.) are from <a
+href="https://en.wikipedia.org/wiki/Design_Patterns">GoF’s</a>.</p>
+<h1 id="abstract-factory">Abstract factory</h1>
+<p>La dependency injection e’ basata sull’Abstract Factory.</p>
+<p>ESPANDERE con abstract factory</p>
+<h1 id="adapter---page-139">Adapter - page 139</h1>
+<blockquote>
+<p>Convert the interface of a class into another interface clients
+expect. Adapter lets classes work together that couldn’t otherwise
+because of incompatible interfaces.</p>
+</blockquote>
+<h2 id="class-adapter">Class Adapter</h2>
+<p>Adatto una singola classe, staticamente, quindi proprio “quella
+classe”. “Un unico oggetto che puo’ essere usato contemporaneamente con
+le due interfacce diverse (vecchia e nuova)”. <u>Utile se devo adattare
+solo 1 metodo su 10</u>: gli altri 9 mi vengono gratis, devo fare fatica
+solo su 1.</p>
+<figure>
+<img src="class-adapter.png" alt="class adapter|300" />
+<figcaption aria-hidden="true">class adapter|300</figcaption>
+</figure>
+<h2 id="object-adapter">Object Adapter</h2>
+<p>Adatto un oggetto compatibile con una interfaccia, una gerarchia;
+perche’ posso settare diversi adapter, in base all’esigenza. Due oggetti
+diversi. Il nuovo non puo’ piu’ essere usato con interfaccia
+vecchia.</p>
+<figure>
+<img src="object-adapter.png" alt="object-adapter|300" />
+<figcaption aria-hidden="true">object-adapter|300</figcaption>
+</figure>
+<p>Si differenzia perche’ sfrutta la composizione. Posso aggregare piu’
+classi diversi, quindi c’e’ maggiore flessibilita’.</p>
+<h1 id="builder">Builder</h1>
+<h2 id="telescoping-constructor">Telescoping constructor</h2>
+<p>Si hanno multipli costruttori in overloading. Di difficile
+manutenibilita’ nel momento in cui voglio diverse possibilita’, perche’
+aumentano esponenzialmente i costruttori da dichiarare.</p>
+<h2 id="setter-o-fluent-interface">Setter (o fluent interface)</h2>
+<p>Problemi di concorrenza e sono obbligato ad accettare la mutabilita’
+dell’oggetto, perche’ ho dei setter, quindi espongo lo stato.</p>
+<h2 id="static-method-factory-non-e-factory-method">Static method
+factory (non e’ Factory method)</h2>
+<p>Ho un costruttore privato con tutti i parametri, e una serie di
+metodi statici pubblici che al loro interno costruiscono l’oggetto in
+base a cio’ che mi serve. Posso dare nomi significativi a ogni metodo,
+per spiegare come crea l’oggetto, cosa che con il costruttore
+chiaramente non posso fare.</p>
+<h2 id="builder-pattern">Builder pattern</h2>
+<figure>
+<img src="builder-pattern.png" alt="builder-pattern|300" />
+<figcaption aria-hidden="true">builder-pattern|300</figcaption>
+</figure>
+<p>Classe Builder interna, con costruttore con soli parametri
+obbligatori. Si hanno poi variabili d’istanza con valori di default,
+sovrascrivibili tramite metodo, usando fluent interface.</p>
+<p>```java linenos:1 public class Xxx { private final TO optionalField1;
+private final T1 mandatoryField; private final T2 optionalField2;</p>
+<p>private Xxx(Builder builder) { mandatoryField =
+builder.mandatoryField; optionalField1 = builder.optionalField1;
+optionalField2 = builder.optionalField2; }</p>
+<p>public static class Builder { private TO optionalField1 =
+defaultValue1; private T1 mandatoryField; private T2 optionalField2 =
+defaultValue2; public Builder(T1 mf) { mandatoryField = mf; } public
+Builder withOptionalField1(TO of) { optionalFieldl = of; return this; }
+// etc…</p>
+<pre><code>
+Usage
+
+```java linenos:1
+Xxx b = Xxx.Builder(mandatoryField)
+            .withOptionalField1(optionalField)
+            .build();</code></pre>
+<h1 id="chain-of-responsibility">Chain of responsibility</h1>
+<p>Disaccoppia chi genera la richiesta da chi puo’ soddisfarla.</p>
+<p>“Permette di definire una catena di potenziali gestori di una
+richiesta, non sappiamo a priori chi sara’ in grado di gestirla
+effettivamente”</p>
+<p>Evita l’antipattern dello switch case o degli if else</p>
+<p>Ogni valutatore guarda se sa rispondere alla domanda, altrimenti
+manda avanti la domanda al prossimo: c’e’ uno specifico ordine in cui le
+risposte sono ordinate.</p>
+<aside>
+open close principle
+</aside>
+<p>Rimuovo la responsabilita’ dalla classe client dell’identificazione
+di una certa situazione, la responsabilita’ non e’ sua. Il client e’
+chiuso rispetto alle modifiche ma aperto alle estensioni, perche’ se
+devo cambiare la logica di gestione delle responsabilita’ lui non viene
+toccato.</p>
+<p>ESPANDERE Analogia con il dynamic binding e il suo albero di
+navigazione per cercare l’implementazione del metodo.</p>
+<p>Ottimo anche quando sviluppato in TDD, in quanto ogni nodo puo’
+essere sviluppato in isolamento.</p>
+<h1 id="composite">Composite</h1>
+<figure>
+<img src="pattern-composite.png" alt="composite-pattern|300" />
+<figcaption aria-hidden="true">composite-pattern|300</figcaption>
+</figure>
+<p>Gestire uniformemente foglie e sotto-alberi. “Non mi devo accorgere
+se sto interagendo con una foglia o un sotto-albero”.</p>
+<h1 id="decorator">Decorator</h1>
+<figure>
+<img src="pattern-decorator.png" alt="pattern-decorator|300" />
+<figcaption aria-hidden="true">pattern-decorator|300</figcaption>
+</figure>
+<p>Aggiungere nuove funzionalita’ o caratteristiche dinamicamente.
+Distribuisce le responsabilita’ lasciando ogni decorazione molto
+semplice.</p>
+<p>Simile come struttura al <a
+href="Design%20Pattern.md#Decorator">Decorator</a>, il composite mette
+assieme tante “cose”, il Decorator decora una “cosa”. Notare
+l’<code>1</code> nello schema, vicino a Component.</p>
+<p>Possono esserci piu’ <code>ConcreteDecorator</code>.</p>
+<p>L’elemento finale di un Decorator pattern e’ cio’ che sto decorando,
+che puo’ arrivare anche dopo una sequenza di decorazioni.</p>
+<p>I vari oggetti decorati sono estranei gli uni agli altri.</p>
+<p>Un esempio in Java sono gli <code>InputStream</code>.</p>
+<p>Esempio di Decorator dal prof</p>
+<figure>
+<img src="esempio-decorator.png" alt="esempio-decorator|500" />
+<figcaption aria-hidden="true">esempio-decorator|500</figcaption>
+</figure>
+<h1 id="iterator">Iterator</h1>
+<p><a
+href="https://github.com/lazywithclass/learning/tree/master/software-engineering/DesignPatterns/src/iterator">Implementation
+example</a></p>
+<blockquote>
+<p>Fornisce un modo di accedere agli elementi di un oggetto aggregatore
+in maniera sequenziale senza esporre la rappresentazione interna</p>
+</blockquote>
+<figure>
+<img src="pattern-iterator.png" alt="iterator|300" />
+<figcaption aria-hidden="true">iterator|300</figcaption>
+</figure>
+<p>Notare come <code>condimentCost</code> non dipende da chi sto
+decorando, dipende da <code>ConcreteCondiment</code>.</p>
+<h1 id="facade">Facade</h1>
+<p>Fornisce una interfaccia unificata e semplificata a un insieme di
+interfacce separate.</p>
+<h1 id="factory-method">Factory method</h1>
+<p>Definisce un’interfaccia per creare un oggetto ma lascia alle
+sottoclassi la scelta su cosa creare.</p>
+<figure>
+<img src="factory-method.png" alt="factory-pattern|300" />
+<figcaption aria-hidden="true">factory-pattern|300</figcaption>
+</figure>
+<h1 id="model-view-controller">Model View Controller</h1>
+<p><img src="mvc.png" /></p>
+<p>L’MVC e’ un set di pattern che collaborano assieme nello stesso
+design: Composite (view), Strategy (quale Controller iniettare, il
+Controller e’ lo Strategy per la View), Observer (il Model e’ observable
+e View e Controller sono observer).</p>
+<blockquote>
+<p>The best way to think of MVC is as set of principles including the
+separation of presentation from domain logic and synchronizing
+presentation state through events (the observer pattern) – Martin
+Fowler</p>
+</blockquote>
+<p>About “handling the triggering of synchronization between screen
+state and session state”, MVC does it by making updates on the model and
+then relying of the observer relationship to update the views that are
+observing that model.</p>
+<p>Il problema e’ che c’e’ una circolarita’ di comunicazione, quindi si
+potrebbe preferire per questo l’MVP.</p>
+<h2 id="model">Model</h2>
+<p>Un unico modello che rappresenta lo stato dell’applicazione</p>
+<h2 id="view">View</h2>
+<p>La View si aggiorna ogni volta che il Model cambia stato. Tra Model e
+View c’e’ una relazione tipo Observer.</p>
+<h2 id="controller">Controller</h2>
+<p>Ascolta gli eventi dell’interfaccia, a fronte del quale eventualmente
+puo’ richiedere una modifica dello stato. Implementa quindi la Strategy
+di gestione di un evento. A seconda del Controller che associo ho un
+comportamento diverso.</p>
+<h1 id="model-view-presenter">Model View Presenter</h1>
+<p>https://martinfowler.com/eaaDev/uiArchs.html#Model-view-presentermvp</p>
+<figure>
+<img src="mvc-mvp.png" alt="mvc-mvp|400" />
+<figcaption aria-hidden="true">mvc-mvp|400</figcaption>
+</figure>
+<p>Viene rimossa la dipendenza circolare. Molto piu’ facile da
+testare.</p>
+<p>Il Presenter ha un riferimento a View e Model, agendo da middle
+man.</p>
+<p>Per ogni View c’e’ un Presenter. Si puo’ intendere quindi 1 classe
+View e 1 istanza Presenter, 1 classe View e 1 classe Presenter, tenendo
+presente i principi di buona scrittura del software.</p>
+<p>Vedi <a
+href="Design%20Pattern.md#Modalita&#39;%20-%20pag%20298">Modalita’ - pag
+298</a> di Observer.</p>
+<h2 id="diverse-relazioni">Diverse relazioni</h2>
+<h3 id="presenter-rightarrow-model">Presenter <span
+class="math inline">→</span> Model</h3>
+<p>Il Presenter viene aggiunto come ascoltatore di cambi di stato sul
+Model.</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>model<span class="op">.</span><span class="fu">addObserver</span><span class="op">(</span>presenter<span class="op">)</span></span></code></pre></div>
+<h3 id="presenter-rightarrow-view">Presenter <span
+class="math inline">→</span> View</h3>
+<p>Il presente viene aggiunto come gestore degli eventi sulle View</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>view<span class="op">.</span><span class="fu">addHandler</span><span class="op">(</span>presenter<span class="op">)</span></span></code></pre></div>
+<h2 id="suddivisione-tra-model-e-state">Suddivisione tra Model e
+State</h2>
+<p>Puo’ essere una buona idea operare una divisione di questo tipo:</p>
+<p>State: rappresenta lo stato all’interno del pattern. Model: e’ <a
+href="Design%20Pattern.md#Class%20Adapter">Class Adapter</a> dello State
+aggiungendo capacita’ di <a
+href="Design%20Pattern.md#Observer%20-%20pag%20293">Observer - pag
+293</a>.</p>
+<h2 id="interface-segregation-sul-presenter">Interface Segregation sul
+Presenter</h2>
+<p>Non sempre voglio che tutti i Presenter implementino lo stesso
+<code>Presenter</code>, ricordarsi di specializzare sfruttando
+l’eredita’ multipla sulle interfacce.</p>
+<h2 id="da-dove-si-parte-nellimplementazione">Da dove si parte
+nell’implementazione?</h2>
+<p>Si puo’ approcciare da diversi lati, ad esempio con diversi
+sotto-team che si avvicinano assieme al risultato.</p>
+<p>O inizio dal Presenter (top down). Piuttosto che dal Model (bottom
+up). In questo senso una buona strategia puo’ essere partire dal Model
+delineando in una interfaccia quali sono i metodi che verranno
+implementati.</p>
+<p>TODO RIMANDO A IMMUTABILITA’ Favorire un design con immutabilita’ nel
+Model, per evitare deep copies.</p>
+<h2 id="gestione-degli-errori">Gestione degli errori</h2>
+<p>Nel Presenter (ma…). Importante che una volta validato il dato questa
+validazione non sia fatta, se si usa il contract based allora si puo’
+costruire un tipo che assume per costruzione la validazione del dato,
+es:</p>
+<p><code>java linenos:1 public record TimeOfRun(@NotNull String name, @NotNull Double time) {   public TimeOfRun {     if (name.isBlank) throw     if (time &lt; 0) throw   } }</code></p>
+<p>E’ il Presenter che istruisce la vista sul suo stato di errore.</p>
+<p>Ma anche nel Model (…!). Dipende da dove ha senso, ad esempio se ho
+un Model che gestisce due manche di sciatori, e mi arriva nel Model un
+nome di uno sciatore non presente nella prima manche allora questo lo
+posso gestire solo nel Model.</p>
+<h2 id="deregistrarsi-dagli-observer">Deregistrarsi dagli observer</h2>
+<p>Puo’ avere senso ad un certo stato di avanzamento nell’applicazione
+per qualcuno di deregistrarsi.</p>
+<h1 id="nullobject">NullObject</h1>
+<blockquote>
+<p>Vogliamo creare un oggetto che corrisponda al concetto “nessun
+valore” o “valore neutro”</p>
+</blockquote>
+<p>```java linenos:1 public interface CardSource { Card draw(); boolean
+isEmpty();</p>
+<pre><code>enum NULL implements CardSource {
+    INSTANCE;
+    public boolean isEmpty() {
+        return true;
+    }
+    public Card draw() {
+        assert !isEmpty();
+        return null;
+    }
+}</code></pre>
+<p>}</p>
+<pre><code>
+# Observer - pag 293
+
+Diversi modi di presentare una informazione, esempio
+![observer|300](observer-example.png)
+
+...il problema e&#39; che ogni vista e&#39; accoppiata alle altre perche&#39; devono reagire al cambiamento
+![observer|300](observer-pattern-problem.png)
+
+Per evitare questo estraiamo la parte comune: lo stato, e lo mettiamo in un oggetto a parte (Subject), osservato dagli altri (Observer)
+
+![observer-pattern|300](observer-pattern.png)
+
+Vogliamo rendere osservabile questo stato
+
+```java linenos:1
+public class State {
+    private double temp;
+    
+    public State(double temp) {
+        this.temp = temp;
+    }
+}</code></pre>
+<h2 id="modalita---pag-298">Modalita’ - pag 298</h2>
+<p>E’ possibile avere due modalita’ per avvertire gli observer di un
+cambiamento: pull e push</p>
+<p>```java linenos:1 <span class="citation"
+data-cites="Override">@Override</span> public void setTemp(double temp)
+{ if (this.temp != temp) { this.temp = temp; notifyObservers(); } }</p>
+<p><span class="citation" data-cites="Override">@Override</span> public
+void notifyObservers() { for (Observer<Double> obs : observers) {
+obs.update(this, temp); // qui si rendono disponibili entrambe le
+modalita’ } }</p>
+<pre><code>
+Stato semplice $\rightarrow$ push.
+Stato complesso o parzialmente rilevante $\rightarrow$ pull.
+
+### Modalita&#39; pull
+
+Il subject fornisce metodi (getter) per accedere al proprio stato, lasciando agli observer il compito di scegliere cosa consultare.
+Vantaggi: Più flessibile, perché ogni observer può decidere cosa gli serve. Ideale per stati complessi.
+
+### Modalita&#39; push
+
+Il subject invia lo stato agli observer.
+Vantaggi: semplice da implementare se lo stato è compatto e se gli observer richiedono tutte le informazioni.
+Svantaggi: inefficiente se lo stato è complesso e gli observer sono interessati solo a una parte, o se vogliono solo essere notificati del cambiamento senza conoscerne i dettagli.
+
+```java linenos:1
+@Override
+public void update(@Nullable Observable&lt;Double&gt; subject, @NotNull Double state) {
+    view.setValue(String.format(&quot;%.2f&quot;, strategy.convertFromCelsius(state)));
+}</code></pre>
+<h1 id="singleton">Singleton</h1>
+<blockquote>
+<p>Sfrutta il fatto che in Java i campi degli <code>enum</code> sono
+realizzati tramite degli oggetti costanti creati al momento del loro
+primo uso</p>
+</blockquote>
+<p>```java linenos:1 public enum Singleton { INSTANCE; public void op()
+{ … } }</p>
+<p>Singleton.INSTANCE.op(); ```</p>
+<h1 id="state">State</h1>
+<figure>
+<img src="state-pattern.png" alt="pattern-state|300" />
+<figcaption aria-hidden="true">pattern-state|300</figcaption>
+</figure>
+<p>Nei diversi momenti ci sono diversi stati da poter utilizzare (state
+machine).</p>
+<p>Meta stato (nell’esempio <code>State</code>) Stato astratto <span
+class="math inline">→</span> classe (nell’esempio
+<code>ConcreteState</code>) Stato concreto <span
+class="math inline">→</span> le informazioni di contesto</p>
+<p>Gli stati non devono conoscersi a vicenda, e’ il <code>Context</code>
+che puo’ conoscerli.</p>
+<h1 id="strategy">Strategy</h1>
+<figure>
+<img src="pattern-strategy.png" alt="pattern-strategy|300" />
+<figcaption aria-hidden="true">pattern-strategy|300</figcaption>
+</figure>
+<blockquote>
+<p>Definisce una famiglia di algoritmi, e li rende (tramite
+encapsulation) tra loro intercambiabili.</p>
+</blockquote>
+<p>Ad esempio usato nel <a
+href="https://github.com/lazywithclass/learning/tree/master/software-engineering/DesignPatterns/src/strategy/sort">sorting</a>.</p>
+<h1 id="template">Template</h1>
+<p>TODO ESPANDERE</p>
+</body>
+</html>

@@ -3,7 +3,7 @@ cssclasses:
   - cornell-note
 tags:
   - parser-combinators
-  - f#
+  - fsharp
   - combinators
 ---
 
@@ -11,7 +11,7 @@ tags:
 
 Here's the [blog post](https://fsharpforfunandprofit.com/posts/understanding-parser-combinators/) the author made on the subject 
 
-![[Pasted image 20240112223842.png]]
+![Pasted image 20240112223842.png](Pasted%20image%2020240112223842.png)
 
 ```
 Parser<A> combine-with Parser<B> => Parser<C>

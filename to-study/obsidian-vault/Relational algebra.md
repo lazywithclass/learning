@@ -71,7 +71,7 @@ We can't do $\pi_{GC.boardgame}(\sigma_{C.name\neq Wargame}(GC\bowtie_{GC.catego
 
 because the $boardgame$ having id 4 has different categories, so we would not show the line where it has $name$ 4, but we would show the like where it has $name$ $Ancient$, which is wrong because this boardgame also is a $Wargame$. 
 
-<span class="b">To verify a negative condition we have to verify all data together, which we can't</span>, because of the [[Relational algebra#Fundamental principle]].
+<span class="b">To verify a negative condition we have to verify all data together, which we can't</span>, because of the [Relational algebra#Fundamental principle](Relational%20algebra#Fundamental%20principle.md).
 
 <aside>Solution when working with negation</aside>
 Always obtain those records that fall in the category, and then subtract these from all records: 
@@ -103,15 +103,17 @@ To achieve that we
 3) remove from all possible elements what we got at 1) $\pi_{A}(R) - \pi_{A}(\pi_{A}(R) \times \pi_{B}(S) - R)$
 
 This operation is called division $\div$.
+
 ### More info
 
 [Great explanation](https://www2.cs.arizona.edu/~mccann/research/divpresentation.pdf).
 
 Given relation $R$ and $S$, $R \div S$ identifies attribute values in $R$ that can be paired with all of the values in $S$. It is the inverse of Cartesian product.
 
-![[relational-algebra-cartesian-product.png|500]] ![[relational-algebra-division.png|545]]
+![relational-algebra-cartesian-product.png](relational-algebra-cartesian-product.png) 
+![relational-algebra-division.png](relational-algebra-division.png)
 
-![[relational-algebra-in-short.png|500]]
+![relational-algebra-in-short.png](relational-algebra-in-short.png)
 
 If $U = R \times S$ then $U \div S = R$ e $U \div R = S$.
 
@@ -140,7 +142,7 @@ Sometimes it might be useful to invert the sentence and ask ourselves the negate
 
 Following examples use this schema:
 
-![[Pasted image 20240201195400.png]]
+![Pasted image 20240201195400.png](Pasted%20image%2020240201195400.png)
 
 <aside>writing a query</aside>
 How to approach writing a query:
@@ -169,7 +171,7 @@ The idea would be to take from all boardgames the ones that are "Wargame":
 $$\pi_{id}(boardgame) - \pi_{GameCategory.boardgame}(\sigma_{cname\neq"Wargame"} (GameCategory\bowtie_{boardgame=id} Category))$$
 
 4. Given the following we want to find all values of `R.A` that have a correspondance with all values `S.B`. Could be useful when you want to find all students that attended all courses for example.
-![[Pasted image 20240201221133.png|500]]
+![Pasted image 20240201221133.png](Pasted%20image%2020240201221133.png)
 $$\pi_A(R) \times \pi_{B}(S) - R$$
 With the first part $\pi_A(R) \times \pi_{B}(S)$ we get all possible combinations, we remove `R` so we get the online one that's missing.
 So we arrive to $\pi_{A}(R) - \pi_{A}(\pi_A(R) \times \pi_{B}(S) - R)$
@@ -223,7 +225,7 @@ $\pi_{boardgame}Listings - \pi_{boardgame}(\sigma_{currency=EU \wedge price\lt 1
 
 ### Cities
 
-![[relational-algebra-politicians.png]]
+![relational-algebra-politicians.png](relational-algebra-politicians.png)
 
 1. Find the names of politicians that are in charge in cities of nations where they were not born into
 $\sigma_{C.country \neq P.birth\_place}(Politician \bowtie_{P.id=C.head}City)$

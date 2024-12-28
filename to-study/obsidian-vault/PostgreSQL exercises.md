@@ -13,7 +13,7 @@ tags:
 
 ### Subtraction
 
-In [[Relational algebra]] we can do the subtraction, in SQL this could be achieved using
+In [Relational algebra](Relational%20algebra.md) we can do the subtraction, in SQL this could be achieved using
 * `NOT IN`
 ```sql
 SELECT C.iso3 

@@ -1,14 +1,18 @@
 {
 	"nodes":[
-		{"id":"85dd640905a2b3bb","x":-3120,"y":-986,"width":2080,"height":1826,"type":"group","label":"Software engineering"},
-		{"id":"b0347299040bae97","x":-5200,"y":-280,"width":1049,"height":689,"type":"group","label":"Java"},
+		{"id":"85dd640905a2b3bb","type":"group","x":-3120,"y":-986,"width":2080,"height":1826,"label":"Software engineering"},
+		{"id":"b0347299040bae97","type":"group","x":-5200,"y":-280,"width":1049,"height":689,"label":"Java"},
 		{"id":"1d96b754faeaee28","type":"file","file":"Exception.md","x":-5138,"y":-191,"width":400,"height":400},
-		{"id":"7b56a502ad3fb7fc","x":-3040,"y":-880,"width":400,"height":402,"type":"file","file":"Design Pattern.md"},
-		{"id":"4f1cb2aca91aaf7a","x":-2360,"y":-880,"width":400,"height":400,"type":"file","file":"Encapsulation and information hiding.md"},
-		{"id":"a83c9bac82882194","x":-2628,"y":-85,"width":400,"height":400,"type":"file","file":"Verifica e convalida.md"},
-		{"id":"d7901ebc7ac6d58f","x":-1688,"y":123,"width":400,"height":400,"type":"file","file":"Inheritance.md"},
-		{"id":"dea8b742a229aa25","x":-1640,"y":-625,"width":400,"height":400,"type":"file","file":"Law of Demeter.md"},
-		{"id":"9c8caae7182b4d20","x":-3040,"y":440,"width":400,"height":400,"type":"file","file":"SOLID.md"}
+		{"id":"7b56a502ad3fb7fc","type":"file","file":"Design Pattern.md","x":-3040,"y":-880,"width":400,"height":402},
+		{"id":"4f1cb2aca91aaf7a","type":"file","file":"Encapsulation and information hiding.md","x":-2360,"y":-880,"width":400,"height":400},
+		{"id":"d7901ebc7ac6d58f","type":"file","file":"Inheritance.md","x":-1688,"y":123,"width":400,"height":400},
+		{"id":"dea8b742a229aa25","type":"file","file":"Law of Demeter.md","x":-1640,"y":-625,"width":400,"height":400},
+		{"id":"969134cf7e4e5c47","x":-4560,"y":-191,"width":400,"height":400,"type":"file","file":"Java.md"},
+		{"id":"a83c9bac82882194","type":"file","file":"Verifica e convalida.md","x":-2960,"y":323,"width":400,"height":400},
+		{"id":"9c8caae7182b4d20","type":"file","file":"SOLID.md","x":-2360,"y":-77,"width":400,"height":400}
 	],
-	"edges":[]
+	"edges":[
+		{"id":"9cba33d2898e5a11","fromNode":"dea8b742a229aa25","fromSide":"left","toNode":"9c8caae7182b4d20","toSide":"top"},
+		{"id":"faa6ae0a9e46bb90","fromNode":"9c8caae7182b4d20","fromSide":"top","toNode":"dea8b742a229aa25","toSide":"left"}
+	]
 }

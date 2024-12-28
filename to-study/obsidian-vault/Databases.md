@@ -5,8 +5,8 @@ tags:
   - databases
 ---
 
-[[Relational algebra]]
-[[PostgreSQL exercises]]
+[Relational algebra](Relational%20algebra.md)
+[PostgreSQL exercises](PostgreSQL%20exercises.md)
 
 # Relational model
 

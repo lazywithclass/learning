@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTMX Example</title>
+  <script src="https://unpkg.com/htmx.org"></script>
+  <link rel="stylesheet" href="css/index.css" />
+  <link rel="stylesheet" href="css/highlight.min.css" />
+  <script src="js/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</head>
+<body>
+  <div class="layout">
+    <div id="main">
+      <p>Select an item from the sidebar to view content.</p>
+    </div>
+    <div hx-get="notes.html" hx-trigger="load" hx-swap="innerHTML"></div>
+    
+  </div>
+</body>
+</html>

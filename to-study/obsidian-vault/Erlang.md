@@ -8,35 +8,9 @@ tags:
   - purely-functional
 ---
 
-- [[#Tutorials|Tutorials]]
-	- [[#Tutorials#Erlang Master Class|Erlang Master Class]]
-	- [[#Tutorials#Erlang Express Course|Erlang Express Course]]
-- [[#The language|The language]]
-- [[#The syntax|The syntax]]
-	- [[#The syntax#Punctuation|Punctuation]]
-	- [[#The syntax#Rounding|Rounding]]
-	- [[#The syntax#A recursive function|A recursive function]]
-	- [[#The syntax#Reversing a list|Reversing a list]]
-	- [[#The syntax#Tuples and records|Tuples and records]]
-	- [[#The syntax#Pattern matching|Pattern matching]]
-	- [[#The syntax#Libraries|Libraries]]
-- [[#Running Erlang|Running Erlang]]
-- [[#Shell commands|Shell commands]]
-- [[#Actors|Actors]]
-	- [[#Actors#Receive|Receive]]
-	- [[#Actors#Functions that work at the actor level|Functions that work at the actor level]]
-	- [[#Actors#Group leader|Group leader]]
-	- [[#Actors#Nodes|Nodes]]
-- [[#Error handling|Error handling]]
-	- [[#Error handling#Link|Link]]
-	- [[#Error handling#Monitor|Monitor]]
-- [[#Useful stuff|Useful stuff]]
-- [[#Dyalizer|Dyalizer]]
-- [[#Testing|Testing]]
+# Tutorials
 
-## Tutorials
-
-### Erlang Master Class
+## Erlang Master Class
 
 https://www.cs.kent.ac.uk/ErlangMasterClasses/
 
@@ -48,20 +22,20 @@ In the first part they talk about interpreters. Pretty interesting, not really t
 
 Second part is about concurrency and its patterns (rpc, Futures, ...).
 
-### Erlang Express Course
+## Erlang Express Course
 
 https://www.youtube.com/watch?v=aEyQcZg-Njs&list=PLoFxPv8jwGVVlajiMxaW9zG1IZgHODTuq
 
-Much longer than the [[Erlang#Erlang Master Class]]. High quality content, taught by [Simon Thompson](https://www.kent.ac.uk/computing/people/3164/thompson-simon).
+Much longer than the [Erlang#Erlang Master Class](Erlang#Erlang%20Master%20Class.md). High quality content, taught by [Simon Thompson](https://www.kent.ac.uk/computing/people/3164/thompson-simon).
 
-## The language
+# The language
 
 Exercises, exam attempted solutions, and the likes could be found [here](https://github.com/lazywithclass/learning/tree/master/programming-languages/erlang).
 
-[[Dynamically typed]] [[purely functional]] programming language.
-Fault tolerant, supports [[hot code swapping]].
+Dynamically typed purely functional programming language.
+Fault tolerant, supports hot code swapping.
 
-Being [[stateless]] it has a huge advantage when dealing with [[concurrency]] since there is no need to lock the state.
+Being stateless it has a huge advantage when dealing with concurrency since there is no need to lock the state.
 
 <aside>concurrent programs</aside>
 
@@ -69,12 +43,12 @@ Being [[stateless]] it has a huge advantage when dealing with [[concurrency]] si
  * distributed - among different computers
  * parallelism - on the same computer, with more CPUs
 
-[[Beam]] is the VM on top of which Erlang runs.
+Beam is the VM on top of which Erlang runs.
 
 <aside>Mind blowing integers</aside>
 Integers in Erlang have arbitrary precision.
 
-## The syntax
+# The syntax
 
 `=` is not assignment, it is always pattern matching, to see it in action try to create a variable with a value and then re-assign it. Read the error message.
 
@@ -96,21 +70,21 @@ Also
 
 Gives an error, as the same `F` can't be both 23 and 24.
 
-### Punctuation
+## Punctuation
 
 At first Erlang syntax looks a bit alien, especially with `,`, `;`, and `.`, use English as an analogy:
 * `,` separates expressions within a clause expressions
 * `;` separates parts of a sentence (clauses in Erlang)
 * `.` ends a sentence (function)
 
-### Rounding
+## Rounding
 
 ```erlang
 1> round(1.0).
 1
 ```
 
-### A recursive function
+## A recursive function
 
 ```erlang
 -module(fact).
@@ -126,7 +100,7 @@ fact(N) -> N * fact(N-1).
 65 # ASCII
 ```
 
-### Reversing a list
+## Reversing a list
 
 ```erlang
 -module(exercise).
@@ -144,11 +118,11 @@ Different cases in a function declaration are separated with `;`, once you're do
 
 Careful, lists in Erlang are 1-based!
 
-### Tuples and records
+## Tuples and records
 
 Tuples could be used to pass around structured information: `{ msgname, msgbody, extra }`; for records look into [this exercise](https://github.com/lazywithclass/learning/blob/master/programming-languages/erlang/course-exercises/counting.erl).
 
-### Pattern matching
+## Pattern matching
 
 Besides the usual structural pattern matching on arrays (`[H|T]`) or tuples (`{a, b, _}`) you could also:
 
@@ -176,7 +150,7 @@ Use
 * `,` if all guards have to succeed
 * `;` if one guard has to succeed
 
-### Libraries
+## Libraries
 
 Common libraries
 
@@ -185,7 +159,7 @@ Common libraries
 * lists.erl - standard list processing
 * code.erl - load test manipulate code
 
-## Running Erlang
+# Running Erlang
 
 ```shell
 $ erl
@@ -196,7 +170,7 @@ $ erl
 5040
 ```
 
-## Shell commands
+# Shell commands
 
 * help() - prints out a list of shell commands
 * h() - history, print the last 20 commands
@@ -204,7 +178,7 @@ $ erl
 * f() - forget, forget all variable bindings
 * f(X) - forget, forget the binding of variable X
 
-## Actors
+# Actors
 
 Actor model explained in under 5 minutes:
 
@@ -232,13 +206,13 @@ You could use `?MODULE` to reference to the module you're in instead of, for exa
 
 `spawn` returns a process identifier, which is the only knowledge you get about that process; to `spawn` something you need to `export` it.
 
-### Send
+## Send
 
 To send a message to a PID you use the `!` construct: `Pid ! {self(), something}`
 
 Sending a message will never fail, messages sent to non existing processes are thrown away, received messages are stored in the process mailbox.
 
-### Receive 
+## Receive 
 
 A pattern and a body to execute if that pattern is matched
 
@@ -294,17 +268,17 @@ spawn(module, loop_receiving, []),
 io:format("done").
 ```
 
-### Functions that work at the actor level
+## Functions that work at the actor level
 
 * [`spawn`](https://www.erlang.org/doc/reference_manual/processes.html#process-creation) -  creates actors
 * [`!`](https://www.erlang.org/doc/reference_manual/processes.html#sending-signals) - sends messages
-* [`spawn_link`](https://www.erlang.org/doc/man/erlang#spawn_link-4) spawns and then [[#Link]]
+* [`spawn_link`](https://www.erlang.org/doc/man/erlang#spawn_link-4) spawns and then [#Link](#Link.md)
 * pattern match - works through the message queue, messages are ordered by [sent order](https://www.erlang.org/blog/message-passing/)
 * `self()` - gives the PID of the current actor
 * `register(an_atom, Pid)` 
 * `unregister(an_atom)` 
 * `whereis(an_atom) -> Pid|undefined`
-* `global:whereis_name(an_atom) -> Pid|undefined`, remember to `net_adm:ping(Host)` (see [[#Useful stuff]])
+* `global:whereis_name(an_atom) -> Pid|undefined`, remember to `net_adm:ping(Host)` (see [#Useful stuff](#Useful%20stuff.md))
 * `registered()`
 
 <aside>why register</aside>
@@ -317,11 +291,11 @@ The following allows to extend the max number of processes, you can get the max 
 $ erl +p $NUM_PROCESSES
 ```
 
-### Group leader
+## Group leader
 
 Each output is associated to a certain group_leader, you configure to have `io:format` output to go on a certain node by using `group_leader(whereis(user), self())`.
 
-### Nodes
+## Nodes
 
 You could start a node with (note that the hostname is `hostname`)
 
@@ -358,11 +332,11 @@ where `server` is how you registered the pid of the process, this line basically
 
 More on this [in the docs](https://www.erlang.org/doc/getting_started/conc_prog#distributed-programming)
 
-## Error handling
+# Error handling
 
 On [receiving exit signals](https://www.erlang.org/doc/reference_manual/processes#receiving-exit-signals).
 
-### Link
+## Link
 
 Symmetric, when `B` dies an exit signal is sent to `A`
 
@@ -375,7 +349,7 @@ link(B)
 
 We can create a system process if we don't want it to die when it receives the signal: `process_flag(trap_exit, true)`, it will be treated as a message.
 
-### Monitor
+## Monitor
 
 Asymmetric link, one stares at the other, but that's it, just the stared one dies.
 
@@ -387,7 +361,7 @@ Asymmetric link, one stares at the other, but that's it, just the stared one die
 monitor(process, B)
 ```
 
-## Useful stuff
+# Useful stuff
 
 `badmatch` usually means you are redefining a variable, you can't.
 
@@ -408,13 +382,8 @@ Nodes are loosely coupled so to make them aware of each other you could `net_adm
 
 ## Dyalizer
 
-[[Dialyzer]]
+TODO
 
 ## Testing
 
-[[Testing]] Erlang could be done via [[Rebar3]]
-
-
-https://duckduckgo.com/?q=how+to+deal+with+erlang+purity+when+modifying+stuff&atb=v340-1&ia=web
-https://user.it.uu.se/~kostis/Papers/purity.pdf
-
+Testing Erlang could be done via Rebar3.

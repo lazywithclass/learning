@@ -23,6 +23,13 @@ Reference escaping - "pensavo di essere protetto dall'encapsulation, ma invece e
 
 Non sempre c'e' reference escaping, dipende se cio' che sto passando e' o meno un segreto, se non e' un segreto o se e' immutabile allora non c'e'.
 
+Tipologie di relazioni:
+* composizione: tipicamente non voglio che l'oggetto interno della classe venga esposto, perche' e' un mio segreto
+* associazione: se qualcosa arriva da fuori, mi e' passato, probabilmente non e' un mio segreto, quindi posso tenermene una copia, ma se lo rendo disponibile non c'e' reference escaping
+* aggregazione:
+
+Lo stato del Model, in [Model View Presenter](Design%20Pattern.md#Model%20View%20Presenter) e' un segreto da proteggere, perche' se qualcuno lo modifica dall'esterno non posso notificare gli osservatori.
+
 ## Variabili di istanza non private
 
 Normalmente le variabili di istanza devono essere private, chiaramente non vuol dire mettere getter e setter. Vedere lo stato puo' essere corretto, cio' che non e' corretto e' consentire la modifica.
