@@ -13,13 +13,6 @@ https://www.youtube.com/watch?v=7vb089FkfiI&sttick=0
 file:///C:/Users/monte/Downloads/Telegram%20Desktop/slides%20(2).pdf
 
 
-TODO 
-difference use story e user story
-
-Vedere assertj come usa la reflection e fai degli esempi
-
-Prendere dalle slide di lab i code smell
-
 
 FLASHCARDS
 
@@ -165,6 +158,7 @@ https://prog2-unimi.github.io/notes/CED.html
 
 - per quanto concerne il libro di testo [Effective Java](http://www.informit.com/store/effective-java-9780134685991) i capitoli 2, 3, 4, 5 (eccetto gli _item_ 32 e 33), 8 (eccetto gli _item_ 53 e 55), 9 (eccetto l'_item_ 66), 10;
 
+
 # Punti di attenzione dal lab
 
 ## Approccio ai parziali ed in generale all'implementazione di un programma
@@ -172,24 +166,10 @@ https://prog2-unimi.github.io/notes/CED.html
 Planning: "cosa riesco a fare?", "era impossibile farlo in 4 ore" $\rightarrow$ non si e' capito cosa e' un modello incrementale
 "Cosa riesco a fare in 4 ore che da piu' valore al cliente?"
 
-## try with resources
-
-```java linenos:1
-// ci assicura che lo scanner venga chiuso
-try (Scanner sc = new Scanner(input)) {
-  // code
-}
-```
-
 ## gitflow
 
 Utilizzare assolutamente la funzionalita' dentro l'IDE.
 
-## ParameterizedTest
-
-https://www.baeldung.com/parameterized-tests-junit-5#6-methods
-
-Un ottimo modo per evitare duplicazione all'interno dei test. Anche i test sono codice.
 
 ## Code smells
 

@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Petri nets</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<p>Nascono per descrivere sistemi concorrenti.</p>
+<h1 id="note-sulla-sintassi">Note sulla sintassi</h1>
+<p>Marcatura: distribuzione dei token sui posti, piu’ formalmente e’ una
+funzione che assegna un intero non negativo ad ogni posto della rete
+Scatto: <span
+class="math inline"><em>M</em>[<em>t</em><sub>1</sub> &gt; <em>M</em>′</span>
+<span class="math inline"><em>M</em></span> abilita <span
+class="math inline"><em>t</em>1</span>: <span
+class="math inline"><em>M</em>[<em>t</em><sub>1</sub>&gt;</span> I
+preset <span
+class="math inline"><em>p</em><em>r</em><em>e</em>(<em>t</em>)</span>
+sono i posti connessi alle transizioni, i postset <span
+class="math inline"><em>p</em><em>o</em><em>s</em>(<em>t</em>)</span>
+sono i posti connessi dalle transizioni. # Differenza con FSM</p>
+<ul>
+<li>stato non e’ a livello di sistema, ma come composizione di stati
+parziali</li>
+<li>transizioni sono promosse a nodi (non piu’ archi), si limitano a
+modificare una parte dello stato globale</li>
+</ul>
+<h1 id="composte-da">Composte da</h1>
+<ul>
+<li>posti - cerchi</li>
+<li>token - assegnati a vari posti</li>
+<li>transizioni - rettangoli</li>
+<li>archi - connettono posti a transizioni, transizioni a posti</li>
+</ul>
+<figure>
+<img src="attachments/reti-di-petri.png" alt="|500" />
+<figcaption aria-hidden="true">|500</figcaption>
+</figure>
+<h2 id="token">Token</h2>
+<p>Posso assegnare piu’ token per lo stesso posto, il numero di token
+puo’ quindi rappresentare il numero di istanze di quel tipo di
+posto.</p>
+<p>Ad esempio “tre robot che producono un certo manufatto”.</p>
+<p>Se non c’e’ un limite imposto dalle logiche di transizione un posto
+puo’ accettare infiniti token. Cosa che con una FSM non posso
+modellare.</p>
+<aside>
+creazione e distruzione dei token
+</aside>
+<p>I token non si spostano! I token si creano e si distruggono!</p>
+<h2 id="transizioni">Transizioni</h2>
+<p>Collegati a certi eventi, scattano quando sussitono certe condizioni,
+se hanno abbastanza gettoni nei posti di ingresso</p>
+<p><img src="attachments/petri-gettoni-prima.png" alt="petri|300" />
+<code>T1</code> ha abbastanza token per scattare, i token finiscono nei
+posti in uscita</p>
+<h3 id="una-transizione-e-abilitata-ad-evolvere-quando">Una transizione
+e’ abilitata ad evolvere quando</h3>
+<p><span class="math inline"><em>t</em> ∈ <em>T</em></span> e’ abilitata
+in <span class="math inline"><em>M</em></span> se e solo se <span
+class="math inline">∀<em>p</em> ∈ <em>p</em><em>r</em><em>e</em>(<em>t</em>)   <em>M</em>(<em>p</em>) ≥ <em>W</em>(⟨<em>p</em>,<em>t</em>⟩)</span></p>
+<p>Lo scatto di una transizione <span
+class="math inline"><em>t</em></span> in una marcatura <span
+class="math inline"><em>M</em></span> produce una nuova marcatura <span
+class="math inline"><em>M</em>′</span>.</p>
+<p>Ci puo’ essere una sola transizione alla volta. Se ci sono piu’
+transizioni abilitate non posso dire quale deve scattare, sono tutte
+equiprobabili.</p>
+<h4 id="esempi-di-transizioni">Esempi di transizioni</h4>
+<p>Quali delle seguente sono abilitate ad evolvere? Vedi <a
+href="Petri%20nets.md#Una%20transizione%20e&#39;%20abilitata%20ad%20evolvere%20quando">Una
+transizione e’ abilitata ad evolvere quando</a>.</p>
+<p>Discorsivamente: una transizione e’ abilitata ad evolvere se il
+numero di token nei posti di input e’ maggiore o uguale ai pesi degli
+archi connessi.</p>
+<p><img src="attachments/petri-nets-transitions.png" /></p>
+<p><span class="math inline"><em>A</em></span> abilitata <span
+class="math inline"><em>B</em></span> abilitata <span
+class="math inline"><em>C</em></span> abilitata <span
+class="math inline"><em>D</em></span> abilitata <span
+class="math inline"><em>E</em></span> non abilitata <span
+class="math inline"><em>F</em></span> abilitata <span
+class="math inline"><em>G</em></span> non abilitata</p>
+<p>Per le transizioni abilitate, quanti gettoni al primo posto e quanti
+al secondo?</p>
+<p><span class="math inline"><em>A</em></span> 0 1 <span
+class="math inline"><em>B</em></span> 0 2 <span
+class="math inline"><em>C</em></span> 0 1 1 &lt;= attenzione a questa!
+<span class="math inline"><em>D</em></span> 1 2 1 <span
+class="math inline"><em>F</em></span> 0 0 1</p>
+<h3 id="sequenza">Sequenza</h3>
+<p>Una transizione <span
+class="math inline"><em>t</em><sub>1</sub></span> e’ in sequenza con una
+transizione <span class="math inline"><em>t</em><sub>2</sub></span> in
+una marcatura <span class="math inline"><em>M</em></span> se e solo
+se</p>
+<p><span
+class="math inline"><em>M</em>[<em>t</em><sub>1</sub> &gt;  ∧ ¬<em>M</em>[<em>t</em><sub>2</sub> &gt;  ∧ <em>M</em>[<em>t</em><sub>1</sub><em>t</em><sub>2</sub>&gt;</span></p>
+<p>O piu’ umanamente: * <span
+class="math inline"><em>t</em><sub>1</sub></span> e’ abilitata in <span
+class="math inline"><em>M</em></span> * <span
+class="math inline"><em>t</em><sub>2</sub></span> non e’ abilitata in
+<span class="math inline"><em>M</em></span> * <span
+class="math inline"><em>t</em><sub>2</sub></span> e’ abilitata nella
+marcatura <span class="math inline"><em>M</em>′</span> prodotta dallo
+scatto <span
+class="math inline"><em>M</em>[<em>t</em><sub>1</sub> &gt; <em>M</em>′</span></p>
+<p>Nel seguente esempio <span class="math inline"><em>T</em>0</span> e
+<span class="math inline"><em>T</em>1</span>, <span
+class="math inline"><em>T</em>0</span> e <span
+class="math inline"><em>T</em>2</span>, <span
+class="math inline"><em>T</em>3</span> e <span
+class="math inline"><em>T</em>2</span></p>
+<p><img src="attachments/reti-di-petri-sequenza-esempio.png" /></p>
+<p><span class="math inline"><em>T</em>0</span> e <span
+class="math inline"><em>T</em>6</span> no perche’ <span
+class="math inline"><em>T</em>6</span> necessita di un token in <span
+class="math inline"><em>P</em>5</span>, che manca. <span
+class="math inline"><em>T</em>1</span> e <span
+class="math inline"><em>T</em>0</span> no perche’ <span
+class="math inline"><em>T</em>1</span> non e’ abilitata.</p>
+<p>Nota che se una transizione e’ in sequenza con un’altra dipende dalla
+situazione attuale.</p>
+<h3 id="conflitto">Conflitto</h3>
+<p>Due transizioni <span
+class="math inline"><em>t</em><sub>1</sub></span> e <span
+class="math inline"><em>t</em><sub>2</sub></span> sono in conflitto</p>
+<ul>
+<li>strutturale (dipende dalla topologia della rete non dalla marcatura)
+se e solo se <span
+class="math inline"><em>p</em><em>r</em><em>e</em>(<em>t</em><sub>1</sub>) ∩ <em>p</em><em>r</em><em>e</em>(<em>t</em><sub>2</sub>) ≠ ∅</span></li>
+<li>effettivo in una marcatura <span
+class="math inline"><em>M</em></span> se e solo se:
+<ul>
+<li>riguardo il preset <span
+class="math inline"><em>M</em>[<em>T</em><sub>1</sub>&gt;  ∧  <em>M</em>[<em>t</em><sub>2</sub>&gt;  ∧ ∃<em>p</em> ∈ <em>p</em><em>r</em><em>e</em>(<em>t</em><sub>1</sub>) ∩ <em>p</em><em>r</em><em>e</em>(<em>t</em><sub>2</sub>)  <em>M</em>(<em>p</em>) &lt; <em>W</em>(⟨<em>p</em>,<em>t</em><sub>1</sub>⟩) + <em>W</em>(⟨<em>p</em>,<em>t</em><sub>2</sub>⟩)</span>
+“esiste un posto <span class="math inline"><em>p</em></span> in ingresso
+a entrambe le transizioni che non ha abbastanza token per farle scattare
+entrambe</li>
+<li>riguardo il postset <span
+class="math inline"><em>M</em>[<em>t</em><sub>1</sub> &gt;  ∧ <em>M</em>[<em>t</em><sub>2</sub> &gt;  ∧ ¬<em>M</em>[<em>t</em><sub>1</sub><em>t</em><sub>2</sub>&gt;</span></li>
+</ul></li>
+</ul>
+<p><img src="attachments/reti-petri-conflitti.png" /></p>
+<p>Conflitto effettivo condizione sufficiente perche’ ci sia quello
+strutturale.</p>
+<p>Le due transizioni sono in conflitto * strutturale perche’ hanno
+posti in comune * effettivo perche’ <span
+class="math inline"><em>P</em>1</span> non ha sufficenti gettoni per
+farle scattare entrambe, <span class="math inline"><em>P</em>0</span>
+si; basta che ce ne sia uno di posto che non riesce a soddisfare le
+esigenze. Se facessi scattare prima <span
+class="math inline"><em>T</em>1</span> non ci sarebbe il conflitto
+effettivo.</p>
+<h4 id="esempio">Esempio</h4>
+<p>Quali sono i conflitti qua?</p>
+<figure>
+<img src="attachments/reti-di-petri-conflitti.png" alt="|500" />
+<figcaption aria-hidden="true">|500</figcaption>
+</figure>
+<ul>
+<li>strutturali
+<ul>
+<li><span class="math inline"><em>t</em><sub>3</sub></span> e <span
+class="math inline"><em>t</em><sub>4</sub></span></li>
+<li><span class="math inline"><em>t</em><sub>2</sub></span> e <span
+class="math inline"><em>t</em><sub>6</sub></span></li>
+</ul></li>
+<li>effettivi
+<ul>
+<li><span class="math inline"><em>t</em><sub>3</sub></span> e <span
+class="math inline"><em>t</em><sub>4</sub></span></li>
+</ul></li>
+</ul>
+<h3 id="concorrenza">Concorrenza</h3>
+<p>Due transizioni <span
+class="math inline"><em>t</em><sub>1</sub></span> e <span
+class="math inline"><em>t</em><sub>2</sub></span> sono in concorrenza *
+strutturale se e solo se <span
+class="math inline"><em>p</em><em>r</em><em>e</em>(<em>t</em><sub>1</sub>) ∩ <em>p</em><em>r</em><em>e</em>(<em>t</em><sub>2</sub>) = ∅</span>
+(la negazione del conflitto) * effettiva in una marcatura <span
+class="math inline"><em>M</em></span> se e solo se * riguardo il preset
+<span
+class="math inline"><em>M</em>[<em>T</em><sub>1</sub>&gt;  ∧  <em>M</em>[<em>t</em><sub>2</sub>&gt;  ∧ ∀<em>p</em> ∈ <em>p</em><em>r</em><em>e</em>(<em>t</em><sub>1</sub>) ∩ <em>p</em><em>r</em><em>e</em>(<em>t</em><sub>2</sub>)  <em>M</em>(<em>p</em>) ≥ <em>W</em>(⟨<em>p</em>,<em>t</em><sub>1</sub>⟩) + <em>W</em>(⟨<em>p</em>,<em>t</em><sub>2</sub>⟩)</span>
+“tutti i posti in ingresso a entrambe le transizioni hanno abbastanza
+token per farle scattare entrambe</p>
+<h2 id="archi">Archi</h2>
+<p>Possono avere un peso, quindi posso esprimere situazioni concorrenti.
+Se non scrivo nulla vuol dire peso 1.</p>
+<p>Un arco <span class="b">in entrata</span> di una transizione, e’ un
+<span class="b">requirement</span>. Un arco <span class="b">in
+uscita</span> da una transizione, crea dei token.</p>
+<figure>
+<img src="attachments/petri-gettoni-dopo.png" alt="petri|300" />
+<figcaption aria-hidden="true">petri|300</figcaption>
+</figure>
+<h1 id="definizione-formale">Definizione formale</h1>
+<p>E’ una 5-upla <span
+class="math inline">[<em>P</em>,<em>T</em>;<em>F</em>,<em>W</em>,<em>M</em><sub>0</sub>]</span></p>
+<ul>
+<li><span class="math inline"><em>P</em></span> insieme dei posti</li>
+<li><span class="math inline"><em>T</em></span> insieme delle
+transizioni</li>
+<li><span class="math inline"><em>F</em></span> relazione di flusso -
+<span
+class="math inline"><em>F</em> ⊆ (<em>P</em>×<em>T</em>) ∪ (<em>T</em>×<em>P</em>)</span></li>
+<li><span class="math inline"><em>W</em></span> la funzione peso
+(codominio senza <span class="math inline">0</span>) - <span
+class="math inline">$W : F \rightarrow \\N^{+}$</span></li>
+<li><span class="math inline"><em>M</em><sub>0</sub></span> la funzione
+marcatura (iniziale) - <span class="math inline">$M_0 : P \rightarrow
+\\N$</span></li>
+</ul>
+<p><span class="math inline"><em>P</em> ∪ <em>T</em></span> non puo’
+essere vuoto <span class="math inline"><em>P</em> ∩ <em>T</em></span> e’
+vuoto</p>
+<p><span
+class="math inline"><em>p</em><em>r</em><em>e</em>(<em>a</em>) = <em>d</em> ∈ (<em>P</em>∪<em>T</em>) | ⟨<em>d</em>, <em>a</em>⟩ ∈ <em>F</em></span>
+<span
+class="math inline"><em>p</em><em>o</em><em>s</em><em>t</em>(<em>a</em>) = <em>d</em> ∈ (<em>P</em>∪<em>T</em>) | ⟨<em>a</em>, <em>d</em>⟩ ∈ <em>F</em></span></p>
+<p>Quindi i preset sono i posti connessi alle transizioni, i postset
+sono i posti connessi dalle transizioni.</p>
+<h2 id="definizione-di-m">Definizione di <span
+class="math inline"><em>M</em>′</span></h2>
+<p>Notazione: <span
+class="math inline">∀<em>p</em> ∈ <em>p</em><em>r</em><em>e</em>(<em>t</em>) \ <em>p</em><em>o</em><em>s</em><em>t</em>(<em>t</em>)</span>
+significa “per tutti i posti che appartengono al preset di <span
+class="math inline"><em>t</em></span> ma non appartengono al postset di
+<span class="math inline"><em>t</em></span>”</p>
+<p><span class="math inline"><em>W</em>(⟨<em>p</em>,<em>t</em>⟩)</span>
+numero di gettoni nell’arco</p>
+<p><span class="math display">$$
+\begin{align}
+&amp;\forall p \in pre(t) \setminus post(t) &amp;\qquad M'(p) &amp;=
+M(p) - W(\langle p,t \rangle) \\
+&amp;\forall p \in post(t) \setminus pre(t) &amp;\qquad M'(p) &amp;=
+M(p) + W(\langle t,p \rangle) \\
+&amp;\forall p \in post(t) \cap pre(t) &amp;\qquad M'(p) &amp;= M(p) -
+W(\langle p,t \rangle) + W(\langle t,p \rangle) \\
+&amp;\forall p \in P \setminus (pre(t) \cup post(t)) &amp;\qquad M'(p)
+&amp;= M(p)
+\end{align}
+$$</span></p>
+<p>Grazie all’ultima e’ possibile fare una analisi locale.</p>
+<h1 id="esempio-1">Esempio</h1>
+<p><img src="attachments/fsm-to-petri.png" /></p>
+</body>
+</html>

@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Petri nets</title>
+  <title>Latex</title>
   <style>
     html {
       color: #1a1a1a;
@@ -172,6 +172,38 @@
   <![endif]-->
 </head>
 <body>
-
+<p>Mainly stuff I forget about, jotted down at random.</p>
+<h1 id="sets">Sets</h1>
+<p><span class="math inline"><em>A</em> ∪ <em>B</em></span> <span
+class="math inline"><em>A</em> ∩ <em>B</em></span> <span
+class="math inline"><em>A</em> ⊆ <em>B</em></span></p>
+<h1 id="multiple-expressions-alignment">Multiple expressions
+alignment</h1>
+<p><span class="math display">$$
+\begin{align}
+&amp;\forall p \in pre(t) \setminus post(t) &amp;\qquad M'(p) &amp;=
+M(p) - W(\langle p,t \rangle) \\
+&amp;\forall p \in post(t) \setminus pre(t) &amp;\qquad M'(p) &amp;=
+M(p) + W(\langle t,p \rangle) \\
+&amp;\forall p \in post(t) \cap pre(t) &amp;\qquad M'(p) &amp;= M(p) -
+W(\langle p,t \rangle) + W(\langle t,p \rangle) \\
+&amp;\forall p \in P \setminus (pre(t) \cup post(t)) &amp;\qquad M'(p)
+&amp;= M(p)
+\end{align}
+$$</span></p>
+<h1 id="miscellanea">Miscellanea</h1>
+<p><span class="math inline">$\displaystyle\sum_{i=0} ^{\infty} a_i
+x^i$</span></p>
+<p><span class="math inline">⌊<em>a</em>⌋</span></p>
+<p><span class="math inline">⌈<em>a</em>⌉</span></p>
+<p><span class="math display">$$
+\begin{equation}
+    T(x,y) =
+    \begin{cases}
+      2, &amp; \text{se}\ y=0 \\
+      6 + T(x, \lfloor y/2\rfloor) &amp; \text{se} \ y &gt; 0
+    \end{cases}
+  \end{equation}
+$$</span></p>
 </body>
 </html>

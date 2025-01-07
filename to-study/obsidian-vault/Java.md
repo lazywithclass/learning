@@ -28,3 +28,17 @@ Difference between checked and unchecked
 
 Unchecked: se avvengono il programma non e' recoverable, quindi non ha senso fare try catch. Per lo piu' sono errori del programmatore.
 
+# try with resources
+
+```java linenos:1
+// ci assicura che lo scanner venga chiuso
+try (Scanner sc = new Scanner(input)) {
+  // code
+}
+```
+
+# ParameterizedTest
+
+https://www.baeldung.com/parameterized-tests-junit-5#6-methods
+
+Un ottimo modo per evitare duplicazione all'interno dei test. Anche i test sono codice.

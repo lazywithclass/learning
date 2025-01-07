@@ -4,5 +4,6 @@ let
 in pkgs.mkShell {
   packages = with pkgs; [
     pandoc
+    nodePackages.vercel
   ];
 }
