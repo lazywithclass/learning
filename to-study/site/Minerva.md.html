@@ -167,39 +167,50 @@
     }
     .display.math{display: block; text-align: center; margin: 0.5rem auto;}
   </style>
+  <link rel="stylesheet" href="https://latex.vercel.app/style.css">
+  <link rel="stylesheet" href="https://latex.vercel.app/prism/prism.css">
+
+  <link rel="stylesheet" href="css/index.css">
   <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
 </head>
 <body>
-<h1 id="definizioni">Definizioni</h1>
-<h2 id="documenti">Documenti</h2>
+<h1 id="definizioni"><a href="#definizioni">Definizioni</a></h1>
+<h2 id="documenti"><a href="#documenti">Documenti</a></h2>
 <p>Qualsiasi azione in ospedale produce un documento, anche per avere
 chiara la responsabilita’</p>
-<h3 id="documento-rilasciati-alla-fine">Documento rilasciati alla
-fine</h3>
-<h4 id="dcacum">DCACUM</h4>
+<h3 id="documento-rilasciati-alla-fine"><a
+href="#documento-rilasciati-alla-fine">Documento rilasciati alla
+fine</a></h3>
+<h4 id="dcacum"><a href="#dcacum">DCACUM</a></h4>
 <p>“Passa il medico e annota” Notifiche manuale e automatiche.
 Annotazioni riguardo il paziente. Storia del ricovero, incompleto, non
 ci sono gli esami, referti di laboratorio, …</p>
-<h4 id="fut---foglio-unico-terapia">FUT - Foglio Unico Terapia</h4>
+<h4 id="fut---foglio-unico-terapia"><a
+href="#fut---foglio-unico-terapia">FUT - Foglio Unico Terapia</a></h4>
 <p>Analogo DCACUM sulle somministrazioni</p>
 <p>Lettera dimissione medica Perche’ e’ stato dimesso</p>
-<h3 id="documento-prodotto-con-paziente-in-ospedale">Documento prodotto
-con paziente in ospedale</h3>
-<h4 id="dca">DCA</h4>
+<h3 id="documento-prodotto-con-paziente-in-ospedale"><a
+href="#documento-prodotto-con-paziente-in-ospedale">Documento prodotto
+con paziente in ospedale</a></h3>
+<h4 id="dca"><a href="#dca">DCA</a></h4>
 <p>Singola entry del DCACUM</p>
-<h4 id="param">Param</h4>
+<h4 id="param"><a href="#param">Param</a></h4>
 <p>Automatiche</p>
-<h4 id="notifiche-automatiche">Notifiche automatiche</h4>
+<h4 id="notifiche-automatiche"><a
+href="#notifiche-automatiche">Notifiche automatiche</a></h4>
 <p>Analogo del Param (cambia formato in xml)</p>
-<h4 id="annotazioni-manuali">Annotazioni manuali</h4>
-<h4 id="inquadramento-clinico">Inquadramento clinico</h4>
+<h4 id="annotazioni-manuali"><a href="#annotazioni-manuali">Annotazioni
+manuali</a></h4>
+<h4 id="inquadramento-clinico"><a
+href="#inquadramento-clinico">Inquadramento clinico</a></h4>
 <p>Prima “cosa” che fanno al paziente quando arriva in ospedale</p>
-<h1 id="architettura">Architettura</h1>
+<h1 id="architettura"><a href="#architettura">Architettura</a></h1>
 <p><img src="photo_2024-10-11_11-36-56.jpg" /></p>
 <p><img src="Pasted%20image%2020241014182839.png" /></p>
-<h2 id="flusso-dei-dati">Flusso dei dati</h2>
+<h2 id="flusso-dei-dati"><a href="#flusso-dei-dati">Flusso dei
+dati</a></h2>
 <p><img src="Pasted%20image%2020241018140706.png" /></p>
 <p>Ogni 4h, o a volonta’ con il trigger manuale, la richiesta di andare
 a prendere i dati (da tabelle, pdf, e xml) vengono immesse tramite due
@@ -227,14 +238,14 @@ usi</p>
 <p>E a runtime costruisce dinamicamente la query a seconda della vista e
 dialetto sql e QUALSIASI sia la vista e i dati in essa presenti chiede
 sempre Gli STESSI dati</p>
-<h2 id="testa-logica">Testa logica</h2>
+<h2 id="testa-logica"><a href="#testa-logica">Testa logica</a></h2>
 <p>Ha a che fare con i file, non con il loro contenuto.</p>
 <aside>
 ATTENZIONE!
 </aside>
 <p><span class="b">I dati dei pdf vengono scritti su S3 e linkati per i
 Bronze, Silver, e Gold</span></p>
-<h2 id="dwh">DWH</h2>
+<h2 id="dwh"><a href="#dwh">DWH</a></h2>
 <p>Estrazione feature da S3, piu’ pulizia del pdf perche’ header e
 footer si mettono in mezzo quando c’e’ da parsare, sopratutto quando
 sono in mezzo al cambio di pagina</p>
@@ -244,5 +255,8 @@ partenza da riempire con i dati che si trovano.</p>
 estrarre e come farlo.</p>
 <p><span class="math inline">∀</span> docs pulizia estrazione sezioni
 estrazione informazioni salvataggio file update testa logica</p>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs/prism.min.js"></script>
+
 </body>
 </html>

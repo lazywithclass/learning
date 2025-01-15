@@ -167,6 +167,10 @@
     }
     .display.math{display: block; text-align: center; margin: 0.5rem auto;}
   </style>
+  <link rel="stylesheet" href="https://latex.vercel.app/style.css">
+  <link rel="stylesheet" href="https://latex.vercel.app/prism/prism.css">
+
+  <link rel="stylesheet" href="css/index.css">
   <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
@@ -177,24 +181,29 @@ of Operational Semantics</a> gives an intro to the semantics. Great as
 quick reference thanks to the explanations.</p>
 <p>Used for * specify a programming language * communicate language
 design idea, communicate among experts what are the ideas going on</p>
-<h3 id="example">Example</h3>
+<h3 id="example"><a href="#example">Example</a></h3>
 <p>A language called Arithmetic. Defining a language syntax means
 defining the set of programs present in the language.</p>
-<h4 id="mathy-way">“Mathy” way</h4>
+<h4 id="mathy-way"><a href="#mathy-way">“Mathy” way</a></h4>
 <pre><code>i ∈ Z ⇒ i ∈ A
 e ∈ A ⇒ Pred(e) ∈ A
 e ∈ A ⇒ Succ(e) ∈ A
 e1 ∈ A ∧ e2 ∈ A ⇒ Plus(e1, e2) ∈ A
 e1 ∈ A ∧ e2 ∈ A ⇒ Mult(e1, e2) ∈ A</code></pre>
-<h4 id="inference-rules">Inference rules</h4>
+<h4 id="inference-rules"><a href="#inference-rules">Inference
+rules</a></h4>
 <pre><code>H1    H2    ...    Hn
 ______________________
          C</code></pre>
 <p>is like saying <code>H1 ∧ H2 ∧ ... ∧ Hn ⇒ C</code></p>
-<h3 id="natural-semantics-of-a">Natural semantics of A</h3>
+<h3 id="natural-semantics-of-a"><a
+href="#natural-semantics-of-a">Natural semantics of A</a></h3>
 <p>Define the meaning of a program. Proof trees are built using these to
 prove that a given expression evaluates to a given number.</p>
 <p>So for example one can show that <code>Plus(4, Succ(2))</code> by
 combining the correct rules.</p>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs/prism.min.js"></script>
+
 </body>
 </html>

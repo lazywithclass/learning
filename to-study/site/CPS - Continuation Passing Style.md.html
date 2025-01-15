@@ -231,6 +231,10 @@
     code span.vs { color: #4070a0; } /* VerbatimString */
     code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
+  <link rel="stylesheet" href="https://latex.vercel.app/style.css">
+  <link rel="stylesheet" href="https://latex.vercel.app/prism/prism.css">
+
+  <link rel="stylesheet" href="css/index.css">
   <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
@@ -238,7 +242,7 @@
 <body>
 <p><a
 href="Tutorial%20Tuesday%20#1:%20Intro%20to%20continuations,%20call/cc,%20and%20CPS">https://www.youtube.com/watch?v=2GfFlfToBCo</a></p>
-<h3 id="continuations">Continuations</h3>
+<h3 id="continuations"><a href="#continuations">Continuations</a></h3>
 <p>ABCs of learning continuations, always be learning about
 continuations.</p>
 <p>Continuation = “The rest of the work that has to happen to finish
@@ -248,8 +252,9 @@ represent it in the heap.</p>
 <p>Continuations allow you to</p>
 <p> * get your hands on the control flow of a program</p>
 <p> * simulate exceptions, loops</p>
-<h3 id="aps---accumulator-passing-style">APS - Accumulator Passing
-Style</h3>
+<h3 id="aps---accumulator-passing-style"><a
+href="#aps---accumulator-passing-style">APS - Accumulator Passing
+Style</a></h3>
 <p>The recursive call is in tail position and we pass the result of the
 partial computation into an accumulator</p>
 <div class="sourceCode" id="cb1"><pre
@@ -302,12 +307,15 @@ class="sourceCode ocaml"><code class="sourceCode ocaml"><span id="cb2-1"><a href
 <p>And the interesting fact is that you can start off with a
 continuation that resumes from a previous computation, not necessarily
 from the beginning.</p>
-<h3 id="cps">CPS</h3>
+<h3 id="cps"><a href="#cps">CPS</a></h3>
 <p><code>(f v) = (fC v id)</code> where <code>f</code> is the function,
 <code>v</code> the value, <code>fC</code> the lifted function to work
 with continuations, <code>id</code> the identity function.</p>
 <p>TODO VAI A VEDERE ALLINIZIO DOVE DICE CHE CON L’ACC NON E’ GARANTITO
 … QUALCOSA</p>
 <p>https://fsharpforfunandprofit.com/posts/recursive-types-and-folds/</p>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs/prism.min.js"></script>
+
 </body>
 </html>

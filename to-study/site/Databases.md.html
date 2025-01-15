@@ -167,6 +167,10 @@
     }
     .display.math{display: block; text-align: center; margin: 0.5rem auto;}
   </style>
+  <link rel="stylesheet" href="https://latex.vercel.app/style.css">
+  <link rel="stylesheet" href="https://latex.vercel.app/prism/prism.css">
+
+  <link rel="stylesheet" href="css/index.css">
   <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
@@ -174,7 +178,8 @@
 <body>
 <p><a href="Relational%20algebra.md">Relational algebra</a> <a
 href="PostgreSQL%20exercises.md">PostgreSQL exercises</a></p>
-<h1 id="relational-model">Relational model</h1>
+<h1 id="relational-model"><a href="#relational-model">Relational
+model</a></h1>
 <p>Mathematical relations between sets (domains) via a Cartesian
 product. Data is organized in rows, all rows are different from each
 other (since they are the result of a Cartesian product).</p>
@@ -212,7 +217,7 @@ the Cartesian product is <span
 class="math inline"><em>D</em><sub>1</sub> × <em>D</em><sub>2</sub> = {(<em>a</em>,<em>x</em>), (<em>a</em>,<em>y</em>), (<em>a</em>,<em>z</em>), (<em>b</em>,<em>x</em>), (<em>b</em>,<em>y</em>), (<em>b</em>,<em>z</em>)}</span>.
 A relation is a subset of that product such that <span
 class="math inline"><em>r</em> ⊆ <em>D</em><sub>1</sub> × <em>D</em><sub>2</sub> = {(<em>a</em>,<em>x</em>), (<em>a</em>,<em>y</em>), (<em>b</em>,<em>x</em>), (<em>b</em>,<em>y</em>)}</span>.</p>
-<h2 id="null">NULL</h2>
+<h2 id="null"><a href="#null">NULL</a></h2>
 <p>Absence of a value in the domain. We can’t use it to compare values,
 an attribute <span
 class="math inline"><em>y</em><em>e</em><em>a</em><em>r</em></span>
@@ -221,13 +226,15 @@ class="math inline"><em>N</em><em>U</em><em>L</em><em>L</em></span>
 could not be compared with, for example, <span
 class="math inline">2024</span> to understand if it comes before or
 after. We can’t even say if they’re different or not (in a way).</p>
-<h3 id="open-world-semantic">Open-world semantic</h3>
+<h3 id="open-world-semantic"><a href="#open-world-semantic">Open-world
+semantic</a></h3>
 <p>Everything that does not falsify a predicate it’s true.</p>
-<h3 id="closed-world-semantic">Closed-world semantic</h3>
+<h3 id="closed-world-semantic"><a
+href="#closed-world-semantic">Closed-world semantic</a></h3>
 <p>Only something that verify a predicate it’s true.</p>
-<h2 id="constraints">Constraints</h2>
+<h2 id="constraints"><a href="#constraints">Constraints</a></h2>
 <p>A predicate that for each instance could return true or false.</p>
-<h3 id="in-a-table">In a table</h3>
+<h3 id="in-a-table"><a href="#in-a-table">In a table</a></h3>
 <ul>
 <li>domain constraints - for example <span
 class="math inline"><em>y</em><em>e</em><em>a</em><em>r</em> ≥ 1950 <em>A</em><em>N</em><em>D</em> <em>y</em><em>e</em><em>a</em><em>r</em> ≤ 2015</span></li>
@@ -235,7 +242,8 @@ class="math inline"><em>y</em><em>e</em><em>a</em><em>r</em> ≥ 1950 <em>A
 constraints are row constraints that operate on a single attribute</li>
 <li>key constraints</li>
 </ul>
-<h2 id="functional-dependency">Functional dependency</h2>
+<h2 id="functional-dependency"><a
+href="#functional-dependency">Functional dependency</a></h2>
 <p>A dependency <span
 class="math inline"><em>F</em><em>D</em> : <em>X</em>→ <em>Y</em></span> means
 that the values of <span class="math inline"><em>Y</em></span> are
@@ -254,22 +262,22 @@ key concept
 dependency: “left side of this hypothetical dependency identifies
 precisely the right side?” if not then there isn’t a functional
 dependency.</p>
-<h2 id="normal-forms">Normal forms</h2>
+<h2 id="normal-forms"><a href="#normal-forms">Normal forms</a></h2>
 <p>We want to avoid redundancy in the information.</p>
 <p>A database is well formed if it has 1NF, 2NF, 3NF. As a rule of
 thumb: * we want lots of writes <span class="math inline">→</span> more
 normalization * we want lots of reads <span class="math inline">→</span>
 less normalization</p>
-<h3 id="nf">1NF</h3>
+<h3 id="nf"><a href="#1nf">1NF</a></h3>
 <p>Only atomic attributes. We don’t have a relational database if we
 don’t have this NF.</p>
-<h3 id="nf-1">2NF</h3>
+<h3 id="nf-1"><a href="#2nf">2NF</a></h3>
 <p>Depends on 1NF.</p>
 <p>Every non-key attribute must depend on the primary key, as a whole,
 and not just on a subset of it. Normalization: put the subset of the key
 and the attribute in a new table.</p>
 <p>If the key is a single attribute then we always have 2NF.</p>
-<h3 id="nf-2">3NF</h3>
+<h3 id="nf-2"><a href="#3nf">3NF</a></h3>
 <p>Depends on 2NF.</p>
 <p>Transitive dependency: <span
 class="math inline"><em>X</em> → <em>Y</em></span> is transitive if a
@@ -282,12 +290,13 @@ transitive way on the primary key.</p>
 <p>In other words: we don’t want two non-key attributes on the left AND
 on the right of a functional dependency. They all have to be on the left
 side.</p>
-<h3 id="bcnf">BCNF</h3>
+<h3 id="bcnf"><a href="#bcnf">BCNF</a></h3>
 <p>All non prime attributes must depend on a super-key.</p>
 <p>The key in the decomposed relations must be a super-key in the
 original relation.</p>
-<h2 id="using-normal-forms-to-decompose-relations">Using normal forms to
-decompose relations</h2>
+<h2 id="using-normal-forms-to-decompose-relations"><a
+href="#using-normal-forms-to-decompose-relations">Using normal forms to
+decompose relations</a></h2>
 <p>Goal is to start from a big universal relation and finish to a scheme
 with multiple relations, which respect the normal forms.</p>
 <p>There is a procedure to follow, which has 3 rules: * preserve
@@ -301,11 +310,14 @@ relation where we have <span class="math inline"><em>X</em></span> and
 all dependencies on the right side that have <span
 class="math inline"><em>X</em></span> on the left side 4. attributes
 left out go in a relation of their own</p>
-<h2 id="normalization">Normalization</h2>
+<h2 id="normalization"><a href="#normalization">Normalization</a></h2>
 <p>Anomalies and redundancies arise when we have functional dependencies
 like <span class="math inline"><em>X</em> → <em>Y</em></span>, where
 <span class="math inline"><em>X</em></span> is not a superkey (a subset
 of the key). To avoid redundancies and anomalies, we have to put our
 relation in BCNF.</p>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs/prism.min.js"></script>
+
 </body>
 </html>

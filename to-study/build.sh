@@ -8,7 +8,7 @@ OUTPUT_FILE="$NOTES_DIR/notes.html"
 find $OBSIDIAN_VAULT/*md -maxdepth 1 -type f | while read -r file; do
     echo "$file"
     filename=$(echo "$file" | cut -d/ -f2)
-    pandoc --quiet "$file" -s -o "$NOTES_DIR/$(echo $filename).html"
+    pandoc --quiet "$file" -o "$NOTES_DIR/$(echo $filename).html" --lua-filter=pandoc-lua/add_links.lua -H extra-head.html -A after-body.html
 done
 
 cat > "$OUTPUT_FILE" <<EOF
@@ -28,3 +28,5 @@ cat >> "$OUTPUT_FILE" <<EOF
 </div>
 EOF
 
+mkdir -p "$NOTES_DIR/attachments"
+cp -r "$OBSIDIAN_VAULT/attachments" "$NOTES_DIR/"

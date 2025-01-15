@@ -231,13 +231,18 @@
     code span.vs { color: #4070a0; } /* VerbatimString */
     code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
+  <link rel="stylesheet" href="https://latex.vercel.app/style.css">
+  <link rel="stylesheet" href="https://latex.vercel.app/prism/prism.css">
+
+  <link rel="stylesheet" href="css/index.css">
   <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
 </head>
 <body>
-<h1 id="tutorials">Tutorials</h1>
-<h2 id="erlang-master-class">Erlang Master Class</h2>
+<h1 id="tutorials"><a href="#tutorials">Tutorials</a></h1>
+<h2 id="erlang-master-class"><a href="#erlang-master-class">Erlang
+Master Class</a></h2>
 <p>https://www.cs.kent.ac.uk/ErlangMasterClasses/</p>
 <p>Course is hosted on Youtube and taught by: * Simon Thompson,
 Professor of Logic and Computation at the University of Kent * Joe
@@ -248,14 +253,15 @@ not really tied to Erlang though so I’d skip it if you were not
 interested.</p>
 <p>Second part is about concurrency and its patterns (rpc, Futures,
 …).</p>
-<h2 id="erlang-express-course">Erlang Express Course</h2>
+<h2 id="erlang-express-course"><a href="#erlang-express-course">Erlang
+Express Course</a></h2>
 <p>https://www.youtube.com/watch?v=aEyQcZg-Njs&amp;list=PLoFxPv8jwGVVlajiMxaW9zG1IZgHODTuq</p>
 <p>Much longer than the <a
 href="Erlang#Erlang%20Master%20Class.md">Erlang#Erlang Master Class</a>.
 High quality content, taught by <a
 href="https://www.kent.ac.uk/computing/people/3164/thompson-simon">Simon
 Thompson</a>.</p>
-<h1 id="the-language">The language</h1>
+<h1 id="the-language"><a href="#the-language">The language</a></h1>
 <p>Exercises, exam attempted solutions, and the likes could be found <a
 href="https://github.com/lazywithclass/learning/tree/master/programming-languages/erlang">here</a>.</p>
 <p>Dynamically typed purely functional programming language. Fault
@@ -275,7 +281,7 @@ concurrent programs
 Mind blowing integers
 </aside>
 <p>Integers in Erlang have arbitrary precision.</p>
-<h1 id="the-syntax">The syntax</h1>
+<h1 id="the-syntax"><a href="#the-syntax">The syntax</a></h1>
 <p><code>=</code> is not assignment, it is always pattern matching, to
 see it in action try to create a variable with a value and then
 re-assign it. Read the error message.</p>
@@ -292,17 +298,18 @@ class="sourceCode erlang"><code class="sourceCode erlang"><span id="cb1-1"><a hr
 class="sourceCode erlang"><code class="sourceCode erlang"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="op">&gt;</span> <span class="fu">{</span><span class="va">F</span><span class="fu">,</span><span class="va">F</span><span class="fu">,</span><span class="va">G</span><span class="fu">}</span> <span class="op">=</span> <span class="fu">{</span><span class="dv">23</span><span class="fu">,</span><span class="dv">24</span><span class="fu">,</span><span class="dv">12</span><span class="fu">}</span></span></code></pre></div>
 <p>Gives an error, as the same <code>F</code> can’t be both 23 and
 24.</p>
-<h2 id="punctuation">Punctuation</h2>
+<h2 id="punctuation"><a href="#punctuation">Punctuation</a></h2>
 <p>At first Erlang syntax looks a bit alien, especially with
 <code>,</code>, <code>;</code>, and <code>.</code>, use English as an
 analogy: * <code>,</code> separates expressions within a clause
 expressions * <code>;</code> separates parts of a sentence (clauses in
 Erlang) * <code>.</code> ends a sentence (function)</p>
-<h2 id="rounding">Rounding</h2>
+<h2 id="rounding"><a href="#rounding">Rounding</a></h2>
 <div class="sourceCode" id="cb3"><pre
 class="sourceCode erlang"><code class="sourceCode erlang"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="op">&gt;</span> <span class="fu">round(</span><span class="fl">1.0</span><span class="fu">).</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span></span></code></pre></div>
-<h2 id="a-recursive-function">A recursive function</h2>
+<h2 id="a-recursive-function"><a href="#a-recursive-function">A
+recursive function</a></h2>
 <div class="sourceCode" id="cb4"><pre
 class="sourceCode erlang"><code class="sourceCode erlang"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">-module</span><span class="fu">(</span><span class="ch">fact</span><span class="fu">).</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">-export</span><span class="fu">([</span><span class="ch">fact</span><span class="op">/</span><span class="dv">1</span><span class="fu">]).</span> <span class="co">% 1 is the arity</span></span>
@@ -313,7 +320,8 @@ class="sourceCode erlang"><code class="sourceCode erlang"><span id="cb4-1"><a hr
 <div class="sourceCode" id="cb5"><pre
 class="sourceCode erlang"><code class="sourceCode erlang"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="op">&gt;</span> <span class="dv">$A</span><span class="fu">.</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="dv">65</span> <span class="fu">#</span> <span class="va">ASCII</span></span></code></pre></div>
-<h2 id="reversing-a-list">Reversing a list</h2>
+<h2 id="reversing-a-list"><a href="#reversing-a-list">Reversing a
+list</a></h2>
 <div class="sourceCode" id="cb6"><pre
 class="sourceCode erlang"><code class="sourceCode erlang"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">-module</span><span class="fu">(</span><span class="ch">exercise</span><span class="fu">).</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">-export</span><span class="fu">([</span><span class="ch">reverse</span><span class="op">/</span><span class="dv">1</span><span class="fu">]).</span></span>
@@ -328,12 +336,14 @@ class="sourceCode erlang"><code class="sourceCode erlang"><span id="cb6-1"><a hr
 lists 1-based
 </aside>
 <p>Careful, lists in Erlang are 1-based!</p>
-<h2 id="tuples-and-records">Tuples and records</h2>
+<h2 id="tuples-and-records"><a href="#tuples-and-records">Tuples and
+records</a></h2>
 <p>Tuples could be used to pass around structured information:
 <code>{ msgname, msgbody, extra }</code>; for records look into <a
 href="https://github.com/lazywithclass/learning/blob/master/programming-languages/erlang/course-exercises/counting.erl">this
 exercise</a>.</p>
-<h2 id="pattern-matching">Pattern matching</h2>
+<h2 id="pattern-matching"><a href="#pattern-matching">Pattern
+matching</a></h2>
 <p>Besides the usual structural pattern matching on arrays
 (<code>[H|T]</code>) or tuples (<code>{a, b, _}</code>) you could
 also:</p>
@@ -352,7 +362,7 @@ class="sourceCode erlang"><code class="sourceCode erlang"><span id="cb9-1"><a hr
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">foo(</span><span class="va">A</span><span class="fu">,</span> <span class="va">B</span><span class="fu">)</span>             <span class="op">-&gt;</span> <span class="ch">not_equal</span><span class="fu">;</span></span></code></pre></div>
 <p>Use * <code>,</code> if all guards have to succeed * <code>;</code>
 if one guard has to succeed</p>
-<h2 id="libraries">Libraries</h2>
+<h2 id="libraries"><a href="#libraries">Libraries</a></h2>
 <p>Common libraries</p>
 <ul>
 <li>io.erl - i/o functionality</li>
@@ -360,14 +370,16 @@ if one guard has to succeed</p>
 <li>lists.erl - standard list processing</li>
 <li>code.erl - load test manipulate code</li>
 </ul>
-<h1 id="running-erlang">Running Erlang</h1>
+<h1 id="running-erlang"><a href="#running-erlang">Running
+Erlang</a></h1>
 <pre class="shell"><code>$ erl
 # output removed
 1&gt; c(fact). % this way you compile your module
 {ok,fact}
 2&gt; fact:fact(7).
 5040</code></pre>
-<h1 id="shell-commands">Shell commands</h1>
+<h1 id="shell-commands"><a href="#shell-commands">Shell
+commands</a></h1>
 <ul>
 <li>help() - prints out a list of shell commands</li>
 <li>h() - history, print the last 20 commands</li>
@@ -375,7 +387,7 @@ if one guard has to succeed</p>
 <li>f() - forget, forget all variable bindings</li>
 <li>f(X) - forget, forget the binding of variable X</li>
 </ul>
-<h1 id="actors">Actors</h1>
+<h1 id="actors"><a href="#actors">Actors</a></h1>
 <p>Actor model explained in under 5 minutes:</p>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/ELwEdb_pD0k?si=kRuxinyLZoH6DCbO" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
 </iframe>
@@ -402,13 +414,13 @@ in instead of, for example, <code>processes_demo</code>.</p>
 <p><code>spawn</code> returns a process identifier, which is the only
 knowledge you get about that process; to <code>spawn</code> something
 you need to <code>export</code> it.</p>
-<h2 id="send">Send</h2>
+<h2 id="send"><a href="#send">Send</a></h2>
 <p>To send a message to a PID you use the <code>!</code> construct:
 <code>Pid ! {self(), something}</code></p>
 <p>Sending a message will never fail, messages sent to non existing
 processes are thrown away, received messages are stored in the process
 mailbox.</p>
-<h2 id="receive">Receive</h2>
+<h2 id="receive"><a href="#receive">Receive</a></h2>
 <p>A pattern and a body to execute if that pattern is matched</p>
 <div class="sourceCode" id="cb12"><pre
 class="sourceCode erlang"><code class="sourceCode erlang"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">receive</span></span>
@@ -458,8 +470,9 @@ in the <code>receive</code> loop, asynchronously</p>
 <div class="sourceCode" id="cb16"><pre
 class="sourceCode erlang"><code class="sourceCode erlang"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">spawn(</span><span class="ch">module</span><span class="fu">,</span> <span class="ch">loop_receiving</span><span class="fu">,</span> <span class="fu">[]),</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">io:format(</span><span class="st">&quot;done&quot;</span><span class="fu">).</span></span></code></pre></div>
-<h2 id="functions-that-work-at-the-actor-level">Functions that work at
-the actor level</h2>
+<h2 id="functions-that-work-at-the-actor-level"><a
+href="#functions-that-work-at-the-actor-level">Functions that work at
+the actor level</a></h2>
 <ul>
 <li><a
 href="https://www.erlang.org/doc/reference_manual/processes.html#process-creation"><code>spawn</code></a>
@@ -492,11 +505,11 @@ code, but still you want to send a message.</p>
 get the max with <code>erlang:system_info(process_limit)</code>.</p>
 <div class="sourceCode" id="cb17"><pre
 class="sourceCode bash"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> erl +p <span class="va">$NUM_PROCESSES</span></span></code></pre></div>
-<h2 id="group-leader">Group leader</h2>
+<h2 id="group-leader"><a href="#group-leader">Group leader</a></h2>
 <p>Each output is associated to a certain group_leader, you configure to
 have <code>io:format</code> output to go on a certain node by using
 <code>group_leader(whereis(user), self())</code>.</p>
-<h2 id="nodes">Nodes</h2>
+<h2 id="nodes"><a href="#nodes">Nodes</a></h2>
 <p>You could start a node with (note that the hostname is
 <code>hostname</code>)</p>
 <div class="sourceCode" id="cb18"><pre
@@ -527,11 +540,12 @@ as <code>{registered_name,node_name}</code>.</p>
 <p>More on this <a
 href="https://www.erlang.org/doc/getting_started/conc_prog#distributed-programming">in
 the docs</a></p>
-<h1 id="error-handling">Error handling</h1>
+<h1 id="error-handling"><a href="#error-handling">Error
+handling</a></h1>
 <p>On <a
 href="https://www.erlang.org/doc/reference_manual/processes#receiving-exit-signals">receiving
 exit signals</a>.</p>
-<h2 id="link">Link</h2>
+<h2 id="link"><a href="#link">Link</a></h2>
 <p>Symmetric, when <code>B</code> dies an exit signal is sent to
 <code>A</code></p>
 <div class="sourceCode" id="cb22"><pre
@@ -543,7 +557,7 @@ trap
 <p>We can create a system process if we don’t want it to die when it
 receives the signal: <code>process_flag(trap_exit, true)</code>, it will
 be treated as a message.</p>
-<h2 id="monitor">Monitor</h2>
+<h2 id="monitor"><a href="#monitor">Monitor</a></h2>
 <p>Asymmetric link, one stares at the other, but that’s it, just the
 stared one dies.</p>
 <p><img src="https://i.imgflip.com/86l0zp.jpg"
@@ -551,7 +565,7 @@ stared one dies.</p>
 <div class="sourceCode" id="cb23"><pre
 class="sourceCode erlang"><code class="sourceCode erlang"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">% inside A</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">monitor(</span><span class="ch">process</span><span class="fu">,</span> <span class="va">B</span><span class="fu">)</span></span></code></pre></div>
-<h1 id="useful-stuff">Useful stuff</h1>
+<h1 id="useful-stuff"><a href="#useful-stuff">Useful stuff</a></h1>
 <p><code>badmatch</code> usually means you are redefining a variable,
 you can’t.</p>
 <p>Literally put
@@ -579,9 +593,12 @@ at least that’s happening in my Emacs setup).</p>
 could <code>net_adm:ping(Host)</code> to create a connection, remember
 to expect <code>pong</code> as an answer and not <code>pang</code>,
 which means that the other side was not found.</p>
-<h2 id="dyalizer">Dyalizer</h2>
+<h2 id="dyalizer"><a href="#dyalizer">Dyalizer</a></h2>
 <p>TODO</p>
-<h2 id="testing">Testing</h2>
+<h2 id="testing"><a href="#testing">Testing</a></h2>
 <p>Testing Erlang could be done via Rebar3.</p>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs/prism.min.js"></script>
+
 </body>
 </html>

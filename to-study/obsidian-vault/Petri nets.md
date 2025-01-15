@@ -8,18 +8,66 @@ tags:
   - italian
 ---
 
+<body class="latex-dark">
+<main><article>
+
 Nascono per descrivere sistemi concorrenti.
+
+# Tool
+
+[Link al tool](https://petri.hp102.ru/pnet.html) per la creazione e run delle reti di Petri
 
 # Note sulla sintassi
 
 Marcatura: distribuzione dei token sui posti, piu' formalmente e' una funzione che assegna un intero non negativo ad ogni posto della rete
+$M(p)$: numero di gettoni in Posto $p$ per Marcatura $M$
 Scatto: $M[t_1 > M'$
 $M$ abilita $t1$: $M[t_1 >$
 I preset $pre(t)$ sono i posti connessi alle transizioni, i postset $pos(t)$ sono i posti connessi dalle transizioni.
+
 # Differenza con FSM
 
 * stato non e' a livello di sistema, ma come composizione di stati parziali
 * transizioni sono promosse a nodi (non piu' archi), si limitano a modificare una parte dello stato globale
+
+# Definizione formale
+
+E' una 5-upla $[P, T; F, W, M_{0}]$
+
+* $P$ insieme dei posti
+* $T$ insieme delle transizioni
+* $F$ relazione di flusso - $F \subseteq (P \times T) \cup (T \times P)$
+* $W$ la funzione peso (codominio senza $0$) - $W : F \rightarrow \\N^{+}$
+* $M_{0}$ la funzione marcatura (iniziale) - $M_0 : P \rightarrow \\N$
+
+$P \cup T$ non puo' essere vuoto
+$P \cap T$ e' vuoto
+
+$pre(a) = { d \in (P \cup T) \ | \ \langle d,a \rangle \in F }$
+$post(a) = { d \in (P \cup T) \ | \ \langle a,d \rangle \in F }$
+
+Quindi i preset sono i posti connessi alle transizioni, i postset sono i posti connessi dalle transizioni.
+
+## Definizione di $M'$
+
+Notazione: $\forall p \in pre(t) \setminus post(t)$ significa "per tutti i posti che appartengono al preset di $t$ ma non appartengono al postset di $t$"
+
+$W(\langle p,t \rangle)$ numero di gettoni nell'arco
+
+$$
+\begin{align}
+&\forall p \in pre(t) \setminus post(t) &\qquad M'(p) &= M(p) - W(\langle p,t \rangle) \\
+&\forall p \in post(t) \setminus pre(t) &\qquad M'(p) &= M(p) + W(\langle t,p \rangle) \\
+&\forall p \in post(t) \cap pre(t) &\qquad M'(p) &= M(p) - W(\langle p,t \rangle) + W(\langle t,p \rangle) \\
+&\forall p \in P \setminus (pre(t) \cup post(t)) &\qquad M'(p) &= M(p)
+\end{align}
+$$
+
+Grazie all'ultima e' possibile fare una analisi locale.
+
+# Esempio di reti
+
+![](attachments/fsm-to-petri.png)
 
 # Composte da 
 
@@ -28,31 +76,30 @@ I preset $pre(t)$ sono i posti connessi alle transizioni, i postset $pos(t)$ son
 * transizioni - rettangoli
 * archi - connettono posti a transizioni, transizioni a posti
 
-![|500](attachments/reti-di-petri.png)
+![|500](attachments/reti-di-petri.png){width=500px}
 
 ## Token
 
-Posso assegnare piu' token per lo stesso posto, il numero di token puo' quindi rappresentare il numero di istanze di quel tipo di posto.
+Posso assegnare piu' token per lo stesso posto, il numero di token puo' quindi rappresentare il numero di istanze di quel tipo di posto. <label class="sidenote-toggle sidenote-number"></label>
+<span class="sidenote">I token non si spostano, i token si creano e si distruggono!</span>
 
 Ad esempio "tre robot che producono un certo manufatto".
 
 Se non c'e' un limite imposto dalle logiche di transizione un posto puo' accettare infiniti token.
 Cosa che con una FSM non posso modellare.
 
-<aside>creazione e distruzione dei token</aside>
-I token non si spostano! I token si creano e si distruggono!
-
 ## Transizioni
 
 Collegati a certi eventi, scattano quando sussitono certe condizioni, se hanno abbastanza gettoni nei posti di ingresso
 
-![petri|300](attachments/petri-gettoni-prima.png)
+![|300](attachments/petri-gettoni-prima.png){width=300px}
 `T1` ha abbastanza token per scattare, i token finiscono nei posti in uscita
 
 ### Una transizione e' abilitata ad evolvere quando
 
 $t \in T$ e' abilitata in $M$ se e solo se $\forall p \in pre(t) \qquad M(p) \ge W(\langle p, t \rangle)$
 
+(questo vuol dire che se una transizione non ha un Posto prima di essa e' abilitata a scattare)
 Lo scatto di una transizione $t$ in una marcatura $M$ produce una nuova marcatura $M'$.
 
 Ci puo' essere una sola transizione alla volta. Se ci sono piu' transizioni abilitate non posso dire quale deve scattare, sono tutte equiprobabili.
@@ -109,23 +156,26 @@ Due transizioni $t_1$ e $t_2$ sono in conflitto
 * effettivo in una marcatura $M$ se e solo se:
     * riguardo il preset
         $M[T_{1} > \quad \land \quad M[t_{2} > \quad \land \ \exists p \in pre(t_{1}) \cap pre(t_{2}) \quad M(p) < W(\langle p,t_{1} \rangle) + W(\langle p,t_{2} \rangle)$
-        "esiste un posto $p$ in ingresso a entrambe le transizioni che non ha abbastanza token per farle scattare entrambe
+        "esiste un posto $p$ in ingresso a entrambe le transizioni che non ha abbastanza token per farle scattare entrambe"
     * riguardo il postset
      $M[t_1> \land M[t_2 > \land \lnot M[t_{1}t_{2} >$
 
 ![](attachments/reti-petri-conflitti.png)
 
 Conflitto effettivo condizione sufficiente perche' ci sia quello strutturale.
+Conflitto strutturale condizione necessaria perche' ci sia quello effettivo.
 
 Le due transizioni sono in conflitto
 * strutturale perche' hanno posti in comune
 * effettivo perche' $P1$ non ha sufficenti gettoni per farle scattare entrambe, $P0$ si; basta che ce ne sia uno di posto che non riesce a soddisfare le esigenze. Se facessi scattare prima $T1$ non ci sarebbe il conflitto effettivo.
 
-#### Esempio
+E' possibile far scattare due transizioni assieme, purche' ci siano sufficienti Token.
+
+#### Esempio di conflitti
 
 Quali sono i conflitti qua?
 
-![|500](attachments/reti-di-petri-conflitti.png)
+![|500](attachments/reti-di-petri-conflitti.png){width=500px}
 
 * strutturali
     * $t_3$ e $t_4$
@@ -136,14 +186,13 @@ Quali sono i conflitti qua?
 ### Concorrenza
 
 Due transizioni $t_1$ e $t_2$ sono in concorrenza
-    * strutturale se e solo se
-    $pre(t_1) \cap pre(t_2) = \emptyset$
-    (la negazione del conflitto)
-    * effettiva in una marcatura $M$ se e solo se
-        * riguardo il preset
-        $M[T_{1} > \quad \land \quad M[t_{2} > \quad \land \ \forall p \in pre(t_{1}) \cap pre(t_{2}) \quad M(p) \geq W(\langle p,t_{1} \rangle) + W(\langle p,t_{2} \rangle)$
-        "tutti i posti in ingresso a entrambe le transizioni hanno abbastanza token per farle scattare entrambe
 
+* strutturale se e solo se $pre(t_1) \cap pre(t_2) = \emptyset$ (la negazione del conflitto)
+* effettiva in una marcatura $M$ se e solo se
+    * riguardo il preset 
+      $M[T_{1} > \quad \land \quad M[t_{2} > \quad \land \ \forall p \in pre(t_{1}) \cap pre(t_{2}) \quad M(p) \geq W(\langle p,t_{1} \rangle) + W(\langle p,t_{2} \rangle)$ 
+      "tutti i posti in ingresso a entrambe le transizioni hanno abbastanza token per farle scattare entrambe"
+      
 ## Archi
 
 Possono avere un peso, quindi posso esprimere situazioni concorrenti. Se non scrivo nulla vuol dire peso 1.
@@ -151,43 +200,148 @@ Possono avere un peso, quindi posso esprimere situazioni concorrenti. Se non scr
 Un arco <span class="b">in entrata</span> di una transizione, e' un <span class="b">requirement</span>.
 Un arco <span class="b">in uscita</span> da una transizione, crea dei token.
 
-![petri|300](attachments/petri-gettoni-dopo.png)
+![esempio di archi in entrata e in uscita su T1](attachments/petri-gettoni-dopo.png){width=300px}
 
-# Definizione formale
+# Insieme di raggiungibilita'
 
-E' una 5-upla $[P, T; F, W, M_{0}]$
+$R$ e' l'insieme di raggiungibilita', che e' il piu' piccolo insieme di marcature tale che:
 
-* $P$ insieme dei posti
-* $T$ insieme delle transizioni
-* $F$ relazione di flusso - $F \subseteq (P \times T) \cup (T \times P)$
-* $W$ la funzione peso (codominio senza $0$) - $W : F \rightarrow \\N^{+}$
-* $M_{0}$ la funzione marcatura (iniziale) - $M_0 : P \rightarrow \\N$
+* $M \in R(P/T, M)$ - $P/T$ sono le Reti di Petri fin qua viste (Posti Transizioni)
+* $(M' \in R(P/T, M) \  \cap \ \exists t \in T \ M'[t> M'') \implies M'' \in R(P/T, M)$
 
-$P \cup T$ non puo' essere vuoto
-$P \cap T$ e' vuoto
+Tutte le marcature raggiungibili da una corretta play della Rete di Petri.
 
-$pre(a) = { d \in (P \cup T) \ | \ \langle d,a \rangle \in F }$
-$post(a) = { d \in (P \cup T) \ | \ \langle a,d \rangle \in F }$
+# Proprieta' di limitatezza
 
-Quindi i preset sono i posti connessi alle transizioni, i postset sono i posti connessi dalle transizioni.
+$P/T$ con Marcatura $M$ si dice limitata se e solo se 
 
-## Definizione di $M'$
+$\exists k \in \mathbb{N} \quad \forall M' \in R(P/T, M) \ \forall p \in P \quad M'(p) \le k$
 
-Notazione: $\forall p \in pre(t) \setminus post(t)$ significa "per tutti i posti che appartengono al preset di $t$ ma non appartengono al postset di $t$"
+Cioe' se riesco a fissare un numero massimo di Token per ognuno dei Posti.
+La cardinalita' dell'insieme di raggiungibilita' e' infinito oppure no?
 
-$W(\langle p,t \rangle)$ numero di gettoni nell'arco
+# Legame con automi a stati finiti
 
-$$
-\begin{align}
-&\forall p \in pre(t) \setminus post(t) &\qquad M'(p) &= M(p) - W(\langle p,t \rangle) \\
-&\forall p \in post(t) \setminus pre(t) &\qquad M'(p) &= M(p) + W(\langle t,p \rangle) \\
-&\forall p \in post(t) \cap pre(t) &\qquad M'(p) &= M(p) - W(\langle p,t \rangle) + W(\langle t,p \rangle) \\
-&\forall p \in P \setminus (pre(t) \cup post(t)) &\qquad M'(p) &= M(p)
-\end{align}
-$$
+Se la rete di Petri e' limitata, allora l'insieme di raggiungibilita' finito, allora esiste un automa a stati finiti corrispondente che ne descrive il comportamento.
 
-Grazie all'ultima e' possibile fare una analisi locale.
+Gli stati sono le possibili marcature dell'insieme di raggiungibilita'.
 
-# Esempio
+# Vitalita' di una transizione
 
-![](attachments/fsm-to-petri.png)
+Una transizione $t$ in una Marcatura $M$ si dice viva.
+
+<aside>rete viva</aside>
+Una rete si dice viva se tutte le sue transizioni sono vive.
+
+## Grado 0 - morta
+
+Non e' abilitata in $M$ e in nessuna delle Marcature raggiungibili da $M$ allora $\forall M' \in R(P/T, M) \quad \lnot M'[t>$
+
+Non sono piu' capace di far scattare una transizione.
+
+Esempio: se c'e' una transizione che rappresenta lo scoppio di una centrale nucleare, il fatto che la transizione sia dimostrabile che e' morta e' una cosa molto piacevole. La centrale non puo' esplodere per il motivo rappresentato dalla transizione.
+
+## Grado 1
+
+Esiste almeno una Marcatura raggiungibile da $M$ in cui $t$ e' abilitata
+
+$\exists M' \in R(P/T, M) \quad M[t>$
+
+Posso essere in grado di spegnere la centrale nucleare in maniera sicura.
+
+## Grado 2
+
+Per ogni numero $k$ (quindi grande a piacere) esiste almeno una sequenza di scatti ammissibile da $M$ in cui la transizione $t$ scatta $k$ volte
+
+$\forall k \in \mathbb{N} \quad M[..t\ ..t^1 \ ..t^{k-1} \ ..t^k>$
+
+## Grado 3
+
+Esiste almeno una sequenza ammissibile da $M$ in cui la transizione $t$ scatta infinite volte.
+
+## Grado 4 - viva
+
+In qualunque Marcatura raggiungibile da $M$, $t$ non e' morta
+
+$\forall M' \in R(P/T, M) \quad \exists M'' \in R(P/T, M') \quad M''[t>$
+
+## Esempi
+
+$T0$ Morta
+$T1$ Grado 1
+![|300](attachments/Pasted%20image%2020250110221547.png){width=300px}
+
+$T3$ Grado 3
+![|300](attachments/Pasted%20image%2020250110222110.png){width=300px}
+
+$T2$ Grado 2, perche' posso farla scattare quante volte voglio, ma ad un certo punto devo fermarmi: non va avanti da sola
+![|300](attachments/Pasted%20image%2020250110222208.png){width=300px}
+
+
+# Estensioni
+
+## Capacita' dei posti
+
+Posso fissare un massimo numero di Token ammissibili per un Posto.
+La regola di abilitazione cambia con una aggiunta:
+* $\forall p \in pre(t) \qquad M(p) \ge W(\langle p, t \rangle)$ (preesistente)
+* $\forall p \in post(t) \qquad M(p) + W(\langle t,p \rangle) \le K(p)$
+
+Dove $K(p)$ e' la capacita' di $p$.
+
+## Posto complementare
+
+Grazie ai posti complementari "reti con capacita' di posti possono essere tradotte in rete senza capacita' di posti" senza complicare troppo la cosa.
+
+$\forall t \in post(p) \quad \exists \langle t,p_{c} \rangle \in F \quad W(\langle t, p_{c} \rangle) = W(\langle p,t \rangle)$
+
+# Rete pura
+
+Una rete e' detta pura se $\forall t \in T \quad pre(t) \cap post(t) = \emptyset$
+
+ESPANDERE
+
+# Archi inibitori
+
+ESPANDERE
+
+# Eliminare i pesi degli archi
+
+Per semplificare la rete.
+
+Creo un nuovo Posto e una nuova Transizione. 
+
+![|300](attachments/reti-di-petri-eliminazione-archi.png){width=300px}
+
+ESPANDERE Boh? Non ho capito nulla.
+
+E S P A N D E R E
+
+# Albero di raggiungibilita'
+
+<aside>correttezza rete?</aside>
+"Come faccio a verificare se le proprieta' che desidero siano verificate?"
+"Genero l'albero di raggiungibilita'"
+
+## Algoritmo per la generazione
+
+ESPANERE
+
+# Copribilita'
+
+Una Marcatura $M$ copre una Marcatura $M'$ ($M'$ e' coperta da $M$) se e solo se: $\forall p \in P \quad M(p) \ge M'(p)$
+
+Una Marcatura $M$ e' detta copribile a partire da una marcatura $M'$ se esiste una marcatura $M'' \in R(P/T, M')$ che copre $M$.
+
+"Ho piu' gettoni posto per posto".
+Copre in maniera propria se $M(p) \gt M'(p)$
+
+E' utile perche' se $M$ e' la marcatura minima per abilitare $t$
+
+$\forall p \in pre(t) \quad M(p) = W(\langle p,t \rangle)$ e $\forall p \in P \setminus pre(t) \quad M(p) = 0$
+
+allora la transizione $t$ e' morta se e solo se $M$ non e' copribile a partire dalla Marcatura corrente.
+
+
+</article></main>
+</body>

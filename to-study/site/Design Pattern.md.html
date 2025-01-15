@@ -231,6 +231,10 @@
     code span.vs { color: #4070a0; } /* VerbatimString */
     code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
+  <link rel="stylesheet" href="https://latex.vercel.app/style.css">
+  <link rel="stylesheet" href="https://latex.vercel.app/prism/prism.css">
+
+  <link rel="stylesheet" href="css/index.css">
   <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
@@ -240,16 +244,18 @@
 Beck * e dal GOF</p>
 <p>All page numbers (i.e. pag.) are from <a
 href="https://en.wikipedia.org/wiki/Design_Patterns">GoF’s</a>.</p>
-<h1 id="abstract-factory">Abstract factory</h1>
+<h1 id="abstract-factory"><a href="#abstract-factory">Abstract
+factory</a></h1>
 <p>La dependency injection e’ basata sull’Abstract Factory.</p>
 <p>ESPANDERE con abstract factory</p>
-<h1 id="adapter---page-139">Adapter - page 139</h1>
+<h1 id="adapter---page-139"><a href="#adapter---page-139">Adapter - page
+139</a></h1>
 <blockquote>
 <p>Convert the interface of a class into another interface clients
 expect. Adapter lets classes work together that couldn’t otherwise
 because of incompatible interfaces.</p>
 </blockquote>
-<h2 id="class-adapter">Class Adapter</h2>
+<h2 id="class-adapter"><a href="#class-adapter">Class Adapter</a></h2>
 <p>Adatto una singola classe, staticamente, quindi proprio “quella
 classe”. “Un unico oggetto che puo’ essere usato contemporaneamente con
 le due interfacce diverse (vecchia e nuova)”. <u>Utile se devo adattare
@@ -259,7 +265,8 @@ solo su 1.</p>
 <img src="class-adapter.png" alt="class adapter|300" />
 <figcaption aria-hidden="true">class adapter|300</figcaption>
 </figure>
-<h2 id="object-adapter">Object Adapter</h2>
+<h2 id="object-adapter"><a href="#object-adapter">Object
+Adapter</a></h2>
 <p>Adatto un oggetto compatibile con una interfaccia, una gerarchia;
 perche’ posso settare diversi adapter, in base all’esigenza. Due oggetti
 diversi. Il nuovo non puo’ piu’ essere usato con interfaccia
@@ -270,22 +277,26 @@ vecchia.</p>
 </figure>
 <p>Si differenzia perche’ sfrutta la composizione. Posso aggregare piu’
 classi diversi, quindi c’e’ maggiore flessibilita’.</p>
-<h1 id="builder">Builder</h1>
-<h2 id="telescoping-constructor">Telescoping constructor</h2>
+<h1 id="builder"><a href="#builder">Builder</a></h1>
+<h2 id="telescoping-constructor"><a
+href="#telescoping-constructor">Telescoping constructor</a></h2>
 <p>Si hanno multipli costruttori in overloading. Di difficile
 manutenibilita’ nel momento in cui voglio diverse possibilita’, perche’
 aumentano esponenzialmente i costruttori da dichiarare.</p>
-<h2 id="setter-o-fluent-interface">Setter (o fluent interface)</h2>
+<h2 id="setter-o-fluent-interface"><a
+href="#setter-o-fluent-interface">Setter (o fluent interface)</a></h2>
 <p>Problemi di concorrenza e sono obbligato ad accettare la mutabilita’
 dell’oggetto, perche’ ho dei setter, quindi espongo lo stato.</p>
-<h2 id="static-method-factory-non-e-factory-method">Static method
-factory (non e’ Factory method)</h2>
+<h2 id="static-method-factory-non-e-factory-method"><a
+href="#static-method-factory-non-e-factory-method">Static method factory
+(non e’ Factory method)</a></h2>
 <p>Ho un costruttore privato con tutti i parametri, e una serie di
 metodi statici pubblici che al loro interno costruiscono l’oggetto in
 base a cio’ che mi serve. Posso dare nomi significativi a ogni metodo,
 per spiegare come crea l’oggetto, cosa che con il costruttore
 chiaramente non posso fare.</p>
-<h2 id="builder-pattern">Builder pattern</h2>
+<h2 id="builder-pattern"><a href="#builder-pattern">Builder
+pattern</a></h2>
 <figure>
 <img src="builder-pattern.png" alt="builder-pattern|300" />
 <figcaption aria-hidden="true">builder-pattern|300</figcaption>
@@ -310,7 +321,8 @@ Usage
 Xxx b = Xxx.Builder(mandatoryField)
             .withOptionalField1(optionalField)
             .build();</code></pre>
-<h1 id="chain-of-responsibility">Chain of responsibility</h1>
+<h1 id="chain-of-responsibility"><a
+href="#chain-of-responsibility">Chain of responsibility</a></h1>
 <p>Disaccoppia chi genera la richiesta da chi puo’ soddisfarla.</p>
 <p>“Permette di definire una catena di potenziali gestori di una
 richiesta, non sappiamo a priori chi sara’ in grado di gestirla
@@ -331,14 +343,14 @@ toccato.</p>
 navigazione per cercare l’implementazione del metodo.</p>
 <p>Ottimo anche quando sviluppato in TDD, in quanto ogni nodo puo’
 essere sviluppato in isolamento.</p>
-<h1 id="composite">Composite</h1>
+<h1 id="composite"><a href="#composite">Composite</a></h1>
 <figure>
 <img src="pattern-composite.png" alt="composite-pattern|300" />
 <figcaption aria-hidden="true">composite-pattern|300</figcaption>
 </figure>
 <p>Gestire uniformemente foglie e sotto-alberi. “Non mi devo accorgere
 se sto interagendo con una foglia o un sotto-albero”.</p>
-<h1 id="decorator">Decorator</h1>
+<h1 id="decorator"><a href="#decorator">Decorator</a></h1>
 <figure>
 <img src="pattern-decorator.png" alt="pattern-decorator|300" />
 <figcaption aria-hidden="true">pattern-decorator|300</figcaption>
@@ -360,7 +372,7 @@ che puo’ arrivare anche dopo una sequenza di decorazioni.</p>
 <img src="esempio-decorator.png" alt="esempio-decorator|500" />
 <figcaption aria-hidden="true">esempio-decorator|500</figcaption>
 </figure>
-<h1 id="iterator">Iterator</h1>
+<h1 id="iterator"><a href="#iterator">Iterator</a></h1>
 <p><a
 href="https://github.com/lazywithclass/learning/tree/master/software-engineering/DesignPatterns/src/iterator">Implementation
 example</a></p>
@@ -374,17 +386,19 @@ in maniera sequenziale senza esporre la rappresentazione interna</p>
 </figure>
 <p>Notare come <code>condimentCost</code> non dipende da chi sto
 decorando, dipende da <code>ConcreteCondiment</code>.</p>
-<h1 id="facade">Facade</h1>
+<h1 id="facade"><a href="#facade">Facade</a></h1>
 <p>Fornisce una interfaccia unificata e semplificata a un insieme di
 interfacce separate.</p>
-<h1 id="factory-method">Factory method</h1>
+<h1 id="factory-method"><a href="#factory-method">Factory
+method</a></h1>
 <p>Definisce un’interfaccia per creare un oggetto ma lascia alle
 sottoclassi la scelta su cosa creare.</p>
 <figure>
 <img src="factory-method.png" alt="factory-pattern|300" />
 <figcaption aria-hidden="true">factory-pattern|300</figcaption>
 </figure>
-<h1 id="model-view-controller">Model View Controller</h1>
+<h1 id="model-view-controller"><a href="#model-view-controller">Model
+View Controller</a></h1>
 <p><img src="mvc.png" /></p>
 <p>L’MVC e’ un set di pattern che collaborano assieme nello stesso
 design: Composite (view), Strategy (quale Controller iniettare, il
@@ -402,17 +416,18 @@ then relying of the observer relationship to update the views that are
 observing that model.</p>
 <p>Il problema e’ che c’e’ una circolarita’ di comunicazione, quindi si
 potrebbe preferire per questo l’MVP.</p>
-<h2 id="model">Model</h2>
+<h2 id="model"><a href="#model">Model</a></h2>
 <p>Un unico modello che rappresenta lo stato dell’applicazione</p>
-<h2 id="view">View</h2>
+<h2 id="view"><a href="#view">View</a></h2>
 <p>La View si aggiorna ogni volta che il Model cambia stato. Tra Model e
 View c’e’ una relazione tipo Observer.</p>
-<h2 id="controller">Controller</h2>
+<h2 id="controller"><a href="#controller">Controller</a></h2>
 <p>Ascolta gli eventi dell’interfaccia, a fronte del quale eventualmente
 puo’ richiedere una modifica dello stato. Implementa quindi la Strategy
 di gestione di un evento. A seconda del Controller che associo ho un
 comportamento diverso.</p>
-<h1 id="model-view-presenter">Model View Presenter</h1>
+<h1 id="model-view-presenter"><a href="#model-view-presenter">Model View
+Presenter</a></h1>
 <p>https://martinfowler.com/eaaDev/uiArchs.html#Model-view-presentermvp</p>
 <figure>
 <img src="mvc-mvp.png" alt="mvc-mvp|400" />
@@ -428,33 +443,37 @@ presente i principi di buona scrittura del software.</p>
 <p>Vedi <a
 href="Design%20Pattern.md#Modalita&#39;%20-%20pag%20298">Modalita’ - pag
 298</a> di Observer.</p>
-<h2 id="diverse-relazioni">Diverse relazioni</h2>
-<h3 id="presenter-rightarrow-model">Presenter <span
-class="math inline">→</span> Model</h3>
+<h2 id="diverse-relazioni"><a href="#diverse-relazioni">Diverse
+relazioni</a></h2>
+<h3 id="presenter-rightarrow-model"><a
+href="#presenter-rightarrow-model">Presenter \rightarrow Model</a></h3>
 <p>Il Presenter viene aggiunto come ascoltatore di cambi di stato sul
 Model.</p>
 <div class="sourceCode" id="cb2"><pre
 class="sourceCode java"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>model<span class="op">.</span><span class="fu">addObserver</span><span class="op">(</span>presenter<span class="op">)</span></span></code></pre></div>
-<h3 id="presenter-rightarrow-view">Presenter <span
-class="math inline">→</span> View</h3>
+<h3 id="presenter-rightarrow-view"><a
+href="#presenter-rightarrow-view">Presenter \rightarrow View</a></h3>
 <p>Il presente viene aggiunto come gestore degli eventi sulle View</p>
 <div class="sourceCode" id="cb3"><pre
 class="sourceCode java"><code class="sourceCode java"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>view<span class="op">.</span><span class="fu">addHandler</span><span class="op">(</span>presenter<span class="op">)</span></span></code></pre></div>
-<h2 id="suddivisione-tra-model-e-state">Suddivisione tra Model e
-State</h2>
+<h2 id="suddivisione-tra-model-e-state"><a
+href="#suddivisione-tra-model-e-state">Suddivisione tra Model e
+State</a></h2>
 <p>Puo’ essere una buona idea operare una divisione di questo tipo:</p>
 <p>State: rappresenta lo stato all’interno del pattern. Model: e’ <a
 href="Design%20Pattern.md#Class%20Adapter">Class Adapter</a> dello State
 aggiungendo capacita’ di <a
 href="Design%20Pattern.md#Observer%20-%20pag%20293">Observer - pag
 293</a>.</p>
-<h2 id="interface-segregation-sul-presenter">Interface Segregation sul
-Presenter</h2>
+<h2 id="interface-segregation-sul-presenter"><a
+href="#interface-segregation-sul-presenter">Interface Segregation sul
+Presenter</a></h2>
 <p>Non sempre voglio che tutti i Presenter implementino lo stesso
 <code>Presenter</code>, ricordarsi di specializzare sfruttando
 l’eredita’ multipla sulle interfacce.</p>
-<h2 id="da-dove-si-parte-nellimplementazione">Da dove si parte
-nell’implementazione?</h2>
+<h2 id="da-dove-si-parte-nellimplementazione"><a
+href="#da-dove-si-parte-nellimplementazione">Da dove si parte
+nell’implementazione?</a></h2>
 <p>Si puo’ approcciare da diversi lati, ad esempio con diversi
 sotto-team che si avvicinano assieme al risultato.</p>
 <p>O inizio dal Presenter (top down). Piuttosto che dal Model (bottom
@@ -463,7 +482,8 @@ delineando in una interfaccia quali sono i metodi che verranno
 implementati.</p>
 <p>TODO RIMANDO A IMMUTABILITA’ Favorire un design con immutabilita’ nel
 Model, per evitare deep copies.</p>
-<h2 id="gestione-degli-errori">Gestione degli errori</h2>
+<h2 id="gestione-degli-errori"><a href="#gestione-degli-errori">Gestione
+degli errori</a></h2>
 <p>Nel Presenter (ma…). Importante che una volta validato il dato questa
 validazione non sia fatta, se si usa il contract based allora si puo’
 costruire un tipo che assume per costruzione la validazione del dato,
@@ -474,10 +494,12 @@ es:</p>
 un Model che gestisce due manche di sciatori, e mi arriva nel Model un
 nome di uno sciatore non presente nella prima manche allora questo lo
 posso gestire solo nel Model.</p>
-<h2 id="deregistrarsi-dagli-observer">Deregistrarsi dagli observer</h2>
+<h2 id="deregistrarsi-dagli-observer"><a
+href="#deregistrarsi-dagli-observer">Deregistrarsi dagli
+observer</a></h2>
 <p>Puo’ avere senso ad un certo stato di avanzamento nell’applicazione
 per qualcuno di deregistrarsi.</p>
-<h1 id="nullobject">NullObject</h1>
+<h1 id="nullobject"><a href="#nullobject">NullObject</a></h1>
 <blockquote>
 <p>Vogliamo creare un oggetto che corrisponda al concetto “nessun
 valore” o “valore neutro”</p>
@@ -518,7 +540,8 @@ public class State {
         this.temp = temp;
     }
 }</code></pre>
-<h2 id="modalita---pag-298">Modalita’ - pag 298</h2>
+<h2 id="modalita---pag-298"><a href="#modalita---pag-298">Modalita’ -
+pag 298</a></h2>
 <p>E’ possibile avere due modalita’ per avvertire gli observer di un
 cambiamento: pull e push</p>
 <p>```java linenos:1 <span class="citation"
@@ -548,7 +571,7 @@ Svantaggi: inefficiente se lo stato è complesso e gli observer sono interessati
 public void update(@Nullable Observable&lt;Double&gt; subject, @NotNull Double state) {
     view.setValue(String.format(&quot;%.2f&quot;, strategy.convertFromCelsius(state)));
 }</code></pre>
-<h1 id="singleton">Singleton</h1>
+<h1 id="singleton"><a href="#singleton">Singleton</a></h1>
 <blockquote>
 <p>Sfrutta il fatto che in Java i campi degli <code>enum</code> sono
 realizzati tramite degli oggetti costanti creati al momento del loro
@@ -557,7 +580,7 @@ primo uso</p>
 <p>```java linenos:1 public enum Singleton { INSTANCE; public void op()
 { … } }</p>
 <p>Singleton.INSTANCE.op(); ```</p>
-<h1 id="state">State</h1>
+<h1 id="state"><a href="#state">State</a></h1>
 <figure>
 <img src="state-pattern.png" alt="pattern-state|300" />
 <figcaption aria-hidden="true">pattern-state|300</figcaption>
@@ -570,7 +593,7 @@ class="math inline">→</span> classe (nell’esempio
 class="math inline">→</span> le informazioni di contesto</p>
 <p>Gli stati non devono conoscersi a vicenda, e’ il <code>Context</code>
 che puo’ conoscerli.</p>
-<h1 id="strategy">Strategy</h1>
+<h1 id="strategy"><a href="#strategy">Strategy</a></h1>
 <figure>
 <img src="pattern-strategy.png" alt="pattern-strategy|300" />
 <figcaption aria-hidden="true">pattern-strategy|300</figcaption>
@@ -581,7 +604,10 @@ encapsulation) tra loro intercambiabili.</p>
 </blockquote>
 <p>Ad esempio usato nel <a
 href="https://github.com/lazywithclass/learning/tree/master/software-engineering/DesignPatterns/src/strategy/sort">sorting</a>.</p>
-<h1 id="template">Template</h1>
+<h1 id="template"><a href="#template">Template</a></h1>
 <p>TODO ESPANDERE</p>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs/prism.min.js"></script>
+
 </body>
 </html>

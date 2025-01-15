@@ -167,6 +167,10 @@
     }
     .display.math{display: block; text-align: center; margin: 0.5rem auto;}
   </style>
+  <link rel="stylesheet" href="https://latex.vercel.app/style.css">
+  <link rel="stylesheet" href="https://latex.vercel.app/prism/prism.css">
+
+  <link rel="stylesheet" href="css/index.css">
   <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
@@ -174,7 +178,7 @@
 <body>
 <p>Questa parte e’ devastante. Espandere appena hai la forza.
 Auguri.</p>
-<h1 id="use-case">Use case</h1>
+<h1 id="use-case"><a href="#use-case">Use case</a></h1>
 <p>E’ il dialogo con il cliente. Fornisce un insieme di scenari
 relazionati tra loro</p>
 <ul>
@@ -184,21 +188,22 @@ relazionati tra loro</p>
 <li>flusso di esecuzione</li>
 <li>eccezioni e loro trattamento</li>
 </ul>
-<h3 id="utilizzo">Utilizzo</h3>
+<h3 id="utilizzo"><a href="#utilizzo">Utilizzo</a></h3>
 <ul>
 <li>identificazione attori</li>
 <li>denominazione del tipo di interazione</li>
 <li>collegamenti attore - attore e caso d’uso - caso d’uso</li>
 </ul>
-<h4 id="attore">Attore</h4>
+<h4 id="attore"><a href="#attore">Attore</a></h4>
 <p>E’ una entita’ esterna al sistema, non per forza un umano, che
 interagisce col sistema. E’ fonte o destinatario del sistema.</p>
 <p>“Attore non e’ lo studente avente matricola XYZ, e’ ‘lo
 studente’”.</p>
-<h3 id="identificazione">Identificazione</h3>
+<h3 id="identificazione"><a
+href="#identificazione">Identificazione</a></h3>
 <p>Per identificare gli use case posso partire dagli attori * cosa
 fanno? * cosa vogliono?</p>
-<h3 id="associazioni">Associazioni</h3>
+<h3 id="associazioni"><a href="#associazioni">Associazioni</a></h3>
 <ul>
 <li>uno use case deve essere associato ad almeno un attore</li>
 <li>un attore deve essere associato ad almeno uno use case</li>
@@ -207,29 +212,35 @@ case</li>
 </ul>
 <p>Ne esistono tra use case: * inclusione: una parte dello use case *
 estensione: preso uno use case ne faccio una estensione</p>
-<h4 id="generalizzazione">Generalizzazione</h4>
+<h4 id="generalizzazione"><a
+href="#generalizzazione">Generalizzazione</a></h4>
 <p>Permette di esplicitare relazioni tra ruoli, es uno
 <code>StaffMember</code> e’ anche un <code>LibraryMember</code>.</p>
 <p>Simile a estensione, ma sostituisco alcune parti della descrizione,
 mentre ne eredito altre.</p>
-<h2 id="scenari">Scenari</h2>
+<h2 id="scenari"><a href="#scenari">Scenari</a></h2>
 <p>Descrizioni di come il sistema e’ usato in pratica</p>
 <ul>
 <li>utili nella raccolta dei requisiti, casi specifici</li>
 <li>posso essere usati come esempi</li>
 </ul>
-<h1 id="diagramma-delle-classi">Diagramma delle classi</h1>
+<h1 id="diagramma-delle-classi"><a
+href="#diagramma-delle-classi">Diagramma delle classi</a></h1>
 <p>Recuperare dalle slide</p>
-<h1 id="diagramma-degli-stati">Diagramma degli stati</h1>
+<h1 id="diagramma-degli-stati"><a
+href="#diagramma-degli-stati">Diagramma degli stati</a></h1>
 <p>Recuperare dalle slide</p>
-<h1 id="diagramma-di-sequenza">Diagramma di sequenza</h1>
+<h1 id="diagramma-di-sequenza"><a
+href="#diagramma-di-sequenza">Diagramma di sequenza</a></h1>
 <p><img src="sequence-diagram.png" /></p>
 <p>Recuperare dalle slide</p>
-<h1 id="diagramma-delle-attivita">Diagramma delle attivita’</h1>
+<h1 id="diagramma-delle-attivita"><a
+href="#diagramma-delle-attivita">Diagramma delle attivita’</a></h1>
 <p>Usato per * flusso all’interno di un metodo * flusso di uno use-case
 * logica all’interno di un business process</p>
 <p>Gli stati sono attivita’.</p>
-<h2 id="sincronizzazione">Sincronizzazione</h2>
+<h2 id="sincronizzazione"><a
+href="#sincronizzazione">Sincronizzazione</a></h2>
 <figure>
 <img src="uml-sincronizzazione.png" alt="|300" />
 <figcaption aria-hidden="true">|300</figcaption>
@@ -238,24 +249,29 @@ mentre ne eredito altre.</p>
 Activity2 e Activity3 possono partire contemporaneamente on in
 pseudo-concorrenza non deterministica. Quando entrambe terminano parto
 con un’altra attivita’. Ha sempre inizio e fine.</p>
-<h2 id="decisioni">Decisioni</h2>
+<h2 id="decisioni"><a href="#decisioni">Decisioni</a></h2>
 <figure>
 <img src="uml-decisioni.png" alt="|300" />
 <figcaption aria-hidden="true">|300</figcaption>
 </figure>
-<h2 id="swim-lane">Swim lane</h2>
+<h2 id="swim-lane"><a href="#swim-lane">Swim lane</a></h2>
 <figure>
 <img src="uml-swimlane.png" alt="|300" />
 <figcaption aria-hidden="true">|300</figcaption>
 </figure>
 <p>Rappresentano le responsabilita’ sulle singole attivita’</p>
-<h1 id="diagrammi-dei-componenti">Diagrammi dei componenti</h1>
+<h1 id="diagrammi-dei-componenti"><a
+href="#diagrammi-dei-componenti">Diagrammi dei componenti</a></h1>
 <figure>
 <img src="component-diagram.png" alt="|300" />
 <figcaption aria-hidden="true">|300</figcaption>
 </figure>
 <p>Permette di raggruppare ragionando in termini di componenti
 fisici</p>
-<h1 id="diagramma-di-deploy">Diagramma di deploy</h1>
+<h1 id="diagramma-di-deploy"><a href="#diagramma-di-deploy">Diagramma di
+deploy</a></h1>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs/prism.min.js"></script>
+
 </body>
 </html>

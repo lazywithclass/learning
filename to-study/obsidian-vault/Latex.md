@@ -5,6 +5,8 @@ tags:
   - latex
 ---
 
+https://oeis.org/wiki/List_of_LaTeX_mathematical_symbols
+
 Mainly stuff I forget about, jotted down at random.
 
 # Sets
@@ -12,6 +14,8 @@ Mainly stuff I forget about, jotted down at random.
 $A \cup B$
 $A \cap B$
 $A \subseteq B$
+
+$\mathbb{N}$
 
 # Multiple expressions alignment
 

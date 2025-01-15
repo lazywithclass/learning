@@ -167,6 +167,10 @@
     }
     .display.math{display: block; text-align: center; margin: 0.5rem auto;}
   </style>
+  <link rel="stylesheet" href="https://latex.vercel.app/style.css">
+  <link rel="stylesheet" href="https://latex.vercel.app/prism/prism.css">
+
+  <link rel="stylesheet" href="css/index.css">
   <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
@@ -174,7 +178,8 @@
 <body>
 <p>Allows to understand * fundamental knowledge about how queries work *
 execution plans and how to construct efficient ones</p>
-<h2 id="fundamental-principle">Fundamental principle</h2>
+<h2 id="fundamental-principle"><a
+href="#fundamental-principle">Fundamental principle</a></h2>
 <aside>
 one tuple at a time
 </aside>
@@ -182,11 +187,11 @@ one tuple at a time
 tuple at a time. So we need to put data side by side to be able to
 compare it. This is because the relations contain facts. Understanding
 this allows to reason about operators.</p>
-<h2 id="notation">Notation</h2>
+<h2 id="notation"><a href="#notation">Notation</a></h2>
 <p>To use attribute <span class="math inline"><em>a</em></span> from
 relation <span class="math inline"><em>R</em></span> write <span
 class="math inline"><em>R</em>.<em>c</em></span></p>
-<h2 id="operators">Operators</h2>
+<h2 id="operators"><a href="#operators">Operators</a></h2>
 <p>Considering table as if they were sets in the mathematical meaning
 helps a lot.</p>
 <p>Domains of the tables should be the same for the operations to be
@@ -249,7 +254,8 @@ inverse of Cartesian product</li>
 </ul>
 <p>Note on joins: they can be implemented as the Cartesian product with
 a selection.</p>
-<h2 id="the-need-for-subtraction">The need for subtraction</h2>
+<h2 id="the-need-for-subtraction"><a
+href="#the-need-for-subtraction">The need for subtraction</a></h2>
 <p>There are scenarios where it’s tricky to understand what to do, or at
 least it is for me: say we want to find all board games that are not
 wargames, these are the tables:</p>
@@ -345,7 +351,8 @@ Solution when working with negation
 subtract these from all records:</p>
 <p><span
 class="math inline"><em>π</em><sub><em>i</em><em>d</em></sub>(<em>B</em>) − <em>π</em><sub><em>G</em><em>C</em>.<em>b</em><em>o</em><em>a</em><em>r</em><em>d</em><em>g</em><em>a</em><em>m</em><em>e</em></sub>(<em>σ</em><sub><em>C</em>.<em>n</em><em>a</em><em>m</em><em>e</em> = <em>W</em><em>a</em><em>r</em><em>g</em><em>a</em><em>m</em><em>e</em></sub>(<em>G</em><em>C</em>⋈<sub><em>G</em><em>C</em>.<em>c</em><em>a</em><em>t</em><em>e</em><em>g</em><em>o</em><em>r</em><em>y</em> = <em>C</em>.<em>i</em><em>d</em></sub><em>C</em>))</span></p>
-<h2 id="the-need-for-division">The need for division</h2>
+<h2 id="the-need-for-division"><a href="#the-need-for-division">The need
+for division</a></h2>
 <p>Say you have</p>
 <p class="table-header">
 R
@@ -405,7 +412,7 @@ elements what we got at 1) <span
 class="math inline"><em>π</em><sub><em>A</em></sub>(<em>R</em>) − <em>π</em><sub><em>A</em></sub>(<em>π</em><sub><em>A</em></sub>(<em>R</em>)×<em>π</em><sub><em>B</em></sub>(<em>S</em>)−<em>R</em>)</span></p>
 <p>This operation is called division <span
 class="math inline">÷</span>.</p>
-<h3 id="more-info">More info</h3>
+<h3 id="more-info"><a href="#more-info">More info</a></h3>
 <p><a
 href="https://www2.cs.arizona.edu/~mccann/research/divpresentation.pdf">Great
 explanation</a>.</p>
@@ -430,7 +437,8 @@ class="math inline"><em>U</em> = <em>R</em> × <em>S</em></span> then
 <span class="math inline"><em>U</em> ÷ <em>S</em> = <em>R</em></span> e
 <span
 class="math inline"><em>U</em> ÷ <em>R</em> = <em>S</em></span>.</p>
-<h2 id="talking-about-all">Talking about “all”</h2>
+<h2 id="talking-about-all"><a href="#talking-about-all">Talking about
+“all”</a></h2>
 <p>It is useful when you need to “find all X that Y” to think about it
 in a different way, so try to “find all X that do not Y” and then remove
 from X what you just found (hope this makes sense).</p>
@@ -450,13 +458,13 @@ doing a division</span>.</p>
 <p>We are doing a double negation, so to make an example with BoardGame:
 “we take games such that it does not exist a game such that it is not in
 first position”.</p>
-<h2 id="notes">Notes</h2>
+<h2 id="notes"><a href="#notes">Notes</a></h2>
 <p>Cartesian product between something and the empty set is the empty
 set <span class="math inline"><em>R</em> × ∅ = ∅</span>.</p>
 <p>Sometimes it might be useful to invert the sentence and ask ourselves
 the negated version of it.</p>
-<h2 id="exercises">Exercises</h2>
-<h3 id="boardgame">Boardgame</h3>
+<h2 id="exercises"><a href="#exercises">Exercises</a></h2>
+<h3 id="boardgame"><a href="#boardgame">Boardgame</a></h3>
 <p>Following examples use this schema:</p>
 <figure>
 <img src="Pasted%20image%2020240201195400.png"
@@ -568,7 +576,7 @@ class="math inline"><em>π</em><sub><em>b</em><em>g</em><em>g</em><em>u</em><em>
 <li><p>Find all games that are not sold at less than a 100E <span
 class="math inline"><em>π</em><sub><em>b</em><em>o</em><em>a</em><em>r</em><em>d</em><em>g</em><em>a</em><em>m</em><em>e</em></sub><em>L</em><em>i</em><em>s</em><em>t</em><em>i</em><em>n</em><em>g</em><em>s</em> − <em>π</em><sub><em>b</em><em>o</em><em>a</em><em>r</em><em>d</em><em>g</em><em>a</em><em>m</em><em>e</em></sub>(<em>σ</em><sub><em>c</em><em>u</em><em>r</em><em>r</em><em>e</em><em>n</em><em>c</em><em>y</em> = <em>E</em><em>U</em> ∧ <em>p</em><em>r</em><em>i</em><em>c</em><em>e</em> &lt; 100</sub><em>L</em><em>i</em><em>s</em><em>t</em><em>i</em><em>n</em><em>g</em><em>s</em>)</span></p></li>
 </ol>
-<h3 id="cities">Cities</h3>
+<h3 id="cities"><a href="#cities">Cities</a></h3>
 <figure>
 <img src="relational-algebra-politicians.png"
 alt="relational-algebra-politicians.png" />
@@ -599,5 +607,8 @@ class="math inline"><em>π</em><sub><em>C</em>.<em>i</em><em>d</em></sub><em>C</
 <li><p>Find politicians that are head in more than one city <span
 class="math inline"><em>π</em><sub><em>C</em><sub>1</sub>.<em>h</em><em>e</em><em>a</em><em>d</em></sub>(<em>C</em><em>i</em><em>t</em><em>y</em><sub>1</sub>⋈<sub><em>C</em><em>i</em><em>t</em><em>y</em><sub>1</sub>.<em>i</em><em>d</em> ≠ <em>C</em><em>i</em><em>t</em><em>y</em><sub>2</sub>.<em>i</em><em>d</em> ∧ <em>C</em><em>i</em><em>t</em><em>y</em><sub>1</sub>.<em>h</em><em>e</em><em>a</em><em>d</em> = <em>C</em><em>i</em><em>t</em><em>y</em><sub>2</sub>.<em>h</em><em>e</em><em>a</em><em>d</em></sub><em>C</em><em>i</em><em>t</em><em>y</em><sub>2</sub>)</span></p></li>
 </ol>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs/prism.min.js"></script>
+
 </body>
 </html>

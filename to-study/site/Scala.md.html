@@ -231,12 +231,17 @@
     code span.vs { color: #4070a0; } /* VerbatimString */
     code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
+  <link rel="stylesheet" href="https://latex.vercel.app/style.css">
+  <link rel="stylesheet" href="https://latex.vercel.app/prism/prism.css">
+
+  <link rel="stylesheet" href="css/index.css">
   <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
 </head>
 <body>
-<h2 id="run-code-in-the-repl">Run code in the REPL</h2>
+<h2 id="run-code-in-the-repl"><a href="#run-code-in-the-repl">Run code
+in the REPL</a></h2>
 <p>If 1.scala contains</p>
 <div class="sourceCode" id="cb1"><pre
 class="sourceCode scala"><code class="sourceCode scala"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> <span class="fu">add1</span><span class="op">(</span>n<span class="op">:</span> <span class="bu">Int</span><span class="op">):</span> <span class="bu">Int</span> <span class="op">=</span> n <span class="op">+</span> <span class="dv">1</span></span></code></pre></div>
@@ -247,18 +252,18 @@ class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">add1:</span> <span class="er">(</span><span class="ex">n:</span> Int<span class="kw">)</span><span class="ex">Int</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ex">scala</span><span class="op">&gt;</span> add1<span class="er">(</span><span class="ex">5</span><span class="kw">)</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="ex">res1:</span> Int = 6</span></code></pre></div>
-<h2 id="difference-val-and-var">Difference <code>val</code> and
-<code>var</code></h2>
+<h2 id="difference-val-and-var"><a
+href="#difference-val-and-var">Difference val and var</a></h2>
 <p><code>val</code> is used to define constants, <code>var</code> is for
 <code>var</code>iables.</p>
-<h2 id="class">Class</h2>
-<h3 id="case-classes">Case classes</h3>
+<h2 id="class"><a href="#class">Class</a></h2>
+<h3 id="case-classes"><a href="#case-classes">Case classes</a></h3>
 <p>Useful in pattern matching and to build immutable objects.</p>
 <div class="sourceCode" id="cb3"><pre
 class="sourceCode scala"><code class="sourceCode scala"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="cf">case</span> <span class="kw">class</span> <span class="fu">RGB</span><span class="op">(</span>r<span class="op">:</span> <span class="bu">Int</span><span class="op">,</span> g<span class="op">:</span> <span class="bu">Int</span><span class="op">,</span> b<span class="op">:</span> <span class="bu">Int</span><span class="op">)</span></span></code></pre></div>
-<h2 id="object">Object</h2>
+<h2 id="object"><a href="#object">Object</a></h2>
 <p><code>object</code> defines a singleton</p>
-<h3 id="companion">Companion</h3>
+<h3 id="companion"><a href="#companion">Companion</a></h3>
 <p>From <a
 href="https://docs.scala-lang.org/tour/singleton-objects.html#companion-objects">the
 docs</a>:</p>
@@ -289,11 +294,11 @@ avoid mistakes, also we do not change the original class’ constructor so
 that interface remains untouched.</p>
 <p><code>unapply</code> is used in the context of pattern matching to
 destructure objects and extract their components.</p>
-<h2 id="trait">Trait</h2>
+<h2 id="trait"><a href="#trait">Trait</a></h2>
 <p>Lego blocks.</p>
-<h2 id="dsl">DSL</h2>
+<h2 id="dsl"><a href="#dsl">DSL</a></h2>
 <pre><code>With Scala you can use the dual power of OO and functional programming to evolve your domain model. Using the OO features of Scala, you can abstract over types and values, specialize a component through subtyping, and do composition using mixins. You can also use the functional features of Scala through its higher-order functions, closures, and combinators. Finally, you can compose all of this using modules and get your final abstraction.</code></pre>
-<h3 id="internal">Internal</h3>
+<h3 id="internal"><a href="#internal">Internal</a></h3>
 <p>Written idiomatically in the language.</p>
 <ul>
 <li>no <code>;</code> in Scala</li>
@@ -301,11 +306,12 @@ destructure objects and extract their components.</p>
 <li>operators as methods</li>
 <li>optional parentheses</li>
 </ul>
-<h3 id="external">External</h3>
+<h3 id="external"><a href="#external">External</a></h3>
 <p>Different parser and language. Uses <a
 href="https://github.com/scala/scala-parser-combinators">Scala parser
 combinators</a>.</p>
-<h4 id="scala-parser-combinators">Scala parser combinators</h4>
+<h4 id="scala-parser-combinators"><a
+href="#scala-parser-combinators">Scala parser combinators</a></h4>
 <p>All my exercises could be found <a
 href="https://github.com/lazywithclass/learning/tree/master/programming-languages/scala">here</a>,
 under course-exercises you will find lots of examples.</p>
@@ -352,9 +358,10 @@ class="sourceCode scala"><code class="sourceCode scala"><span id="cb7-1"><a href
 <p>When writing a parser for a language I’ve found it useful to * first
 write the <a href="BNF.md">BNF</a> list of derivation rules * for each
 derivation rule write a parser combinator</p>
-<h2 id="functions-and-methods">Functions and methods</h2>
+<h2 id="functions-and-methods"><a
+href="#functions-and-methods">Functions and methods</a></h2>
 <p>Functions cannot be written without parenthesis.</p>
-<h2 id="useful-stuff">Useful stuff</h2>
+<h2 id="useful-stuff"><a href="#useful-stuff">Useful stuff</a></h2>
 <p>Do not use the REPL. I’ve seen it misbehave.</p>
 <p><strong>The following saved me hours of bug searching:</strong> while
 writing combinators it’s easy to miss silly mistakes, always print each
@@ -362,12 +369,15 @@ combinator result before returning the value, this helps a lot when
 there’s a lot going on, follows a simple example</p>
 <div class="sourceCode" id="cb8"><pre
 class="sourceCode scala"><code class="sourceCode scala"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> field <span class="op">=</span> ident <span class="op">^^</span> <span class="op">{</span> s <span class="op">=&gt;</span> <span class="fu">println</span><span class="op">(</span>s<span class="op">);</span> s <span class="op">}</span></span></code></pre></div>
-<h3 id="printing">Printing</h3>
+<h3 id="printing"><a href="#printing">Printing</a></h3>
 <div class="sourceCode" id="cb9"><pre
 class="sourceCode scala"><code class="sourceCode scala"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">val</span> n <span class="op">=</span> <span class="dv">4</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">val</span> m <span class="op">=</span> <span class="dv">2</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span><span class="op">(</span><span class="ss">s&quot;$n</span><span class="st"> </span><span class="ss">$m&quot;</span><span class="op">)</span></span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co">// or the following if you have a method invocation</span></span>
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span><span class="op">(</span><span class="ss">s&quot;${</span>something<span class="op">.</span>method<span class="ss">}&quot;</span><span class="op">)</span></span></code></pre></div>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs/prism.min.js"></script>
+
 </body>
 </html>

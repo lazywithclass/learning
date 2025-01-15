@@ -231,17 +231,23 @@
     code span.vs { color: #4070a0; } /* VerbatimString */
     code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
+  <link rel="stylesheet" href="https://latex.vercel.app/style.css">
+  <link rel="stylesheet" href="https://latex.vercel.app/prism/prism.css">
+
+  <link rel="stylesheet" href="css/index.css">
   <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
 </head>
 <body>
-<h2 id="refresher-sui-logaritmi">Refresher sui logaritmi</h2>
+<h2 id="refresher-sui-logaritmi"><a
+href="#refresher-sui-logaritmi">Refresher sui logaritmi</a></h2>
 <p>TODO</p>
-<h2 id="lezione-1---2509">Lezione 1 - 25/09</h2>
+<h2 id="lezione-1---2509"><a href="#lezione-1---2509">Lezione 1 -
+25/09</a></h2>
 <p>Algoritmo: procedimento per la soluzione di un problema</p>
 <p>Fondamentale organizzare i dati -&gt; strutture dati</p>
-<h3 id="fasi">Fasi</h3>
+<h3 id="fasi"><a href="#fasi">Fasi</a></h3>
 <p>Sintesi: problema -&gt; algoritmo Analisi: l’algoritmo trovato e’ il
 migliore?</p>
 <p>Sintesi * Progettazione * studio delle strutture dati Analisi *
@@ -251,8 +257,9 @@ molto spesso sono in constrasto, ad es un algoritmo che usa molto spazio
 magari usa meno tempo * studio delle limitazioni inerenti e complessita’
 dei problemi, alcuni problemi hanno soluzioni poco efficienti (problema
 del commesso viaggiatore)</p>
-<h4 id="case-study---commesso-viaggiatore">Case study - Commesso
-Viaggiatore</h4>
+<h4 id="case-study---commesso-viaggiatore"><a
+href="#case-study---commesso-viaggiatore">Case study - Commesso
+Viaggiatore</a></h4>
 <p>Istanza: n citta’, le cui distanze sono note Problema: vogliamo
 trovare il percorso piu’ corto che visiti tutte le citta’ e torni al
 punto di partenza</p>
@@ -265,13 +272,15 @@ per la terza citta’ sono <span class="math inline"><em>n</em> − 2</span>
 <p>Approssimazione di Stirling su fattoriale</p>
 <p>Se ho molte citta’ l’algoritmo potrebbe non terminare mai</p>
 <p>Mi accontento di risposte approssimate</p>
-<h3 id="perche-studiare-lalgoritmica">Perche’ studiare
-l’algoritmica?</h3>
+<h3 id="perche-studiare-lalgoritmica"><a
+href="#perche-studiare-lalgoritmica">Perche’ studiare
+l’algoritmica?</a></h3>
 <p>Risoluzione problemi</p>
 <p>Ci sono strumenti per capire i problemi, non solo per risolverli</p>
 <p>CERCARE: Knuth, the art of computer programming, spiegare un concetto
 ad un computer per capirlo realmente</p>
-<h4 id="esempio-di-problema">Esempio di problema</h4>
+<h4 id="esempio-di-problema"><a href="#esempio-di-problema">Esempio di
+problema</a></h4>
 <p><span class="math inline"><em>N</em> &gt; 0</span> <span
 class="math inline"><em>N</em> − 1</span> compresi tra <span
 class="math inline">1</span> e <span
@@ -280,7 +289,8 @@ numero mancante</p>
 <p>Sommo tutti i numeri da 1 a N Sommo tutti gli altri</p>
 <p>Differenza tra le due</p>
 <p>sommatoria da i = 1 a N e’ (n+1) * N / 2</p>
-<h2 id="lezione-2---2709">Lezione 2 - 27/09</h2>
+<h2 id="lezione-2---2709"><a href="#lezione-2---2709">Lezione 2 -
+27/09</a></h2>
 <p>Punti fondamentali sintesi e analisi algoritmi</p>
 <p>Algoritmo Insieme ordinato e finito di passi eseguibili e non ambigui
 che definiscono un procedimento che termina</p>
@@ -297,12 +307,13 @@ regole di uno specifico linguaggio di programmazione</p>
 class="sourceCode java"><code class="sourceCode java"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>ALGORITMO <span class="fu">moltiplicazione</span><span class="op">(</span>intero a<span class="op">,</span> intero b<span class="op">)</span> <span class="op">-&gt;</span> intero</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  RETURN a <span class="op">*</span> b</span></code></pre></div>
 <p>Sintesi: dal problema progettare l’algoritmo</p>
-<h3 id="analisi">Analisi</h3>
+<h3 id="analisi"><a href="#analisi">Analisi</a></h3>
 <p>Viene fatta a priori per evitare di incorrere in perdite di tempo,
 altrimenti potrei scrivere un programma particolarmente lento</p>
 <p>Correttezza - risolve il problema? Efficienza - una volta fatto il
 punto precedente, valuto la quantita’ di risorse usate</p>
-<h4 id="esempio-moltiplicazione---1">Esempio moltiplicazione - 1</h4>
+<h4 id="esempio-moltiplicazione---1"><a
+href="#esempio-moltiplicazione---1">Esempio moltiplicazione - 1</a></h4>
 <pre class="code"><code>     19 * 
     114 =
 ---------
@@ -313,7 +324,8 @@ punto precedente, valuto la quantita’ di risorse usate</p>
    2166</code></pre>
 <p># prodotti a 1 cifra = # cifre(a) * # cifre(b) # somme = dipende da #
 cifre(a) e # cifre(b)</p>
-<h4 id="esempio-moltiplicazione---2">Esempio moltiplicazione - 2</h4>
+<h4 id="esempio-moltiplicazione---2"><a
+href="#esempio-moltiplicazione---2">Esempio moltiplicazione - 2</a></h4>
 <p>Somme iterate</p>
 <p><span
 class="math inline"><em>a</em> * <em>b</em> = <em>a</em> + <em>a</em> + ... + <em>a</em></span>
@@ -367,7 +379,8 @@ class="math inline"><em>p</em><em>r</em><em>o</em><em>d</em><sub><em>i</em></sub
 class="math inline">3</span> Per <span
 class="math inline"><em>b</em> &gt; 0</span> totale <span
 class="math inline">3<em>b</em> + 3</span></p>
-<h4 id="esempio-moltiplicazione---3">Esempio moltiplicazione - 3</h4>
+<h4 id="esempio-moltiplicazione---3"><a
+href="#esempio-moltiplicazione---3">Esempio moltiplicazione - 3</a></h4>
 <p>Algoritmo “alla russa”</p>
 <p><span class="math inline">19 * 114</span></p>
 <pre class="code"><code>* 2     / 2
@@ -393,8 +406,9 @@ class="math inline"><em>a</em><sub><em>i</em></sub>, <em>b</em><sub><em>i</em>
 valori delle variabili dopo i-esima iterazione</p>
 <p>Proprieta’ <span
 class="math inline"><em>a</em><em>i</em> * <em>b</em><em>i</em> + <em>p</em><em>r</em><em>o</em><em>d</em><em>i</em> = <em>a</em> * <em>b</em></span></p>
-<h5 id="dimostrazione-per-induzione-su-i">Dimostrazione per induzione su
-i</h5>
+<h5 id="dimostrazione-per-induzione-su-i"><a
+href="#dimostrazione-per-induzione-su-i">Dimostrazione per induzione su
+i</a></h5>
 <p>Parto dalla proprieta’ di cui sopra e svolgo</p>
 <p>Base <span class="math inline"><em>i</em> = 0</span> <span
 class="math inline"><em>a</em><sub>0</sub> = <em>a</em></span> <span
@@ -478,18 +492,21 @@ class="math inline">0 + <em>p</em><em>r</em><em>o</em><em>d</em><em>i</em>�
 <p>per b &gt; 0 u = log2n + 1 (parte intera del log)</p>
 <p>Quindi T(a,b) = 5 logb + 8 (parte intera del log) crescita
 logaritmica</p>
-<h2 id="lezione-3---3009">Lezione 3 - 30/09</h2>
+<h2 id="lezione-3---3009"><a href="#lezione-3---3009">Lezione 3 -
+30/09</a></h2>
 <p>“Come cresce il tempo al crescere della lunghezza dei dati in
 input?”</p>
 <p>Dati x e y &gt; 0 interi, voglio calcolare la potenza <span
 class="math inline"><em>x</em><sup><em>y</em></sup></span></p>
 <p><span
 class="math inline"><em>x</em><sup><em>y</em></sup> = <em>x</em> * <em>x</em> * ... * <em>x</em></span></p>
-<h3 id="esempio-potenza---1">Esempio potenza - 1</h3>
+<h3 id="esempio-potenza---1"><a href="#esempio-potenza---1">Esempio
+potenza - 1</a></h3>
 <p><code>java linenos:1 ALGORITMO potenza(intero x, intero y) -&gt; intero     power &lt;- 1     WHILE y &gt; 0 DO         power &lt;- power * x         y &lt;- y - 1     RETURN power</code></p>
 <p>TODO provare come fatto per le somme</p>
-<h3 id="esempio-potenza-con-equazione-di-ricorrenza---2">Esempio potenza
-con equazione di ricorrenza - 2</h3>
+<h3 id="esempio-potenza-con-equazione-di-ricorrenza---2"><a
+href="#esempio-potenza-con-equazione-di-ricorrenza---2">Esempio potenza
+con equazione di ricorrenza - 2</a></h3>
 <p><code>java linenos:1 ALGORITMO potenza(intero x, intero y) -&gt; intero     IF y = 0 THEN         RETURN 1     ELSE         power &lt;- potenza(x, y / 2) // divisione parte intera         power &lt;- power * power         IF y e' dispari THEN             power &lt;- power * x         RETURN power</code></p>
 <p>T(x,y) tempo in funzione di x e y</p>
 <table>
@@ -539,7 +556,8 @@ parte intera</p>
     \end{cases}
   \end{equation}
 $$</span></p>
-<h4 id="equazione-di-ricorrenza">Equazione di ricorrenza</h4>
+<h4 id="equazione-di-ricorrenza"><a
+href="#equazione-di-ricorrenza">Equazione di ricorrenza</a></h4>
 <p>Calcolo <span class="math inline"><em>T</em>(<em>x</em>,1)</span>
 usando la formula <span
 class="math inline"><em>T</em>(<em>x</em>,1) = 6 + <em>T</em>(<em>x</em>,0)) = 6 + 2 = 8</span></p>
@@ -624,7 +642,8 @@ che <span class="math inline"><em>H</em>(<em>x</em>,1) = 2</span></p>
 class="math inline"><em>l</em><em>o</em><em>g</em><sub>2</sub><em>y</em> + 2</span>.</p>
 <p>Il totale poi si otterrebbe moltiplicando il numero di variabili per
 questa quantita’.</p>
-<h2 id="lezione-4---0210">Lezione 4 - 02/10</h2>
+<h2 id="lezione-4---0210"><a href="#lezione-4---0210">Lezione 4 -
+02/10</a></h2>
 <blockquote>
 <p>[!Error] RECUPERARE FINO A NOTAZIONI ASINTOTICHE</p>
 </blockquote>
@@ -647,7 +666,8 @@ uno scritto in base 2?</p>
 quasi 3 volte</p>
 <p>In base 1 la lunghezza e’ pari al numero stesso, quindi il
 ragionamento vale dal numero 2 in poi.</p>
-<h3 id="modello-di-calcolo-astratto">Modello di calcolo astratto</h3>
+<h3 id="modello-di-calcolo-astratto"><a
+href="#modello-di-calcolo-astratto">Modello di calcolo astratto</a></h3>
 <p>Quando si calcola il peso di una riga bisogna sapere cosa il pc
 riesce a calcolare in tempo costante, ci serve un modello di calcolo di
 riferimento</p>
@@ -667,7 +687,8 @@ che posso confrontare gli elementi, non conosco la loro natura</p>
 ThetaGrande(n)</p>
 <p>Nel caso di stringhe i confronti non costano <span
 class="math inline"><em>O</em>(1)</span></p>
-<h2 id="lezione-5---0410">Lezione 5 - 04/10</h2>
+<h2 id="lezione-5---0410"><a href="#lezione-5---0410">Lezione 5 -
+04/10</a></h2>
 <p>Criterio di costo uniforme - ragionevole quando i valori trattati
 sono di una grnadezza limitata</p>
 <p>Tempo: ogni istruzione elementare usa un;unit di tempo
@@ -730,8 +751,9 @@ risolve P deve usare tempo almeno T’(n), quindi T’(n) e’ necessario per
 risolvere P, “P richiede tempo Omega(T(n)) significa che ogni algoritmo
 (anche quelli non ancora inventati) che risolve P utilizza tempo
 Omega(T(n))”</p>
-<h2 id="lezione-6---algoritmi-di-ricerca---0710">Lezione 6 - Algoritmi
-di ricerca - 07/10</h2>
+<h2 id="lezione-6---algoritmi-di-ricerca---0710"><a
+href="#lezione-6---algoritmi-di-ricerca---0710">Lezione 6 - Algoritmi di
+ricerca - 07/10</a></h2>
 <p>Introduciamo la ricerca di elementi all’interno di array: strutture
 indicizzate (array) Collezione di elementi dello stesso tipo, ciascuno
 dei quali accessibile in base alla posizione</p>
@@ -743,12 +765,16 @@ del dato</p>
 <p>Problema trovare indice di <code>x</code> Input: Array
 <code>a</code>, elemento <code>x</code> Output: Indice i tale che A[i] =
 x, -1 se non lo trovo</p>
-<h3 id="ricerca-sequenziale">Ricerca sequenziale</h3>
+<h3 id="ricerca-sequenziale"><a href="#ricerca-sequenziale">Ricerca
+sequenziale</a></h3>
 <p><code>java linenos:1 ALGORITMO ricercaSequenziale(Array A[0..n-1], elemento x) -&gt; indice     i &lt;- 0     WHILE i &lt; n AND A[i] != x DO         i &lt;- i + 1     IF i = n THEN RETURN -1              ELSE RETURN i</code></p>
 <p>Non posso fare meglio di una ricerca lineare, se pero’ qualcuno ci dà
 l’array gia’ in ordine allora cambia tutto.</p>
-<h3 id="ricerca-binaria-o-dicotomica">Ricerca binaria o dicotomica</h3>
-<h4 id="versione-ricorsiva">Versione ricorsiva</h4>
+<h3 id="ricerca-binaria-o-dicotomica"><a
+href="#ricerca-binaria-o-dicotomica">Ricerca binaria o
+dicotomica</a></h3>
+<h4 id="versione-ricorsiva"><a href="#versione-ricorsiva">Versione
+ricorsiva</a></h4>
 <p><code>dx</code> rappresenta la prima porzione esclusa, quindi cerco
 da <code>sx</code> a <code>dx - 1</code></p>
 <p>```java linenos:1 FUNZIONE ricercaBinaria(Array A, indice sx, indice
@@ -810,8 +836,9 @@ ALGORITMO ricercaBinaria(Array a[0..n-1], elemento x) -&gt; indice
 La memoria non dipende dalla grandezza dell’array. Tempo <span
 class="math inline"><em>θ</em>(<em>l</em><em>o</em><em>g</em><em>n</em>)</span>
 Spazio <span class="math inline"><em>O</em>(1)</span></p>
-<h2 id="lezione-7---algoritmi-di-ordinamento---0910">Lezione 7 -
-Algoritmi di ordinamento - 09/10</h2>
+<h2 id="lezione-7---algoritmi-di-ordinamento---0910"><a
+href="#lezione-7---algoritmi-di-ordinamento---0910">Lezione 7 -
+Algoritmi di ordinamento - 09/10</a></h2>
 <p>Siccome avere un vettore ordinato ci consente ricerche veloci, come
 facciamo ad ordinare un vettore?</p>
 <p>Ordinamento interno: dati all’interno della memoria centrale;
@@ -820,7 +847,8 @@ accesso a blocchi di dati, lentezza hardware periferiche da tenere in
 conto</p>
 <p>Stabile: se preserva l’ordine relativo tra record con la medesima
 chiave.</p>
-<h3 id="selection-sort">Selection sort</h3>
+<h3 id="selection-sort"><a href="#selection-sort">Selection
+sort</a></h3>
 <p>https://tobinatore.github.io/algovis/selectionsort.html</p>
 <p>Cerco l’elemento minore e lo metto al primo posto, scambiandolo con
 l’elemento alla posizione. Avanzo un indice che rappresenta il limite
@@ -832,7 +860,8 @@ class="math inline"><em>n</em> − <em>k</em> − 1</span></p>
 n-1 di i che e’ come (n-1)n tutto fratto 2 che e’ come <span
 class="math inline"><em>θ</em>(<em>n</em><sup>2</sup>)</span></p>
 <p>TODO: COME OTTENGO n-k-1?</p>
-<h3 id="insertion-sort">Insertion sort</h3>
+<h3 id="insertion-sort"><a href="#insertion-sort">Insertion
+sort</a></h3>
 <p>https://tobinatore.github.io/algovis/insertionsort.html</p>
 <p>Muovo un puntatore verso destra, scambio verso sinistra scambiando
 elementi fino a che non ottengo una situazione ordinata.</p>
@@ -846,7 +875,7 @@ creando posto spostando gli elementi!</p>
 che e’ uguale a (n-1)n tutto /2</p>
 <p>Caso peggiore quando l’array e’ ordinato al contrario Caso migliore
 quando l’arry e’ gia’ ordinato</p>
-<h3 id="bubble-sort">Bubble sort</h3>
+<h3 id="bubble-sort"><a href="#bubble-sort">Bubble sort</a></h3>
 <p>https://tobinatore.github.io/algovis/bubblesort.html</p>
 <p>Diverse passate sugli elementi, ogni passata scambia, l’effetto delle
 passate e’ far migrare gli elementi piu’ grandi in alto. Mi fermo quando
@@ -859,8 +888,9 @@ siano tutti ordinati.</p>
 class="math inline"><em>n</em> − 1</span> confronti. Totale confronti
 sommatoria da i=1 a n-1 di n-i che e’ sommatoria da k=1 a n-1 di k che
 e’ n(n-1)/2 theta(n^2)</p>
-<h2 id="lezione-8---algoritmi-di-ordinamento---1110">Lezione 8 -
-Algoritmi di ordinamento - 11/10</h2>
+<h2 id="lezione-8---algoritmi-di-ordinamento---1110"><a
+href="#lezione-8---algoritmi-di-ordinamento---1110">Lezione 8 -
+Algoritmi di ordinamento - 11/10</a></h2>
 <p>Supponiamo di avere due array ordinati, voglio ottenere un array
 ordinato che contenga gli stessi elementi.</p>
 <p>```java linenos:1 ALGORITMO merge(array B[0..lb-1], array c[0..lc-1])
@@ -924,10 +954,10 @@ class="math inline"><em>n</em> + 2<em>n</em><em>l</em><em>o</em><em>g</em><s
 <p>= <span
 class="math inline"><em>θ</em>(<em>n</em><em>l</em><em>o</em><em>g</em><em>n</em>)</span>
 anche in generale</p>
-<h2 id="lezione-9">Lezione 9</h2>
-<h2
-id="lezione-10---divide-et-impera-moltiplicazione-matrici-1610">Lezione
-10 - Divide et impera, moltiplicazione matrici 16/10</h2>
+<h2 id="lezione-9"><a href="#lezione-9">Lezione 9</a></h2>
+<h2 id="lezione-10---divide-et-impera-moltiplicazione-matrici-1610"><a
+href="#lezione-10---divide-et-impera-moltiplicazione-matrici-1610">Lezione
+10 - Divide et impera, moltiplicazione matrici 16/10</a></h2>
 <p>INTEGRARE CON SLIDE</p>
 <p>Prodotto tra due matrici M x N</p>
 <p>Se N = 1 e’ facile: C = (a_{11} * b_{11}) Se n &gt; 1 l’idea e’
@@ -965,5 +995,8 @@ DO dx &lt;- dx - 1 WHILE A[dx] &gt; perno DO sx &lt;- sx + 1 WHILE sx
 &lt; dx AND A[sx] &lt;= perno IF sx &lt; dx THEN scambio A[sx] con A[dx]
 scambia A[i] con A[dx] RETURN dx</p>
 <p>```</p>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs/prism.min.js"></script>
+
 </body>
 </html>

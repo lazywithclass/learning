@@ -231,13 +231,17 @@
     code span.vs { color: #4070a0; } /* VerbatimString */
     code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
+  <link rel="stylesheet" href="https://latex.vercel.app/style.css">
+  <link rel="stylesheet" href="https://latex.vercel.app/prism/prism.css">
+
+  <link rel="stylesheet" href="css/index.css">
   <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
 </head>
 <body>
-<h2 id="notes">Notes</h2>
-<h3 id="subtraction">Subtraction</h3>
+<h2 id="notes"><a href="#notes">Notes</a></h2>
+<h3 id="subtraction"><a href="#subtraction">Subtraction</a></h3>
 <p>In <a href="Relational%20algebra.md">Relational algebra</a> we can do
 the subtraction, in SQL this could be achieved using *
 <code>NOT IN</code></p>
@@ -260,7 +264,8 @@ class="math inline">∪</span> * <code>INTERSECT</code> <span
 class="math inline">→</span> <span class="math inline">∩</span> *
 <code>EXCEPT</code> <span class="math inline">→</span> <span
 class="math inline">−</span></p>
-<h3 id="finding-the-max">Finding the <code>Max</code></h3>
+<h3 id="finding-the-max"><a href="#finding-the-max">Finding the
+Max</a></h3>
 <p>Find the movie with the greatest score</p>
 <p>Using <code>ANY</code></p>
 <div class="sourceCode" id="cb3"><pre
@@ -279,14 +284,16 @@ class="sourceCode sql"><code class="sourceCode sql"><span id="cb5-1"><a href="#c
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> imdb.ratings <span class="kw">AS</span> R</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> R.score <span class="kw">DESC</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="kw">LIMIT</span> <span class="dv">1</span></span></code></pre></div>
-<h3 id="select-and-aggregation-operators"><code>SELECT</code> and
-aggregation operators</h3>
+<h3 id="select-and-aggregation-operators"><a
+href="#select-and-aggregation-operators">SELECT and aggregation
+operators</a></h3>
 <p><code>SELECT</code>s work on single rows, aggregation operators work
 on a set of rows.</p>
-<h2 id="practice">Practice</h2>
+<h2 id="practice"><a href="#practice">Practice</a></h2>
 <p>These are mainly exercises along with some explanations in
 preparation for a database exam I have coming along.</p>
-<h3 id="department-highest-salary">Department highest salary</h3>
+<h3 id="department-highest-salary"><a
+href="#department-highest-salary">Department highest salary</a></h3>
 <pre><code>Employee
 +--------------+---------+
 | Column Name  | Type    |
@@ -313,7 +320,8 @@ join (
     group by DepartmentId
 ) as mx
 on e.Salary = mx.Salary and e.DepartmentId = mx.DepartmentId</code></pre>
-<h3 id="ranking-alongside-records">Ranking alongside records</h3>
+<h3 id="ranking-alongside-records"><a
+href="#ranking-alongside-records">Ranking alongside records</a></h3>
 <pre><code>+-------------+---------+
 | Column Name | Type    |
 +-------------+---------+
@@ -328,7 +336,8 @@ on e.Salary = mx.Salary and e.DepartmentId = mx.DepartmentId</code></pre>
   ) AS rank
 FROM Scores S1
 ORDER BY S1.score DESC;</code></pre>
-<h3 id="consecutive-available-seats">Consecutive Available Seats</h3>
+<h3 id="consecutive-available-seats"><a
+href="#consecutive-available-seats">Consecutive Available Seats</a></h3>
 <pre><code>+-------------+------+
 | Column Name | Type |
 +-------------+------+
@@ -348,5 +357,8 @@ WHERE EXISTS (
         AND c2.free = 1
 )
 ORDER BY seat_id;</code></pre>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs/prism.min.js"></script>
+
 </body>
 </html>

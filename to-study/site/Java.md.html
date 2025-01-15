@@ -231,12 +231,16 @@
     code span.vs { color: #4070a0; } /* VerbatimString */
     code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
+  <link rel="stylesheet" href="https://latex.vercel.app/style.css">
+  <link rel="stylesheet" href="https://latex.vercel.app/prism/prism.css">
+
+  <link rel="stylesheet" href="css/index.css">
   <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
 </head>
 <body>
-<h1 id="comparable">Comparable</h1>
+<h1 id="comparable"><a href="#comparable">Comparable</a></h1>
 <div class="sourceCode" id="cb1"><pre
 class="sourceCode java"><code class="sourceCode java"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span> <span class="dt">static</span> <span class="dt">final</span> <span class="bu">Comparator</span><span class="op">&lt;</span>TimeOfRun<span class="op">&gt;</span> COMPARATOR <span class="op">=</span> <span class="bu">Comparator</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">comparingDouble</span><span class="op">(</span>TimeOfRun<span class="op">::</span>time<span class="op">)</span></span>
@@ -247,16 +251,22 @@ class="sourceCode java"><code class="sourceCode java"><span id="cb1-1"><a href="
 assumono l’implementazione di <code>Comparable&lt;T&gt;</code>
 potrebbero usare <code>compareTo</code> per vedere ad esempio se la
 chiave e’ gia’ esistente in una struttura dati.</p>
-<h1 id="functional-interface">Functional interface</h1>
-<h1 id="exception">Exception</h1>
+<h1 id="functional-interface"><a href="#functional-interface">Functional
+interface</a></h1>
+<h1 id="exception"><a href="#exception">Exception</a></h1>
 <p>Difference between checked and unchecked</p>
 <p>Unchecked: se avvengono il programma non e’ recoverable, quindi non
 ha senso fare try catch. Per lo piu’ sono errori del programmatore.</p>
-<h1 id="try-with-resources">try with resources</h1>
+<h1 id="try-with-resources"><a href="#try-with-resources">try with
+resources</a></h1>
 <p><code>java linenos:1 // ci assicura che lo scanner venga chiuso try (Scanner sc = new Scanner(input)) {   // code }</code></p>
-<h1 id="parameterizedtest">ParameterizedTest</h1>
+<h1 id="parameterizedtest"><a
+href="#parameterizedtest">ParameterizedTest</a></h1>
 <p>https://www.baeldung.com/parameterized-tests-junit-5#6-methods</p>
 <p>Un ottimo modo per evitare duplicazione all’interno dei test. Anche i
 test sono codice.</p>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs/prism.min.js"></script>
+
 </body>
 </html>

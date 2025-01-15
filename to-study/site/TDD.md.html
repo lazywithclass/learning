@@ -167,6 +167,10 @@
     }
     .display.math{display: block; text-align: center; margin: 0.5rem auto;}
   </style>
+  <link rel="stylesheet" href="https://latex.vercel.app/style.css">
+  <link rel="stylesheet" href="https://latex.vercel.app/prism/prism.css">
+
+  <link rel="stylesheet" href="css/index.css">
   <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
@@ -188,12 +192,13 @@ programming, and techniques to control that gaps – Kent Beck</p>
 <blockquote>
 <p>Write tests until fear is transformed into boredom</p>
 </blockquote>
-<h1 id="test">Test</h1>
+<h1 id="test"><a href="#test">Test</a></h1>
 <p>Always use <code>SUT</code> as variable name for the Subject Under
 Test, as there could be only one SUT for a single test.</p>
 <p>IN test unitari mai avere due classi reali, sempre almeno una SUT che
 DEVE Essere mockata si puo’ non mockare * enum * lambda</p>
-<h1 id="red-green-refactor">Red green refactor</h1>
+<h1 id="red-green-refactor"><a href="#red-green-refactor">Red green
+refactor</a></h1>
 <p>ESPANDERE CON LA PARTE RELATIVA AL FORZARE UN TEST ROSSO</p>
 <aside>
 failure is progress
@@ -208,12 +213,12 @@ refactor to remove duplication</p>
 example suppose the first expectation was the only one then we add the
 second:</p>
 <p><code>java linenos:1 public vid testEquality() {   assertTrue(new Dollar(5).equals(new Dollar(5)));   assertTrue(new Dollar(5).equals(new Dollar(6))); // triangulation }</code></p>
-<h1 id="tempo">Tempo</h1>
+<h1 id="tempo"><a href="#tempo">Tempo</a></h1>
 <p>Un rosso deve essere ragionevolmente breve, indicativamente minore di
 10’ - 15’. Trovarsi bloccati in questa fase puo’ voler dire che si e’
 approcciato un problema troppo difficile, trovare una via piu’
 semplice.</p>
-<h1 id="test-double">Test double</h1>
+<h1 id="test-double"><a href="#test-double">Test double</a></h1>
 <p><a href="http://xunitpatterns.com/Test%20Double.html">Test double</a>
 - controfigura per il testing: si mette al posto di DOC (dependent-on
 component) per testare in isolamento il SUT (system under test); utile
@@ -223,7 +228,7 @@ prevedibili * presentare situazioni difficilmente riproducibili
 non voglio considerare mentre testo SUT</p>
 <p>ESPANDERE https://www.baeldung.com/spock-stub-mock-spy
 https://martinfowler.com/articles/mocksArentStubs.html</p>
-<h2 id="mock-stub">Mock / Stub</h2>
+<h2 id="mock-stub"><a href="#mock-stub">Mock / Stub</a></h2>
 <p>Crea un oggetto. Dichiaro cosa voglio che questo oggetto sappia
 fare.</p>
 <p>Instrumentano il DOC, instrumentati per essere interrogabili in
@@ -250,19 +255,20 @@ try (var mocked = Mockito.mockConstruction(Tavolo.class)) {
   // ...
 }
 </code></pre>
-<h2 id="spy">Spy</h2>
+<h2 id="spy"><a href="#spy">Spy</a></h2>
 <p>Wrappa un oggetto reale. Dichiaro cosa voglio che non sappia fare
 (svuoto).</p>
 <p>Se il soggetto e’ l’oggetto under test allora &gt; stub : spy =
 riempire : svuotare</p>
 <p>Meglio partire dal vuoto, cioe’ stub.</p>
-<h1 id="assertions">Assertions</h1>
+<h1 id="assertions"><a href="#assertions">Assertions</a></h1>
 <p>Ricordati che</p>
 <ul>
 <li><code>AssertionsForClassTypes</code> e’ per</li>
 <li>ESPANDERE</li>
 </ul>
-<h1 id="testare-metodi-privati">Testare metodi privati</h1>
+<h1 id="testare-metodi-privati"><a
+href="#testare-metodi-privati">Testare metodi privati</a></h1>
 <p>Sono testati indirettamente, a fronte di chiamate dall’esterno.
 Voglio poter cambiare i metodi privati senza troppo sforzo, in modo da
 fare refactor senza incorrere in grossi attriti.</p>
@@ -272,8 +278,9 @@ privata, e
 quando si sta testando una classe che implementa interfacce, perche’
 altrimenti l’<code>assertThat</code> “solito” non riesce a estrarre la
 proprieta’.</p>
-<h1 id="esporre-variabili-distanza-metodi">Esporre variabili d’istanza /
-metodi</h1>
+<h1 id="esporre-variabili-distanza-metodi"><a
+href="#esporre-variabili-distanza-metodi">Esporre variabili d’istanza /
+metodi</a></h1>
 <p><code>java linenos:1 var m = Game.class.getDeclaredMethod("distributeInitialCards");   m.setAccessible(true);   m.invoke(game);</code></p>
 <p>Da farsi solo in test, perche’ altrimenti a causa della reflection
 puo’ rompere tutte le astrazioni.</p>
@@ -286,8 +293,8 @@ testGetPoints(String cards, int expectedPoints) {</p>
 <code>List&lt;Card&gt;</code> da <code>cards</code></p>
 <p>Perche’ occhio che il codice duplicato e’ anche dentro i test, non
 solo nel sorgente!</p>
-<h1 id="patterns">Patterns</h1>
-<h2 id="isolation">Isolation</h2>
+<h1 id="patterns"><a href="#patterns">Patterns</a></h1>
+<h2 id="isolation"><a href="#isolation">Isolation</a></h2>
 <p>Good tests are written in isolation, so if one fails the rest will
 continue as if nothing happened: the idea is not to pollute a global
 state from which tests take their fixtures.</p>
@@ -295,43 +302,51 @@ state from which tests take their fixtures.</p>
 broken tests <span class="math inline">→</span> two problems.</p>
 <p>If tests are written in isolation then the order in which they’re run
 does not matter.</p>
-<h2 id="test-list">Test list</h2>
+<h2 id="test-list"><a href="#test-list">Test list</a></h2>
 <p>Offload your brain list into a written one, on paper, jot down
 critical issues, pain points, etc… ; you don’t want to put the list into
 tests right away, always follow the “climber rule”: out of four among
 feet and hands always have at least three attached to the wall.</p>
-<h2 id="assert-first">Assert first</h2>
+<h2 id="assert-first"><a href="#assert-first">Assert first</a></h2>
 <p>Write the assert first and then work your way upwards through the
 test. This approach allows to concentrate on the goal and force the
 preconditions to come out almost on their own.</p>
-<h2 id="data">Data</h2>
+<h2 id="data"><a href="#data">Data</a></h2>
 <p>Make use of data to tell a clearer story, make your intentions
 evident. For example split whole numbers in elementary operations to
 make the reader aware of “where did that 372.68 come from?”.</p>
-<h1 id="gestione-situazioni-critiche">Gestione situazioni critiche</h1>
+<h1 id="gestione-situazioni-critiche"><a
+href="#gestione-situazioni-critiche">Gestione situazioni
+critiche</a></h1>
 <p>ESPANDERE DA LEZIONE</p>
 <h2
-id="mi-sono-dimenticato-di-aprire-una-feature-con-gitflow-senza-aver-committato">Mi
+id="mi-sono-dimenticato-di-aprire-una-feature-con-gitflow-senza-aver-committato"><a
+href="#mi-sono-dimenticato-di-aprire-una-feature-con-gitflow-senza-aver-committato">Mi
 sono dimenticato di aprire una feature con gitflow (senza aver
-committato)</h2>
+committato)</a></h2>
 <p>Posso aprirla senza problemi perche’ e’ effettivamente la creazione
 di un branch.</p>
-<h2 id="mi-sono-dimenticato-di-committare-rosso">Mi sono dimenticato di
-committare ROSSO</h2>
+<h2 id="mi-sono-dimenticato-di-committare-rosso"><a
+href="#mi-sono-dimenticato-di-committare-rosso">Mi sono dimenticato di
+committare ROSSO</a></h2>
 <p>Basta committare prima test ROSSO e poi implementazione VERDE</p>
 <h2
-id="committato-rosso-ma-mi-sono-accorto-che-il-test-non-era-scritto-giusto">Committato
-ROSSO ma mi sono accorto che il test non era scritto giusto</h2>
+id="committato-rosso-ma-mi-sono-accorto-che-il-test-non-era-scritto-giusto"><a
+href="#committato-rosso-ma-mi-sono-accorto-che-il-test-non-era-scritto-giusto">Committato
+ROSSO ma mi sono accorto che il test non era scritto giusto</a></h2>
 <p>Modifico il test in regime di rosso.</p>
 <h2
-id="ho-committato-il-rosso-ma-mi-accorgo-che-prima-era-necessario-fare-unaltra-feature-sbagliato-ordine">Ho
+id="ho-committato-il-rosso-ma-mi-accorgo-che-prima-era-necessario-fare-unaltra-feature-sbagliato-ordine"><a
+href="#ho-committato-il-rosso-ma-mi-accorgo-che-prima-era-necessario-fare-unaltra-feature-sbagliato-ordine">Ho
 committato il ROSSO ma mi accorgo che prima era necessario fare un’altra
-feature (sbagliato ordine)</h2>
+feature (sbagliato ordine)</a></h2>
 <h2
-id="ho-committato-rosso-ma-mi-accorgo-che-e-necessario-fare-refactoring-prima">Ho
+id="ho-committato-rosso-ma-mi-accorgo-che-e-necessario-fare-refactoring-prima"><a
+href="#ho-committato-rosso-ma-mi-accorgo-che-e-necessario-fare-refactoring-prima">Ho
 committato ROSSO ma mi accorgo che e’ necessario fare REFACTORING
-prima</h2>
-<h1 id="ariadnes-thread">Ariadne’s thread</h1>
+prima</a></h2>
+<h1 id="ariadnes-thread"><a href="#ariadnes-thread">Ariadne’s
+thread</a></h1>
 <p>Keep a todo list of things that need to be addressed while
 programming. So that you don’t lose yourself in the sea of changes.</p>
 <p>SISTEMARE!!!!!!!!!!!!!!!!!!!!!</p>
@@ -397,5 +412,8 @@ che il test mi da.</p>
 <p>Vedi kata calistenici per forzare i livelli di indentazione</p>
 <p>Evitare regressioni facendo andare anche il test globale prima di
 ogni commit</p>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs/prism.min.js"></script>
+
 </body>
 </html>

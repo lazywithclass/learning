@@ -167,6 +167,10 @@
     }
     .display.math{display: block; text-align: center; margin: 0.5rem auto;}
   </style>
+  <link rel="stylesheet" href="https://latex.vercel.app/style.css">
+  <link rel="stylesheet" href="https://latex.vercel.app/prism/prism.css">
+
+  <link rel="stylesheet" href="css/index.css">
   <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
@@ -191,7 +195,8 @@ responsibility principle</a>)</li>
 <li>“A class is more reusable when you minimize the assumptions other
 classes must make to use it”</li>
 </ul>
-<h1 id="reference-escaping">Reference escaping</h1>
+<h1 id="reference-escaping"><a href="#reference-escaping">Reference
+escaping</a></h1>
 <p>Reference escaping - “pensavo di essere protetto dall’encapsulation,
 ma invece e’ peggio perche’ e’ difficile da trovare”</p>
 <p>Non sempre c’e’ reference escaping, dipende se cio’ che sto passando
@@ -207,30 +212,34 @@ aggregazione:</p>
 href="Design%20Pattern.md#Model%20View%20Presenter">Model View
 Presenter</a> e’ un segreto da proteggere, perche’ se qualcuno lo
 modifica dall’esterno non posso notificare gli osservatori.</p>
-<h2 id="variabili-di-istanza-non-private">Variabili di istanza non
-private</h2>
+<h2 id="variabili-di-istanza-non-private"><a
+href="#variabili-di-istanza-non-private">Variabili di istanza non
+private</a></h2>
 <p>Normalmente le variabili di istanza devono essere private,
 chiaramente non vuol dire mettere getter e setter. Vedere lo stato puo’
 essere corretto, cio’ che non e’ corretto e’ consentire la modifica.</p>
-<h2 id="tenere-un-riferimento-esterno-alla-classe">Tenere un riferimento
-esterno alla classe</h2>
+<h2 id="tenere-un-riferimento-esterno-alla-classe"><a
+href="#tenere-un-riferimento-esterno-alla-classe">Tenere un riferimento
+esterno alla classe</a></h2>
 <p>Si prende un riferimento esterno senza farsene una copia. Chiaramente
 puo’ succedere nei punti di contatto con l’esterno come setter o
 costruttori.</p>
-<h2 id="immutabilita">Immutabilita’</h2>
+<h2 id="immutabilita"><a href="#immutabilita">Immutabilita’</a></h2>
 <p>Oggetti immutabili possono essere condivisi.</p>
 <p>Cosa vuol dire essere immutabili? Non vuol dire essere stateless,
 vuol dire che non c’e’ modo di cambiare lo stato dell’oggetto dopo la
 sua inizializzazione. <code>String</code> e’ immutabile ma una volta
 creata non la modifico piu’.</p>
-<h1 id="encapsulation-e-astrazioni">Encapsulation e astrazioni</h1>
+<h1 id="encapsulation-e-astrazioni"><a
+href="#encapsulation-e-astrazioni">Encapsulation e astrazioni</a></h1>
 <p>Dare un nome ai concetti: type abstraction.</p>
-<h1 id="tell-dont-ask">Tell dont ask</h1>
+<h1 id="tell-dont-ask"><a href="#tell-dont-ask">Tell dont ask</a></h1>
 <p>https://martinfowler.com/bliki/TellDontAsk.html</p>
 <p>“Non chiedere i dati, ma di cosa vuoi che faccia sui dati”; vuol dire
 ad esempio minimizzare i getter e creare una funzione che provveda al
 vero obiettivo per il quale abbiamo creato il getter.</p>
-<h1 id="open-closed-principle">Open Closed principle</h1>
+<h1 id="open-closed-principle"><a href="#open-closed-principle">Open
+Closed principle</a></h1>
 <blockquote>
 <p>We expect that the methods of a class are not closed to changes in
 the member variables of that class. However we do expect that any other
@@ -240,5 +249,8 @@ encapsulation</p>
 </blockquote>
 <p><a href="SOLID.md#Open%20closed%20principle">Open closed
 principle</a></p>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs/prism.min.js"></script>
+
 </body>
 </html>

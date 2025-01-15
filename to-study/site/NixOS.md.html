@@ -231,15 +231,20 @@
     code span.vs { color: #4070a0; } /* VerbatimString */
     code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
+  <link rel="stylesheet" href="https://latex.vercel.app/style.css">
+  <link rel="stylesheet" href="https://latex.vercel.app/prism/prism.css">
+
+  <link rel="stylesheet" href="css/index.css">
   <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
 </head>
 <body>
-<h1 id="system-wide-executables">System wide executables</h1>
+<h1 id="system-wide-executables"><a
+href="#system-wide-executables">System wide executables</a></h1>
 <p>Under <code>~/.nix-profile/bin/</code> you could find the symlinks to
 the installed executables</p>
-<h1 id="overlay">Overlay</h1>
+<h1 id="overlay"><a href="#overlay">Overlay</a></h1>
 <p>Real world example, I needed pyparsing at the latest version. This
 example assumes Nixos, home-manager, and direnv</p>
 <p>This is <code>default.nix</code> which gets invoked every time I
@@ -269,5 +274,8 @@ class="sourceCode nix"><code class="sourceCode nix"><span id="cb2-1"><a href="#c
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">};</span>  </span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="op">});</span>  </span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs/prism.min.js"></script>
+
 </body>
 </html>

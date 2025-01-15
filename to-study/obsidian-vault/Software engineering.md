@@ -148,7 +148,7 @@ https://prog2-unimi.github.io/notes/CED.html
 - astrazione (tramite procedure e tipi di dati),
 - incapsulamento (tramite classi concrete/astratte e interfacce),
 - estensibilità (per ereditarietà, o composizione),
-- polimorfismo (e tipi generici).
+    - polimorfismo (e tipi generici).
 
 - l'uso di **astrazioni** di vario livello (come i metodi, i tipi di dato astratti, l'iterazione esterna, l'estensione),
     

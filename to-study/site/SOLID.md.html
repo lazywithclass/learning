@@ -167,6 +167,10 @@
     }
     .display.math{display: block; text-align: center; margin: 0.5rem auto;}
   </style>
+  <link rel="stylesheet" href="https://latex.vercel.app/style.css">
+  <link rel="stylesheet" href="https://latex.vercel.app/prism/prism.css">
+
+  <link rel="stylesheet" href="css/index.css">
   <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
@@ -194,8 +198,9 @@ that design.</p>
 <p>– <a
 href="cpp-report_engineering-notebook_liskov-substitution-principle.pdf">Validity
 is not Intrinsic</a></p>
-<h1 id="single-responsibility-principle">Single responsibility
-principle</h1>
+<h1 id="single-responsibility-principle"><a
+href="#single-responsibility-principle">Single responsibility
+principle</a></h1>
 <p><a
 href="single-responsibility-principle.pdf">single-responsibility-principle</a></p>
 <blockquote>
@@ -239,7 +244,8 @@ src="https://cdn-images-1.medium.com/max/640/0*11cZSBOkR82nknwy.png"
 alt="img|300" />
 <figcaption aria-hidden="true">img|300</figcaption>
 </figure>
-<h2 id="related-patterns">Related patterns</h2>
+<h2 id="related-patterns"><a href="#related-patterns">Related
+patterns</a></h2>
 <ul>
 <li><a href="Design%20Pattern.md#Decorator">Decorator</a>: per
 decentralizzare le varie aggiunte, ognuna in una classe decoratrice,
@@ -250,7 +256,8 @@ ignorando cio’ che ha attorno</li>
 <li><a href="Design%20Pattern.md#Factory">Factory</a>: delego la
 creazione di ogni specifico oggetto</li>
 </ul>
-<h1 id="open-closed-principle">Open-Closed principle</h1>
+<h1 id="open-closed-principle"><a
+href="#open-closed-principle">Open-Closed principle</a></h1>
 <p><a
 href="cpp-report_engineering-notebook_open-closed-principle.pdf">Engineering
 Notebook columns for The C++ Report - The Open-Closed Principle</a></p>
@@ -276,7 +283,8 @@ violates the Open-Closed principle</p>
 </blockquote>
 <p>Permette di chiamare codice non ancora scritto VEDI NOTE DI
 JESSICA</p>
-<h2 id="related-patterns-1">Related patterns</h2>
+<h2 id="related-patterns-1"><a href="#related-patterns">Related
+patterns</a></h2>
 <ul>
 <li><a href="Design%20Pattern.md#Template">Template</a>: definisce lo
 scheletro di un algoritmo in una classe base, alcuni passaggi vengono
@@ -286,8 +294,9 @@ originale</li>
 page 139</a>: riusare classi in nuovi contesti senza modificarle
 direttamente</li>
 </ul>
-<h1 id="liskov-substitution-principle">Liskov substitution
-principle</h1>
+<h1 id="liskov-substitution-principle"><a
+href="#liskov-substitution-principle">Liskov substitution
+principle</a></h1>
 <blockquote>
 <p>methods that use references to base classes must be able to use
 objects of derived classes without knowing it</p>
@@ -303,9 +312,9 @@ ce l’ha.</p>
 <p>If a function violates LSP then that function uses a reference to a
 base class, but must know about all the derivatives of that base
 class.</p>
-<h1
-id="open-closed-principle-and-liskov-substitution-principle">Open-Closed
-Principle and Liskov Substitution Principle</h1>
+<h1 id="open-closed-principle-and-liskov-substitution-principle"><a
+href="#open-closed-principle-and-liskov-substitution-principle">Open-Closed
+Principle and Liskov Substitution Principle</a></h1>
 <aside>
 OOD is-a relationship pertains to behavior
 </aside>
@@ -316,8 +325,9 @@ base classes that they use.</p>
 </blockquote>
 <p>Siamo interessati al comportamento dei moduli tra di loro,
 comportamento su cui gli utilizzatori dipendono.</p>
-<h1 id="design-by-contract-and-liskov-substituion-principle">Design by
-Contract and Liskov Substituion Principle</h1>
+<h1 id="design-by-contract-and-liskov-substituion-principle"><a
+href="#design-by-contract-and-liskov-substituion-principle">Design by
+Contract and Liskov Substituion Principle</a></h1>
 <p>In Design by Contract (Bertrand Meyer) methods declare preconditions
 and postconditions: * preconditions must be true before method
 invocation * postconditions are guaranteed by method invocation</p>
@@ -337,7 +347,8 @@ to all the postconditions of the base <span class="math inline">→</span>
 their behaviours and outputs must not violate any of the contraints
 established for the base class; users of the base class must not be
 confused by the output of the derived class</p>
-<h1 id="interface-segregation">Interface segregation</h1>
+<h1 id="interface-segregation"><a
+href="#interface-segregation">Interface segregation</a></h1>
 <blockquote>
 <p>Make fine grained interfaces that are client specific</p>
 </blockquote>
@@ -357,12 +368,14 @@ accoppiamento tra gli oggetti.</p>
 alt="interface-segregation|400" />
 <figcaption aria-hidden="true">interface-segregation|400</figcaption>
 </figure>
-<h2 id="related-patterns-2">Related patterns</h2>
+<h2 id="related-patterns-2"><a href="#related-patterns">Related
+patterns</a></h2>
 <ul>
 <li><a href="Design%20Pattern.md#Observer">Observer</a>: un solo metodo
 <code>update()</code> che e’ l’unico interesse del Subject</li>
 </ul>
-<h1 id="dependency-inversion">Dependency inversion</h1>
+<h1 id="dependency-inversion"><a href="#dependency-inversion">Dependency
+inversion</a></h1>
 <blockquote>
 <p>Depend on abstractions, not on concretions</p>
 </blockquote>
@@ -372,7 +385,8 @@ dovrebbero dipendere dai dettagli. Programmare verso le interfacce.</p>
 <p>“Depend on stuff more concrete than me”</p>
 <p>This is pure gold:
 https://blog.cleancoder.com/uncle-bob/2016/01/04/ALittleArchitecture.html</p>
-<h2 id="related-patterns-3">Related patterns</h2>
+<h2 id="related-patterns-3"><a href="#related-patterns">Related
+patterns</a></h2>
 <ul>
 <li><a href="Design%20Pattern.md#Factory%20method">Factory method</a>:
 definisce una interfaccia per la creazione di un oggetto, ma consente
@@ -385,9 +399,10 @@ concrete</li>
 uniformemente parti e insiemi, il client non sa se sta parlando con una
 parte o un insieme</li>
 </ul>
-<h1 id="esempi">Esempi</h1>
-<h2 id="dependency-inversion-e-open-close">Dependency Inversion e Open
-Close</h2>
+<h1 id="esempi"><a href="#esempi">Esempi</a></h1>
+<h2 id="dependency-inversion-e-open-close"><a
+href="#dependency-inversion-e-open-close">Dependency Inversion e Open
+Close</a></h2>
 <blockquote>
 <p>Identificare gli aspetti della applicazione che cambiano e separarli
 da cio’ che rimane fisso</p>
@@ -425,5 +440,8 @@ single responsibility
 <p>Quindi non devo avere piu’ ragioni per cambiare: “cambia modo di fare
 quack o di volare?” se sono nella classe sono due motivi diversi per
 cambiare la classe.</p>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs/prism.min.js"></script>
+
 </body>
 </html>

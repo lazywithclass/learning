@@ -167,6 +167,10 @@
     }
     .display.math{display: block; text-align: center; margin: 0.5rem auto;}
   </style>
+  <link rel="stylesheet" href="https://latex.vercel.app/style.css">
+  <link rel="stylesheet" href="https://latex.vercel.app/prism/prism.css">
+
+  <link rel="stylesheet" href="css/index.css">
   <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
@@ -176,12 +180,12 @@
 codice, quindi se qualcuno scrive codice al massimo della sua capacita’
 e’ per definizione incapace di debuggarlo o capirlo. Quindi scrivi
 codice semplice.</p>
-<h1 id="terminologia">Terminologia</h1>
+<h1 id="terminologia"><a href="#terminologia">Terminologia</a></h1>
 <p><span class="b">Convalida</span>: confronto del software con i
 requisiti informali posti dal committente. Test di accettazione.</p>
 <p><span class="b">Verifica</span>: confronto del software con le
 specifiche formali prodotte dall’analista. Test di unita’.</p>
-<h2 id="bug">“Bug”</h2>
+<h2 id="bug"><a href="#bug">“Bug”</a></h2>
 <p><span class="b">Malfunzionamento (failure)</span>: funzionamento non
 corretto del programma, non del suo codice. Quindi dire “c’e’ un
 malfunzionamento alla riga 42 e’ un uso improprio del termine”. Dire
@@ -202,7 +206,7 @@ conoscenza del linguaggio). Il riutilizzo della parte incriminata
 dall’Ariane 4 per l’Ariane 5, perche’ Ariane 4 raggiungeva velocita’
 orizzontali non rappresentabili con 16bit. E’ possibile evitare che si
 ripeta, con dei processi.</p>
-<h2 id="tecniche">Tecniche</h2>
+<h2 id="tecniche"><a href="#tecniche">Tecniche</a></h2>
 <p><span class="b">Tecniche statiche</span>: basate sull’analisi del
 codice: * metodi formali * analisi data flow * modelli statistici</p>
 <p><span class="b">Tecniche dinamiche</span>: basate sull’esecuzione del
@@ -218,7 +222,7 @@ anomalie nel prodotto finale Testing: tecniche che si prefiggono di
 rilevare malfunzionamenti, o fornire fiducia nel prodotto Debugging:
 tecniche che si prefiggono di localizzare le anomalie che causano
 malfunzionamenti rilevati in precedenza</p>
-<h1 id="testing">Testing</h1>
+<h1 id="testing"><a href="#testing">Testing</a></h1>
 <p>Testing e’ verifica di correttezza o validazione di
 affidabilita’.</p>
 <p>Un programma si puo’ dire corretto se aderisce alle specifiche per
@@ -227,7 +231,8 @@ ogni dato appartenente al dominio di ingresso.</p>
 malfunzionamenti presenti nel programma che non fossero gia’ noti. Test
 ideale: se il superamento del test (quindi il suo non successo) implica
 la correttezza del programma.</p>
-<h2 id="criterio-di-selezione-test">Criterio di selezione test</h2>
+<h2 id="criterio-di-selezione-test"><a
+href="#criterio-di-selezione-test">Criterio di selezione test</a></h2>
 <p>Presi due test un criterio si dice <span class="b">affidabile</span>
 se entrambi i test hanno successo o entrambi falliscono.</p>
 <p><span class="math inline">$affidabile(C, P) \leftrightarrow \newline
@@ -241,7 +246,7 @@ successo per il programma <span
 class="math inline"><em>P</em></span>.</p>
 <p><span
 class="math inline"><em>v</em><em>a</em><em>l</em><em>i</em><em>d</em><em>o</em>(<em>C</em>,<em>P</em>) ↔︎ (¬<em>o</em><em>k</em>(<em>P</em>,<em>D</em>)→∃<em>T</em>∈<em>C</em><em>s</em><em>u</em><em>c</em><em>c</em><em>e</em><em>s</em><em>s</em><em>o</em>(<em>T</em>,<em>P</em>))</span></p>
-<h3 id="esempio">Esempio</h3>
+<h3 id="esempio"><a href="#esempio">Esempio</a></h3>
 <p>Dato</p>
 <p><code>java linenos:1 int raddoppia(int n) {   return n * n; }</code></p>
 <p>Un criterio che seleziona sottoinsiemi di <span
@@ -251,7 +256,8 @@ class="math inline">$\set{0,1,2,3,4}$</span> e’ non affidabile ma
 valido. Un criterio che seleziona sottoinsiemi finiti di <span
 class="math inline"><em>D</em></span> con almeno un valore maggiore di
 <span class="math inline">18</span> e’ affidabile e valido.</p>
-<h2 id="utilita-di-un-test">Utilita’ di un test</h2>
+<h2 id="utilita-di-un-test"><a href="#utilita-di-un-test">Utilita’ di un
+test</a></h2>
 <p>Dobbiamo trovare una metrica che misuri la copertura di un criterio e
 ci permetta di * decidere quando smettere * decidere quale altro caso di
 test aggiungere per aumentare la copertura * confrontare la bonta’ di
@@ -263,5 +269,8 @@ punto prececente deve portare a produrre un output diverso da quello
 atteso</p>
 <p>Deriva dal punto 1. che voglio assicurarmi di stimolare tutti i
 comandi.</p>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs/prism.min.js"></script>
+
 </body>
 </html>
