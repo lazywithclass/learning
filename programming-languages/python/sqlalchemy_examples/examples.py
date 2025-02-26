@@ -1,11 +1,3 @@
-# sqlalchemy stream_results
-
-
-
-
-# cosa ritorna come risultato di una query?
-# come si accede al valore di una colonna?
-
 from sqlalchemy import create_engine, text
 
 DATABASE_URL = "sqlite:///mydatabase.db"
