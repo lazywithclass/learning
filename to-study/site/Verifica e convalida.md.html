@@ -4,273 +4,494 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Verifica e convalida</title>
-  <style>
-    html {
-      color: #1a1a1a;
-      background-color: #fdfdfd;
-    }
-    body {
-      margin: 0 auto;
-      max-width: 36em;
-      padding-left: 50px;
-      padding-right: 50px;
-      padding-top: 50px;
-      padding-bottom: 50px;
-      hyphens: auto;
-      overflow-wrap: break-word;
-      text-rendering: optimizeLegibility;
-      font-kerning: normal;
-    }
-    @media (max-width: 600px) {
-      body {
-        font-size: 0.9em;
-        padding: 12px;
-      }
-      h1 {
-        font-size: 1.8em;
-      }
-    }
-    @media print {
-      html {
-        background-color: white;
-      }
-      body {
-        background-color: transparent;
-        color: black;
-        font-size: 12pt;
-      }
-      p, h2, h3 {
-        orphans: 3;
-        widows: 3;
-      }
-      h2, h3, h4 {
-        page-break-after: avoid;
-      }
-    }
-    p {
-      margin: 1em 0;
-    }
-    a {
-      color: #1a1a1a;
-    }
-    a:visited {
-      color: #1a1a1a;
-    }
-    img {
-      max-width: 100%;
-    }
-    svg {
-      height: auto;
-      max-width: 100%;
-    }
-    h1, h2, h3, h4, h5, h6 {
-      margin-top: 1.4em;
-    }
-    h5, h6 {
-      font-size: 1em;
-      font-style: italic;
-    }
-    h6 {
-      font-weight: normal;
-    }
-    ol, ul {
-      padding-left: 1.7em;
-      margin-top: 1em;
-    }
-    li > ol, li > ul {
-      margin-top: 0;
-    }
-    blockquote {
-      margin: 1em 0 1em 1.7em;
-      padding-left: 1em;
-      border-left: 2px solid #e6e6e6;
-      color: #606060;
-    }
-    code {
-      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
-      font-size: 85%;
-      margin: 0;
-      hyphens: manual;
-    }
-    pre {
-      margin: 1em 0;
-      overflow: auto;
-    }
-    pre code {
-      padding: 0;
-      overflow: visible;
-      overflow-wrap: normal;
-    }
-    .sourceCode {
-     background-color: transparent;
-     overflow: visible;
-    }
-    hr {
-      background-color: #1a1a1a;
-      border: none;
-      height: 1px;
-      margin: 1em 0;
-    }
-    table {
-      margin: 1em 0;
-      border-collapse: collapse;
-      width: 100%;
-      overflow-x: auto;
-      display: block;
-      font-variant-numeric: lining-nums tabular-nums;
-    }
-    table caption {
-      margin-bottom: 0.75em;
-    }
-    tbody {
-      margin-top: 0.5em;
-      border-top: 1px solid #1a1a1a;
-      border-bottom: 1px solid #1a1a1a;
-    }
-    th {
-      border-top: 1px solid #1a1a1a;
-      padding: 0.25em 0.5em 0.25em 0.5em;
-    }
-    td {
-      padding: 0.125em 0.5em 0.25em 0.5em;
-    }
-    header {
-      margin-bottom: 4em;
-      text-align: center;
-    }
-    #TOC li {
-      list-style: none;
-    }
-    #TOC ul {
-      padding-left: 1.3em;
-    }
-    #TOC > ul {
-      padding-left: 0;
-    }
-    #TOC a:not(:hover) {
-      text-decoration: none;
-    }
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    /* The extra [class] is a hack that increases specificity enough to
-       override a similar rule in reveal.js */
-    ul.task-list[class]{list-style: none;}
-    ul.task-list li input[type="checkbox"] {
-      font-size: inherit;
-      width: 0.8em;
-      margin: 0 0.8em 0.2em -1.6em;
-      vertical-align: middle;
-    }
-    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
-  </style>
-  <link rel="stylesheet" href="https://latex.vercel.app/style.css">
-  <link rel="stylesheet" href="https://latex.vercel.app/prism/prism.css">
-
+  <link rel="stylesheet" href="css/latex.css">
+  <link rel="stylesheet" href="css/prism.css">
   <link rel="stylesheet" href="css/index.css">
-  <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-  <![endif]-->
 </head>
-<body>
-<p>Debuggare o capire codice e’ 3 volte piu’ difficile che scrivere
-codice, quindi se qualcuno scrive codice al massimo della sua capacita’
-e’ per definizione incapace di debuggarlo o capirlo. Quindi scrivi
-codice semplice.</p>
-<h1 id="terminologia"><a href="#terminologia">Terminologia</a></h1>
-<p><span class="b">Convalida</span>: confronto del software con i
-requisiti informali posti dal committente. Test di accettazione.</p>
-<p><span class="b">Verifica</span>: confronto del software con le
-specifiche formali prodotte dall’analista. Test di unita’.</p>
-<h2 id="bug"><a href="#bug">“Bug”</a></h2>
-<p><span class="b">Malfunzionamento (failure)</span>: funzionamento non
-corretto del programma, non del suo codice. Quindi dire “c’e’ un
-malfunzionamento alla riga 42 e’ un uso improprio del termine”. Dire
-“invocando somma con 1 e 2 produce un malfunzionamento perche’ si
-ottiene 2” Non e’ il comportamento previsto. Ad esempio l’Ariane 5 che
-esplode e’ chiaro sia un malfunzionamento.</p>
-<p><span class="b">Difetto o anomalia (fault)</span>: legato al codice,
-e’ condizione necessaria (ma non sufficiente) per il verificarsi di un
-malfunzionamento. Ad esempio se ho una funzione raddoppia che fa
-<code>java linenos:1 int raddoppia(int n) {   return n * n; }</code> non
-sempre ritorna un risultato sbagliato, per <code>2</code> e’ corretta,
-per <code>3</code> no. Pericolose perche’ sembra stiano funzionando.
-Sempre in Ariane 5 anomalia e’ stata la conversione di un 64bit a 16bit
-del valore della velocita’ orizzontale.</p>
-<p><span class="b">Sbaglio (mistake)</span>: causa di una anomalia. In
-genere si tratta di un errore umano (concettuale, battitura, scarsa
-conoscenza del linguaggio). Il riutilizzo della parte incriminata
-dall’Ariane 4 per l’Ariane 5, perche’ Ariane 4 raggiungeva velocita’
-orizzontali non rappresentabili con 16bit. E’ possibile evitare che si
-ripeta, con dei processi.</p>
-<h2 id="tecniche"><a href="#tecniche">Tecniche</a></h2>
-<p><span class="b">Tecniche statiche</span>: basate sull’analisi del
-codice: * metodi formali * analisi data flow * modelli statistici</p>
-<p><span class="b">Tecniche dinamiche</span>: basate sull’esecuzione del
-programma eseguibile * testing * debugging (non di verifica)</p>
-<p>Classificazione delle tecniche: * simplified properties: una versione
-semplificata del programma e’ corretto * optimistic inaccuracy: “non
-sono sicuro, ma se non riesco a dimostrarti che non va bene allora va
-bene”, che e’ cio’ che fa il testing * pessimistic inaccuracy: “se non
-riesco a dimostrarti formalmente che non c’e’ quell’errore per me e’
-come se ci fosse”, metodi formali</p>
-<p>Metodi formali: tecniche che si prefiggono di provare l’assenza di
-anomalie nel prodotto finale Testing: tecniche che si prefiggono di
-rilevare malfunzionamenti, o fornire fiducia nel prodotto Debugging:
-tecniche che si prefiggono di localizzare le anomalie che causano
-malfunzionamenti rilevati in precedenza</p>
-<h1 id="testing"><a href="#testing">Testing</a></h1>
-<p>Testing e’ verifica di correttezza o validazione di
-affidabilita’.</p>
-<p>Un programma si puo’ dire corretto se aderisce alle specifiche per
-ogni dato appartenente al dominio di ingresso.</p>
-<p>Un test ha successo quando riesce a rilevare uno o piu’
-malfunzionamenti presenti nel programma che non fossero gia’ noti. Test
-ideale: se il superamento del test (quindi il suo non successo) implica
-la correttezza del programma.</p>
-<h2 id="criterio-di-selezione-test"><a
-href="#criterio-di-selezione-test">Criterio di selezione test</a></h2>
-<p>Presi due test un criterio si dice <span class="b">affidabile</span>
-se entrambi i test hanno successo o entrambi falliscono.</p>
-<p><span class="math inline">$affidabile(C, P) \leftrightarrow \newline
-(\forall T_{1} \in C, \forall T_{2} \in C \ successo(T_{1}, P)
-\leftrightarrow successo(T_{2},P))$</span></p>
-<p>Presi due test un criterio si dice <span class="b">valido</span> se,
-qualora <span class="math inline"><em>P</em></span> non sia corretto,
-allora esiste almeno un <span class="math inline"><em>T</em></span>
-selezionato in base a <span class="math inline"><em>C</em></span> che a
-successo per il programma <span
-class="math inline"><em>P</em></span>.</p>
-<p><span
-class="math inline"><em>v</em><em>a</em><em>l</em><em>i</em><em>d</em><em>o</em>(<em>C</em>,<em>P</em>) ↔︎ (¬<em>o</em><em>k</em>(<em>P</em>,<em>D</em>)→∃<em>T</em>∈<em>C</em><em>s</em><em>u</em><em>c</em><em>c</em><em>e</em><em>s</em><em>s</em><em>o</em>(<em>T</em>,<em>P</em>))</span></p>
-<h3 id="esempio"><a href="#esempio">Esempio</a></h3>
-<p>Dato</p>
-<p><code>java linenos:1 int raddoppia(int n) {   return n * n; }</code></p>
-<p>Un criterio che seleziona sottoinsiemi di <span
-class="math inline">{0, 2}</span> e’ affidabile ma non valido. Un
-criterio che seleziona sottoinsiemi di <span
-class="math inline">$\set{0,1,2,3,4}$</span> e’ non affidabile ma
-valido. Un criterio che seleziona sottoinsiemi finiti di <span
-class="math inline"><em>D</em></span> con almeno un valore maggiore di
-<span class="math inline">18</span> e’ affidabile e valido.</p>
-<h2 id="utilita-di-un-test"><a href="#utilita-di-un-test">Utilita’ di un
-test</a></h2>
-<p>Dobbiamo trovare una metrica che misuri la copertura di un criterio e
-ci permetta di * decidere quando smettere * decidere quale altro caso di
-test aggiungere per aumentare la copertura * confrontare la bonta’ di
-test diversi</p>
-<p>Un caso di test per evidenziare un malfunzionamento causato da una
-anomalia deve: 1. eseguire il comando che contiene l’anomalia 2. il
-punto precedente deve portare il sistema in uno stato scorretto 3. il
-punto prececente deve portare a produrre un output diverso da quello
-atteso</p>
-<p>Deriva dal punto 1. che voglio assicurarmi di stimolare tutti i
-comandi.</p>
-<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/prismjs/prism.min.js"></script>
-
+<body class="latex-dark">
+  <main>
+    <article>
+    <p>Debuggare o capire codice e’ 3 volte più difficile che scrivere
+    codice, quindi se qualcuno scrive codice al massimo della sua
+    capacita’ e’ per definizione incapace di debuggarlo o capirlo.
+    Quindi scrivi codice semplice.</p>
+    <h2 id="terminologia"><a href="#terminologia">Terminologia</a></h2>
+    <p><span class="b">Convalida</span>: confronto del software con i
+    requisiti informali posti dal committente. Test di accettazione.</p>
+    <p><span class="b">Verifica</span>: confronto del software con le
+    specifiche formali prodotte dall’analista. Test di unita’.</p>
+    <h3 id="malfunzionamento-guasto-failure"><a
+    href="#malfunzionamento-guasto-failure">Malfunzionamento (guasto /
+    failure)</a></h3>
+    <p>Funzionamento non corretto del programma, non del suo codice.
+    Esterno al sistema.</p>
+    <p>Quindi dire “c’e’ un malfunzionamento alla riga 42” e’ un uso
+    improprio del termine. Dire “invocando somma con 1 e 2 produce un
+    malfunzionamento perche’ si ottiene 2” Non e’ il comportamento
+    previsto. Ad esempio l’Ariane 5 che esplode e’ chiaro sia un
+    malfunzionamento.</p>
+    <h3 id="difetto-anomalia-fault"><a
+    href="#difetto-anomalia-fault">Difetto (anomalia / fault)</a></h3>
+    <p>Legato al codice, e’ condizione necessaria (ma non sufficiente)
+    per il verificarsi di un malfunzionamento. Ad esempio se ho una
+    funzione raddoppia che fa</p>
+    <pre class="language-java"><code>int raddoppia(int n) {
+  return n * n;
+}</code></pre>
+    <p>non sempre ritorna un risultato sbagliato, per <code>2</code> e’
+    corretta, per <code>3</code> no. Pericolose perche’ sembra stiano
+    funzionando. Sempre in Ariane 5 anomalia e’ stata la conversione di
+    un 64bit a 16bit del valore della velocita’ orizzontale.</p>
+    <h3 id="sbaglio-mistake"><a href="#sbaglio-mistake">Sbaglio
+    (mistake)</a></h3>
+    <p>Causa di una anomalia. In genere si tratta di un errore umano
+    (concettuale, battitura, scarsa conoscenza del linguaggio). Il
+    riutilizzo della parte incriminata dall’Ariane 4 per l’Ariane 5,
+    perche’ Ariane 4 raggiungeva velocita’ orizzontali non
+    rappresentabili con 16bit. E’ possibile evitare che si ripeta, con
+    dei processi.</p>
+    <h3 id="tecniche"><a href="#tecniche">Tecniche</a></h3>
+    <p><span class="b">Tecniche statiche</span>: basate sull’analisi del
+    codice: * metodi formali * analisi data flow * modelli
+    statistici</p>
+    <p><span class="b">Tecniche dinamiche</span>: basate sull’esecuzione
+    del programma eseguibile * testing * debugging (non di verifica)</p>
+    <p>Classificazione delle tecniche: * simplified properties: una
+    versione semplificata del programma e’ corretto * optimistic
+    inaccuracy: “non sono sicuro, ma se non riesco a dimostrarti che non
+    va bene allora va bene”, che e’ cio’ che fa il testing * pessimistic
+    inaccuracy: “se non riesco a dimostrarti formalmente che non c’e’
+    quell’errore per me e’ come se ci fosse”, metodi formali</p>
+    <p>Metodi formali: tecniche che si prefiggono di provare l’assenza
+    di anomalie nel prodotto finale Testing: tecniche che si prefiggono
+    di rilevare malfunzionamenti, o fornire fiducia nel prodotto
+    Debugging: tecniche che si prefiggono di localizzare le anomalie che
+    causano malfunzionamenti rilevati in precedenza</p>
+    <h2 id="testing"><a href="#testing">Testing</a></h2>
+    <p>Testing e’ verifica di correttezza o validazione di
+    affidabilita’.</p>
+    <p>Un programma si puo’ dire corretto se aderisce alle specifiche
+    per ogni dato appartenente al dominio di ingresso.</p>
+    <p>Un test ha successo quando riesce a rilevare uno o piu’
+    malfunzionamenti presenti nel programma che non fossero gia’
+    noti.</p>
+    <p>Test ideale: se il superamento del test (quindi il suo non
+    successo) implica la correttezza del programma <span
+    class="math display">$$
+    \begin{align}
+    &amp;\ \lnot successo(T,\ P)\ \rightarrow\ ok(P,\ D) \newline
+    \end{align}
+    $$</span></p>
+    <h3 id="criterio-di-selezione-test"><a
+    href="#criterio-di-selezione-test">Criterio di selezione
+    test</a></h3>
+    <p>Presi due test un criterio si dice <span
+    class="b">affidabile</span> se entrambi i test hanno successo o
+    entrambi falliscono.</p>
+    <p><span class="math display">$$affidabile(C, P) \leftrightarrow
+    \newline (\forall T_{1} \in C, \forall T_{2} \in C \ successo(T_{1},
+    P) \leftrightarrow successo(T_{2},P))$$</span></p>
+    <p>Presi due test un criterio si dice <span class="b">valido</span>
+    se, qualora <span class="math inline"><em>P</em></span> non sia
+    corretto, allora esiste almeno un <span
+    class="math inline"><em>T</em></span> selezionato in base al
+    criterio <span class="math inline"><em>C</em></span> che ha successo
+    per il programma <span class="math inline"><em>P</em></span>, quindi
+    che rileva uno o piu’ malfunzionamenti <span
+    class="math display"><em>v</em><em>a</em><em>l</em><em>i</em><em>d</em><em>o</em>(<em>C</em>, <em>P</em>) ↔︎ (¬<em>o</em><em>k</em>(<em>P</em>, <em>D</em>) → ∃<em>T</em> ∈ <em>C</em>|<em>s</em><em>u</em><em>c</em><em>c</em><em>e</em><em>s</em><em>s</em><em>o</em>(<em>T</em>, <em>P</em>))</span></p>
+    <h4 id="esempio"><a href="#esempio">Esempio</a></h4>
+    <p>Dato</p>
+    <pre class="language-java"><code>int raddoppia(int n) {
+  return n * n;
+}</code></pre>
+    <p>Un criterio che seleziona sottoinsiemi di <span
+    class="math inline">{0, 2}</span> e’ affidabile ma non valido.<br />
+    Un criterio che seleziona sottoinsiemi di <span
+    class="math inline">{0, 1, 2, 3, 4}</span> e’ non affidabile ma
+    valido.<br /> Un criterio che seleziona sottoinsiemi finiti di <span
+    class="math inline"><em>D</em></span> con almeno un valore maggiore
+    di <span class="math inline">18</span> e’ affidabile e valido.</p>
+    <h4 id="tutto-bello-ma"><a href="#tutto-bello-ma">Tutto bello,
+    ma…</a></h4>
+    <p>Cosa succede se ho un test affidabile e valido? (<span
+    class="math inline">¬<em>s</em><em>u</em><em>c</em><em>c</em><em>e</em><em>s</em><em>s</em><em>o</em>(<em>T</em>, <em>P</em>)</span>
+    vuol dire che non trova problemi) <span class="math display">$$
+    \begin{align} \begin{gathered} affidabile(C,\ P)\ \land\ valido(C,\
+    P)\ \land\ \exists T\in C\ \land\ \lnot successo(T,\ P) \\
+    \Rightarrow \\ ok(P,\ D) \end{gathered} \end{align}
+    $$</span></p>
+    <p>Quindi:</p>
+    <ul>
+    <li>siccome e’ affidabile se uno non trova, allora tutti non
+    trovano</li>
+    <li>siccome e’ valido se il programma fosse stato sbagliato allora
+    almeno un test avrebbe dovuto trovare problema</li>
+    <li>esiste (o per ogni) non ha successo</li>
+    </ul>
+    <p>Allora implica che il programma e’ corretto, ma questa e’ la
+    definizione di test ideale, che abbiamo detto che non esiste. Quindi
+    non può esistere un criterio che sia contemporaneamente affidabile e
+    valido!</p>
+    <p>Quindi l’unico caso in cui ho <span
+    class="math inline"><em>a</em><em>f</em><em>f</em><em>i</em><em>d</em><em>a</em><em>b</em><em>i</em><em>l</em><em>e</em></span>
+    a priori senza conoscenza del test e’ quando sto selezionando un
+    unico test.</p>
+    <p>Quindi l’unico caso in cui ho <span
+    class="math inline"><em>v</em><em>a</em><em>l</em><em>i</em><em>d</em><em>o</em></span>
+    a priori senza conoscenza dei test e’ quando sto selezionando
+    infiniti test.</p>
+    <p>Vogliamo quindi arrivare ad avvicinarci.</p>
+    <h3 id="utilita-di-un-test"><a href="#utilita-di-un-test">Utilita’
+    di un test</a></h3>
+    <p>Dobbiamo trovare una metrica che misuri la copertura di un
+    criterio e ci permetta di</p>
+    <ul>
+    <li>decidere quando smettere</li>
+    <li>decidere quale altro caso di test aggiungere per aumentare la
+    copertura</li>
+    <li>confrontare la bonta’ di test diversi</li>
+    </ul>
+    <p>Un caso di test per evidenziare un malfunzionamento causato da
+    una anomalia deve:</p>
+    <ol type="1">
+    <li>eseguire il comando che contiene l’anomalia</li>
+    <li>il punto precedente deve portare il sistema in uno stato
+    scorretto</li>
+    <li>il punto prececente deve portare a produrre un output diverso da
+    quello atteso</li>
+    </ol>
+    <p>Deriva dal punto 1. che voglio assicurarmi di stimolare tutti i
+    comandi.</p>
+    <p>Voglio che i miei test siano limitati in merito al cammino che
+    coprono, in modo tale che mi sia più agevole utilizzarli come punto
+    di partenza per il debugging.</p>
+    <h4 id="criterio-di-copertura-dei-comandi-una-riga"><a
+    href="#criterio-di-copertura-dei-comandi-una-riga">Criterio di
+    copertura dei comandi (una riga)</a></h4>
+    <p>Un test <span class="math inline"><em>T</em></span> soddisfa il
+    criterio di copertura dei comandi se e solo se ogni comando
+    eseguibile del programma e’ eseguito in corrispondenza di almeno un
+    caso di test <span
+    class="math inline"><em>t</em> ∈ <em>T</em></span>.</p>
+    <p>Soddisfare questo criterio non garantisce la correttezza del
+    programma, esegue semplicemente tutte le righe di codice
+    raggiungibili.</p>
+    <h4 id="criterio-di-copertura-delle-decisioni-if-while"><a
+    href="#criterio-di-copertura-delle-decisioni-if-while-">Criterio di
+    copertura delle decisioni ( if, while, …)</a></h4>
+    <p>Un test <span class="math inline"><em>T</em></span> soddisfa il
+    criterio di copertura delle decisioni se e solo se ogni decisione
+    effettiva viene resa sia vera che falsa in corrispondenza di almeno
+    un caso di test <span
+    class="math inline"><em>t</em> ∈ <em>T</em></span>.</p>
+    <p>Implica il criterio di copertura dei comandi.</p>
+    <h4
+    id="criterio-di-copertura-delle-condizioni-esempio-una-delle-condizioni-di-un-if"><a
+    href="#criterio-di-copertura-delle-condizioni-esempio-una-delle-condizioni-di-un-if">Criterio
+    di copertura delle condizioni (esempio una delle condizioni di un
+    if)</a></h4>
+    <p>Un test <span class="math inline"><em>T</em></span> soddisfa il
+    criterio di copertura delle condizioni se e solo se ogni singola
+    condizione effettiva viene resa sia vera che falsa in corrispondenza
+    di almeno un caso di test <span
+    class="math inline"><em>t</em> ∈ <em>T</em></span>.</p>
+    <p>Si differenzia dal precedente <a
+    href="#Criterio%20di%20copertura%20delle%20decisioni">Criterio di
+    copertura delle decisioni</a> perché si riferisce alle singole
+    condizioni, non a tutta l’espressione oggetto di valutazione della
+    condizione.</p>
+    <p>Non implica il criterio di copertura dei comandi.</p>
+    <h4 id="criterio-di-copertura-delle-decisioni-e-delle-condizioni"><a
+    href="#criterio-di-copertura-delle-decisioni-e-delle-condizioni">Criterio
+    di copertura delle decisioni e delle condizioni</a></h4>
+    <p>Un test <span class="math inline"><em>T</em></span> soddisfa il
+    criterio di copertura delle decisioni e delle condizioni se e solo
+    se ogni decisione vale sia vero che falso e ogni condizione che
+    compare nelle decisioni del programma vale sia vero che falso per
+    diversi casi di test <span
+    class="math inline"><em>t</em> ∈ <em>T</em></span>.</p>
+    <p>E’ l’intersezione di <a
+    href="#Criterio%20di%20copertura%20delle%20decisioni">Criterio di
+    copertura delle decisioni</a> (e quindi del <a
+    href="#Criterio%20di%20copertura%20dei%20comandi">Criterio di
+    copertura dei comandi</a>) e <a
+    href="#Criterio%20di%20copertura%20delle%20condizioni">Criterio di
+    copertura delle condizioni</a>.</p>
+    <h4 id="criterio-di-copertura-delle-condizioni-composte"><a
+    href="#criterio-di-copertura-delle-condizioni-composte">Criterio di
+    copertura delle condizioni composte</a></h4>
+    <p>Un test <span class="math inline"><em>T</em></span> soddisfa il
+    criterio di copertura delle condizioni composte se e solo se ogni
+    possibile composizione delle condizioni base vale sia vero che falso
+    per diversi casi di test <span
+    class="math inline"><em>t</em> ∈ <em>T</em></span>.</p>
+    <p>Per esempio per la
+    condizione <code>x != 0 &amp;&amp; y &lt; 3</code>, vengono testati
+    separatamente i casi <span
+    class="math inline">⟨<em>V</em>, <em>V</em>⟩, ⟨<em>V</em>, <em>F</em>⟩, ⟨<em>F</em>, <em>V</em>⟩, ⟨<em>F</em>, <em>F</em>⟩</span>.</p>
+    <p>Data la natura combinatoria del criterio e’ considerato non
+    applicabile in pratica, oltre che alcune combinazioni potrebbero non
+    avvenire, e quindi non avrebbe alcun senso testarle.</p>
+    <h4
+    id="criterio-di-copertura-delle-condizioni-e-delle-decisioni-modificate"><a
+    href="#criterio-di-copertura-delle-condizioni-e-delle-decisioni-modificate">Criterio
+    di copertura delle condizioni e delle decisioni modificate</a></h4>
+    <p>Conto solo le combinazioni piu’ rilevanti, cioe’ quelle che per
+    cui la modifica di una condizione base porti a modificare l’esito
+    della decisione.</p>
+    <p>Permette quindi di testare solamente per quei valori
+    significativi che vanno a far cambiare la decisione.</p>
+    <h4 id="criterio-di-copertura-dei-cammini"><a
+    href="#criterio-di-copertura-dei-cammini">Criterio di copertura dei
+    cammini</a></h4>
+    <p>Un test <span class="math inline"><em>T</em></span> soddisfa il
+    criterio di copertura dei cammini se e solo se ogni cammino del
+    grafo di controllo del programma viene percorso per almeno un caso
+    di <span class="math inline"><em>t</em> ∈ <em>T</em></span>.</p>
+    <p>Non applicabile in pratica.</p>
+    <h4 id="criterio-di-n-copertura-dei-cicli"><a
+    href="#criterio-di-n-copertura-dei-cicli">Criterio di n-copertura
+    dei cicli</a></h4>
+    <p>Un test <span class="math inline"><em>T</em></span> soddisfa il
+    criterio di <span class="math inline"><em>n</em></span>-copertura se
+    e solo se per ogni ciclo, abbiamo che viene eseguito <span
+    class="math inline">0</span>, <span class="math inline">1</span>, …,
+    <span class="math inline"><em>n</em></span> volte per almeno un caso
+    di test.</p>
+    <p>Il criterio viene spesso applicato nella forma <span
+    class="math inline">2</span>-copertura dei cicli: * zero iterazioni
+    * una iterazione * piu’ di una iterazione</p>
+    <h4 id="implicazioni-tra-criteri"><a
+    href="#implicazioni-tra-criteri">Implicazioni tra criteri</a></h4>
+    <figure>
+    <img src="attachments/Pasted%20image%2020250330182124.png"
+    alt="Implicazioni tra criteri" />
+    <figcaption aria-hidden="true">Implicazioni tra criteri</figcaption>
+    </figure>
+    <h2 id="analisi-data-flow-df"><a
+    href="#analisi-data-flow-df">Analisi Data Flow (DF)</a></h2>
+    <p>E’ analisi statica. Gli elementi da analizzare non sono infiniti
+    come invece possono esserlo gli elementi nell’analisi dinamica.</p>
+    <p>Serve a capire come ottimizzare il codice, e per identificare
+    potenziali errori.</p>
+    <p>Ci sono tre operazioni:</p>
+    <ul>
+    <li><span class="math inline"><em>d</em></span> (definizione): il
+    comando assegna un valore alla variabile, stesso dicasi per quando
+    una variabile viene passata come parametro</li>
+    <li><span class="math inline"><em>u</em></span> (uso): il comando
+    legge il contenuto di una variabile</li>
+    <li><span class="math inline"><em>a</em></span> (annullamento): il
+    comando rende il valore della variabile invalido</li>
+    </ul>
+    <p>Analizziamo le operazioni su <code>x</code>, <code>x1</code>,
+    <code>x2</code></p>
+    <pre class="language-c"><code>void swap(int &amp;x1, int &amp;x2) {
+    int x1; // (a) - shadowing di x1 parametro
+    x3 = x1; // (u)
+    x3 = x2;
+    x2 = x1; // (u)
+} // (a) - scope di x1 terminato</code></pre>
+    <table>
+    <thead>
+    <tr class="header">
+    <th>variabile</th>
+    <th>DF</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="odd">
+    <td>x</td>
+    <td>auua</td>
+    </tr>
+    <tr class="even">
+    <td>x1</td>
+    <td>…dud…</td>
+    </tr>
+    <tr class="odd">
+    <td>x2</td>
+    <td>…ddd…</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><code>x</code> viene usata 2 volte senza essere prima stata
+    definita. <code>x2</code> viene definita più volte senza essere
+    usata nel frattempo.</p>
+    <p>Lista di stati non corretti:</p>
+    <ul>
+    <li>aa</li>
+    <li>au</li>
+    <li>da</li>
+    <li>dd</li>
+    </ul>
+    <h3 id="criterio-di-copertura-delle-definizioni"><a
+    href="#criterio-di-copertura-delle-definizioni">Criterio di
+    copertura delle definizioni</a></h3>
+    <p><span
+    class="math inline"><em>d</em><em>e</em><em>f</em>(<em>i</em>)</span>
+    insieme delle variabili definite nel nodo <span
+    class="math inline"><em>i</em></span> <span
+    class="math inline"><em>d</em><em>u</em>(<em>x</em>, <em>i</em>)</span>
+    e’ l’insieme dei nodi <span class="math inline"><em>j</em></span>
+    tali che:</p>
+    <ul>
+    <li><span
+    class="math inline"><em>x</em> ∈ <em>d</em><em>e</em><em>f</em>(<em>i</em>)</span></li>
+    <li><span class="math inline"><em>x</em></span> usato in <span
+    class="math inline"><em>j</em></span></li>
+    <li>esiste un cammino da <span class="math inline"><em>i</em></span>
+    a <span class="math inline"><em>j</em></span>, libero da definizioni
+    di <span class="math inline"><em>x</em></span></li>
+    </ul>
+    <p>Un test <span class="math inline"><em>T</em></span> soddisfa il
+    criterio di copertura delle definizioni se e solo se per ogni nodo
+    <span class="math inline"><em>i</em></span> e ogni variabile <span
+    class="math inline"><em>x</em></span> appartenente a <span
+    class="math inline"><em>d</em><em>e</em><em>f</em>(<em>i</em>)</span>
+    <span class="math inline"><em>T</em></span> include un caso di test
+    che esegue un cammino libero da definizioni da <span
+    class="math inline"><em>i</em></span> ad almeno uno degli elementi
+    di <span
+    class="math inline"><em>d</em><em>u</em>(<em>x</em>, <em>i</em>)</span>.</p>
+    <p>Ovvero, in termini umani: esiste almeno un uso di quella
+    definizione.</p>
+    <p>Esempio</p>
+    <pre class="language-c"><code>void main() {
+    float a, b, x, y;
+    read(x);
+    read(y);
+    a = x;
+    b = y;
+    while (a != b)
+        if (a &gt; b)
+            a = a - b;
+        else
+            b = b - a;
+    write(a);
+}</code></pre>
+    <p>Considerando la variabile <code>a</code>TODO AGGIUNGERE LINE
+    NUMBERS</p>
+    <p><span
+    class="math inline"><em>d</em><em>u</em>(<em>a</em>, 5) = {7, 8, 9, 11, 12}</span>
+    <span
+    class="math inline"><em>d</em><em>u</em>(<em>a</em>, 9) = {7, 8, 9, 11, 12}</span></p>
+    <ul>
+    <li><span
+    class="math inline"><em>d</em><sub>5</sub><em>u</em><sub>7</sub></span>
+    viene gratis</li>
+    <li><span
+    class="math inline"><em>d</em><sub>9</sub><em>u</em><sub>7</sub></span>
+    basta entrare una volta nel ciclo</li>
+    </ul>
+    <p>CHIEDERE A NOTEBOOK ULTERIORI ESEMPI E DOMANE SU QUESTA PARTE</p>
+    <h3 id="criterio-di-copertura-degli-usi"><a
+    href="#criterio-di-copertura-degli-usi">Criterio di copertura degli
+    usi</a></h3>
+    <p>Un test <span class="math inline"><em>T</em></span> soddisfa il
+    criterio di copertura degli usi se e solo se per ogni nodo <span
+    class="math inline"><em>i</em></span> e ogni variabile <span
+    class="math inline"><em>x</em></span> appartenente a <span
+    class="math inline"><em>d</em><em>e</em><em>f</em>(<em>i</em>)</span>
+    per ogni elemento <span class="math inline"><em>j</em></span> di
+    <span
+    class="math inline"><em>d</em><em>u</em>(<em>x</em>, <em>i</em>)</span>
+    <span class="math inline"><em>T</em></span> include un caso di test
+    che esegue un cammino libero da definizioni da <span
+    class="math inline"><em>i</em></span> a <span
+    class="math inline"><em>j</em></span>.</p>
+    <p>Non copre istruzioni che non sono usi.</p>
+    <p>CHIEDERE A NOTEBOOK ULTERIORI ESEMPI E DOMANE SU QUESTA PARTE</p>
+    <p>Esempio</p>
+    <pre class="language-c"><code>void main() {
+    float a, b, x, y;
+    read(x);
+    read(y);
+    a = x;
+    b = y;
+    while (a != b)
+        if (a &gt; b)
+            a = a - b;
+        else
+            b = b - a;
+    write(a);
+}</code></pre>
+    <p>Considerando ancora la variabile <span
+    class="math inline"><em>a</em></span></p>
+    <p><span
+    class="math inline"><em>d</em><em>u</em>(<em>a</em>, 5) = {7, 8, 9, 11, 12}</span>
+    <span
+    class="math inline"><em>d</em><em>u</em>(<em>a</em>, 9) = {7, 8, 9, 11, 12}</span></p>
+    <p><span
+    class="math inline"><em>d</em><sub>5</sub><em>u</em><sub>7</sub><em>u</em><sub>8</sub><em>u</em><sub>11</sub><em>u</em><sub>7</sub><em>u</em><sub>12</sub></span></p>
+    <p>CHIEDERE A NOTEBOOK DI FARE UN ESEMPIO Di <span
+    class="math inline"><em>d</em></span></p>
+    <h2 id="bebugging"><a href="#bebugging">Bebugging</a></h2>
+    <p>Inseriamo <span class="math inline"><em>n</em></span> errori
+    dentro il codice prima di mandare il programma a chi lo deve
+    testare. Chi testa sa che ci sono <span
+    class="math inline"><em>n</em></span> errori ma non sa dove sono.
+    Quindi nel mentre cerca questi errori ci sono ottime probabilità che
+    ne trovi altri.</p>
+    <p>Tipicamente in questo scenario c’e’ un team di testing separato
+    dal team di sviluppo.</p>
+    <p>Problemi</p>
+    <ul>
+    <li>potrebbe essere che ho messo errori piu’ semplici di quelli che
+    realmente voglio trovare</li>
+    <li>potrei usare strumenti sbagliati per trovare i bug ESPANDERE CON
+    NITEBOOK</li>
+    </ul>
+    <h2 id="analisi-mutazionale"><a href="#analisi-mutazionale">Analisi
+    mutazionale</a></h2>
+    <p>Viene generato un insieme di programmi <span
+    class="math inline"><em>Π</em></span> simili al programma <span
+    class="math inline"><em>P</em></span> in esame.</p>
+    <p>Su di essi viene eseguito lo stesso test <span
+    class="math inline"><em>T</em></span> previsto per il programma
+    <span class="math inline"><em>P</em></span>:</p>
+    <ul>
+    <li>se <span class="math inline"><em>P</em></span> e’ corretto
+    allora i programmi in <span class="math inline"><em>Π</em></span>
+    devono essere sbagliati</li>
+    <li>per almeno un caso di test devono quindi produrre un risultato
+    diverso</li>
+    </ul>
+    <p>Un test <span class="math inline"><em>T</em></span> soddisfa il
+    criterio di copertura dei mutanti se e solo se per ogni mutante
+    <span class="math inline"><em>π</em> ∈ <em>Π</em></span> esiste
+    almeno un caso di test in <span
+    class="math inline"><em>T</em></span> la cui esecuzione produca per
+    <span class="math inline"><em>π</em></span> un risultato diverso da
+    quello prodotto da <span class="math inline"><em>P</em></span>.</p>
+    <p>La metrica e’ la frazione di mutanti riconosciuta come diversa da
+    <span class="math inline"><em>P</em></span> sul totale di mutanti
+    generati.</p>
+    <p>Voglio un mutante per ogni possibile difetto, virtualmente
+    infiniti. I piu’ semplici effettuano modifiche sintattiche che
+    comportino modifiche semantiche.</p>
+    <p>L’onere di esecuzione e’ molto forte.</p>
+    <h2 id="testing-ed-ereditarietà-testing-e-collegamento-dinamico"><a
+    href="#testing-ed-ereditariet-testing-e-collegamento-dinamico">Testing
+    ed ereditarietà, testing e collegamento dinamico</a></h2>
+    <p>https://youtu.be/mZ8vBaHtzlY?t=771</p>
+    <p>Chiedere a NOTEBOOK di espandere questa parte</p>
+    <h2 id="class-testing"><a href="#class-testing">Class
+    testing</a></h2>
+    <p>Isolare la classe: costruiamo stub per renderla eseguibile
+    indipendentemente dal contesto</p>
+    <p>I mock consentono di parallelizzare lo sviluppo di componenti che
+    dipendono l’una dall’altra, a patto di avere dei contratti, espressi
+    con le interfacce.</p>
+    <h2 id="copertura-della-classe"><a
+    href="#copertura-della-classe">Copertura della classe</a></h2>
+    <p>Chiedere a NOTEBOOK</p>
+    <h2 id="test-funzionale"><a href="#test-funzionale">Test
+    funzionale</a></h2>
+    <p>Sinonimo di blackbox.</p>
+    <p>Punto di partenza con cui effettuare ragionamenti per la
+    copertura. Parto dai requisiti.</p>
+    </article>
+  </main>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script src="js/prism.min.js"></script>
 </body>
-</html>

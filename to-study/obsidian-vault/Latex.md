@@ -17,6 +17,12 @@ $A \subseteq B$
 
 $\mathbb{N}$
 
+# Centering
+
+$$
+\begin{align} \begin{gathered} affidabile(C,\ P)\ \land\ valido(C,\ P)\ \land\ \exists T\in C\ \land\ \lnot successo(T,\ P) \\ \Rightarrow \\ ok(P,\ D) \end{gathered} \end{align}
+$$
+
 # Multiple expressions alignment
 
 $$
@@ -29,6 +35,8 @@ $$
 $$
 
 # Miscellanea
+
+$\Pi$ capital case
 
 $\displaystyle\sum_{i=0} ^{\infty} a_i x^i$
 

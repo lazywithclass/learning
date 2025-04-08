@@ -30,7 +30,7 @@ http://butunclebob.com/ArticleS.UncleBob.PrinciplesOfOod
 
 # Single responsibility principle
 
-[single-responsibility-principle](single-responsibility-principle.pdf)
+[The Single Responsibility Principle - The Clean Code Blog](https://blog.cleancoder.com/uncle-bob/2014/05/08/SingleReponsibilityPrinciple.html)
 
 > A class should have one, and only one, reason to change
 
@@ -54,6 +54,12 @@ This is the reason we do not put SQL in JSPs. This is the reason we do not gener
 
 ![img|300](https://cdn-images-1.medium.com/max/640/0*11cZSBOkR82nknwy.png)
 
+## Benefici
+
+* ridotto impatto a seguito di modifiche perche' ogni classe si concentra su uno specifico aspetto o funzionalita' del sistema
+* mantenibilita' aumentata perche' posso intervenire su una classe, ad esempio con un refactor, senza che queste modifiche impattino su un'altra
+* facilita il riutilizzo perche' siccome e' chiaro di cosa si occupano e non hanno un alto livello di accoppiamento con le altre classi, posso usarle anche in altri ambiti
+
 ## Related patterns
 
 * [Decorator](Design%20Pattern.md#Decorator): per decentralizzare le varie aggiunte, ognuna in una classe decoratrice, invece di avere una god class
@@ -62,30 +68,32 @@ This is the reason we do not put SQL in JSPs. This is the reason we do not gener
 
 # Open-Closed principle
 
-[Engineering Notebook columns for The C++ Report - The Open-Closed Principle](cpp-report_engineering-notebook_open-closed-principle.pdf)
+[Engineering Notebook columns for The C++ Report - The Open-Closed Principle](https://courses.cs.duke.edu/fall07/cps108/papers/ocp.pdf)
 
-> The foundation for building code that is maintanable and resusable
+> The foundation for building code that is maintainable and reusable
 
--- [see introduction](cpp-report_engineering-notebook_liskov-substitution-principle.pdf)
+-- [See Introduction of Engineering Notebook columns for The C++ Report - The Liskov Substitution Principle](cpp-report_engineering-notebook_liskov-substitution-principle.pdf)
 
 > You should be able to extend a classes behavior, without modifying it
 
-* the behaviour of the module could be extended
-* the source code of such mode is inviolate 
-
 > When the creation of a derived class causes us to make changes to the base class, it often implies that the design is fault, indeed it violates the Open-Closed principle
 
-Permette di chiamare codice non ancora scritto 
-VEDI NOTE DI JESSICA 
+Permette di ottenere:
+* stabilita' grazie al fatto che non vengono modificate le classi
+* mantenibilita' attraverso l'estensibilita'
 
+[Dynamic binding](Java.md#Dynamic%20binding) e' un aspetto chiave di OOP, perche' permette di chiamare codice non ancora scritto: cioe' riconoscendo il tipo concreto dal tipo apparente solo a runtime, tengo aperta la possibilita' di future estensioni.
 ## Related patterns
 
 * [Template](Design%20Pattern.md#Template): definisce lo scheletro di un algoritmo in una classe base, alcuni passaggi vengono lasciati da implementare alle sottoclassi, senza modificare la classe originale
 * [Adapter - page 139](Design%20Pattern.md#Adapter%20-%20page%20139): riusare classi in nuovi contesti senza modificarle direttamente
+* [Strategy](Design%20Pattern.md#Strategy): ogni  algoritmo e' incapsulato nella sua classe che implementa una interfaccia condivisa
 
 # Liskov substitution principle
 
-> methods that use references to base classes must be able to use objects of derived classes without knowing it
+[Engineering Notebook columns for The C++ Report - The Liskov Substitution Principle](https://www.cs.utexas.edu/~downing/papers/LSP-1996.pdf)
+
+> if you have a program that works correctly with a base class, then it should continue to work correctly if you replace the base class with any of its derived classes
 
 `S` sottotipo di `T`:
 * precondizioni dei metodi di `S` non devono essere piu' stringenti delle precondizioni dei metodi di `T`
@@ -95,7 +103,7 @@ Voglio evitare che chi cita una classe e vede una possibilita' (metodo), si ritr
 
 If a function violates LSP then that function uses a reference to a base class, but must know about all the derivatives of that base class.
 
-# Open-Closed Principle and Liskov Substitution Principle
+## Open-Closed Principle and Liskov Substitution Principle
 
 <aside>OOD is-a relationship pertains to behavior</aside>
 
@@ -103,7 +111,7 @@ If a function violates LSP then that function uses a reference to a base class, 
 
 Siamo interessati al comportamento dei moduli tra di loro, comportamento su cui gli utilizzatori dipendono.
 
-# Design by Contract and Liskov Substituion Principle
+## Design by Contract and Liskov Substituion Principle
 
 In Design by Contract (Bertrand Meyer) methods declare preconditions and postconditions:
 * preconditions must be true before method invocation
@@ -120,12 +128,17 @@ So:
 
 # Interface segregation
 
+[Engineering Notebook columns for The C++ Report - The Interface Segregation Principle](https://www.cs.utexas.edu/~downing/papers/ISP-1996.pdf)
+
+>Clients should not be forced to depend on methods they do not use
+
 > Make fine grained interfaces that are client specific
 
 "Offer different views of the same type."
 
 > "Polimorfismo e' un modo per esprimere di fronte alla stessa interfaccia comportamenti diversi. Grazie al polimorfismo possiamo mostrare lo stesso cosa nascondendo diversi come."
--- Jessica Vecchia
+
+ -- Jessica Vecchia
 
 Fa in modo che il client ottenga la dipendenza <span class="b">minima</span> dalla classe che vuole utilizzare, vuole utilizzare solo certi aspetti che la classe implementa, non tutti.
 
@@ -139,6 +152,8 @@ Questo principio permette di raggiungere un grado basso di accoppiamento tra gli
 
 # Dependency inversion
 
+[Engineering Notebook columns for The C++ Report - The Dependency Inversion Principle](https://www.labri.fr/perso/clement/enseignements/ao/DIP.pdf)
+
 > Depend on abstractions, not on concretions
 
 I moduli di alto livello non dovrebbero dipendere dai moduli di basso livello: entrambi dovrebbero dipendere da astrazioni.
@@ -147,7 +162,11 @@ Le astrazioni non dovrebbero dipendere dai dettagli. Programmare verso le interf
 "Depend on stuff more concrete than me"
 
 This is pure gold: https://blog.cleancoder.com/uncle-bob/2016/01/04/ALittleArchitecture.html
+## Benefici
 
+* testabilita' perche' posso mockare con semplificita' una interfaccia invece di portarmi dietro un intero albero di implementazioni
+* flessibilita' perche' posso variare l'implementazione in base alle necessita', quindi ad esempio passare un database PostgreSQL a MySQL
+* ridotto accoppiamento perche' dei cambiamenti nei moduli di basso livello non impattano i moduli di alto livello
 ## Related patterns
 
 * [Factory method](Design%20Pattern.md#Factory%20method): definisce una interfaccia per la creazione di un oggetto, ma consente alle sottoclassi di decidere quale classe istanziare

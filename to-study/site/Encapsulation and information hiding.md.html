@@ -4,253 +4,93 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Encapsulation and information hiding</title>
-  <style>
-    html {
-      color: #1a1a1a;
-      background-color: #fdfdfd;
-    }
-    body {
-      margin: 0 auto;
-      max-width: 36em;
-      padding-left: 50px;
-      padding-right: 50px;
-      padding-top: 50px;
-      padding-bottom: 50px;
-      hyphens: auto;
-      overflow-wrap: break-word;
-      text-rendering: optimizeLegibility;
-      font-kerning: normal;
-    }
-    @media (max-width: 600px) {
-      body {
-        font-size: 0.9em;
-        padding: 12px;
-      }
-      h1 {
-        font-size: 1.8em;
-      }
-    }
-    @media print {
-      html {
-        background-color: white;
-      }
-      body {
-        background-color: transparent;
-        color: black;
-        font-size: 12pt;
-      }
-      p, h2, h3 {
-        orphans: 3;
-        widows: 3;
-      }
-      h2, h3, h4 {
-        page-break-after: avoid;
-      }
-    }
-    p {
-      margin: 1em 0;
-    }
-    a {
-      color: #1a1a1a;
-    }
-    a:visited {
-      color: #1a1a1a;
-    }
-    img {
-      max-width: 100%;
-    }
-    svg {
-      height: auto;
-      max-width: 100%;
-    }
-    h1, h2, h3, h4, h5, h6 {
-      margin-top: 1.4em;
-    }
-    h5, h6 {
-      font-size: 1em;
-      font-style: italic;
-    }
-    h6 {
-      font-weight: normal;
-    }
-    ol, ul {
-      padding-left: 1.7em;
-      margin-top: 1em;
-    }
-    li > ol, li > ul {
-      margin-top: 0;
-    }
-    blockquote {
-      margin: 1em 0 1em 1.7em;
-      padding-left: 1em;
-      border-left: 2px solid #e6e6e6;
-      color: #606060;
-    }
-    code {
-      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
-      font-size: 85%;
-      margin: 0;
-      hyphens: manual;
-    }
-    pre {
-      margin: 1em 0;
-      overflow: auto;
-    }
-    pre code {
-      padding: 0;
-      overflow: visible;
-      overflow-wrap: normal;
-    }
-    .sourceCode {
-     background-color: transparent;
-     overflow: visible;
-    }
-    hr {
-      background-color: #1a1a1a;
-      border: none;
-      height: 1px;
-      margin: 1em 0;
-    }
-    table {
-      margin: 1em 0;
-      border-collapse: collapse;
-      width: 100%;
-      overflow-x: auto;
-      display: block;
-      font-variant-numeric: lining-nums tabular-nums;
-    }
-    table caption {
-      margin-bottom: 0.75em;
-    }
-    tbody {
-      margin-top: 0.5em;
-      border-top: 1px solid #1a1a1a;
-      border-bottom: 1px solid #1a1a1a;
-    }
-    th {
-      border-top: 1px solid #1a1a1a;
-      padding: 0.25em 0.5em 0.25em 0.5em;
-    }
-    td {
-      padding: 0.125em 0.5em 0.25em 0.5em;
-    }
-    header {
-      margin-bottom: 4em;
-      text-align: center;
-    }
-    #TOC li {
-      list-style: none;
-    }
-    #TOC ul {
-      padding-left: 1.3em;
-    }
-    #TOC > ul {
-      padding-left: 0;
-    }
-    #TOC a:not(:hover) {
-      text-decoration: none;
-    }
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    /* The extra [class] is a hack that increases specificity enough to
-       override a similar rule in reveal.js */
-    ul.task-list[class]{list-style: none;}
-    ul.task-list li input[type="checkbox"] {
-      font-size: inherit;
-      width: 0.8em;
-      margin: 0 0.8em 0.2em -1.6em;
-      vertical-align: middle;
-    }
-    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
-  </style>
-  <link rel="stylesheet" href="https://latex.vercel.app/style.css">
-  <link rel="stylesheet" href="https://latex.vercel.app/prism/prism.css">
-
+  <link rel="stylesheet" href="css/latex.css">
+  <link rel="stylesheet" href="css/prism.css">
   <link rel="stylesheet" href="css/index.css">
-  <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-  <![endif]-->
 </head>
-<body>
-<aside>
-L8 encapsulation information hiding
-</aside>
-<blockquote>
-<p>[!info] Parnas’ Law (L8): Solo cio’ che e’ nascosto puo’ essere
-cambiato liberamente e senza pericoli</p>
-</blockquote>
-<ul>
-<li>possibilita’ di evoluzione: perche’ il fatto che nessuno conosca
-come faccio qualcosa all’interno, a parita’ di effetti esterni, mi da
-liberta’ di cambiare scelta.</li>
-<li>facilitare la comprensione del codice: isolo la parte di codice in
-cui devo cercare, solo certe parti del codice hanno permesso di scrivere
-in quella variabile (definisco le responsabilita’: <a
-href="SOLID.md#Single%20responsibility%20principle">Single
-responsibility principle</a>)</li>
-<li>“A class is more reusable when you minimize the assumptions other
-classes must make to use it”</li>
-</ul>
-<h1 id="reference-escaping"><a href="#reference-escaping">Reference
-escaping</a></h1>
-<p>Reference escaping - “pensavo di essere protetto dall’encapsulation,
-ma invece e’ peggio perche’ e’ difficile da trovare”</p>
-<p>Non sempre c’e’ reference escaping, dipende se cio’ che sto passando
-e’ o meno un segreto, se non e’ un segreto o se e’ immutabile allora non
-c’e’.</p>
-<p>Tipologie di relazioni: * composizione: tipicamente non voglio che
-l’oggetto interno della classe venga esposto, perche’ e’ un mio segreto
-* associazione: se qualcosa arriva da fuori, mi e’ passato,
-probabilmente non e’ un mio segreto, quindi posso tenermene una copia,
-ma se lo rendo disponibile non c’e’ reference escaping *
-aggregazione:</p>
-<p>Lo stato del Model, in <a
-href="Design%20Pattern.md#Model%20View%20Presenter">Model View
-Presenter</a> e’ un segreto da proteggere, perche’ se qualcuno lo
-modifica dall’esterno non posso notificare gli osservatori.</p>
-<h2 id="variabili-di-istanza-non-private"><a
-href="#variabili-di-istanza-non-private">Variabili di istanza non
-private</a></h2>
-<p>Normalmente le variabili di istanza devono essere private,
-chiaramente non vuol dire mettere getter e setter. Vedere lo stato puo’
-essere corretto, cio’ che non e’ corretto e’ consentire la modifica.</p>
-<h2 id="tenere-un-riferimento-esterno-alla-classe"><a
-href="#tenere-un-riferimento-esterno-alla-classe">Tenere un riferimento
-esterno alla classe</a></h2>
-<p>Si prende un riferimento esterno senza farsene una copia. Chiaramente
-puo’ succedere nei punti di contatto con l’esterno come setter o
-costruttori.</p>
-<h2 id="immutabilita"><a href="#immutabilita">Immutabilita’</a></h2>
-<p>Oggetti immutabili possono essere condivisi.</p>
-<p>Cosa vuol dire essere immutabili? Non vuol dire essere stateless,
-vuol dire che non c’e’ modo di cambiare lo stato dell’oggetto dopo la
-sua inizializzazione. <code>String</code> e’ immutabile ma una volta
-creata non la modifico piu’.</p>
-<h1 id="encapsulation-e-astrazioni"><a
-href="#encapsulation-e-astrazioni">Encapsulation e astrazioni</a></h1>
-<p>Dare un nome ai concetti: type abstraction.</p>
-<h1 id="tell-dont-ask"><a href="#tell-dont-ask">Tell dont ask</a></h1>
-<p>https://martinfowler.com/bliki/TellDontAsk.html</p>
-<p>“Non chiedere i dati, ma di cosa vuoi che faccia sui dati”; vuol dire
-ad esempio minimizzare i getter e creare una funzione che provveda al
-vero obiettivo per il quale abbiamo creato il getter.</p>
-<h1 id="open-closed-principle"><a href="#open-closed-principle">Open
-Closed principle</a></h1>
-<blockquote>
-<p>We expect that the methods of a class are not closed to changes in
-the member variables of that class. However we do expect that any other
-class, including subclasses are closed against changes to those
-variables. We have a name for this expectation, we call it:
-encapsulation</p>
-</blockquote>
-<p><a href="SOLID.md#Open%20closed%20principle">Open closed
-principle</a></p>
-<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/prismjs/prism.min.js"></script>
-
+<body class="latex-dark">
+  <main>
+    <article>
+    <aside>
+    L8 encapsulation information hiding
+    </aside>
+    <blockquote>
+    <p>[!info] Parnas’ Law (L8): Solo cio’ che e’ nascosto puo’ essere
+    cambiato liberamente e senza pericoli</p>
+    </blockquote>
+    <ul>
+    <li>possibilita’ di evoluzione: perche’ il fatto che nessuno conosca
+    come faccio qualcosa all’interno, a parita’ di effetti esterni, mi
+    da liberta’ di cambiare scelta.</li>
+    <li>facilitare la comprensione del codice: isolo la parte di codice
+    in cui devo cercare, solo certe parti del codice hanno permesso di
+    scrivere in quella variabile (definisco le responsabilita’: <a
+    href="SOLID.md#Single%20responsibility%20principle">Single
+    responsibility principle</a>)</li>
+    <li>“A class is more reusable when you minimize the assumptions
+    other classes must make to use it”</li>
+    </ul>
+    <h1 id="reference-escaping"><a href="#reference-escaping">Reference
+    escaping</a></h1>
+    <p>Reference escaping - “pensavo di essere protetto
+    dall’encapsulation, ma invece e’ peggio perche’ e’ difficile da
+    trovare”</p>
+    <p>Non sempre c’e’ reference escaping, dipende se cio’ che sto
+    passando e’ o meno un segreto, se non e’ un segreto o se e’
+    immutabile allora non c’e’.</p>
+    <p>Tipologie di relazioni: * composizione: tipicamente non voglio
+    che l’oggetto interno della classe venga esposto, perche’ e’ un mio
+    segreto * associazione: se qualcosa arriva da fuori, mi e’ passato,
+    probabilmente non e’ un mio segreto, quindi posso tenermene una
+    copia, ma se lo rendo disponibile non c’e’ reference escaping *
+    aggregazione:</p>
+    <p>Lo stato del Model, in <a
+    href="Design%20Pattern.md#Model%20View%20Presenter">Model View
+    Presenter</a> e’ un segreto da proteggere, perche’ se qualcuno lo
+    modifica dall’esterno non posso notificare gli osservatori.</p>
+    <h2 id="variabili-di-istanza-non-private"><a
+    href="#variabili-di-istanza-non-private">Variabili di istanza non
+    private</a></h2>
+    <p>Normalmente le variabili di istanza devono essere private,
+    chiaramente non vuol dire mettere getter e setter. Vedere lo stato
+    puo’ essere corretto, cio’ che non e’ corretto e’ consentire la
+    modifica.</p>
+    <h2 id="tenere-un-riferimento-esterno-alla-classe"><a
+    href="#tenere-un-riferimento-esterno-alla-classe">Tenere un
+    riferimento esterno alla classe</a></h2>
+    <p>Si prende un riferimento esterno senza farsene una copia.
+    Chiaramente puo’ succedere nei punti di contatto con l’esterno come
+    setter o costruttori.</p>
+    <h2 id="immutabilita"><a href="#immutabilita">Immutabilita’</a></h2>
+    <p>Oggetti immutabili possono essere condivisi.</p>
+    <p>Cosa vuol dire essere immutabili? Non vuol dire essere stateless,
+    vuol dire che non c’e’ modo di cambiare lo stato dell’oggetto dopo
+    la sua inizializzazione. <code>String</code> e’ immutabile ma una
+    volta creata non la modifico piu’.</p>
+    <h1 id="encapsulation-e-astrazioni"><a
+    href="#encapsulation-e-astrazioni">Encapsulation e
+    astrazioni</a></h1>
+    <p>Dare un nome ai concetti: type abstraction.</p>
+    <h1 id="tell-dont-ask"><a href="#tell-dont-ask">Tell dont
+    ask</a></h1>
+    <p>https://martinfowler.com/bliki/TellDontAsk.html</p>
+    <p>“Non chiedere i dati, ma di cosa vuoi che faccia sui dati”; vuol
+    dire ad esempio minimizzare i getter e creare una funzione che
+    provveda al vero obiettivo per il quale abbiamo creato il
+    getter.</p>
+    <h1 id="open-closed-principle"><a href="#open-closed-principle">Open
+    Closed principle</a></h1>
+    <blockquote>
+    <p>We expect that the methods of a class are not closed to changes
+    in the member variables of that class. However we do expect that any
+    other class, including subclasses are closed against changes to
+    those variables. We have a name for this expectation, we call it:
+    encapsulation</p>
+    </blockquote>
+    <p><a href="SOLID.md#Open%20closed%20principle">Open closed
+    principle</a></p>
+    </article>
+  </main>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.min.js"></script>
 </body>
-</html>

@@ -53,6 +53,13 @@ Dare un nome ai concetti: type abstraction.
 
 https://martinfowler.com/bliki/TellDontAsk.html
 
+> Things that are tightly coupled should be in the same component. Thinking of tell-don't-ask is a way to help programmers to see how they can increase this co-location.
+
+
+[Qui](https://media.pragprog.com/articles/jan_03_enbug.pdf) ne parlano un po' più approfonditamente:
+
+> Adhering to this notion of “Tell, Don’t Ask” is easier if you mentally categorize each of your functions and methods as either a command or a query
+
 "Non chiedere i dati, ma di cosa vuoi che faccia sui dati"; vuol dire ad esempio minimizzare i getter e creare una funzione che provveda al vero obiettivo per il quale abbiamo creato il getter.
 
 # Open Closed principle

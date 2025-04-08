@@ -4,1153 +4,1025 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Software engineering</title>
-  <style>
-    html {
-      color: #1a1a1a;
-      background-color: #fdfdfd;
-    }
-    body {
-      margin: 0 auto;
-      max-width: 36em;
-      padding-left: 50px;
-      padding-right: 50px;
-      padding-top: 50px;
-      padding-bottom: 50px;
-      hyphens: auto;
-      overflow-wrap: break-word;
-      text-rendering: optimizeLegibility;
-      font-kerning: normal;
-    }
-    @media (max-width: 600px) {
-      body {
-        font-size: 0.9em;
-        padding: 12px;
-      }
-      h1 {
-        font-size: 1.8em;
-      }
-    }
-    @media print {
-      html {
-        background-color: white;
-      }
-      body {
-        background-color: transparent;
-        color: black;
-        font-size: 12pt;
-      }
-      p, h2, h3 {
-        orphans: 3;
-        widows: 3;
-      }
-      h2, h3, h4 {
-        page-break-after: avoid;
-      }
-    }
-    p {
-      margin: 1em 0;
-    }
-    a {
-      color: #1a1a1a;
-    }
-    a:visited {
-      color: #1a1a1a;
-    }
-    img {
-      max-width: 100%;
-    }
-    svg {
-      height: auto;
-      max-width: 100%;
-    }
-    h1, h2, h3, h4, h5, h6 {
-      margin-top: 1.4em;
-    }
-    h5, h6 {
-      font-size: 1em;
-      font-style: italic;
-    }
-    h6 {
-      font-weight: normal;
-    }
-    ol, ul {
-      padding-left: 1.7em;
-      margin-top: 1em;
-    }
-    li > ol, li > ul {
-      margin-top: 0;
-    }
-    blockquote {
-      margin: 1em 0 1em 1.7em;
-      padding-left: 1em;
-      border-left: 2px solid #e6e6e6;
-      color: #606060;
-    }
-    code {
-      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
-      font-size: 85%;
-      margin: 0;
-      hyphens: manual;
-    }
-    pre {
-      margin: 1em 0;
-      overflow: auto;
-    }
-    pre code {
-      padding: 0;
-      overflow: visible;
-      overflow-wrap: normal;
-    }
-    .sourceCode {
-     background-color: transparent;
-     overflow: visible;
-    }
-    hr {
-      background-color: #1a1a1a;
-      border: none;
-      height: 1px;
-      margin: 1em 0;
-    }
-    table {
-      margin: 1em 0;
-      border-collapse: collapse;
-      width: 100%;
-      overflow-x: auto;
-      display: block;
-      font-variant-numeric: lining-nums tabular-nums;
-    }
-    table caption {
-      margin-bottom: 0.75em;
-    }
-    tbody {
-      margin-top: 0.5em;
-      border-top: 1px solid #1a1a1a;
-      border-bottom: 1px solid #1a1a1a;
-    }
-    th {
-      border-top: 1px solid #1a1a1a;
-      padding: 0.25em 0.5em 0.25em 0.5em;
-    }
-    td {
-      padding: 0.125em 0.5em 0.25em 0.5em;
-    }
-    header {
-      margin-bottom: 4em;
-      text-align: center;
-    }
-    #TOC li {
-      list-style: none;
-    }
-    #TOC ul {
-      padding-left: 1.3em;
-    }
-    #TOC > ul {
-      padding-left: 0;
-    }
-    #TOC a:not(:hover) {
-      text-decoration: none;
-    }
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    /* The extra [class] is a hack that increases specificity enough to
-       override a similar rule in reveal.js */
-    ul.task-list[class]{list-style: none;}
-    ul.task-list li input[type="checkbox"] {
-      font-size: inherit;
-      width: 0.8em;
-      margin: 0 0.8em 0.2em -1.6em;
-      vertical-align: middle;
-    }
-    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
-  </style>
-  <link rel="stylesheet" href="https://latex.vercel.app/style.css">
-  <link rel="stylesheet" href="https://latex.vercel.app/prism/prism.css">
-
+  <link rel="stylesheet" href="css/latex.css">
+  <link rel="stylesheet" href="css/prism.css">
   <link rel="stylesheet" href="css/index.css">
-  <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-  <![endif]-->
 </head>
-<body>
-<blockquote>
-<p>[!warning] Questo documento e’ incompleto, alcuni concetti che gia’
-conosco sono stati saltati</p>
-</blockquote>
-<p>Correzione https://www.youtube.com/watch?v=7vb089FkfiI&amp;sttick=0
-file:///C:/Users/monte/Downloads/Telegram%20Desktop/slides%20(2).pdf</p>
-<p>FLASHCARDS</p>
-<p>https://www.memory.com/courses/dashboard/ingegneria-del-software-it-it–ao8b_1695973981615185115_73/Italian/Italian</p>
-<h1 id="refresh-di-programmazione-ii"><a
-href="#refresh-di-programmazione-ii">Refresh di Programmazione
-II</a></h1>
-<h2 id="nested-classes"><a href="#nested-classes">Nested
-classes</a></h2>
-<p>Sono di 4 tipi</p>
-<h3 id="static-member-classes"><a href="#static-member-classes">Static
-member classes</a></h3>
-<p>Se una istanza di questa classe puo’ esistere indipendentemente da
-una istanza della classe contenitrice. Se non si richiede accesso
-all’istanza della classe contenitrice allora sempre mettere
-<code>static</code></p>
-<h3 id="nonstatic-member-classes"><a
-href="#nonstatic-member-classes">Nonstatic member classes</a></h3>
-<p>Ogni istanza di questa classe e’ associata ad una istanza della
-classe contenitrice</p>
-<h3 id="anonymous-classes"><a href="#anonymous-classes">Anonymous
-classes</a></h3>
-<h3 id="local-classes"><a href="#local-classes">Local classes</a></h3>
-<hr />
-<p>Cio’ che segue e’ ancora tutto da sistemare</p>
-<p>https://prog2unimi-temi-svolti.netlify.app/</p>
-<hr />
-<p>https://martinfowler.com/bliki/TellDontAsk.html</p>
-<p>Review del codice “Controllato in costruzione” non “preservato in
-costruzione” Documentazione metodi che contenga anche ad esempio per
-quali input uno split di un orario formattato con 00:00:00 non funziona
-Perché ha usato getClass e non ha usato instanceof nell’equals? Brano
-statico con String album come campo, discussione Coerenza documentazione
-- codice Ritiene appropriato lanciare una eccezione se non trova un
-elemento in una lista? List.copyOf cosa ritorna? Cosa sono le eccezioni
-cosa servono quando e’ opportuno sollevare checked e unchecked?</p>
-<p>Review del codice Catch di Exception “e’ bruttarello” Perche’
-getClass dentro l’equals? Differenza tra StringBuilder e + tra stringhe
-per poche concatenazioni FA e RI Effetto collaterale benevolo Come si
-mescola RI e sottoclassi? super.repOK &amp;&amp; repOK, ok ma ci sono
-dei casi in cui non controllare gli attributi del supertipo puo’ essere
-ritenuto ragionevole? Cosa si intende per attributi del supertipo?
-Quando si ricorre agli attributi protected? Attributi di una classe
-astratta, quali sono le circostanze in cui e’ preferibile public,
-protected, o private?</p>
-<p>Review del codice Non fare troppe eccezioni che siano sottoclassi di
-IllegalArgumentException Come si costruisce un buon iteratore? Assumendo
-che durataComplessiva dentro Album scorre tutti gli i brani per dare il
-risultato, si puo’ fare meglio? Metodi totali e parziali, cosa sono,
-quando si usano, pregi e difetti Insieme di regole che le pre-post
-condizioni devono soddisfare perche’ valga LSP Astrazione per
-specificazione, perche’ sono importanti le proprieta’ caratteristiche di
-questa astrazione</p>
-<p>Review del codice Legame tra hashcode e equals, qual e’ il verso
-dell’implicazione? Cosa sarebbe successo se hashcode uguale implicasse
-equals? Cosa sono FA e RI? In che contesto ne parliamo e perche’ li
-usiamo? Con che proposito vengono introdotte? Esempio di iniettivita’
-della FA Principio di sostituzione di Liskov Covarianza? Astrazione per
-iterazione</p>
-<p>Consigli dal prof Prima di consegnare scrivete il main per vedere se
-il codice lancia eccezioni Assicurarsi che la documentazione sia in
-linea con l’implementazione repOK non dovrebbe mai sollevare eccezioni
-Allo scritto dovete principalmente cercare di arrivare all’orale,
-contenere le cagate e poi fare l’orale</p>
-<hr />
-<p>https://github.com/Pasinim/prog2/tree/main/.-Dispense/orali</p>
-<p>dispatching</p>
-<p>metodi totali parziali</p>
-<p>AF RI</p>
-<p>Benevolent side effect</p>
-<p>eccezioni</p>
-<p>Program Development in Java - 5.7 Reasoning about Data Abstractions -
-5.8 Design Issues - 5.9 Locality and Modifiability - 9.2 Some Criteria
-for Specifications</p>
-<p>Sidebar 1.1, 1.2, 2.2, 2.3, 2.4, 3.1, 3.2, 3.3, 4.1, 4.2, 5.1, 5.2,
-5.3, 5.4, 5.5, 5.6, 6.1, 6.2, 6.3, 7.1, 7.2, 7.3, 7.4, 7.5, 7.6, 7.8,
-8.1, 8.2, 9.1, 9.2, 9.3,</p>
-<p>capitoli 13 - 14 - 15 da leggere e basta</p>
-<p>Equals e ereditarieta’ che lo rompe</p>
-<p>Differenza tra avere assert in dev e non averla in prod Discorso
-dell’assunzione</p>
-<p>classi e tutte le posizioni posizioni nested non nested una che
-utilizza l’altra nested statica per ognuna use case e cosa comporta</p>
-<p>https://prog2-unimi.github.io/notes/TGERDS.html
-https://prog2-unimi.github.io/notes/DM.html
-https://prog2-unimi.github.io/notes/EACO.html
-https://prog2-unimi.github.io/notes/UEE.html
-https://prog2-unimi.github.io/notes/CED.html</p>
-<ul>
-<li><p>reference escaping (che se presente invalida tutta la
-encapsulation)</p></li>
-<li><p>interface segregation</p></li>
-<li><p>nullability</p></li>
-<li><p>mocking</p></li>
-<li><p>fattorizzazione codice tramite pattern strategy o
-template</p></li>
-<li><p>astrazione (tramite procedure e tipi di dati),</p></li>
-<li><p>incapsulamento (tramite classi concrete/astratte e
-interfacce),</p></li>
-<li><p>estensibilità (per ereditarietà, o composizione),</p>
-<ul>
-<li>polimorfismo (e tipi generici).</li>
-</ul></li>
-<li><p>l’uso di <strong>astrazioni</strong> di vario livello (come i
-metodi, i tipi di dato astratti, l’iterazione esterna,
-l’estensione),</p></li>
-<li><p>alcuni <strong>strumenti concettuali</strong> per ragionare su
-tali astrazioni (come l’<em>invariante di rappresentazione</em>,
-la <em>funzione di astrazione</em>,
-le <em>pre-</em>/<em>post-condizioni</em>, gli <em>effetti
-collaterali</em>, l’<em>induzione sui tipi di dato</em>…),</p></li>
-<li><p>alcuni <strong>criteri di valutazione della qualità</strong> del
-progetto di codice <em>object oriented</em> (come
-l’<em>incapsulamento</em>, il <em>data hiding</em>,
-la <em>manutenibilità</em>, il <em>riuso</em> e
-l’<em>estendibilità</em>),</p></li>
-<li><p>per quanto concerne il libro di testo <a
-href="http://www.informit.com/store/effective-java-9780134685991">Effective
-Java</a> i capitoli 2, 3, 4, 5 (eccetto gli <em>item</em> 32 e 33), 8
-(eccetto gli <em>item</em> 53 e 55), 9 (eccetto l’<em>item</em> 66),
-10;</p></li>
-</ul>
-<h1 id="punti-di-attenzione-dal-lab"><a
-href="#punti-di-attenzione-dal-lab">Punti di attenzione dal lab</a></h1>
-<h2
-id="approccio-ai-parziali-ed-in-generale-allimplementazione-di-un-programma"><a
-href="#approccio-ai-parziali-ed-in-generale-allimplementazione-di-un-programma">Approccio
-ai parziali ed in generale all’implementazione di un programma</a></h2>
-<p>Planning: “cosa riesco a fare?”, “era impossibile farlo in 4 ore”
-<span class="math inline">→</span> non si e’ capito cosa e’ un modello
-incrementale “Cosa riesco a fare in 4 ore che da piu’ valore al
-cliente?”</p>
-<h2 id="gitflow"><a href="#gitflow">gitflow</a></h2>
-<p>Utilizzare assolutamente la funzionalita’ dentro l’IDE.</p>
-<h2 id="code-smells"><a href="#code-smells">Code smells</a></h2>
-<p>ISTEMARE DOPO LAB</p>
-<p>// null? code smell<br />
-// nested classes<br />
-// metodi per esplicitare cosa stiamo facendo<br />
-// posso avere un nodo che non contiene un valore? meglio di no<br />
-// Objects.requireNonNull</p>
-<p>// privilegiare assert, il compilatore le leva direttamente in
-prod<br />
-// flag EA del compiler</p>
-<p>non si fa in nessun caso commit diretto su develop.</p>
-<p>Si apre sempre una nuova feature.</p>
-<p>Nel caso 2 e 3 si parte con un test (anche nel due: infatti se hai
-trovato un bug…scrivi per prima cosa un test che lo verifica, commit del
-rosso e solo dopo applichi il fix)</p>
-<p>Nel caso 1… se il refactoring si tradurrà in un unico commit… gitflow
-di default applicherà fast forward (sempre che nessuno nel frattempo non
-abbia integrato qualcosa di nuovo…). Quindi magari sembrerà che sia un
-commit diretto su develop, ma appunto sarà un caso speciale (singolo
-commit e no overlapping con altri developer)</p>
-<h1 id="esame"><a href="#esame">Esame</a></h1>
-<h2 id="commenti-su-esami-ed-errori-comuni"><a
-href="#commenti-su-esami-ed-errori-comuni">Commenti su esami ed errori
-comuni</a></h2>
-<p>https://www.youtube.com/watch?v=7vb089FkfiI</p>
-<p>Stazione dei treni https://www.youtube.com/watch?v=Oq1EnhTgTyQ
-https://www.youtube.com/watch?v=AswqBpGB6BE</p>
-<p>Sapore di sale https://www.youtube.com/watch?v=39hEK_YDOvw</p>
-<p>Principi SOLID Single Responsibility Open-Closed Liskov Substitution
-Interface Segregation Dependency Inversion Testing Unità * copertura di
-comandi e decisioni/condizioni * isolamento e mocking Processo TDD *
-gitflow e feature * refactoring Patterns * MVP * Template e/o Strategy *
-Singleton * Builder * Chain of Responsibility * Adapter appropriate data
-structures nullability encapsulation no escaping reference readability
-(clean code)</p>
-<h3 id="domande-orale"><a href="#domande-orale">Domande orale</a></h3>
-<p>Puo’ chiedere di scrivere un diagramma delle classi di qualunque cosa
-vista a lezione (tipicamente design pattern) e puo’ chiedere di leggere
-qualsiasi diagramma.</p>
-<p>Nullability e mocking vengono chiesti molto spesso, sia allo scritto
-che all’orale.</p>
-<ul>
-<li>principi SOLID, con approfondimento su qualcuno di questi (+)</li>
-<li>stime di tempi nell’ambito di un progetto, problemi e come
-risolverli (+)</li>
-<li>interface segregation (+)</li>
-<li>refactoring</li>
-<li>modelli di sviluppo, a spirale; modello prototipale vs modello
-incrementale (+)</li>
-<li>modelli di ciclo di vita del software</li>
-<li>parlami positivamente del modello a cascata, come nasce il modello a
-cascata?</li>
-<li>mocking, differenza tra stub e mock (+)</li>
-<li>meta-pattern, pattern decorator, pattern composite, pattern
-strategy, chain of responsability (+++++)</li>
-<li>cosa e’ un test ideale? (+)</li>
-<li>perche’ TDD e’ una buona tecnica? Tecnica di requisiti o tecnica di
-design o di progettazione? Cos’e’? (+)</li>
-<li>mi parli di criterio di selezione. Che cos’è? Perché dobbiamo
-scegliere nei test un sottoinsieme del loro domino (cioè non seleziono
-tutti i test, ma solo alcuni)</li>
-<li>differenza tra tecnica di design e tecnica di progettazione</li>
-<li>due pratiche XP per convincere il manager (+)</li>
-<li>da dove derivano, chi è che scrive le specifiche? Dopo averle
-raccolte cosa devi fare prima di implementarle?</li>
-<li>differenza tra merge e pull request</li>
-</ul>
-<p>UNSORTED - quando un criterio di selezione è valido e quando è
-affidabile - relazioni di conflitto tra transizioni - problemi nella
-stima dei tempi e come risolverli - parlami di analisi statica e analisi
-data flow - legame tra limitatezza e conservatività - legame tra
-limitatezza e conservatività (continua…) - terminologia degli errori -
-albero di copertura vs abero di raggiungibilità - criteri di selezione:
-proprietà - tell dont ask - differenza semantica debole e forte -
-differenza tra verifica e convalida - Che cos’è la nullability? Perché è
-importante? Qual è la caratteristica del valore null che “da fastidio”?
-- disegnato una rete di petri, fare l’albero di copertura - scrivere
-formalmente la regola di abilitazione - diagrammi di sequenza -
-Terminologia di base di verifica e convalida. Sbaglio, errore, difetto,
-anomalia…, esempio in cui si presenta anomalia ma non (difetto o errore
-(?)) - Prova a scrivermi la relazione di conflitto, relazione di
-concorrenza (fai esempi e scrivi in maniera formale) evidenzia
-strutturale/effettivo - Inserisco un valore che sfora, dove limito
-questo inserimento (model o presenter?Andava messo nel model) - Esempio
-di rete limitata.</p>
-<h1 id="lezione-1---2509"><a href="#lezione-1---2509">Lezione 1 -
-25/09</a></h1>
-<h2 id="logistica"><a href="#logistica">Logistica</a></h2>
-<p>Libri: * Head first design patterns * Fundamentals of software
-engineering * A handbook of software and systems engineering - ha i
-riferimenti alle “leggi”</p>
-<p>Software per il lab * git * gradle * intellij * jdk 17 o 21</p>
-<p>Turno A matricole pari (Monga), turno B matricole dispari
-(Bellettini)</p>
-<hr />
-<p>Comunicazione tra sviluppatori e’ un fattore importante nello
-sviluppo software. Il software deve fare cio’ che voglio, con qualita’,
-per poter dire: “per come ho creato il software ti garantisco che
-funziona”.</p>
-<p>Voglio delle metriche che siano correlate rispetto al mio obiettivo
-di qualita’. Next step, definisco un tool che controlli il rispetto di
-queste metriche.</p>
-<h2 id="problemi"><a href="#problemi">Problemi</a></h2>
-<ul>
-<li>numero di persone coinvolte - il programmatore non e’ il cliente
--&gt; comunicazione. Overhead comunicazione cresce al crescere del
-numero di persone che lavorano su un programma, quindi non basta tirare
-sviluppatori al problema</li>
-<li>dimensioni software, sia come linee di codice che come tempo uomo
-necessario per scriverle</li>
-<li>software - in fase di scrittura del codice e’ come se la storia
-venisse cambiata mentre la si sta scrivendo, come se in un libro al
-capitolo 9 si modificasse il capitolo 1 facendo morire un
-personaggio</li>
-</ul>
-<p>Un buon processo puo’ produrre un prodotto di qualita’.</p>
-<p><a
-href="https://en.wikipedia.org/wiki/Capability_Maturity_Model_Integration">CMMI</a>
-- standardizzazione del livello di qualita’ di una ditta Programma a
-livelli per stabilire il grado di maturita’ di un gruppo di lavoro. 0 -
-dipendenza dall’eroe, come se avessi Achille come programmatore, ma cosa
-succede se sparisce? Dipendo da lui? 1 - … …</p>
-<h2 id="qualita"><a href="#qualita">Qualita’</a></h2>
-<p>Valore per gli stakeholder Scelte: “ottimizzo sullo spazio o sul
-tempo?”</p>
-<aside>
-Qualita’
-</aside>
-<p>Esterne: visibili agli utenti Interne: visibili agli sviluppatori</p>
-<p>Un programma deve: * <a
-href="Software%20engineering#Funzionare.md">Software
-engineering#Funzionare</a> * essere bello * farmi ricco</p>
-<h3 id="funzionare"><a href="#funzionare">Funzionare</a></h3>
-<p>Funziona e’ diverso da compila!</p>
-<h4 id="correttezza"><a href="#correttezza">Correttezza</a></h4>
-<p>Qualita’ assoluta: o corretto o non corretto. Correttezza: fa cio’
-che e’ stato chiesto, confronto con le specifiche.</p>
-<blockquote>
-<p>[!info] La correttezza e’ una proprieta’ matematica che stabilisce
-l’equivalenza tra il software e la sua specifica</p>
-</blockquote>
-<p>Differenza tra requisiti e specifiche: * requisiti - volatili,
-arrivato dall’esterno, sono i desiderata del cliente * specifiche -
-scritte, cosa io ho capito che il cliente voleva, contratto tra cliente
-e programmatore</p>
-<aside>
-L1
-</aside>
-<blockquote>
-<p>[!info] Glass’ Law (L1): Requirement deficiencies are the prime
-source of project failures</p>
-</blockquote>
-<h4 id="affidabilita"><a href="#affidabilita">Affidabilita’</a></h4>
-<p>Qualita’ relativa: se avviene un errore non grave il programma puo’
-comunque essere inteso come affidabile. Affidabilita’: mi posso fidare
-che faccia cio’ che voglio in un dato periodo di tempo</p>
-<h4 id="innocuita-robustezza"><a href="#innocuita-robustezza">Innocuita’
-/ robustezza</a></h4>
-<p>Innocuita’: che non faccia male Robustezza: si comporta bene anche
-rispetto situazioni fuori specifica, questa e’ la linea di demarcazione
-tra correttezza e robustezza: corretto o non corretto e’ definito in
-base alle specifiche, robusto in base a cio’ che e’ fuori da esse</p>
-<h3 id="bello"><a href="#bello">Bello</a></h3>
-<p>Usabilita’: facile da usare, non solo UI, ad esempio facilita’ di
-configurazione di un tool da CLI Adattabilita’ all’esigenza dell’utente
-e’ una caratteristica dell’usabilita’</p>
-<aside>
-L26
-</aside>
-<blockquote>
-<p>[!info] Nielsen-Norman’s Law (L26): Usability is quantifiable</p>
-</blockquote>
-<p>Osservare gli utenti mentre utilizzano il programma e’ un quick
-win.</p>
-<p>Velocita’, ed efficienza nell’uso delle risorse</p>
-Pulito
-<aside>
-La pulizia del codice e’ richiesta all’esame
-</aside>
-<p>Verificabilita, posso dimostrare che e’ corretto</p>
-<h3 id="farmi-ricco"><a href="#farmi-ricco">Farmi ricco</a></h3>
-<p>Riusabilita’ dei componenti Rivendo un software gia’ fatto per un
-altro cliente, lo riuso cosi non impiego tempo Bonus point: mi porto
-dietro affidabilita’ di quel software</p>
-<aside>
-L15
-</aside>
-<blockquote>
-<p>[!info] McIlroy’s law (L15): Software reuse reduces cycle time and
-increases productivity and quality</p>
-</blockquote>
-<p>Vedi incidente Ariane5, il riuso va bene ma deve essere di
-qualita’</p>
-<p>Manutenibilita’ e’ semplificare gli interventi post consegna,
-suddivisibile in * riparabilita’, se consente facilmente di eliminare i
-difetti (ben diviso in moduli, information hiding, no interconnessioni
-complesse, etc) * evolvibilita’, se facilita i cambiamenti permettendo
-di soddisfare nuovi requisiti</p>
-<aside>
-L27 L28
-</aside>
-<blockquote>
-<p>[!info] Lehman’s first law (L27): A system that is used will be
-changed</p>
-</blockquote>
-<p>“Change is inevitable”</p>
-<blockquote>
-<p>[!info] Lehman’s second law (L28): An evolving system increases its
-complexity unless work is done to reduce it</p>
-</blockquote>
-<p>Design for change.</p>
-<h2 id="processo"><a href="#processo">Processo</a></h2>
-<blockquote>
-<p>[!danger] TODO ESPANDERE</p>
-</blockquote>
-<p>Funzionare Essere bello Farmi diventare ricco</p>
-<p>Resistere agli imprevisti - robustezza Bello - sono veloce,
-produttivo Cogliere l’attimo - tempismo</p>
-<h1 id="lezione-2---3009"><a href="#lezione-2---3009">Lezione 2 -
-30/09</a></h1>
-<p>Produrre software: * non solo scrivere codice * risolvere problema di
-comunicazione * essere rigorosi - ne linguaggio formale ne linguaggio
-“normale”</p>
-<aside>
-H3
-</aside>
-<blockquote>
-<p>[!info] Bauer-Zemanek Hypotesis (H3): Formal methods significantly
-reduce design errors, or eliminate them early</p>
-</blockquote>
-<p>Un linguaggio formale e’ veramente la soluzione? Potrebbe essere
-molto piu’ difficile del problema stesso. Per questo e’ una ipotesi, non
-una legge. Va pesato sulla difficolta’ del progetto.</p>
-<p>Ci sono molti aspetti da considerare nel processo di produzione del
-software.</p>
-<h2 id="ciclo-di-vita-del-software"><a
-href="#ciclo-di-vita-del-software">Ciclo di vita del software</a></h2>
-<h3 id="identificare-le-attivita-necessarie"><a
-href="#identificare-le-attivita-necessarie">Identificare le attivita’
-necessarie</a></h3>
-<p>Come si svolgono, e chi coinvolgono. “Cosa devo fare adesso?” “Fino a
-quando devo farlo?”</p>
-<h3 id="studio-di-fattibilita"><a href="#studio-di-fattibilita">Studio
-di fattibilita’</a></h3>
-<p>Capire il problema, ci conviene affrontare il problema? Riusciamo a
-diventare ricchi risolvendo questo problema? Parte economica; parte di
-importanza; a quanto riusciro’ a venderlo; c’e’ gia’ chi lo fa? Il
-tempismo gioca un ruolo determinante.</p>
-<p>Lo scrivo io? Lo faccio scrivere? Metto assieme componenti gia’
-esistenti? Devo espandere il team?</p>
-<p>Stima dei costi, dei tempi, risorse necessari. Benefici?</p>
-<p>Chi fa lo studio di fattibilita’?</p>
-<p>E’ possibile che l’output sia “non ci conviene farlo”.</p>
-<h3 id="dai-requisiti-alle-specifiche"><a
-href="#dai-requisiti-alle-specifiche">Dai requisiti alle
-specifiche</a></h3>
-<p>Comprendere il dominio applicativo. Ok, ma noi sviluppatori non
-sappiamo quasi nulla di quello, infatti:</p>
-<blockquote>
-<p>It’s developers’ understanding, not domain experts’ knowledge, that
-gets released in production</p>
-</blockquote>
-<p>C’e’ un momento in cui si parla con gli esperti, si raccoglie il
-contento e si consolida nelle specifiche.</p>
-<aside>
-Stakeholder
-</aside>
-<p>Gli stakeholder sono tutte quelle persone interessate che questo
-progetto vada a buon fine: committente, utente, manutentore,
-installatore, colui che dovra’ farlo evolvere, …</p>
-<aside>
-Differenza requisito specifiche
-</aside>
-<p>Requisito: cosa deve fare il sistema Specifiche: come deve farlo, non
-ambigue</p>
-<p>In output ho: * documento approvato dal committente * base per il
-lavoro di design e verifica Quindi e’ importante avere un documento
-formale, non ambiguo</p>
-<p>Due domande che il modello deve aiutare a rispondere: * cosa devo
-fare adesso? * fino a quando?</p>
-<blockquote>
-<p>[!info] Davis’ Law (L4): The value of models depends on the view
-taken, but none is best for all purposes</p>
-</blockquote>
-<p>Linguaggio che serva da ponte per descrivere il problema.</p>
-<h3 id="progettazione"><a href="#progettazione">Progettazione</a></h3>
-<p>Definizione dell’architettura del sistema * scelta di una
-architettura software * scomposizione in moduli o oggetti *
-identificazione pattern</p>
-<p>Programmazione e test di unita’: verifica e programmazione fanno
-parte della stessa attivita’.</p>
-<p>Top down Esempio: modulo che gestisce l’interfaccia utente e chiama
-sotto di se dei moduli fittizi, che non fanno nulla, man mano che mi
-serve scambio un modulo fittizio con una implementazione.</p>
-<p>Bottom up Esempio: parto dal modulo che fa la radice quadrata, che
-viene usato dal modulo che calcola la velocita’, etc. Non sono i moduli
-che vedra’ l’utente.</p>
-<h3 id="manutenzione"><a href="#manutenzione">Manutenzione</a></h3>
-<p>Correttiva: ci sono errore e faccio modifiche che risolvono gli
-errori Adattiva: era corretta prima, ora le specifiche sono cambiate
-Perfettiva: posso perfezionare una delle qualita’?</p>
-<h2 id="modello-a-cascata"><a href="#modello-a-cascata">Modello a
-cascata</a></h2>
-<p>Keyword: documento</p>
-<p>Requisiti -&gt; Progetto -&gt; Codifica -&gt; Testing -&gt; Prodotto
-C’e’ una sequenzialita’ stretta.</p>
-<p>Permette la separazione dei compiti. Semplifica la pianificazione e
-il monitoring dello stato di avanzamento, ma il problema e’ che se ci
-sono dei ritardi di stima tutto slitta.</p>
-<p>Non prevede una manutenzione, perche’ tutto viene assunto come fatto
-bene. E’ fuori dal modello. Coinvolge il cliente solo nella parte
-iniziale.</p>
-<h2 id="riposizionamento-modello-a-v"><a
-href="#riposizionamento-modello-a-v">Riposizionamento modello a
-V</a></h2>
-<p>Cascata ma con interazione con utente e test a ogni livello.</p>
-<h2 id="modello-a-fontana"><a href="#modello-a-fontana">Modello a
-fontana</a></h2>
-<p>Da qualunque step posso ricadere ad uno degli step precedenti.</p>
-<aside>
-iterativi vs incrementali
-</aside>
-<p>Un modello e’ incrementale quando nelle iterazioni viene inclusa la
-consegna, ogni volta consegno qualcosa in piu’.</p>
-<aside>
-definizione di consegna
-</aside>
-<p>Qualcosa di usabile e di valore per l’utente</p>
-<p>Implementazione iterativa, raccolta requisiti e progettazione una
-volta, poi un pezzo alla volta sviluppiamo iterativamente e poi un’unica
-consegna. Solo la parte implementativa e’ iterativa, non tutto lo
-sviluppo.</p>
-<p>Sviluppo incrementale, un pezzo alla volta viene sottoposto a tutte
-le fasi. Dopo aver finito un pezzo: “Bene, adesso cosa vuoi che
-faccia?”</p>
-<p>I modelli incrementali hanno problemi: * complicato il lavoro di
-planning, perche’ lo stato del processo e’ meno visibile * bisogna
-pianificare tutte le iterazioni * cos’e’ e quanto dura una
-iterazione?</p>
-<h2 id="modelli-prototipali"><a href="#modelli-prototipali">Modelli
-prototipali</a></h2>
-<p>“Faccio male”, senza soffermarmi sulle qualita’. Voglio usare una
-consegna parziale per poter parlare con il cliente. “Verra’ cosi, e’
-cosi che lo vuoi?”</p>
-<p>La base e’ caotica e non pensata per l’evoluzione, non e’ un punto di
-partenza valido.</p>
-<p>Perfetto per esplorare concetti, come ad esempio un nuovo linguaggio,
-per ponderare diverse scelte per problemi difficili, etc</p>
-<aside>
-L3
-</aside>
-<blockquote>
-<p>[!info] Boehm’s Law (L3): Prototyping (significantly) reduces
-requirements and design errors, especially for user interfaces</p>
-</blockquote>
-<h1 id="lezione-3---0210"><a href="#lezione-3---0210">Lezione 3 -
-02/10</a></h1>
-<h2 id="modelli-non-agili"><a href="#modelli-non-agili">Modelli non
-agili</a></h2>
-<h3 id="pinball-life-cycle"><a href="#pinball-life-cycle">Pinball
-life-cycle</a></h3>
-<p>1984</p>
-<p>Flipper, posso controllare solo come lancio la pallina, per il resto
-passa tempo prima che la pallina ritorni a me: * processo indefinito *
-non ci sono passi in sequenza, posso andare da un punto del processo a
-qualsiasi altro * niente vincoli temporali * non misurabile</p>
-<p>Difficile riprodurre la stessa partita due volte. “Non ho bisogno di
-un modello”, vuol dire che sto adottando questo modello.</p>
-<h3 id="modelli-trasformazionali"><a
-href="#modelli-trasformazionali">Modelli trasformazionali</a></h3>
-<p>Mirano ad avere tutto sotto controllo. Raffinamento /
-concretizzazione passo passo delle specifiche formali del problema. Ogni
-passo garantisce che vengano mantenute le proprieta’ del passo
-precedente. Mi avvicino sempre piu’ alla versione eseguibile delle
-specifiche.</p>
-<p>TODO INSERISCI immagine dalla slide (e’ attorno al 10 min di
-lezione)</p>
-<h3 id="metamodello-a-spirale"><a
-href="#metamodello-a-spirale">MetaModello a spirale</a></h3>
-<p>1988</p>
-<p>Guidato dall’analisi dei rischi</p>
-<p>Prevedere ciclicamente se ci sono rischi e decidere se andare avanti
-o interrompere.</p>
-<p>Fasi Determinazione obiettivi, alternative, vincoli Identificare i
-rischi Sviluppo e test Pianificare iterazione successiva</p>
-<p>Il raggio della spirale rappresenta il costo del progetto, che
-aumenta.</p>
-<p>TODO Inserire immagine</p>
-<h3 id="modello-spirale-win-win"><a
-href="#modello-spirale-win-win">Modello spirale win-win</a></h3>
-<p>Ha espanso l’area dei rischi.</p>
-<p>TODO ESPANDERE</p>
-<h3 id="modello-cots"><a href="#modello-cots">Modello COTS</a></h3>
-<p>Components off the shelf</p>
-<p>“Non c’e’ gia’ qualcosa che fa quello che ci serve? Prendiamo quelli
-e integriamo”</p>
-<p>Prima della progettazione c’e’ una fase di ricerca dei componenti
-gia’ esistenti.</p>
-<p>Ricordarsi del problema dell’adattabilita’ dei differenti
-componenti</p>
-<h2 id="metodologie-agili"><a href="#metodologie-agili">Metodologie
-agili</a></h2>
-<p>fine 1990</p>
-<p>eXtreme Programming</p>
-<aside>
-mappa XP
-</aside>
-<p>http://www.extremeprogramming.org/map/project.html</p>
-<p>Nascono dal basso, dagli sviluppatori, non da teorici. Design
-emergente. Quindi una critica che si muove a XP e’ che non c’e’ un
-design up-front.</p>
-<p><span class="math display">$$
-\begin{align}
-&amp; \text{\large{Individuals and interactions} \small{over processes
-and tools}} \\
-&amp;\text{\large{Working software} \small{over comprehensive
-documentation }} \\
-&amp; \text{\large{Customer collaboration} \small{over contract
-negotiation}} \\
-&amp; \text{\large{Responding to change} \small{over following a plan}}
-\\
-\end{align}
-$$</span> <a href="https://agilemanifesto.org/">agile manifesto</a></p>
-<h3 id="lean-software-snello"><a href="#lean-software-snello">Lean
-software (snello)</a></h3>
-<p>Reduce waste, dentro il software e’ tutto cio’ che non ha valore per
-il cliente. Difficile capire cosa non ha valore.</p>
-<p>Un dipendente e’ per la vita. Investo nel dipendente, voglio il
-dipendente felice.</p>
-<h3 id="kanban"><a href="#kanban">Kanban</a></h3>
-<p>Stories - cio’ che vogliamo fare Todo - cosa vogliamo fare nel
-prossimo periodo, cioe’ su cui ci concentriamo In progress - su cosa sto
-lavorando Testing - cose che qualcuno sta valutando Done - finito,
-cliente lo ha verificato e accettato</p>
-<p>Definition of done e’ molto importante. Minimizzare la colonna “In
-progress”, perche’aiuta minimizza il context switch</p>
-<h3 id="scrum"><a href="#scrum">Scrum</a></h3>
-<p>Scrum e’ la mischia del rugby: “si lavora tutti assieme spingendo per
-avanzare”</p>
-<p>Congelare i requisiti durante brevi iterazioni. “Cliente puoi
-cambiare i requisiti quanto vuoi, ma non durante un’iterazione”,
-un’iterazione dura 2 settimane / 1 mese.</p>
-<h3 id="crystal"><a href="#crystal">Crystal</a></h3>
-<p>Comunicazione per osmosi. Pair programming: due persone acquisiscono
-conoscenza su quella parte.</p>
-<h2 id="tdd"><a href="#tdd">TDD</a></h2>
-<p><a href="TDD.md">TDD</a></p>
-<h2 id="variabili-in-gioco"><a href="#variabili-in-gioco">Variabili in
-gioco</a></h2>
-<p>Portata - quante funzionalita’ si vogliono implementare Tempo -
-quanto tempo si puo’ dedicare al progetto? Qualita’ - qualita’ del
-progetto che si deve ottenere Costo - risorse finanziarie che si possono
-impegnare</p>
-<p>I cliente fa parte del team di sviluppo. Con il TDD vede che il
-numero di test e di funzionalita’ cresce.</p>
-<p>Espandere perche’ e’ ARRIVATO L’ESITO di ARCHITETTURA</p>
-<p>eXtreme Programming: * feedback rapido * presumere la semplicitia’ -
-non complicarti la vita * accettare il cambiamento * modifica
-incrementale * lavoro di qualita’ - voglio i programmatori felici
-perche’ se andassero via si perderebbe la loro conoscenza della codebase
-e tutta la formazione fatta nel tempo</p>
-<p>sweng classica: * separazione interessi * astrazione e modularita’ *
-anticipazione del cambiamento (design for change) * generalita’ *
-incrementalita’</p>
-<h1 id="lezione-4---0710"><a href="#lezione-4---0710">Lezione 4 -
-07/10</a></h1>
-<h2 id="figure-in-gioco-in-extreme-programming"><a
-href="#figure-in-gioco-in-extreme-programming">Figure in gioco in
-eXtreme Programming</a></h2>
-<p>Manager / Cliente Ha responsabilita’ di decidere * portata del
-progetto * priorita’ tra funzionalita’ * date dei rilasci Ha ditto di *
-sapere cosa puo’ essere fatto, tempistiche e costi * vedere progressi
-del sistema, con test da lui definiti * cambiare idea, sostituire
-funzionalita’, cambiare priorita’ ma nell’ottica SCRUM, quindi non nelle
-iterazioni</p>
-<p>Sviluppatore Ha responsabilita’ di decidere * stime dei tempi delle
-funzionalita’ * conseguenze di scelte tecnologiche * pianificazione
-dettagliata nelle settimane di sviluppo Ha diritto di * sapere cosa e’
-necessario tramite chiare storie con priorita’, “voglio che quando
-faccio questo il software deve fare questo” * cambiare stime dei tempi
-in base all’esperienza fatta nelle iterazioni precedenti * identificare
-e indicare funzionalita’ pericolose * produrre software di qualita’, in
-pace, con un buono stipendio, etc</p>
-<h2 id="tecniche"><a href="#tecniche">Tecniche</a></h2>
-<p>Mettere insieme delle pratiche che si rafforzino in varie situazioni.
-Le iterazioni durano due settimane.</p>
-<h3 id="planning-game"><a href="#planning-game">Planning game</a></h3>
-<p>Carte sufficientemente piccole in modo che non sia possibile
-scriverci sopra un papiro, basate sulle storie scritte dall’utente
-(prima del planning game). Servono a decidere le funzionalita’ del
-prossimo rilascio, combinando priorita’ commerciali e valutazioni
-tecniche.</p>
-<p>Il cliente partecipa al planning game.</p>
-<p>Carta: * descrizione * caso di test che funge da test di accettazione
-* valore di business</p>
-<p>Sviluppatori: * ognuno da la propria stima, si ricava una stima
-condivisa che il team fa sua</p>
-<p>Manager: * prende le carte e puo’ decidere quali schede verranno
-implementate nella prossima iterazione</p>
-<p>Far parlare tutti prima di iniziare la procedura, anche solo per dire
-il proprio nome, sblocca quelle persone in modo tale che poi avranno
-meno problemi a parlare.</p>
-<h4 id="stime"><a href="#stime">Stime</a></h4>
-<aside>
-Stime
-</aside>
-<p>“Non e’ un consuntivo, e’ una stima” “Quante cose riusciamo a mettere
-dentro l’iterazione?”</p>
-<p>L’incertezza c’e’ sulla prima stima, poi la metodologia
-“ingrana”.</p>
-<p>La stima non è personale, ma del team. Questo perché chiunque può
-trovarsi a farla. Come faccio a mettere assieme stime molto differenti
-quindi? Perché è difficile per chi ha stimato più alto scendere ad
-esempio.</p>
-<p>Se le stime sono molto diverse magari il problema è come è scritta la
-storia. Non si prende la media, ne il tempo piu’ basso, ne il tempo piu’
-alto.</p>
-<p>Non si possono fare stime per cui ognuno dice la sua, perche’
-altrimenti il primo che parla <a
-href="https://en.wikipedia.org/wiki/Anchoring_effect">setta
-un’ancora</a> sulle stime degli altri.</p>
-<p>Non si parla di ore / uomo se non esattamente alla fine per evitare *
-stime che si discostano dalla realta’ (7 ore) * per incasellare le stime
-possibili in range (ad esempio secondo planning poker usando i numeri di
-<a href="https://en.wikipedia.org/wiki/Planning_poker">Fibonacci
-arrotondati (vedi Equipment sul perche’ arrotondati)</a>)</p>
-<aside>
-The Mythical Man Month
-</aside>
-<p><a href="The%20Mythical%20Man-Month.md">The Mythical
-Man-Month</a></p>
-<h5 id="planning-poker"><a href="#planning-poker">Planning
-poker</a></h5>
-<p>Procedura</p>
-<ol type="1">
-<li>si presentano le carte stando attenti ai numeri, i numeri rischiano
-di settare ancore</li>
-<li>si fanno domande, si chiedono chiarimenti, si discute per chiarire
-assunzioni e rischi</li>
-<li>ogni componente prende una carta dal proprio mazzo che rappresenta
-la stima</li>
-<li>si girano tutte le carte contemporaneamente</li>
-<li>tutti zitti, chi ha fatto la stima piu’ bassa e chi ha fatto la
-stima piu’ alta parlano, 1 minuto per spiegare perche’</li>
-<li>si rivota, ora si ha un range di ancora</li>
-</ol>
-<h5 id="team-estimation-game"><a href="#team-estimation-game">Team
-estimation game</a></h5>
-<p>Procedura</p>
-<ol type="1">
-<li>carte sul tavolo</li>
-<li>la prima la si mette in centro</li>
-<li>il primo developer prende una carta, la legge ad alta voce, e la
-mette a sx (piu’ semplice) o a dx (piu’ difficile) o sotto quella in
-centro</li>
-<li>il prossimo puo’
-<ol type="1">
-<li>prendere una nuova carta e posizionarla secondo le regole</li>
-<li>spostare una carta precedentemente posizionata motivando</li>
-</ol></li>
-<li>si parla solo se qualcuno non e’ d’accordo con una disposizione
-precedente</li>
-</ol>
-<p>Una volta che si e’ tutti d’accordo sulle posizioni</p>
-<ol type="1">
-<li>usando un solo mazzo di carte, si prende la prima carta e la si
-mette sulla prima colonna (di solito si mette un 2 per lasciare spazio
-ad eventuali risistemazioni)</li>
-<li>il primo developer prende la prossima carta e la mette sulla prima
-colonna che pensa abbia quel valore</li>
-<li>il prossimo puo’
-<ol type="1">
-<li>prendere una nuova carta e posizionarla secondo le regole</li>
-<li>spostare una carta precedentemente posizionata motivando</li>
-</ol></li>
-</ol>
-<h5 id="unita-di-misura"><a href="#unita-di-misura">Unita’ di
-misura</a></h5>
-<p>Se serve. Quantifico all’ultimo, per tenere gli errori al minimo.</p>
-<p>Stimo in tempo la carta piu’ semplice. Tramite proporzioni stimo
-tutte le altre.</p>
-<h4 id="velocity"><a href="#velocity">Velocity</a></h4>
-<p>Capacita’ osservata di completare lavori. Dopo la prima iterazione il
-team dira’ che puo’ sviluppare tanti punti quanti ne ha fatti
-all’iterazione precedente. Permette di compensare stime sbagliate.</p>
-<aside>
-Pericolosa la tentazione di aggiungere nuovi membri
-</aside>
-<p>Se i membri del team diminuscono allora posso adattare al ribasso. Se
-i membri del team aumentano la velocity rimane la stessa della volta
-precedente. Si tratta di fare assunzioni che siano safe.</p>
-<p>Non deve essere valutato come metro di valutazione. Non deve essere
-imposta. Non si devono considerare storie non finite.</p>
-<h3 id="brevi-cicli-di-rilascio"><a
-href="#brevi-cicli-di-rilascio">Brevi cicli di rilascio</a></h3>
-<p>Ridurre rischi con rilasci significativi ogni due settimane.</p>
-<h3 id="usare-una-metafora"><a href="#usare-una-metafora">Usare una
-metafora</a></h3>
-<p>Trovare un vocabolario diverso su cui rimappare termini tecnici con
-cui cliente e sviluppatori hanno dimestichezza.</p>
-<p>TODO ESPANDERE</p>
-<h3 id="semplicita-di-progetto"><a
-href="#semplicita-di-progetto">Semplicita’ di progetto</a></h3>
-<p>L’arte di massimizzare il lavoro non fatto.</p>
-<p>One and once only: cioe’ tutto quello che serve e senza duplicazioni.
-KISS.</p>
-<h3 id="testing"><a href="#testing">Testing</a></h3>
-<p><a href="TDD.md">TDD</a></p>
-<h3 id="refactoring"><a href="#refactoring">Refactoring</a></h3>
-<p>“Modifiche al codice che non modificano le funzionalita’”</p>
-<p>Serve a tenere bassa la crescita di complessita’ di un progetto.</p>
-<p>Non devo aver paura di modificare il progetto per semplificarlo.
-Graduale ma * con continuita’ * senza pieta’</p>
-<h3 id="pair-programming"><a href="#pair-programming">Pair
-programming</a></h3>
-<blockquote>
-<p>Given enough eyeballs, all bugs are shallow – Eric S. Raymond</p>
-</blockquote>
-<p>“Durante pair programming siamo una singola entita’ e come tale
-abbiamo problemi condivisi, idee, etc”</p>
-<p>Il manager dice “pago due persone perche’ solo uno lavori”.</p>
-<p>Invece: * mentre un programmatore sta scrivendo codice l’altro non e’
-che li guarda, ma ispeziona il codice, e potrebbe pensare “questo pezzo
-potrebbe essere fatto meglio?” * aiuta inserimento di nuovo personale *
-aiuta a ottenere proprieta’ collettiva (conoscenza osmotica di Crystal)
-* aiuta refactoring * “se avessi avuto due persone a lavorare
-separatamente avrei ottenuto due feature, le ho messe assieme e ne ho
-ottenute tre”: la produttivita’ aumenta rispetto al singolo</p>
-<p>Molti dei costi sono dopo la consegna, siamo sicuri che ragionare
-sulla produttivita’ in base al giorno sia la scelta migliore?</p>
-<h3 id="proprieta-collettiva"><a href="#proprieta-collettiva">Proprieta’
-collettiva</a></h3>
-<p>Il codice non appartiene ad una sola persona. “Non e’ il mio codice,
-e’ del team”. Ci si deve sentire responsabilizzati sull’intero codice,
-anche se non si conosce tutto alla stessa maniera.</p>
-<h3 id="integrazione-continua"><a
-href="#integrazione-continua">Integrazione continua</a></h3>
-<p>“Metto il mio lavoro in comune con quello fatto da altri”.</p>
-<p>Azione rapida, perche’ il codice nel frattempo non e’ cambiato
-molto.</p>
-<h3 id="settimana-di-40-ore"><a href="#settimana-di-40-ore">Settimana di
-40 ore</a></h3>
-<h3 id="cliente-sul-posto"><a href="#cliente-sul-posto">Cliente sul
-posto</a></h3>
-<p>Dove ci sono gli sviluppatori c’e’ anche un rappresentante del
-cliente. “Invece di fare una documentazione esaustiva iniziale ho il
-depositario della conoscenza del dominio”</p>
-<p>In SCRUM c’e’ il Product Owner, un intermediario rispetto al cliente,
-si prende la responsabilita’ di aver dato la giusta interpretazione
-rispetto a cosa voleva il cliente</p>
-<h3 id="standard-di-codifica"><a href="#standard-di-codifica">Standard
-di codifica</a></h3>
-<p>Convenzioni distribuite e approvate all’interno del team. Aiuta *
-refactoring * pair programming * proprieta’ collettiva</p>
-<h1 id="lezione-5---0910"><a href="#lezione-5---0910">Lezione 5 -
-09/10</a></h1>
-<h2 id="fasi"><a href="#fasi">Fasi</a></h2>
-<h3 id="requirements"><a href="#requirements">Requirements</a></h3>
-<p>Dal momento che il cliente fa parte del team di sviluppo (lavora
-assieme) puo’ spiegare le storie che ha scritto direttamente ai
-programmatori.</p>
-<p>Consegne incrementali e pianificazioni continue.</p>
-<h3 id="design"><a href="#design">Design</a></h3>
-<p>ESPANDERE Una metafora come visione unificante del progetto</p>
-<p>Refactoring. Presumere la semplicita’, contrapposta a “design for
-change”. ESPANDERE QUESTA ULTIMA COSA</p>
-<h3 id="code"><a href="#code">Code</a></h3>
-<p>Programmare a coppie modifica completamente l’approccio al codice.
-Proprieta’ collettiva “non ho codice su cui non posso lavorare”.
-Integrazioni continue.</p>
-<h3 id="test"><a href="#test">Test</a></h3>
-<p>Testing di unita’ continuo, da scrivere prima del codice. Test
-funzionale scritto dagli utenti.</p>
-<h2 id="documentazione"><a
-href="#documentazione">Documentazione</a></h2>
-<p>Use stories ESPANDERE CON LA DIFFERENZA CON USE CASES DI UML</p>
-<p>Codice e test sono la documentazione. “Test e’ la traduzione in
-linguaggio formale delle use stories e di cio’ che ci siamo detti
-verbalmente”.</p>
-<p>Ha un valore documentale molto piu’ forte della documentazione
-scritta.</p>
-<p>Le persone sono la documentazione.</p>
-<h2 id="quando-non-si-puo-usare-xp"><a
-href="#quando-non-si-puo-usare-xp">Quando non si puo’ usare XP?</a></h2>
-<p>Ambienti che * non permettono di testare e avere un feedback
-immediato (es: codice che gira in un acceleratore di particelle del
-CERN) * non permettono di avere uno sviluppo incrementale (es: centrale
-nucleare) * frappongono barriere di tipo manageriale o burocratico (es:
-team troppo grossi non suddivisibili) * frappongono barriere di tipo
-fisico (es: elementi del team divisi)</p>
-<h2 id="critiche"><a href="#critiche">Critiche</a></h2>
-<p>ESPANDERE Sottovalutazione dell’up-front Sopravvalutazione delle user
-stories Mancata evidenziazione dipendenze tra user stories TDD puo’
-portare a visione troppo ristretta In team con competenze diverse puo’
-esserci un problema</p>
-<p>ESPANDERE CON <img src="Pasted%20image%2020241012211104.png" /></p>
-<h2 id="open-source-process"><a href="#open-source-process">Open source
-process</a></h2>
-<p>ESPANDERE</p>
-<h3 id="the-cathedral-and-the-bazaar"><a
-href="#the-cathedral-and-the-bazaar">The Cathedral and the
-Bazaar</a></h3>
-<aside>
-the cathedral and the bazaar
-</aside>
-<p>http://www.catb.org/~esr/writings/cathedral-bazaar/ (<a
-href="https://www.youtube.com/watch?v=qpyewW09HXo">Audiobook</a>)</p>
-<p>“Ogni buon lavoro software inizia dalla frenesia personale di uno
-sviluppatore”</p>
-<p>Sono entrambi due esempi positivi</p>
-<p>Cattedrale: ideata da uno o da pochi eletti, ben strutturata Bazaar:
-funzionale e pratico, ma e’ un po’ un casino, chiunque puo’ dire la sua
-e contribuire</p>
-<p>La bonta’ del codice non e’ una caratteristica essenziale, se ci sono
-problemi, se non e’ perfetto crea comunicazione e una voglia di
-guardarci dentro per sistemare.</p>
-<p>19 Lessons: 1. Every good work of software starts by scratching a
-developer’s personal itch. 2. Good programmers know what to write. Great
-ones know what to rewrite (and reuse). 3. Plan to throw one [version]
-away; you will, anyhow (copied from Frederick Brooks’s <em><a
-href="https://en.wikipedia.org/wiki/The_Mythical_Man-Month"
-title="The Mythical Man-Month">The Mythical Man-Month</a></em>). 4. If
-you have the right attitude, interesting problems will find you. 5. When
-you lose interest in a program, your last duty to it is to hand it off
-to a competent successor. 6. Treating your users as co-developers is
-your least-hassle route to rapid code improvement and effective
-debugging. 7. <a
-href="https://en.wikipedia.org/wiki/Release_early,_release_often"
-title="Release early, release often">Release early. Release
-often.</a> And listen to your customers. 8. Given a large enough
-beta-tester and co-developer base, almost every problem will be
-characterized quickly and the fix obvious to someone. 9. Smart data
-structures and dumb code works a lot better than the other way around.
-10. If you treat your beta-testers as if they’re your most valuable
-resource, they will respond by becoming your most valuable resource. 11.
-The next best thing to having good ideas is recognizing good ideas from
-your users. Sometimes the latter is better. 12. Often, the most striking
-and innovative solutions come from realizing that your concept of the
-problem was wrong. 13. Perfection (in design) is achieved not when there
-is nothing more to add, but rather when there is nothing more to take
-away. (Attributed to <a
-href="https://en.wikipedia.org/wiki/Antoine_de_Saint-Exup%C3%A9ry"
-title="Antoine de Saint-Exupéry">Antoine de Saint-Exupéry</a>) 14. Any
-tool should be useful in the expected way, but a truly great tool lends
-itself to uses you never expected. 15. When writing gateway software of
-any kind, take pains to disturb the data stream as little as
-possible—and never throw away information unless the recipient forces
-you to! 16. When your language is nowhere near <a
-href="https://en.wikipedia.org/wiki/Turing_completeness"
-title="Turing completeness">Turing-complete</a>, <a
-href="https://en.wikipedia.org/wiki/Syntactic_sugar"
-title="Syntactic sugar">syntactic sugar</a> can be your friend. 17. A
-security system is only as secure as its secret. Beware of
-pseudo-secrets. 18. To solve an interesting problem, start by finding a
-problem that is interesting to you. 19. Provided the development
-coordinator has a communications medium at least as good as the
-Internet, and knows how to lead without coercion, many heads are
-inevitably better than one.</p>
-<h3 id="care-and-feeding-of-foss"><a
-href="#care-and-feeding-of-foss">Care and Feeding of FOSS</a></h3>
-<p>TODO</p>
-<h3 id="the-emerging-economic-paradigm-of-open-source"><a
-href="#the-emerging-economic-paradigm-of-open-source">The Emerging
-Economic Paradigm of Open Source</a></h3>
-<p>TODO</p>
-<p>“Perche’ una azienda dovrebbe pagare i propri dipendenti per
-sviluppare open source?”</p>
-<h3
-id="an-empirical-study-of-open-source-and-closed-source-software-products-by-j.w.-paulson-et-al."><a
-href="#an-empirical-study-of-open-source-and-closed-source-software-products-by-jw-paulson-et-al">An
-empirical study of open-source and closed-source software products by
-J.W. Paulson et al.</a></h3>
-<p>https://ieeexplore.ieee.org/abstract/document/1274044</p>
-<h1 id="lezione-6---git---1410"><a
-href="#lezione-6---git---1410">Lezione 6 - Git - 14/10</a></h1>
-<p>Integra dal libro di Git</p>
-<p>INSERISCI DA TABLET</p>
-<h1 id="lezione-7---git-segue---1610"><a
-href="#lezione-7---git-segue---1610">Lezione 7 - Git segue -
-16/10</a></h1>
-<p>git merge git reset git amend</p>
-<h2 id="git-flow-avh"><a href="#git-flow-avh">git flow (AVH)</a></h2>
-<p>ESPANDERE GIT FLOW</p>
-<aside>
-git flow
-</aside>
-<p>main / master - cio’ che viene consegnato al cliente develop - dove
-si mettono le modifiche in comune con gli altri sviluppatori, da dove
-parto con lo sviluppo di una feature</p>
-<p><code>git flow feature start $featname</code>: *
-<code>git checkout develop</code> * <code>git branch $featname</code> *
-<code>git checkout $featname</code></p>
-<p>Feature parte dell’ultima situazione stabile sul develop.</p>
-<p><code>git flow feature finish $featname</code>: *
-<code>git checkout develop</code> *
-<code>git merge --no-ff $featname</code> (–no-ff vuol dire forzare a
-fare un commit) * <code>git branch -d $featname</code> Il motivo per cui
-si usa <code>--no-ff</code> e’ che nel branch di develop non ho i
-“rossi” che invece avvengono dentro la branch di feature.</p>
-<p><code>git flow release start ver</code> Congelo le feature che
-dovranno esserci nella prossima release. *
-<code>git checkout -b ver develop</code></p>
-<p><code>git flow release finish ver</code> * git checkout master * git
-merge –no-ff release-ver * git tag -a ver * git checkout develop * git
-merge –no-ff release-ver * git branch -d release-ver Non si puo’ aprire
-una release se ce ne e’ gia’ una precedente aperta.</p>
-<p>Riparazione veloce di difetti urgenti senza aspettare la prossima
-release <code>git flow hotfix start ver</code> *
-<code>git checkout -b ver master</code></p>
-<p><code>git flow hotfix finish ver</code> *
-<code>git checkout master</code> * <code>git merge --no-ff ver</code> *
-<code>git checkout develop</code> * <code>git merge --no-ff ver</code> *
-<code>git branch -d ver</code></p>
-<h2 id="mancanze-di-git"><a href="#mancanze-di-git">Mancanze di
-Git</a></h2>
-<p>No livelli di autorizzazione (i commit possono essere firmati)
-Soluzione: fork.</p>
-<p>No livelli di review, c’e’
-<code>git request-pull &lt;start&gt; &lt;url&gt; [&lt;end&gt;]</code>
-per preparare cio’che poi mandero’ perche’ ne venga fatta review.</p>
-<p>I grandi progetti non sono clonati lato Github, ma esistono una volta
-e poi sono linkati quando clonati.</p>
-<p>Aggiungere Gerrit</p>
-<h2 id="build-automation"><a href="#build-automation">Build
-automation</a></h2>
-<p>Come mi proteggo da checkin di una versione non funzionante?
-Automatizzo: * compilazione * testing</p>
-<p>“Da cosa dipende il fatto che io possa eseguire il mio
-programma?”</p>
-<h1 id="lezione-8---progettazione---1610"><a
-href="#lezione-8---progettazione---1610">Lezione 8 - Progettazione -
-16/10</a></h1>
-<aside>
-visibilita’ nei test
-</aside>
-<p>Avere una struttura di questo tipo</p>
-<pre><code>└── src
+<body class="latex-dark">
+  <main>
+    <article>
+    <blockquote>
+    <p>[!warning] Questo documento e’ incompleto, alcuni concetti che
+    gia’ conosco sono stati saltati</p>
+    </blockquote>
+    <p>Correzione
+    https://www.youtube.com/watch?v=7vb089FkfiI&amp;sttick=0
+    file:///C:/Users/monte/Downloads/Telegram%20Desktop/slides%20(2).pdf</p>
+    <p>FLASHCARDS</p>
+    <p>https://www.memory.com/courses/dashboard/ingegneria-del-software-it-it–ao8b_1695973981615185115_73/Italian/Italian</p>
+    <h1 id="refresh-di-programmazione-ii"><a
+    href="#refresh-di-programmazione-ii">Refresh di Programmazione
+    II</a></h1>
+    <h2 id="nested-classes"><a href="#nested-classes">Nested
+    classes</a></h2>
+    <p>Sono di 4 tipi</p>
+    <h3 id="static-member-classes"><a
+    href="#static-member-classes">Static member classes</a></h3>
+    <p>Se una istanza di questa classe puo’ esistere indipendentemente
+    da una istanza della classe contenitrice. Se non si richiede accesso
+    all’istanza della classe contenitrice allora sempre mettere
+    <code>static</code></p>
+    <h3 id="nonstatic-member-classes"><a
+    href="#nonstatic-member-classes">Nonstatic member classes</a></h3>
+    <p>Ogni istanza di questa classe e’ associata ad una istanza della
+    classe contenitrice</p>
+    <h3 id="anonymous-classes"><a href="#anonymous-classes">Anonymous
+    classes</a></h3>
+    <h3 id="local-classes"><a href="#local-classes">Local
+    classes</a></h3>
+    <hr />
+    <p>Cio’ che segue e’ ancora tutto da sistemare</p>
+    <p>https://prog2unimi-temi-svolti.netlify.app/</p>
+    <hr />
+    <p>https://martinfowler.com/bliki/TellDontAsk.html</p>
+    <p>Review del codice “Controllato in costruzione” non “preservato in
+    costruzione” Documentazione metodi che contenga anche ad esempio per
+    quali input uno split di un orario formattato con 00:00:00 non
+    funziona Perché ha usato getClass e non ha usato instanceof
+    nell’equals? Brano statico con String album come campo, discussione
+    Coerenza documentazione - codice Ritiene appropriato lanciare una
+    eccezione se non trova un elemento in una lista? List.copyOf cosa
+    ritorna? Cosa sono le eccezioni cosa servono quando e’ opportuno
+    sollevare checked e unchecked?</p>
+    <p>Review del codice Catch di Exception “e’ bruttarello” Perche’
+    getClass dentro l’equals? Differenza tra StringBuilder e + tra
+    stringhe per poche concatenazioni FA e RI Effetto collaterale
+    benevolo Come si mescola RI e sottoclassi? super.repOK &amp;&amp;
+    repOK, ok ma ci sono dei casi in cui non controllare gli attributi
+    del supertipo puo’ essere ritenuto ragionevole? Cosa si intende per
+    attributi del supertipo? Quando si ricorre agli attributi protected?
+    Attributi di una classe astratta, quali sono le circostanze in cui
+    e’ preferibile public, protected, o private?</p>
+    <p>Review del codice Non fare troppe eccezioni che siano sottoclassi
+    di IllegalArgumentException Come si costruisce un buon iteratore?
+    Assumendo che durataComplessiva dentro Album scorre tutti gli i
+    brani per dare il risultato, si puo’ fare meglio? Metodi totali e
+    parziali, cosa sono, quando si usano, pregi e difetti Insieme di
+    regole che le pre-post condizioni devono soddisfare perche’ valga
+    LSP Astrazione per specificazione, perche’ sono importanti le
+    proprieta’ caratteristiche di questa astrazione</p>
+    <p>Review del codice Legame tra hashcode e equals, qual e’ il verso
+    dell’implicazione? Cosa sarebbe successo se hashcode uguale
+    implicasse equals? Cosa sono FA e RI? In che contesto ne parliamo e
+    perche’ li usiamo? Con che proposito vengono introdotte? Esempio di
+    iniettivita’ della FA Principio di sostituzione di Liskov
+    Covarianza? Astrazione per iterazione</p>
+    <p>Consigli dal prof Prima di consegnare scrivete il main per vedere
+    se il codice lancia eccezioni Assicurarsi che la documentazione sia
+    in linea con l’implementazione repOK non dovrebbe mai sollevare
+    eccezioni Allo scritto dovete principalmente cercare di arrivare
+    all’orale, contenere le cagate e poi fare l’orale</p>
+    <hr />
+    <p>https://github.com/Pasinim/prog2/tree/main/.-Dispense/orali</p>
+    <p>dispatching</p>
+    <p>metodi totali parziali</p>
+    <p>AF RI</p>
+    <p>Benevolent side effect</p>
+    <p>eccezioni</p>
+    <p>Program Development in Java - 5.7 Reasoning about Data
+    Abstractions - 5.8 Design Issues - 5.9 Locality and Modifiability -
+    9.2 Some Criteria for Specifications</p>
+    <p>Sidebar 1.1, 1.2, 2.2, 2.3, 2.4, 3.1, 3.2, 3.3, 4.1, 4.2, 5.1,
+    5.2, 5.3, 5.4, 5.5, 5.6, 6.1, 6.2, 6.3, 7.1, 7.2, 7.3, 7.4, 7.5,
+    7.6, 7.8, 8.1, 8.2, 9.1, 9.2, 9.3,</p>
+    <p>capitoli 13 - 14 - 15 da leggere e basta</p>
+    <p>Equals e ereditarieta’ che lo rompe</p>
+    <p>Differenza tra avere assert in dev e non averla in prod Discorso
+    dell’assunzione</p>
+    <p>classi e tutte le posizioni posizioni nested non nested una che
+    utilizza l’altra nested statica per ognuna use case e cosa
+    comporta</p>
+    <p>https://prog2-unimi.github.io/notes/TGERDS.html
+    https://prog2-unimi.github.io/notes/DM.html
+    https://prog2-unimi.github.io/notes/EACO.html
+    https://prog2-unimi.github.io/notes/UEE.html
+    https://prog2-unimi.github.io/notes/CED.html</p>
+    <ul>
+    <li><p>reference escaping (che se presente invalida tutta la
+    encapsulation)</p></li>
+    <li><p>interface segregation</p></li>
+    <li><p>nullability</p></li>
+    <li><p>mocking</p></li>
+    <li><p>fattorizzazione codice tramite pattern strategy o
+    template</p></li>
+    <li><p>astrazione (tramite procedure e tipi di dati),</p></li>
+    <li><p>incapsulamento (tramite classi concrete/astratte e
+    interfacce),</p></li>
+    <li><p>estensibilità (per ereditarietà, o composizione),</p>
+    <ul>
+    <li>polimorfismo (e tipi generici).</li>
+    </ul></li>
+    <li><p>l’uso di <strong>astrazioni</strong> di vario livello (come i
+    metodi, i tipi di dato astratti, l’iterazione esterna,
+    l’estensione),</p></li>
+    <li><p>alcuni <strong>strumenti concettuali</strong> per ragionare
+    su tali astrazioni (come l’<em>invariante di rappresentazione</em>,
+    la <em>funzione di astrazione</em>,
+    le <em>pre-</em>/<em>post-condizioni</em>, gli <em>effetti
+    collaterali</em>, l’<em>induzione sui tipi di dato</em>…),</p></li>
+    <li><p>alcuni <strong>criteri di valutazione della
+    qualità</strong> del progetto di codice <em>object
+    oriented</em> (come l’<em>incapsulamento</em>, il <em>data
+    hiding</em>, la <em>manutenibilità</em>, il <em>riuso</em> e
+    l’<em>estendibilità</em>),</p></li>
+    <li><p>per quanto concerne il libro di testo <a
+    href="http://www.informit.com/store/effective-java-9780134685991">Effective
+    Java</a> i capitoli 2, 3, 4, 5 (eccetto gli <em>item</em> 32 e 33),
+    8 (eccetto gli <em>item</em> 53 e 55), 9 (eccetto
+    l’<em>item</em> 66), 10;</p></li>
+    </ul>
+    <h1 id="punti-di-attenzione-dal-lab"><a
+    href="#punti-di-attenzione-dal-lab">Punti di attenzione dal
+    lab</a></h1>
+    <h2
+    id="approccio-ai-parziali-ed-in-generale-allimplementazione-di-un-programma"><a
+    href="#approccio-ai-parziali-ed-in-generale-allimplementazione-di-un-programma">Approccio
+    ai parziali ed in generale all’implementazione di un
+    programma</a></h2>
+    <p>Planning: “cosa riesco a fare?”, “era impossibile farlo in 4 ore”
+    <span class="math inline">→</span> non si e’ capito cosa e’ un
+    modello incrementale “Cosa riesco a fare in 4 ore che da piu’ valore
+    al cliente?”</p>
+    <h2 id="gitflow"><a href="#gitflow">gitflow</a></h2>
+    <p>Utilizzare assolutamente la funzionalita’ dentro l’IDE.</p>
+    <h2 id="code-smells"><a href="#code-smells">Code smells</a></h2>
+    <p>ISTEMARE DOPO LAB</p>
+    <p>// null? code smell<br />
+    // nested classes<br />
+    // metodi per esplicitare cosa stiamo facendo<br />
+    // posso avere un nodo che non contiene un valore? meglio di
+    no<br />
+    // Objects.requireNonNull</p>
+    <p>// privilegiare assert, il compilatore le leva direttamente in
+    prod<br />
+    // flag EA del compiler</p>
+    <p>non si fa in nessun caso commit diretto su develop.</p>
+    <p>Si apre sempre una nuova feature.</p>
+    <p>Nel caso 2 e 3 si parte con un test (anche nel due: infatti se
+    hai trovato un bug…scrivi per prima cosa un test che lo verifica,
+    commit del rosso e solo dopo applichi il fix)</p>
+    <p>Nel caso 1… se il refactoring si tradurrà in un unico commit…
+    gitflow di default applicherà fast forward (sempre che nessuno nel
+    frattempo non abbia integrato qualcosa di nuovo…). Quindi magari
+    sembrerà che sia un commit diretto su develop, ma appunto sarà un
+    caso speciale (singolo commit e no overlapping con altri
+    developer)</p>
+    <h1 id="esame"><a href="#esame">Esame</a></h1>
+    <h2 id="commenti-su-esami-ed-errori-comuni"><a
+    href="#commenti-su-esami-ed-errori-comuni">Commenti su esami ed
+    errori comuni</a></h2>
+    <p>https://www.youtube.com/watch?v=7vb089FkfiI</p>
+    <p>Stazione dei treni https://www.youtube.com/watch?v=Oq1EnhTgTyQ
+    https://www.youtube.com/watch?v=AswqBpGB6BE</p>
+    <p>Sapore di sale https://www.youtube.com/watch?v=39hEK_YDOvw</p>
+    <p>Principi SOLID Single Responsibility Open-Closed Liskov
+    Substitution Interface Segregation Dependency Inversion Testing
+    Unità * copertura di comandi e decisioni/condizioni * isolamento e
+    mocking Processo TDD * gitflow e feature * refactoring Patterns *
+    MVP * Template e/o Strategy * Singleton * Builder * Chain of
+    Responsibility * Adapter appropriate data structures nullability
+    encapsulation no escaping reference readability (clean code)</p>
+    <h3 id="domande-orale"><a href="#domande-orale">Domande
+    orale</a></h3>
+    <p>Puo’ chiedere di scrivere un diagramma delle classi di qualunque
+    cosa vista a lezione (tipicamente design pattern) e puo’ chiedere di
+    leggere qualsiasi diagramma.</p>
+    <p>Nullability e mocking vengono chiesti molto spesso, sia allo
+    scritto che all’orale.</p>
+    <ul>
+    <li>principi SOLID, con approfondimento su qualcuno di questi
+    (+)</li>
+    <li>stime di tempi nell’ambito di un progetto, problemi e come
+    risolverli (+)</li>
+    <li>interface segregation (+)</li>
+    <li>refactoring</li>
+    <li>modelli di sviluppo, a spirale; modello prototipale vs modello
+    incrementale (+)</li>
+    <li>modelli di ciclo di vita del software</li>
+    <li>parlami positivamente del modello a cascata, come nasce il
+    modello a cascata?</li>
+    <li>mocking, differenza tra stub e mock (+)</li>
+    <li>meta-pattern, pattern decorator, pattern composite, pattern
+    strategy, chain of responsability (+++++)</li>
+    <li>cosa e’ un test ideale? (+)</li>
+    <li>perche’ TDD e’ una buona tecnica? Tecnica di requisiti o tecnica
+    di design o di progettazione? Cos’e’? (+)</li>
+    <li>mi parli di criterio di selezione. Che cos’è? Perché dobbiamo
+    scegliere nei test un sottoinsieme del loro domino (cioè non
+    seleziono tutti i test, ma solo alcuni)</li>
+    <li>differenza tra tecnica di design e tecnica di progettazione</li>
+    <li>due pratiche XP per convincere il manager (+)</li>
+    <li>da dove derivano, chi è che scrive le specifiche? Dopo averle
+    raccolte cosa devi fare prima di implementarle?</li>
+    <li>differenza tra merge e pull request</li>
+    </ul>
+    <p>UNSORTED - quando un criterio di selezione è valido e quando è
+    affidabile - relazioni di conflitto tra transizioni - problemi nella
+    stima dei tempi e come risolverli - parlami di analisi statica e
+    analisi data flow - legame tra limitatezza e conservatività - legame
+    tra limitatezza e conservatività (continua…) - terminologia degli
+    errori - albero di copertura vs abero di raggiungibilità - criteri
+    di selezione: proprietà - tell dont ask - differenza semantica
+    debole e forte - differenza tra verifica e convalida - Che cos’è la
+    nullability? Perché è importante? Qual è la caratteristica del
+    valore null che “da fastidio”? - disegnato una rete di petri, fare
+    l’albero di copertura - scrivere formalmente la regola di
+    abilitazione - diagrammi di sequenza - Terminologia di base di
+    verifica e convalida. Sbaglio, errore, difetto, anomalia…, esempio
+    in cui si presenta anomalia ma non (difetto o errore (?)) - Prova a
+    scrivermi la relazione di conflitto, relazione di concorrenza (fai
+    esempi e scrivi in maniera formale) evidenzia strutturale/effettivo
+    - Inserisco un valore che sfora, dove limito questo inserimento
+    (model o presenter?Andava messo nel model) - Esempio di rete
+    limitata.</p>
+    <h1 id="lezione-1---2509"><a href="#lezione-1---2509">Lezione 1 -
+    25/09</a></h1>
+    <h2 id="logistica"><a href="#logistica">Logistica</a></h2>
+    <p>Libri: * Head first design patterns * Fundamentals of software
+    engineering * A handbook of software and systems engineering - ha i
+    riferimenti alle “leggi”</p>
+    <p>Software per il lab * git * gradle * intellij * jdk 17 o 21</p>
+    <p>Turno A matricole pari (Monga), turno B matricole dispari
+    (Bellettini)</p>
+    <hr />
+    <p>Comunicazione tra sviluppatori e’ un fattore importante nello
+    sviluppo software. Il software deve fare cio’ che voglio, con
+    qualita’, per poter dire: “per come ho creato il software ti
+    garantisco che funziona”.</p>
+    <p>Voglio delle metriche che siano correlate rispetto al mio
+    obiettivo di qualita’. Next step, definisco un tool che controlli il
+    rispetto di queste metriche.</p>
+    <h2 id="problemi"><a href="#problemi">Problemi</a></h2>
+    <ul>
+    <li>numero di persone coinvolte - il programmatore non e’ il cliente
+    -&gt; comunicazione. Overhead comunicazione cresce al crescere del
+    numero di persone che lavorano su un programma, quindi non basta
+    tirare sviluppatori al problema</li>
+    <li>dimensioni software, sia come linee di codice che come tempo
+    uomo necessario per scriverle</li>
+    <li>software - in fase di scrittura del codice e’ come se la storia
+    venisse cambiata mentre la si sta scrivendo, come se in un libro al
+    capitolo 9 si modificasse il capitolo 1 facendo morire un
+    personaggio</li>
+    </ul>
+    <p>Un buon processo puo’ produrre un prodotto di qualita’.</p>
+    <p><a
+    href="https://en.wikipedia.org/wiki/Capability_Maturity_Model_Integration">CMMI</a>
+    - standardizzazione del livello di qualita’ di una ditta Programma a
+    livelli per stabilire il grado di maturita’ di un gruppo di lavoro.
+    0 - dipendenza dall’eroe, come se avessi Achille come programmatore,
+    ma cosa succede se sparisce? Dipendo da lui? 1 - … …</p>
+    <h2 id="qualita"><a href="#qualita">Qualita’</a></h2>
+    <p>Valore per gli stakeholder Scelte: “ottimizzo sullo spazio o sul
+    tempo?”</p>
+    <aside>
+    Qualita’
+    </aside>
+    <p>Esterne: visibili agli utenti Interne: visibili agli
+    sviluppatori</p>
+    <p>Un programma deve: * <a
+    href="Software%20engineering#Funzionare.md">Software
+    engineering#Funzionare</a> * essere bello * farmi ricco</p>
+    <h3 id="funzionare"><a href="#funzionare">Funzionare</a></h3>
+    <p>Funziona e’ diverso da compila!</p>
+    <h4 id="correttezza"><a href="#correttezza">Correttezza</a></h4>
+    <p>Qualita’ assoluta: o corretto o non corretto. Correttezza: fa
+    cio’ che e’ stato chiesto, confronto con le specifiche.</p>
+    <blockquote>
+    <p>[!info] La correttezza e’ una proprieta’ matematica che
+    stabilisce l’equivalenza tra il software e la sua specifica</p>
+    </blockquote>
+    <p>Differenza tra requisiti e specifiche: * requisiti - volatili,
+    arrivato dall’esterno, sono i desiderata del cliente * specifiche -
+    scritte, cosa io ho capito che il cliente voleva, contratto tra
+    cliente e programmatore</p>
+    <aside>
+    L1
+    </aside>
+    <blockquote>
+    <p>[!info] Glass’ Law (L1): Requirement deficiencies are the prime
+    source of project failures</p>
+    </blockquote>
+    <h4 id="affidabilita"><a href="#affidabilita">Affidabilita’</a></h4>
+    <p>Qualita’ relativa: se avviene un errore non grave il programma
+    puo’ comunque essere inteso come affidabile. Affidabilita’: mi posso
+    fidare che faccia cio’ che voglio in un dato periodo di tempo</p>
+    <h4 id="innocuita-robustezza"><a
+    href="#innocuita-robustezza">Innocuita’ / robustezza</a></h4>
+    <p>Innocuita’: che non faccia male Robustezza: si comporta bene
+    anche rispetto situazioni fuori specifica, questa e’ la linea di
+    demarcazione tra correttezza e robustezza: corretto o non corretto
+    e’ definito in base alle specifiche, robusto in base a cio’ che e’
+    fuori da esse</p>
+    <h3 id="bello"><a href="#bello">Bello</a></h3>
+    <p>Usabilita’: facile da usare, non solo UI, ad esempio facilita’ di
+    configurazione di un tool da CLI Adattabilita’ all’esigenza
+    dell’utente e’ una caratteristica dell’usabilita’</p>
+    <aside>
+    L26
+    </aside>
+    <blockquote>
+    <p>[!info] Nielsen-Norman’s Law (L26): Usability is quantifiable</p>
+    </blockquote>
+    <p>Osservare gli utenti mentre utilizzano il programma e’ un quick
+    win.</p>
+    <p>Velocita’, ed efficienza nell’uso delle risorse</p>
+    Pulito
+    <aside>
+    La pulizia del codice e’ richiesta all’esame
+    </aside>
+    <p>Verificabilita, posso dimostrare che e’ corretto</p>
+    <h3 id="farmi-ricco"><a href="#farmi-ricco">Farmi ricco</a></h3>
+    <p>Riusabilita’ dei componenti Rivendo un software gia’ fatto per un
+    altro cliente, lo riuso cosi non impiego tempo Bonus point: mi porto
+    dietro affidabilita’ di quel software</p>
+    <aside>
+    L15
+    </aside>
+    <blockquote>
+    <p>[!info] McIlroy’s law (L15): Software reuse reduces cycle time
+    and increases productivity and quality</p>
+    </blockquote>
+    <p>Vedi incidente Ariane5, il riuso va bene ma deve essere di
+    qualita’</p>
+    <p>Manutenibilita’ e’ semplificare gli interventi post consegna,
+    suddivisibile in * riparabilita’, se consente facilmente di
+    eliminare i difetti (ben diviso in moduli, information hiding, no
+    interconnessioni complesse, etc) * evolvibilita’, se facilita i
+    cambiamenti permettendo di soddisfare nuovi requisiti</p>
+    <aside>
+    L27 L28
+    </aside>
+    <blockquote>
+    <p>[!info] Lehman’s first law (L27): A system that is used will be
+    changed</p>
+    </blockquote>
+    <p>“Change is inevitable”</p>
+    <blockquote>
+    <p>[!info] Lehman’s second law (L28): An evolving system increases
+    its complexity unless work is done to reduce it</p>
+    </blockquote>
+    <p>Design for change.</p>
+    <h2 id="processo"><a href="#processo">Processo</a></h2>
+    <blockquote>
+    <p>[!danger] TODO ESPANDERE</p>
+    </blockquote>
+    <p>Funzionare Essere bello Farmi diventare ricco</p>
+    <p>Resistere agli imprevisti - robustezza Bello - sono veloce,
+    produttivo Cogliere l’attimo - tempismo</p>
+    <h1 id="lezione-2---3009"><a href="#lezione-2---3009">Lezione 2 -
+    30/09</a></h1>
+    <p>Produrre software: * non solo scrivere codice * risolvere
+    problema di comunicazione * essere rigorosi - ne linguaggio formale
+    ne linguaggio “normale”</p>
+    <aside>
+    H3
+    </aside>
+    <blockquote>
+    <p>[!info] Bauer-Zemanek Hypotesis (H3): Formal methods
+    significantly reduce design errors, or eliminate them early</p>
+    </blockquote>
+    <p>Un linguaggio formale e’ veramente la soluzione? Potrebbe essere
+    molto piu’ difficile del problema stesso. Per questo e’ una ipotesi,
+    non una legge. Va pesato sulla difficolta’ del progetto.</p>
+    <p>Ci sono molti aspetti da considerare nel processo di produzione
+    del software.</p>
+    <h2 id="ciclo-di-vita-del-software"><a
+    href="#ciclo-di-vita-del-software">Ciclo di vita del
+    software</a></h2>
+    <h3 id="identificare-le-attivita-necessarie"><a
+    href="#identificare-le-attivita-necessarie">Identificare le
+    attivita’ necessarie</a></h3>
+    <p>Come si svolgono, e chi coinvolgono. “Cosa devo fare adesso?”
+    “Fino a quando devo farlo?”</p>
+    <h3 id="studio-di-fattibilita"><a
+    href="#studio-di-fattibilita">Studio di fattibilita’</a></h3>
+    <p>Capire il problema, ci conviene affrontare il problema? Riusciamo
+    a diventare ricchi risolvendo questo problema? Parte economica;
+    parte di importanza; a quanto riusciro’ a venderlo; c’e’ gia’ chi lo
+    fa? Il tempismo gioca un ruolo determinante.</p>
+    <p>Lo scrivo io? Lo faccio scrivere? Metto assieme componenti gia’
+    esistenti? Devo espandere il team?</p>
+    <p>Stima dei costi, dei tempi, risorse necessari. Benefici?</p>
+    <p>Chi fa lo studio di fattibilita’?</p>
+    <p>E’ possibile che l’output sia “non ci conviene farlo”.</p>
+    <h3 id="dai-requisiti-alle-specifiche"><a
+    href="#dai-requisiti-alle-specifiche">Dai requisiti alle
+    specifiche</a></h3>
+    <p>Comprendere il dominio applicativo. Ok, ma noi sviluppatori non
+    sappiamo quasi nulla di quello, infatti:</p>
+    <blockquote>
+    <p>It’s developers’ understanding, not domain experts’ knowledge,
+    that gets released in production</p>
+    </blockquote>
+    <p>C’e’ un momento in cui si parla con gli esperti, si raccoglie il
+    contento e si consolida nelle specifiche.</p>
+    <aside>
+    Stakeholder
+    </aside>
+    <p>Gli stakeholder sono tutte quelle persone interessate che questo
+    progetto vada a buon fine: committente, utente, manutentore,
+    installatore, colui che dovra’ farlo evolvere, …</p>
+    <aside>
+    Differenza requisito specifiche
+    </aside>
+    <p>Requisito: cosa deve fare il sistema Specifiche: come deve farlo,
+    non ambigue</p>
+    <p>In output ho: * documento approvato dal committente * base per il
+    lavoro di design e verifica Quindi e’ importante avere un documento
+    formale, non ambiguo</p>
+    <p>Due domande che il modello deve aiutare a rispondere: * cosa devo
+    fare adesso? * fino a quando?</p>
+    <blockquote>
+    <p>[!info] Davis’ Law (L4): The value of models depends on the view
+    taken, but none is best for all purposes</p>
+    </blockquote>
+    <p>Linguaggio che serva da ponte per descrivere il problema.</p>
+    <h3 id="progettazione"><a
+    href="#progettazione">Progettazione</a></h3>
+    <p>Definizione dell’architettura del sistema * scelta di una
+    architettura software * scomposizione in moduli o oggetti *
+    identificazione pattern</p>
+    <p>Programmazione e test di unita’: verifica e programmazione fanno
+    parte della stessa attivita’.</p>
+    <p>Top down Esempio: modulo che gestisce l’interfaccia utente e
+    chiama sotto di se dei moduli fittizi, che non fanno nulla, man mano
+    che mi serve scambio un modulo fittizio con una implementazione.</p>
+    <p>Bottom up Esempio: parto dal modulo che fa la radice quadrata,
+    che viene usato dal modulo che calcola la velocita’, etc. Non sono i
+    moduli che vedra’ l’utente.</p>
+    <h3 id="manutenzione"><a href="#manutenzione">Manutenzione</a></h3>
+    <p>Correttiva: ci sono errore e faccio modifiche che risolvono gli
+    errori Adattiva: era corretta prima, ora le specifiche sono cambiate
+    Perfettiva: posso perfezionare una delle qualita’?</p>
+    <h2 id="modello-a-cascata"><a href="#modello-a-cascata">Modello a
+    cascata</a></h2>
+    <p>Keyword: documento</p>
+    <p>Requisiti -&gt; Progetto -&gt; Codifica -&gt; Testing -&gt;
+    Prodotto C’e’ una sequenzialita’ stretta.</p>
+    <p>Permette la separazione dei compiti. Semplifica la pianificazione
+    e il monitoring dello stato di avanzamento, ma il problema e’ che se
+    ci sono dei ritardi di stima tutto slitta.</p>
+    <p>Non prevede una manutenzione, perche’ tutto viene assunto come
+    fatto bene. E’ fuori dal modello. Coinvolge il cliente solo nella
+    parte iniziale.</p>
+    <h2 id="riposizionamento-modello-a-v"><a
+    href="#riposizionamento-modello-a-v">Riposizionamento modello a
+    V</a></h2>
+    <p>Cascata ma con interazione con utente e test a ogni livello.</p>
+    <h2 id="modello-a-fontana"><a href="#modello-a-fontana">Modello a
+    fontana</a></h2>
+    <p>Da qualunque step posso ricadere ad uno degli step
+    precedenti.</p>
+    <aside>
+    iterativi vs incrementali
+    </aside>
+    <p>Un modello e’ incrementale quando nelle iterazioni viene inclusa
+    la consegna, ogni volta consegno qualcosa in piu’.</p>
+    <aside>
+    definizione di consegna
+    </aside>
+    <p>Qualcosa di usabile e di valore per l’utente</p>
+    <p>Implementazione iterativa, raccolta requisiti e progettazione una
+    volta, poi un pezzo alla volta sviluppiamo iterativamente e poi
+    un’unica consegna. Solo la parte implementativa e’ iterativa, non
+    tutto lo sviluppo.</p>
+    <p>Sviluppo incrementale, un pezzo alla volta viene sottoposto a
+    tutte le fasi. Dopo aver finito un pezzo: “Bene, adesso cosa vuoi
+    che faccia?”</p>
+    <p>I modelli incrementali hanno problemi: * complicato il lavoro di
+    planning, perche’ lo stato del processo e’ meno visibile * bisogna
+    pianificare tutte le iterazioni * cos’e’ e quanto dura una
+    iterazione?</p>
+    <h2 id="modelli-prototipali"><a href="#modelli-prototipali">Modelli
+    prototipali</a></h2>
+    <p>“Faccio male”, senza soffermarmi sulle qualita’. Voglio usare una
+    consegna parziale per poter parlare con il cliente. “Verra’ cosi, e’
+    cosi che lo vuoi?”</p>
+    <p>La base e’ caotica e non pensata per l’evoluzione, non e’ un
+    punto di partenza valido.</p>
+    <p>Perfetto per esplorare concetti, come ad esempio un nuovo
+    linguaggio, per ponderare diverse scelte per problemi difficili,
+    etc</p>
+    <aside>
+    L3
+    </aside>
+    <blockquote>
+    <p>[!info] Boehm’s Law (L3): Prototyping (significantly) reduces
+    requirements and design errors, especially for user interfaces</p>
+    </blockquote>
+    <h1 id="lezione-3---0210"><a href="#lezione-3---0210">Lezione 3 -
+    02/10</a></h1>
+    <h2 id="modelli-non-agili"><a href="#modelli-non-agili">Modelli non
+    agili</a></h2>
+    <h3 id="pinball-life-cycle"><a href="#pinball-life-cycle">Pinball
+    life-cycle</a></h3>
+    <p>1984</p>
+    <p>Flipper, posso controllare solo come lancio la pallina, per il
+    resto passa tempo prima che la pallina ritorni a me: * processo
+    indefinito * non ci sono passi in sequenza, posso andare da un punto
+    del processo a qualsiasi altro * niente vincoli temporali * non
+    misurabile</p>
+    <p>Difficile riprodurre la stessa partita due volte. “Non ho bisogno
+    di un modello”, vuol dire che sto adottando questo modello.</p>
+    <h3 id="modelli-trasformazionali"><a
+    href="#modelli-trasformazionali">Modelli trasformazionali</a></h3>
+    <p>Mirano ad avere tutto sotto controllo. Raffinamento /
+    concretizzazione passo passo delle specifiche formali del problema.
+    Ogni passo garantisce che vengano mantenute le proprieta’ del passo
+    precedente. Mi avvicino sempre piu’ alla versione eseguibile delle
+    specifiche.</p>
+    <p>TODO INSERISCI immagine dalla slide (e’ attorno al 10 min di
+    lezione)</p>
+    <h3 id="metamodello-a-spirale"><a
+    href="#metamodello-a-spirale">MetaModello a spirale</a></h3>
+    <p>1988</p>
+    <p>Guidato dall’analisi dei rischi</p>
+    <p>Prevedere ciclicamente se ci sono rischi e decidere se andare
+    avanti o interrompere.</p>
+    <p>Fasi Determinazione obiettivi, alternative, vincoli Identificare
+    i rischi Sviluppo e test Pianificare iterazione successiva</p>
+    <p>Il raggio della spirale rappresenta il costo del progetto, che
+    aumenta.</p>
+    <p>TODO Inserire immagine</p>
+    <h3 id="modello-spirale-win-win"><a
+    href="#modello-spirale-win-win">Modello spirale win-win</a></h3>
+    <p>Ha espanso l’area dei rischi.</p>
+    <p>TODO ESPANDERE</p>
+    <h3 id="modello-cots"><a href="#modello-cots">Modello COTS</a></h3>
+    <p>Components off the shelf</p>
+    <p>“Non c’e’ gia’ qualcosa che fa quello che ci serve? Prendiamo
+    quelli e integriamo”</p>
+    <p>Prima della progettazione c’e’ una fase di ricerca dei componenti
+    gia’ esistenti.</p>
+    <p>Ricordarsi del problema dell’adattabilita’ dei differenti
+    componenti</p>
+    <h2 id="metodologie-agili"><a href="#metodologie-agili">Metodologie
+    agili</a></h2>
+    <p>fine 1990</p>
+    <p>eXtreme Programming</p>
+    <aside>
+    mappa XP
+    </aside>
+    <p>http://www.extremeprogramming.org/map/project.html</p>
+    <p>Nascono dal basso, dagli sviluppatori, non da teorici. Design
+    emergente. Quindi una critica che si muove a XP e’ che non c’e’ un
+    design up-front.</p>
+    <p><span class="math display">$$
+    \begin{align}
+    &amp; \text{\large{Individuals and interactions} \small{over
+    processes and tools}} \\
+    &amp;\text{\large{Working software} \small{over comprehensive
+    documentation }} \\
+    &amp; \text{\large{Customer collaboration} \small{over contract
+    negotiation}} \\
+    &amp; \text{\large{Responding to change} \small{over following a
+    plan}} \\
+    \end{align}
+    $$</span> <a href="https://agilemanifesto.org/">agile
+    manifesto</a></p>
+    <h3 id="lean-software-snello"><a href="#lean-software-snello">Lean
+    software (snello)</a></h3>
+    <p>Reduce waste, dentro il software e’ tutto cio’ che non ha valore
+    per il cliente. Difficile capire cosa non ha valore.</p>
+    <p>Un dipendente e’ per la vita. Investo nel dipendente, voglio il
+    dipendente felice.</p>
+    <h3 id="kanban"><a href="#kanban">Kanban</a></h3>
+    <p>Stories - cio’ che vogliamo fare Todo - cosa vogliamo fare nel
+    prossimo periodo, cioe’ su cui ci concentriamo In progress - su cosa
+    sto lavorando Testing - cose che qualcuno sta valutando Done -
+    finito, cliente lo ha verificato e accettato</p>
+    <p>Definition of done e’ molto importante. Minimizzare la colonna
+    “In progress”, perche’aiuta minimizza il context switch</p>
+    <h3 id="scrum"><a href="#scrum">Scrum</a></h3>
+    <p>Scrum e’ la mischia del rugby: “si lavora tutti assieme spingendo
+    per avanzare”</p>
+    <p>Congelare i requisiti durante brevi iterazioni. “Cliente puoi
+    cambiare i requisiti quanto vuoi, ma non durante un’iterazione”,
+    un’iterazione dura 2 settimane / 1 mese.</p>
+    <h3 id="crystal"><a href="#crystal">Crystal</a></h3>
+    <p>Comunicazione per osmosi. Pair programming: due persone
+    acquisiscono conoscenza su quella parte.</p>
+    <h2 id="tdd"><a href="#tdd">TDD</a></h2>
+    <p><a href="TDD.md">TDD</a></p>
+    <h2 id="variabili-in-gioco"><a href="#variabili-in-gioco">Variabili
+    in gioco</a></h2>
+    <p>Portata - quante funzionalita’ si vogliono implementare Tempo -
+    quanto tempo si puo’ dedicare al progetto? Qualita’ - qualita’ del
+    progetto che si deve ottenere Costo - risorse finanziarie che si
+    possono impegnare</p>
+    <p>I cliente fa parte del team di sviluppo. Con il TDD vede che il
+    numero di test e di funzionalita’ cresce.</p>
+    <p>Espandere perche’ e’ ARRIVATO L’ESITO di ARCHITETTURA</p>
+    <p>eXtreme Programming: * feedback rapido * presumere la
+    semplicitia’ - non complicarti la vita * accettare il cambiamento *
+    modifica incrementale * lavoro di qualita’ - voglio i programmatori
+    felici perche’ se andassero via si perderebbe la loro conoscenza
+    della codebase e tutta la formazione fatta nel tempo</p>
+    <p>sweng classica: * separazione interessi * astrazione e
+    modularita’ * anticipazione del cambiamento (design for change) *
+    generalita’ * incrementalita’</p>
+    <h1 id="lezione-4---0710"><a href="#lezione-4---0710">Lezione 4 -
+    07/10</a></h1>
+    <h2 id="figure-in-gioco-in-extreme-programming"><a
+    href="#figure-in-gioco-in-extreme-programming">Figure in gioco in
+    eXtreme Programming</a></h2>
+    <p>Manager / Cliente Ha responsabilita’ di decidere * portata del
+    progetto * priorita’ tra funzionalita’ * date dei rilasci Ha ditto
+    di * sapere cosa puo’ essere fatto, tempistiche e costi * vedere
+    progressi del sistema, con test da lui definiti * cambiare idea,
+    sostituire funzionalita’, cambiare priorita’ ma nell’ottica SCRUM,
+    quindi non nelle iterazioni</p>
+    <p>Sviluppatore Ha responsabilita’ di decidere * stime dei tempi
+    delle funzionalita’ * conseguenze di scelte tecnologiche *
+    pianificazione dettagliata nelle settimane di sviluppo Ha diritto di
+    * sapere cosa e’ necessario tramite chiare storie con priorita’,
+    “voglio che quando faccio questo il software deve fare questo” *
+    cambiare stime dei tempi in base all’esperienza fatta nelle
+    iterazioni precedenti * identificare e indicare funzionalita’
+    pericolose * produrre software di qualita’, in pace, con un buono
+    stipendio, etc</p>
+    <h2 id="tecniche"><a href="#tecniche">Tecniche</a></h2>
+    <p>Mettere insieme delle pratiche che si rafforzino in varie
+    situazioni. Le iterazioni durano due settimane.</p>
+    <h3 id="planning-game"><a href="#planning-game">Planning
+    game</a></h3>
+    <p>Carte sufficientemente piccole in modo che non sia possibile
+    scriverci sopra un papiro, basate sulle storie scritte dall’utente
+    (prima del planning game). Servono a decidere le funzionalita’ del
+    prossimo rilascio, combinando priorita’ commerciali e valutazioni
+    tecniche.</p>
+    <p>Il cliente partecipa al planning game.</p>
+    <p>Carta: * descrizione * caso di test che funge da test di
+    accettazione * valore di business</p>
+    <p>Sviluppatori: * ognuno da la propria stima, si ricava una stima
+    condivisa che il team fa sua</p>
+    <p>Manager: * prende le carte e puo’ decidere quali schede verranno
+    implementate nella prossima iterazione</p>
+    <p>Far parlare tutti prima di iniziare la procedura, anche solo per
+    dire il proprio nome, sblocca quelle persone in modo tale che poi
+    avranno meno problemi a parlare.</p>
+    <h4 id="stime"><a href="#stime">Stime</a></h4>
+    <aside>
+    Stime
+    </aside>
+    <p>“Non e’ un consuntivo, e’ una stima” “Quante cose riusciamo a
+    mettere dentro l’iterazione?”</p>
+    <p>L’incertezza c’e’ sulla prima stima, poi la metodologia
+    “ingrana”.</p>
+    <p>La stima non è personale, ma del team. Questo perché chiunque può
+    trovarsi a farla. Come faccio a mettere assieme stime molto
+    differenti quindi? Perché è difficile per chi ha stimato più alto
+    scendere ad esempio.</p>
+    <p>Se le stime sono molto diverse magari il problema è come è
+    scritta la storia. Non si prende la media, ne il tempo piu’ basso,
+    ne il tempo piu’ alto.</p>
+    <p>Non si possono fare stime per cui ognuno dice la sua, perche’
+    altrimenti il primo che parla <a
+    href="https://en.wikipedia.org/wiki/Anchoring_effect">setta
+    un’ancora</a> sulle stime degli altri.</p>
+    <p>Non si parla di ore / uomo se non esattamente alla fine per
+    evitare * stime che si discostano dalla realta’ (7 ore) * per
+    incasellare le stime possibili in range (ad esempio secondo planning
+    poker usando i numeri di <a
+    href="https://en.wikipedia.org/wiki/Planning_poker">Fibonacci
+    arrotondati (vedi Equipment sul perche’ arrotondati)</a>)</p>
+    <aside>
+    The Mythical Man Month
+    </aside>
+    <p><a href="The%20Mythical%20Man-Month.md">The Mythical
+    Man-Month</a></p>
+    <h5 id="planning-poker"><a href="#planning-poker">Planning
+    poker</a></h5>
+    <p>Procedura</p>
+    <ol type="1">
+    <li>si presentano le carte stando attenti ai numeri, i numeri
+    rischiano di settare ancore</li>
+    <li>si fanno domande, si chiedono chiarimenti, si discute per
+    chiarire assunzioni e rischi</li>
+    <li>ogni componente prende una carta dal proprio mazzo che
+    rappresenta la stima</li>
+    <li>si girano tutte le carte contemporaneamente</li>
+    <li>tutti zitti, chi ha fatto la stima piu’ bassa e chi ha fatto la
+    stima piu’ alta parlano, 1 minuto per spiegare perche’</li>
+    <li>si rivota, ora si ha un range di ancora</li>
+    </ol>
+    <h5 id="team-estimation-game"><a href="#team-estimation-game">Team
+    estimation game</a></h5>
+    <p>Procedura</p>
+    <ol type="1">
+    <li>carte sul tavolo</li>
+    <li>la prima la si mette in centro</li>
+    <li>il primo developer prende una carta, la legge ad alta voce, e la
+    mette a sx (piu’ semplice) o a dx (piu’ difficile) o sotto quella in
+    centro</li>
+    <li>il prossimo puo’
+    <ol type="1">
+    <li>prendere una nuova carta e posizionarla secondo le regole</li>
+    <li>spostare una carta precedentemente posizionata motivando</li>
+    </ol></li>
+    <li>si parla solo se qualcuno non e’ d’accordo con una disposizione
+    precedente</li>
+    </ol>
+    <p>Una volta che si e’ tutti d’accordo sulle posizioni</p>
+    <ol type="1">
+    <li>usando un solo mazzo di carte, si prende la prima carta e la si
+    mette sulla prima colonna (di solito si mette un 2 per lasciare
+    spazio ad eventuali risistemazioni)</li>
+    <li>il primo developer prende la prossima carta e la mette sulla
+    prima colonna che pensa abbia quel valore</li>
+    <li>il prossimo puo’
+    <ol type="1">
+    <li>prendere una nuova carta e posizionarla secondo le regole</li>
+    <li>spostare una carta precedentemente posizionata motivando</li>
+    </ol></li>
+    </ol>
+    <h5 id="unita-di-misura"><a href="#unita-di-misura">Unita’ di
+    misura</a></h5>
+    <p>Se serve. Quantifico all’ultimo, per tenere gli errori al
+    minimo.</p>
+    <p>Stimo in tempo la carta piu’ semplice. Tramite proporzioni stimo
+    tutte le altre.</p>
+    <h4 id="velocity"><a href="#velocity">Velocity</a></h4>
+    <p>Capacita’ osservata di completare lavori. Dopo la prima
+    iterazione il team dira’ che puo’ sviluppare tanti punti quanti ne
+    ha fatti all’iterazione precedente. Permette di compensare stime
+    sbagliate.</p>
+    <aside>
+    Pericolosa la tentazione di aggiungere nuovi membri
+    </aside>
+    <p>Se i membri del team diminuscono allora posso adattare al
+    ribasso. Se i membri del team aumentano la velocity rimane la stessa
+    della volta precedente. Si tratta di fare assunzioni che siano
+    safe.</p>
+    <p>Non deve essere valutato come metro di valutazione. Non deve
+    essere imposta. Non si devono considerare storie non finite.</p>
+    <h3 id="brevi-cicli-di-rilascio"><a
+    href="#brevi-cicli-di-rilascio">Brevi cicli di rilascio</a></h3>
+    <p>Ridurre rischi con rilasci significativi ogni due settimane.</p>
+    <h3 id="usare-una-metafora"><a href="#usare-una-metafora">Usare una
+    metafora</a></h3>
+    <p>Trovare un vocabolario diverso su cui rimappare termini tecnici
+    con cui cliente e sviluppatori hanno dimestichezza.</p>
+    <p>TODO ESPANDERE</p>
+    <h3 id="semplicita-di-progetto"><a
+    href="#semplicita-di-progetto">Semplicita’ di progetto</a></h3>
+    <p>L’arte di massimizzare il lavoro non fatto.</p>
+    <p>One and once only: cioe’ tutto quello che serve e senza
+    duplicazioni. KISS.</p>
+    <h3 id="testing"><a href="#testing">Testing</a></h3>
+    <p><a href="TDD.md">TDD</a></p>
+    <h3 id="refactoring"><a href="#refactoring">Refactoring</a></h3>
+    <p>“Modifiche al codice che non modificano le funzionalita’”</p>
+    <p>Serve a tenere bassa la crescita di complessita’ di un
+    progetto.</p>
+    <p>Non devo aver paura di modificare il progetto per semplificarlo.
+    Graduale ma * con continuita’ * senza pieta’</p>
+    <h3 id="pair-programming"><a href="#pair-programming">Pair
+    programming</a></h3>
+    <blockquote>
+    <p>Given enough eyeballs, all bugs are shallow – Eric S. Raymond</p>
+    </blockquote>
+    <p>“Durante pair programming siamo una singola entita’ e come tale
+    abbiamo problemi condivisi, idee, etc”</p>
+    <p>Il manager dice “pago due persone perche’ solo uno lavori”.</p>
+    <p>Invece: * mentre un programmatore sta scrivendo codice l’altro
+    non e’ che li guarda, ma ispeziona il codice, e potrebbe pensare
+    “questo pezzo potrebbe essere fatto meglio?” * aiuta inserimento di
+    nuovo personale * aiuta a ottenere proprieta’ collettiva (conoscenza
+    osmotica di Crystal) * aiuta refactoring * “se avessi avuto due
+    persone a lavorare separatamente avrei ottenuto due feature, le ho
+    messe assieme e ne ho ottenute tre”: la produttivita’ aumenta
+    rispetto al singolo</p>
+    <p>Molti dei costi sono dopo la consegna, siamo sicuri che ragionare
+    sulla produttivita’ in base al giorno sia la scelta migliore?</p>
+    <h3 id="proprieta-collettiva"><a
+    href="#proprieta-collettiva">Proprieta’ collettiva</a></h3>
+    <p>Il codice non appartiene ad una sola persona. “Non e’ il mio
+    codice, e’ del team”. Ci si deve sentire responsabilizzati
+    sull’intero codice, anche se non si conosce tutto alla stessa
+    maniera.</p>
+    <h3 id="integrazione-continua"><a
+    href="#integrazione-continua">Integrazione continua</a></h3>
+    <p>“Metto il mio lavoro in comune con quello fatto da altri”.</p>
+    <p>Azione rapida, perche’ il codice nel frattempo non e’ cambiato
+    molto.</p>
+    <h3 id="settimana-di-40-ore"><a
+    href="#settimana-di-40-ore">Settimana di 40 ore</a></h3>
+    <h3 id="cliente-sul-posto"><a href="#cliente-sul-posto">Cliente sul
+    posto</a></h3>
+    <p>Dove ci sono gli sviluppatori c’e’ anche un rappresentante del
+    cliente. “Invece di fare una documentazione esaustiva iniziale ho il
+    depositario della conoscenza del dominio”</p>
+    <p>In SCRUM c’e’ il Product Owner, un intermediario rispetto al
+    cliente, si prende la responsabilita’ di aver dato la giusta
+    interpretazione rispetto a cosa voleva il cliente</p>
+    <h3 id="standard-di-codifica"><a
+    href="#standard-di-codifica">Standard di codifica</a></h3>
+    <p>Convenzioni distribuite e approvate all’interno del team. Aiuta *
+    refactoring * pair programming * proprieta’ collettiva</p>
+    <h1 id="lezione-5---0910"><a href="#lezione-5---0910">Lezione 5 -
+    09/10</a></h1>
+    <h2 id="fasi"><a href="#fasi">Fasi</a></h2>
+    <h3 id="requirements"><a href="#requirements">Requirements</a></h3>
+    <p>Dal momento che il cliente fa parte del team di sviluppo (lavora
+    assieme) puo’ spiegare le storie che ha scritto direttamente ai
+    programmatori.</p>
+    <p>Consegne incrementali e pianificazioni continue.</p>
+    <h3 id="design"><a href="#design">Design</a></h3>
+    <p>ESPANDERE Una metafora come visione unificante del progetto</p>
+    <p>Refactoring. Presumere la semplicita’, contrapposta a “design for
+    change”. ESPANDERE QUESTA ULTIMA COSA</p>
+    <h3 id="code"><a href="#code">Code</a></h3>
+    <p>Programmare a coppie modifica completamente l’approccio al
+    codice. Proprieta’ collettiva “non ho codice su cui non posso
+    lavorare”. Integrazioni continue.</p>
+    <h3 id="test"><a href="#test">Test</a></h3>
+    <p>Testing di unita’ continuo, da scrivere prima del codice. Test
+    funzionale scritto dagli utenti.</p>
+    <h2 id="documentazione"><a
+    href="#documentazione">Documentazione</a></h2>
+    <p>Use stories ESPANDERE CON LA DIFFERENZA CON USE CASES DI UML</p>
+    <p>Codice e test sono la documentazione. “Test e’ la traduzione in
+    linguaggio formale delle use stories e di cio’ che ci siamo detti
+    verbalmente”.</p>
+    <p>Ha un valore documentale molto piu’ forte della documentazione
+    scritta.</p>
+    <p>Le persone sono la documentazione.</p>
+    <h2 id="quando-non-si-puo-usare-xp"><a
+    href="#quando-non-si-puo-usare-xp">Quando non si puo’ usare
+    XP?</a></h2>
+    <p>Ambienti che * non permettono di testare e avere un feedback
+    immediato (es: codice che gira in un acceleratore di particelle del
+    CERN) * non permettono di avere uno sviluppo incrementale (es:
+    centrale nucleare) * frappongono barriere di tipo manageriale o
+    burocratico (es: team troppo grossi non suddivisibili) * frappongono
+    barriere di tipo fisico (es: elementi del team divisi)</p>
+    <h2 id="critiche"><a href="#critiche">Critiche</a></h2>
+    <p>ESPANDERE Sottovalutazione dell’up-front Sopravvalutazione delle
+    user stories Mancata evidenziazione dipendenze tra user stories TDD
+    puo’ portare a visione troppo ristretta In team con competenze
+    diverse puo’ esserci un problema</p>
+    <p>ESPANDERE CON <img
+    src="Pasted%20image%2020241012211104.png" /></p>
+    <h2 id="open-source-process"><a href="#open-source-process">Open
+    source process</a></h2>
+    <p>ESPANDERE</p>
+    <h3 id="the-cathedral-and-the-bazaar"><a
+    href="#the-cathedral-and-the-bazaar">The Cathedral and the
+    Bazaar</a></h3>
+    <aside>
+    the cathedral and the bazaar
+    </aside>
+    <p>http://www.catb.org/~esr/writings/cathedral-bazaar/ (<a
+    href="https://www.youtube.com/watch?v=qpyewW09HXo">Audiobook</a>)</p>
+    <p>“Ogni buon lavoro software inizia dalla frenesia personale di uno
+    sviluppatore”</p>
+    <p>Sono entrambi due esempi positivi</p>
+    <p>Cattedrale: ideata da uno o da pochi eletti, ben strutturata
+    Bazaar: funzionale e pratico, ma e’ un po’ un casino, chiunque puo’
+    dire la sua e contribuire</p>
+    <p>La bonta’ del codice non e’ una caratteristica essenziale, se ci
+    sono problemi, se non e’ perfetto crea comunicazione e una voglia di
+    guardarci dentro per sistemare.</p>
+    <p>19 Lessons: 1. Every good work of software starts by scratching a
+    developer’s personal itch. 2. Good programmers know what to write.
+    Great ones know what to rewrite (and reuse). 3. Plan to throw one
+    [version] away; you will, anyhow (copied from Frederick
+    Brooks’s <em><a
+    href="https://en.wikipedia.org/wiki/The_Mythical_Man-Month"
+    title="The Mythical Man-Month">The Mythical Man-Month</a></em>). 4.
+    If you have the right attitude, interesting problems will find you.
+    5. When you lose interest in a program, your last duty to it is to
+    hand it off to a competent successor. 6. Treating your users as
+    co-developers is your least-hassle route to rapid code improvement
+    and effective debugging. 7. <a
+    href="https://en.wikipedia.org/wiki/Release_early,_release_often"
+    title="Release early, release often">Release early. Release
+    often.</a> And listen to your customers. 8. Given a large enough
+    beta-tester and co-developer base, almost every problem will be
+    characterized quickly and the fix obvious to someone. 9. Smart data
+    structures and dumb code works a lot better than the other way
+    around. 10. If you treat your beta-testers as if they’re your most
+    valuable resource, they will respond by becoming your most valuable
+    resource. 11. The next best thing to having good ideas is
+    recognizing good ideas from your users. Sometimes the latter is
+    better. 12. Often, the most striking and innovative solutions come
+    from realizing that your concept of the problem was wrong. 13.
+    Perfection (in design) is achieved not when there is nothing more to
+    add, but rather when there is nothing more to take away. (Attributed
+    to <a
+    href="https://en.wikipedia.org/wiki/Antoine_de_Saint-Exup%C3%A9ry"
+    title="Antoine de Saint-Exupéry">Antoine de Saint-Exupéry</a>) 14.
+    Any tool should be useful in the expected way, but a truly great
+    tool lends itself to uses you never expected. 15. When writing
+    gateway software of any kind, take pains to disturb the data stream
+    as little as possible—and never throw away information unless the
+    recipient forces you to! 16. When your language is nowhere near <a
+    href="https://en.wikipedia.org/wiki/Turing_completeness"
+    title="Turing completeness">Turing-complete</a>, <a
+    href="https://en.wikipedia.org/wiki/Syntactic_sugar"
+    title="Syntactic sugar">syntactic sugar</a> can be your friend. 17.
+    A security system is only as secure as its secret. Beware of
+    pseudo-secrets. 18. To solve an interesting problem, start by
+    finding a problem that is interesting to you. 19. Provided the
+    development coordinator has a communications medium at least as good
+    as the Internet, and knows how to lead without coercion, many heads
+    are inevitably better than one.</p>
+    <h3 id="care-and-feeding-of-foss"><a
+    href="#care-and-feeding-of-foss">Care and Feeding of FOSS</a></h3>
+    <p>TODO</p>
+    <h3 id="the-emerging-economic-paradigm-of-open-source"><a
+    href="#the-emerging-economic-paradigm-of-open-source">The Emerging
+    Economic Paradigm of Open Source</a></h3>
+    <p>TODO</p>
+    <p>“Perche’ una azienda dovrebbe pagare i propri dipendenti per
+    sviluppare open source?”</p>
+    <h3
+    id="an-empirical-study-of-open-source-and-closed-source-software-products-by-j.w.-paulson-et-al."><a
+    href="#an-empirical-study-of-open-source-and-closed-source-software-products-by-jw-paulson-et-al">An
+    empirical study of open-source and closed-source software products
+    by J.W. Paulson et al.</a></h3>
+    <p>https://ieeexplore.ieee.org/abstract/document/1274044</p>
+    <h1 id="lezione-6---git---1410"><a
+    href="#lezione-6---git---1410">Lezione 6 - Git - 14/10</a></h1>
+    <p>Integra dal libro di Git</p>
+    <p>INSERISCI DA TABLET</p>
+    <h1 id="lezione-7---git-segue---1610"><a
+    href="#lezione-7---git-segue---1610">Lezione 7 - Git segue -
+    16/10</a></h1>
+    <p>git merge git reset git amend</p>
+    <h2 id="git-flow-avh"><a href="#git-flow-avh">git flow
+    (AVH)</a></h2>
+    <p>ESPANDERE GIT FLOW</p>
+    <aside>
+    git flow
+    </aside>
+    <p>main / master - cio’ che viene consegnato al cliente develop -
+    dove si mettono le modifiche in comune con gli altri sviluppatori,
+    da dove parto con lo sviluppo di una feature</p>
+    <p><code>git flow feature start $featname</code>: *
+    <code>git checkout develop</code> *
+    <code>git branch $featname</code> *
+    <code>git checkout $featname</code></p>
+    <p>Feature parte dell’ultima situazione stabile sul develop.</p>
+    <p><code>git flow feature finish $featname</code>: *
+    <code>git checkout develop</code> *
+    <code>git merge --no-ff $featname</code> (–no-ff vuol dire forzare a
+    fare un commit) * <code>git branch -d $featname</code> Il motivo per
+    cui si usa <code>--no-ff</code> e’ che nel branch di develop non ho
+    i “rossi” che invece avvengono dentro la branch di feature.</p>
+    <p><code>git flow release start ver</code> Congelo le feature che
+    dovranno esserci nella prossima release. *
+    <code>git checkout -b ver develop</code></p>
+    <p><code>git flow release finish ver</code> * git checkout master *
+    git merge –no-ff release-ver * git tag -a ver * git checkout develop
+    * git merge –no-ff release-ver * git branch -d release-ver Non si
+    puo’ aprire una release se ce ne e’ gia’ una precedente aperta.</p>
+    <p>Riparazione veloce di difetti urgenti senza aspettare la prossima
+    release <code>git flow hotfix start ver</code> *
+    <code>git checkout -b ver master</code></p>
+    <p><code>git flow hotfix finish ver</code> *
+    <code>git checkout master</code> *
+    <code>git merge --no-ff ver</code> *
+    <code>git checkout develop</code> *
+    <code>git merge --no-ff ver</code> *
+    <code>git branch -d ver</code></p>
+    <h2 id="mancanze-di-git"><a href="#mancanze-di-git">Mancanze di
+    Git</a></h2>
+    <p>No livelli di autorizzazione (i commit possono essere firmati)
+    Soluzione: fork.</p>
+    <p>No livelli di review, c’e’
+    <code>git request-pull &lt;start&gt; &lt;url&gt; [&lt;end&gt;]</code>
+    per preparare cio’che poi mandero’ perche’ ne venga fatta
+    review.</p>
+    <p>I grandi progetti non sono clonati lato Github, ma esistono una
+    volta e poi sono linkati quando clonati.</p>
+    <p>Aggiungere Gerrit</p>
+    <h2 id="build-automation"><a href="#build-automation">Build
+    automation</a></h2>
+    <p>Come mi proteggo da checkin di una versione non funzionante?
+    Automatizzo: * compilazione * testing</p>
+    <p>“Da cosa dipende il fatto che io possa eseguire il mio
+    programma?”</p>
+    <h1 id="lezione-8---progettazione---1610"><a
+    href="#lezione-8---progettazione---1610">Lezione 8 - Progettazione -
+    16/10</a></h1>
+    <aside>
+    visibilita’ nei test
+    </aside>
+    <p>Avere una struttura di questo tipo</p>
+    <pre><code>└── src
     ├── main
     │   └── java
     │       └── it
@@ -1166,61 +1038,65 @@ visibilita’ nei test
                     └── di
                         └── sweng
                             └── DoublyLinkedListTest.java</code></pre>
-<p>consente di sfruttare la visibilita’ a livello di package dei
-componenti delle classi, per averli disponibili nel test.</p>
-<p>INSERIRE delle note tra i processi per “Unified process”
-https://youtu.be/jNqgozh_7x8?t=1999 (un po’ prima di questo minuto)</p>
-<p>Spostare queste due parti altrove e partire da 0 qua con la
-PROGETTAZIONE</p>
-<p>Come si condivide l’informazione?</p>
-<p>Metodi (TDD) Design pattern Principi - giudicare e capire se e’
-necessario modificare qualcosa</p>
-<p>Un linguaggio per potersi definire ad oggetti deve avere: *
-ereditarieta’ * polimorfismo * collegamento dinamico</p>
-<h2 id="encapsulation-and-information-hiding"><a
-href="#encapsulation-and-information-hiding">Encapsulation and
-information hiding</a></h2>
-<p><a href="Encapsulation%20and%20information%20hiding.md">Encapsulation
-and information hiding</a></p>
-<h1 id="lezione-9---pattern---23102024"><a
-href="#lezione-9---pattern---23102024">Lezione 9 - Pattern -
-23/10/2024</a></h1>
-<h2 id="collegamento-dinamico-statico"><a
-href="#collegamento-dinamico-statico">Collegamento dinamico /
-statico</a></h2>
-<p>Statico: il compilatore guarda il tipo dell’oggetto e chiama il
-metodo corretto Dinamico: a runtime c’e’ un collegamento
-all’implementazione concreta</p>
-<p>ESPANDERE</p>
-<h2 id="uml"><a href="#uml">UML</a></h2>
-<p><img src="uml.png" /></p>
-<p><code>T</code> nel rettangolo tratteggiato rappresenta un type
-parameter. static: sottolineato abstract: corsivo</p>
-<h2 id="pattern"><a href="#pattern">Pattern</a></h2>
-<p>Situazioni ricorrenti di cui do una soluzione architetturale.</p>
-<p>Meta pattern hanno due elementi di base: * HookMethod, metodo
-astratto che determinato il comportamento specifico nelle sottoclassi:
-“dimmi tu come e’ fatto nel tuo caso questo metodo” * TemplateMethod:
-invariabile del pattern, coordina piu’ hookmethod</p>
-<p>Come si classificano i pattern in base alla relazione tra hook e
-template: unification, connection, recursive connection <img
-src="metapattern.png" /></p>
-<p>Categorie di pattern in base all’output * creazionali *
-comportamentali * strutturali</p>
-<h3 id="singleton"><a href="#singleton">Singleton</a></h3>
-<aside>
-singleton
-</aside>
-<p>Voglio ottenere un oggetto e non una classe. Voglio rendere la classe
-responsabile del fatto che non puo’ esistere piu’ di una istanza.</p>
-<p><img src="singleton-pattern.png" /></p>
-<p>Costruttore protected per dare l’opportunita’ a chi sub-classa di
-creare una istanza.</p>
-<p>In realta’ questa e’ l’implementazione migliore:</p>
-<p>```java linenos:1 public enum MySingleton { INSTANCE; public void
-sampleOp() {…} }</p>
-<p>MySingleton.INSTANCE.sampleOp();</p>
-<pre><code>
+    <p>consente di sfruttare la visibilita’ a livello di package dei
+    componenti delle classi, per averli disponibili nel test.</p>
+    <p>INSERIRE delle note tra i processi per “Unified process”
+    https://youtu.be/jNqgozh_7x8?t=1999 (un po’ prima di questo
+    minuto)</p>
+    <p>Spostare queste due parti altrove e partire da 0 qua con la
+    PROGETTAZIONE</p>
+    <p>Come si condivide l’informazione?</p>
+    <p>Metodi (TDD) Design pattern Principi - giudicare e capire se e’
+    necessario modificare qualcosa</p>
+    <p>Un linguaggio per potersi definire ad oggetti deve avere: *
+    ereditarieta’ * polimorfismo * collegamento dinamico</p>
+    <h2 id="encapsulation-and-information-hiding"><a
+    href="#encapsulation-and-information-hiding">Encapsulation and
+    information hiding</a></h2>
+    <p><a
+    href="Encapsulation%20and%20information%20hiding.md">Encapsulation
+    and information hiding</a></p>
+    <h1 id="lezione-9---pattern---23102024"><a
+    href="#lezione-9---pattern---23102024">Lezione 9 - Pattern -
+    23/10/2024</a></h1>
+    <h2 id="collegamento-dinamico-statico"><a
+    href="#collegamento-dinamico-statico">Collegamento dinamico /
+    statico</a></h2>
+    <p>Statico: il compilatore guarda il tipo dell’oggetto e chiama il
+    metodo corretto Dinamico: a runtime c’e’ un collegamento
+    all’implementazione concreta</p>
+    <p>ESPANDERE</p>
+    <h2 id="uml"><a href="#uml">UML</a></h2>
+    <p><img src="uml.png" /></p>
+    <p><code>T</code> nel rettangolo tratteggiato rappresenta un type
+    parameter. static: sottolineato abstract: corsivo</p>
+    <h2 id="pattern"><a href="#pattern">Pattern</a></h2>
+    <p>Situazioni ricorrenti di cui do una soluzione architetturale.</p>
+    <p>Meta pattern hanno due elementi di base: * HookMethod, metodo
+    astratto che determinato il comportamento specifico nelle
+    sottoclassi: “dimmi tu come e’ fatto nel tuo caso questo metodo” *
+    TemplateMethod: invariabile del pattern, coordina piu’
+    hookmethod</p>
+    <p>Come si classificano i pattern in base alla relazione tra hook e
+    template: unification, connection, recursive connection <img
+    src="metapattern.png" /></p>
+    <p>Categorie di pattern in base all’output * creazionali *
+    comportamentali * strutturali</p>
+    <h3 id="singleton"><a href="#singleton">Singleton</a></h3>
+    <aside>
+    singleton
+    </aside>
+    <p>Voglio ottenere un oggetto e non una classe. Voglio rendere la
+    classe responsabile del fatto che non puo’ esistere piu’ di una
+    istanza.</p>
+    <p><img src="singleton-pattern.png" /></p>
+    <p>Costruttore protected per dare l’opportunita’ a chi sub-classa di
+    creare una istanza.</p>
+    <p>In realta’ questa e’ l’implementazione migliore:</p>
+    <p>```java linenos:1 public enum MySingleton { INSTANCE; public void
+    sampleOp() {…} }</p>
+    <p>MySingleton.INSTANCE.sampleOp();</p>
+    <pre><code>
 ESPANDI CON EFFECTIVE JAVA
 
 ### Iteratore
@@ -1251,15 +1127,16 @@ public Card(Rank rank, Suit suit) {
     this.suit = Object.requireNonNull(suit);
   }
 }</code></pre>
-<p>Il seguente codice e’ completamente sbagliato, perche’ viene comunque
-creato un oggetto con le variabili d’istanza a <code>null</code></p>
-<p><code>java linenos:1 public Card(Rank rank, Suit suit) {   if (rank != null &amp;&amp; suit != null) {     this.rank = rank;     this.suit = suit;   } }</code></p>
-<p>Difensiva: gestione esplicita dei <code>null</code>, “sono capace di
-gestire <code>null</code>”, programmazione difensiva</p>
-<p>```java linenos:1 public Card(Rank rank, Suit suit) { if (rank ==
-null || suit == null) { throw new IllegalArgumentException(); }</p>
-<p>this.rank = rank; this.suit = suit; }</p>
-<pre><code>
+    <p>Il seguente codice e’ completamente sbagliato, perche’ viene
+    comunque creato un oggetto con le variabili d’istanza a
+    <code>null</code></p>
+    <p><code>java linenos:1 public Card(Rank rank, Suit suit) {   if (rank != null &amp;&amp; suit != null) {     this.rank = rank;     this.suit = suit;   } }</code></p>
+    <p>Difensiva: gestione esplicita dei <code>null</code>, “sono capace
+    di gestire <code>null</code>”, programmazione difensiva</p>
+    <p>```java linenos:1 public Card(Rank rank, Suit suit) { if (rank ==
+    null || suit == null) { throw new IllegalArgumentException(); }</p>
+    <p>this.rank = rank; this.suit = suit; }</p>
+    <pre><code>
 Mi assicuro che in sviluppo non mi arrivi un `null`, ma non e&#39; compito mio:
 
 ```java linenos:1
@@ -1268,74 +1145,77 @@ public Card(Rank rank, Suit suit) {
   this.rank = rank;
   this.suit = suit;
 }</code></pre>
-<p>Intellij puo’ generare <code>if</code> in questo caso, inoltre lascia
-aperta la porta a tool che potrebbero fare analisi statica grazie alla
-mia dichiarazione di intento:</p>
-<p>```java linenos:1 private final <span class="citation"
-data-cites="NotNull">@NotNull</span> Rank rank; private final <span
-class="citation" data-cites="NotNull">@NotNull</span> Suit suit;</p>
-<p>public Card(<span class="citation"
-data-cites="NotNull">@NotNull</span> Rank rank, <span class="citation"
-data-cites="NotNull">@NotNull</span> Suit suit) { this.rank = rank;
-this.suit = suit; } ```</p>
-<p><code>Optional</code>? Quasi, non e’ molto differente da controllare
-se qualcosa e’ <code>null</code>.</p>
-<h2 id="pattern-1"><a href="#pattern">Pattern</a></h2>
-<aside>
-null object pattern
-</aside>
-<h3 id="null-object-pattern"><a href="#null-object-pattern">Null Object
-Pattern</a></h3>
-<p>“Vogliamo creare un oggetto che corrisponda al concetti”nessun
-valore” o “valore neutro”.</p>
-<p>ESPANDERE https://youtu.be/i5yG8Q6u8ic?t=1831</p>
-<h1 id="lezione-11---01112024"><a href="#lezione-11---01112024">Lezione
-11 - 01/11/2024</a></h1>
-<h1 id="lezione-12---04112024"><a href="#lezione-12---04112024">Lezione
-12 - 04/11/2024</a></h1>
-<h1 id="lezione-13---06112024"><a href="#lezione-13---06112024">Lezione
-13 - 06/11/2024</a></h1>
-<h1 id="lezione-14---11112024"><a href="#lezione-14---11112024">Lezione
-14 - 11/11/2024</a></h1>
-<p><code>assert</code> vuol dire stabilire un contratto con il
-chiamante; per questo puo’ sparire una volta in produzione.</p>
-<h1 id="lezione-15---13112024"><a href="#lezione-15---13112024">Lezione
-15 - 13/11/2024</a></h1>
-<p>Stato concreto e astratto * concreto dipende dalla sua
-implementazione, ad esempio se ho due interi e’ <span
-class="math inline">2<sup><sub>32</sub></sup> * 2<sup><sub>32</sub></sup></span>
-* astratto e’ un sottoinsieme (meglio se significativo) degli stati
-concreti</p>
-<p>Oggetti senza stato possono essere gli oggetti funzione. Oggetti con
-un solo stato sono gli oggetti immutabili.</p>
-<p>NB: una classe immutabile non ha un solo stato, sono le sue istanze
-che una volta create non possono piu’ cambiarlo.</p>
-<h2 id="state-diagram"><a href="#state-diagram">State diagram</a></h2>
-<p>Un automa e’ una n-upla &lt;S, I, U; <span
-class="math inline"><em>δ</em></span>, <span
-class="math inline"><em>τ</em></span>, <span
-class="math inline"><em>s</em><sub>0</sub></span>&gt;, dove * S insieme
-finito e non vuoto degli stati * I l’insieme finito dei possibili
-ingressi * U l’insieme finito delle possibili uscite * <span
-class="math inline"><em>δ</em></span> la funzione di transizione * <span
-class="math inline"><em>τ</em></span> la funzione di uscita * <span
-class="math inline"><em>S</em><sub>0</sub></span> lo stato iniziale</p>
-<p>La funzione di transizione definisce i passaggi da uno stato
-all’altro <span
-class="math inline"><em>δ</em> : <em>S</em> × <em>I</em> → <em>S</em></span>,
-puo’ essere una funzione parziale, cioe’ non essere definita per tutte
-le possibili coppie.</p>
-<p>Un automi a stati finiti non e’ un buon metodo se abbiamo un alto
-numero di stati significativi.</p>
-<p>ESPANDERE</p>
-<p>Superstate</p>
-<p>TODO fare musica maestro kata!!!!!</p>
-<h1 id="lezione-16---18112024"><a href="#lezione-16---18112024">Lezione
-16 - 18/11/2024</a></h1>
-<h1 id="lezione-17---20112024"><a href="#lezione-17---20112024">Lezione
-17 - 20/11/2024</a></h1>
-<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/prismjs/prism.min.js"></script>
-
+    <p>Intellij puo’ generare <code>if</code> in questo caso, inoltre
+    lascia aperta la porta a tool che potrebbero fare analisi statica
+    grazie alla mia dichiarazione di intento:</p>
+    <p>```java linenos:1 private final <span class="citation"
+    data-cites="NotNull">@NotNull</span> Rank rank; private final <span
+    class="citation" data-cites="NotNull">@NotNull</span> Suit suit;</p>
+    <p>public Card(<span class="citation"
+    data-cites="NotNull">@NotNull</span> Rank rank, <span
+    class="citation" data-cites="NotNull">@NotNull</span> Suit suit) {
+    this.rank = rank; this.suit = suit; } ```</p>
+    <p><code>Optional</code>? Quasi, non e’ molto differente da
+    controllare se qualcosa e’ <code>null</code>.</p>
+    <h2 id="pattern-1"><a href="#pattern">Pattern</a></h2>
+    <aside>
+    null object pattern
+    </aside>
+    <h3 id="null-object-pattern"><a href="#null-object-pattern">Null
+    Object Pattern</a></h3>
+    <p>“Vogliamo creare un oggetto che corrisponda al concetti”nessun
+    valore” o “valore neutro”.</p>
+    <p>ESPANDERE https://youtu.be/i5yG8Q6u8ic?t=1831</p>
+    <h1 id="lezione-11---01112024"><a
+    href="#lezione-11---01112024">Lezione 11 - 01/11/2024</a></h1>
+    <h1 id="lezione-12---04112024"><a
+    href="#lezione-12---04112024">Lezione 12 - 04/11/2024</a></h1>
+    <h1 id="lezione-13---06112024"><a
+    href="#lezione-13---06112024">Lezione 13 - 06/11/2024</a></h1>
+    <h1 id="lezione-14---11112024"><a
+    href="#lezione-14---11112024">Lezione 14 - 11/11/2024</a></h1>
+    <p><code>assert</code> vuol dire stabilire un contratto con il
+    chiamante; per questo puo’ sparire una volta in produzione.</p>
+    <h1 id="lezione-15---13112024"><a
+    href="#lezione-15---13112024">Lezione 15 - 13/11/2024</a></h1>
+    <p>Stato concreto e astratto * concreto dipende dalla sua
+    implementazione, ad esempio se ho due interi e’ <span
+    class="math inline">2<sup><sub>32</sub></sup> * 2<sup><sub>32</sub></sup></span>
+    * astratto e’ un sottoinsieme (meglio se significativo) degli stati
+    concreti</p>
+    <p>Oggetti senza stato possono essere gli oggetti funzione. Oggetti
+    con un solo stato sono gli oggetti immutabili.</p>
+    <p>NB: una classe immutabile non ha un solo stato, sono le sue
+    istanze che una volta create non possono piu’ cambiarlo.</p>
+    <h2 id="state-diagram"><a href="#state-diagram">State
+    diagram</a></h2>
+    <p>Un automa e’ una n-upla &lt;S, I, U; <span
+    class="math inline"><em>δ</em></span>, <span
+    class="math inline"><em>τ</em></span>, <span
+    class="math inline"><em>s</em><sub>0</sub></span>&gt;, dove * S
+    insieme finito e non vuoto degli stati * I l’insieme finito dei
+    possibili ingressi * U l’insieme finito delle possibili uscite *
+    <span class="math inline"><em>δ</em></span> la funzione di
+    transizione * <span class="math inline"><em>τ</em></span> la
+    funzione di uscita * <span
+    class="math inline"><em>S</em><sub>0</sub></span> lo stato
+    iniziale</p>
+    <p>La funzione di transizione definisce i passaggi da uno stato
+    all’altro <span
+    class="math inline"><em>δ</em> : <em>S</em> × <em>I</em> → <em>S</em></span>,
+    puo’ essere una funzione parziale, cioe’ non essere definita per
+    tutte le possibili coppie.</p>
+    <p>Un automi a stati finiti non e’ un buon metodo se abbiamo un alto
+    numero di stati significativi.</p>
+    <p>ESPANDERE</p>
+    <p>Superstate</p>
+    <p>TODO fare musica maestro kata!!!!!</p>
+    <h1 id="lezione-16---18112024"><a
+    href="#lezione-16---18112024">Lezione 16 - 18/11/2024</a></h1>
+    <h1 id="lezione-17---20112024"><a
+    href="#lezione-17---20112024">Lezione 17 - 20/11/2024</a></h1>
+    </article>
+  </main>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.min.js"></script>
 </body>
-</html>

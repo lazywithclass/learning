@@ -4,259 +4,97 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Minerva</title>
-  <style>
-    html {
-      color: #1a1a1a;
-      background-color: #fdfdfd;
-    }
-    body {
-      margin: 0 auto;
-      max-width: 36em;
-      padding-left: 50px;
-      padding-right: 50px;
-      padding-top: 50px;
-      padding-bottom: 50px;
-      hyphens: auto;
-      overflow-wrap: break-word;
-      text-rendering: optimizeLegibility;
-      font-kerning: normal;
-    }
-    @media (max-width: 600px) {
-      body {
-        font-size: 0.9em;
-        padding: 12px;
-      }
-      h1 {
-        font-size: 1.8em;
-      }
-    }
-    @media print {
-      html {
-        background-color: white;
-      }
-      body {
-        background-color: transparent;
-        color: black;
-        font-size: 12pt;
-      }
-      p, h2, h3 {
-        orphans: 3;
-        widows: 3;
-      }
-      h2, h3, h4 {
-        page-break-after: avoid;
-      }
-    }
-    p {
-      margin: 1em 0;
-    }
-    a {
-      color: #1a1a1a;
-    }
-    a:visited {
-      color: #1a1a1a;
-    }
-    img {
-      max-width: 100%;
-    }
-    svg {
-      height: auto;
-      max-width: 100%;
-    }
-    h1, h2, h3, h4, h5, h6 {
-      margin-top: 1.4em;
-    }
-    h5, h6 {
-      font-size: 1em;
-      font-style: italic;
-    }
-    h6 {
-      font-weight: normal;
-    }
-    ol, ul {
-      padding-left: 1.7em;
-      margin-top: 1em;
-    }
-    li > ol, li > ul {
-      margin-top: 0;
-    }
-    blockquote {
-      margin: 1em 0 1em 1.7em;
-      padding-left: 1em;
-      border-left: 2px solid #e6e6e6;
-      color: #606060;
-    }
-    code {
-      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
-      font-size: 85%;
-      margin: 0;
-      hyphens: manual;
-    }
-    pre {
-      margin: 1em 0;
-      overflow: auto;
-    }
-    pre code {
-      padding: 0;
-      overflow: visible;
-      overflow-wrap: normal;
-    }
-    .sourceCode {
-     background-color: transparent;
-     overflow: visible;
-    }
-    hr {
-      background-color: #1a1a1a;
-      border: none;
-      height: 1px;
-      margin: 1em 0;
-    }
-    table {
-      margin: 1em 0;
-      border-collapse: collapse;
-      width: 100%;
-      overflow-x: auto;
-      display: block;
-      font-variant-numeric: lining-nums tabular-nums;
-    }
-    table caption {
-      margin-bottom: 0.75em;
-    }
-    tbody {
-      margin-top: 0.5em;
-      border-top: 1px solid #1a1a1a;
-      border-bottom: 1px solid #1a1a1a;
-    }
-    th {
-      border-top: 1px solid #1a1a1a;
-      padding: 0.25em 0.5em 0.25em 0.5em;
-    }
-    td {
-      padding: 0.125em 0.5em 0.25em 0.5em;
-    }
-    header {
-      margin-bottom: 4em;
-      text-align: center;
-    }
-    #TOC li {
-      list-style: none;
-    }
-    #TOC ul {
-      padding-left: 1.3em;
-    }
-    #TOC > ul {
-      padding-left: 0;
-    }
-    #TOC a:not(:hover) {
-      text-decoration: none;
-    }
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    /* The extra [class] is a hack that increases specificity enough to
-       override a similar rule in reveal.js */
-    ul.task-list[class]{list-style: none;}
-    ul.task-list li input[type="checkbox"] {
-      font-size: inherit;
-      width: 0.8em;
-      margin: 0 0.8em 0.2em -1.6em;
-      vertical-align: middle;
-    }
-    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
-  </style>
-  <link rel="stylesheet" href="https://latex.vercel.app/style.css">
-  <link rel="stylesheet" href="https://latex.vercel.app/prism/prism.css">
-
+  <link rel="stylesheet" href="css/latex.css">
+  <link rel="stylesheet" href="css/prism.css">
   <link rel="stylesheet" href="css/index.css">
-  <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-  <![endif]-->
 </head>
-<body>
-<h1 id="definizioni"><a href="#definizioni">Definizioni</a></h1>
-<h2 id="documenti"><a href="#documenti">Documenti</a></h2>
-<p>Qualsiasi azione in ospedale produce un documento, anche per avere
-chiara la responsabilita’</p>
-<h3 id="documento-rilasciati-alla-fine"><a
-href="#documento-rilasciati-alla-fine">Documento rilasciati alla
-fine</a></h3>
-<h4 id="dcacum"><a href="#dcacum">DCACUM</a></h4>
-<p>“Passa il medico e annota” Notifiche manuale e automatiche.
-Annotazioni riguardo il paziente. Storia del ricovero, incompleto, non
-ci sono gli esami, referti di laboratorio, …</p>
-<h4 id="fut---foglio-unico-terapia"><a
-href="#fut---foglio-unico-terapia">FUT - Foglio Unico Terapia</a></h4>
-<p>Analogo DCACUM sulle somministrazioni</p>
-<p>Lettera dimissione medica Perche’ e’ stato dimesso</p>
-<h3 id="documento-prodotto-con-paziente-in-ospedale"><a
-href="#documento-prodotto-con-paziente-in-ospedale">Documento prodotto
-con paziente in ospedale</a></h3>
-<h4 id="dca"><a href="#dca">DCA</a></h4>
-<p>Singola entry del DCACUM</p>
-<h4 id="param"><a href="#param">Param</a></h4>
-<p>Automatiche</p>
-<h4 id="notifiche-automatiche"><a
-href="#notifiche-automatiche">Notifiche automatiche</a></h4>
-<p>Analogo del Param (cambia formato in xml)</p>
-<h4 id="annotazioni-manuali"><a href="#annotazioni-manuali">Annotazioni
-manuali</a></h4>
-<h4 id="inquadramento-clinico"><a
-href="#inquadramento-clinico">Inquadramento clinico</a></h4>
-<p>Prima “cosa” che fanno al paziente quando arriva in ospedale</p>
-<h1 id="architettura"><a href="#architettura">Architettura</a></h1>
-<p><img src="photo_2024-10-11_11-36-56.jpg" /></p>
-<p><img src="Pasted%20image%2020241014182839.png" /></p>
-<h2 id="flusso-dei-dati"><a href="#flusso-dei-dati">Flusso dei
-dati</a></h2>
-<p><img src="Pasted%20image%2020241018140706.png" /></p>
-<p>Ogni 4h, o a volonta’ con il trigger manuale, la richiesta di andare
-a prendere i dati (da tabelle, pdf, e xml) vengono immesse tramite due
-lambda su due code separate. Un componente successivamente si occupa di
-chiedere al Fetch di prendere questi dati, che li salva dentro il
-Bronze. Quindi sul Bronze ci sono due tipi di dato per ogni azione di
-fetch: * pdf_name.pdf che e’ il contenuto del blob * pdf_name.json che
-e’ il contenuto delle colonne della tupla dove c’era il blob
-Successivamente AWS Batch si occupa di prendere i dati e inserirli nella
-Testa Logica, la quale ha dei riferimenti a diversi repository di dati,
-in base al grado di estrazione compiuta: * Bronze - dato grezzo * Silver
-- c’e’ stata estrazione dei dati * Gold - le feature sono state ripulite
-e aggregate</p>
-<p>Quindi FETCHER_VISTE fa fetch da * server A che parla Postgres dove
-abbiamo TIPOFILE1 dentro VISTA1, TIPOFILE2 deNTRO vista2 ecc. * server B
-che parla Oracle dove abbiamo TIPOFILE1 dentro VISTA1, TIPOFILE2 deNTRO
-vista2 ecc. * server C che parla Mysql dove abbiamo TIPOFILE1 dentro
-VISTA1, TIPOFILE2 deNTRO vista2 ecc. ecc. In un server possiamo avere n
-viste e una vista puo’ ospitare da 0 a n tipofile che dobbiamo fetchare.
-Se ne ospita 0 non e’ una vista che prendiamo in considerazione, se ne
-ospita 1 o + si.</p>
-<p>Il fetcher gestisce il pool di connessioni e astrae la query che
-serve a prescindere dalla vista che interroghi e dal dialetto sql che
-usi</p>
-<p>E a runtime costruisce dinamicamente la query a seconda della vista e
-dialetto sql e QUALSIASI sia la vista e i dati in essa presenti chiede
-sempre Gli STESSI dati</p>
-<h2 id="testa-logica"><a href="#testa-logica">Testa logica</a></h2>
-<p>Ha a che fare con i file, non con il loro contenuto.</p>
-<aside>
-ATTENZIONE!
-</aside>
-<p><span class="b">I dati dei pdf vengono scritti su S3 e linkati per i
-Bronze, Silver, e Gold</span></p>
-<h2 id="dwh"><a href="#dwh">DWH</a></h2>
-<p>Estrazione feature da S3, piu’ pulizia del pdf perche’ header e
-footer si mettono in mezzo quando c’e’ da parsare, sopratutto quando
-sono in mezzo al cambio di pagina</p>
-<p>Per ogni sezione tirare fuori l’informazione, c’e’ uno schema di
-partenza da riempire con i dati che si trovano.</p>
-<p>Creiamo quindi un JSON a partire da una struttura che dice cosa
-estrarre e come farlo.</p>
-<p><span class="math inline">∀</span> docs pulizia estrazione sezioni
-estrazione informazioni salvataggio file update testa logica</p>
-<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/prismjs/prism.min.js"></script>
-
+<body class="latex-dark">
+  <main>
+    <article>
+    <h1 id="definizioni"><a href="#definizioni">Definizioni</a></h1>
+    <h2 id="documenti"><a href="#documenti">Documenti</a></h2>
+    <p>Qualsiasi azione in ospedale produce un documento, anche per
+    avere chiara la responsabilita’</p>
+    <h3 id="documento-rilasciati-alla-fine"><a
+    href="#documento-rilasciati-alla-fine">Documento rilasciati alla
+    fine</a></h3>
+    <h4 id="dcacum"><a href="#dcacum">DCACUM</a></h4>
+    <p>“Passa il medico e annota” Notifiche manuale e automatiche.
+    Annotazioni riguardo il paziente. Storia del ricovero, incompleto,
+    non ci sono gli esami, referti di laboratorio, …</p>
+    <h4 id="fut---foglio-unico-terapia"><a
+    href="#fut---foglio-unico-terapia">FUT - Foglio Unico
+    Terapia</a></h4>
+    <p>Analogo DCACUM sulle somministrazioni</p>
+    <p>Lettera dimissione medica Perche’ e’ stato dimesso</p>
+    <h3 id="documento-prodotto-con-paziente-in-ospedale"><a
+    href="#documento-prodotto-con-paziente-in-ospedale">Documento
+    prodotto con paziente in ospedale</a></h3>
+    <h4 id="dca"><a href="#dca">DCA</a></h4>
+    <p>Singola entry del DCACUM</p>
+    <h4 id="param"><a href="#param">Param</a></h4>
+    <p>Automatiche</p>
+    <h4 id="notifiche-automatiche"><a
+    href="#notifiche-automatiche">Notifiche automatiche</a></h4>
+    <p>Analogo del Param (cambia formato in xml)</p>
+    <h4 id="annotazioni-manuali"><a
+    href="#annotazioni-manuali">Annotazioni manuali</a></h4>
+    <h4 id="inquadramento-clinico"><a
+    href="#inquadramento-clinico">Inquadramento clinico</a></h4>
+    <p>Prima “cosa” che fanno al paziente quando arriva in ospedale</p>
+    <h1 id="architettura"><a href="#architettura">Architettura</a></h1>
+    <p><img src="photo_2024-10-11_11-36-56.jpg" /></p>
+    <p><img src="Pasted%20image%2020241014182839.png" /></p>
+    <h2 id="flusso-dei-dati"><a href="#flusso-dei-dati">Flusso dei
+    dati</a></h2>
+    <p><img src="Pasted%20image%2020241018140706.png" /></p>
+    <p>Ogni 4h, o a volonta’ con il trigger manuale, la richiesta di
+    andare a prendere i dati (da tabelle, pdf, e xml) vengono immesse
+    tramite due lambda su due code separate. Un componente
+    successivamente si occupa di chiedere al Fetch di prendere questi
+    dati, che li salva dentro il Bronze. Quindi sul Bronze ci sono due
+    tipi di dato per ogni azione di fetch: * pdf_name.pdf che e’ il
+    contenuto del blob * pdf_name.json che e’ il contenuto delle colonne
+    della tupla dove c’era il blob Successivamente AWS Batch si occupa
+    di prendere i dati e inserirli nella Testa Logica, la quale ha dei
+    riferimenti a diversi repository di dati, in base al grado di
+    estrazione compiuta: * Bronze - dato grezzo * Silver - c’e’ stata
+    estrazione dei dati * Gold - le feature sono state ripulite e
+    aggregate</p>
+    <p>Quindi FETCHER_VISTE fa fetch da * server A che parla Postgres
+    dove abbiamo TIPOFILE1 dentro VISTA1, TIPOFILE2 deNTRO vista2 ecc. *
+    server B che parla Oracle dove abbiamo TIPOFILE1 dentro VISTA1,
+    TIPOFILE2 deNTRO vista2 ecc. * server C che parla Mysql dove abbiamo
+    TIPOFILE1 dentro VISTA1, TIPOFILE2 deNTRO vista2 ecc. ecc. In un
+    server possiamo avere n viste e una vista puo’ ospitare da 0 a n
+    tipofile che dobbiamo fetchare. Se ne ospita 0 non e’ una vista che
+    prendiamo in considerazione, se ne ospita 1 o + si.</p>
+    <p>Il fetcher gestisce il pool di connessioni e astrae la query che
+    serve a prescindere dalla vista che interroghi e dal dialetto sql
+    che usi</p>
+    <p>E a runtime costruisce dinamicamente la query a seconda della
+    vista e dialetto sql e QUALSIASI sia la vista e i dati in essa
+    presenti chiede sempre Gli STESSI dati</p>
+    <h2 id="testa-logica"><a href="#testa-logica">Testa logica</a></h2>
+    <p>Ha a che fare con i file, non con il loro contenuto.</p>
+    <aside>
+    ATTENZIONE!
+    </aside>
+    <p><span class="b">I dati dei pdf vengono scritti su S3 e linkati
+    per i Bronze, Silver, e Gold</span></p>
+    <h2 id="dwh"><a href="#dwh">DWH</a></h2>
+    <p>Estrazione feature da S3, piu’ pulizia del pdf perche’ header e
+    footer si mettono in mezzo quando c’e’ da parsare, sopratutto quando
+    sono in mezzo al cambio di pagina</p>
+    <p>Per ogni sezione tirare fuori l’informazione, c’e’ uno schema di
+    partenza da riempire con i dati che si trovano.</p>
+    <p>Creiamo quindi un JSON a partire da una struttura che dice cosa
+    estrarre e come farlo.</p>
+    <p><span class="math inline">∀</span> docs pulizia estrazione
+    sezioni estrazione informazioni salvataggio file update testa
+    logica</p>
+    </article>
+  </main>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.min.js"></script>
 </body>
-</html>

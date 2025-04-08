@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <link rel="stylesheet" href="css/latex.css">
+  <link rel="stylesheet" href="css/prism.css">
+  <link rel="stylesheet" href="css/index.css">
+</head>
+<body class="latex-dark">
+  <main>
+    <article>
+    <h1>SOLID</h1>
+    <p>TODO!!!!!!!!!!!!!!!! FINISH extracting
+    https://condor.depaul.edu/dmumaugh/OOT/Design-Principles/
+    https://ieeexplore.ieee.org/author/37291880700
+    https://en.wikipedia.org/wiki/Robert_C._Martin
+    https://web.archive.org/web/20150906155800/http://www.objectmentor.com/resources/articles/Principles_and_Patterns.pdf
+    https://www.youtube.com/results?search_query=barbara+liskov
+    https://www.youtube.com/watch?v=v-2yFMzxqwU
+    https://duckduckgo.com/?q=Barbara+Liskov%2C+%E2%80%9CData+Abstraction+and+Hierarchy%2C%E2%80%9D+SIGPLAN+Notices%2C+23%2C5+(May%2C+1988).&amp;atb=v340-1&amp;ia=web
+    https://se.inf.ethz.ch/~meyer/publications/old/dbc_chapter.pdf
+    https://en.wikipedia.org/wiki/SOLID#cite_note-11
+    https://vimeo.com/97514630
+    https://www.youtube.com/watch?v=TMuno5RZNeE
+    https://www.youtube.com/watch?v=BSaAMQVq01E</p>
+    <p>http://butunclebob.com/ArticleS.UncleBob.PrinciplesOfOod</p>
+    <blockquote>
+    <p>When considering whether a particular design is appropriate or
+    not, one must not simply view the solution in isolation. One must
+    view it in terms of the reasonable assumptions that will be made by
+    the users of that design.</p>
+    </blockquote>
+    <p>– <a
+    href="cpp-report_engineering-notebook_liskov-substitution-principle.pdf">Validity
+    is not Intrinsic</a></p>
+    <h1 id="single-responsibility-principle"><a
+    href="#single-responsibility-principle">Single responsibility
+    principle</a></h1>
+    <p><a
+    href="https://blog.cleancoder.com/uncle-bob/2014/05/08/SingleReponsibilityPrinciple.html">The
+    Single Responsibility Principle - The Clean Code Blog</a></p>
+    <blockquote>
+    <p>A class should have one, and only one, reason to change</p>
+    </blockquote>
+    <blockquote>
+    <p>Why was it important to separate these two responsibilities into
+    separate classes? Because each responsibility is an axis of change.
+    When the requirements change, that change will be manifest through a
+    change in responsibility amongst the classes. If a class assumes
+    more than one responsibility, then there will be more than one
+    reason for it to change. If a class has more then one
+    responsibility, then the responsibilities become coupled. Changes to
+    one responsibility may impair or inhibit the class’ ability to meet
+    the others. This kind of coupling leads to fragile designs that
+    break in unexpected ways when changed.</p>
+    </blockquote>
+    <p>“Each software module should have one and only one reason to
+    change”, but then “What defines a reason to change?”.</p>
+    <p>“Incoraggia un’alta coesione interna (tutti i metodi hanno a che
+    fare con lo stesso obiettivo) e un alto disaccoppiamento esterno,
+    porta ad una buona modularizzazione”</p>
+    <p>“This principle is about people.”</p>
+    <p>This is the reason we do not put SQL in JSPs. This is the reason
+    we do not generate HTML in the modules that compute results. This is
+    the reason that business rules should not know the database schema.
+    This is the reason we separate concerns.</p>
+    <p>“Gather together the things that change for the same reasons.
+    Separate those things that change for different reasons.”</p>
+    <ul>
+    <li>the secret which I am guaranteeing for, and for which I manage
+    evolution over time; or</li>
+    <li>the single reason why I should change</li>
+    </ul>
+    <p><a
+    href="https://www.enjoyalgorithms.com/blog/single-responsibility-principle-in-oops">“A
+    good system should be high on cohesion and low on coupling”</a></p>
+    <figure>
+    <img
+    src="https://cdn-images-1.medium.com/max/640/0*11cZSBOkR82nknwy.png"
+    alt="img|300" />
+    <figcaption aria-hidden="true">img|300</figcaption>
+    </figure>
+    <h2 id="benefici"><a href="#benefici">Benefici</a></h2>
+    <ul>
+    <li>ridotto impatto a seguito di modifiche perche’ ogni classe si
+    concentra su uno specifico aspetto o funzionalita’ del sistema</li>
+    <li>mantenibilita’ aumentata perche’ posso intervenire su una
+    classe, ad esempio con un refactor, senza che queste modifiche
+    impattino su un’altra</li>
+    <li>facilita il riutilizzo perche’ siccome e’ chiaro di cosa si
+    occupano e non hanno un alto livello di accoppiamento con le altre
+    classi, posso usarle anche in altri ambiti</li>
+    </ul>
+    <h2 id="related-patterns"><a href="#related-patterns">Related
+    patterns</a></h2>
+    <ul>
+    <li><a href="Design%20Pattern.md#Decorator">Decorator</a>: per
+    decentralizzare le varie aggiunte, ognuna in una classe decoratrice,
+    invece di avere una god class</li>
+    <li><a href="Design%20Pattern.md#Strategy">Strategy</a>: per
+    scegliere quale algoritmo usare, la strategia si occupa di un certo
+    compito, ignorando cio’ che ha attorno</li>
+    <li><a href="Design%20Pattern.md#Factory">Factory</a>: delego la
+    creazione di ogni specifico oggetto</li>
+    </ul>
+    <h1 id="open-closed-principle"><a
+    href="#open-closed-principle">Open-Closed principle</a></h1>
+    <p><a
+    href="https://courses.cs.duke.edu/fall07/cps108/papers/ocp.pdf">Engineering
+    Notebook columns for The C++ Report - The Open-Closed
+    Principle</a></p>
+    <blockquote>
+    <p>The foundation for building code that is maintainable and
+    reusable</p>
+    </blockquote>
+    <p>– <a
+    href="cpp-report_engineering-notebook_liskov-substitution-principle.pdf">See
+    Introduction of Engineering Notebook columns for The C++ Report -
+    The Liskov Substitution Principle</a></p>
+    <blockquote>
+    <p>You should be able to extend a classes behavior, without
+    modifying it</p>
+    </blockquote>
+    <blockquote>
+    <p>When the creation of a derived class causes us to make changes to
+    the base class, it often implies that the design is fault, indeed it
+    violates the Open-Closed principle</p>
+    </blockquote>
+    <p>Permette di ottenere: * stabilita’ grazie al fatto che non
+    vengono modificate le classi * mantenibilita’ attraverso
+    l’estensibilita’</p>
+    <p><a href="Java.md#Dynamic%20binding">Dynamic binding</a> e’ un
+    aspetto chiave di OOP, perche’ permette di chiamare codice non
+    ancora scritto: cioe’ riconoscendo il tipo concreto dal tipo
+    apparente solo a runtime, tengo aperta la possibilita’ di future
+    estensioni. ## Related patterns</p>
+    <ul>
+    <li><a href="Design%20Pattern.md#Template">Template</a>: definisce
+    lo scheletro di un algoritmo in una classe base, alcuni passaggi
+    vengono lasciati da implementare alle sottoclassi, senza modificare
+    la classe originale</li>
+    <li><a href="Design%20Pattern.md#Adapter%20-%20page%20139">Adapter -
+    page 139</a>: riusare classi in nuovi contesti senza modificarle
+    direttamente</li>
+    <li><a href="Design%20Pattern.md#Strategy">Strategy</a>: ogni
+    algoritmo e’ incapsulato nella sua classe che implementa una
+    interfaccia condivisa</li>
+    </ul>
+    <h1 id="liskov-substitution-principle"><a
+    href="#liskov-substitution-principle">Liskov substitution
+    principle</a></h1>
+    <p><a
+    href="https://www.cs.utexas.edu/~downing/papers/LSP-1996.pdf">Engineering
+    Notebook columns for The C++ Report - The Liskov Substitution
+    Principle</a></p>
+    <blockquote>
+    <p>if you have a program that works correctly with a base class,
+    then it should continue to work correctly if you replace the base
+    class with any of its derived classes</p>
+    </blockquote>
+    <p><code>S</code> sottotipo di <code>T</code>: * precondizioni dei
+    metodi di <code>S</code> non devono essere piu’ stringenti delle
+    precondizioni dei metodi di <code>T</code> * postcondizioni dei
+    metodi di <code>S</code> non devono essere piu’ larghe delle
+    postcondizioni dei metodi di <code>T</code></p>
+    <p>Voglio evitare che chi cita una classe e vede una possibilita’
+    (metodo), si ritrovi con una classe figlia che questa possibilita’
+    non ce l’ha.</p>
+    <p>If a function violates LSP then that function uses a reference to
+    a base class, but must know about all the derivatives of that base
+    class.</p>
+    <h2 id="open-closed-principle-and-liskov-substitution-principle"><a
+    href="#open-closed-principle-and-liskov-substitution-principle">Open-Closed
+    Principle and Liskov Substitution Principle</a></h2>
+    <aside>
+    OOD is-a relationship pertains to behavior
+    </aside>
+    <blockquote>
+    <p>In order for the LSP to hold, and with it the Open-Closed
+    principle, all derivatives must conform to the behavior that clients
+    expect of the base classes that they use.</p>
+    </blockquote>
+    <p>Siamo interessati al comportamento dei moduli tra di loro,
+    comportamento su cui gli utilizzatori dipendono.</p>
+    <h2 id="design-by-contract-and-liskov-substituion-principle"><a
+    href="#design-by-contract-and-liskov-substituion-principle">Design
+    by Contract and Liskov Substituion Principle</a></h2>
+    <p>In Design by Contract (Bertrand Meyer) methods declare
+    preconditions and postconditions: * preconditions must be true
+    before method invocation * postconditions are guaranteed by method
+    invocation</p>
+    <p>The rule for these conditions, for derivatives, is:</p>
+    <blockquote>
+    <p>…when redefining a routine in a derivative, you may only replace
+    its precondition by a weaker one, and its postcondition by a
+    stronger one.</p>
+    </blockquote>
+    <p>So: * when using an object through its base class <span
+    class="math inline">→</span> the client knows only the preconditions
+    and postconditions of the base class <span
+    class="math inline">→</span> derived objects must not expect such
+    clients to obey preconditions that are stronger that those required
+    by the base class <u>They must accept anything that the base class
+    accepts</u> * derived classes must conform to all the postconditions
+    of the base <span class="math inline">→</span> their behaviours and
+    outputs must not violate any of the contraints established for the
+    base class; users of the base class must not be confused by the
+    output of the derived class</p>
+    <h1 id="interface-segregation"><a
+    href="#interface-segregation">Interface segregation</a></h1>
+    <p><a
+    href="https://www.cs.utexas.edu/~downing/papers/ISP-1996.pdf">Engineering
+    Notebook columns for The C++ Report - The Interface Segregation
+    Principle</a></p>
+    <blockquote>
+    <p>Clients should not be forced to depend on methods they do not
+    use</p>
+    </blockquote>
+    <blockquote>
+    <p>Make fine grained interfaces that are client specific</p>
+    </blockquote>
+    <p>“Offer different views of the same type.”</p>
+    <blockquote>
+    <p>“Polimorfismo e’ un modo per esprimere di fronte alla stessa
+    interfaccia comportamenti diversi. Grazie al polimorfismo possiamo
+    mostrare lo stesso cosa nascondendo diversi come.”</p>
+    </blockquote>
+    <p>– Jessica Vecchia</p>
+    <p>Fa in modo che il client ottenga la dipendenza <span
+    class="b">minima</span> dalla classe che vuole utilizzare, vuole
+    utilizzare solo certi aspetti che la classe implementa, non
+    tutti.</p>
+    <p>Questo principio permette di raggiungere un grado basso di
+    accoppiamento tra gli oggetti.</p>
+    <figure>
+    <img src="interface-segregation-example.png"
+    alt="interface-segregation|400" />
+    <figcaption
+    aria-hidden="true">interface-segregation|400</figcaption>
+    </figure>
+    <h2 id="related-patterns-1"><a href="#related-patterns">Related
+    patterns</a></h2>
+    <ul>
+    <li><a href="Design%20Pattern.md#Observer">Observer</a>: un solo
+    metodo <code>update()</code> che e’ l’unico interesse del
+    Subject</li>
+    </ul>
+    <h1 id="dependency-inversion"><a
+    href="#dependency-inversion">Dependency inversion</a></h1>
+    <p><a
+    href="https://www.labri.fr/perso/clement/enseignements/ao/DIP.pdf">Engineering
+    Notebook columns for The C++ Report - The Dependency Inversion
+    Principle</a></p>
+    <blockquote>
+    <p>Depend on abstractions, not on concretions</p>
+    </blockquote>
+    <p>I moduli di alto livello non dovrebbero dipendere dai moduli di
+    basso livello: entrambi dovrebbero dipendere da astrazioni. Le
+    astrazioni non dovrebbero dipendere dai dettagli. Programmare verso
+    le interfacce.</p>
+    <p>“Depend on stuff more concrete than me”</p>
+    <p>This is pure gold:
+    https://blog.cleancoder.com/uncle-bob/2016/01/04/ALittleArchitecture.html
+    ## Benefici</p>
+    <ul>
+    <li><p>testabilita’ perche’ posso mockare con semplificita’ una
+    interfaccia invece di portarmi dietro un intero albero di
+    implementazioni</p></li>
+    <li><p>flessibilita’ perche’ posso variare l’implementazione in base
+    alle necessita’, quindi ad esempio passare un database PostgreSQL a
+    MySQL</p></li>
+    <li><p>ridotto accoppiamento perche’ dei cambiamenti nei moduli di
+    basso livello non impattano i moduli di alto livello ## Related
+    patterns</p></li>
+    <li><p><a href="Design%20Pattern.md#Factory%20method">Factory
+    method</a>: definisce una interfaccia per la creazione di un
+    oggetto, ma consente alle sottoclassi di decidere quale classe
+    istanziare</p></li>
+    <li><p><a href="Design%20Pattern.md#Abstract%20factory">Abstract
+    factory</a>: fornisce un’interfaccia per la creazione di famiglie di
+    oggetti correlati o dipendenti senza specificare le loro classi
+    concrete</p></li>
+    <li><p><a href="Design%20Pattern.md#Composite">Composite</a>:
+    trattare uniformemente parti e insiemi, il client non sa se sta
+    parlando con una parte o un insieme</p></li>
+    </ul>
+    <h1 id="esempi"><a href="#esempi">Esempi</a></h1>
+    <h2 id="dependency-inversion-e-open-close"><a
+    href="#dependency-inversion-e-open-close">Dependency Inversion e
+    Open Close</a></h2>
+    <blockquote>
+    <p>Identificare gli aspetti della applicazione che cambiano e
+    separarli da cio’ che rimane fisso</p>
+    </blockquote>
+    <p>In questo caso usiamo due volte lo <a
+    href="Design%20Pattern.md#Strategy">Strategy</a>.</p>
+    <figure>
+    <img src="di-oc-example.png" alt="strategy|300" />
+    <figcaption aria-hidden="true">strategy|300</figcaption>
+    </figure>
+    <p>Fin qua tutto ok.</p>
+    <figure>
+    <img src="di-oc-problem.png" alt="strategy-problem|300" />
+    <figcaption aria-hidden="true">strategy-problem|300</figcaption>
+    </figure>
+    <p>Il problema nasce quando si aggiunge <code>RubberDuck</code> e
+    successivamente si aggiunge un metodo <code>fly()</code> a
+    <code>Duck</code>: <code>RubberDuck</code> si ritrova a poter
+    volare!</p>
+    <p>Override non e’ una soluzione perche’ mi ritrovo a dover
+    implementare uno “stub” dentro <code>RubberDuck</code>, sto violando
+    <a href="SOLID.md#Liskov%20substitution%20principle">Liskov
+    substitution principle</a>: ho una sottoclasse che non sa fare
+    qualcosa che la superclasse sa fare.</p>
+    <p>Definire diverse interfacce come <code>Quackable</code>,
+    <code>Swimmable</code>, …, con metodi di default e’ meglio ma devo
+    far implementare a <code>MallardDuck</code> e
+    <code>RedheadDuck</code> le interfacce in base a cosa possono fare,
+    ma mi porta a duplicazione.</p>
+    <p>Delego! <img src="di-oc-solution.png"
+    alt="pattern-strategy-ducks|500" /> <code>Duck</code> contiene
+    (aggrega) al suo interno come si comporta rispetto al fare
+    “quack”.</p>
+    <aside>
+    single responsibility
+    </aside>
+    <p>Quindi non devo avere piu’ ragioni per cambiare: “cambia modo di
+    fare quack o di volare?” se sono nella classe sono due motivi
+    diversi per cambiare la classe.</p>
+    </article>
+  </main>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script src="js/prism.min.js"></script>
+</body>

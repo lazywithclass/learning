@@ -1,18 +1,26 @@
 {
 	"nodes":[
 		{"id":"85dd640905a2b3bb","type":"group","x":-3120,"y":-986,"width":2080,"height":1826,"label":"Software engineering"},
+		{"id":"00e9f975870d4907","type":"group","x":-3480,"y":1200,"width":2080,"height":1826,"label":"Verifica e convalida"},
+		{"id":"895635680b7e7df4","type":"group","x":-5280,"y":1280,"width":1200,"height":1040,"label":"Database"},
 		{"id":"b0347299040bae97","type":"group","x":-5200,"y":-280,"width":1049,"height":689,"label":"Java"},
+		{"id":"a83c9bac82882194","type":"file","file":"Verifica e convalida.md","x":-3280,"y":1440,"width":400,"height":400},
+		{"id":"9c8caae7182b4d20","type":"file","file":"SOLID.md","x":-2360,"y":-77,"width":400,"height":400},
+		{"id":"f7c0300af3594b9e","type":"file","file":"TDD.md","x":-2480,"y":1520,"width":400,"height":400},
+		{"id":"d7901ebc7ac6d58f","type":"file","file":"Inheritance.md","x":-1688,"y":123,"width":400,"height":400},
+		{"id":"3641920f7a5b59c5","type":"file","file":"Databases.md","x":-4876,"y":1880,"width":400,"height":400},
+		{"id":"c01c2479d46c1773","type":"file","file":"Relational algebra.md","x":-4560,"y":1320,"width":400,"height":400},
+		{"id":"529f0538e11231ae","type":"file","file":"SQL.md","x":-5200,"y":1320,"width":400,"height":400},
 		{"id":"1d96b754faeaee28","type":"file","file":"Exception.md","x":-5138,"y":-191,"width":400,"height":400},
+		{"id":"969134cf7e4e5c47","type":"file","file":"Java.md","x":-4560,"y":-191,"width":400,"height":400},
 		{"id":"7b56a502ad3fb7fc","type":"file","file":"Design Pattern.md","x":-3040,"y":-880,"width":400,"height":402},
 		{"id":"4f1cb2aca91aaf7a","type":"file","file":"Encapsulation and information hiding.md","x":-2360,"y":-880,"width":400,"height":400},
-		{"id":"d7901ebc7ac6d58f","type":"file","file":"Inheritance.md","x":-1688,"y":123,"width":400,"height":400},
-		{"id":"dea8b742a229aa25","type":"file","file":"Law of Demeter.md","x":-1640,"y":-625,"width":400,"height":400},
-		{"id":"969134cf7e4e5c47","x":-4560,"y":-191,"width":400,"height":400,"type":"file","file":"Java.md"},
-		{"id":"a83c9bac82882194","type":"file","file":"Verifica e convalida.md","x":-2960,"y":323,"width":400,"height":400},
-		{"id":"9c8caae7182b4d20","type":"file","file":"SOLID.md","x":-2360,"y":-77,"width":400,"height":400}
+		{"id":"dea8b742a229aa25","type":"file","file":"Law of Demeter.md","x":-1640,"y":-625,"width":400,"height":400}
 	],
 	"edges":[
 		{"id":"9cba33d2898e5a11","fromNode":"dea8b742a229aa25","fromSide":"left","toNode":"9c8caae7182b4d20","toSide":"top"},
-		{"id":"faa6ae0a9e46bb90","fromNode":"9c8caae7182b4d20","fromSide":"top","toNode":"dea8b742a229aa25","toSide":"left"}
+		{"id":"faa6ae0a9e46bb90","fromNode":"9c8caae7182b4d20","fromSide":"top","toNode":"dea8b742a229aa25","toSide":"left"},
+		{"id":"270c65b72056b788","fromNode":"c01c2479d46c1773","fromSide":"left","toNode":"529f0538e11231ae","toSide":"right"},
+		{"id":"a76fd420ddbefe72","fromNode":"529f0538e11231ae","fromSide":"bottom","toNode":"3641920f7a5b59c5","toSide":"top","fromEnd":"arrow"}
 	]
 }

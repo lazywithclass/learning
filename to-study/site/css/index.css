@@ -1,5 +1,23 @@
 /* because I am bad at CSS */
 
+:root {
+  --font-size: 1.0em;
+}
+
+html {
+  background-color: inherit !important;
+  font-size: var(--font-size) !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  border-bottom: 1px solid grey !important;
+}
+
 h1 a,
 h2 a,
 h3 a,
@@ -10,6 +28,42 @@ h6 a {
   text-decoration: none !important;
 }
 
-html {
-  background-color: inherit !important;
+iframe {
+  border: none !important;
+}
+
+article > figcaption {
+  margin-top: 0;
+}
+
+/* add quotes to blockquotes */
+blockquote {
+    position: relative;
+}
+blockquote:before {
+  position: absolute;
+  content: open-quote;
+  font-size: var(--font-size);
+  margin-left: -0.6em;
+  margin-top: -0.4em;
+}
+blockquote:after {
+  position: absolute;
+  content: close-quote;
+  font-size: var(--font-size);
+  bottom: 0;
+  right: 0;
+  margin-right: -0.6em;
+  margin-bottom: -0.8em;
+}
+blockquote p {
+  display: inline;
+}
+
+cite {
+  display: block !important;
+}
+
+figure {
+  justify-items: center;
 }

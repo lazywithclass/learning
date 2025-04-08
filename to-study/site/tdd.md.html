@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <link rel="stylesheet" href="css/latex.css">
+  <link rel="stylesheet" href="css/prism.css">
+  <link rel="stylesheet" href="css/index.css">
+</head>
+<body class="latex-dark">
+  <main>
+    <article>
+    <h1>TDD</h1>
+    <p>Domande</p>
+    <ul>
+    <li><ul>
+    <li>cosa e’ un test ideale? (+)</li>
+    </ul></li>
+    <li>perche’ TDD e’ una buona tecnica? Tecnica di requisiti o tecnica
+    di design o di progettazione? Cos’e’? (+)</li>
+    <li>quando un criterio di selezione è valido e quando è
+    affidabile</li>
+    <li>terminologia degli errori</li>
+    <li>albero di copertura vs abero di raggiungibilità</li>
+    <li>criteri di selezione: proprietà</li>
+    <li>Terminologia di base di verifica e convalida. Sbaglio, errore,
+    difetto, anomalia…, esempio in cui si presenta anomalia ma non
+    (difetto o errore (?))</li>
+    </ul>
+    <h1 id="definizione"><a href="#definizione">Definizione</a></h1>
+    <blockquote>
+    <p>TDD is an awareness of the gap between decision and feedback
+    during programming, and techniques to control that gaps <cite>– Kent
+    Beck</cite></p>
+    </blockquote>
+    <p>The gap is the time between when a decision is made and when you
+    get if it was correct. In traditional development this gap could be
+    huge, which makes debugging difficult and costly.</p>
+    <p>Techniques:</p>
+    <ul>
+    <li>write tests before implementation code</li>
+    <li>work in very small increments (<a
+    href="TDD.md#Red%20green%20refactor%20cycle">Red green refactor
+    cycle</a>)</li>
+    <li>getting rapid feedback on each decision</li>
+    <li>making course correction while the context is fresh in your
+    mind</li>
+    </ul>
+    <p>So TDD could be thought as a feedback mechanism.</p>
+    <p>Shrinking the gap allows to reduce decision fatigue and technical
+    debt, as the latter could be expressed as decisions made without
+    proper feedback.</p>
+    <h2 id="quotes"><a href="#quotes">Quotes</a></h2>
+    <blockquote>
+    <p>TDD e’ una metodologia di sviluppo software, non di testing</p>
+    </blockquote>
+    <blockquote>
+    <p>Testing shows the presence, not the absence of bugs. <cite>–
+    Dijkstra</cite></p>
+    </blockquote>
+    <p>This quote comes from <a
+    href="http://homepages.cs.ncl.ac.uk/brian.randell/NATO/nato1969.PDF">here</a></p>
+    <blockquote>
+    <p>Write tests until fear is transformed into boredom</p>
+    </blockquote>
+    <p>TDD = test first + baby steps</p>
+    <h1 id="verifica-e-convalida"><a
+    href="#verifica-e-convalida">Verifica e convalida</a></h1>
+    <p>Vedere <a href="Verifica%20e%20convalida.md">Verifica e
+    convalida</a> per * definizione di test affidabile e valido *
+    criteri di selezione di test</p>
+    <h1 id="test"><a href="#test">Test</a></h1>
+    <p>SUT is the subject under test, <a
+    href="https://highlander.fandom.com/wiki/There_can_be_only_one">there
+    can be only one</a> SUT for a single test and it is never mocked.
+    DOC is the dependent on component, there can be many and they have
+    to be mocked.</p>
+    <p>Si possono evitare di mockare:</p>
+    <ul>
+    <li>enum</li>
+    <li>lambda</li>
+    </ul>
+    <h1 id="red-green-refactor-cycle"><a
+    href="#red-green-refactor-cycle">Red green refactor cycle</a></h1>
+    <p><span class="sidenote">Failure is progress</span></p>
+    <p>Ask myself: “What set of tests, when passed, will demonstrate the
+    presence of code we are confident will compute as expected?”</p>
+    <p>The rhythm of TDD (Red Green Refactor Red Green …): * quickly add
+    a test * run <span class="b">all</span> tests and see the new one
+    fail * make a little change * run <span class="b">all</span> tests
+    and se them all succeed * refactor to remove duplication</p>
+    <figure>
+    <img src="Pasted%20image%2020250309154057.png"
+    alt="Test Driven Development" />
+    <figcaption aria-hidden="true"><a
+    href="https://martinfowler.com/bliki/TestDrivenDevelopment.html">Test
+    Driven Development</a></figcaption>
+    </figure>
+    <p>If in need to have a test go red use the triangulation technique,
+    for example suppose the first expectation was the only one then we
+    add the second:</p>
+    <pre class="language-java"><code>public void testEquality() {
+  assertTrue(new Dollar(5).equals(new Dollar(5)));
+  assertTrue(new Dollar(5).equals(new Dollar(6))); // triangulation
+}</code></pre>
+    <p>Per ogni test ci deve essere una sola esecuzione del metodo che
+    sto testando, cosi che quando qualcosa fallisce so esattamente dove
+    andare a guardare, e non ci sono test che “falliscono a meta’”.</p>
+    <h2 id="refactoring"><a href="#refactoring">Refactoring</a></h2>
+    <p>Modifiche del codice senza cambiare funzionalita’, per modificare
+    qualche qualita’ interna, avviene dopo il Green perche’ se ottengo
+    un Red dopo un Refactoring sono nell’incertezza.</p>
+    <p>Continuare a fare refactoring senza pieta’. Perche’ per farlo ci
+    vuole coraggio: “Scrivo il test e tra 5 10 minuti il test passa”</p>
+    <p>Non ci può essere un refactoring se non si parte da Green. Nei
+    refactoring non si possono modificare funzionalità.</p>
+    <h2 id="tempo"><a href="#tempo">Tempo</a></h2>
+    <p>Un rosso deve essere ragionevolmente breve, indicativamente
+    minore di 10’ - 15’. Trovarsi bloccati in questa fase puo’ voler
+    dire che si e’ approcciato un problema troppo difficile, trovare una
+    via piu’ semplice.</p>
+    <h1 id="test-double"><a href="#test-double">Test double</a></h1>
+    <p>The notion comes from “stunt double” used in movies.</p>
+    <p><a href="http://xunitpatterns.com/Test%20Double.html">Test
+    double</a> - controfigura per il testing: si mette al posto di DOC
+    per testare in isolamento il SUT; utile quando DOC:</p>
+    <ul>
+    <li>non esiste</li>
+    <li>fornisce dati non deterministici / non prevedibili</li>
+    <li>presentare situazioni difficilmente riproducibili (trasmissione,
+    memoria, …)</li>
+    <li>e’ lento</li>
+    <li>potrebbe introdurre errori che non voglio considerare mentre
+    testo SUT</li>
+    </ul>
+    <h2 id="mock-vs-stub"><a href="#mock-vs-stub">Mock vs Stub</a></h2>
+    <p><a
+    href="https://martinfowler.com/articles/mocksArentStubs.html#TheDifferenceBetweenMocksAndStubs">Quale
+    e’ la differenza tra un mock e uno stub?</a></p>
+    <ul>
+    <li><p>dummy: oggetto passato ma su cui non si fa alcuna
+    asserzione</p></li>
+    <li><p>fake: possiede una implementazione funzionante, ma vive solo
+    nel mondo dei test, ad esempio un database in memory per velocizzare
+    i test</p></li>
+    <li><p>assenza di mock: si sta facendo verificazione dello
+    stato</p></li>
+    <li><p>mock: verifica del comportamento (“questo metodo e’ stato
+    chiamato cosi?”)</p></li>
+    <li><p>stub: forniscono risposte preconfezionate, e rispondono solo
+    a quelle (parto dal vuoto)</p></li>
+    <li><p>spy: sono proxy di oggetti reali che consentono di loggarne
+    le interazioni</p></li>
+    </ul>
+    <h2 id="utilizzo"><a href="#utilizzo">Utilizzo</a></h2>
+    <p>Crea un oggetto. Dichiaro cosa voglio che questo oggetto sappia
+    fare.</p>
+    <p>Instrumentano il DOC, instrumentati per essere interrogabili in
+    merito a cosa gli e’ successo: “chi ti ha chiamato?”, “in che
+    ordine?”, “quante volte?”, …</p>
+    <pre class="language-java"><code>when(mockedObj.methodName(args)).thenXXX(values);</code></pre>
+    <p>Per verificare quante volte un metodo viene chiamato</p>
+    <pre class="language-java"><code>verify(mockedClass, times(1)).methodName(args)
+// oppure
+ArgumentCaptor&lt;Person&gt; arg = ArgumentCaptor
+    .forClass(Person.class);
+verify(mock).doSomething(arg.capture());
+assertEquals(&quot;John&quot;, arg.getValue().getName());</code></pre>
+    <p>Per evitare di “consumare l’iteratore” si puo’ utilizzare questo
+    metodo di utilita’:</p>
+    <pre class="language-java"><code>public static &lt;T&gt; void whenIter(Iterable&lt;T&gt; p, T... d) {
+    when(p.iterator())
+      .thenAnswer((Answer&lt;Iterator&lt;T&gt;&gt;) _ -&gt; 
+          List.of(d).iterator());
+}
+</code></pre>
+    <p>Per mockare un costruttore</p>
+    <pre class="language-java"><code>// si puo&#39; passare a mockConstruction una serie di 
+// parametri per mockare ad esempio eventuali altri 
+// metodi che vengono usati nel costruttore di Tavolo
+try (var mocked = Mockito.mockConstruction(Tavolo.class)) {
+  Partita p = new Partita();
+  Card c = mock();
+  Tavolo t = mocked.constructed().getFirst();
+  // ...
+}
+</code></pre>
+    <h2 id="spy"><a href="#spy">Spy</a></h2>
+    <p>Wrappa un oggetto reale. Dichiaro cosa voglio che non sappia fare
+    (svuoto).</p>
+    <p>Se il soggetto e’ l’oggetto under test allora &gt; stub : spy =
+    riempire : svuotare</p>
+    <p>Meglio partire dal vuoto, cioe’ stub.</p>
+    <h1 id="testare-metodi-privati"><a
+    href="#testare-metodi-privati">Testare metodi privati</a></h1>
+    <p>Sono testati indirettamente, a fronte di chiamate dall’esterno.
+    Voglio poter cambiare i metodi privati senza troppo sforzo, in modo
+    da fare refactor senza incorrere in grossi attriti.</p>
+    <p>Usare <code>extracting</code> quando si vuole testare una
+    proprieta’ privata, e</p>
+    <pre class="language-java"><code>AssertionsForClassTypes.assertThat(player)
+    .extracting(&quot;personalDeck&quot;, as(LIST))
+    .containsExactly(Card.of(&quot;1B&quot;), Card.of(&quot;2B&quot;));</code></pre>
+    <p>quando si sta testando una classe che implementa interfacce,
+    perche’ altrimenti l’<code>assertThat</code> “solito” non riesce a
+    estrarre la proprieta’.</p>
+    <h1 id="esporre-variabili-distanza-metodi"><a
+    href="#esporre-variabili-distanza-metodi">Esporre variabili
+    d’istanza / metodi</a></h1>
+    <pre class="language-java"><code>var m = Game
+    .class
+    .getDeclaredMethod(&quot;distributeInitialCards&quot;);  
+m.setAccessible(true);  
+m.invoke(game);</code></pre>
+    <p>Da farsi solo in test, perche’ altrimenti a causa della
+    reflection puo’ rompere tutte le astrazioni.</p>
+    <h1 id="patterns"><a href="#patterns">Patterns</a></h1>
+    <p>Il codice duplicato e’ anche dentro i test, non solo nel
+    sorgente!</p>
+    <h2 id="isolation"><a href="#isolation">Isolation</a></h2>
+    <p>Good tests are written in isolation, so if one fails the rest
+    will continue as if nothing happened: the idea is not to pollute a
+    global state from which tests take their fixtures.</p>
+    <p>One broken test <span class="math inline">→</span> one problem.
+    Two broken tests <span class="math inline">→</span> two
+    problems.</p>
+    <p>If tests are written in isolation then the order in which they’re
+    run does not matter.</p>
+    <h2 id="test-list"><a href="#test-list">Test list</a></h2>
+    <p>Ariadne’s thread: Offload your brain list into a written one, on
+    paper, jot down critical issues, pain points, etc… ; you don’t want
+    to put the list into tests right away, always follow the “climber
+    rule”: out of four among feet and hands always have at least three
+    attached to the wall.</p>
+    <h2 id="assert-first"><a href="#assert-first">Assert first</a></h2>
+    <p>Write the assert first and then work your way upwards through the
+    test. This approach allows to concentrate on the goal and force the
+    preconditions to come out almost on their own.</p>
+    <h2 id="data"><a href="#data">Data</a></h2>
+    <p>Make use of data to tell a clearer story, make your intentions
+    evident. For example split whole numbers in elementary operations to
+    make the reader aware of “where did that 372.68 come from?”.</p>
+    <h1 id="problema-degli-unit-test"><a
+    href="#problema-degli-unit-test">Problema degli unit test</a></h1>
+    <figure>
+    <img src="attachments/tdd-titanic.png"
+    alt="il problema degli unit test" />
+    <figcaption aria-hidden="true">il problema degli unit
+    test</figcaption>
+    </figure>
+    <p>Sempre bene usare test di integrazione per asserire riguardo la
+    correttezza del programma.</p>
+    <p>A volte puo’ succedere che eseguendo un nuovo test (scommentato
+    ad esempio come vediamo a laboratorio), questo passi senza aver
+    seguito il red green refactor red etc.<span class="sidenote">Red
+    green green … wat?</span> Vuol dire che magari la mia soluzione
+    probabilmente ha implementato piu’ del necessario. Quindi vuol dire
+    che non ho scritto la soluzione piu’ semplice per far passare il
+    test.</p>
+    <h1 id="llm-prompts"><a href="#llm-prompts">LLM prompts</a></h1>
+    <blockquote>
+    <p>I want to make a learning exercise with you: I need to learn TDD
+    for a university course, I want you to act like you’re not into it
+    and will try to push back, while I will try to convince you.
+    Ready?</p>
+    </blockquote>
+    </article>
+  </main>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script src="js/prism.min.js"></script>
+</body>

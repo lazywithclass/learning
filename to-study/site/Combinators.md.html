@@ -4,247 +4,85 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Combinators</title>
-  <style>
-    html {
-      color: #1a1a1a;
-      background-color: #fdfdfd;
-    }
-    body {
-      margin: 0 auto;
-      max-width: 36em;
-      padding-left: 50px;
-      padding-right: 50px;
-      padding-top: 50px;
-      padding-bottom: 50px;
-      hyphens: auto;
-      overflow-wrap: break-word;
-      text-rendering: optimizeLegibility;
-      font-kerning: normal;
-    }
-    @media (max-width: 600px) {
-      body {
-        font-size: 0.9em;
-        padding: 12px;
-      }
-      h1 {
-        font-size: 1.8em;
-      }
-    }
-    @media print {
-      html {
-        background-color: white;
-      }
-      body {
-        background-color: transparent;
-        color: black;
-        font-size: 12pt;
-      }
-      p, h2, h3 {
-        orphans: 3;
-        widows: 3;
-      }
-      h2, h3, h4 {
-        page-break-after: avoid;
-      }
-    }
-    p {
-      margin: 1em 0;
-    }
-    a {
-      color: #1a1a1a;
-    }
-    a:visited {
-      color: #1a1a1a;
-    }
-    img {
-      max-width: 100%;
-    }
-    svg {
-      height: auto;
-      max-width: 100%;
-    }
-    h1, h2, h3, h4, h5, h6 {
-      margin-top: 1.4em;
-    }
-    h5, h6 {
-      font-size: 1em;
-      font-style: italic;
-    }
-    h6 {
-      font-weight: normal;
-    }
-    ol, ul {
-      padding-left: 1.7em;
-      margin-top: 1em;
-    }
-    li > ol, li > ul {
-      margin-top: 0;
-    }
-    blockquote {
-      margin: 1em 0 1em 1.7em;
-      padding-left: 1em;
-      border-left: 2px solid #e6e6e6;
-      color: #606060;
-    }
-    code {
-      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
-      font-size: 85%;
-      margin: 0;
-      hyphens: manual;
-    }
-    pre {
-      margin: 1em 0;
-      overflow: auto;
-    }
-    pre code {
-      padding: 0;
-      overflow: visible;
-      overflow-wrap: normal;
-    }
-    .sourceCode {
-     background-color: transparent;
-     overflow: visible;
-    }
-    hr {
-      background-color: #1a1a1a;
-      border: none;
-      height: 1px;
-      margin: 1em 0;
-    }
-    table {
-      margin: 1em 0;
-      border-collapse: collapse;
-      width: 100%;
-      overflow-x: auto;
-      display: block;
-      font-variant-numeric: lining-nums tabular-nums;
-    }
-    table caption {
-      margin-bottom: 0.75em;
-    }
-    tbody {
-      margin-top: 0.5em;
-      border-top: 1px solid #1a1a1a;
-      border-bottom: 1px solid #1a1a1a;
-    }
-    th {
-      border-top: 1px solid #1a1a1a;
-      padding: 0.25em 0.5em 0.25em 0.5em;
-    }
-    td {
-      padding: 0.125em 0.5em 0.25em 0.5em;
-    }
-    header {
-      margin-bottom: 4em;
-      text-align: center;
-    }
-    #TOC li {
-      list-style: none;
-    }
-    #TOC ul {
-      padding-left: 1.3em;
-    }
-    #TOC > ul {
-      padding-left: 0;
-    }
-    #TOC a:not(:hover) {
-      text-decoration: none;
-    }
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    /* The extra [class] is a hack that increases specificity enough to
-       override a similar rule in reveal.js */
-    ul.task-list[class]{list-style: none;}
-    ul.task-list li input[type="checkbox"] {
-      font-size: inherit;
-      width: 0.8em;
-      margin: 0 0.8em 0.2em -1.6em;
-      vertical-align: middle;
-    }
-    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
-  </style>
-  <link rel="stylesheet" href="https://latex.vercel.app/style.css">
-  <link rel="stylesheet" href="https://latex.vercel.app/prism/prism.css">
-
+  <link rel="stylesheet" href="css/latex.css">
+  <link rel="stylesheet" href="css/prism.css">
   <link rel="stylesheet" href="css/index.css">
-  <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-  <![endif]-->
 </head>
-<body>
-<h1 id="to-mock-a-mockingbird"><a href="#to-mock-a-mockingbird">To Mock
-a Mockingbird</a></h1>
-<p><span class="math inline"><em>A</em></span> and <span
-class="math inline"><em>B</em></span> are two birds. We call <span
-class="math inline"><em>B</em></span> to <span
-class="math inline"><em>A</em></span>. This creates a new bird called
-<span class="math inline"><em>A</em><em>B</em></span>. Or in other words
-“<span class="math inline"><em>A</em></span>’s response to hearing the
-name of <span class="math inline"><em>B</em></span>”, or “<span
-class="math inline"><em>A</em></span>’s response to <span
-class="math inline"><em>B</em></span>”.</p>
-<p><span class="math inline"><em>A</em>(<em>B</em><em>C</em>)</span> is
-“<span class="math inline"><em>A</em></span>’s response to the bird
-<span class="math inline"><em>B</em><em>C</em></span>”. <span
-class="math inline"><em>A</em><em>B</em></span> is not necessarily the
-same as <span class="math inline"><em>B</em><em>A</em></span> and <span
-class="math inline"><em>A</em>(<em>B</em><em>C</em>)</span> is not
-necessarily the same as <span
-class="math inline">(<em>A</em><em>B</em>)<em>C</em></span>.</p>
-<h3 id="properties-of-birds"><a href="#properties-of-birds">Properties
-of birds</a></h3>
-<p><strong>Composition</strong>: bird <span
-class="math inline"><em>C</em></span> composes <span
-class="math inline"><em>A</em></span> with <span
-class="math inline"><em>B</em></span> if for every bird <span
-class="math inline"><em>x</em></span> this holds: <span
-class="math inline"><em>C</em><em>x</em> = <em>A</em>(<em>B</em><em>x</em>)</span>
-<strong>Fondness</strong>: bird <span
-class="math inline"><em>A</em><em>B</em></span> is the same as bird
-<span class="math inline"><em>B</em></span> if <span
-class="math inline"><em>A</em></span> is fond of <span
-class="math inline"><em>B</em></span>, or <span
-class="math inline"><em>A</em><em>B</em> = <em>B</em></span></p>
-<h2 id="birds"><a href="#birds">Birds</a></h2>
-<p>Mockingbird: <span
-class="math inline"><em>M</em><em>x</em> = <em>x</em><em>x</em></span> -
-its response to <span class="math inline"><em>x</em></span> is the same
-as <span class="math inline"><em>x</em></span>’s response to itself</p>
-<h2 id="the-significance-of-the-mockingbird"><a
-href="#the-significance-of-the-mockingbird">The significance of the
-Mockingbird</a></h2>
-<p><span class="math inline"><em>C</em><sub>1</sub></span>: for any two
-birds <span class="math inline"><em>A</em></span> and <span
-class="math inline"><em>B</em></span> there is a bird <span
-class="math inline"><em>C</em></span> that for any bird <span
-class="math inline"><em>x</em></span>, <span
-class="math inline"><em>C</em><em>x</em> = <em>A</em>(<em>B</em><em>x</em>)</span>
-<span class="math inline"><em>C</em><sub>2</sub></span>: the forest
-contains a mockingbird <span class="math inline"><em>M</em></span></p>
-<p>One rumor has it that every bird of the forest is fond of at least
-one bird. Another rumor has it that there is at least one bird that is
-not fond of any bird.</p>
-<p>Given <span class="math inline"><em>A</em></span></p>
-<hr />
-<p>https://swlaschin.gitbooks.io/fsharpforfunandprofit/content/posts/understanding-parser-combinators-2.html</p>
-<p>expand with logic programming</p>
-<p>https://wolfram-media.com/products/combinators-a-centennial-view/</p>
-<p>https://www.cambridge.org/core/books/lambdacalculus-and-combinators/5E58FA156DE2129BE89BDFDCD7ECB645</p>
-<p>https://www.amazon.it/Lambda-Calculus-Combinators-Introduction-Roger-Hindley/dp/0521898854</p>
-<p>https://www.reddit.com/r/functionalprogramming/comments/r8tnyx/is_there_a_heuristic_for_understanding_what_a_y/</p>
-<p>https://www.reddit.com/r/learnrust/comments/m8p60s/help_learning_restraint_with_combinators/</p>
-<p>https://www.reddit.com/r/ProgrammingLanguages/comments/18ndfea/combinators_without_closures/</p>
-<p>https://www.reddit.com/r/haskell/comments/nvzmlj/youve_heard_of_the_ski_combinators_introducing/</p>
-<p>https://www.reddit.com/r/haskell/comments/8els6f/why_are_combinators_as_powerful_as_full/</p>
-<p>https://www.reddit.com/r/reasoners/comments/7duyio/combining_combinators/</p>
-<p>https://www.reddit.com/r/okbuddyphd/comments/zrb5t9/combinators_all_the_way_down/</p>
-<p>https://www.reddit.com/r/programming/comments/2i9d6/ask_reddit_can_anyone_explain_combinators_to_me/</p>
-<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/prismjs/prism.min.js"></script>
-
+<body class="latex-dark">
+  <main>
+    <article>
+    <h1 id="to-mock-a-mockingbird"><a href="#to-mock-a-mockingbird">To
+    Mock a Mockingbird</a></h1>
+    <p><span class="math inline"><em>A</em></span> and <span
+    class="math inline"><em>B</em></span> are two birds. We call <span
+    class="math inline"><em>B</em></span> to <span
+    class="math inline"><em>A</em></span>. This creates a new bird
+    called <span class="math inline"><em>A</em><em>B</em></span>. Or in
+    other words “<span class="math inline"><em>A</em></span>’s response
+    to hearing the name of <span class="math inline"><em>B</em></span>”,
+    or “<span class="math inline"><em>A</em></span>’s response to <span
+    class="math inline"><em>B</em></span>”.</p>
+    <p><span class="math inline"><em>A</em>(<em>B</em><em>C</em>)</span>
+    is “<span class="math inline"><em>A</em></span>’s response to the
+    bird <span class="math inline"><em>B</em><em>C</em></span>”. <span
+    class="math inline"><em>A</em><em>B</em></span> is not necessarily
+    the same as <span class="math inline"><em>B</em><em>A</em></span>
+    and <span
+    class="math inline"><em>A</em>(<em>B</em><em>C</em>)</span> is not
+    necessarily the same as <span
+    class="math inline">(<em>A</em><em>B</em>)<em>C</em></span>.</p>
+    <h3 id="properties-of-birds"><a
+    href="#properties-of-birds">Properties of birds</a></h3>
+    <p><strong>Composition</strong>: bird <span
+    class="math inline"><em>C</em></span> composes <span
+    class="math inline"><em>A</em></span> with <span
+    class="math inline"><em>B</em></span> if for every bird <span
+    class="math inline"><em>x</em></span> this holds: <span
+    class="math inline"><em>C</em><em>x</em> = <em>A</em>(<em>B</em><em>x</em>)</span>
+    <strong>Fondness</strong>: bird <span
+    class="math inline"><em>A</em><em>B</em></span> is the same as bird
+    <span class="math inline"><em>B</em></span> if <span
+    class="math inline"><em>A</em></span> is fond of <span
+    class="math inline"><em>B</em></span>, or <span
+    class="math inline"><em>A</em><em>B</em> = <em>B</em></span></p>
+    <h2 id="birds"><a href="#birds">Birds</a></h2>
+    <p>Mockingbird: <span
+    class="math inline"><em>M</em><em>x</em> = <em>x</em><em>x</em></span>
+    - its response to <span class="math inline"><em>x</em></span> is the
+    same as <span class="math inline"><em>x</em></span>’s response to
+    itself</p>
+    <h2 id="the-significance-of-the-mockingbird"><a
+    href="#the-significance-of-the-mockingbird">The significance of the
+    Mockingbird</a></h2>
+    <p><span class="math inline"><em>C</em><sub>1</sub></span>: for any
+    two birds <span class="math inline"><em>A</em></span> and <span
+    class="math inline"><em>B</em></span> there is a bird <span
+    class="math inline"><em>C</em></span> that for any bird <span
+    class="math inline"><em>x</em></span>, <span
+    class="math inline"><em>C</em><em>x</em> = <em>A</em>(<em>B</em><em>x</em>)</span>
+    <span class="math inline"><em>C</em><sub>2</sub></span>: the forest
+    contains a mockingbird <span
+    class="math inline"><em>M</em></span></p>
+    <p>One rumor has it that every bird of the forest is fond of at
+    least one bird. Another rumor has it that there is at least one bird
+    that is not fond of any bird.</p>
+    <p>Given <span class="math inline"><em>A</em></span></p>
+    <hr />
+    <p>https://swlaschin.gitbooks.io/fsharpforfunandprofit/content/posts/understanding-parser-combinators-2.html</p>
+    <p>expand with logic programming</p>
+    <p>https://wolfram-media.com/products/combinators-a-centennial-view/</p>
+    <p>https://www.cambridge.org/core/books/lambdacalculus-and-combinators/5E58FA156DE2129BE89BDFDCD7ECB645</p>
+    <p>https://www.amazon.it/Lambda-Calculus-Combinators-Introduction-Roger-Hindley/dp/0521898854</p>
+    <p>https://www.reddit.com/r/functionalprogramming/comments/r8tnyx/is_there_a_heuristic_for_understanding_what_a_y/</p>
+    <p>https://www.reddit.com/r/learnrust/comments/m8p60s/help_learning_restraint_with_combinators/</p>
+    <p>https://www.reddit.com/r/ProgrammingLanguages/comments/18ndfea/combinators_without_closures/</p>
+    <p>https://www.reddit.com/r/haskell/comments/nvzmlj/youve_heard_of_the_ski_combinators_introducing/</p>
+    <p>https://www.reddit.com/r/haskell/comments/8els6f/why_are_combinators_as_powerful_as_full/</p>
+    <p>https://www.reddit.com/r/reasoners/comments/7duyio/combining_combinators/</p>
+    <p>https://www.reddit.com/r/okbuddyphd/comments/zrb5t9/combinators_all_the_way_down/</p>
+    <p>https://www.reddit.com/r/programming/comments/2i9d6/ask_reddit_can_anyone_explain_combinators_to_me/</p>
+    </article>
+  </main>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.min.js"></script>
 </body>
-</html>

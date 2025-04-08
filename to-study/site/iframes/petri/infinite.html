@@ -1,0 +1,49 @@
+
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Home | Petri Nets | Statebox</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.grey-deep_purple.min.css">
+    <script defer="" src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="app.css">
+    <script src="http://petrinet.org/pnet-viewer/pnet-viewer.js"></script>
+    <link rel="stylesheet" href="petrinet.css">
+    <script>function renderNet(sel, netInfo) { PS["Halogen.Aff.Util"].runHalogenAff(PS.Main.renderNet(sel)(netInfo))() }</script>
+
+</head>
+
+<body>
+    <petrinet-viewer id="pn-Intro"></petrinet-viewer>
+    <script>
+        var netInfo = {
+            "title": "Intro",
+            "net": {
+                "places": [
+                    { "label": "Total", "x": 50, "y": 0 }
+                ], "transitions": [
+                    { 
+                      "label": "Add", "x": 0, "y": 0,
+                      "pre": {}, "post": { "Total": 1 }
+                    },
+                    { 
+                      "label": "Sub", "x": 100, "y": 0,
+                      "pre": { "Total": 1  }, "post": {}
+                    },
+                ], 
+                "marking": {
+                }
+            }
+        }
+        var title = "pn-Intro"
+
+        
+        renderNet("#" + title, netInfo);
+    </script>
+</body>
+
+</html>

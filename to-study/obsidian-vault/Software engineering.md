@@ -10,9 +10,6 @@ cssclasses:
 
 Correzione 
 https://www.youtube.com/watch?v=7vb089FkfiI&sttick=0
-file:///C:/Users/monte/Downloads/Telegram%20Desktop/slides%20(2).pdf
-
-
 
 FLASHCARDS
 
@@ -248,8 +245,6 @@ Nullability e mocking vengono chiesti molto spesso, sia allo scritto che all'ora
 * parlami positivamente del modello a cascata, come nasce il modello a cascata?
 * mocking, differenza tra stub e mock (+)
 * meta-pattern, pattern decorator, pattern composite, pattern strategy, chain of responsability (+++++)
-* cosa e' un test ideale? (+)
-* perche' TDD e' una buona tecnica? Tecnica di requisiti o tecnica di design o di progettazione? Cos'e'? (+)
 * mi parli di criterio di selezione. Che cos’è? Perché dobbiamo scegliere nei test un sottoinsieme del loro domino (cioè non seleziono tutti i test, ma solo alcuni)
 * differenza tra tecnica di design e tecnica di progettazione
 * due pratiche XP per convincere il manager (+)
@@ -257,15 +252,13 @@ Nullability e mocking vengono chiesti molto spesso, sia allo scritto che all'ora
 * differenza tra merge e pull request
 
 UNSORTED
-- quando un criterio di selezione è valido e quando è affidabile
+
 - relazioni di conflitto tra transizioni 
 - problemi nella stima dei tempi e come risolverli
 - parlami di analisi statica e analisi data flow
 - legame tra limitatezza e conservatività
 - legame tra limitatezza e conservatività (continua...)
-- terminologia degli errori
-- albero di copertura vs abero di raggiungibilità
-- criteri di selezione: proprietà
+
 - tell dont ask
 - differenza semantica debole e forte
 - differenza tra verifica e convalida
@@ -273,7 +266,6 @@ UNSORTED
 - disegnato una rete di petri, fare l’albero di copertura
   - scrivere formalmente la regola di abilitazione
 - diagrammi di sequenza
-- Terminologia di base di verifica e convalida. Sbaglio, errore, difetto, anomalia…, esempio in cui si presenta anomalia ma non (difetto o errore (?))
 - Prova a scrivermi la relazione di conflitto, relazione di concorrenza (fai esempi e scrivi in maniera formale) evidenzia strutturale/effettivo
 - Inserisco un valore che sfora, dove limito questo inserimento (model o presenter?Andava messo nel model)
 - Esempio di rete limitata.
