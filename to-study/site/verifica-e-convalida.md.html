@@ -45,7 +45,7 @@
     un 64bit a 16bit del valore della velocita’ orizzontale.</p>
     <h3 id="sbaglio-mistake"><a href="#sbaglio-mistake">Sbaglio
     (mistake)</a></h3>
-    <p>Causa di una anomalia. In genere si tratta di un errore umano
+    <p>Causa di un difetto. In genere si tratta di un errore umano
     (concettuale, battitura, scarsa conoscenza del linguaggio). Il
     riutilizzo della parte incriminata dall’Ariane 4 per l’Ariane 5,
     perche’ Ariane 4 raggiungeva velocita’ orizzontali non
@@ -53,10 +53,18 @@
     dei processi.</p>
     <h3 id="tecniche"><a href="#tecniche">Tecniche</a></h3>
     <p><span class="b">Tecniche statiche</span>: basate sull’analisi del
-    codice: * metodi formali * analisi data flow * modelli
-    statistici</p>
+    codice:</p>
+    <ul>
+    <li>metodi formali</li>
+    <li>analisi data flow</li>
+    <li>modelli statistici</li>
+    </ul>
     <p><span class="b">Tecniche dinamiche</span>: basate sull’esecuzione
-    del programma eseguibile * testing * debugging (non di verifica)</p>
+    del programma eseguibile</p>
+    <ul>
+    <li>testing</li>
+    <li>debugging (non di verifica)</li>
+    </ul>
     <p>Classificazione delle tecniche: * simplified properties: una
     versione semplificata del programma e’ corretto * optimistic
     inaccuracy: “non sono sicuro, ma se non riesco a dimostrarti che non
@@ -237,9 +245,9 @@
     id="criterio-di-copertura-delle-condizioni-e-delle-decisioni-modificate"><a
     href="#criterio-di-copertura-delle-condizioni-e-delle-decisioni-modificate">Criterio
     di copertura delle condizioni e delle decisioni modificate</a></h4>
-    <p>Conto solo le combinazioni piu’ rilevanti, cioe’ quelle che per
-    cui la modifica di una condizione base porti a modificare l’esito
-    della decisione.</p>
+    <p>Conto solo le combinazioni piu’ rilevanti, cioe’ quelle per cui
+    la modifica di una condizione base porti a modificare l’esito della
+    decisione.</p>
     <p>Permette quindi di testare solamente per quei valori
     significativi che vanno a far cambiare la decisione.</p>
     <h4 id="criterio-di-copertura-dei-cammini"><a
@@ -437,10 +445,9 @@
     dal team di sviluppo.</p>
     <p>Problemi</p>
     <ul>
-    <li>potrebbe essere che ho messo errori piu’ semplici di quelli che
+    <li>potrebbe essere che ho messo errori più semplici di quelli che
     realmente voglio trovare</li>
-    <li>potrei usare strumenti sbagliati per trovare i bug ESPANDERE CON
-    NITEBOOK</li>
+    <li>potrei usare strumenti sbagliati per trovare i bug</li>
     </ul>
     <h2 id="analisi-mutazionale"><a href="#analisi-mutazionale">Analisi
     mutazionale</a></h2>
@@ -468,7 +475,7 @@
     <span class="math inline"><em>P</em></span> sul totale di mutanti
     generati.</p>
     <p>Voglio un mutante per ogni possibile difetto, virtualmente
-    infiniti. I piu’ semplici effettuano modifiche sintattiche che
+    infiniti. I più semplici effettuano modifiche sintattiche che
     comportino modifiche semantiche.</p>
     <p>L’onere di esecuzione e’ molto forte.</p>
     <h2 id="testing-ed-ereditarietà-testing-e-collegamento-dinamico"><a

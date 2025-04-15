@@ -18,7 +18,6 @@ find $OBSIDIAN_VAULT/*md -maxdepth 1 -type f | while read -r file; do
     fi
     echo "$file"
     pandoc --quiet "$file" --metadata title="$title" --template=custom.html5 -o "$NOTES_DIR/$(echo $filename).html" --lua-filter=pandoc-lua/add_links.lua
-
 done
 
 cat > "$OUTPUT_FILE" <<EOF

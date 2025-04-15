@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <link rel="stylesheet" href="css/latex.css">
+  <link rel="stylesheet" href="css/prism.css">
+  <link rel="stylesheet" href="css/index.css">
+</head>
+<body class="latex-dark">
+  <main>
+    <article>
+    <h1>SQL</h1>
+    <p>Structured Query Language</p>
+    <p>Linguaggio dichiarativo.</p>
+    <p>DDL: comandi per creare strutture per l’ossatura della base di
+    dati (<code>CREATE TABLE</code>, <code>CREATE VIEW</code>, …) DML:
+    istruzioni (<code>INSERT</code>, <code>DELETE</code>,
+    <code>UPDATE</code>, …) DQL: <code>SELECT</code> DCL: comandi sul
+    controllo</p>
+    <h2 id="funzioni-operatori-clausole"><a
+    href="#funzioni-operatori-clausole">Funzioni / operatori /
+    clausole</a></h2>
+    <ul>
+    <li><code>lower</code> trasforma la stringa in lowercase</li>
+    <li><code>like</code></li>
+    <li><code>ilike</code> insensitive <code>like</code></li>
+    <li><code>trim</code> rimuove gli spazi prima e dopo</li>
+    <li><code>ltrim</code> spazi a sinistra</li>
+    <li><code>rtrim</code> spazi a destra</li>
+    <li><code>between</code> ad esempio
+    <code>... vote BETWEEN 1 and 10;</code></li>
+    <li><code>in</code> ad esempio
+    <code>... lower(genre) in ('drama', 'thriller', 'crime')</code></li>
+    <li><code>distinct</code>
+    <ul>
+    <li>ad esempio <code>SELECT DISTINCT movie FROM imdb.genre</code>
+    (elimina i duplicati, rendendo il risultato “come fosse in algebra
+    relazionale”)</li>
+    <li><code>SELECT DISTINCT movie, genre FROM imdb.genre</code> perché
+    <code>DISTINCT</code> lavora sull’intera clausola
+    <code>SELECT</code></li>
+    </ul></li>
+    <li><code>order by</code> ordina ciò che restituiamo, e’ l’ultima
+    cosa che viene fatta; si può specificare <code>DESC</code> per più
+    attributi in base alle necessita’ Si puo’ fare
+    <code>ORDER BY 2</code> per riferirsi alla colonna
+    <code>2</code></li>
+    <li><code>extract</code> permette di prendere parti di una data come
+    ad esempio
+    <code>WHERE extract(YEAR FROM birth_date) = '1971'</code></li>
+    <li><code>as</code> e’ l’equivalente di <span
+    class="math inline"><em>ρ</em></span> nell’algebra relazionale</li>
+    <li><code>::</code> e’ l’operatore di cast
+    <code>SELECT extract(year) from birth_date)::char(4) from imdb.person</code></li>
+    <li><code>is null</code> unico modo per confrontare con
+    <code>NULL</code><br />
+    </li>
+    <li><code>ALL</code> da true solo se il predicato e’ verificato per
+    tutti i valori restituiti dalla sotto query</li>
+    <li><code>ANY</code> da true se il predicato e’ verificato per
+    almeno un valore restituito dalla sotto query</li>
+    <li><code>min/max</code> (agg)</li>
+    <li><code>avg</code> (agg)</li>
+    <li><code>sum</code> (agg)</li>
+    <li><code>count</code> (agg) cardinalità di una relazione
+    <ul>
+    <li><code>COUNT(*)</code> conta le righe</li>
+    <li><code>COUNT(attributo)</code> conta le occorrenze in cui
+    l’attributo non e’ <code>NULL</code></li>
+    </ul></li>
+    <li><code>group by</code> (agg) partizionare i record in base ad un
+    criterio</li>
+    </ul>
+    <p>(agg) sono operatori di aggregamento, ignorano il
+    <code>NULL</code>; vengono eseguiti alla fine; posso proiettare solo
+    attributi aggregati o prodotti da un operatore di aggregamento</p>
+    <p>La precedenza degli operatori logici viene valutata da sinistra
+    verso destra, quindi</p>
+    <div class="sourceCode" id="cb1"><pre
+    class="sourceCode sql"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> imdb.movie</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> <span class="dt">year</span> <span class="st">&#39;2010&#39;</span> <span class="kw">OR</span> <span class="fu">length</span> <span class="op">&gt;=</span> <span class="dv">60</span> <span class="kw">AND</span> <span class="fu">length</span> <span class="op">&lt;=</span> <span class="dv">120</span>;</span></code></pre></div>
+    <p>Prima valuta <code>year '2010' OR length &gt;= 60</code> e poi il
+    risultato di questa in <code>AND</code>.</p>
+    <p><code>%</code> segnaposto per una stringa di qualsiasi lunghezza
+    <code>_</code> segnaposto per una stringa di lunghezza 1</p>
+    <h2 id="prodotto-cartesiano"><a href="#prodotto-cartesiano">Prodotto
+    cartesiano</a></h2>
+    <div class="sourceCode" id="cb2"><pre
+    class="sourceCode sql"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> imdb.movie, imdb.produced</span></code></pre></div>
+    <p>Cardinalità totale e’ uguale a cardinalità movie (1033) per
+    cardinalità produced (1332).</p>
+    <h2 id="join"><a href="#join">Join</a></h2>
+    <p>Sono una selezione sul prodotto cartesiano.</p>
+    <div class="sourceCode" id="cb3"><pre
+    class="sourceCode sql"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> imdb.movie m, imdb.produced p</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> m.<span class="kw">id</span> <span class="op">=</span> p.movie</span></code></pre></div>
+    <p><code>movie.id</code> chiave primaria,
+    <code>produced.movie</code> chiave esterna. Cardinalità e’ uguale a
+    cardinalità di produced.</p>
+    <p>Sintassi alternativa</p>
+    <div class="sourceCode" id="cb4"><pre
+    class="sourceCode sql"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> m.<span class="kw">id</span>, m.official_title</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> imdb.movie m </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="kw">INNER</span> <span class="kw">join</span> imdb.produced p <span class="kw">ON</span> m.<span class="kw">id</span> <span class="op">=</span> p.movie</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> country <span class="op">=</span> <span class="st">&#39;USA&#39;</span></span></code></pre></div>
+    <p><code>a JOIN b ON c</code> restituisce i record di <code>a</code>
+    e <code>b</code> nel prodotto cartesiano che soddisfano
+    <code>c</code>.</p>
+    <p>Eventuali <code>WHERE</code> vengono applicate dopo la
+    <code>JOIN</code>!</p>
+    <h2 id="join-esterno"><a href="#join-esterno">Join esterno</a></h2>
+    <p>Aggiunge al join eventuali record che non hanno alcuna
+    corrispondenza nella tabella di destra (nel caso di
+    <code>LEFT JOIN</code>).</p>
+    <p>La cardinalità quindi include anche i record senza
+    corrispondenza.</p>
+    <p><code>FULL JOIN</code> combina <code>LEFT</code> e
+    <code>RIGHT</code>. ## Viste</p>
+    <hr />
+    <p>old file</p>
+    <h2 id="notes"><a href="#notes">Notes</a></h2>
+    <h3 id="subtraction"><a href="#subtraction">Subtraction</a></h3>
+    <p>In <a href="Relational%20algebra.md">Relational algebra</a> we
+    can do the subtraction, in SQL this could be achieved using *
+    <code>NOT IN</code></p>
+    <div class="sourceCode" id="cb5"><pre
+    class="sourceCode sql"><code class="sourceCode sql"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> C.iso3 </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> imdb.country <span class="kw">AS</span> C</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> C.iso3 <span class="kw">NOT</span> <span class="kw">IN</span> (</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="kw">DISTINCT</span> P.country <span class="kw">FROM</span> imdb.produced <span class="kw">as</span> P)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+    <ul>
+    <li><code>EXCEPT</code></li>
+    </ul>
+    <div class="sourceCode" id="cb6"><pre
+    class="sourceCode sql"><code class="sourceCode sql"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> C.iso3 <span class="kw">FROM</span> imdb.country <span class="kw">AS</span> C</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">EXCEPT</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="kw">DISTINCT</span> P.country <span class="kw">FROM</span> imdb.produced <span class="kw">as</span> P</span></code></pre></div>
+    <p>A comparison between relational algebra’s operators and sql’s: *
+    <code>UNION</code> <span class="math inline">→</span> <span
+    class="math inline">∪</span> * <code>INTERSECT</code> <span
+    class="math inline">→</span> <span class="math inline">∩</span> *
+    <code>EXCEPT</code> <span class="math inline">→</span> <span
+    class="math inline">−</span></p>
+    <h3 id="finding-the-max"><a href="#finding-the-max">Finding the
+    Max</a></h3>
+    <p>Find the movie with the greatest score</p>
+    <p>Using <code>ANY</code></p>
+    <div class="sourceCode" id="cb7"><pre
+    class="sourceCode sql"><code class="sourceCode sql"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> imdb.ratings <span class="kw">AS</span> R2</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> R2.score <span class="op">&gt;=</span> <span class="kw">ANY</span> (<span class="kw">SELECT</span> R.score <span class="kw">FROM</span> imdb.ratings <span class="kw">AS</span> R)</span></code></pre></div>
+    <p>or using <code>MAX</code></p>
+    <div class="sourceCode" id="cb8"><pre
+    class="sourceCode sql"><code class="sourceCode sql"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> imdb.ratings <span class="kw">AS</span> R2</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> R2.score <span class="op">&gt;=</span> (<span class="kw">SELECT</span> <span class="fu">MAX</span>(R.score) <span class="kw">FROM</span> imdb.ratings <span class="kw">AS</span> R)</span></code></pre></div>
+    <p>Do not do this, as it just returns the first, even though there
+    might be more than 1 with the same value</p>
+    <div class="sourceCode" id="cb9"><pre
+    class="sourceCode sql"><code class="sourceCode sql"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> imdb.ratings <span class="kw">AS</span> R</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> R.score <span class="kw">DESC</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="kw">LIMIT</span> <span class="dv">1</span></span></code></pre></div>
+    <h3 id="select-and-aggregation-operators"><a
+    href="#select-and-aggregation-operators">SELECT and aggregation
+    operators</a></h3>
+    <p><code>SELECT</code>s work on single rows, aggregation operators
+    work on a set of rows.</p>
+    <h2 id="practice"><a href="#practice">Practice</a></h2>
+    <p>These are mainly exercises along with some explanations in
+    preparation for a database exam I have coming along.</p>
+    <h3 id="department-highest-salary"><a
+    href="#department-highest-salary">Department highest salary</a></h3>
+    <pre><code>Employee
++--------------+---------+
+| Column Name  | Type    |
++--------------+---------+
+| id           | int     |
+| name         | varchar |
+| salary       | int     |
+| departmentId | int     |
++--------------+---------+
+
+Department
++-------------+---------+
+| Column Name | Type    |
++-------------+---------+
+| id          | int     |
+| name        | varchar |
++-------------+---------+</code></pre>
+    <pre class="postgresql"><code>select d.Name as Department, e.Name as Employee, e.Salary
+from Employee as e
+join Department as d on e.DepartmentId = d.Id
+join (
+    select max(Salary) as Salary, DepartmentId
+    from Employee
+    group by DepartmentId
+) as mx
+on e.Salary = mx.Salary and e.DepartmentId = mx.DepartmentId</code></pre>
+    <h3 id="ranking-alongside-records"><a
+    href="#ranking-alongside-records">Ranking alongside records</a></h3>
+    <pre><code>+-------------+---------+
+| Column Name | Type    |
++-------------+---------+
+| id          | int     |
+| score       | decimal |
++-------------+---------+</code></pre>
+    <pre class="postgresql"><code>SELECT S1.score,
+  (
+    SELECT COUNT(DISTINCT S2.score)
+    FROM Scores S2
+    WHERE S2.score &gt;= S1.score
+  ) AS rank
+FROM Scores S1
+ORDER BY S1.score DESC;</code></pre>
+    <h3 id="consecutive-available-seats"><a
+    href="#consecutive-available-seats">Consecutive Available
+    Seats</a></h3>
+    <pre><code>+-------------+------+
+| Column Name | Type |
++-------------+------+
+| seat_id     | int  |
+| free        | bool |
++-------------+------+</code></pre>
+    <p><code>seat_id</code> is an auto-increment column for this table.
+    Each row of this table indicates whether the ith seat is free or
+    not. 1 means free while 0 means occupied.</p>
+    <pre class="postgresql"><code>SELECT seat_id
+FROM Cinema AS c1
+WHERE EXISTS (
+    SELECT 1
+    FROM Cinema AS c2
+    WHERE (c1.seat_id + 1 = c2.seat_id OR c1.seat_id = c2.seat_id + 1)
+        AND c1.free = 1
+        AND c2.free = 1
+)
+ORDER BY seat_id;</code></pre>
+    </article>
+  </main>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script src="js/prism.min.js"></script>
+</body>

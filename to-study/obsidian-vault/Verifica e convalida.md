@@ -324,8 +324,8 @@ Tipicamente in questo scenario c'e' un team di testing separato dal team di svil
 
 Problemi
 
-* potrebbe essere che ho messo errori piu' semplici di quelli che realmente voglio trovare
-* potrei usare strumenti sbagliati per trovare i bug ESPANDERE CON NITEBOOK
+* potrebbe essere che ho messo errori più semplici di quelli che realmente voglio trovare
+* potrei usare strumenti sbagliati per trovare i bug
 
 ## Analisi mutazionale
 
@@ -340,7 +340,7 @@ Un test $T$ soddisfa il criterio di copertura dei mutanti se e solo se per ogni 
 
 La metrica e' la frazione di mutanti riconosciuta come diversa da $P$ sul totale di mutanti generati.
 
-Voglio un mutante per ogni possibile difetto, virtualmente infiniti. I piu' semplici effettuano modifiche sintattiche che comportino modifiche semantiche.
+Voglio un mutante per ogni possibile difetto, virtualmente infiniti. I più semplici effettuano modifiche sintattiche che comportino modifiche semantiche.
 
 L'onere di esecuzione e' molto forte.
 

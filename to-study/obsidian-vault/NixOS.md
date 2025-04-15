@@ -5,12 +5,17 @@ tags:
   - nixos
 ---
 
-# System wide executables
+## System wide executables
 
 Under `~/.nix-profile/bin/` you could find the symlinks to the installed executables
 
+## Sandbox
 
-# Overlay
+In derivations looks like there's no connectivity.
+I was building AWS cli v2 and pip wasn't able to find the packages repository due to a DNS failure.
+
+To escape the sandbox put `__noChroot = true;` in the .nix and switch with `home-manager switch --option sandbox false`.
+## Overlay
 
 Real world example, I needed pyparsing at the latest version.
 This example assumes Nixos, home-manager, and direnv

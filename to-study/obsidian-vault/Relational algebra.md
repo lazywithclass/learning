@@ -14,7 +14,7 @@ Qualunque operazione produce una relazione.
 
 DQL, quindi non si modificano i dati, si interrogano solamente.
 
-# Operatori
+## Operatori
 
 Operatori unari:
 * proiezione $\pi$
@@ -31,13 +31,13 @@ Operatori binari di join:
 * equi join
 * natural join
 
-## Insiemistici
+### Insiemistici
 
 Ricorda che le relazioni in un database sono insiemi, vedi [Modello relazionale](Databases.md#Modello%20relazionale).
 
 <span class="sidenote">Precondizioni</span>
 Per poter fare unione, intersezione, differenza le relazioni devono avere pari grado, e attributo per attributo sono compatibili (le relazioni che partecipano non possono avere vincoli di dominio diversi)<label class="sidenote-toggle sidenote-number"></label>.
-### Unione
+#### Unione
 
 Date $R_1$ e $R_2$ restituisce gli elementi appartenenti a $R_1$ o $R_2$ (presi una volta, non ci devono essere duplicati)
 
@@ -53,18 +53,18 @@ Se avessi
 * in movie_b (003, 'shutter island', '2010', 120)
 
 E ne facessi l'unione otterrei entrambi i record perché sono due individui diversi.
-### Intersezione
+#### Intersezione
 
 Date $R_1$ e $R_2$ restituisce gli elementi appartenenti a $R_1$ e $R_2$.
 
 $movie\_a \cup movie\_b = { r_1 \in movie\_a \land r_2 \in movie\_b }$
 
 Produce il medesimo grado della relazione di partenza e cardinalità pari agli elementi in comune.
-### Differenza
+#### Differenza
 
 Date $R_1$ e $R_2$ restituisce gli elementi appartenenti a $R_1$ e non a $R_2$.
 La differenza non e' una operazione simmetrica.
-## Selezione $\sigma$
+### Selezione $\sigma$
 
 Risponde alla domanda "Quali record della relazione voglio considerare?"
 
@@ -78,7 +78,7 @@ $$
 $$
 
 Scorre i record uno a uno, quindi e' una valutazione locale, non globale, quindi non può essere usata per quei casi dove si vogliono ottenere valori relativi al globale.
-## Proiezione $\pi$
+### Proiezione $\pi$
 
 Seleziona solo l'insieme di attributi che voglio mostrare nel risultato. Riduce il grado e la cardinalità e'  uguale a quella di partenza.
 
@@ -86,7 +86,7 @@ E' possibile che applicando una proiezione si possano ottenere righe uguali, in 
 
 Chiedersi sempre se e' il caso di ridurre gli attributi applicando una proiezione.
 
-## Prodotto cartesiano
+### Prodotto cartesiano
 
 $$
 \begin{align}
@@ -115,10 +115,10 @@ $R_1 \times R_2$ produce una relazione avente come grado la somma dei gradi dell
 | a2  | b2  | c1  | d1  |     |
 | a2  | b2  | c2  | d2  |     |
 | a2  | b2  | c3  | d3  |     |
-## Ridenominazione $\rho$
+### Ridenominazione $\rho$
 
 Data $R_1(A,\ B,\ C)$ se scrivo $\rho_{C\rightarrow D} R_1$ ottengo $R_1(A,\ B,\ D)$.
-## Join $\bowtie$
+### Join $\bowtie$
 
 ### $\theta$ join
 
@@ -141,7 +141,7 @@ $$
 $$
 Come si vede nell'ultima riga $B$ compare una volta sola.
 
-## Divisione
+### Divisione
 
 Vediamo questo operatore con un esempio
 $$
@@ -194,15 +194,15 @@ La divisione e' utile quando non so a priori cosa ho a denominatore
 ESPANDERE Con la chiarificazione di ciò che voglio avere a numeratore a
 
 ---
-# Suggerimenti
+## Suggerimenti
 
 Cercare di limitare quanto più possibile il grado di una relazione, in modo da fare che le relazioni si possano combinare più facilmente.
 
-# Esercizi con lo schema imdb
+## Esercizi con lo schema imdb
 
 ![IMDB Schema](attachments/imdb-schema.png)
 
-## Trovare le pellicole del 2010 che non sono thriller
+*  Trovare le pellicole del 2010 che non sono thriller
 
 Procedura:
 
@@ -223,7 +223,7 @@ $$
 <span class="sidenote">Usare la proiezione per ottenere relazioni confrontabili in termini di sottrazione</span>
 Siccome $R_1$ ha 3 attributi, e $R_2$ ne ha 2 queste due relazioni non sono confrontabili ne per numero ne per dominio <label class="sidenote-toggle sidenote-number"></label>. Anche se le colonne hanno nome diverso hanno lo stesso tipo di dato, quindi sono confrontabili.
 
-## Trovare le pellicole che sono di genere "thriller" o "crime"
+* Trovare le pellicole che sono di genere "thriller" o "crime"
 
 Procedura:
 
@@ -233,7 +233,7 @@ Procedura:
 * prendo l'id dalla relazione precedente
 * unisco le due relazioni ottenute
 
-## Trovare le pellicole che sono di genere "comedy" e "romantic"
+* Trovare le pellicole che sono di genere "comedy" e "romantic"
 
 Appartenere ad entrambi i generi vuol dire avere due record in cui c'e' il codice della pellicola e ognuno dei due "genre" voluti
 
@@ -289,7 +289,7 @@ $R_1$ e' sbagliata perché ogni riga viene valutata individualmente, ma nessun r
 
 > [!warning] TODO inserire rimando di Ferrara al fatto che ogni riga viene valutata individualmente
 
-## Trovare le persone che hanno interpretato come attore il personaggio 'Dexter'
+* Trovare le persone che hanno interpretato come attore il personaggio 'Dexter'
 
 $$
 \begin{align}
@@ -310,7 +310,7 @@ $$
 \pi_{person}(\sigma_{character='Dexter'}(\sigma_{role='actor'}\ crew))
 \end{align}
 $$
-## Trovare il nome delle persone nate dopo il 2000 che recitano in film thriller
+* Trovare il nome delle persone nate dopo il 2000 che recitano in film thriller
 
 $$
 \begin{align}
@@ -331,7 +331,7 @@ $$
 \end{align}
 $$
 
-##  Guardando lo schema IMDB dato a lezione
+* Guardando lo schema IMDB dato a lezione
 
 * Trovare il titolo delle pellicole con valutazione (rating) maggiore di 8
 $$
@@ -408,7 +408,7 @@ $$
 Il risultato e' definito sulle colonne $id$, $title$, $year$.
 
 Funzionerebbe anche con l'intersezione in questo caso, ma il vantaggio della divisione e' che non e' necessario specificare a priori come e' composto il divisore.
-# Esercizi usando uno schema simile a quello dell'esame
+## Esercizi usando uno schema simile a quello dell'esame
 
 $$
 \begin{align}
@@ -499,6 +499,9 @@ $$
 
 VEDI ESERCIZI su Ariel e appunti del prof
 INSERIRE e capire come si deriva la divisione
+
+
+
 
 
 

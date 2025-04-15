@@ -31,6 +31,7 @@ DCL: comandi sul controllo
 	* ad esempio `SELECT DISTINCT movie FROM imdb.genre` (elimina i duplicati, rendendo il risultato "come fosse in algebra relazionale")
 	* `SELECT DISTINCT movie, genre FROM imdb.genre` perché `DISTINCT` lavora sull'intera clausola `SELECT`
 * `order by` ordina ciò che restituiamo, e' l'ultima cosa che viene fatta; si può specificare `DESC` per più attributi in base alle necessita'
+  Si puo' fare `ORDER BY 2` per riferirsi alla colonna `2`
 * `extract` permette di prendere parti di una data come ad esempio `WHERE extract(YEAR FROM birth_date) = '1971'`
 * `as` e' l'equivalente di $\rho$ nell'algebra relazionale
 * `::` e' l'operatore di cast `SELECT extract(year) from birth_date)::char(4) from imdb.person`
@@ -42,9 +43,12 @@ DCL: comandi sul controllo
 * `sum` (agg)
 * `count` (agg) cardinalità di una relazione
 	* `COUNT(*)` conta le righe
-	* `COUNT(attributo)` conta le occorrenze in cui l'attributo non e' `NULL`
+	* `COUNT(attributo)` conta le occorrenze in cui l'attributo non e' `NULL`, sempre bene contare su chiave esterna per essere sicuro che sia `NOT NULL`
+* `group by` (agg) partizionare i record in base ad un criterio
+* `having` filtra sul risultato del gruppo, quindi su operatori aggregati o sugli attributi del gruppo
 
-(agg) sono operatori aggregati, ignorano il `NULL`; vengono eseguiti alla fine
+(agg) sono operatori di aggregamento, ignorano il `NULL`; vengono eseguiti alla fine; posso proiettare solo attributi aggregati o prodotti da un operatore di aggregamento.
+Non si possono fare aggregati di aggregati.
 
 La precedenza degli operatori logici viene valutata da sinistra verso destra, quindi
 ```sql
@@ -96,6 +100,9 @@ Eventuali `WHERE` vengono applicate dopo la `JOIN`!
 ## Join esterno
 
 Aggiunge al join eventuali record che non hanno alcuna corrispondenza nella tabella di destra (nel caso di `LEFT JOIN`).
+Prima fa un `INNER JOIN` applicando le clausole `ON`, poi aggiunge i record spuri (che sono quelli della tabella "dall'altro lato per cui non e' stato trovato un corrispondente).
+
+TODO Espandere questa cosa dei record spuri, e' corretto dire che vengono presi i record della tabella dall'altro lato, e non quello che rimangono fuori dall'inner join?
 
 La cardinalità quindi include anche i record senza corrispondenza. 
 
@@ -136,6 +143,123 @@ EXPLAIN ANALYZE ...
 
 Molto inefficiente
 TODO espandere
+
+## Query ricorsive
+
+La tabella `sim` descrive similarità tra pellicole, la colonna `cause` spiega il motivo di questa similarità.
+
+* Data una pellicola specifica suggerire le pellicole simili
+
+Sono interessato alla pellicola `0013444`, le sono simili quelle che rispondono a 
+
+```sql
+SELECT movie2 FROM sim WHERE movie1 = '0013444'
+```
+
+Ma sono simili a `0013444` anche le pellicole simili a quelle restituite dalla query precedente, cioè se `0018756` e' restituito dalla query precedente, anche le query simili a `0018756` sono indirettamente simili a `0013444`.
+
+Magari vorrei fermarmi ad una "distanza 3". Posso interpretare le pellicole come nodi, un arco e' presente se c'e' una relazione di somiglianza tra le due pellicole.
+
+### Esempio base di query ricorsiva
+
+```sql
+WITH RECURSIVE t(n) AS (
+	SELECT 1 
+	UNION all 
+	SELECT n+1 FROM t)
+SELECT n FROM t
+```
+
+`t(n)` specifica che `n` e' il nome di cosa la query restituisce.
+`SELECT 1` e' il passo base, `SELECT n+1 FROM t` e' il passo ricorsivo.
+
+Tutte le query ricorsive quindi seguono questo schema, con la `UNION` tra i due passi.
+
+Il problema di questa query e' che non si ferma mai, quindi ne limitiamo l'esecuzione con la `WHERE`.
+
+```sql
+
+WITH RECURSIVE t(n) AS (
+	SELECT 1 
+	UNION all 
+	SELECT n+1 FROM t WHERE n < 10)
+SELECT n FROM t
+```
+
+La differenza tra `UNION` e `UNION ALL` e' nella gestione dei duplicati, la seconda gestisce anche i duplicati.
+
+### Altro esempio
+
+Supponiamo di essere interessati ad una organizzazione dei generi che sia gerarchica.
+
+```sql
+CREATE TABLE genre_taxonomy {
+  genre_name VARCHAR PRIMARY KEY,
+  genre_parent VARCHAR
+}
+ALTER TABLE genre_taxonomy 
+ADD CONSTRAINT parent_fk FOREIGN KEY (genre_parent)
+REFERENCES genre_taxonomy(genre_name)
+
+```
+
+Serve `ALTER TABLE` perché e' un riferimento alla tabella stessa, quindi va prima creata la tabella, e poi si può introdurre la foreign key.
+
+Relazione 1 a N:
+
+* 1 perché preso un sotto-genere ha sempre e solo 1 padre
+* N perché preso un sopra-genere può avere N figli
+
+```
+- thriller
+	- noir
+		- poliziesco
+			- spionaggio
+			- cronaca nera
+	- splatter
+```
+
+Restituire i generi di 'poliziesco'
+
+```sql
+WITH RECURSIVE search_parent(the_genre, parent_genre) AS (
+	SELECT genre_name, genre_parent
+	FROM genre_taxonomy
+	WHERE genre_name = 'poliziesco'
+	union
+	SELECT sp.the_genre, gt.genre_parent -- nota gli stessi nomi dei parametri
+	FROM search_parent sp 
+	JOIN genre_taxonomy gt ON sp.genre_parent = gt.genre_name
+)
+
+SELECT * FROM search_parent
+```
+
+Si ferma grazie al `JOIN` che non produce una riga quando trova un `NULL` nella sua condizione di `ON`.
+
+Restituire i primi due generi di 'poliziesco', quindi mi fermo "prima di arrivare in cima"
+
+Aggiungo un parametro `distance`
+
+```sql
+WITH RECURSIVE search_parent(the_genre, parent_genre, distance) AS (
+	SELECT genre_name, genre_parent, 1
+	FROM genre_taxonomy
+	WHERE genre_name = 'poliziesco'
+	union
+	SELECT sp.the_genre, gt.genre_parent, sp.distance + 1
+	FROM search_parent sp 
+	JOIN genre_taxonomy gt ON sp.genre_parent = gt.genre_name
+	WHERE distance < 1
+)
+
+SELECT * FROM search_parent
+```
+
+### Riprendendo sulle pellicole simili
+
+
+
 
 
 ---
@@ -315,10 +439,31 @@ EXCEPT
 SELECT movie FROM produced WHERE country <> 'ITA'
 ```
 
-Oppure con join esterno TODO
+Oppure con join esterno
 
 ```sql
-SELECT 
+WITH itamovies AS (
+	SELECT p.movie
+	FROM produced p
+	WHERE p.country = 'ITA'
+),
+nonitamovies AS (
+	SELECT movie 
+	FROM produced
+	WHERE country <> 'ITA'
+)
+SELECT *
+FROM itamovies LEFT JOIN nonitamovies ON itamovies.movie = nonitamovies.movie
+WHERE nonitamovies.movie IS NULL
+```
+
+Oppure senza `WITH`
+
+```sql
+SELECT DISTINCT itamovies.*
+FROM produced itamovies
+LEFT JOIN produced nonitamovies ON itamovies.movie = nonitamovies.movie AND nonitamovies.country <> 'ITA'
+WHERE itamovies.country = 'ITA' AND nonitamovies.movie IS NULL
 ```
 
 * Trovare il titolo di tutti i film con relativi generi
@@ -488,6 +633,187 @@ SELECT COUNT(*) FROM MOVIE WHERE year IS NOT NULL
 SELECT COUNT(DISTINCT official_title) FROM movie
 ```
 
+* Trovare la durata media dei film del 2010
+
+```sql
+SELECT sum(length) / count(length)
+FROM movie
+WHERE year = '2010'
+```
+
+* Trovare il numero di pellicole per ogni anno disponibile
+
+Conteggia in base ad ogni gruppo trovato dalla `GROUP BY`
+
+```sql
+SELECT year, COUNT(*)
+FROM movie
+GROUP BY year
+```
+
+* Trovare per ciascun film il numero di persone coinvolte per ciascun ruolo
+
+```sql
+SELECT COUNT(*)
+FROM crew
+GROUP BY movie, c.p_role
+```
+
+* Trovare il numero di valutazioni per ogni film
+
+La seguente pero' non tiene conto delle pellicole senza valutazioni, perché dentro `rating` ho solo pellicole già valutate
+
+```sql
+SELECT movie, COUNT(*) 
+FROM rating
+GROUP BY movie
+```
+
+La seguente produce il risultato atteso ma e' convoluta
+
+```sql
+SELECT movie, COUNT(*)
+FROM ratingGROUP BY movie
+UNION
+(
+	SELECT id, 0
+	FROM movie
+	EXCEPT 
+	SELECT movie, 0
+	FROM rating
+)
+```
+
+Nella seguente occhio a non usare `COUNT(*)` perché altrimenti conterebbe le righe, invece usando `COUNT(r.movie)` conteggio quando la riga non e' spuria.
+
+```sql
+SELECT movie, COUNT(r.movie)
+FROM movie m LEFT JOIN rating r ON m.id = r.movie
+GROUP BY id
+```
+
+* Trovare il miglior rating di ciascun film
+
+```sql
+SELECT movie, MAX(score / scale)
+FROM movie m LEFT JOIN rating r on movie.id = rating.movie
+GROUP BY id
+ORDER BY 2 DESC
+```
+
+* Trovare l'attore che ha recitato nel maggior numero di film
+
+`MAX(COUNT(*))` non si può fare.
+
+La seguente e' sbagliata, perché potrebbero esserci più record con il valore massimo.
+`DISTINCT MOVIE` per rimuovere attori con più di un ruolo nello stesso film.
+
+```sql
+SELECT person, COUNT(DISTINCT movie)
+FROM crew
+WHERE p_role = 'actor'
+GROUP BY person
+ORDER BY 2 DESC
+LIMIT 1
+```
+
+Soluzione
+
+```sql
+WITH recitazioni AS (
+	SELECT person, COUNT(DISTINCT movie) AS n_partecipazioni
+	FROM crew
+	WHERE p_role = 'actor'
+	GROUP BY person
+)
+SELECT id, given_name, n_partecipazioni
+FROM person p JOIN recitazioni r ON p.id = r.person
+WHERE n_partecipazioni = (
+	SELECT MAX(n_partecipazioni) AS max_partecipazioni
+	FROM recitazioni)
+```
+
+Soluzione alternativa
+
+```sql
+SELECT person, COUNT(DISTINCT movie) AS n_partecipazioni
+FROM crew
+WHERE p_role = 'actor'
+GROUP BY person
+HAVING COUNT(DISTINCT movie) >= ALL (
+	SELECT COUNT(DISTINCT movie)
+	FROM crew
+	WHERE p_role = 'actor'
+	GROUP BY person
+)
+```
+
+* Trovare i film con cast più numeroso della media dei film del medesimo genere
+
+```sql
+WITH movie_cast AS (
+	SELECT movie, COUNT(DISTINCT person) AS n_person
+	FROM crew
+	WHERE p_role in ('actor', 'director')
+	GROUP BY movie
+),
+avg_genre AS (
+	SELECT genre, AVG(n_person) as avg_cast
+	FROM movie m LEFT 
+	LEFT JOIN genre g ON m.id = g.movie 
+	LEFT JOIN movie_cast mc ON m.id = mc.movie
+	GROUP BY genre
+)
+SELECT m.id, official_title, g.genre, n_person
+FROM movie m
+LEFT JOIN genre g ON m.id = g.movie
+LEFT JOIN movie_cast mc ON m.id = mc.movie
+WHERE mc.n_person > (
+	SELECT avg_cast 
+	FROM avg_genre 
+	WHERE g.genre = avg_genre.genre 
+)
+```
+
+* Trovare le persone che hanno recitato in tutti i film di genere crime
+
+Tabelle utili
+$$
+\begin{align}
+&\ crew(person,\ movie) \newline
+&\ genre(movie,\ genre) \newline
+\end{align}
+$$
+
+In algebra e'
+$$
+\begin{align}
+&\ A = \pi_{(person,movie)} crew \newline
+&\ B = \pi_{movie}(\sigma_{genre='Crime}) \newline
+&\ A / B \newline
+\end{align}
+$$
+
+```sql
+SELECT id, given_name
+FROM person p
+WHERE NOT EXISTS (
+	SELECT *
+	FROM genre g
+	WHERE g.genre = 'Crime' AND NOT EXISTS (
+		SELECT *
+		FROM crew c
+		WHERE p_role = 'actor' AND p.id = c.person AND g.movie = crew.movie
+	)
+)
+```
+
+
+
+
+
+
+
 
 
 
@@ -502,7 +828,7 @@ SELECT COUNT(DISTINCT official_title) FROM movie
 
 ---
 
-old file
+OLD FILE
 
 
 
@@ -512,7 +838,9 @@ old file
 ### Subtraction
 
 In [Relational algebra](Relational%20algebra.md) we can do the subtraction, in SQL this could be achieved using
-* `NOT IN`
+
+`NOT IN`
+
 ```sql
 SELECT C.iso3 
 FROM imdb.country AS C
@@ -520,7 +848,9 @@ WHERE C.iso3 NOT IN (
 SELECT DISTINCT P.country FROM imdb.produced as P)
 )
 ```
-* `EXCEPT`
+
+Or `EXCEPT`
+
 ```sql
 SELECT C.iso3 FROM imdb.country AS C
 EXCEPT
