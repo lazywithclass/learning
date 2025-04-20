@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <link rel="stylesheet" href="css/latex.css">
+  <link rel="stylesheet" href="css/prism.css">
+  <link rel="stylesheet" href="css/index.css">
+</head>
+<body class="latex-dark">
+  <main>
+    <article>
+    <h1>NixOS</h1>
+    <p>FAQs</p>
+    <p>https://nixos.wiki/wiki/FAQ</p>
+    <h2 id="install-a-single-unstable-package"><a
+    href="#install-a-single-unstable-package">Install a single unstable
+    package</a></h2>
+    <p>https://nixos.wiki/wiki/FAQ#How_can_I_install_a_package_from_unstable_while_remaining_on_the_stable_channel.3F</p>
+    <p><code>nix-shell -I nixpkgs=channel:nixpkgs-unstable -p awscli2</code></p>
+    <h2 id="system-wide-executables"><a
+    href="#system-wide-executables">System wide executables</a></h2>
+    <p>Under <code>~/.nix-profile/bin/</code> you could find the
+    symlinks to the installed executables</p>
+    <h2 id="sandbox"><a href="#sandbox">Sandbox</a></h2>
+    <p>In derivations looks like there’s no connectivity. I was building
+    AWS cli v2 and pip wasn’t able to find the packages repository due
+    to a DNS failure.</p>
+    <p>To escape the sandbox put <code>__noChroot = true;</code> in the
+    .nix and switch with
+    <code>home-manager switch --option sandbox false</code>. ##
+    Overlay</p>
+    <p>Real world example, I needed pyparsing at the latest version.
+    This example assumes Nixos, home-manager, and direnv</p>
+    <p>This is <code>default.nix</code> which gets invoked every time I
+    enter in a folder</p>
+    <div class="sourceCode" id="cb1"><pre
+    class="sourceCode nix"><code class="sourceCode nix"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">{</span> <span class="va">pkgs</span> <span class="op">?</span> <span class="bu">import</span> &lt;nixpkgs&gt; <span class="op">{</span> <span class="va">overlays</span> <span class="op">=</span> <span class="op">[</span> <span class="op">(</span><span class="bu">import</span> <span class="ss">./overlay.nix</span><span class="op">)</span> <span class="op">];</span> <span class="op">}</span> <span class="op">}</span>:  </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span>  </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">in</span> pkgs.mkShell <span class="op">{</span>  </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="va">buildInputs</span> <span class="op">=</span> <span class="kw">with</span> pkgs<span class="op">;</span> <span class="op">[</span>  </span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    pdfgrep  </span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    python3  </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    python311Packages.python-lsp-server  </span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    python311Packages.flake8  </span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    python311Packages.python-dotenv  </span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    python311Packages.pymupdf  </span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    pyparsing  </span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="op">];</span>  </span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+    <p>This is the overlay that allows for pyparsing version</p>
+    <div class="sourceCode" id="cb2"><pre
+    class="sourceCode nix"><code class="sourceCode nix"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="va">self</span><span class="op">:</span> <span class="va">super</span><span class="op">:</span> <span class="op">{</span>  </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="va">pyparsing</span> <span class="op">=</span> super.python311Packages.pyparsing.overrideAttrs <span class="op">(</span><span class="va">oldAttrs</span><span class="op">:</span> <span class="op">{</span>  </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">src</span> <span class="op">=</span> super.fetchurl <span class="op">{</span>  </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>      <span class="va">url</span> <span class="op">=</span> <span class="st">&quot;https://github.com/pyparsing/pyparsing/releases/download/3.2.0/pyparsing-3.2.0.tar.gz&quot;</span><span class="op">;</span>  </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>      <span class="va">sha256</span> <span class="op">=</span> <span class="st">&quot;cbf74e27246d595d9a74b186b810f6fbb86726dbf3b9532efb343f6d7294fe9c&quot;</span><span class="op">;</span>  </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">};</span>  </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="op">});</span>  </span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+    </article>
+  </main>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script src="js/prism.min.js"></script>
+</body>

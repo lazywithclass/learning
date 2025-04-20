@@ -4,6 +4,15 @@ cssclasses:
 tags:
   - nixos
 ---
+FAQs
+
+https://nixos.wiki/wiki/FAQ
+
+## Install a single unstable package
+
+https://nixos.wiki/wiki/FAQ#How_can_I_install_a_package_from_unstable_while_remaining_on_the_stable_channel.3F
+
+`nix-shell -I nixpkgs=channel:nixpkgs-unstable -p awscli2`
 
 ## System wide executables
 

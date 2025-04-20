@@ -36,16 +36,25 @@ DCL: comandi sul controllo
 * `as` e' l'equivalente di $\rho$ nell'algebra relazionale
 * `::` e' l'operatore di cast `SELECT extract(year) from birth_date)::char(4) from imdb.person`
 * `is null` unico modo per confrontare con `NULL`  
-* `ALL` da true solo se il predicato e' verificato per tutti i valori restituiti dalla sotto query
+* `ALL` da true solo se il predicato e' verificato per tutti i valori restituiti dalla sotto query ad esempio nella seguente ammettendo che la sub-query ritornasse più valori, allora un record per poter essere restituito dovrebbe essere maggiore di tutti questi valori
+```sql
+SELECT id, official_title, length
+FROM imdb.movie
+WHERE length > ALL (
+	SELECT length
+	FROM imdb.movie
+	WHERE official_title = 'Inception'
+);
+ ```
 * `ANY` da true se il predicato e' verificato per almeno un valore restituito dalla sotto query
 * `min/max` (agg)
 * `avg` (agg)
 * `sum` (agg)
 * `count` (agg) cardinalità di una relazione
-	* `COUNT(*)` conta le righe
+	* `COUNT(*)` conta tutte le righe
 	* `COUNT(attributo)` conta le occorrenze in cui l'attributo non e' `NULL`, sempre bene contare su chiave esterna per essere sicuro che sia `NOT NULL`
 * `group by` (agg) partizionare i record in base ad un criterio
-* `having` filtra sul risultato del gruppo, quindi su operatori aggregati o sugli attributi del gruppo
+* `having` filtra sul risultato del gruppo, quindi su operatori aggregati o sugli attributi del gruppo; come ottimizzazione e' meglio usare una `WHERE` prima di arrivare alla `GROUP BY` in modo da raggruppare su meno record, quindi e' sconsigliato usare la `HAVING` al suo posto
 
 (agg) sono operatori di aggregamento, ignorano il `NULL`; vengono eseguiti alla fine; posso proiettare solo attributi aggregati o prodotti da un operatore di aggregamento.
 Non si possono fare aggregati di aggregati.
@@ -97,12 +106,20 @@ WHERE country = 'USA'
 
 Eventuali `WHERE` vengono applicate dopo la `JOIN`!
 
-## Join esterno
+## Join esterno (outer join)
 
 Aggiunge al join eventuali record che non hanno alcuna corrispondenza nella tabella di destra (nel caso di `LEFT JOIN`).
-Prima fa un `INNER JOIN` applicando le clausole `ON`, poi aggiunge i record spuri (che sono quelli della tabella "dall'altro lato per cui non e' stato trovato un corrispondente).
+Prima fa un `INNER JOIN` applicando le clausole `ON`, poi aggiunge i record spuri (che sono quelli della tabella "dall'altro lato" per cui non e' stato trovato un corrispondente).
 
-TODO Espandere questa cosa dei record spuri, e' corretto dire che vengono presi i record della tabella dall'altro lato, e non quello che rimangono fuori dall'inner join?
+Ad esempio per la richiesta "selezionare paesi nei quali non sono prodotti film":
+
+```sql
+SELECT c.iso3
+FROM country c
+LEFT JOIN produced p ON c.iso3 = p.country
+WHERE p.country IS null
+```
+
 
 La cardinalità quindi include anche i record senza corrispondenza. 
 
@@ -174,6 +191,8 @@ SELECT n FROM t
 `SELECT 1` e' il passo base, `SELECT n+1 FROM t` e' il passo ricorsivo.
 
 Tutte le query ricorsive quindi seguono questo schema, con la `UNION` tra i due passi.
+
+`UNION ALL` rimuove duplicati, `UNION` li tiene.
 
 Il problema di questa query e' che non si ferma mai, quindi ne limitiamo l'esecuzione con la `WHERE`.
 
@@ -258,9 +277,18 @@ SELECT * FROM search_parent
 
 ### Riprendendo sulle pellicole simili
 
-
-
-
+```sql
+WITH RECURSIVE search_sim(movie, t_movie, distance) AS(
+	SELECT movie1, movie2, 1
+	FROM sim
+	WHERE movie1 = '0013444'
+	UNION
+	SELECT ss.movie, si.movie2, distance + 1
+	FROM search_sim ss 
+	JOIN sim si ON ss.s_movie = si.movie1
+	WHERE distance < 3
+)
+```
 
 ---
 ## Esercizi
@@ -775,7 +803,7 @@ WHERE mc.n_person > (
 )
 ```
 
-* Trovare le persone che hanno recitato in tutti i film di genere crime
+* Trovare le persone che hanno recitato in tutti i film di genere crime (divisione)
 
 Tabelle utili
 $$
@@ -809,173 +837,46 @@ WHERE NOT EXISTS (
 ```
 
 
+* Restituire le persone che hanno svolto più di un ruolo all'interno dello stesso team
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
----
-
-OLD FILE
-
-
-
-
-## Notes
-
-### Subtraction
-
-In [Relational algebra](Relational%20algebra.md) we can do the subtraction, in SQL this could be achieved using
-
-`NOT IN`
+Questa prima query e' in grado di dire quali ruoli e la persona ha svolto e in che film...
 
 ```sql
-SELECT C.iso3 
-FROM imdb.country AS C
-WHERE C.iso3 NOT IN (
-SELECT DISTINCT P.country FROM imdb.produced as P)
+SELECT DISTINCT c1.person, c1.p_role, c2.p_role, c1.movie
+FROM crew c1
+JOIN crew c2 ON c1.person = c2.person
+WHERE c1.p_role <> c2.p_role AND c1.movie = c2.movie
+ORDER BY c1.person
+```
+
+...mentre questa query e' in grado di dire che la data `person` ha svolto più ruoli all'interno del film, ma non sa dire quali per via dell'aggregazione che fa perdere informazione; per contro questa query e' più performante della precedente
+
+```sql
+SELECT person, movie
+FROM crew
+GROUP BY movie, person
+HAVING COUNT(DISTINCT p_role) > 1;
+```
+
+* Trovare i film che hanno un cast più numeroso della media
+
+`ANY` e' opzionale nel caso di un solo record ritornato
+
+```sql
+WITH cast_crew_num AS (
+	SELECT movie, COUNT(*)
+	FROM crew
+	GROUP BY movie
+),
+mean AS (
+	SELECT AVG(count) AS m
+	FROM cast_crew_num
 )
-```
 
-Or `EXCEPT`
-
-```sql
-SELECT C.iso3 FROM imdb.country AS C
-EXCEPT
-SELECT DISTINCT P.country FROM imdb.produced as P
-```
-
-A comparison between relational algebra's operators and sql's:
-* `UNION` $\rightarrow$ $\cup$
-* `INTERSECT` $\rightarrow$ $\cap$
-* `EXCEPT` $\rightarrow$ $-$
-
-### Finding the `Max`
-
-Find the movie with the greatest score
-
-Using `ANY`
-```sql
-SELECT *
-FROM imdb.ratings AS R2
-WHERE R2.score >= ANY (SELECT R.score FROM imdb.ratings AS R)
-```
-
-or using `MAX`
-```sql
-SELECT *
-FROM imdb.ratings AS R2
-WHERE R2.score >= (SELECT MAX(R.score) FROM imdb.ratings AS R)
-```
-
-Do not do this, as it just returns the first, even though there might be more than 1 with the same value
-
-```sql
-SELECT *
-FROM imdb.ratings AS R
-ORDER BY R.score DESC
-LIMIT 1
-```
-
-### `SELECT` and aggregation operators
-
-`SELECT`s work on single rows, aggregation operators work on a set of rows.
-
-## Practice
-
-These are mainly exercises along with some explanations in preparation for a database exam I have coming along.
-
-### Department highest salary
-
-```
-Employee
-+--------------+---------+
-| Column Name  | Type    |
-+--------------+---------+
-| id           | int     |
-| name         | varchar |
-| salary       | int     |
-| departmentId | int     |
-+--------------+---------+
-
-Department
-+-------------+---------+
-| Column Name | Type    |
-+-------------+---------+
-| id          | int     |
-| name        | varchar |
-+-------------+---------+
-```
-
-```postgresql
-select d.Name as Department, e.Name as Employee, e.Salary
-from Employee as e
-join Department as d on e.DepartmentId = d.Id
-join (
-	select max(Salary) as Salary, DepartmentId
-	from Employee
-	group by DepartmentId
-) as mx
-on e.Salary = mx.Salary and e.DepartmentId = mx.DepartmentId
+SELECT *, (SELECT m FROM mean)
+FROM cast_crew_num
+WHERE count > (SELECT m FROM mean)
 ```
 
 
-### Ranking alongside records
 
-```
-+-------------+---------+
-| Column Name | Type    |
-+-------------+---------+
-| id          | int     |
-| score       | decimal |
-+-------------+---------+
-```
-
-```postgresql
-SELECT S1.score,
-  (
-    SELECT COUNT(DISTINCT S2.score)
-    FROM Scores S2
-    WHERE S2.score >= S1.score
-  ) AS rank
-FROM Scores S1
-ORDER BY S1.score DESC;
-```
-
-### Consecutive Available Seats
-
-```
-+-------------+------+
-| Column Name | Type |
-+-------------+------+
-| seat_id     | int  |
-| free        | bool |
-+-------------+------+
-```
-`seat_id` is an auto-increment column for this table.
-Each row of this table indicates whether the ith seat is free or not. 1 means free while 0 means occupied.
-
-```postgresql
-SELECT seat_id
-FROM Cinema AS c1
-WHERE EXISTS (
-    SELECT 1
-    FROM Cinema AS c2
-    WHERE (c1.seat_id + 1 = c2.seat_id OR c1.seat_id = c2.seat_id + 1)
-        AND c1.free = 1
-        AND c2.free = 1
-)
-ORDER BY seat_id;
-```

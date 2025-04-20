@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <link rel="stylesheet" href="css/latex.css">
+  <link rel="stylesheet" href="css/prism.css">
+  <link rel="stylesheet" href="css/index.css">
+</head>
+<body class="latex-dark">
+  <main>
+    <article>
+    <h1>Database progettazione</h1>
+    <p>Come costruire un database, come progettarlo.</p>
+    <figure>
+    <img src="Pasted%20image%2020250420190513.png"
+    alt="Attività di progettazione" />
+    <figcaption aria-hidden="true">Attività di
+    progettazione</figcaption>
+    </figure>
+    <h2 id="esempi"><a href="#esempi">Esempi</a></h2>
+    <p>Si modelli un diagramma ER che descrive una realtà ospedaliera in
+    cui i medici curano i pazienti</p>
+    <figure>
+    <img src="Pasted%20image%2020250416210616.png"
+    alt="Schema ER di una realtà ospedaliera" />
+    <figcaption aria-hidden="true">Schema ER di una realtà
+    ospedaliera</figcaption>
+    </figure>
+    <ul>
+    <li>quali sono le entità che voglio rappresentare? Le chiamo al
+    singolare, sto descrivendo un singolo oggetto di quel tipo. Uso il
+    rettangolo per comunicare che sto mostrando una entità</li>
+    <li>metto solamente quegli attributi che sono presenti nella realtà
+    che sto modellando, se parlo di pazienti non avrò <code>id</code>,
+    ma avrò <code>tessera_sanitaria</code></li>
+    <li>porre attenzione agli attributi composti come ad esempio
+    <code>residenza</code>: non voglio concatenare tutto in una
+    stringa</li>
+    <li>esprimo la cardinalità con <code>(x, y)</code> dove
+    <code>x</code> e’ la cardinalità minima, <code>y</code> la
+    cardinalità massima
+    <ul>
+    <li>la cardinalità minima non può essere indeterminata</li>
+    <li>la cardinalità minima e’ sempre meno della massima</li>
+    <li>la cardinalità va espressa per entrambe le direzioni della
+    relazione</li>
+    <li>la cardinalità della relazione la si capisce guardando la
+    cardinalità massima sui due lati della relazione (esempio se avessi
+    <code>(0,N)</code> e <code>(1,N)</code> sarebbe una cardinalità
+    molti a molti)</li>
+    </ul></li>
+    </ul>
+    </article>
+  </main>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script src="js/prism.min.js"></script>
+</body>

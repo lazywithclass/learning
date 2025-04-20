@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <link rel="stylesheet" href="css/latex.css">
+  <link rel="stylesheet" href="css/prism.css">
+  <link rel="stylesheet" href="css/index.css">
+</head>
+<body class="latex-dark">
+  <main>
+    <article>
+    <h1>Database intro</h1>
+    <h1 id="link-utili"><a href="#link-utili">Link utili</a></h1>
+    <p><a href="Relational%20algebra.md">Relational algebra</a> <a
+    href="SQL.md">SQL</a></p>
+    <p><a
+    href="https://github.com/lazywithclass/learning/tree/master/postgresql">Ambiente
+    di esecuzione query</a></p>
+    <h1 id="dati-strutturati"><a href="#dati-strutturati">Dati
+    strutturati</a></h1>
+    <p>Sfide nella gestione dei dati:</p>
+    <ul>
+    <li>duplicazione</li>
+    <li>violazione dell’integrità</li>
+    <li>errori di inserimento</li>
+    <li>incapacità di controllare il tipo di dato</li>
+    <li>difficoltà di collegamento tra file</li>
+    <li>controllo dell’accesso</li>
+    <li>valori nulli - alcuni valori non possono mancare</li>
+    </ul>
+    <p>Tutti questi vengono gestiti dai DBMS.</p>
+    <p>Vincoli - leggi che voglio applicare per mantenere l’integrità
+    dei dati</p>
+    <p><span class="math display">$$
+    \begin{align}
+    &amp;\ movie(id, title, year, length) \\
+    &amp;\ genre(id, name) \\
+    &amp;\ movie\_genre(id\_movie, id\_genre)
+    \end{align}
+    $$</span></p>
+    <p>In realtà <span
+    class="math inline"><em>g</em><em>e</em><em>n</em><em>r</em><em>e</em>.<em>i</em><em>d</em></span>
+    e’ deleterio perché per come e’ strutturata la tabella non
+    serve.</p>
+    <p><span class="math display">$$
+    \begin{align}
+    &amp;\ movie(id, title, year, length) \newline
+    &amp;\ genre(name) \newline
+    &amp;\ movie\_genre(id\_movie, name\_genre)
+    \end{align}
+    $$</span></p>
+    <p>La tabella <span
+    class="math inline"><em>g</em><em>e</em><em>n</em><em>r</em><em>e</em></span>
+    e’ comunque utile perché consente di sapere rapidamente quali sono i
+    generi presenti nella base dati</p>
+    <p>La struttura delle tabelle deve cambiare solo quando cambiano i
+    requisiti. <label class="sidenote-toggle sidenote-number"></label>
+    <span class="sidenote">Rigidita’ dei database.</span></p>
+    <h2 id="case-study-film-associati-a-recensioni"><a
+    href="#case-study-film-associati-a-recensioni">Case study: film
+    associati a recensioni</a></h2>
+    <p><span class="math display">$$
+    \begin{align}
+    &amp;\ reviewer(name) \newline
+    &amp;\ rating(score, scale, description, review\_date,
+    reviewer\_name, id\_movie) \newline
+    \end{align}
+    $$</span></p>
+    <p>Se c’e’ un rating allora vuol dire che c’e’ uno e un solo film,
+    per via del fatto che c’e’ <span
+    class="math inline"><em>i</em><em>d</em>_<em>m</em><em>o</em><em>v</em><em>i</em><em>e</em></span>
+    come chiave esterna.</p>
+    <h1 id="caratteristiche"><a
+    href="#caratteristiche">Caratteristiche</a></h1>
+    <p>DDL - Data Definition Language - lavora sullo schema DML - Data
+    Manipulation Language - lavora sui dati</p>
+    <p>Indipendenza - astrazione di come i dati vengono memorizzati su
+    disco, che ci consente di disinteressarci di come sono fisicamente
+    distribuiti</p>
+    <p>DQL - Data Query Language - ogni utente ha una vista dei dati che
+    e’ di interesse per quello specifico utente</p>
+    <p>Controllo della concorrenza - condivisione magari sugli stessi
+    dati o addirittura sullo stesso record (lock, transazioni)</p>
+    <p>DCL - Data Control Language - controllo degli accessi</p>
+    <p>Database sono i dati, DBMS e’ il software.</p>
+    <h1 id="definizioni"><a href="#definizioni">Definizioni</a></h1>
+    <p>DBMS - sistema software in grado di gestire collezioni di dati
+    che siano grandi, condivise, persistenti assicurando la loro
+    affidabilità e privatezza, deve essere efficiente ed efficace Una
+    base di dati (o database) e’ una collezione di dati gestita da un
+    DBMS</p>
+    <figure>
+    <img src="Pasted%20image%2020250401210255.png"
+    alt="Architettura a tre livelli" />
+    <figcaption aria-hidden="true">Architettura a tre
+    livelli</figcaption>
+    </figure>
+    <h1 id="modello-relazionale"><a href="#modello-relazionale">Modello
+    relazionale</a></h1>
+    <p><span class="sidenote">Definizione di tabella</span> Basato sul
+    concetto di relazione matematica
+    <label class="sidenote-toggle sidenote-number"></label>, intesa come
+    sottoinsieme del prodotto cartesiano fra due o più insiemi di dati
+    detti domini <span class="math display">$$
+    \begin{align}
+    &amp;\ D1 = \{cane, gatto\}; D2 = \{ bianco, nero, marrone \}
+    \newline
+    \end{align}
+    $$</span> Dove <span class="math inline"><em>D</em>1</span>, <span
+    class="math inline"><em>D</em>2</span> sono domini: cioè possibili
+    valori che può assumere un attributo che usa questo dominio.</p>
+    <p>Posso definire una relazione <span
+    class="math inline"><em>R</em></span> <span class="math display">$$
+    \begin{align}
+    &amp;\ animale(tipo, colore) \newline
+    \end{align}
+    $$</span> che avrà <span class="math inline">6</span> elementi
+    (<span class="math inline">2 * 3</span>), e che sara’ espressa come
+    <span class="math display">$$
+    \begin{align}
+    &amp;\ R \subset D1 \times D2 \newline
+    \end{align}
+    $$</span> Posso scrivere <span class="math display">$$
+    \begin{align}
+    &amp;\ R(D1, D2, D3) \newline
+    &amp;\ t(d1, d2, d3) \newline
+    \end{align}
+    $$</span> dove nella prima riga ho la relazione con i domini, nella
+    seconda riga ho un esempio di tupla, dove <span
+    class="math inline"><em>d</em><sub>1</sub> ∈ <em>D</em><sub>1</sub></span>,
+    <span
+    class="math inline"><em>d</em><sub>2</sub> ∈ <em>D</em><sub>2</sub></span>,
+    <span
+    class="math inline"><em>d</em><sub>3</sub> ∈ <em>D</em><sub>3</sub></span>.
+    Notare come non serve dare un nome a <span
+    class="math inline"><em>d</em><sub>1</sub></span>, ma e’ sicuramente
+    utile farlo, quindi con <span
+    class="math inline"><em>t</em>[<em>k</em>]</span> voglio puntare al
+    valore <span class="math inline"><em>k</em></span> nella tupla <span
+    class="math inline"><em>t</em></span>.</p>
+    <h2 id="schema-di-una-base-di-dati"><a
+    href="#schema-di-una-base-di-dati">Schema di una base di
+    dati</a></h2>
+    <p>Insiemi degli schemi di tutte le relazioni che lo costituiscono,
+    ogni relazione ha poi il suo schema: <span class="math display">$$
+    \begin{align}
+    &amp;\ BD = \{ R_1(X_1), R_2(X_2), ..., R_n(X_n)\}   \newline
+    &amp;\ X_1 = \{ A_1, A_2, ..., A_n \}   \newline
+    \end{align}
+    $$</span> Dove <span
+    class="math inline"><em>X</em><sub>1</sub></span> fino ad arrivare
+    ad <span class="math inline"><em>X</em><sub><em>n</em></sub></span>
+    sono gli schema (o insiemi di attributi).
+    <label class="sidenote-toggle sidenote-number"></label> <span
+    class="sidenote">Lo schema non cambia se cambiano i requisiti,
+    l’istanza si e anche spesso</span> Istanza della base di dati e’
+    l’insieme dei record nelle relazioni.</p>
+    <p><label class="sidenote-toggle sidenote-number"></label> <span
+    class="sidenote">Estensionale ed intensionale</span> La parte
+    estensionale di una tabella sono i suoi dati. La parte intensionale
+    e’ il suo schema.</p>
+    <p>Per ogni tabella esiste sempre un identificatore, al peggio e’
+    composto da tutti i valori degli attributi che definiscono la
+    tabella.</p>
+    <p>Grado di relazione: quanti attributi sono definiti sulla
+    relazione Cardinalità di una relazione: quante tuple ci sono nella
+    relazione</p>
+    <h2 id="vincoli"><a href="#vincoli">Vincoli</a></h2>
+    <p>Caratteristiche che i dati devono avere per poter essere ammessi.
+    Predicato il cui valore di verità e’ verificato all’inserimento di
+    un possibile record nella relazione.</p>
+    <ul>
+    <li>intra-relazionali: all’interno della stessa relazione</li>
+    <li>inter-relazionali: tra diverse relazioni</li>
+    </ul>
+    <p>Avere un tipo di valore <code>DATE</code> già fornisce vincoli su
+    come deve presentarsi il dato. ### Vincolo di <code>NULL</code> e
+    <code>NOT NULL</code></p>
+    <p>Consentire l’inserimento di <code>NULL</code> e’ il default.</p>
+    <p>Ad esempio</p>
+    <p><span class="math display">$$
+    \begin{align}
+    &amp;\ rating(check\_date, source, movie, scale,votes, score)
+    \newline
+    \end{align}
+    $$</span> Potrebbe avere come vincoli di integrità <span
+    class="math display">$$
+    \begin{align}
+    &amp;\ check(score \geq 0\ AND\ score \leq scale) \newline
+    &amp;\ check(scale\ in\ (5, 10, 100)) \newline
+    \end{align}
+    $$</span> ### Vincoli di chiave</p>
+    <p>Valori che referenziano valori identificativi referenziati
+    altrove. #### Superchiave</p>
+    <p>Una qualsiasi combinazione di attributi che garantisce
+    l’univocità dei valori nelle ennuple della relazione. Data <span
+    class="math inline"><em>K</em></span> superchiave della relazione
+    <span class="math inline"><em>R</em></span>, non esistono due tuple
+    <span class="math inline"><em>t</em><sub>1</sub></span>, <span
+    class="math inline"><em>t</em><sub>2</sub></span> in <span
+    class="math inline"><em>R</em></span> per le quali <span
+    class="math inline"><em>t</em><sub>1</sub>[<em>K</em>] = <em>t</em><sub>2</sub>[<em>K</em>]</span>.</p>
+    <p>La seguente relazione <span class="math display">$$
+    \begin{align}
+    &amp;\ movie(id, title, year, length, budget, plot) \newline
+    \end{align}
+    $$</span> avrebbe come superchiavi</p>
+    <ul>
+    <li><span class="math inline"><em>i</em><em>d</em></span></li>
+    <li><span
+    class="math inline"><em>i</em><em>d</em>, <em>t</em><em>i</em><em>t</em><em>l</em><em>e</em>, <em>y</em><em>e</em><em>a</em><em>r</em>, <em>l</em><em>e</em><em>n</em><em>g</em><em>t</em><em>h</em>, <em>b</em><em>u</em><em>d</em><em>g</em><em>e</em><em>t</em>, <em>p</em><em>l</em><em>o</em><em>t</em></span></li>
+    <li>ogni combinazione di attributi che contenga <span
+    class="math inline"><em>i</em><em>d</em></span></li>
+    <li><span
+    class="math inline"><em>t</em><em>i</em><em>t</em><em>l</em><em>e</em>, <em>y</em><em>e</em><em>a</em><em>r</em>, <em>l</em><em>e</em><em>n</em><em>g</em><em>t</em><em>h</em>, <em>b</em><em>u</em><em>d</em><em>g</em><em>e</em><em>t</em>, <em>p</em><em>l</em><em>o</em><em>t</em></span></li>
+    <li><span
+    class="math inline"><em>p</em><em>l</em><em>o</em><em>t</em></span>
+    (dipende da quali situazioni vogliamo tollerare, “ci possono essere
+    due film con la stessa trama?”)</li>
+    <li><span
+    class="math inline"><em>t</em><em>i</em><em>t</em><em>l</em><em>e</em>, <em>p</em><em>l</em><em>o</em><em>t</em></span>
+    (dipende da quali situazioni vogliamo tollerare, “ci possono essere
+    due film con lo stesso titolo e la stessa trama?”)</li>
+    <li><span
+    class="math inline"><em>t</em><em>i</em><em>t</em><em>l</em><em>e</em>, <em>p</em><em>l</em><em>o</em><em>t</em>, <em>l</em><em>e</em><em>n</em><em>g</em><em>t</em><em>h</em></span>
+    ### Chiave</li>
+    </ul>
+    <p>Una chiave e’ una superchiave minimale: non posso toglierle alcun
+    attributo senza che sia una chiave. <span
+    class="math inline"><em>K</em></span> e’ un insieme di attributi
+    superchiave di <span class="math inline"><em>R</em></span>, dato un
+    qualunque insieme <span
+    class="math inline"><em>S</em> ⊆ <em>K</em></span>, <span
+    class="math inline"><em>K</em></span> e’ chiave se può esistere
+    <span
+    class="math inline"><em>t</em><sub>1</sub>[<em>K</em> − <em>S</em>] = <em>t</em><sub>2</sub>[<em>K</em> − <em>S</em>]</span>.</p>
+    <p>Non posso togliere attributi alla chiave mantenendone la
+    caratteristica di chiave, ad esempio a <span
+    class="math inline"><em>t</em><em>i</em><em>t</em><em>l</em><em>e</em>, <em>y</em><em>e</em><em>a</em><em>r</em>, <em>l</em><em>e</em><em>n</em><em>g</em><em>t</em><em>h</em></span>
+    non posso togliere <span
+    class="math inline"><em>l</em><em>e</em><em>n</em><em>g</em><em>t</em><em>h</em></span>,
+    o <span
+    class="math inline"><em>y</em><em>e</em><em>a</em><em>r</em></span>,
+    o <span
+    class="math inline"><em>l</em><em>e</em><em>n</em><em>g</em><em>t</em><em>h</em></span>,
+    senza perdere univocità.</p>
+    <p>Tutte le combinazioni che contengono <span
+    class="math inline"><em>i</em><em>d</em></span> sono superchiavi, ma
+    non sono chiavi perché posso togliere qualsiasi attributo, dal
+    momento che <span class="math inline"><em>i</em><em>d</em></span> da
+    solo basta ad identificare una tupla. ### Chiave primaria</p>
+    <p>Vincolo di entity integrity; e’ una chiave sulla quale non sono
+    possibili valori <code>NULL</code>. Ogni relazione ha una e una sola
+    chiave primaria. ## Integrità referenziale</p>
+    <p>Metto in relazione dati appartenenti ad entità diverse. Permette
+    l’operazione di <code>JOIN</code></p>
+    <p><span class="math inline"><em>R</em><sub>1</sub></span> e <span
+    class="math inline"><em>R</em><sub>2</sub></span>, la prima e’ la
+    relazione che referenzia, la seconda e’ quella referenziata</p>
+    <p><span class="math inline"><em>R</em><sub>1</sub></span> contiene
+    attributo o insieme di attributi <span
+    class="math inline"><em>X</em></span> detto chiave esterna <span
+    class="math inline"><em>R</em><sub>2</sub></span> contiene attributo
+    o insieme di attributi <span class="math inline"><em>Y</em></span>
+    che e’ chiave per <span
+    class="math inline"><em>R</em><sub>2</sub></span></p>
+    <p>Possibili problemi quando si fa un <code>INSERT</code> o
+    <code>UPDATE</code>: * chiavi * vincoli integrità * vincoli dominio
+    - inserisco una stringa dove mi aspettavo un numero * valori
+    null</p>
+    <p>Quando si fa una <code>DELETE</code> su una tabella referenziata
+    si può avere un problema solo se esistono record nella tabella
+    referenziante; <code>NO ACTION</code>. Politiche
+    <code>NO ACTION</code> e <code>CASCADE</code> servono a mantenere
+    l’integrità referenziale.</p>
+    <p>Un film viene proiettato in un cinema in un certo giorno e
+    orario: <span class="math display">$$
+    \begin{align}
+    &amp;\ projection(movie, c\_name, c\_city, p\_date, h\_date)
+    \newline
+    \end{align}
+    $$</span> con: * chiave <span
+    class="math inline"><em>m</em><em>o</em><em>v</em><em>i</em><em>e</em>, <em>c</em>_<em>n</em><em>a</em><em>m</em><em>e</em>, <em>c</em>_<em>c</em><em>i</em><em>t</em><em>y</em>, <em>p</em>_<em>d</em><em>a</em><em>t</em><em>e</em>, <em>h</em>_<em>d</em><em>a</em><em>t</em><em>e</em></span>
+    * <span
+    class="math inline"><em>p</em><em>r</em><em>o</em><em>j</em><em>e</em><em>c</em><em>t</em><em>i</em><em>o</em><em>n</em>.<em>m</em><em>o</em><em>v</em><em>i</em><em>e</em></span>
+    foreign key <span
+    class="math inline"><em>m</em><em>o</em><em>v</em><em>i</em><em>e</em>.<em>i</em><em>d</em></span>
+    * <span
+    class="math inline"><em>p</em><em>r</em><em>o</em><em>j</em><em>e</em><em>c</em><em>t</em><em>i</em><em>o</em><em>n</em>.<em>c</em>_<em>n</em><em>a</em><em>m</em><em>e</em>, <em>p</em><em>r</em><em>o</em><em>j</em><em>e</em><em>c</em><em>t</em><em>i</em><em>o</em><em>n</em>.<em>c</em>_<em>c</em><em>i</em><em>t</em><em>y</em></span>
+    referenziano <span
+    class="math inline"><em>c</em><em>i</em><em>n</em><em>e</em><em>m</em><em>a</em>.<em>n</em><em>a</em><em>m</em><em>e</em>, <em>c</em><em>i</em><em>n</em><em>e</em><em>m</em><em>a</em>.<em>c</em><em>i</em><em>t</em><em>y</em></span>
+    e potrei scrivere in SQL
+    <code>FOREIGN KEY (c_name, c_city) REFERENCES cinema(name, city) ON UPDATE CASCADE ON DELETE NO ACTION</code>;
+    per evitare la chiave esterna composta, si può considerare l’uso di
+    una chiave atomica</p>
+    <p>Se una tabella non e’ referenziata da altre tabelle non serve un
+    <span class="math inline"><em>i</em><em>d</em></span>.</p>
+    <p>Data <span class="math display">$$
+    \begin{align}
+    &amp;\ person(id,\ firstname,\ lastname,\ father) \newline
+    \end{align}
+    $$</span></p>
+    <table>
+    <thead>
+    <tr class="header">
+    <th>id</th>
+    <th>firstname</th>
+    <th>lastname</th>
+    <th>father</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="odd">
+    <td>1</td>
+    <td>Mario</td>
+    <td>Montanelli</td>
+    <td><a href="#null">NULL</a></td>
+    </tr>
+    <tr class="even">
+    <td>2</td>
+    <td>Stefano</td>
+    <td>Montanelli</td>
+    <td>1</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><span
+    class="math inline"><em>f</em><em>a</em><em>t</em><em>h</em><em>e</em><em>r</em></span>
+    e’ chiave esterna, sebbene si riferisca alla stessa tabella:
+    <code>FOREIGN KEY (father) REFERENCES person(id)</code>; inoltre la
+    chiave esterna può essere <code>NULL</code>.</p>
+    <table style="width:6%;">
+    <colgroup>
+    <col style="width: 5%" />
+    </colgroup>
+    <tbody>
+    <tr class="odd">
+    <td>VECCHIO file</td>
+    </tr>
+    </tbody>
+    </table>
+    <h1 id="relational-model"><a href="#relational-model">Relational
+    model</a></h1>
+    <p>Mathematical relations between sets (domains) via a Cartesian
+    product. Data is organized in rows, all rows are different from each
+    other (since they are the result of a Cartesian product).</p>
+    <table>
+    <thead>
+    <tr class="header">
+    <th><span
+    class="math inline"><em>A</em><em>t</em><em>t</em><em>r</em><em>i</em><em>b</em><em>u</em><em>t</em><em>e</em><sub>1</sub></span></th>
+    <th><span
+    class="math inline"><em>A</em><em>t</em><em>t</em><em>r</em><em>i</em><em>b</em><em>u</em><em>t</em><em>e</em><sub>2</sub></span></th>
+    <th><span class="math inline">…</span></th>
+    <th><span
+    class="math inline"><em>A</em><em>t</em><em>t</em><em>r</em><em>i</em><em>b</em><em>u</em><em>t</em><em>e</em><sub><em>k</em></sub></span></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="odd">
+    <td><span
+    class="math inline"><em>D</em><em>a</em><em>t</em><em>a</em><sub>1</sub></span></td>
+    <td><span
+    class="math inline"><em>D</em><em>a</em><em>t</em><em>a</em><sub>2</sub></span></td>
+    <td><span class="math inline">…</span></td>
+    <td><span
+    class="math inline"><em>D</em><em>a</em><em>t</em><em>a</em><sub><em>k</em></sub></span></td>
+    </tr>
+    </tbody>
+    </table>
+    <p>Keep the schema as fixed as possible, so that applications using
+    it do not need to change accordingly.</p>
+    <p>Given <span
+    class="math inline"><em>D</em><sub>1</sub> = {<em>a</em>, <em>b</em>}</span>
+    and <span
+    class="math inline"><em>D</em><sub>2</sub> = {<em>x</em>, <em>y</em>, <em>z</em>}</span>
+    the Cartesian product is <span
+    class="math inline"><em>D</em><sub>1</sub> × <em>D</em><sub>2</sub> = {(<em>a</em>, <em>x</em>), (<em>a</em>, <em>y</em>), (<em>a</em>, <em>z</em>), (<em>b</em>, <em>x</em>), (<em>b</em>, <em>y</em>), (<em>b</em>, <em>z</em>)}</span>.
+    A relation is a subset of that product such that <span
+    class="math inline"><em>r</em> ⊆ <em>D</em><sub>1</sub> × <em>D</em><sub>2</sub> = {(<em>a</em>, <em>x</em>), (<em>a</em>, <em>y</em>), (<em>b</em>, <em>x</em>), (<em>b</em>, <em>y</em>)}</span>.</p>
+    <h2 id="null"><a href="#null">NULL</a></h2>
+    <p>Absence of a value in the domain. We can’t use it to compare
+    values, an attribute <span
+    class="math inline"><em>y</em><em>e</em><em>a</em><em>r</em></span>
+    which could be <span
+    class="math inline"><em>N</em><em>U</em><em>L</em><em>L</em></span>
+    could not be compared with, for example, <span
+    class="math inline">2024</span> to understand if it comes before or
+    after. We can’t even say if they’re different or not (in a way).</p>
+    <h3 id="open-world-semantic"><a
+    href="#open-world-semantic">Open-world semantic</a></h3>
+    <p>Everything that does not falsify a predicate it’s true.</p>
+    <h3 id="closed-world-semantic"><a
+    href="#closed-world-semantic">Closed-world semantic</a></h3>
+    <p>Only something that verify a predicate it’s true.</p>
+    <h2 id="constraints"><a href="#constraints">Constraints</a></h2>
+    <p>A predicate that for each instance could return true or
+    false.</p>
+    <h3 id="in-a-table"><a href="#in-a-table">In a table</a></h3>
+    <ul>
+    <li>domain constraints - for example <span
+    class="math inline"><em>y</em><em>e</em><em>a</em><em>r</em> ≥ 1950 <em>A</em><em>N</em><em>D</em> <em>y</em><em>e</em><em>a</em><em>r</em> ≤ 2015</span></li>
+    <li>row constraints - express conditions on attributes on a row,
+    domain constraints are row constraints that operate on a single
+    attribute</li>
+    <li>key constraints</li>
+    </ul>
+    <h2 id="functional-dependency"><a
+    href="#functional-dependency">Functional dependency</a></h2>
+    <p>A dependency <span
+    class="math inline"><em>F</em><em>D</em> : <em>X</em>→ <em>Y</em></span> means
+    that the values of <span class="math inline"><em>Y</em></span> are
+    determined by the values of <span
+    class="math inline"><em>X</em></span>.</p>
+    <p>“Which are the minimum attributes I need to determine that
+    attribute?”</p>
+    <p>This allows to determine which attributes go in which tables.</p>
+    <p>Of course we could only recognize functional dependencies if we
+    know the domain of the application, if we don’t know anything it’s
+    very hard to do a good job in identifying them.</p>
+    <aside>
+    key concept
+    </aside>
+    <p>Key question to ask ourself to see if there’s a functional
+    dependency: “left side of this hypothetical dependency identifies
+    precisely the right side?” if not then there isn’t a functional
+    dependency.</p>
+    <h2 id="normal-forms"><a href="#normal-forms">Normal forms</a></h2>
+    <p>We want to avoid redundancy in the information.</p>
+    <p>A database is well formed if it has 1NF, 2NF, 3NF. As a rule of
+    thumb: * we want lots of writes <span class="math inline">→</span>
+    more normalization * we want lots of reads <span
+    class="math inline">→</span> less normalization</p>
+    <h3 id="nf"><a href="#1nf">1NF</a></h3>
+    <p>Only atomic attributes. We don’t have a relational database if we
+    don’t have this NF.</p>
+    <h3 id="nf-1"><a href="#2nf">2NF</a></h3>
+    <p>Depends on 1NF.</p>
+    <p>Every non-key attribute must depend on the primary key, as a
+    whole, and not just on a subset of it. Normalization: put the subset
+    of the key and the attribute in a new table.</p>
+    <p>If the key is a single attribute then we always have 2NF.</p>
+    <h3 id="nf-2"><a href="#3nf">3NF</a></h3>
+    <p>Depends on 2NF.</p>
+    <p>Transitive dependency: <span
+    class="math inline"><em>X</em> → <em>Y</em></span> is transitive if
+    a set of attributes <span class="math inline"><em>Z</em></span> (not
+    key and not subset of a key) exists such that <span
+    class="math inline"><em>X</em> → <em>Z</em></span> and <span
+    class="math inline"><em>Z</em> → <em>Y</em></span>. 2NF and no
+    non-prime attribute in <span class="math inline"><em>R</em></span>
+    depends in a transitive way on the primary key.</p>
+    <p>In other words: we don’t want two non-key attributes on the left
+    AND on the right of a functional dependency. They all have to be on
+    the left side.</p>
+    <h3 id="bcnf"><a href="#bcnf">BCNF</a></h3>
+    <p>All non prime attributes must depend on a super-key.</p>
+    <p>The key in the decomposed relations must be a super-key in the
+    original relation.</p>
+    <h2 id="using-normal-forms-to-decompose-relations"><a
+    href="#using-normal-forms-to-decompose-relations">Using normal forms
+    to decompose relations</a></h2>
+    <p>Goal is to start from a big universal relation and finish to a
+    scheme with multiple relations, which respect the normal forms.</p>
+    <p>There is a procedure to follow, which has 3 rules: * preserve
+    attributes * preserve functional dependencies * lossless joins - we
+    don’t want joins to that create data that was not present in the
+    original relations</p>
+    <p>The algorithm is: 1. define functional dependencies 2. minimize
+    functional dependencies 3. for each functional dependency <span
+    class="math inline"><em>X</em> → <em>Y</em></span>, create a new
+    relation where we have <span class="math inline"><em>X</em></span>
+    and all dependencies on the right side that have <span
+    class="math inline"><em>X</em></span> on the left side 4. attributes
+    left out go in a relation of their own</p>
+    <h2 id="normalization"><a
+    href="#normalization">Normalization</a></h2>
+    <p>Anomalies and redundancies arise when we have functional
+    dependencies like <span
+    class="math inline"><em>X</em> → <em>Y</em></span>, where <span
+    class="math inline"><em>X</em></span> is not a superkey (a subset of
+    the key). To avoid redundancies and anomalies, we have to put our
+    relation in BCNF.</p>
+    </article>
+  </main>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script src="js/prism.min.js"></script>
+</body>

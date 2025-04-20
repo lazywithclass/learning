@@ -1,4 +1,13 @@
-# Strange loop
+
+## Definizioni
+
+Teorema
+
+Assioma
+
+
+
+## Strange loop
 
 Make examples, what is that
 
@@ -18,3 +27,21 @@ Contrapuntal compositions are musical works built on the principle of counterpoi
 
 
 See if https://www.youtube.com/watch?v=qsE7H6YPfco starts from the beginning then the second voice starts from the end?
+
+
+## Procedura di decisione per i sistemi PG
+
+Possibilità di avere un algoritmo o un metodo meccanico che possa determinare, per qualsiasi formula ben formata nel sistema, se essa sia o non sia un teorema del sistema.
+
+In termini più semplici, una procedura di decisione sarebbe un metodo che potrebbe dire "sì" o "no" a qualsiasi proposizione matematica presentata nel sistema PG, determinando in modo definitivo se quella proposizione è dimostrabile all'interno del sistema oppure no.
+
+Esempio
+
+`--p-g---` 
+
+Si puo' procedere dal basso o dall'altro.
+
+
+
+
+https://en.wikipedia.org/wiki/Euclid's_theorem
