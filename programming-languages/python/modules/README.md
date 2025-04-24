@@ -14,9 +14,11 @@ The directory structure when working with modules should be
 ├── __init__.py
 ```
 
-From inside the example folder by running the following command, you should see "oh hai" printed to the console
+As you can see also a message from `__init__.py` is printed when the module is imported.
 
 ```bash
+$ cd example
 $ python -m example_user.hello
+hello from __init__.py
 oh hai
 ```
