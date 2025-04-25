@@ -6,7 +6,7 @@ OUTPUT_FILE="$NOTES_DIR/notes.html"
 
 normalize_filename() {
     local filename="$1"
-    echo "$filename" | tr '[:upper:]' '[:lower:]' | tr ' ' '-'
+    echo "$filename" | tr '[:upper:]' '[:lower:]' | tr ' ' '-' | tr -d \'
 }
 
 find $OBSIDIAN_VAULT/*md -maxdepth 1 -type f | while read -r file; do

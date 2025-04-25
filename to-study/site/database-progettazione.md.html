@@ -19,7 +19,10 @@
     <figcaption aria-hidden="true">Attività di
     progettazione</figcaption>
     </figure>
-    <h2 id="esempi"><a href="#esempi">Esempi</a></h2>
+    <h2 id="modello-er"><a href="#modello-er">Modello ER</a></h2>
+    <p>Entità sono rettangoli Associazioni sono rombi, più importante il
+    significato rispetto al suo nome, cioè quali entità associa Per ogni
+    relazione ci sono due cardinalità ### Esempio</p>
     <p>Si modelli un diagramma ER che descrive una realtà ospedaliera in
     cui i medici curano i pazienti</p>
     <figure>
@@ -42,7 +45,7 @@
     <code>x</code> e’ la cardinalità minima, <code>y</code> la
     cardinalità massima
     <ul>
-    <li>la cardinalità minima non può essere indeterminata</li>
+    <li>la cardinalità minima non può essere <code>N</code></li>
     <li>la cardinalità minima e’ sempre meno della massima</li>
     <li>la cardinalità va espressa per entrambe le direzioni della
     relazione</li>
@@ -51,6 +54,154 @@
     <code>(0,N)</code> e <code>(1,N)</code> sarebbe una cardinalità
     molti a molti)</li>
     </ul></li>
+    </ul>
+    <h3 id="altri-esempi"><a href="#altri-esempi">Altri esempi</a></h3>
+    <p>Seguono alcuni esempi con richieste differenti</p>
+    <table>
+    <colgroup>
+    <col style="width: 73%" />
+    <col style="width: 11%" />
+    <col style="width: 11%" />
+    <col style="width: 2%" />
+    </colgroup>
+    <thead>
+    <tr class="header">
+    <th>Esempio</th>
+    <th>Medico - Paziente</th>
+    <th>Paziente - Medico</th>
+    <th>Tipo</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="odd">
+    <td>Un medico cura non più di 1000 pazienti, e un paziente non può
+    avere più di 10 medici curanti</td>
+    <td>(0, 1000)</td>
+    <td>(1, 10)</td>
+    <td>N N</td>
+    </tr>
+    <tr class="even">
+    <td>Un medico cura almeno 10 e non più di 1000 pazienti, e un
+    paziente non può avere più di un medico curante</td>
+    <td>(10, 1000)</td>
+    <td>(1, 1)</td>
+    <td>1 N</td>
+    </tr>
+    </tbody>
+    </table>
+    <p>In una N a N una associazione viene tradotta con una tabella con
+    un identificativo per parte. In una 1 a N la chiave esterna va
+    nell’entità che ha 1 come cardinalità massima.</p>
+    <p>“Ogni medico ha un supervisore che e’ un altro medico”, produrra’
+    due modi di leggere l’associazione:</p>
+    <ul>
+    <li>ha_supervisore (1, 1)</li>
+    <li>e’_supervisore (0, N)</li>
+    </ul>
+    <p>Ed e’ una 1 a N.</p>
+    <p>“I medici lavorano in reparti all’interno di ospedali, ogni
+    reparto ha un primario scelto tra i medici che vi lavorano”</p>
+    <p>Mettere <code>primario</code> come attributo di
+    <code>Reparto</code> e’ un errore, perché lo identificherei con la
+    sua <code>matricola</code>, e quindi sarebbe un <code>Medico</code>,
+    quindi modello come una associazione.</p>
+    <h3 id="entità-debole"><a href="#entit-debole">Entità
+    debole</a></h3>
+    <p>Reparto da solo non e’ in grado di descriversi univocamente.</p>
+    <p>La cardinalità minima e’ sempre (1, 1).</p>
+    <figure>
+    <img src="Pasted%20image%2020250422145718.png"
+    alt="Esempio di entità debole" />
+    <figcaption aria-hidden="true">Esempio di entità debole</figcaption>
+    </figure>
+    <p>TODO prendi da appunti di lezione gli altri schemi, ad esempio
+    dove msotra attributi sulle associazioni</p>
+    <p>TODO mettere rimando al vincolo extra schema: non si puo’ gestire
+    con un elemento dello schema, verrebbe gestito da trigger</p>
+    <h2 id="problema-della-storicizzazione-dei-dati"><a
+    href="#problema-della-storicizzazione-dei-dati">Problema della
+    storicizzazione dei dati</a></h2>
+    <p>Si tratta di scegliere se far si che la base di dati mostri la
+    situazione attuale, o tenga uno storico di come si e’ evoluta la
+    situazione nel tempo.</p>
+    <p>TODO vedi l’esempio dagli appunti del prof su come cambia lo
+    schema ER</p>
+    <h2 id="gerarchie-di-generalizzazione"><a
+    href="#gerarchie-di-generalizzazione">Gerarchie di
+    generalizzazione</a></h2>
+    <p>Vincoli che riguardano delle specifiche entità.</p>
+    <p>“Negli ospedali lavorano diverse figure professionali, tra le
+    quali distinguiamo: medici, infermieri, dirigenti, personale
+    amministrativo”</p>
+    <p>Obiettivo e’ avere una entità che generalizzi le diverse
+    figure.</p>
+    <p>La gerarchia ha due caratteristiche, che vanno sempre specificate
+    (una per coppia):</p>
+    <ul>
+    <li>totalità e parzialità “a quali sotto classi può appartenere?”
+    <ul>
+    <li>totale: un elemento appartiene ad almeno una delle sottoclassi
+    (l’unione delle sottoclassi ricostruisce la superclasse)</li>
+    <li>parziale: esistono individui non appartenente ad alcuna delle
+    sottoclassi</li>
+    </ul></li>
+    <li>esclusività e sovrapponibilità
+    <ul>
+    <li>esclusività: un individuo e’ collocabile solo in una delle
+    sottoclassi, intersezione tra le sottocategorie e’ <span
+    class="math inline">∅</span></li>
+    <li>sovrapponibile: un individuo può appartenere a più
+    sottoclassi</li>
+    </ul></li>
+    </ul>
+    <p>Le sottoclassi possono non avere identificatore, nel caso questo
+    sia presente nella superclasse.</p>
+    <p>Quando ci sono attributi che sono in comune tra le relazioni e’
+    bene chiedersi se si e’ in presenza di una possibile gerarchia di
+    generalizzazione. ### Esempi</p>
+    <p>“Si sappia che un Dipendente può essere Medico, Dirigente,
+    Infermiere, Amministrativo e Custode”</p>
+    <p>TODO aggiungi questo esempio</p>
+    <p>TODO prendi ER dagli appunti del prof</p>
+    <p>TODO prova a fare lo schema sui dati immobiliari proposto dal
+    prof e dopo guarda la soluzione</p>
+    <h2 id="esercizio-su-caso-duso-events"><a
+    href="#esercizio-su-caso-duso-events">Esercizio su caso d’uso
+    Events</a></h2>
+    <p>La base di dati dovrà memorizzare:</p>
+    <ul>
+    <li>dati relativi a clienti distinti in persone fisiche e
+    giuridiche</li>
+    <li>dati relativi agli eventi organizzati, tra i quali si
+    distinguono banchetti e convegni</li>
+    <li>dati relativi ai partecipanti agli eventi con eventuali
+    intolleranze (si tenga presente che non è possibile inserire dati
+    anagrafici dei partecipanti se non il nome e il cognome). Si
+    memorizzino gli accompagnatori (il partecipante A può essere
+    accompagnato da B e C) sapendo che un partecipante può avere più
+    accompagnatori, ma può accompagnare solo un partecipante.</li>
+    <li>dati relativi ai ristoranti che gestiscono i banchetti. Tra i
+    ristoranti si distinguono quelli caratteristici</li>
+    <li>dati relativi ai menu serviti ai banchetti. Un menu è un insieme
+    di portate classificate come antipasto, primo, secondo, dessert. Tra
+    le portate si distinguono le specialità che possono essere offerte
+    solo in ristoranti caratteristici. Il costo di un menu è la somma
+    dei costi delle portate incluse nel menu</li>
+    </ul>
+    <p>TODO rifallo da solo e controlla sia rispetto alla versione
+    dell’anno scorso che rispetto a quella di questo anno</p>
+    <p>Come abbiamo proceduto a lezione:</p>
+    <ul>
+    <li>per ogni entità ci chiediamo quali sono gli identificatori,
+    eventualmente pensando se siamo in presenza di una entità
+    debole</li>
+    <li>identificato cliente, come gerarchia di persona fisica e persona
+    giuridica (T, E)</li>
+    <li>identificato evento, come gerarchi di banchetto e convegno (P,
+    S)</li>
+    <li>pensiamo a come collegare le entità con le associazioni</li>
+    <li>ogni volta che ottengo “gruppi” di entità mi chiedo anche li
+    come collegarli con le associazioni</li>
     </ul>
     </article>
   </main>

@@ -1,5 +1,4 @@
 ---
-cssclasses: 
 tags:
   - sql
   - postgres

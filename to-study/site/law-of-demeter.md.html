@@ -25,12 +25,22 @@
     </figure>
     <h2 id="obiettivo"><a href="#obiettivo">Obiettivo</a></h2>
     <p>Obiettivo e’ ridurre l’accoppiamento tra gli oggetti e promuovere
-    la modularita’ del codice. E’ anche chiamato <a
+    la modularità del codice. E’ anche chiamato <a
     href="https://en.wikipedia.org/wiki/Law_of_Demeter">principle of
     least knowledge</a>, o in modo colloquiale riassunto con “gli amici
     dei miei amici non sono miei amici”. Anche citato in “tell don’t
     ask”.</p>
-    <h2 id="istruzioni"><a href="#istruzioni">Istruzioni</a></h2>
+    <p>Maggiore e’ il numero di oggetti con cui parli, maggiore e’ la
+    probabilità di rompersi quando questi oggetti cambiano.</p>
+    <blockquote>
+    <p>The fundamental goal […] is to write shy code, code that doesn’t
+    reveal too much of itself to anyone else and doesn’t talk to others
+    any more than is necessary. Shy code keeps to itself, not like that
+    gossipy neighbor who’s involved in everyone else’s comings and
+    goings.</p>
+    </blockquote>
+    <p>– https://media.pragprog.com/articles/jan_03_enbug.pdf ##
+    Istruzioni</p>
     <p>Limitare le interazioni tra gli oggetti ad un numero ristretto di
     amici stretti. Meno conosco gli altri oggetti piu’ e’ facile che
     possano cambiare. Il codice di un metodo dovrebbe accedere
