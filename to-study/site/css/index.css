@@ -67,3 +67,7 @@ cite {
 figure {
   justify-items: center;
 }
+
+table th {
+  white-space: nowrap;
+}

@@ -1,26 +1,26 @@
 {
 	"nodes":[
-		{"id":"85dd640905a2b3bb","type":"group","x":-3120,"y":-986,"width":2080,"height":2026,"label":"Software engineering"},
-		{"id":"00e9f975870d4907","type":"group","x":-3480,"y":1200,"width":2080,"height":1826,"label":"Verifica e convalida"},
-		{"id":"895635680b7e7df4","type":"group","x":-5240,"y":1280,"width":1120,"height":1080,"label":"Database"},
-		{"id":"b0347299040bae97","type":"group","x":-5200,"y":-280,"width":1049,"height":689,"label":"Java"},
-		{"id":"1d96b754faeaee28","type":"file","file":"Exception.md","x":-5138,"y":-191,"width":400,"height":400},
-		{"id":"969134cf7e4e5c47","type":"file","file":"Java.md","x":-4560,"y":-191,"width":400,"height":400},
-		{"id":"c01c2479d46c1773","type":"file","file":"Relational algebra.md","x":-4560,"y":1320,"width":400,"height":400},
-		{"id":"529f0538e11231ae","type":"file","file":"SQL.md","x":-5200,"y":1320,"width":400,"height":400},
-		{"id":"3641920f7a5b59c5","type":"file","file":"Database intro.md","x":-5200,"y":1920,"width":400,"height":400},
-		{"id":"19ac0e06c432d2fd","type":"file","file":"Database progettazione.md","x":-4560,"y":1920,"width":400,"height":400},
-		{"id":"a83c9bac82882194","type":"file","file":"Verifica e convalida.md","x":-3280,"y":1440,"width":400,"height":400},
-		{"id":"f7c0300af3594b9e","type":"file","file":"TDD.md","x":-2480,"y":1520,"width":400,"height":400},
+		{"id":"85dd640905a2b3bb","type":"group","x":-3080,"y":-920,"width":1720,"height":1640,"label":"Software engineering"},
+		{"id":"895635680b7e7df4","type":"group","x":-4620,"y":360,"width":1120,"height":1080,"label":"Database"},
+		{"id":"b0347299040bae97","type":"group","x":-4620,"y":-478,"width":1140,"height":478,"label":"Java"},
+		{"id":"00e9f975870d4907","type":"group","x":-3080,"y":1120,"width":1120,"height":480,"label":"Verifica e convalida"},
 		{"id":"7b56a502ad3fb7fc","type":"file","file":"Design Pattern.md","x":-3040,"y":-880,"width":400,"height":402},
-		{"id":"4f1cb2aca91aaf7a","type":"file","file":"Encapsulation and information hiding.md","x":-2360,"y":-880,"width":400,"height":400},
-		{"id":"9c8caae7182b4d20","type":"file","file":"SOLID.md","x":-2360,"y":-77,"width":400,"height":400},
-		{"id":"d7901ebc7ac6d58f","type":"file","file":"Inheritance.md","x":-1688,"y":123,"width":400,"height":400},
-		{"id":"401ec0a9f232982d","type":"file","file":"Tell don't ask.md","x":-1688,"y":-920,"width":400,"height":400},
-		{"id":"dea8b742a229aa25","type":"file","file":"Law of Demeter.md","x":-1688,"y":-400,"width":400,"height":400},
-		{"id":"5c5d6073d7f887e6","x":-2285,"y":600,"width":250,"height":154,"type":"text","text":"Protection against change to the existing code and design at variation and evolution points"},
-		{"id":"16a027477a88af32","x":-2035,"y":443,"width":250,"height":50,"type":"text","text":"Open close principle"},
-		{"id":"6ee38529d3077eaa","type":"text","text":"Protected variation","x":-2485,"y":443,"width":250,"height":50}
+		{"id":"969134cf7e4e5c47","type":"file","file":"Java.md","x":-4600,"y":-440,"width":400,"height":400},
+		{"id":"69ad361f530a96a5","type":"file","file":"Nullability.md","x":-3960,"y":-440,"width":400,"height":400},
+		{"id":"4f1cb2aca91aaf7a","type":"file","file":"Encapsulation and information hiding.md","x":-2435,"y":-878,"width":400,"height":400},
+		{"id":"401ec0a9f232982d","type":"file","file":"Tell don't ask.md","x":-1800,"y":-878,"width":400,"height":400},
+		{"id":"9c8caae7182b4d20","type":"file","file":"SOLID.md","x":-2435,"y":-107,"width":400,"height":400},
+		{"id":"dea8b742a229aa25","type":"file","file":"Law of Demeter.md","x":-1800,"y":-360,"width":400,"height":400},
+		{"id":"6ee38529d3077eaa","type":"text","text":"Protected variation","x":-2560,"y":393,"width":250,"height":50},
+		{"id":"16a027477a88af32","type":"text","text":"Open close principle","x":-2160,"y":393,"width":250,"height":50},
+		{"id":"5c5d6073d7f887e6","type":"text","text":"Protection against change to the existing code and design at variation and evolution points","x":-2360,"y":539,"width":250,"height":154},
+		{"id":"d7901ebc7ac6d58f","type":"file","file":"Inheritance.md","x":-1800,"y":293,"width":400,"height":400},
+		{"id":"529f0538e11231ae","type":"file","file":"SQL.md","x":-4580,"y":400,"width":400,"height":400},
+		{"id":"3641920f7a5b59c5","type":"file","file":"Database intro.md","x":-4580,"y":1000,"width":400,"height":400},
+		{"id":"19ac0e06c432d2fd","type":"file","file":"Database progettazione.md","x":-3940,"y":1000,"width":400,"height":400},
+		{"id":"c01c2479d46c1773","type":"file","file":"Relational algebra.md","x":-3940,"y":400,"width":400,"height":400},
+		{"id":"a83c9bac82882194","type":"file","file":"Verifica e convalida.md","x":-3040,"y":1160,"width":400,"height":400},
+		{"id":"f7c0300af3594b9e","type":"file","file":"TDD.md","x":-2400,"y":1160,"width":400,"height":400}
 	],
 	"edges":[
 		{"id":"9cba33d2898e5a11","fromNode":"dea8b742a229aa25","fromSide":"left","toNode":"9c8caae7182b4d20","toSide":"top"},
@@ -32,6 +32,7 @@
 		{"id":"2a5216e7d1b2da9c","fromNode":"401ec0a9f232982d","fromSide":"left","toNode":"4f1cb2aca91aaf7a","toSide":"right"},
 		{"id":"d3e393b18022be10","fromNode":"16a027477a88af32","fromSide":"bottom","toNode":"5c5d6073d7f887e6","toSide":"top"},
 		{"id":"312bee533d9a660b","fromNode":"9c8caae7182b4d20","fromSide":"bottom","toNode":"16a027477a88af32","toSide":"top"},
-		{"id":"667a6c31d833b09c","fromNode":"6ee38529d3077eaa","fromSide":"bottom","toNode":"5c5d6073d7f887e6","toSide":"top"}
+		{"id":"667a6c31d833b09c","fromNode":"6ee38529d3077eaa","fromSide":"bottom","toNode":"5c5d6073d7f887e6","toSide":"top"},
+		{"id":"c6fb3018ef3663ed","fromNode":"85dd640905a2b3bb","fromSide":"left","toNode":"69ad361f530a96a5","toSide":"right"}
 	]
 }

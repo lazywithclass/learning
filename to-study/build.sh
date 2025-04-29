@@ -45,3 +45,9 @@ cp -r "$OBSIDIAN_VAULT/attachments" "$NOTES_DIR/"
 
 mkdir -p "$NOTES_DIR/iframes"
 cp -r "iframes" "$NOTES_DIR/"
+
+if [[ "$1" == "prod" ]]; then
+  pushd site
+  vercel --prod
+  popd
+fi

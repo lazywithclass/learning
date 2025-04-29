@@ -14,7 +14,7 @@
     <h1>Database progettazione</h1>
     <p>Come costruire un database, come progettarlo.</p>
     <figure>
-    <img src="Pasted%20image%2020250420190513.png"
+    <img src="attachments/Pasted%20image%2020250420190513.png"
     alt="Attività di progettazione" />
     <figcaption aria-hidden="true">Attività di
     progettazione</figcaption>
@@ -22,11 +22,12 @@
     <h2 id="modello-er"><a href="#modello-er">Modello ER</a></h2>
     <p>Entità sono rettangoli Associazioni sono rombi, più importante il
     significato rispetto al suo nome, cioè quali entità associa Per ogni
-    relazione ci sono due cardinalità ### Esempio</p>
+    relazione ci sono due cardinalità</p>
+    <h3 id="esempio"><a href="#esempio">Esempio</a></h3>
     <p>Si modelli un diagramma ER che descrive una realtà ospedaliera in
     cui i medici curano i pazienti</p>
     <figure>
-    <img src="Pasted%20image%2020250416210616.png"
+    <img src="attachments/Pasted%20image%2020250416210616.png"
     alt="Schema ER di una realtà ospedaliera" />
     <figcaption aria-hidden="true">Schema ER di una realtà
     ospedaliera</figcaption>
@@ -110,7 +111,7 @@
     <p>Reparto da solo non e’ in grado di descriversi univocamente.</p>
     <p>La cardinalità minima e’ sempre (1, 1).</p>
     <figure>
-    <img src="Pasted%20image%2020250422145718.png"
+    <img src="attachments/Pasted%20image%2020250422145718.png"
     alt="Esempio di entità debole" />
     <figcaption aria-hidden="true">Esempio di entità debole</figcaption>
     </figure>
@@ -158,7 +159,8 @@
     sia presente nella superclasse.</p>
     <p>Quando ci sono attributi che sono in comune tra le relazioni e’
     bene chiedersi se si e’ in presenza di una possibile gerarchia di
-    generalizzazione. ### Esempi</p>
+    generalizzazione.</p>
+    <h3 id="esempi"><a href="#esempi">Esempi</a></h3>
     <p>“Si sappia che un Dipendente può essere Medico, Dirigente,
     Infermiere, Amministrativo e Custode”</p>
     <p>TODO aggiungi questo esempio</p>
@@ -203,6 +205,141 @@
     <li>ogni volta che ottengo “gruppi” di entità mi chiedo anche li
     come collegarli con le associazioni</li>
     </ul>
+    <h2 id="progettazione-logica"><a
+    href="#progettazione-logica">Progettazione logica</a></h2>
+    <p>Da modello concettuale a modello logico.</p>
+    <p>TODO integra con il diagramma che avevi fatto e mettilo qua TODO
+    integra con gli esempi nel materiale del prof su Ariel</p>
+    <p>Partiamo da questo</p>
+    <figure>
+    <img src="attachments/Pasted%20image%2020250416210616.png"
+    alt="Schema ER di una realtà ospedaliera" />
+    <figcaption aria-hidden="true">Schema ER di una realtà
+    ospedaliera</figcaption>
+    </figure>
+    <p>Chiavi primarie sono sottolineate con riga continua. TODO
+    metterlo in latex Attributi opzionali sono denotati da un <span
+    class="math inline">*</span></p>
+    <ul>
+    <li><p>Parto da una entità - <span
+    class="math inline"><em>M</em><em>e</em><em>d</em><em>i</em><em>c</em><em>o</em></span></p></li>
+    <li><p>Scrivo i suoi attributi - <span
+    class="math inline">$Medico(\underline{matricola},\ ruolo,\
+    cognome,\ nome,\ specialita')$</span></p></li>
+    <li><p>Prossima entità - <span
+    class="math inline">$Ambulatorio(\underline{numero}, telefono*,
+    ubicazione)$</span></p></li>
+    <li><p>Prossima entità (focus solo sugli attributi interessanti) -
+    <span class="math inline">$Paziente(\underline{tessera\_sanitaria},
+    residenza, diagnosi)$</span> Scegliendo <span
+    class="math inline"><em>r</em><em>e</em><em>s</em><em>i</em><em>d</em><em>e</em><em>n</em><em>z</em><em>a</em></span>
+    come unica stringa allora renderò alcune query molto difficili da
+    fare, dovrò fare il parsing, quindi dipende dal dominio; se invece
+    voglio poter fare query allora li metto come attributi separati
+    dell’entità<label class="sidenote-toggle sidenote-number"></label>
+    <span class="sidenote">Gestione attributi composti</span>. Per un
+    attributo multi-valore come <span
+    class="math inline"><em>d</em><em>i</em><em>a</em><em>g</em><em>n</em><em>o</em><em>s</em><em>i</em></span>
+    la faccio diventare una entità. Che quindi diventa una associazione
+    1 a N, 1 perché l’attributo e’ diventato entità debole.</p>
+    <p>Quindi ottengo una nuova relazione - <span
+    class="math inline">$Diagnosi(\underline{diagnosi,\
+    tessera\_sanitaria})$</span><label class="sidenote-toggle sidenote-number"></label>
+    <span class="sidenote">1 a N: metto l’identificatore nel lato 1 che
+    ho nel lato N</span> Con la seguente notazione specifico a quale
+    chiave fa riferimento la chiave esterna: <span
+    class="math inline"><em>D</em><em>i</em><em>a</em><em>g</em><em>n</em><em>o</em><em>s</em><em>i</em>.<em>t</em><em>e</em><em>s</em><em>s</em><em>e</em><em>r</em><em>a</em>_<em>s</em><em>a</em><em>n</em><em>i</em><em>t</em><em>a</em><em>r</em><em>i</em><em>a</em> → <em>P</em><em>a</em><em>z</em><em>i</em><em>e</em><em>n</em><em>t</em><em>e</em>.<em>t</em><em>e</em><em>s</em><em>s</em><em>e</em><em>r</em><em>a</em>_<em>s</em><em>a</em><em>n</em><em>i</em><em>t</em><em>a</em><em>r</em><em>i</em><em>a</em></span></p></li>
+    <li><p>vedo se ci sono associazioni rimanenti</p></li>
+    <li><p>parto da <span
+    class="math inline"><em>C</em><em>u</em><em>r</em><em>a</em><em>n</em><em>o</em></span>,
+    che diventa una nuova tabella perché ho bisogno di mantenere quale
+    <span
+    class="math inline"><em>M</em><em>e</em><em>d</em><em>i</em><em>c</em><em>o</em></span>
+    e’ associato a quale <span
+    class="math inline"><em>P</em><em>a</em><em>z</em><em>i</em><em>e</em><em>n</em><em>t</em><em>e</em></span>:
+    <span class="math inline">$Curano(\underline{medico,\
+    paziente})$</span>, e quindi aggiungo le specifiche per la chiavi
+    esterne <span
+    class="math inline"><em>C</em><em>u</em><em>r</em><em>a</em><em>n</em><em>o</em>.<em>m</em><em>e</em><em>d</em><em>i</em><em>c</em><em>o</em> → <em>M</em><em>e</em><em>d</em><em>i</em><em>c</em><em>o</em>.<em>m</em><em>a</em><em>t</em><em>r</em><em>i</em><em>c</em><em>o</em><em>l</em><em>a</em></span>
+    <span
+    class="math inline"><em>C</em><em>u</em><em>r</em><em>a</em><em>n</em><em>o</em>.<em>p</em><em>a</em><em>z</em><em>i</em><em>e</em><em>n</em><em>t</em><em>e</em> → <em>P</em><em>a</em><em>z</em><em>i</em><em>e</em><em>n</em><em>t</em><em>e</em>.<em>t</em><em>e</em><em>s</em><em>s</em><em>e</em><em>r</em><em>a</em>_<em>s</em><em>a</em><em>n</em><em>i</em><em>t</em><em>a</em><em>r</em><em>i</em><em>a</em></span></p></li>
+    <li><p>Prossima associazione <span
+    class="math inline"><em>V</em><em>i</em><em>s</em><em>i</em><em>t</em><em>a</em></span>:
+    <span class="math inline">$Visita(\underline{medico,\ paziente,\
+    ambulatorio,\ data\_visita})$</span>, e quindi aggiungo le
+    specifiche per la chiavi esterne <span
+    class="math inline"><em>V</em><em>i</em><em>s</em><em>t</em><em>i</em><em>t</em><em>a</em>.<em>m</em><em>e</em><em>d</em><em>i</em><em>c</em><em>o</em> → <em>M</em><em>e</em><em>d</em><em>i</em><em>c</em><em>o</em>.<em>m</em><em>a</em><em>t</em><em>r</em><em>i</em><em>c</em><em>o</em><em>l</em><em>a</em></span>
+    <span
+    class="math inline"><em>V</em><em>i</em><em>s</em><em>i</em><em>t</em><em>a</em>.<em>p</em><em>a</em><em>z</em><em>i</em><em>e</em><em>n</em><em>t</em><em>e</em> → <em>P</em><em>a</em><em>z</em><em>i</em><em>e</em><em>n</em><em>t</em><em>e</em>.<em>t</em><em>e</em><em>s</em><em>s</em><em>e</em><em>r</em><em>a</em>_<em>s</em><em>a</em><em>n</em><em>i</em><em>t</em><em>a</em><em>r</em><em>i</em><em>a</em></span>
+    <span
+    class="math inline"><em>V</em><em>i</em><em>s</em><em>i</em><em>t</em><em>a</em>.<em>a</em><em>m</em><em>b</em><em>u</em><em>l</em><em>a</em><em>t</em><em>o</em><em>r</em><em>i</em><em>o</em> → <em>A</em><em>m</em><em>b</em><em>u</em><em>l</em><em>a</em><em>t</em><em>o</em><em>r</em><em>i</em><em>o</em>.<em>n</em><em>u</em><em>m</em><em>e</em><em>r</em><em>o</em></span></p></li>
+    </ul>
+    <p>Abbiamo sbagliato il modello concettuale, manca <span
+    class="math inline"><em>d</em><em>a</em><em>t</em><em>a</em>_<em>v</em><em>i</em><em>s</em><em>i</em><em>t</em><em>a</em></span>
+    dentro <span
+    class="math inline"><em>V</em><em>i</em><em>s</em><em>i</em><em>t</em><em>a</em></span>,
+    perché altrimenti non avrei potuto avere una visita tra lo stesso
+    medico, lo stesso paziente, nello stesso ambulatorio, il che e’
+    assurdo. L’attributo <span
+    class="math inline"><em>d</em><em>a</em><em>t</em><em>a</em>_<em>v</em><em>i</em><em>s</em><em>i</em><em>t</em><em>a</em></span>
+    e’ parte della chiave quando voglio <span
+    class="math inline"><em>V</em><em>i</em><em>s</em><em>i</em><em>t</em><em>a</em></span>
+    come relazione storica.</p>
+    <p><span
+    class="math inline"><em>V</em><em>i</em><em>s</em><em>i</em><em>t</em><em>a</em>.<em>a</em><em>m</em><em>b</em><em>u</em><em>l</em><em>a</em><em>t</em><em>o</em><em>r</em><em>i</em><em>o</em></span>
+    non e’ rappresentato come 0, come dovrebbe essere secondo la
+    cardinalità, ma siccome fa parte della chiave deve esserci, quindi
+    quando non c’e’ semplicemente non appare in <span
+    class="math inline"><em>V</em><em>i</em><em>s</em><em>i</em><em>t</em><em>a</em></span>.
+    E’ con i <code>LEFT JOIN</code> che vado a pescare questi record
+    quando mi serve. In realtà sono sbagliate le <code>(1,N)</code>
+    perché vorrebbe dire che ogni volta che aggiungo un <span
+    class="math inline"><em>M</em><em>e</em><em>d</em><em>i</em><em>c</em><em>o</em></span>
+    devo subito assegnargli un <span
+    class="math inline"><em>P</em><em>a</em><em>z</em><em>i</em><em>e</em><em>n</em><em>t</em><em>e</em></span>
+    il che può non essere vero.</p>
+    <p>Nel caso di entità deboli faccio prima l’entità a cui sono
+    associate.</p>
+    <p>Per convenienza e’ possibile mettere un <span
+    class="math inline"><em>i</em><em>d</em></span> dove oltre agli
+    identificatori naturali uso un identificatore “utile”, perché cosi
+    ad esempio le <code>JOIN</code> non sono un delirio di
+    <code>ON</code> a causa dei molteplici attributi coinvolti nella
+    chiave. E’ una scelta fatta in fase di ristrutturazione.</p>
+    <p>Per una associazione con N entità devo prendere tutte le chiavi
+    di ogni entità partecipante, per poi metterla nella nuova
+    tabella.</p>
+    <h3 id="gestione-gerarchie"><a href="#gestione-gerarchie">Gestione
+    gerarchie</a></h3>
+    <p>TODO mettere immagini da appunti del prof</p>
+    <h4 id="accorpamento-su-entità-padre-verso-lalto"><a
+    href="#accorpamento-su-entit-padre-verso-lalto">Accorpamento su
+    entità padre (verso l’alto)</a></h4>
+    <p>Si può sempre fare, con ogni tipo di gerarchia. La gerarchia
+    collassa in un’unica entità, che e’ quella padre e:</p>
+    <ul>
+    <li>si aggiunge un tipo enumerativo che identifica le figlie, nella
+    gerarchia totale tipo e’ obbligatorio, nella gerarchia parziale tipo
+    e’ opzionale; occhio che nelle sovrapposte il tipo deve considerare
+    tutte le possibili combinazioni (può diventare poco
+    maneggevole)</li>
+    <li>si aggiungono eventuali attributi delle entità figlie, che
+    arrivano come opzionali</li>
+    </ul>
+    <h4 id="eliminazione-dellentità-padre-verso-il-basso"><a
+    href="#eliminazione-dellentit-padre-verso-il-basso">Eliminazione
+    dell’entità padre (verso il basso)</a></h4>
+    <p>Non e’ praticabile con una gerarchia parziale. La gerarchia viene
+    spostata verso il basso, tutti gli attributi del padre vengono dati
+    ai figli. Se non sappiamo ad esempio se una persona e’ fisica o
+    giuridica dobbiamo fare una <code>UNION</code> per cercarla
+    dappertutto.</p>
+    <h4 id="mantenimento-di-tutte-le-entità"><a
+    href="#mantenimento-di-tutte-le-entit">Mantenimento di tutte le
+    entità</a></h4>
+    <p>La gerarchia viene scomposta in associazioni binarie (<span
+    class="math inline"><em>e</em>′_<em>t</em><em>i</em><em>p</em><em>o</em></span>).
+    I figli sono sempre entità deboli rispetto al padre.</p>
     </article>
   </main>
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>

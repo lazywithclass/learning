@@ -11,9 +11,9 @@ Structured Query Language
 
 Linguaggio dichiarativo.
 
-DDL: comandi per creare strutture per l'ossatura della base di dati (`CREATE TABLE`, `CREATE VIEW`, ...)
-DML: istruzioni (`INSERT`, `DELETE`, `UPDATE`, ...)
-DQL: `SELECT`
+DDL: comandi per creare strutture per l'ossatura della base di dati (`CREATE TABLE`, `CREATE VIEW`, ...)<br />
+DML: istruzioni (`INSERT`, `DELETE`, `UPDATE`, ...)<br />
+DQL: `SELECT`<br />
 DCL: comandi sul controllo
 
 ## Funzioni / operatori / clausole
@@ -123,6 +123,7 @@ WHERE p.country IS null
 La cardinalità quindi include anche i record senza corrispondenza. 
 
 `FULL JOIN` combina `LEFT` e `RIGHT`.
+
 ## Viste
 
 Oggetti derivati formati a partire dai dati nelle tabelle, per offrire delle proiezioni dei dati tipicamente appartenenti a tabelle diverse.
