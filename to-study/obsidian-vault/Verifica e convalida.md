@@ -99,8 +99,8 @@ int raddoppia(int n) {
 }
 ```
 
-Un criterio che seleziona sottoinsiemi di $\{ 0,2\}$ e' affidabile ma non valido.<br />
-Un criterio che seleziona sottoinsiemi di $\{0,1,2,3,4\}$ e' non affidabile ma valido.<br />
+Un criterio che seleziona sottoinsiemi di $\{ 0,2\}$ e' affidabile ma non valido.\
+Un criterio che seleziona sottoinsiemi di $\{0,1,2,3,4\}$ e' non affidabile ma valido.\
 Un criterio che seleziona sottoinsiemi finiti di $D$ con almeno un valore maggiore di $18$ e' affidabile e valido.
 
 #### Tutto  bello, ma...

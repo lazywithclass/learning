@@ -17,8 +17,9 @@
     <p>DDL: comandi per creare strutture per l’ossatura della base di
     dati (<code>CREATE TABLE</code>, <code>CREATE VIEW</code>, …)<br />
     DML: istruzioni (<code>INSERT</code>, <code>DELETE</code>,
-    <code>UPDATE</code>, …)<br /> DQL: <code>SELECT</code><br /> DCL:
-    comandi sul controllo</p>
+    <code>UPDATE</code>, …)<br />
+    DQL: <code>SELECT</code><br />
+    DCL: comandi sul controllo</p>
     <h2 id="funzioni-operatori-clausole"><a
     href="#funzioni-operatori-clausole">Funzioni / operatori /
     clausole</a></h2>
@@ -51,7 +52,7 @@
     ad esempio
     <code>WHERE extract(YEAR FROM birth_date) = '1971'</code></li>
     <li><code>as</code> e’ l’equivalente di <span
-    class="math inline"><em>ρ</em></span> nell’algebra relazionale</li>
+    class="math inline">\(\rho\)</span> nell’algebra relazionale</li>
     <li><code>::</code> e’ l’operatore di cast
     <code>SELECT extract(year) from birth_date)::char(4) from imdb.person</code></li>
     <li><code>is null</code> unico modo per confrontare con
@@ -753,19 +754,19 @@
     <li>Trovare le persone che hanno recitato in tutti i film di genere
     crime (divisione)</li>
     </ul>
-    <p>Tabelle utili <span class="math display">$$
+    <p>Tabelle utili <span class="math display">\[
     \begin{align}
     &amp;\ crew(person,\ movie) \newline
     &amp;\ genre(movie,\ genre) \newline
     \end{align}
-    $$</span></p>
-    <p>In algebra e’ <span class="math display">$$
+    \]</span></p>
+    <p>In algebra e’ <span class="math display">\[
     \begin{align}
     &amp;\ A = \pi_{(person,movie)} crew \newline
-    &amp;\ B = \pi_{movie}(\sigma_{genre='Crime}) \newline
+    &amp;\ B = \pi_{movie}(\sigma_{genre=&#39;Crime}) \newline
     &amp;\ A / B \newline
     \end{align}
-    $$</span></p>
+    \]</span></p>
     <div class="sourceCode" id="cb64"><pre
     class="sourceCode sql"><code class="sourceCode sql"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="kw">id</span>, given_name</span>
 <span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> person p</span>

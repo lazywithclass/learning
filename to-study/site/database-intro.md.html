@@ -33,45 +33,41 @@
     <p>Tutti questi vengono gestiti dai DBMS.</p>
     <p>Vincoli - leggi che voglio applicare per mantenere l’integrità
     dei dati</p>
-    <p><span class="math display">$$
+    <p><span class="math display">\[
     \begin{align}
     &amp;\ movie(id, title, year, length) \\
     &amp;\ genre(id, name) \\
     &amp;\ movie\_genre(id\_movie, id\_genre)
     \end{align}
-    $$</span></p>
-    <p>In realtà <span
-    class="math inline"><em>g</em><em>e</em><em>n</em><em>r</em><em>e</em>.<em>i</em><em>d</em></span>
-    e’ deleterio perché per come e’ strutturata la tabella non
-    serve.</p>
-    <p><span class="math display">$$
+    \]</span></p>
+    <p>In realtà <span class="math inline">\(genre.id\)</span> e’
+    deleterio perché per come e’ strutturata la tabella non serve.</p>
+    <p><span class="math display">\[
     \begin{align}
     &amp;\ movie(id, title, year, length) \newline
     &amp;\ genre(name) \newline
     &amp;\ movie\_genre(id\_movie, name\_genre)
     \end{align}
-    $$</span></p>
-    <p>La tabella <span
-    class="math inline"><em>g</em><em>e</em><em>n</em><em>r</em><em>e</em></span>
-    e’ comunque utile perché consente di sapere rapidamente quali sono i
-    generi presenti nella base dati</p>
+    \]</span></p>
+    <p>La tabella <span class="math inline">\(genre\)</span> e’ comunque
+    utile perché consente di sapere rapidamente quali sono i generi
+    presenti nella base dati</p>
     <p>La struttura delle tabelle deve cambiare solo quando cambiano i
     requisiti. <label class="sidenote-toggle sidenote-number"></label>
     <span class="sidenote">Rigidita’ dei database.</span></p>
     <h2 id="case-study-film-associati-a-recensioni"><a
     href="#case-study-film-associati-a-recensioni">Case study: film
     associati a recensioni</a></h2>
-    <p><span class="math display">$$
+    <p><span class="math display">\[
     \begin{align}
     &amp;\ reviewer(name) \newline
     &amp;\ rating(score, scale, description, review\_date,
     reviewer\_name, id\_movie) \newline
     \end{align}
-    $$</span></p>
+    \]</span></p>
     <p>Se c’e’ un rating allora vuol dire che c’e’ uno e un solo film,
     per via del fatto che c’e’ <span
-    class="math inline"><em>i</em><em>d</em>_<em>m</em><em>o</em><em>v</em><em>i</em><em>e</em></span>
-    come chiave esterna.</p>
+    class="math inline">\(id\_movie\)</span> come chiave esterna.</p>
     <h1 id="caratteristiche"><a
     href="#caratteristiche">Caratteristiche</a></h1>
     <p>DDL - Data Definition Language - lavora sullo schema DML - Data
@@ -103,56 +99,52 @@
     concetto di relazione matematica
     <label class="sidenote-toggle sidenote-number"></label>, intesa come
     sottoinsieme del prodotto cartesiano fra due o più insiemi di dati
-    detti domini <span class="math display">$$
+    detti domini <span class="math display">\[
     \begin{align}
     &amp;\ D1 = \{cane, gatto\}; D2 = \{ bianco, nero, marrone \}
     \newline
     \end{align}
-    $$</span> Dove <span class="math inline"><em>D</em>1</span>, <span
-    class="math inline"><em>D</em>2</span> sono domini: cioè possibili
-    valori che può assumere un attributo che usa questo dominio.</p>
+    \]</span> Dove <span class="math inline">\(D1\)</span>, <span
+    class="math inline">\(D2\)</span> sono domini: cioè possibili valori
+    che può assumere un attributo che usa questo dominio.</p>
     <p>Posso definire una relazione <span
-    class="math inline"><em>R</em></span> <span class="math display">$$
+    class="math inline">\(R\)</span> <span class="math display">\[
     \begin{align}
     &amp;\ animale(tipo, colore) \newline
     \end{align}
-    $$</span> che avrà <span class="math inline">6</span> elementi
-    (<span class="math inline">2 * 3</span>), e che sara’ espressa come
-    <span class="math display">$$
+    \]</span> che avrà <span class="math inline">\(6\)</span> elementi
+    (<span class="math inline">\(2*3\)</span>), e che sara’ espressa
+    come <span class="math display">\[
     \begin{align}
     &amp;\ R \subset D1 \times D2 \newline
     \end{align}
-    $$</span> Posso scrivere <span class="math display">$$
+    \]</span> Posso scrivere <span class="math display">\[
     \begin{align}
     &amp;\ R(D1, D2, D3) \newline
     &amp;\ t(d1, d2, d3) \newline
     \end{align}
-    $$</span> dove nella prima riga ho la relazione con i domini, nella
+    \]</span> dove nella prima riga ho la relazione con i domini, nella
     seconda riga ho un esempio di tupla, dove <span
-    class="math inline"><em>d</em><sub>1</sub> ∈ <em>D</em><sub>1</sub></span>,
-    <span
-    class="math inline"><em>d</em><sub>2</sub> ∈ <em>D</em><sub>2</sub></span>,
-    <span
-    class="math inline"><em>d</em><sub>3</sub> ∈ <em>D</em><sub>3</sub></span>.
-    Notare come non serve dare un nome a <span
-    class="math inline"><em>d</em><sub>1</sub></span>, ma e’ sicuramente
-    utile farlo, quindi con <span
-    class="math inline"><em>t</em>[<em>k</em>]</span> voglio puntare al
-    valore <span class="math inline"><em>k</em></span> nella tupla <span
-    class="math inline"><em>t</em></span>.</p>
+    class="math inline">\(d_1 \in D_1\)</span>, <span
+    class="math inline">\(d_2 \in D_2\)</span>, <span
+    class="math inline">\(d_3 \in D_3\)</span>. Notare come non serve
+    dare un nome a <span class="math inline">\(d_1\)</span>, ma e’
+    sicuramente utile farlo, quindi con <span
+    class="math inline">\(t[k]\)</span> voglio puntare al valore <span
+    class="math inline">\(k\)</span> nella tupla <span
+    class="math inline">\(t\)</span>.</p>
     <h2 id="schema-di-una-base-di-dati"><a
     href="#schema-di-una-base-di-dati">Schema di una base di
     dati</a></h2>
     <p>Insiemi degli schemi di tutte le relazioni che lo costituiscono,
-    ogni relazione ha poi il suo schema: <span class="math display">$$
+    ogni relazione ha poi il suo schema: <span class="math display">\[
     \begin{align}
     &amp;\ BD = \{ R_1(X_1), R_2(X_2), ..., R_n(X_n)\}   \newline
     &amp;\ X_1 = \{ A_1, A_2, ..., A_n \}   \newline
     \end{align}
-    $$</span> Dove <span
-    class="math inline"><em>X</em><sub>1</sub></span> fino ad arrivare
-    ad <span class="math inline"><em>X</em><sub><em>n</em></sub></span>
-    sono gli schema (o insiemi di attributi).
+    \]</span> Dove <span class="math inline">\(X_1\)</span> fino ad
+    arrivare ad <span class="math inline">\(X_n\)</span> sono gli schema
+    (o insiemi di attributi).
     <label class="sidenote-toggle sidenote-number"></label> <span
     class="sidenote">Lo schema non cambia se cambiano i requisiti,
     l’istanza si e anche spesso</span> Istanza della base di dati e’
@@ -180,92 +172,83 @@
     <code>NOT NULL</code></p>
     <p>Consentire l’inserimento di <code>NULL</code> e’ il default.</p>
     <p>Ad esempio</p>
-    <p><span class="math display">$$
+    <p><span class="math display">\[
     \begin{align}
     &amp;\ rating(check\_date, source, movie, scale,votes, score)
     \newline
     \end{align}
-    $$</span> Potrebbe avere come vincoli di integrità <span
-    class="math display">$$
+    \]</span> Potrebbe avere come vincoli di integrità <span
+    class="math display">\[
     \begin{align}
     &amp;\ check(score \geq 0\ AND\ score \leq scale) \newline
     &amp;\ check(scale\ in\ (5, 10, 100)) \newline
     \end{align}
-    $$</span> ### Vincoli di chiave</p>
+    \]</span> ### Vincoli di chiave</p>
     <p>Valori che referenziano valori identificativi referenziati
     altrove. #### Superchiave</p>
     <p>Una qualsiasi combinazione di attributi che garantisce
     l’univocità dei valori nelle ennuple della relazione. Data <span
-    class="math inline"><em>K</em></span> superchiave della relazione
-    <span class="math inline"><em>R</em></span>, non esistono due tuple
-    <span class="math inline"><em>t</em><sub>1</sub></span>, <span
-    class="math inline"><em>t</em><sub>2</sub></span> in <span
-    class="math inline"><em>R</em></span> per le quali <span
-    class="math inline"><em>t</em><sub>1</sub>[<em>K</em>] = <em>t</em><sub>2</sub>[<em>K</em>]</span>.</p>
-    <p>La seguente relazione <span class="math display">$$
+    class="math inline">\(K\)</span> superchiave della relazione <span
+    class="math inline">\(R\)</span>, non esistono due tuple <span
+    class="math inline">\(t_1\)</span>, <span
+    class="math inline">\(t_2\)</span> in <span
+    class="math inline">\(R\)</span> per le quali <span
+    class="math inline">\(t_1[K] = t_2[K]\)</span>.</p>
+    <p>La seguente relazione <span class="math display">\[
     \begin{align}
     &amp;\ movie(id, title, year, length, budget, plot) \newline
     \end{align}
-    $$</span> avrebbe come superchiavi</p>
+    \]</span> avrebbe come superchiavi</p>
     <ul>
-    <li><span class="math inline"><em>i</em><em>d</em></span></li>
-    <li><span
-    class="math inline"><em>i</em><em>d</em>, <em>t</em><em>i</em><em>t</em><em>l</em><em>e</em>, <em>y</em><em>e</em><em>a</em><em>r</em>, <em>l</em><em>e</em><em>n</em><em>g</em><em>t</em><em>h</em>, <em>b</em><em>u</em><em>d</em><em>g</em><em>e</em><em>t</em>, <em>p</em><em>l</em><em>o</em><em>t</em></span></li>
+    <li><span class="math inline">\(id\)</span></li>
+    <li><span class="math inline">\(id, title, year, length, budget,
+    plot\)</span></li>
     <li>ogni combinazione di attributi che contenga <span
-    class="math inline"><em>i</em><em>d</em></span></li>
-    <li><span
-    class="math inline"><em>t</em><em>i</em><em>t</em><em>l</em><em>e</em>, <em>y</em><em>e</em><em>a</em><em>r</em>, <em>l</em><em>e</em><em>n</em><em>g</em><em>t</em><em>h</em>, <em>b</em><em>u</em><em>d</em><em>g</em><em>e</em><em>t</em>, <em>p</em><em>l</em><em>o</em><em>t</em></span></li>
-    <li><span
-    class="math inline"><em>p</em><em>l</em><em>o</em><em>t</em></span>
-    (dipende da quali situazioni vogliamo tollerare, “ci possono essere
-    due film con la stessa trama?”)</li>
-    <li><span
-    class="math inline"><em>t</em><em>i</em><em>t</em><em>l</em><em>e</em>, <em>p</em><em>l</em><em>o</em><em>t</em></span>
-    (dipende da quali situazioni vogliamo tollerare, “ci possono essere
-    due film con lo stesso titolo e la stessa trama?”)</li>
-    <li><span
-    class="math inline"><em>t</em><em>i</em><em>t</em><em>l</em><em>e</em>, <em>p</em><em>l</em><em>o</em><em>t</em>, <em>l</em><em>e</em><em>n</em><em>g</em><em>t</em><em>h</em></span>
-    ### Chiave</li>
+    class="math inline">\(id\)</span></li>
+    <li><span class="math inline">\(title, year, length, budget,
+    plot\)</span></li>
+    <li><span class="math inline">\(plot\)</span> (dipende da quali
+    situazioni vogliamo tollerare, “ci possono essere due film con la
+    stessa trama?”)</li>
+    <li><span class="math inline">\(title, plot\)</span> (dipende da
+    quali situazioni vogliamo tollerare, “ci possono essere due film con
+    lo stesso titolo e la stessa trama?”)</li>
+    <li><span class="math inline">\(title, plot, length\)</span> ###
+    Chiave</li>
     </ul>
     <p>Una chiave e’ una superchiave minimale: non posso toglierle alcun
     attributo senza che sia una chiave. <span
-    class="math inline"><em>K</em></span> e’ un insieme di attributi
-    superchiave di <span class="math inline"><em>R</em></span>, dato un
-    qualunque insieme <span
-    class="math inline"><em>S</em> ⊆ <em>K</em></span>, <span
-    class="math inline"><em>K</em></span> e’ chiave se può esistere
-    <span
-    class="math inline"><em>t</em><sub>1</sub>[<em>K</em> − <em>S</em>] = <em>t</em><sub>2</sub>[<em>K</em> − <em>S</em>]</span>.</p>
+    class="math inline">\(K\)</span> e’ un insieme di attributi
+    superchiave di <span class="math inline">\(R\)</span>, dato un
+    qualunque insieme <span class="math inline">\(S \subseteq
+    K\)</span>, <span class="math inline">\(K\)</span> e’ chiave se può
+    esistere <span class="math inline">\(t_1[K-S] =
+    t_2[K-S]\)</span>.</p>
     <p>Non posso togliere attributi alla chiave mantenendone la
     caratteristica di chiave, ad esempio a <span
-    class="math inline"><em>t</em><em>i</em><em>t</em><em>l</em><em>e</em>, <em>y</em><em>e</em><em>a</em><em>r</em>, <em>l</em><em>e</em><em>n</em><em>g</em><em>t</em><em>h</em></span>
-    non posso togliere <span
-    class="math inline"><em>l</em><em>e</em><em>n</em><em>g</em><em>t</em><em>h</em></span>,
-    o <span
-    class="math inline"><em>y</em><em>e</em><em>a</em><em>r</em></span>,
-    o <span
-    class="math inline"><em>l</em><em>e</em><em>n</em><em>g</em><em>t</em><em>h</em></span>,
-    senza perdere univocità.</p>
+    class="math inline">\(title, year, length\)</span> non posso
+    togliere <span class="math inline">\(length\)</span>, o <span
+    class="math inline">\(year\)</span>, o <span
+    class="math inline">\(length\)</span>, senza perdere univocità.</p>
     <p>Tutte le combinazioni che contengono <span
-    class="math inline"><em>i</em><em>d</em></span> sono superchiavi, ma
-    non sono chiavi perché posso togliere qualsiasi attributo, dal
-    momento che <span class="math inline"><em>i</em><em>d</em></span> da
-    solo basta ad identificare una tupla. ### Chiave primaria</p>
+    class="math inline">\(id\)</span> sono superchiavi, ma non sono
+    chiavi perché posso togliere qualsiasi attributo, dal momento che
+    <span class="math inline">\(id\)</span> da solo basta ad
+    identificare una tupla. ### Chiave primaria</p>
     <p>Vincolo di entity integrity; e’ una chiave sulla quale non sono
     possibili valori <code>NULL</code>. Ogni relazione ha una e una sola
     chiave primaria. ## Integrità referenziale</p>
     <p>Metto in relazione dati appartenenti ad entità diverse. Permette
     l’operazione di <code>JOIN</code></p>
-    <p><span class="math inline"><em>R</em><sub>1</sub></span> e <span
-    class="math inline"><em>R</em><sub>2</sub></span>, la prima e’ la
-    relazione che referenzia, la seconda e’ quella referenziata</p>
-    <p><span class="math inline"><em>R</em><sub>1</sub></span> contiene
+    <p><span class="math inline">\(R_1\)</span> e <span
+    class="math inline">\(R_2\)</span>, la prima e’ la relazione che
+    referenzia, la seconda e’ quella referenziata</p>
+    <p><span class="math inline">\(R_1\)</span> contiene attributo o
+    insieme di attributi <span class="math inline">\(X\)</span> detto
+    chiave esterna <span class="math inline">\(R_2\)</span> contiene
     attributo o insieme di attributi <span
-    class="math inline"><em>X</em></span> detto chiave esterna <span
-    class="math inline"><em>R</em><sub>2</sub></span> contiene attributo
-    o insieme di attributi <span class="math inline"><em>Y</em></span>
-    che e’ chiave per <span
-    class="math inline"><em>R</em><sub>2</sub></span></p>
+    class="math inline">\(Y\)</span> che e’ chiave per <span
+    class="math inline">\(R_2\)</span></p>
     <p>Possibili problemi quando si fa un <code>INSERT</code> o
     <code>UPDATE</code>: * chiavi * vincoli integrità * vincoli dominio
     - inserisco una stringa dove mi aspettavo un numero * valori
@@ -276,32 +259,29 @@
     <code>NO ACTION</code> e <code>CASCADE</code> servono a mantenere
     l’integrità referenziale.</p>
     <p>Un film viene proiettato in un cinema in un certo giorno e
-    orario: <span class="math display">$$
+    orario: <span class="math display">\[
     \begin{align}
     &amp;\ projection(movie, c\_name, c\_city, p\_date, h\_date)
     \newline
     \end{align}
-    $$</span> con: * chiave <span
-    class="math inline"><em>m</em><em>o</em><em>v</em><em>i</em><em>e</em>, <em>c</em>_<em>n</em><em>a</em><em>m</em><em>e</em>, <em>c</em>_<em>c</em><em>i</em><em>t</em><em>y</em>, <em>p</em>_<em>d</em><em>a</em><em>t</em><em>e</em>, <em>h</em>_<em>d</em><em>a</em><em>t</em><em>e</em></span>
-    * <span
-    class="math inline"><em>p</em><em>r</em><em>o</em><em>j</em><em>e</em><em>c</em><em>t</em><em>i</em><em>o</em><em>n</em>.<em>m</em><em>o</em><em>v</em><em>i</em><em>e</em></span>
-    foreign key <span
-    class="math inline"><em>m</em><em>o</em><em>v</em><em>i</em><em>e</em>.<em>i</em><em>d</em></span>
-    * <span
-    class="math inline"><em>p</em><em>r</em><em>o</em><em>j</em><em>e</em><em>c</em><em>t</em><em>i</em><em>o</em><em>n</em>.<em>c</em>_<em>n</em><em>a</em><em>m</em><em>e</em>, <em>p</em><em>r</em><em>o</em><em>j</em><em>e</em><em>c</em><em>t</em><em>i</em><em>o</em><em>n</em>.<em>c</em>_<em>c</em><em>i</em><em>t</em><em>y</em></span>
-    referenziano <span
-    class="math inline"><em>c</em><em>i</em><em>n</em><em>e</em><em>m</em><em>a</em>.<em>n</em><em>a</em><em>m</em><em>e</em>, <em>c</em><em>i</em><em>n</em><em>e</em><em>m</em><em>a</em>.<em>c</em><em>i</em><em>t</em><em>y</em></span>
-    e potrei scrivere in SQL
+    \]</span> con: * chiave <span class="math inline">\(movie,\
+    c\_name,\ c\_city,\ p\_date,\ h\_date\)</span> * <span
+    class="math inline">\(projection.movie\)</span> foreign key <span
+    class="math inline">\(movie.id\)</span> * <span
+    class="math inline">\(projection.c\_name,\
+    projection.c\_city\)</span> referenziano <span
+    class="math inline">\(cinema.name,\ cinema.city\)</span> e potrei
+    scrivere in SQL
     <code>FOREIGN KEY (c_name, c_city) REFERENCES cinema(name, city) ON UPDATE CASCADE ON DELETE NO ACTION</code>;
     per evitare la chiave esterna composta, si può considerare l’uso di
     una chiave atomica</p>
     <p>Se una tabella non e’ referenziata da altre tabelle non serve un
-    <span class="math inline"><em>i</em><em>d</em></span>.</p>
-    <p>Data <span class="math display">$$
+    <span class="math inline">\(id\)</span>.</p>
+    <p>Data <span class="math display">\[
     \begin{align}
     &amp;\ person(id,\ firstname,\ lastname,\ father) \newline
     \end{align}
-    $$</span></p>
+    \]</span></p>
     <table>
     <thead>
     <tr class="header">
@@ -326,9 +306,8 @@
     </tr>
     </tbody>
     </table>
-    <p><span
-    class="math inline"><em>f</em><em>a</em><em>t</em><em>h</em><em>e</em><em>r</em></span>
-    e’ chiave esterna, sebbene si riferisca alla stessa tabella:
+    <p><span class="math inline">\(father\)</span> e’ chiave esterna,
+    sebbene si riferisca alla stessa tabella:
     <code>FOREIGN KEY (father) REFERENCES person(id)</code>; inoltre la
     chiave esterna può essere <code>NULL</code>.</p>
     <table style="width:6%;">
@@ -349,46 +328,38 @@
     <table>
     <thead>
     <tr class="header">
-    <th><span
-    class="math inline"><em>A</em><em>t</em><em>t</em><em>r</em><em>i</em><em>b</em><em>u</em><em>t</em><em>e</em><sub>1</sub></span></th>
-    <th><span
-    class="math inline"><em>A</em><em>t</em><em>t</em><em>r</em><em>i</em><em>b</em><em>u</em><em>t</em><em>e</em><sub>2</sub></span></th>
-    <th><span class="math inline">…</span></th>
-    <th><span
-    class="math inline"><em>A</em><em>t</em><em>t</em><em>r</em><em>i</em><em>b</em><em>u</em><em>t</em><em>e</em><sub><em>k</em></sub></span></th>
+    <th><span class="math inline">\(Attribute_1\)</span></th>
+    <th><span class="math inline">\(Attribute_2\)</span></th>
+    <th><span class="math inline">\(\dots\)</span></th>
+    <th><span class="math inline">\(Attribute_k\)</span></th>
     </tr>
     </thead>
     <tbody>
     <tr class="odd">
-    <td><span
-    class="math inline"><em>D</em><em>a</em><em>t</em><em>a</em><sub>1</sub></span></td>
-    <td><span
-    class="math inline"><em>D</em><em>a</em><em>t</em><em>a</em><sub>2</sub></span></td>
-    <td><span class="math inline">…</span></td>
-    <td><span
-    class="math inline"><em>D</em><em>a</em><em>t</em><em>a</em><sub><em>k</em></sub></span></td>
+    <td><span class="math inline">\(Data_1\)</span></td>
+    <td><span class="math inline">\(Data_2\)</span></td>
+    <td><span class="math inline">\(\dots\)</span></td>
+    <td><span class="math inline">\(Data_k\)</span></td>
     </tr>
     </tbody>
     </table>
     <p>Keep the schema as fixed as possible, so that applications using
     it do not need to change accordingly.</p>
-    <p>Given <span
-    class="math inline"><em>D</em><sub>1</sub> = {<em>a</em>, <em>b</em>}</span>
-    and <span
-    class="math inline"><em>D</em><sub>2</sub> = {<em>x</em>, <em>y</em>, <em>z</em>}</span>
-    the Cartesian product is <span
-    class="math inline"><em>D</em><sub>1</sub> × <em>D</em><sub>2</sub> = {(<em>a</em>, <em>x</em>), (<em>a</em>, <em>y</em>), (<em>a</em>, <em>z</em>), (<em>b</em>, <em>x</em>), (<em>b</em>, <em>y</em>), (<em>b</em>, <em>z</em>)}</span>.
-    A relation is a subset of that product such that <span
-    class="math inline"><em>r</em> ⊆ <em>D</em><sub>1</sub> × <em>D</em><sub>2</sub> = {(<em>a</em>, <em>x</em>), (<em>a</em>, <em>y</em>), (<em>b</em>, <em>x</em>), (<em>b</em>, <em>y</em>)}</span>.</p>
+    <p>Given <span class="math inline">\(D_1 = \{a,b\}\)</span> and
+    <span class="math inline">\(D_2 = \{x,y,z\}\)</span> the Cartesian
+    product is <span class="math inline">\(D_1 \times D_2 =
+    \{(a,x),(a,y),(a,z),(b,x),(b,y),(b,z)\}\)</span>. A relation is a
+    subset of that product such that <span class="math inline">\(r
+    \subseteq D_1 \times D_2 = \{(a,x), (a,y), (b,x), (b,
+    y)\}\)</span>.</p>
     <h2 id="null"><a href="#null">NULL</a></h2>
     <p>Absence of a value in the domain. We can’t use it to compare
-    values, an attribute <span
-    class="math inline"><em>y</em><em>e</em><em>a</em><em>r</em></span>
-    which could be <span
-    class="math inline"><em>N</em><em>U</em><em>L</em><em>L</em></span>
-    could not be compared with, for example, <span
-    class="math inline">2024</span> to understand if it comes before or
-    after. We can’t even say if they’re different or not (in a way).</p>
+    values, an attribute <span class="math inline">\(year\)</span> which
+    could be <span class="math inline">\(NULL\)</span> could not be
+    compared with, for example, <span
+    class="math inline">\(2024\)</span> to understand if it comes before
+    or after. We can’t even say if they’re different or not (in a
+    way).</p>
     <h3 id="open-world-semantic"><a
     href="#open-world-semantic">Open-world semantic</a></h3>
     <p>Everything that does not falsify a predicate it’s true.</p>
@@ -401,7 +372,8 @@
     <h3 id="in-a-table"><a href="#in-a-table">In a table</a></h3>
     <ul>
     <li>domain constraints - for example <span
-    class="math inline"><em>y</em><em>e</em><em>a</em><em>r</em> ≥ 1950 <em>A</em><em>N</em><em>D</em> <em>y</em><em>e</em><em>a</em><em>r</em> ≤ 2015</span></li>
+    class="math inline">\(year \geq 1950 \ AND \ year \leq
+    2015\)</span></li>
     <li>row constraints - express conditions on attributes on a row,
     domain constraints are row constraints that operate on a single
     attribute</li>
@@ -409,11 +381,10 @@
     </ul>
     <h2 id="functional-dependency"><a
     href="#functional-dependency">Functional dependency</a></h2>
-    <p>A dependency <span
-    class="math inline"><em>F</em><em>D</em> : <em>X</em>→ <em>Y</em></span> means
-    that the values of <span class="math inline"><em>Y</em></span> are
-    determined by the values of <span
-    class="math inline"><em>X</em></span>.</p>
+    <p>A dependency <span class="math inline">\(FD: X \rightarrow \
+    Y\)</span> means that the values of <span
+    class="math inline">\(Y\)</span> are determined by the values
+    of <span class="math inline">\(X\)</span>.</p>
     <p>“Which are the minimum attributes I need to determine that
     attribute?”</p>
     <p>This allows to determine which attributes go in which tables.</p>
@@ -430,9 +401,10 @@
     <h2 id="normal-forms"><a href="#normal-forms">Normal forms</a></h2>
     <p>We want to avoid redundancy in the information.</p>
     <p>A database is well formed if it has 1NF, 2NF, 3NF. As a rule of
-    thumb: * we want lots of writes <span class="math inline">→</span>
-    more normalization * we want lots of reads <span
-    class="math inline">→</span> less normalization</p>
+    thumb: * we want lots of writes <span
+    class="math inline">\(\rightarrow\)</span> more normalization * we
+    want lots of reads <span class="math inline">\(\rightarrow\)</span>
+    less normalization</p>
     <h3 id="nf"><a href="#1nf">1NF</a></h3>
     <p>Only atomic attributes. We don’t have a relational database if we
     don’t have this NF.</p>
@@ -444,14 +416,14 @@
     <p>If the key is a single attribute then we always have 2NF.</p>
     <h3 id="nf-2"><a href="#3nf">3NF</a></h3>
     <p>Depends on 2NF.</p>
-    <p>Transitive dependency: <span
-    class="math inline"><em>X</em> → <em>Y</em></span> is transitive if
-    a set of attributes <span class="math inline"><em>Z</em></span> (not
-    key and not subset of a key) exists such that <span
-    class="math inline"><em>X</em> → <em>Z</em></span> and <span
-    class="math inline"><em>Z</em> → <em>Y</em></span>. 2NF and no
-    non-prime attribute in <span class="math inline"><em>R</em></span>
-    depends in a transitive way on the primary key.</p>
+    <p>Transitive dependency: <span class="math inline">\(X \rightarrow
+    Y\)</span> is transitive if a set of attributes <span
+    class="math inline">\(Z\)</span> (not key and not subset of a key)
+    exists such that <span class="math inline">\(X \rightarrow
+    Z\)</span> and <span class="math inline">\(Z \rightarrow Y\)</span>.
+    2NF and no non-prime attribute in <span
+    class="math inline">\(R\)</span> depends in a transitive way on the
+    primary key.</p>
     <p>In other words: we don’t want two non-key attributes on the left
     AND on the right of a functional dependency. They all have to be on
     the left side.</p>
@@ -470,19 +442,18 @@
     original relations</p>
     <p>The algorithm is: 1. define functional dependencies 2. minimize
     functional dependencies 3. for each functional dependency <span
-    class="math inline"><em>X</em> → <em>Y</em></span>, create a new
-    relation where we have <span class="math inline"><em>X</em></span>
-    and all dependencies on the right side that have <span
-    class="math inline"><em>X</em></span> on the left side 4. attributes
-    left out go in a relation of their own</p>
+    class="math inline">\(X \rightarrow Y\)</span>, create a new
+    relation where we have <span class="math inline">\(X\)</span> and
+    all dependencies on the right side that have <span
+    class="math inline">\(X\)</span> on the left side 4. attributes left
+    out go in a relation of their own</p>
     <h2 id="normalization"><a
     href="#normalization">Normalization</a></h2>
     <p>Anomalies and redundancies arise when we have functional
-    dependencies like <span
-    class="math inline"><em>X</em> → <em>Y</em></span>, where <span
-    class="math inline"><em>X</em></span> is not a superkey (a subset of
-    the key). To avoid redundancies and anomalies, we have to put our
-    relation in BCNF.</p>
+    dependencies like <span class="math inline">\(X \rightarrow
+    Y\)</span>, where <span class="math inline">\(X\)</span> is not a
+    superkey (a subset of the key). To avoid redundancies and anomalies,
+    we have to put our relation in BCNF.</p>
     </article>
   </main>
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>

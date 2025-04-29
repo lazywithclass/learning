@@ -22,7 +22,7 @@ there seem to be few rules:
 
 ## Terminal and nonterminal
 
-Terminal symbols are those that cannot be changed.<br />
+Terminal symbols are those that cannot be changed.\
 Nonterminal symbols can change.
 
 [From Wikipedia](https://en.wikipedia.org/wiki/Terminal_and_nonterminal_symbols#Terminal_symbols), if we have 

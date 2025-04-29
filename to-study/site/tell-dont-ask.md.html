@@ -28,13 +28,11 @@
     responsible for their own state and the rules governing it.</p>
     <h2 id="example"><a href="#example">Example</a></h2>
     <p>Asking</p>
-    <div class="sourceCode" id="cb1"><pre
-    class="sourceCode java"><code class="sourceCode java"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>account<span class="op">.</span><span class="fu">getBalance</span><span class="op">()</span> <span class="op">&gt;</span> withdrawalAmount<span class="op">)</span> <span class="op">{</span> </span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    account<span class="op">.</span><span class="fu">debit</span><span class="op">(</span>withdrawalAmount<span class="op">);</span> </span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+    <pre class="language-java"><code>if (account.getBalance() &gt; withdrawalAmount) { 
+    account.debit(withdrawalAmount); 
+}</code></pre>
     <p>Telling:</p>
-    <div class="sourceCode" id="cb2"><pre
-    class="sourceCode java"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>account<span class="op">.</span><span class="fu">withdraw</span><span class="op">(</span>withdrawalAmount<span class="op">);</span></span></code></pre></div>
+    <pre class="language-java"><code>account.withdraw(withdrawalAmount);</code></pre>
     <p>The logic <code>if (balance &gt; amount)</code> is inside the
     <code>withdraw</code> method of the <code>Account</code> class.</p>
     <h2 id="difference-with-law-of-demeter"><a
@@ -60,7 +58,9 @@
     behavior and data, but I don’t find it a point worth
     highlighting.</p>
     </blockquote>
-    <p>– https://martinfowler.com/bliki/TellDontAsk.html</p>
+    <p>– <a
+    href="https://martinfowler.com/bliki/TellDontAsk.html">Martin
+    Fowler’s article</a></p>
     <p>Follow the links in the article because there’s more to be
     learned.</p>
     </article>

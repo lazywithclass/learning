@@ -17,7 +17,7 @@ find $OBSIDIAN_VAULT/*md -maxdepth 1 -type f | while read -r file; do
       continue
     fi
     echo "$file"
-    pandoc --quiet "$file" --metadata title="$title" --template=custom.html5 -o "$NOTES_DIR/$(echo $filename).html" --lua-filter=pandoc-lua/add_links.lua
+    pandoc "$file" --metadata title="$title" --template=custom.html5 -o "$NOTES_DIR/$(echo $filename).html" --lua-filter=pandoc-lua/add_links.lua --mathjax
 done
 
 cat > "$OUTPUT_FILE" <<EOF
@@ -31,7 +31,7 @@ for file in "$NOTES_DIR"/*; do
     continue
   fi
   cat >> "$OUTPUT_FILE" <<EOF
-    <li><a href="$NOTES/$filename">"${filename%.html}"</a></li>
+    <li><a href="$NOTES/$filename">${filename%.html}</a></li>
 EOF
 done
 

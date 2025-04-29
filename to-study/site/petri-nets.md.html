@@ -24,18 +24,16 @@
     sulla sintassi</a></h1>
     <p>Marcatura: distribuzione dei token sui posti, piu’ formalmente e’
     una funzione che assegna un intero non negativo ad ogni posto della
-    rete <span class="math inline"><em>M</em>(<em>p</em>)</span>: numero
-    di gettoni in Posto <span class="math inline"><em>p</em></span> per
-    Marcatura <span class="math inline"><em>M</em></span> Scatto: <span
-    class="math inline"><em>M</em>[<em>t</em><sub>1</sub> &gt; <em>M</em>′</span>
-    <span class="math inline"><em>M</em></span> abilita <span
-    class="math inline"><em>t</em>1</span>: <span
-    class="math inline"><em>M</em>[<em>t</em><sub>1</sub>&gt;</span> I
-    preset <span
-    class="math inline"><em>p</em><em>r</em><em>e</em>(<em>t</em>)</span>
+    rete <span class="math inline">\(M(p)\)</span>: numero di gettoni in
+    Posto <span class="math inline">\(p\)</span> per Marcatura <span
+    class="math inline">\(M\)</span> Scatto: <span
+    class="math inline">\(M[t_1 &gt; M&#39;\)</span> <span
+    class="math inline">\(M\)</span> abilita <span
+    class="math inline">\(t1\)</span>: <span class="math inline">\(M[t_1
+    &gt;\)</span> I preset <span class="math inline">\(pre(t)\)</span>
     sono i posti connessi alle transizioni, i postset <span
-    class="math inline"><em>p</em><em>o</em><em>s</em>(<em>t</em>)</span>
-    sono i posti connessi dalle transizioni.</p>
+    class="math inline">\(pos(t)\)</span> sono i posti connessi dalle
+    transizioni.</p>
     <h1 id="differenza-con-fsm"><a href="#differenza-con-fsm">Differenza
     con FSM</a></h1>
     <ul>
@@ -51,54 +49,51 @@
     </figcaption>
     <h1 id="definizione-formale"><a
     href="#definizione-formale">Definizione formale</a></h1>
-    <p>E’ una 5-upla <span
-    class="math inline">[<em>P</em>, <em>T</em>; <em>F</em>, <em>W</em>, <em>M</em><sub>0</sub>]</span></p>
+    <p>E’ una 5-upla <span class="math inline">\([P, T; F, W,
+    M_{0}]\)</span></p>
     <ul>
-    <li><span class="math inline"><em>P</em></span> insieme dei
-    posti</li>
-    <li><span class="math inline"><em>T</em></span> insieme delle
+    <li><span class="math inline">\(P\)</span> insieme dei posti</li>
+    <li><span class="math inline">\(T\)</span> insieme delle
     transizioni</li>
-    <li><span class="math inline"><em>F</em></span> relazione di flusso
-    - <span
-    class="math inline"><em>F</em> ⊆ (<em>P</em> × <em>T</em>) ∪ (<em>T</em> × <em>P</em>)</span></li>
-    <li><span class="math inline"><em>W</em></span> la funzione peso
-    (codominio senza <span class="math inline">0</span>) - <span
-    class="math inline">$W : F \rightarrow \\N^{+}$</span></li>
-    <li><span class="math inline"><em>M</em><sub>0</sub></span> la
-    funzione marcatura (iniziale) - <span class="math inline">$M_0 : P
-    \rightarrow \\N$</span></li>
+    <li><span class="math inline">\(F\)</span> relazione di flusso -
+    <span class="math inline">\(F \subseteq (P \times T) \cup (T \times
+    P)\)</span></li>
+    <li><span class="math inline">\(W\)</span> la funzione peso
+    (codominio senza <span class="math inline">\(0\)</span>) - <span
+    class="math inline">\(W : F \rightarrow \\N^{+}\)</span></li>
+    <li><span class="math inline">\(M_{0}\)</span> la funzione marcatura
+    (iniziale) - <span class="math inline">\(M_0 : P \rightarrow
+    \\N\)</span></li>
     </ul>
-    <p><span class="math inline"><em>P</em> ∪ <em>T</em></span> non puo’
-    essere vuoto <span
-    class="math inline"><em>P</em> ∩ <em>T</em></span> e’ vuoto</p>
-    <p><span
-    class="math inline"><em>p</em><em>r</em><em>e</em>(<em>a</em>) = <em>d</em> ∈ (<em>P</em> ∪ <em>T</em>) | ⟨<em>d</em>, <em>a</em>⟩ ∈ <em>F</em></span>
-    <span
-    class="math inline"><em>p</em><em>o</em><em>s</em><em>t</em>(<em>a</em>) = <em>d</em> ∈ (<em>P</em> ∪ <em>T</em>) | ⟨<em>a</em>, <em>d</em>⟩ ∈ <em>F</em></span></p>
+    <p><span class="math inline">\(P \cup T\)</span> non puo’ essere
+    vuoto <span class="math inline">\(P \cap T\)</span> e’ vuoto</p>
+    <p><span class="math inline">\(pre(a) = { d \in (P \cup T) \ | \
+    \langle d,a \rangle \in F }\)</span> <span
+    class="math inline">\(post(a) = { d \in (P \cup T) \ | \ \langle a,d
+    \rangle \in F }\)</span></p>
     <p>Quindi i preset sono i posti connessi alle transizioni, i postset
     sono i posti connessi dalle transizioni.</p>
     <h2 id="definizione-di-m"><a href="#definizione-di-m">Definizione di
     M'</a></h2>
-    <p>Notazione: <span
-    class="math inline">∀<em>p</em> ∈ <em>p</em><em>r</em><em>e</em>(<em>t</em>) \ <em>p</em><em>o</em><em>s</em><em>t</em>(<em>t</em>)</span>
-    significa “per tutti i posti che appartengono al preset di <span
-    class="math inline"><em>t</em></span> ma non appartengono al postset
-    di <span class="math inline"><em>t</em></span>”</p>
-    <p><span
-    class="math inline"><em>W</em>(⟨<em>p</em>, <em>t</em>⟩)</span>
+    <p>Notazione: <span class="math inline">\(\forall p \in pre(t)
+    \setminus post(t)\)</span> significa “per tutti i posti che
+    appartengono al preset di <span class="math inline">\(t\)</span> ma
+    non appartengono al postset di <span
+    class="math inline">\(t\)</span>”</p>
+    <p><span class="math inline">\(W(\langle p,t \rangle)\)</span>
     numero di gettoni nell’arco</p>
-    <p><span class="math display">$$
+    <p><span class="math display">\[
     \begin{align}
-    &amp;\forall p \in pre(t) \setminus post(t) &amp;\qquad M'(p) &amp;=
-    M(p) - W(\langle p,t \rangle) \\
-    &amp;\forall p \in post(t) \setminus pre(t) &amp;\qquad M'(p) &amp;=
-    M(p) + W(\langle t,p \rangle) \\
-    &amp;\forall p \in post(t) \cap pre(t) &amp;\qquad M'(p) &amp;= M(p)
-    - W(\langle p,t \rangle) + W(\langle t,p \rangle) \\
+    &amp;\forall p \in pre(t) \setminus post(t) &amp;\qquad M&#39;(p)
+    &amp;= M(p) - W(\langle p,t \rangle) \\
+    &amp;\forall p \in post(t) \setminus pre(t) &amp;\qquad M&#39;(p)
+    &amp;= M(p) + W(\langle t,p \rangle) \\
+    &amp;\forall p \in post(t) \cap pre(t) &amp;\qquad M&#39;(p) &amp;=
+    M(p) - W(\langle p,t \rangle) + W(\langle t,p \rangle) \\
     &amp;\forall p \in P \setminus (pre(t) \cup post(t)) &amp;\qquad
-    M'(p) &amp;= M(p)
+    M&#39;(p) &amp;= M(p)
     \end{align}
-    $$</span></p>
+    \]</span></p>
     <p>Grazie all’ultima e’ possibile fare una analisi locale.</p>
     <h1 id="esempio-di-rete"><a href="#esempio-di-rete">Esempio di
     rete</a></h1>
@@ -133,15 +128,15 @@
     <h3 id="una-transizione-e-abilitata-ad-evolvere-quando"><a
     href="#una-transizione-e-abilitata-ad-evolvere-quando">Una
     transizione e’ abilitata ad evolvere quando</a></h3>
-    <p><span class="math inline"><em>t</em> ∈ <em>T</em></span> e’
-    abilitata in <span class="math inline"><em>M</em></span> se e solo
-    se <span
-    class="math inline">∀<em>p</em> ∈ <em>p</em><em>r</em><em>e</em>(<em>t</em>)   <em>M</em>(<em>p</em>) ≥ <em>W</em>(⟨<em>p</em>, <em>t</em>⟩)</span></p>
+    <p><span class="math inline">\(t \in T\)</span> e’ abilitata in
+    <span class="math inline">\(M\)</span> se e solo se <span
+    class="math inline">\(\forall p \in pre(t) \qquad M(p) \ge W(\langle
+    p, t \rangle)\)</span></p>
     <p>(questo vuol dire che se una transizione non ha un Posto prima di
     essa e’ abilitata a scattare) Lo scatto di una transizione <span
-    class="math inline"><em>t</em></span> in una marcatura <span
-    class="math inline"><em>M</em></span> produce una nuova marcatura
-    <span class="math inline"><em>M</em>′</span>.</p>
+    class="math inline">\(t\)</span> in una marcatura <span
+    class="math inline">\(M\)</span> produce una nuova marcatura <span
+    class="math inline">\(M&#39;\)</span>.</p>
     <p>Ci puo’ essere una sola transizione alla volta. Se ci sono piu’
     transizioni abilitate non posso dire quale deve scattare, sono tutte
     equiprobabili.</p>
@@ -157,58 +152,55 @@
     degli archi connessi.</p>
     <h3 id="relazione-di-sequenza"><a
     href="#relazione-di-sequenza">Relazione di sequenza</a></h3>
-    <p>Una transizione <span
-    class="math inline"><em>t</em><sub>1</sub></span> e’ in sequenza con
-    una transizione <span
-    class="math inline"><em>t</em><sub>2</sub></span> in una marcatura
-    <span class="math inline"><em>M</em></span> se e solo se</p>
-    <p><span
-    class="math inline"><em>M</em>[<em>t</em><sub>1</sub> &gt; ∧¬<em>M</em>[<em>t</em><sub>2</sub> &gt; ∧<em>M</em>[<em>t</em><sub>1</sub><em>t</em><sub>2</sub>&gt;</span></p>
-    <p>O piu’ umanamente: * <span
-    class="math inline"><em>t</em><sub>1</sub></span> e’ abilitata in
-    <span class="math inline"><em>M</em></span> * <span
-    class="math inline"><em>t</em><sub>2</sub></span> non e’ abilitata
-    in <span class="math inline"><em>M</em></span> * <span
-    class="math inline"><em>t</em><sub>2</sub></span> e’ abilitata nella
-    marcatura <span class="math inline"><em>M</em>′</span> prodotta
-    dallo scatto <span
-    class="math inline"><em>M</em>[<em>t</em><sub>1</sub> &gt; <em>M</em>′</span></p>
-    <p>Nel seguente esempio <span class="math inline"><em>T</em>0</span>
-    e <span class="math inline"><em>T</em>1</span>, <span
-    class="math inline"><em>T</em>0</span> e <span
-    class="math inline"><em>T</em>2</span>, <span
-    class="math inline"><em>T</em>3</span> e <span
-    class="math inline"><em>T</em>2</span></p>
+    <p>Una transizione <span class="math inline">\(t_1\)</span> e’ in
+    sequenza con una transizione <span
+    class="math inline">\(t_2\)</span> in una marcatura <span
+    class="math inline">\(M\)</span> se e solo se</p>
+    <p><span class="math inline">\(M[t_1&gt; \land \lnot M[t_2&gt; \land
+    M[t_1t_2&gt;\)</span></p>
+    <p>O piu’ umanamente: * <span class="math inline">\(t_1\)</span> e’
+    abilitata in <span class="math inline">\(M\)</span> * <span
+    class="math inline">\(t_2\)</span> non e’ abilitata in <span
+    class="math inline">\(M\)</span> * <span
+    class="math inline">\(t_2\)</span> e’ abilitata nella marcatura
+    <span class="math inline">\(M&#39;\)</span> prodotta dallo scatto
+    <span class="math inline">\(M[t_1&gt; M&#39;\)</span></p>
+    <p>Nel seguente esempio <span class="math inline">\(T0\)</span> e
+    <span class="math inline">\(T1\)</span>, <span
+    class="math inline">\(T0\)</span> e <span
+    class="math inline">\(T2\)</span>, <span
+    class="math inline">\(T3\)</span> e <span
+    class="math inline">\(T2\)</span></p>
     <p><img src="attachments/reti-di-petri-sequenza-esempio.png" /></p>
-    <p><span class="math inline"><em>T</em>0</span> e <span
-    class="math inline"><em>T</em>6</span> no perche’ <span
-    class="math inline"><em>T</em>6</span> necessita di un token in
-    <span class="math inline"><em>P</em>5</span>, che manca. <span
-    class="math inline"><em>T</em>1</span> e <span
-    class="math inline"><em>T</em>0</span> no perche’ <span
-    class="math inline"><em>T</em>1</span> non e’ abilitata.</p>
+    <p><span class="math inline">\(T0\)</span> e <span
+    class="math inline">\(T6\)</span> no perche’ <span
+    class="math inline">\(T6\)</span> necessita di un token in <span
+    class="math inline">\(P5\)</span>, che manca. <span
+    class="math inline">\(T1\)</span> e <span
+    class="math inline">\(T0\)</span> no perche’ <span
+    class="math inline">\(T1\)</span> non e’ abilitata.</p>
     <p>Nota che se una transizione e’ in sequenza con un’altra dipende
     dalla situazione attuale.</p>
     <h3 id="relazione-di-conflitto"><a
     href="#relazione-di-conflitto">Relazione di conflitto</a></h3>
-    <p>Due transizioni <span
-    class="math inline"><em>t</em><sub>1</sub></span> e <span
-    class="math inline"><em>t</em><sub>2</sub></span> sono in
-    conflitto</p>
+    <p>Due transizioni <span class="math inline">\(t_1\)</span> e <span
+    class="math inline">\(t_2\)</span> sono in conflitto</p>
     <ul>
     <li>strutturale (dipende dalla topologia della rete non dalla
-    marcatura) se e solo se <span
-    class="math inline"><em>p</em><em>r</em><em>e</em>(<em>t</em><sub>1</sub>) ∩ <em>p</em><em>r</em><em>e</em>(<em>t</em><sub>2</sub>) ≠ ∅</span></li>
+    marcatura) se e solo se <span class="math inline">\(pre(t_1) \cap
+    pre(t_2) \neq \emptyset\)</span></li>
     <li>effettivo in una marcatura <span
-    class="math inline"><em>M</em></span> se e solo se:
+    class="math inline">\(M\)</span> se e solo se:
     <ul>
-    <li>riguardo il preset <span
-    class="math inline"><em>M</em>[<em>T</em><sub>1</sub>&gt;  ∧  <em>M</em>[<em>t</em><sub>2</sub>&gt;  ∧ ∃<em>p</em> ∈ <em>p</em><em>r</em><em>e</em>(<em>t</em><sub>1</sub>) ∩ <em>p</em><em>r</em><em>e</em>(<em>t</em><sub>2</sub>)  <em>M</em>(<em>p</em>) &lt; <em>W</em>(⟨<em>p</em>, <em>t</em><sub>1</sub>⟩) + <em>W</em>(⟨<em>p</em>, <em>t</em><sub>2</sub>⟩)</span>
-    “esiste un posto <span class="math inline"><em>p</em></span> in
-    ingresso a entrambe le transizioni che non ha abbastanza token per
-    farle scattare entrambe”</li>
-    <li>riguardo il postset <span
-    class="math inline"><em>M</em>[<em>t</em><sub>1</sub> &gt; ∧<em>M</em>[<em>t</em><sub>2</sub> &gt; ∧¬<em>M</em>[<em>t</em><sub>1</sub><em>t</em><sub>2</sub>&gt;</span></li>
+    <li>riguardo il preset <span class="math inline">\(M[T_{1} &gt;
+    \quad \land \quad M[t_{2} &gt; \quad \land \ \exists p \in
+    pre(t_{1}) \cap pre(t_{2}) \quad M(p) &lt; W(\langle p,t_{1}
+    \rangle) + W(\langle p,t_{2} \rangle)\)</span> “esiste un posto
+    <span class="math inline">\(p\)</span> in ingresso a entrambe le
+    transizioni che non ha abbastanza token per farle scattare
+    entrambe”</li>
+    <li>riguardo il postset <span class="math inline">\(M[t_1&gt; \land
+    M[t_2 &gt; \land \lnot M[t_{1}t_{2} &gt;\)</span></li>
     </ul></li>
     </ul>
     <p><img src="attachments/reti-petri-conflitti.png" /></p>
@@ -217,12 +209,12 @@
     sia quello effettivo.</p>
     <p>Le due transizioni sono in conflitto * strutturale perche’ hanno
     posti in comune * effettivo perche’ <span
-    class="math inline"><em>P</em>1</span> non ha sufficenti gettoni per
-    farle scattare entrambe, <span
-    class="math inline"><em>P</em>0</span> si; basta che ce ne sia uno
-    di posto che non riesce a soddisfare le esigenze. Se facessi
-    scattare prima <span class="math inline"><em>T</em>1</span> non ci
-    sarebbe il conflitto effettivo.</p>
+    class="math inline">\(P1\)</span> non ha sufficenti gettoni per
+    farle scattare entrambe, <span class="math inline">\(P0\)</span> si;
+    basta che ce ne sia uno di posto che non riesce a soddisfare le
+    esigenze. Se facessi scattare prima <span
+    class="math inline">\(T1\)</span> non ci sarebbe il conflitto
+    effettivo.</p>
     <p>E’ possibile far scattare due transizioni assieme, purche’ ci
     siano sufficienti Token.</p>
     <h4 id="esempio-di-conflitti"><a
@@ -233,31 +225,31 @@
     <ul>
     <li>strutturali
     <ul>
-    <li><span class="math inline"><em>t</em><sub>3</sub></span> e <span
-    class="math inline"><em>t</em><sub>4</sub></span></li>
-    <li><span class="math inline"><em>t</em><sub>2</sub></span> e <span
-    class="math inline"><em>t</em><sub>6</sub></span></li>
+    <li><span class="math inline">\(t_3\)</span> e <span
+    class="math inline">\(t_4\)</span></li>
+    <li><span class="math inline">\(t_2\)</span> e <span
+    class="math inline">\(t_6\)</span></li>
     </ul></li>
     <li>effettivi
     <ul>
-    <li><span class="math inline"><em>t</em><sub>3</sub></span> e <span
-    class="math inline"><em>t</em><sub>4</sub></span></li>
+    <li><span class="math inline">\(t_3\)</span> e <span
+    class="math inline">\(t_4\)</span></li>
     </ul></li>
     </ul>
     <h3 id="concorrenza"><a href="#concorrenza">Concorrenza</a></h3>
     <p>La si puo’ pensare come la relazione opposta alla relazione di
     conflitto.</p>
-    <p>Due transizioni <span
-    class="math inline"><em>t</em><sub>1</sub></span> e <span
-    class="math inline"><em>t</em><sub>2</sub></span> sono in
-    concorrenza</p>
+    <p>Due transizioni <span class="math inline">\(t_1\)</span> e <span
+    class="math inline">\(t_2\)</span> sono in concorrenza</p>
     <ul>
-    <li>strutturale se e solo se <span
-    class="math inline"><em>p</em><em>r</em><em>e</em>(<em>t</em><sub>1</sub>) ∩ <em>p</em><em>r</em><em>e</em>(<em>t</em><sub>2</sub>) = ∅</span>
-    (la negazione del conflitto)</li>
+    <li>strutturale se e solo se <span class="math inline">\(pre(t_1)
+    \cap pre(t_2) = \emptyset\)</span> (la negazione del conflitto)</li>
     <li>effettiva in una marcatura <span
-    class="math inline"><em>M</em></span> se e solo se <span
-    class="math inline"><em>M</em>[<em>T</em><sub>1</sub>&gt;  ∧  <em>M</em>[<em>t</em><sub>2</sub>&gt;  ∧ ∀<em>p</em> ∈ <em>p</em><em>r</em><em>e</em>(<em>t</em><sub>1</sub>) ∩ <em>p</em><em>r</em><em>e</em>(<em>t</em><sub>2</sub>)  <em>M</em>(<em>p</em>) ≥ <em>W</em>(⟨<em>p</em>, <em>t</em><sub>1</sub>⟩) + <em>W</em>(⟨<em>p</em>, <em>t</em><sub>2</sub>⟩)</span></li>
+    class="math inline">\(M\)</span> se e solo se <span
+    class="math inline">\(M[T_{1} &gt; \quad \land \quad M[t_{2} &gt;
+    \quad \land \ \forall p \in pre(t_{1}) \cap pre(t_{2}) \quad M(p)
+    \geq W(\langle p,t_{1} \rangle) + W(\langle p,t_{2}
+    \rangle)\)</span></li>
     </ul>
     <p>Vale a dire: “tutti i posti in ingresso a entrambe le transizioni
     hanno abbastanza token per farle scattare entrambe”</p>
@@ -276,28 +268,27 @@
     <h1 id="insieme-di-raggiungibilita"><a
     href="#insieme-di-raggiungibilita">Insieme di
     raggiungibilita’</a></h1>
-    <p><span class="math inline"><em>R</em></span> e’ l’insieme di
+    <p><span class="math inline">\(R\)</span> e’ l’insieme di
     raggiungibilita’, che e’ il piu’ piccolo insieme di marcature tale
     che:</p>
     <ul>
-    <li><span
-    class="math inline"><em>M</em> ∈ <em>R</em>(<em>P</em>/<em>T</em>, <em>M</em>)</span><br />
+    <li><span class="math inline">\(M \in R(P/T, M)\)</span><br />
     <label for="sn-3" class="sidenote-toggle sidenote-number"></label>
-    <span class="sidenote"><span
-    class="math inline"><em>P</em>/<em>T</em></span> sono le Reti di
-    Petri fin qua viste (Posti Transizioni)</span></li>
-    <li><span
-    class="math inline">(<em>M</em>′ ∈ <em>R</em>(<em>P</em>/<em>T</em>, <em>M</em>) ∧ ∃<em>t</em> ∈ <em>T</em> <em>M</em>′[<em>t</em> &gt; <em>M</em>″) ⟹ <em>M</em>″ ∈ <em>R</em>(<em>P</em>/<em>T</em>, <em>M</em>)</span></li>
+    <span class="sidenote"><span class="math inline">\(P/T\)</span> sono
+    le Reti di Petri fin qua viste (Posti Transizioni)</span></li>
+    <li><span class="math inline">\((M&#39; \in R(P/T, M) \  \land \
+    \exists t \in T \ M&#39;[t&gt; M&#39;&#39;) \implies M&#39;&#39; \in
+    R(P/T, M)\)</span></li>
     </ul>
     <p>Tutte le marcature raggiungibili da una corretta play della Rete
     di Petri.</p>
     <h1 id="proprieta-di-limitatezza"><a
     href="#proprieta-di-limitatezza">Proprieta’ di limitatezza</a></h1>
-    <p><span class="math inline"><em>P</em>/<em>T</em></span> con
-    Marcatura <span class="math inline"><em>M</em></span> si dice
-    limitata se e solo se</p>
-    <p><span
-    class="math inline">∃<em>k</em> ∈ ℕ  ∀<em>M</em>′ ∈ <em>R</em>(<em>P</em>/<em>T</em>, <em>M</em>) ∀<em>p</em> ∈ <em>P</em>  <em>M</em>′(<em>p</em>) ≤ <em>k</em></span></p>
+    <p><span class="math inline">\(P/T\)</span> con Marcatura <span
+    class="math inline">\(M\)</span> si dice limitata se e solo se</p>
+    <p><span class="math inline">\(\exists k \in \mathbb{N} \quad
+    \forall M&#39; \in R(P/T, M) \ \forall p \in P \quad M&#39;(p) \le
+    k\)</span></p>
     <p>Cioe’ se riesco a fissare un numero massimo di Token per ognuno
     dei Posti. La cardinalita’ dell’insieme di raggiungibilita’ e’
     infinito oppure no?</p>
@@ -312,17 +303,16 @@
     <h1 id="vitalita-di-una-transizione"><a
     href="#vitalita-di-una-transizione">Vitalita’ di una
     transizione</a></h1>
-    <p>Una transizione <span class="math inline"><em>t</em></span> in
-    una Marcatura <span class="math inline"><em>M</em></span> si dice
-    viva.</p>
+    <p>Una transizione <span class="math inline">\(t\)</span> in una
+    Marcatura <span class="math inline">\(M\)</span> si dice viva.</p>
     <p>Una rete si dice viva se tutte le sue transizioni sono vive.</p>
     <h2 id="grado-0---morta"><a href="#grado-0---morta">Grado 0 -
     morta</a></h2>
-    <p>Non e’ abilitata in <span class="math inline"><em>M</em></span> e
-    in nessuna delle Marcature raggiungibili da <span
-    class="math inline"><em>M</em></span> allora</p>
-    <p><span
-    class="math display">∀<em>M</em>′ ∈ <em>R</em>(<em>P</em>/<em>T</em>, <em>M</em>)  ¬<em>M</em>′[<em>t</em>&gt;</span></p>
+    <p>Non e’ abilitata in <span class="math inline">\(M\)</span> e in
+    nessuna delle Marcature raggiungibili da <span
+    class="math inline">\(M\)</span> allora</p>
+    <p><span class="math display">\[\forall M&#39; \in R(P/T, M) \quad
+    \lnot M&#39;[t&gt;\]</span></p>
     <p>Non sono piu’ capace di far scattare una transizione.</p>
     <p>Esempio: se c’e’ una transizione che rappresenta lo scoppio di
     una centrale nucleare, il fatto che la transizione sia dimostrabile
@@ -330,59 +320,58 @@
     esplodere per il motivo rappresentato dalla transizione.</p>
     <h2 id="grado-1"><a href="#grado-1">Grado 1</a></h2>
     <p>Esiste almeno una Marcatura raggiungibile da <span
-    class="math inline"><em>M</em></span> in cui <span
-    class="math inline"><em>t</em></span> e’ abilitata</p>
-    <p><span
-    class="math inline">∃<em>M</em>′ ∈ <em>R</em>(<em>P</em>/<em>T</em>, <em>M</em>)  <em>M</em>[<em>t</em>&gt;</span></p>
+    class="math inline">\(M\)</span> in cui <span
+    class="math inline">\(t\)</span> e’ abilitata</p>
+    <p><span class="math inline">\(\exists M&#39; \in R(P/T, M) \quad
+    M[t&gt;\)</span></p>
     <p>Posso essere in grado di spegnere la centrale nucleare in maniera
     sicura.</p>
     <h2 id="grado-2"><a href="#grado-2">Grado 2</a></h2>
-    <p>Per ogni numero <span class="math inline"><em>k</em></span>
-    (quindi grande a piacere) esiste almeno una sequenza di scatti
-    ammissibile da <span class="math inline"><em>M</em></span> in cui la
-    transizione <span class="math inline"><em>t</em></span> scatta <span
-    class="math inline"><em>k</em></span> volte</p>
-    <p><span
-    class="math inline">∀<em>k</em> ∈ ℕ  <em>M</em>[..<em>t</em> ..<em>t</em><sup>1</sup> ..<em>t</em><sup><em>k</em> − 1</sup> ..<em>t</em><sup><em>k</em></sup>&gt;</span></p>
+    <p>Per ogni numero <span class="math inline">\(k\)</span> (quindi
+    grande a piacere) esiste almeno una sequenza di scatti ammissibile
+    da <span class="math inline">\(M\)</span> in cui la transizione
+    <span class="math inline">\(t\)</span> scatta <span
+    class="math inline">\(k\)</span> volte</p>
+    <p><span class="math inline">\(\forall k \in \mathbb{N} \quad M[..t\
+    ..t^1 \ ..t^{k-1} \ ..t^k&gt;\)</span></p>
     <h2 id="grado-3"><a href="#grado-3">Grado 3</a></h2>
     <p>Esiste almeno una sequenza ammissibile da <span
-    class="math inline"><em>M</em></span> in cui la transizione <span
-    class="math inline"><em>t</em></span> scatta infinite volte.</p>
+    class="math inline">\(M\)</span> in cui la transizione <span
+    class="math inline">\(t\)</span> scatta infinite volte.</p>
     <h2 id="grado-4---viva"><a href="#grado-4---viva">Grado 4 -
     viva</a></h2>
     <p>In qualunque Marcatura raggiungibile da <span
-    class="math inline"><em>M</em></span>, <span
-    class="math inline"><em>t</em></span> non e’ morta</p>
-    <p><span
-    class="math inline">∀<em>M</em>′ ∈ <em>R</em>(<em>P</em>/<em>T</em>, <em>M</em>)  ∃<em>M</em>″ ∈ <em>R</em>(<em>P</em>/<em>T</em>, <em>M</em>′)  <em>M</em>″[<em>t</em>&gt;</span></p>
+    class="math inline">\(M\)</span>, <span
+    class="math inline">\(t\)</span> non e’ morta</p>
+    <p><span class="math inline">\(\forall M&#39; \in R(P/T, M) \quad
+    \exists M&#39;&#39; \in R(P/T, M&#39;) \quad
+    M&#39;&#39;[t&gt;\)</span></p>
     <h2 id="esempi"><a href="#esempi">Esempi</a></h2>
     <iframe src="iframes/petri/unbounded-with-dead.html" width="100%" height="500px">
     </iframe>
     <figcaption>
-    <span class="math inline"><em>t</em>1</span> e’ una transizione
-    morta, <span class="math inline"><em>p</em>1</span> e’ un posto non
-    limitato
+    <span class="math inline">\(t1\)</span> e’ una transizione morta,
+    <span class="math inline">\(p1\)</span> e’ un posto non limitato
     </figcaption>
     <img src="attachments/Pasted%20image%2020250126232946.png" />
     <figcaption>
-    <span class="math inline"><em>t</em>1</span> e’ una transizione
-    morta perche’ <span class="math inline"><em>p</em>2</span> per poter
-    avere un token deve riceverlo da <span
-    class="math inline"><em>p</em>5</span> ma allora <span
-    class="math inline"><em>p</em>5</span> rimane senza, <span
-    class="math inline"><em>p</em>1</span> e’ un posto non limitato
-    perche’ posso continuamente far scattare <span
-    class="math inline"><em>t</em>4</span>
+    <span class="math inline">\(t1\)</span> e’ una transizione morta
+    perche’ <span class="math inline">\(p2\)</span> per poter avere un
+    token deve riceverlo da <span class="math inline">\(p5\)</span> ma
+    allora <span class="math inline">\(p5\)</span> rimane senza, <span
+    class="math inline">\(p1\)</span> e’ un posto non limitato perche’
+    posso continuamente far scattare <span
+    class="math inline">\(t4\)</span>
     </figcaption>
-    <p><span class="math inline"><em>T</em>0</span> Morta <span
-    class="math inline"><em>T</em>1</span> Grado 1 <img
+    <p><span class="math inline">\(T0\)</span> Morta <span
+    class="math inline">\(T1\)</span> Grado 1 <img
     src="attachments/Pasted%20image%2020250110221547.png" width="300"
     alt="|300" /></p>
-    <p><span class="math inline"><em>T</em>3</span> Grado 3 <img
+    <p><span class="math inline">\(T3\)</span> Grado 3 <img
     src="attachments/Pasted%20image%2020250110222110.png" width="300"
     alt="|300" /></p>
-    <p><span class="math inline"><em>T</em>2</span> Grado 2, perche’
-    posso farla scattare quante volte voglio, ma ad un certo punto devo
+    <p><span class="math inline">\(T2\)</span> Grado 2, perche’ posso
+    farla scattare quante volte voglio, ma ad un certo punto devo
     fermarmi: non va avanti da sola <img
     src="attachments/Pasted%20image%2020250110222208.png" width="300"
     alt="|300" /></p>
@@ -392,29 +381,29 @@
     <p>Posso fissare un massimo numero di Token ammissibili per un
     Posto. La regola di abilitazione cambia con una aggiunta:</p>
     <ul>
-    <li><span
-    class="math inline">∀<em>p</em> ∈ <em>p</em><em>r</em><em>e</em>(<em>t</em>)   <em>M</em>(<em>p</em>) ≥ <em>W</em>(⟨<em>p</em>, <em>t</em>⟩)</span>
-    (preesistente)</li>
-    <li><span
-    class="math inline">∀<em>p</em> ∈ <em>p</em><em>o</em><em>s</em><em>t</em>(<em>t</em>)   <em>M</em>(<em>p</em>) + <em>W</em>(⟨<em>t</em>, <em>p</em>⟩) ≤ <em>K</em>(<em>p</em>)</span></li>
+    <li><span class="math inline">\(\forall p \in pre(t) \qquad M(p) \ge
+    W(\langle p, t \rangle)\)</span> (preesistente)</li>
+    <li><span class="math inline">\(\forall p \in post(t) \qquad M(p) +
+    W(\langle t,p \rangle) \le K(p)\)</span></li>
     </ul>
-    <p>Dove <span class="math inline"><em>K</em>(<em>p</em>)</span> e’
-    la capacita’ di <span class="math inline"><em>p</em></span>.</p>
+    <p>Dove <span class="math inline">\(K(p)\)</span> e’ la capacita’ di
+    <span class="math inline">\(p\)</span>.</p>
     <h2 id="posto-complementare"><a href="#posto-complementare">Posto
     complementare</a></h2>
-    <p>Un posto <span
-    class="math inline"><em>p</em><sub><em>c</em></sub></span> si dice
+    <p>Un posto <span class="math inline">\(p_c\)</span> si dice
     complementare rispetto ad un posto <span
-    class="math inline"><em>p</em></span> quando ha archi di pari peso
-    verso le stesse transizioni di <span
-    class="math inline"><em>p</em></span>, ma con verso opposto.</p>
+    class="math inline">\(p\)</span> quando ha archi di pari peso verso
+    le stesse transizioni di <span class="math inline">\(p\)</span>, ma
+    con verso opposto.</p>
     <p>Grazie ai posti complementari “reti con capacita’ di posti
     possono essere tradotte in rete senza capacita’ di posti” senza
     complicare troppo la cosa.</p>
-    <p><span
-    class="math inline">∀<em>t</em> ∈ <em>p</em><em>r</em><em>e</em>(<em>p</em>)  ∃⟨<em>p</em><sub><em>c</em></sub>, <em>t</em>⟩ ∈ <em>F</em>  <em>W</em>(⟨<em>p</em><sub><em>c</em></sub>, <em>t</em>⟩) = <em>W</em>(⟨<em>t</em>, <em>p</em>⟩)</span></p>
-    <p><span
-    class="math inline">∀<em>t</em> ∈ <em>p</em><em>o</em><em>s</em><em>t</em>(<em>p</em>)  ∃⟨<em>t</em>, <em>p</em><sub><em>c</em></sub>⟩ ∈ <em>F</em>  <em>W</em>(⟨<em>t</em>, <em>p</em><sub><em>c</em></sub>⟩) = <em>W</em>(⟨<em>p</em>, <em>t</em>⟩)</span></p>
+    <p><span class="math inline">\(\forall t \in pre(p) \quad \exists
+    \langle p_{c}, t \rangle \in F \quad W(\langle p_{c},t \rangle) =
+    W(\langle t,p \rangle)\)</span></p>
+    <p><span class="math inline">\(\forall t \in post(p) \quad \exists
+    \langle t,p_{c} \rangle \in F \quad W(\langle t, p_{c} \rangle) =
+    W(\langle p,t \rangle)\)</span></p>
     <figure>
     <img src="attachments/Pasted%20image%2020250127183519.png"
     alt="Un esempio di introduzione di posto complementare, in nero la rete prima, in verde dopo, notare i token sui due posti complementari" />
@@ -427,8 +416,9 @@
     <li>aggiungere il posto complementare (o piu’ di uno come
     nell’esempio)</li>
     <li>la marcatura iniziale e’ (ad esempio per <span
-    class="math inline"><em>p</em><sub>1</sub></span>) <span
-    class="math inline"><em>M</em>′<sub>0</sub>(<em>p</em>′<sub>1</sub>) = <em>K</em>(<em>p</em><sub>1</sub>) − <em>M</em><sub>0</sub>(<em>p</em><sub>1</sub>) = 2 − 1 = 1</span></li>
+    class="math inline">\(p_1\)</span>) <span
+    class="math inline">\(M&#39;_0(p&#39;_1) = K(p_1) - M_0(p_1) = 2 - 1
+    = 1\)</span></li>
     <li>si aggiungono gli archi verso le direzioni opposte nelle
     transizioni interessate</li>
     </ul>
@@ -439,16 +429,14 @@
     abilitata.</p>
     <p>In caso di rete limitata la potenza espressiva di una rete che
     sfrutta gli archi inibitori non cambia, perche’ esistendo un limite
-    massimo di gettoni <span class="math inline"><em>k</em></span>
+    massimo di gettoni <span class="math inline">\(k\)</span>
     all’interno della rete e’ sufficiente creare un posto complementare
-    a <span class="math inline"><em>p</em></span> detto <span
-    class="math inline"><em>p</em><sub><em>c</em></sub></span> tale
-    che</p>
-    <p><span
-    class="math display"><em>M</em>(<em>p</em>) + <em>M</em>(<em>p</em><sub><em>c</em></sub>) &lt; <em>k</em></span></p>
+    a <span class="math inline">\(p\)</span> detto <span
+    class="math inline">\(p_c\)</span> tale che</p>
+    <p><span class="math display">\[M(p) + M(p_c) &lt; k \]</span></p>
     <h1 id="rete-pura"><a href="#rete-pura">Rete pura</a></h1>
-    <p>Una rete e’ detta pura se <span
-    class="math inline">∀<em>t</em> ∈ <em>T</em>  <em>p</em><em>r</em><em>e</em>(<em>t</em>) ∩ <em>p</em><em>o</em><em>s</em><em>t</em>(<em>t</em>) = ∅</span></p>
+    <p>Una rete e’ detta pura se <span class="math inline">\(\forall t
+    \in T \quad pre(t) \cap post(t) = \emptyset\)</span></p>
     <p>Il vantaggio di una rete pura e’ la semplicita’ di lettura che si
     ottiene, perche’ non avendo archi da e verso la stessa transizione
     viene piu’ semplice ragionare</p>
@@ -479,29 +467,29 @@
     generazione</a></h2>
     <p>ESPANERE</p>
     <h1 id="copribilita"><a href="#copribilita">Copribilita’</a></h1>
-    <p>Una Marcatura <span class="math inline"><em>M</em></span> copre
-    una Marcatura <span class="math inline"><em>M</em>′</span> (<span
-    class="math inline"><em>M</em>′</span> e’ coperta da <span
-    class="math inline"><em>M</em></span>) se e solo se: <span
-    class="math inline">∀<em>p</em> ∈ <em>P</em>  <em>M</em>(<em>p</em>) ≥ <em>M</em>′(<em>p</em>)</span></p>
-    <p>Una Marcatura <span class="math inline"><em>M</em></span> e’
-    detta copribile a partire da una marcatura <span
-    class="math inline"><em>M</em>′</span> se esiste una marcatura <span
-    class="math inline"><em>M</em>″ ∈ <em>R</em>(<em>P</em>/<em>T</em>, <em>M</em>′)</span>
-    che copre <span class="math inline"><em>M</em></span>.</p>
+    <p>Una Marcatura <span class="math inline">\(M\)</span> copre una
+    Marcatura <span class="math inline">\(M&#39;\)</span> (<span
+    class="math inline">\(M&#39;\)</span> e’ coperta da <span
+    class="math inline">\(M\)</span>) se e solo se: <span
+    class="math inline">\(\forall p \in P \quad M(p) \ge
+    M&#39;(p)\)</span></p>
+    <p>Una Marcatura <span class="math inline">\(M\)</span> e’ detta
+    copribile a partire da una marcatura <span
+    class="math inline">\(M&#39;\)</span> se esiste una marcatura <span
+    class="math inline">\(M&#39;&#39; \in R(P/T, M&#39;)\)</span> che
+    copre <span class="math inline">\(M\)</span>.</p>
     <p>“Ho piu’ gettoni posto per posto”. Copre in maniera propria se
-    <span
-    class="math inline"><em>M</em>(<em>p</em>) &gt; <em>M</em>′(<em>p</em>)</span></p>
-    <p>E’ utile perche’ se <span class="math inline"><em>M</em></span>
-    e’ la marcatura minima per abilitare <span
-    class="math inline"><em>t</em></span></p>
-    <p><span
-    class="math inline">∀<em>p</em> ∈ <em>p</em><em>r</em><em>e</em>(<em>t</em>)  <em>M</em>(<em>p</em>) = <em>W</em>(⟨<em>p</em>, <em>t</em>⟩)</span>
-    e <span
-    class="math inline">∀<em>p</em> ∈ <em>P</em> \ <em>p</em><em>r</em><em>e</em>(<em>t</em>)  <em>M</em>(<em>p</em>) = 0</span></p>
-    <p>allora la transizione <span class="math inline"><em>t</em></span>
-    e’ morta se e solo se <span class="math inline"><em>M</em></span>
-    non e’ copribile a partire dalla Marcatura corrente.</p>
+    <span class="math inline">\(M(p) \gt M&#39;(p)\)</span></p>
+    <p>E’ utile perche’ se <span class="math inline">\(M\)</span> e’ la
+    marcatura minima per abilitare <span
+    class="math inline">\(t\)</span></p>
+    <p><span class="math inline">\(\forall p \in pre(t) \quad M(p) =
+    W(\langle p,t \rangle)\)</span> e <span
+    class="math inline">\(\forall p \in P \setminus pre(t) \quad M(p) =
+    0\)</span></p>
+    <p>allora la transizione <span class="math inline">\(t\)</span> e’
+    morta se e solo se <span class="math inline">\(M\)</span> non e’
+    copribile a partire dalla Marcatura corrente.</p>
     </article>
   </main>
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>

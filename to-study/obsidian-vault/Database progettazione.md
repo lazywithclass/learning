@@ -11,9 +11,9 @@ Come costruire un database, come progettarlo.
 
 ## Modello ER
 
-Entità sono rettangoli
-Associazioni sono rombi, più importante il significato rispetto al suo nome, cioè quali entità associa
-Per ogni relazione ci sono due cardinalità
+Entità sono rettangoli.\
+Associazioni sono rombi, più importante il significato rispetto al suo nome, cioè quali entità associa.\
+Per ogni relazione ci sono due cardinalità.
 
 ### Esempio
 
@@ -39,7 +39,7 @@ Seguono alcuni esempi con richieste differenti
 | Un medico cura non più di 1000 pazienti, e un paziente non può avere più di 10 medici curanti             | (0, 1000)         | (1, 10)           | N N  |
 | Un medico cura almeno 10 e non più di 1000 pazienti, e un paziente non può avere più di un medico curante | (10, 1000)        | (1, 1)            | 1 N  |
 
-In una N a N una associazione viene tradotta con una tabella con un identificativo per parte.
+In una N a N una associazione viene tradotta con una tabella con un identificativo per parte.\
 In una 1 a N la chiave esterna va nell'entità che ha 1 come cardinalità massima.
 
 "Ogni medico ha un supervisore che e' un altro medico", produrra' due modi di leggere l'associazione:
@@ -61,9 +61,9 @@ La cardinalità minima e' sempre (1, 1).
 
 ![Esempio di entità debole](attachments/Pasted%20image%2020250422145718.png)
 
-TODO prendi da appunti di lezione gli altri schemi, ad esempio dove msotra attributi sulle associazioni
+TODO prendi da appunti di lezione gli altri schemi, ad esempio dove msotra attributi sulle associazioni.
 
-TODO mettere rimando al vincolo extra schema: non si puo' gestire con un elemento dello schema, verrebbe gestito da trigger
+TODO mettere rimando al vincolo extra schema: non si puo' gestire con un elemento dello schema, verrebbe gestito da trigger.
 
 ## Problema della storicizzazione dei dati
 
@@ -133,8 +133,8 @@ Partiamo da questo
 
 ![Schema ER di una realtà ospedaliera](attachments/Pasted%20image%2020250416210616.png)
 
-Chiavi primarie sono sottolineate con riga continua. TODO metterlo in latex
-Attributi opzionali sono denotati da un $*$
+Chiavi primarie sono sottolineate con riga continua. TODO metterlo in latex.\
+Attributi opzionali sono denotati da un $*$.
 
 * Parto da una entità - $Medico$
 * Scrivo i suoi attributi - $Medico(\underline{matricola},\ ruolo,\ cognome,\ nome,\ specialita')$
@@ -151,23 +151,23 @@ Attributi opzionali sono denotati da un $*$
   Con la seguente notazione specifico a quale chiave fa riferimento la chiave esterna: $Diagnosi.tessera\_sanitaria \rightarrow Paziente.tessera\_sanitaria$
 
 * vedo se ci sono associazioni rimanenti
-* parto da $Curano$, che diventa una nuova tabella perché ho bisogno di mantenere quale $Medico$ e' associato a quale $Paziente$: $Curano(\underline{medico,\ paziente})$, e quindi aggiungo le specifiche per la chiavi esterne
-  $Curano.medico \rightarrow Medico.matricola$
+* parto da $Curano$, che diventa una nuova tabella perché ho bisogno di mantenere quale $Medico$ e' associato a quale $Paziente$: $Curano(\underline{medico,\ paziente})$, e quindi aggiungo le specifiche per la chiavi esterne\
+  $Curano.medico \rightarrow Medico.matricola$\
   $Curano.paziente \rightarrow Paziente.tessera\_sanitaria$
 
-* Prossima associazione $Visita$: $Visita(\underline{medico,\ paziente,\ ambulatorio,\ data\_visita})$, e quindi aggiungo le specifiche per la chiavi esterne
-  $Vistita.medico \rightarrow Medico.matricola$
-  $Visita.paziente \rightarrow Paziente.tessera\_sanitaria$
+* Prossima associazione $Visita$: $Visita(\underline{medico,\ paziente,\ ambulatorio,\ data\_visita})$, e quindi aggiungo le specifiche per la chiavi esterne\
+  $Vistita.medico \rightarrow Medico.matricola$\
+  $Visita.paziente \rightarrow Paziente.tessera\_sanitaria$\
   $Visita.ambulatorio \rightarrow Ambulatorio.numero$
 
 Abbiamo sbagliato il modello concettuale, manca $data\_visita$ dentro $Visita$, perché altrimenti non avrei potuto avere una visita tra lo stesso medico, lo stesso paziente, nello stesso ambulatorio, il che e' assurdo. L'attributo $data\_visita$ e' parte della chiave quando voglio $Visita$ come relazione storica.
 
-$Visita.ambulatorio$ non e' rappresentato come 0, come dovrebbe essere secondo la cardinalità, ma siccome fa parte della chiave deve esserci, quindi quando non c'e' semplicemente non appare in $Visita$. E' con i `LEFT JOIN` che vado a pescare questi record quando mi serve.
+$Visita.ambulatorio$ non e' rappresentato come 0, come dovrebbe essere secondo la cardinalità, ma siccome fa parte della chiave deve esserci, quindi quando non c'e' semplicemente non appare in $Visita$. E' con i `LEFT JOIN` che vado a pescare questi record quando mi serve.\
 In realtà sono sbagliate le `(1,N)` perché vorrebbe dire che ogni volta che aggiungo un $Medico$ devo subito assegnargli un $Paziente$ il che può non essere vero.
 
 Nel caso di entità deboli faccio prima l'entità a cui sono associate.
 
-Per convenienza e' possibile mettere un $id$ dove oltre agli identificatori naturali uso un identificatore "utile", perché cosi ad esempio le `JOIN` non sono un delirio di `ON` a causa dei molteplici attributi coinvolti nella chiave.
+Per convenienza e' possibile mettere un $id$ dove oltre agli identificatori naturali uso un identificatore "utile", perché cosi ad esempio le `JOIN` non sono un delirio di `ON` a causa dei molteplici attributi coinvolti nella chiave.\
 E' una scelta fatta in fase di ristrutturazione.
 
 Per una associazione con N entità devo prendere tutte le chiavi di ogni entità partecipante, per poi metterla nella nuova tabella.
@@ -178,7 +178,7 @@ TODO mettere immagini da appunti del prof
 
 #### Accorpamento su entità padre (verso l'alto)
 
-Si può sempre fare, con ogni tipo di gerarchia.
+Si può sempre fare, con ogni tipo di gerarchia.\
 La gerarchia collassa in un'unica entità, che e' quella padre e:
 
 * si aggiunge un tipo enumerativo che identifica le figlie, nella gerarchia totale tipo e' obbligatorio, nella gerarchia parziale tipo e' opzionale; occhio che nelle sovrapposte il tipo deve considerare tutte le possibili combinazioni (può diventare poco maneggevole)
@@ -186,11 +186,11 @@ La gerarchia collassa in un'unica entità, che e' quella padre e:
 
 #### Eliminazione dell'entità padre (verso il basso)
 
-Non e' praticabile con una gerarchia parziale.
-La gerarchia viene spostata verso il basso, tutti gli attributi del padre vengono dati ai figli.
-Se non sappiamo ad esempio se una persona e' fisica o giuridica dobbiamo fare una `UNION` per cercarla dappertutto.
+Non e' praticabile con una gerarchia parziale.\
+La gerarchia viene spostata verso il basso, tutti gli attributi del padre vengono dati ai figli.\
+Se non sappiamo ad esempio se una persona e' fisica o giuridica dobbiamo fare una `UNION` per cercarla dappertutto.\
 
 #### Mantenimento di tutte le entità
 
-La gerarchia viene scomposta in associazioni binarie ($e'\_tipo$).
+La gerarchia viene scomposta in associazioni binarie ($e'\_tipo$).\
 I figli sono sempre entità deboli rispetto al padre.

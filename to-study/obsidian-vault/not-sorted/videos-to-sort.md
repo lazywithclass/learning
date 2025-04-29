@@ -1565,8 +1565,8 @@ He makes the example of three notable scientists (Hilbert, Gödel, Turing), then
 "Is mathematics invented or discovered?", given that those three arrived to the same 
 conclusions to the "decision problem" independently one could argue that it's discovered.
 
-Propositions as types: Propositions in logic -> types in a programming language<br />
-Proofs in logic -> programs in programming language<br />
+Propositions as types: Propositions in logic -> types in a programming language\
+Proofs in logic -> programs in programming language\
 Simplifications of proofs -> evaluation of programs
 
 Curry-Howard correspondence

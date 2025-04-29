@@ -14,14 +14,14 @@ Goal: to improve encapsulation and place behavior closer to the data it operates
 ## Example
 
 Asking
-```java
+```language-java
 if (account.getBalance() > withdrawalAmount) { 
 	account.debit(withdrawalAmount); 
 }
 ```
 
 Telling:
-```java
+```language-java
 account.withdraw(withdrawalAmount);
 ```
 
@@ -39,6 +39,6 @@ LoD restricts the scope of interactions, while TDA guides the style of interacti
 
 > For me, tell-don't-ask is a stepping stone towards co-locating behavior and data, but I don't find it a point worth highlighting.
 
--- https://martinfowler.com/bliki/TellDontAsk.html
+-- [Martin Fowler's article](https://martinfowler.com/bliki/TellDontAsk.html)
 
 Follow the links in the article because there's more to be learned.

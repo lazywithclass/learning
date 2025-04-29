@@ -11,9 +11,9 @@ Structured Query Language
 
 Linguaggio dichiarativo.
 
-DDL: comandi per creare strutture per l'ossatura della base di dati (`CREATE TABLE`, `CREATE VIEW`, ...)<br />
-DML: istruzioni (`INSERT`, `DELETE`, `UPDATE`, ...)<br />
-DQL: `SELECT`<br />
+DDL: comandi per creare strutture per l'ossatura della base di dati (`CREATE TABLE`, `CREATE VIEW`, ...)\
+DML: istruzioni (`INSERT`, `DELETE`, `UPDATE`, ...)\
+DQL: `SELECT`\
 DCL: comandi sul controllo
 
 ## Funzioni / operatori / clausole
