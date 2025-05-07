@@ -4,15 +4,21 @@ tags:
   - databases
   - normalization
 ---
+```table-of-contents
+title: 
+style: nestedList # TOC style (nestedList|nestedOrderedList|inlineFirstLevel)
+minLevel: 0 # Include headings from the specified level
+maxLevel: 0 # Include headings up to the specified level
+includeLinks: true # Make headings clickable
+hideWhenEmpty: false # Hide TOC if no headings are found
+debugInConsole: false # Print debug info in Obsidian console
+```
+
+---
 
 Permette di stabilire la qualità di uno schema.
 
-TODO mettere l'immagine esempio 
-
-TODO inseire come fare una normalizzazione dalle slide
-
-TODO inserire indice all'inizio del file
-
+Normalizzazione: decomporre $R$ in modo che esista una diversa relazione per ogni dipendenza. Mantenere una relazione che contenga la chiave della relazione di partenza.
 
 $$
 \begin{align}
@@ -22,17 +28,14 @@ $$
 
 Cosa non va in questa tabella?
 
-* ci sono attributi che descrivono diverse entità del contesto cinematografico (ad esempio riguardo persone e film)
-	* questo porta alla duplicazione se ad esempio qualcuno recita in diverse pellicole
-
+Ci sono attributi che descrivono diverse entità del contesto cinematografico (ad esempio riguardo persone e film).\
+Questo porta alla duplicazione se ad esempio qualcuno recita in diverse pellicole.
 
 ## Dipendenza funzionale
 
-Una dipendenza funzionale $x \rightarrow y$ tra due sottoinsiemi di attributi $x$ e $y$ di una stessa relazione R stabilisce un vincolo sulle ennuple he possono formare uno stato di relazione r di R. $y$ dipende funzionalmente da $x$. "Dato un x avrò lo stesso y?"
+Una dipendenza funzionale $X \rightarrow Y$ tra due sottoinsiemi di attributi $X$ e $Y$ di una stessa relazione R stabilisce un vincolo sulle ennuple he possono formare uno stato di relazione $r$ di $R$. $y$ dipende funzionalmente da $x$. "Dato un x avrò lo stesso y?"
 
 $X \rightarrow Y$ non implica $Y \rightarrow X$
-
-Il vincolo stabilisce che... TODO integra da slide
 
 Vuol dire che se prendo due qualunque record $t_1$ e $t_2$ che appartengono alla relazione $R$, allora $t_1[X] = t_2[X] \rightarrow t1[Y] = t_2[Y]$.
 
@@ -50,6 +53,11 @@ Vogliamo ottenere uno schema che <label class="sidenote-toggle sidenote-number">
 
 * garantisca join senza perdita - se da $R_1$ e $R_2$ faccio join devo ritornare a $R$ (ricostruzione di una relazione dalle sue parti decomposte), non voglio nemmeno ottenere righe che prima non c'erano
 * garantisca la conservazione delle dipendenze - se nel decomporre $R$ gli attributi delle dipendenze funzionali finiscono almeno in una entità
+
+Data $R$ e $R_1$ e $R_2$ come decomposizione, e' senza perdita se:
+
+* $R_1 \cup R_2 = R$
+* $R_1 \cap R_2 = R'$ dove $R'$ e' chiave in $R_1$ o in $R_2$, cioè l'attributo di join deve essere chiave di uno dei due
 
 ### Regole di inferenza
 
@@ -75,12 +83,11 @@ $X \rightarrow Y$ e $X \rightarrow Z$ allora $X \rightarrow YZ$
 Pseudo transitiva
 $X \rightarrow Y$ e $WY \rightarrow Z$ allora $WX \rightarrow Z$
 
-$F^+$ e' La chiusura di $F$ e' l'insieme TODO completare da slide 
+L'insieme $F^+$ delle dipendenze funzionali individuate dal progettista unito all'insieme delle dipendenze inferite prende il nome di chiusura di $F$.
 
 ## Forme normali
 
-Strettamente legate al concetto di dipendenza funzionale.\
-Normalizzare vuol dire... TODO completare da slide
+Strettamente legate al concetto di dipendenza funzionale.
 
 Sono proprietà definite sulle relazione e basate sulle dipendenze funzionali. Danno la conferma che non ci siano anomalie.
 
@@ -95,16 +102,9 @@ BCNF e' il massimo ottenibile. Alcuni schemi non possono raggiungere la BCNF.
 
 In generale nella decomposizioni e' bene tenere presenti questioni di opportunità: ad esempio in alcuni casi e' bene favorire un minor numero di join.
 
-
-******************todo
-TODO inserisci esempi di relazioni
-***todo
-
 Quando si controlla in che NF e' la relazione e' bene partire dall'alto e controllare andando verso il basso, piuttosto che dal basso e andando verso l'alto.
 
 ### Boyce-Codd NF
-
-TODO aggiungi le pk agli esempi
 
 Ogni volta che sussiste in $R$ una dipendenza funzionale non banale $X \rightarrow A$, $X$ e' una superchiave.
 
@@ -122,9 +122,9 @@ La relazione non e' in BCNF perché abbiamo dipendenze parziali dalla chiave, qu
 
 Abbiamo pero' iper-normalizzato, ad esempio per $R_1$ e $R_2$, tramite la [Regole di inferenza](Normalizzazione%20di%20schemi.md#Regole%20di%20inferenza) unione posso ottenere
 
-* $R_1(movie,\ title,\ year)$
-* $R_2(person,\ first\_name,\ last\_name,\ given\_name)$
-* $R_3(person,\ movie,\ character)$
+* $R_1(movie,\ title,\ year)$ PK $movie$
+* $R_2(person,\ first\_name,\ last\_name,\ given\_name)$ PK $person$
+* $R_3(person,\ movie,\ character)$ PK $person$, $movie$
 
 ---
 
@@ -141,8 +141,8 @@ Chiave, che va ottenuta guardando i dati e non le dipendenze funzionali, e' comp
 
 Normalizzazione:
 
-* $R_1(movie,\ country)$
-* $R_2(person,\ country)$
+* $R_1(movie,\ country)$ PK $movie$
+* $R_2(person,\ country)$ PK $person$
 
 Provando a fare 
 
@@ -197,8 +197,6 @@ Qualunque tipo di ricostruzione mi porta ad avere un problema, oltretutto il joi
 
 Non possiamo arrivare a BCNF, perché tutti gli attributi sono parte di una dipendenza funzionale <label class="sidenote-toggle sidenote-number"></label>
 <span class="sidenote">Irraggiungibilità di BCNF</span>.
-
-TODO finire da materiale del prof
 
 ### Terza forma normale
 
@@ -261,9 +259,7 @@ join senza perdita: ok.
 
 Dipendenza funzionale $X \rightarrow Y$ e' completa se la rimozione di qualsiasi attributo $A$ da $X$ comporta che la dipendenza non sia più valida.
 
-TODO aggiungi testo dalla slide
-
-Non voglio che un attributo dipenda da un pezzo della chiave, come nell'esempio sopra della $birthdate$ TODO aggiungi rimando e spiegazione
+Non voglio che un attributo dipenda da un pezzo della chiave.
 
 Quindi vuol dire che se la chiave e' composta da un solo attributo siamo sempre in 2NF.
 

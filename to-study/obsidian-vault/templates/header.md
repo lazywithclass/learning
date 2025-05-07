@@ -1,6 +1,4 @@
 ---
-cssclasses:
-  - cornell-note
+cssclasses: []
 tags:
-  - <% tp.file.cursor() %>
 ---
