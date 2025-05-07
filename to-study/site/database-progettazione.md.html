@@ -121,6 +121,8 @@
     dove msotra attributi sulle associazioni.</p>
     <p>TODO mettere rimando al vincolo extra schema: non si puo’ gestire
     con un elemento dello schema, verrebbe gestito da trigger.</p>
+    <p>Occhio che una entità debole non passa mai dalla
+    associazione.</p>
     <h2 id="problema-della-storicizzazione-dei-dati"><a
     href="#problema-della-storicizzazione-dei-dati">Problema della
     storicizzazione dei dati</a></h2>
@@ -340,6 +342,140 @@
     <p>La gerarchia viene scomposta in associazioni binarie (<span
     class="math inline">\(e&#39;\_tipo\)</span>).<br />
     I figli sono sempre entità deboli rispetto al padre.</p>
+    <h4 id="esempio-con-users-e-users_data-todo-prendi-da-slide"><a
+    href="#esempio-con-users-e-usersdata-todo-prendi-da-slide">Esempio
+    con users e users_data TODO prendi da slide</a></h4>
+    <h2 id="reverse-engineering"><a href="#reverse-engineering">Reverse
+    engineering</a></h2>
+    <p>TODO integrare con esempi e riflessioni dagli appunti e dall’html
+    TODO chiedere al prof se i miei due schemi ER e relazionale per
+    ottenere gli schemi sono corretti?</p>
+    <p>Costruire il concettuale (l’ER) che l’ha generata a partire dal
+    relazionale.</p>
+    <p>Essenziale capire quali sono le chiavi esterne, che comunque
+    vengono date (siccome abbiamo il relazionale).</p>
+    <ul>
+    <li>cerco le tabelle che non hanno chiavi esterne</li>
+    <li>cerco le tabelle che hanno chiavi esterne</li>
+    <li>le entità deboli hanno come chiave una chiave esterna (in alcune
+    situazioni e’ possibile che l’entità debole sia in realtà un
+    attributo multi-valore)</li>
+    <li>le molti a molti hanno le chiavi esterne che puntano a diverse
+    tabelle (a volte ci può essere qualche attributo in più)</li>
+    <li>eventuali associazioni ricorsive si riconoscono perché le chiavi
+    esterne fanno riferimento alla tabella stessa</li>
+    </ul>
+    <p>Alla fine del reverse engineering, per vedere se si e’ lavorato
+    bene si può cercare di tornare allo schema logico, se si riesce
+    allora tutto ok.</p>
+    <h2 id="esercizi"><a href="#esercizi">Esercizi</a></h2>
+    <h3 id="ospedale"><a href="#ospedale">Ospedale</a></h3>
+    <figure>
+    <img src="attachments/Pasted%20image%2020250501182308.png"
+    alt="ER ospedale" />
+    <figcaption aria-hidden="true">ER ospedale</figcaption>
+    </figure>
+    <p>Si ottiene:</p>
+    <p><span class="math display">\[
+    \begin{align}
+    &amp;\ Medico(\underline{matricola},\ cognome,\ nome,\
+    specialita&#39;,\ ruolo,\ email) \newline
+    &amp;\ Paziente(\underline{tessera\_sanitaria},\ cognome,\ nome,\
+    data\_nascita,\ cartella\_clinica, residenza) \newline
+    &amp;\ Diagnosi(\underline{diagnosi,\ paziente,\ data}) \newline
+    &amp;\ Ambulatorio(\underline{numero},\ ubicazione,\ telefono*)
+    \newline
+    \newline
+    &amp;\ Cura(\underline{medico,\ paziente}) \newline
+    &amp;\ Visita(\underline{medico,\ paziente,\ ambulatorio,\
+    data\_visita}) \newline
+    \end{align}
+    \]</span></p>
+    <p>Chiavi esterne:</p>
+    <ul>
+    <li>Cura.medico -&gt; Medico.matricola</li>
+    <li>Cura.paziente -&gt; Paziente.tessera_sanitaria</li>
+    <li>Paziente.tessera_sanitaria -&gt; Diagnosi.paziente</li>
+    <li>Visita.medico -&gt; Medico.matricola</li>
+    <li>Vista.paziente -&gt; Paziente.tessera_sanitaria</li>
+    <li>Vista.ambulatorio -&gt; Ambulatorio.numero</li>
+    </ul>
+    <h3 id="medico-paziente"><a href="#medico-paziente">Medico
+    paziente</a></h3>
+    <figure>
+    <img src="attachments/Pasted%20image%2020250501195013.png"
+    alt="ER medico paziente" />
+    <figcaption aria-hidden="true">ER medico paziente</figcaption>
+    </figure>
+    <p>Si ottiene lo stesso schema di prima, ciò che cambia e’ che
+    siccome ora e’ una relazione da 1 a tot allora vuol dire che per un
+    <span class="math inline">\(Paziente\)</span> ho solo un <span
+    class="math inline">\(Medico\)</span>, quindi posso mettere la
+    chiave del <span class="math inline">\(Medico\)</span> nel <span
+    class="math inline">\(Paziente\)</span>.</p>
+    <p>Nel caso in cui non fosse stata <code>(1, 1)</code> ma fosse
+    stata <code>(0, 1)</code> allora avrei avuto la stessa cosa, solo
+    che la chiave esterna di <span class="math inline">\(Medico\)</span>
+    dentro <span class="math inline">\(Paziente\)</span> sarebbe stata
+    con un asterisco, per catturare il fatto che la cardinalità minima
+    e’ ora <code>0</code>.</p>
+    <h3 id="medico-ricorsiva"><a href="#medico-ricorsiva">Medico
+    ricorsiva</a></h3>
+    <figure>
+    <img src="attachments/Pasted%20image%2020250501200939.png"
+    alt="ER medico ricorsiva" />
+    <figcaption aria-hidden="true">ER medico ricorsiva</figcaption>
+    </figure>
+    <p>Non cambia niente, si ottiene:</p>
+    <p><span class="math display">\[
+    \begin{align}
+    &amp;\ Medico(\underline{matricola},\ cognome,\ ...,\ supervisore)
+    \newline
+    \end{align}
+    \]</span></p>
+    <p>Notare come non e’ necessario dire altro perché se un <span
+    class="math inline">\(Medico\)</span> ha un supervisore (come ogni
+    <span class="math inline">\(Medico\)</span> deve avere grazie alla
+    cardinalità minima 1) allora c’e’ il campo <span
+    class="math inline">\(supervisore\)</span>, ma e’ anche possibile
+    che un <span class="math inline">\(Medico\)</span> non sia
+    supervisore di nessuno, quindi non comparirà mai nel campo <span
+    class="math inline">\(supervisore\)</span>.</p>
+    <p>Chiavi esterne:</p>
+    <ul>
+    <li>Medico.supervisore -&gt; Medico.matricola</li>
+    </ul>
+    <h3 id="medico-reparto-ospedale"><a
+    href="#medico-reparto-ospedale">Medico reparto ospedale</a></h3>
+    <figure>
+    <img src="attachments/Pasted%20image%2020250501202544.png"
+    alt="ER medico reparto ospedale" />
+    <figcaption aria-hidden="true">ER medico reparto
+    ospedale</figcaption>
+    </figure>
+    <p>Si ottiene:</p>
+    <p><span class="math display">\[
+    \begin{align}
+    &amp;\ Medico(\underline{matricola},\ ...) \newline
+    &amp;\ Reparto(\underline{nome,\ nome\_ospedale,\
+    citta&#39;\_ospedale},\ primario) \newline
+    &amp;\ Ospedale(\underline{nome,\ citta&#39;},\ piva,\ sede\_legale)
+    \newline
+    &amp;\ \newline
+    &amp;\ Lavora(\underline{medico,\ nome\_reparto,\ nome\_ospedale,\
+    citta&#39;\_ospedale }) \newline
+    \end{align}
+    \]</span></p>
+    <p>Chiavi esterne:</p>
+    <ul>
+    <li>Lavora.medico -&gt; Medico.matricola</li>
+    <li>Lavora.nome_reparto, Lavora.nome_ospedale, Lavora.citta_ospedale
+    -&gt; Reparto.nome, Reparto.nome_ospedale,
+    Reparto.citta_ospedale</li>
+    <li>Reparto.nome_ospedale, Reparto.citta_ospedale -&gt;
+    Ospedale.nome, Ospedale.citta</li>
+    <li>Reparto.primario -&gt; Medico.matricola</li>
+    </ul>
     </article>
   </main>
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>

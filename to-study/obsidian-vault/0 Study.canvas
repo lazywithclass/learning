@@ -11,7 +11,9 @@
 		{"id":"701c96459e9fd487","type":"text","text":"Physical activity","x":1250,"y":198,"width":250,"height":60},
 		{"id":"84743a0f1442fff4","type":"text","text":"Go over the material right before sleep to strengthen learning.","x":1175,"y":320,"width":400,"height":120},
 		{"id":"f2667d81a200b13d","type":"text","text":"Have at least 8 hours sleep","x":1250,"y":500,"width":250,"height":80},
-		{"id":"9a8f69916b9fa7a3","x":360,"y":580,"width":400,"height":400,"type":"file","file":"Self testing.md"}
+		{"id":"9a8f69916b9fa7a3","type":"file","file":"Self testing.md","x":360,"y":580,"width":400,"height":400},
+		{"id":"5ad3c220338a8e3a","type":"text","text":"Procrastination","x":925,"y":580,"width":250,"height":60,"color":"1"},
+		{"id":"32fcfb656d1b87e5","type":"text","text":"Beat it by recognizing **CUES** and not indulding.","x":925,"y":700,"width":250,"height":58,"color":"4"}
 	],
 	"edges":[
 		{"id":"27223decec4cd53e","fromNode":"21a6a4453cd2cb66","fromSide":"right","toNode":"b0979df8e8cec477","toSide":"top"},
@@ -24,6 +26,8 @@
 		{"id":"71ce68026c801aa0","fromNode":"21a6a4453cd2cb66","fromSide":"left","toNode":"4831c3ba456d88c2","toSide":"right"},
 		{"id":"daf971854965c7da","fromNode":"7ba4ea33ea811443","fromSide":"bottom","toNode":"21a6a4453cd2cb66","toSide":"top"},
 		{"id":"f2a444c8a93ac1d0","fromNode":"07fccf3f78a8c174","fromSide":"bottom","toNode":"21a6a4453cd2cb66","toSide":"top"},
-		{"id":"7d4cfe0ad616deab","fromNode":"4831c3ba456d88c2","fromSide":"bottom","toNode":"9a8f69916b9fa7a3","toSide":"top"}
+		{"id":"7d4cfe0ad616deab","fromNode":"4831c3ba456d88c2","fromSide":"bottom","toNode":"9a8f69916b9fa7a3","toSide":"top"},
+		{"id":"03ad5f0b74bc6901","fromNode":"5ad3c220338a8e3a","fromSide":"top","toNode":"21a6a4453cd2cb66","toSide":"bottom"},
+		{"id":"f462d2abed111b3a","fromNode":"32fcfb656d1b87e5","fromSide":"top","toNode":"5ad3c220338a8e3a","toSide":"bottom"}
 	]
 }

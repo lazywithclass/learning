@@ -8,6 +8,13 @@ FAQs
 
 https://nixos.wiki/wiki/FAQ
 
+
+## Run a command in a subshell
+
+```language-bash
+$ nix-shell -p cowsay --run "cowsay oh hai!"
+```
+
 ## Install a single unstable package
 
 https://nixos.wiki/wiki/FAQ#How_can_I_install_a_package_from_unstable_while_remaining_on_the_stable_channel.3F

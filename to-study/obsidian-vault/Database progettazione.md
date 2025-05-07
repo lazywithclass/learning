@@ -65,6 +65,8 @@ TODO prendi da appunti di lezione gli altri schemi, ad esempio dove msotra attri
 
 TODO mettere rimando al vincolo extra schema: non si puo' gestire con un elemento dello schema, verrebbe gestito da trigger.
 
+Occhio che una entità debole non passa mai dalla associazione.
+
 ## Problema della storicizzazione dei dati
 
 Si tratta di scegliere se far si che la base di dati mostri la situazione attuale, o tenga uno storico di come si e' evoluta la situazione nel tempo.
@@ -174,7 +176,7 @@ Per una associazione con N entità devo prendere tutte le chiavi di ogni entità
 
 ### Gestione gerarchie
 
-TODO mettere immagini da appunti del prof
+![Esempio di gerarchia di partenza](attachments/Pasted%20image%2020250506215301.png)
 
 #### Accorpamento su entità padre (verso l'alto)
 
@@ -184,13 +186,189 @@ La gerarchia collassa in un'unica entità, che e' quella padre e:
 * si aggiunge un tipo enumerativo che identifica le figlie, nella gerarchia totale tipo e' obbligatorio, nella gerarchia parziale tipo e' opzionale; occhio che nelle sovrapposte il tipo deve considerare tutte le possibili combinazioni (può diventare poco maneggevole)
 * si aggiungono eventuali attributi delle entità figlie, che arrivano come opzionali
 
+![Accorpamento verso l'alto](attachments/Pasted%20image%2020250506215342.png)
+
 #### Eliminazione dell'entità padre (verso il basso)
 
 Non e' praticabile con una gerarchia parziale.\
 La gerarchia viene spostata verso il basso, tutti gli attributi del padre vengono dati ai figli.\
-Se non sappiamo ad esempio se una persona e' fisica o giuridica dobbiamo fare una `UNION` per cercarla dappertutto.\
+Può essere scomoda se, ad esempio, non sappiamo se una persona e' fisica o giuridica e quindi dobbiamo fare una `UNION` per cercarla dappertutto.
+
+![Scomposizione verso il basso](attachments/Pasted%20image%2020250506215404.png)
 
 #### Mantenimento di tutte le entità
 
 La gerarchia viene scomposta in associazioni binarie ($e'\_tipo$).\
 I figli sono sempre entità deboli rispetto al padre.
+
+![Mantenimento di tutte le entità](attachments/Pasted%20image%2020250506215512.png)
+
+## Reverse engineering
+
+TODO integrare con esempi e riflessioni dagli appunti e dall'html 
+TODO chiedere al prof se i miei due schemi ER e relazionale per ottenere gli schemi sono corretti?
+
+
+Costruire il concettuale (l'ER) che l'ha generata a partire dal relazionale.
+
+Essenziale capire quali sono le chiavi esterne, che comunque vengono date (siccome abbiamo il relazionale).
+
+* cerco le tabelle che non hanno chiavi esterne
+* cerco le tabelle che hanno chiavi esterne
+* le entità deboli hanno come chiave una chiave esterna (in alcune situazioni e' possibile che l'entità debole sia in realtà un attributo multi-valore)
+* le molti a molti hanno le chiavi esterne che puntano a diverse tabelle (a volte ci può essere qualche attributo in più)
+* eventuali associazioni ricorsive si riconoscono perché le chiavi esterne fanno riferimento alla tabella stessa
+
+Alla fine del reverse engineering, per vedere se si e' lavorato bene si può cercare di tornare allo schema logico, se si riesce allora tutto ok.
+
+## Esercizi
+
+### Ospedale
+
+![ER ospedale](attachments/Pasted%20image%2020250501182308.png)
+
+Si ottiene:
+
+$$
+\begin{align}
+&\ Medico(\underline{matricola},\ cognome,\ nome,\ specialita',\ ruolo,\ email) \newline
+&\ Paziente(\underline{tessera\_sanitaria},\ cognome,\ nome,\ data\_nascita,\ cartella\_clinica, residenza) \newline
+&\ Diagnosi(\underline{diagnosi,\ paziente,\ data}) \newline
+&\ Ambulatorio(\underline{numero},\ ubicazione,\ telefono*) \newline
+\newline
+&\ Cura(\underline{medico,\ paziente}) \newline
+&\ Visita(\underline{medico,\ paziente,\ ambulatorio,\ data\_visita}) \newline
+\end{align}
+$$
+
+Chiavi esterne:
+
+* Cura.medico -> Medico.matricola
+* Cura.paziente -> Paziente.tessera_sanitaria
+* Paziente.tessera_sanitaria -> Diagnosi.paziente
+* Visita.medico -> Medico.matricola
+* Vista.paziente -> Paziente.tessera_sanitaria
+* Vista.ambulatorio -> Ambulatorio.numero
+
+### Medico paziente
+
+![ER medico paziente](attachments/Pasted%20image%2020250501195013.png)
+
+Si ottiene lo stesso schema di prima, ciò che cambia e' che siccome ora e' una relazione da 1 a tot allora vuol dire che per un $Paziente$ ho solo un $Medico$, quindi posso mettere la chiave del $Medico$ nel $Paziente$.
+
+Nel caso in cui non fosse stata `(1, 1)` ma fosse stata `(0, 1)` allora avrei avuto la stessa cosa, solo che la chiave esterna di $Medico$ dentro $Paziente$ sarebbe stata con un asterisco, per catturare il fatto che la cardinalità minima e' ora `0`.
+
+### Medico ricorsiva
+
+![ER medico ricorsiva](attachments/Pasted%20image%2020250501200939.png)
+
+Non cambia niente, si ottiene:
+
+$$
+\begin{align}
+&\ Medico(\underline{matricola},\ cognome,\ ...,\ supervisore) \newline
+\end{align}
+$$
+
+Notare come non e' necessario dire altro perché se un $Medico$ ha un supervisore (come ogni $Medico$ deve avere grazie alla cardinalità minima 1) allora c'e' il campo $supervisore$, ma e' anche possibile che un $Medico$ non sia supervisore di nessuno, quindi non comparirà mai nel campo $supervisore$.
+
+Chiavi esterne:
+
+* Medico.supervisore -> Medico.matricola
+
+### Medico reparto ospedale
+
+![ER medico reparto ospedale](attachments/Pasted%20image%2020250501202544.png)
+
+Si ottiene:
+
+$$
+\begin{align}
+&\ Medico(\underline{matricola},\ ...) \newline
+&\ Reparto(\underline{nome,\ nome\_ospedale,\ citta'\_ospedale},\ primario) \newline
+&\ Ospedale(\underline{nome,\ citta'},\ piva,\ sede\_legale) \newline
+&\ \newline
+&\ Lavora(\underline{medico,\ nome\_reparto,\ nome\_ospedale,\ citta'\_ospedale }) \newline
+\end{align}
+$$
+
+Chiavi esterne:
+
+* Lavora.medico -> Medico.matricola
+* Lavora.nome_reparto, Lavora.nome_ospedale, Lavora.citta_ospedale -> Reparto.nome, Reparto.nome_ospedale, Reparto.citta_ospedale
+* Reparto.nome_ospedale, Reparto.citta_ospedale -> Ospedale.nome, Ospedale.citta
+* Reparto.primario -> Medico.matricola
+
+### Esempio con users e users_data
+
+![Esempio di relazione 1 a 1](attachments/Pasted%20image%2020250506215626.png)
+
+$$
+\begin{align}
+&\ Users(\underline{username},\ password,\ enabled) \newline
+&\ UserData(\underline{user}, nome,\ cognome,\ ruolo) \newline
+\end{align}
+$$
+
+Chiavi esterne:
+
+* UserData.user -> Users.username
+
+### Esempio 1 a 1 senza entità debole
+
+![Esempio 1 a 1](attachments/Pasted%20image%2020250506220624.png)
+
+$$
+\begin{align}
+&\ A(\underline{A_1},\ A_2,\ A_3) \newline
+&\ B(\underline{B_1},\ A_1,\ B2) \newline
+\end{align}
+$$
+
+Chiavi esterne:
+
+* B.A1 -> A.A1
+
+### lol
+
+![ER piuttosto ingombrante](attachments/Pasted%20image%2020250506221924.png)
+
+$$
+\begin{align}
+&\ Country(\underline{iso3},\ name) \newline
+&\ Cinema(\underline{city,\ name},\ address,\ phone^*)) \newline
+&\ Genre(\underline{name,\ movie}) \newline
+&\ Material(\underline{id},\ description,\ language^*,\ content^*,\ runtime^*,\ resolution^*,\ type^*,\ url^*,\ movie)) \newline
+&\ Movie(\underline{id},\ budget^*,\ year^*,\ length^*,\ plot^*,\ official\_title^*,\ genre^*) \newline
+&\ Person(\underline{id},\ birth\_date^*,\ death\_date^*,\ given\_name,\ bio^*) \newline
+&\ Rating(\underline{check\_date,\ source,\ movie},\ score,\ votes,\ scale) \newline
+&\ \newline
+&\ Location(\underline{country,\ person},\ d\_role,\ city^*,\ region) \newline
+&\ Produced(\underline{country,\ movie}) \newline
+&\ Released(\underline{country,\ movie},\ released^*,\ title^*) \newline
+&\ Show(\underline{cinema\_city,\ cinema\_name,\ movie},\ showtime) \newline
+&\ Similar(\underline{movie\_a,\ movie\_b},\ cause,\ score) \newline
+&\ Crew(\underline{movie,\ person},\ p\_role,\ character^*) \newline
+\end{align}
+$$
+
+Siccome non sappiamo che tipo di gerarchia coinvolge $Material$ (sto facendo l'esercizio inverso rispetto a quello fatto in classe), faccio un accorpamento verso il padre, perché non ho sbatti di mettere altre relazioni per la divisione in entità
+
+Chiavi esterne:
+
+* Genre.movie -> Movie.id
+* Rating.movie -> Movie.id
+* Location.country -> Country.iso3
+* Location.person -> Person.id
+* Produced.country -> Country.iso3
+* Produced.movie -> Movie.id
+* Released.country -> Country.iso3
+* Released.movie -> Movie.id
+* Show.cinema_city -> Cinema.city
+* Show.cinema_name -> Cinema.name
+* Show.movie -> Movie.id
+* Material.movie -> Movie.id
+* Similar.movie_a -> Movie.id
+* Similar.movie_b -> Movie.id
+* Crew.person -> Person.id
+* Crew.movie -> Movie.id

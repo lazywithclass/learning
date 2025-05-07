@@ -7,6 +7,17 @@ tags:
 
 [Code examples](https://github.com/lazywithclass/learning/tree/master/programming-languages/python)
 
-# Compile to C
+## Compile to C
 
-python3 -m py_compile regexp_approach.py
+```language-bash
+python3 -m py_compile file.py
+```
+
+## uv
+
+Useful commands:
+
+* `uv venv --python 3.13`
+* `uv venv` - creates the virtual environment
+* `uv pip install -r pyproject.toml`
+* `uv lock` - creates the lockfile
