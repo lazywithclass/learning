@@ -312,7 +312,12 @@
     tabella.</p>
     <h3 id="gestione-gerarchie"><a href="#gestione-gerarchie">Gestione
     gerarchie</a></h3>
-    <p>TODO mettere immagini da appunti del prof</p>
+    <figure>
+    <img src="attachments/Pasted%20image%2020250506215301.png"
+    alt="Esempio di gerarchia di partenza" />
+    <figcaption aria-hidden="true">Esempio di gerarchia di
+    partenza</figcaption>
+    </figure>
     <h4 id="accorpamento-su-entità-padre-verso-lalto"><a
     href="#accorpamento-su-entit-padre-verso-lalto">Accorpamento su
     entità padre (verso l’alto)</a></h4>
@@ -327,24 +332,39 @@
     <li>si aggiungono eventuali attributi delle entità figlie, che
     arrivano come opzionali</li>
     </ul>
+    <figure>
+    <img src="attachments/Pasted%20image%2020250506215342.png"
+    alt="Accorpamento verso l’alto" />
+    <figcaption aria-hidden="true">Accorpamento verso
+    l’alto</figcaption>
+    </figure>
     <h4 id="eliminazione-dellentità-padre-verso-il-basso"><a
     href="#eliminazione-dellentit-padre-verso-il-basso">Eliminazione
     dell’entità padre (verso il basso)</a></h4>
     <p>Non e’ praticabile con una gerarchia parziale.<br />
     La gerarchia viene spostata verso il basso, tutti gli attributi del
     padre vengono dati ai figli.<br />
-    Se non sappiamo ad esempio se una persona e’ fisica o giuridica
-    dobbiamo fare una <code>UNION</code> per cercarla dappertutto.<br />
-    </p>
+    Può essere scomoda se, ad esempio, non sappiamo se una persona e’
+    fisica o giuridica e quindi dobbiamo fare una <code>UNION</code> per
+    cercarla dappertutto.</p>
+    <figure>
+    <img src="attachments/Pasted%20image%2020250506215404.png"
+    alt="Scomposizione verso il basso" />
+    <figcaption aria-hidden="true">Scomposizione verso il
+    basso</figcaption>
+    </figure>
     <h4 id="mantenimento-di-tutte-le-entità"><a
     href="#mantenimento-di-tutte-le-entit">Mantenimento di tutte le
     entità</a></h4>
     <p>La gerarchia viene scomposta in associazioni binarie (<span
     class="math inline">\(e&#39;\_tipo\)</span>).<br />
     I figli sono sempre entità deboli rispetto al padre.</p>
-    <h4 id="esempio-con-users-e-users_data-todo-prendi-da-slide"><a
-    href="#esempio-con-users-e-usersdata-todo-prendi-da-slide">Esempio
-    con users e users_data TODO prendi da slide</a></h4>
+    <figure>
+    <img src="attachments/Pasted%20image%2020250506215512.png"
+    alt="Mantenimento di tutte le entità" />
+    <figcaption aria-hidden="true">Mantenimento di tutte le
+    entità</figcaption>
+    </figure>
     <h2 id="reverse-engineering"><a href="#reverse-engineering">Reverse
     engineering</a></h2>
     <p>TODO integrare con esempi e riflessioni dagli appunti e dall’html
@@ -475,6 +495,101 @@
     <li>Reparto.nome_ospedale, Reparto.citta_ospedale -&gt;
     Ospedale.nome, Ospedale.citta</li>
     <li>Reparto.primario -&gt; Medico.matricola</li>
+    </ul>
+    <h3 id="esempio-con-users-e-users_data"><a
+    href="#esempio-con-users-e-usersdata">Esempio con users e
+    users_data</a></h3>
+    <figure>
+    <img src="attachments/Pasted%20image%2020250506215626.png"
+    alt="Esempio di relazione 1 a 1" />
+    <figcaption aria-hidden="true">Esempio di relazione 1 a
+    1</figcaption>
+    </figure>
+    <p><span class="math display">\[
+    \begin{align}
+    &amp;\ Users(\underline{username},\ password,\ enabled) \newline
+    &amp;\ UserData(\underline{user}, nome,\ cognome,\ ruolo) \newline
+    \end{align}
+    \]</span></p>
+    <p>Chiavi esterne:</p>
+    <ul>
+    <li>UserData.user -&gt; Users.username</li>
+    </ul>
+    <h3 id="esempio-1-a-1-senza-entità-debole"><a
+    href="#esempio-1-a-1-senza-entit-debole">Esempio 1 a 1 senza entità
+    debole</a></h3>
+    <figure>
+    <img src="attachments/Pasted%20image%2020250506220624.png"
+    alt="Esempio 1 a 1" />
+    <figcaption aria-hidden="true">Esempio 1 a 1</figcaption>
+    </figure>
+    <p><span class="math display">\[
+    \begin{align}
+    &amp;\ A(\underline{A_1},\ A_2,\ A_3) \newline
+    &amp;\ B(\underline{B_1},\ A_1,\ B2) \newline
+    \end{align}
+    \]</span></p>
+    <p>Chiavi esterne:</p>
+    <ul>
+    <li>B.A1 -&gt; A.A1</li>
+    </ul>
+    <h3 id="lol"><a href="#lol">lol</a></h3>
+    <figure>
+    <img src="attachments/Pasted%20image%2020250506221924.png"
+    alt="ER piuttosto ingombrante" />
+    <figcaption aria-hidden="true">ER piuttosto ingombrante</figcaption>
+    </figure>
+    <p><span class="math display">\[
+    \begin{align}
+    &amp;\ Country(\underline{iso3},\ name) \newline
+    &amp;\ Cinema(\underline{city,\ name},\ address,\ phone^*)) \newline
+    &amp;\ Genre(\underline{name,\ movie}) \newline
+    &amp;\ Material(\underline{id},\ description,\ language^*,\
+    content^*,\ runtime^*,\ resolution^*,\ type^*,\ url^*,\ movie))
+    \newline
+    &amp;\ Movie(\underline{id},\ budget^*,\ year^*,\ length^*,\
+    plot^*,\ official\_title^*,\ genre^*) \newline
+    &amp;\ Person(\underline{id},\ birth\_date^*,\ death\_date^*,\
+    given\_name,\ bio^*) \newline
+    &amp;\ Rating(\underline{check\_date,\ source,\ movie},\ score,\
+    votes,\ scale) \newline
+    &amp;\ \newline
+    &amp;\ Location(\underline{country,\ person},\ d\_role,\ city^*,\
+    region) \newline
+    &amp;\ Produced(\underline{country,\ movie}) \newline
+    &amp;\ Released(\underline{country,\ movie},\ released^*,\ title^*)
+    \newline
+    &amp;\ Show(\underline{cinema\_city,\ cinema\_name,\ movie},\
+    showtime) \newline
+    &amp;\ Similar(\underline{movie\_a,\ movie\_b},\ cause,\ score)
+    \newline
+    &amp;\ Crew(\underline{movie,\ person},\ p\_role,\ character^*)
+    \newline
+    \end{align}
+    \]</span></p>
+    <p>Siccome non sappiamo che tipo di gerarchia coinvolge <span
+    class="math inline">\(Material\)</span> (sto facendo l’esercizio
+    inverso rispetto a quello fatto in classe), faccio un accorpamento
+    verso il padre, perché non ho sbatti di mettere altre relazioni per
+    la divisione in entità</p>
+    <p>Chiavi esterne:</p>
+    <ul>
+    <li>Genre.movie -&gt; Movie.id</li>
+    <li>Rating.movie -&gt; Movie.id</li>
+    <li>Location.country -&gt; Country.iso3</li>
+    <li>Location.person -&gt; Person.id</li>
+    <li>Produced.country -&gt; Country.iso3</li>
+    <li>Produced.movie -&gt; Movie.id</li>
+    <li>Released.country -&gt; Country.iso3</li>
+    <li>Released.movie -&gt; Movie.id</li>
+    <li>Show.cinema_city -&gt; Cinema.city</li>
+    <li>Show.cinema_name -&gt; Cinema.name</li>
+    <li>Show.movie -&gt; Movie.id</li>
+    <li>Material.movie -&gt; Movie.id</li>
+    <li>Similar.movie_a -&gt; Movie.id</li>
+    <li>Similar.movie_b -&gt; Movie.id</li>
+    <li>Crew.person -&gt; Person.id</li>
+    <li>Crew.movie -&gt; Movie.id</li>
     </ul>
     </article>
   </main>
