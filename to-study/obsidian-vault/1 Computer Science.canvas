@@ -2,9 +2,9 @@
 	"nodes":[
 		{"id":"85dd640905a2b3bb","type":"group","x":-3080,"y":-920,"width":1720,"height":1640,"label":"Software engineering"},
 		{"id":"895635680b7e7df4","type":"group","x":-4620,"y":360,"width":1120,"height":1720,"label":"Database"},
-		{"id":"00e9f975870d4907","type":"group","x":-3080,"y":1120,"width":1120,"height":480,"label":"Verifica e convalida"},
 		{"id":"c88b3288ff3eba2b","type":"group","x":-4480,"y":-1159,"width":1140,"height":519,"label":"Python"},
 		{"id":"b0347299040bae97","type":"group","x":-4620,"y":-478,"width":1140,"height":478,"label":"Java"},
+		{"id":"00e9f975870d4907","type":"group","x":-3080,"y":1120,"width":1120,"height":480,"label":"Verifica e convalida"},
 		{"id":"7b56a502ad3fb7fc","type":"file","file":"Design Pattern.md","x":-3040,"y":-880,"width":400,"height":402},
 		{"id":"4f1cb2aca91aaf7a","type":"file","file":"Encapsulation and information hiding.md","x":-2435,"y":-878,"width":400,"height":400},
 		{"id":"69ad361f530a96a5","type":"file","file":"Nullability.md","x":-3960,"y":-440,"width":400,"height":400},
@@ -23,8 +23,8 @@
 		{"id":"16a027477a88af32","type":"text","text":"Open close principle","x":-2160,"y":393,"width":250,"height":50},
 		{"id":"5c5d6073d7f887e6","type":"text","text":"Protection against change to the existing code and design at variation and evolution points","x":-2360,"y":539,"width":250,"height":154},
 		{"id":"f7c0300af3594b9e","type":"file","file":"TDD.md","x":-2400,"y":1160,"width":400,"height":400},
-		{"id":"213e270729dbf5c8","type":"file","file":"Normalizzazione di schemi.md","x":-4580,"y":1560,"width":400,"height":400},
-		{"id":"324142d06531b604","x":-3940,"y":1560,"width":400,"height":400,"type":"file","file":"Indici e progettazione fisica.md"}
+		{"id":"324142d06531b604","type":"file","file":"Database indici e progettazione fisica.md","x":-4580,"y":1600,"width":400,"height":400},
+		{"id":"213e270729dbf5c8","type":"file","file":"Database normalizzazione di schemi.md","x":-3940,"y":1600,"width":400,"height":400}
 	],
 	"edges":[
 		{"id":"9cba33d2898e5a11","fromNode":"dea8b742a229aa25","fromSide":"left","toNode":"9c8caae7182b4d20","toSide":"top"},
@@ -37,6 +37,9 @@
 		{"id":"d3e393b18022be10","fromNode":"16a027477a88af32","fromSide":"bottom","toNode":"5c5d6073d7f887e6","toSide":"top"},
 		{"id":"312bee533d9a660b","fromNode":"9c8caae7182b4d20","fromSide":"bottom","toNode":"16a027477a88af32","toSide":"top"},
 		{"id":"667a6c31d833b09c","fromNode":"6ee38529d3077eaa","fromSide":"bottom","toNode":"5c5d6073d7f887e6","toSide":"top"},
-		{"id":"c6fb3018ef3663ed","fromNode":"85dd640905a2b3bb","fromSide":"left","toNode":"69ad361f530a96a5","toSide":"right"}
+		{"id":"c6fb3018ef3663ed","fromNode":"85dd640905a2b3bb","fromSide":"left","toNode":"69ad361f530a96a5","toSide":"right"},
+		{"id":"b92a0c017c8d774a","fromNode":"19ac0e06c432d2fd","fromSide":"left","toNode":"3641920f7a5b59c5","toSide":"right"},
+		{"id":"addfdf28c72c0813","fromNode":"324142d06531b604","fromSide":"top","toNode":"3641920f7a5b59c5","toSide":"bottom"},
+		{"id":"34ca15874d0d686c","fromNode":"213e270729dbf5c8","fromSide":"top","toNode":"19ac0e06c432d2fd","toSide":"bottom"}
 	]
 }

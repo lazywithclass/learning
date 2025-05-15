@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <link rel="stylesheet" href="css/latex.css">
+  <link rel="stylesheet" href="css/prism.css">
+  <link rel="stylesheet" href="css/index.css">
+</head>
+<body class="latex-dark">
+  <main>
+    <article>
+    <h1>Database indici e progettazione fisica</h1>
+    <p>Come i dati vengono memorizzati.</p>
+    <p>Il buffer permette la gestione dei dati in memoria principale,
+    applica strategie per minimizzare il trasferimento dei dati da
+    elaborare da e verso la memoria secondaria.<br />
+    Il buffer organizzato in pagine, ogni pagina ha un certo numero di
+    blocchi.</p>
+    <p>Buffer organizzato in pagine, ogni pagina ha dei blocchi. Il
+    blocco su disco memorizza i record.</p>
+    <p>Ogni blocco memorizza più record.</p>
+    <h2 id="fattore-di-blocco"><a href="#fattore-di-blocco">Fattore di
+    blocco</a></h2>
+    <p>“Quanti record stanno nello specifico blocco?”</p>
+    <p><span class="math display">\[
+    \begin{align}
+    &amp;\ bfr = \lfloor{\frac{B}{R}}  \rfloor \newline
+    \end{align}
+    \]</span></p>
+    <p>Se un record non sta interamente in un blocco e’ possibile che
+    una parte del blocco rimanga inutilizzata.<br />
+    Da una previsione media.</p>
+    <p>Dove</p>
+    <ul>
+    <li><span class="math inline">\(B\)</span> e’ la dimensione del
+    blocco</li>
+    <li><span class="math inline">\(R\)</span> e’ la dimensione media
+    del record</li>
+    </ul>
+    <p>“Quanto spazio occupa una tabella?”</p>
+    <pre class="language-sql"><code>CREATE TABLE country (
+    id serial,
+    iso3 char(3) PRIMARY KEY,
+    name varchar(50) NOT NULL UNIQUE,
+    population integer,
+    image bytea
+)</code></pre>
+    <p>Il tipo di dato <code>char</code> usa comunque tutto lo spazio
+    specificato, il <code>varchar</code> no, usa ciò che inserisco.</p>
+    <ul>
+    <li><code>char</code>: 4 byte x char -&gt; 12 byte</li>
+    <li><code>integer</code>: 8 byte</li>
+    <li><code>bytea</code>: non posso saperlo, viene memorizzato in un
+    altro blocco, e referenziato nel blocco dove ci sono gli altri
+    campi</li>
+    </ul>
+    <p>Vincoli tipo <code>PRIMARY KEY</code> e <code>UNIQUE</code> sono
+    di particolare interesse, sono indicizzati, quindi ad accesso
+    ottimizzato, per fare in modo che la ricerca sia particolarmente
+    performante.</p>
+    <p>Il costo di ricerca all’interno di un blocco e’ irrisorio.</p>
+    <p>TODO Controllare se e’ corretta la divisione strutture primarie e
+    secondarie</p>
+    <h2 id="struttura-primaria-dei-file"><a
+    href="#struttura-primaria-dei-file">Struttura primaria dei
+    file</a></h2>
+    <p>TODO riempi da slide</p>
+    <p>“Come finiscono i dati nei blocchi?”; criterio con cui disponiamo
+    i record nei blocchi:</p>
+    <ul>
+    <li>sequenziale (array)</li>
+    <li>calcolato (hash)</li>
+    <li>albero (gli indici finiscono in questa categoria)</li>
+    </ul>
+    <h3 id="sequenziale"><a href="#sequenziale">Sequenziale</a></h3>
+    <p>I record finiscono uno dopo l’altro in blocchi sequenziali.</p>
+    <h4 id="heap"><a href="#heap">Heap</a></h4>
+    <p>Riempio con i dati man mano che arrivano, senza ordinarli.</p>
+    <p>Inserire e’ facile (trovo l’ultimo, vedo se posso mettere il
+    record, altrimenti prendo il prossimo blocco e lo metto li),
+    recuperare e’ meno immediato.<br />
+    Prima di inserire devo verificare se la chiave non e’ già presente,
+    il che richiedere una ricerca lineare.</p>
+    <p>Un affiancamento di strutture secondarie permette di velocizzare
+    i passaggi critici.</p>
+    <h4 id="array"><a href="#array">Array</a></h4>
+    <p>“Bello ma scarsamente fattibile”</p>
+    <h4 id="struttura-sequenziale-ordinata"><a
+    href="#struttura-sequenziale-ordinata">Struttura sequenziale
+    ordinata</a></h4>
+    <p>Ordinamento di un campo detto pseudo-chiave</p>
+    <h3 id="hash"><a href="#hash">Hash</a></h3>
+    <p>La funzione di hashing deve garantire una buona equi
+    distribuzione dei dati.</p>
+    <h3 id="indici-primari"><a href="#indici-primari">Indici
+    primari</a></h3>
+    <p>TODO inserire immagine da slide</p>
+    <p>Sono ordinati, quindi ricerche puntuali o per intervallo sono
+    efficienti.</p>
+    <p>Sono sempre sparsi, perché l’albero non contiene mai tutte le
+    chiavi.</p>
+    <p>Alberi utilizzati per memorizzare dati.</p>
+    <p>Ho <span class="math inline">\((k,\ p)\)</span> dove <span
+    class="math inline">\(k\)</span> e’ valore della chiave e <span
+    class="math inline">\(p\)</span> e’ il puntatore alla posizione di
+    memoria del record.</p>
+    <h2 id="strutture-secondarie"><a
+    href="#strutture-secondarie">Strutture secondarie</a></h2>
+    <p>Ci permettono di raggiungere i dati in modo efficiente, indici
+    (alberi). Es. <code>CREATE INDEX</code>.</p>
+    <p>Possiamo usarle anche per memorizzare dati.</p>
+    <h3 id="indici-secondari"><a href="#indici-secondari">Indici
+    secondari</a></h3>
+    <p>TODO inserire immagine da slide</p>
+    <p>Sono ordinati, quindi ricerche puntuali o per intervallo sono
+    efficienti.</p>
+    <p>Sono sempre densi, perché l’albero contiene sempre tutte le
+    chiavi.</p>
+    <h2 id="esercizi-indici-primari"><a
+    href="#esercizi-indici-primari">Esercizi indici primari</a></h2>
+    <p><span class="math inline">\(R = 100B\)</span>, <span
+    class="math inline">\(Blocco = 1024B\)</span>, file con 30000
+    record</p>
+    <p>Quante voci conterrà l’indice?</p>
+    <ul>
+    <li>calcoliamo il blocking factor (cioè quanti record sono
+    memorizzati in ogni blocco): floor(1024/100) = 10</li>
+    <li>calcolo quanti blocchi sono occupati dai record della tabella:
+    30000 / 10 = 3000</li>
+    <li>quante voci di indice primario mi servono per gestire 3000
+    blocchi? In un indice primario ho bisogno di una chiave per ogni
+    blocco, che punta al primo record del blocco, quindi posso gestire
+    3000 blocchi con altrettante voci di indice</li>
+    </ul>
+    <hr />
+    <ul>
+    <li>i valori della pseudo-chiave dell’indice occupano <span
+    class="math inline">\(3B\)</span></li>
+    <li>il puntatore al blocco e’ un indirizzo di <span
+    class="math inline">\(6B\)</span></li>
+    </ul>
+    <p>Quanti blocchi occupa l’indice?</p>
+    <ul>
+    <li>ogni record dell’indice occupa 3+9 = 9B (dimensione del record
+    dell’indice)</li>
+    <li>bf = floor(B/R) - floor(1024 / 9) = 113 record</li>
+    <li>quanti blocchi mi servono (considero che l’indice contiene 3000
+    voci)? 3000 / 113 = 26.5 quindi 27</li>
+    </ul>
+    <h2 id="esercizi-indici-secondari"><a
+    href="#esercizi-indici-secondari">Esercizi indici secondari</a></h2>
+    <p>TODO prendi da risoluzioni del prof</p>
+    <p>R = 100B, B = 1024B, 30000 record</p>
+    <p>Quanti accessi devo fare prima di trovare il valore che cerco?
+    Scansione di tutti i record.</p>
+    </article>
+  </main>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script src="js/prism.min.js"></script>
+</body>

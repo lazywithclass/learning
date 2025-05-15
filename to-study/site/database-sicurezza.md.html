@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <link rel="stylesheet" href="css/latex.css">
+  <link rel="stylesheet" href="css/prism.css">
+  <link rel="stylesheet" href="css/index.css">
+</head>
+<body class="latex-dark">
+  <main>
+    <article>
+    <h1>Database sicurezza</h1>
+    <p>TODO vedere le dispense extra messe su Ariel</p>
+    <p>Obiettivi:</p>
+    <ul>
+    <li>segretezza - vogliamo prevenire accessi non autorizzati</li>
+    <li>integrità - proteggere dati da azioni che ne alterino il
+    contenuto in maniera non lecita</li>
+    <li>disponibilità - il software contenuto nella base dati deve
+    essere utilizzabili da tutti coloro che lo devono usare (e’ un
+    problema se l’utente autorizzato non riesce a lavorare)</li>
+    </ul>
+    <p>Tecniche per fare ciò:</p>
+    <ul>
+    <li>autenticazione - porta di ingresso del DBMS, verifica
+    dell’identità dell’utente</li>
+    <li>controllo dell’accesso - l’utente e’ all’interno del perimetro,
+    dobbiamo verificare la coerenza dei permessi in base a ciò che
+    l’utente vuole fare</li>
+    <li>crittografia - protezione dei dati su disco</li>
+    </ul>
+    <p>Concedere accesso e</p>
+    <h2 id="controllo-dellaccesso"><a
+    href="#controllo-dellaccesso">Controllo dell’accesso</a></h2>
+    <p>Regole che vengono verificate ogni volta che c’e’ un accesso ai
+    dati. Ci focalizzeremo su questa parte.</p>
+    <p>Reference monitor: meccanismo di controllo che ha il compito di
+    stabilire se l’utente e’ autorizzato (parzialmente o totalmente) a
+    compiere l’accesso.</p>
+    <p>TODO integra da slide</p>
+    <p>Politiche di sicurezza:</p>
+    <ul>
+    <li>politiche di amministrazione della sicurezza - chi e’ il
+    soggetto che concede i diritti
+    <ul>
+    <li>centralizzata</li>
+    <li>decentralizzata</li>
+    <li>ownership - chi crea l’oggetto ne gestisce le
+    autorizzazioni</li>
+    </ul></li>
+    </ul>
+    <p>PostgreSQL applica entrambe, centralizzata e decentralizzata.</p>
+    <p>Politiche per il controllo dell’accesso:</p>
+    <ul>
+    <li>need to know - permette ad ogni utente l’accesso solo ai dati
+    strettamente necessari per eseguire le proprie attività (sistema
+    chiuso)</li>
+    <li>maximized sharing - consente massimo accesso alle informazioni
+    nella base di dati, mantenendo comunque informazioni riservate
+    (sistema aperto)</li>
+    </ul>
+    <p>Sistema aperto: accesso consentito a meno che non sia
+    esplicitamente negato.<br />
+    Sistema chiuso: accesso permesso solo se esplicitamente
+    autorizzato.</p>
+    <p>Granularità - livello minimo a cui arriviamo quando specifichiamo
+    privilegi (possiamo arrivare sino ai singoli attributi).</p>
+    <p>Tipologie di controllo:</p>
+    <ul>
+    <li>todo</li>
+    </ul>
+    <p>Politiche discrezionali:</p>
+    <ul>
+    <li>todo</li>
+    </ul>
+    <p>I nostri sono sistemi discrezionali.</p>
+    <p>TODO metti assolutamente per carita’ del signore l’attacco di
+    Troia</p>
+    <p>Ci si salva da questo attacco con una politica mandatoria (che
+    tutelano il movimento - TODO controlla questa cosa tra
+    parentesi).</p>
+    <h2 id="il-sistema-r"><a href="#il-sistema-r">Il sistema R</a></h2>
+    <p>Il comando <code>GRANT</code></p>
+    <p>TODO integra da slide</p>
+    <p><code>GRANT OPTION</code> consente ad altri di fare
+    <code>GRANT</code> anche ad altri.</p>
+    <p><code>REVOKE</code> revoca permessi precedentemente concessi, e
+    ricorsivamente anche ad altri ai quali e’ stato concesso, a meno che
+    lo stesso privilegio non sia stato concesso anche da altri.</p>
+    <p>Un utente puo’ solo revocare privilegi che esso stesso ha
+    concesso.</p>
+    <p>“Un DBA può revocare i privilegi ad un altro DBA” ?
+    <code>create user stefano with superuser, password stefano</code></p>
+    <hr />
+    <pre class="language-sql"><code>-- userA (owner del database imdb) segue
+GRANT SELECT ON imdb.movie TO userB WITH GRANT OPTION;
+
+-- userB non puo&#39; revocare il privilegio SELECT all&#39;userA</code></pre>
+    <h2 id="sysauth-e-syscolauth"><a
+    href="#sysauth-e-syscolauth">Sysauth e syscolauth</a></h2>
+    <p>Sono tabelle del catalogo relazionale.</p>
+    <p>La tabella con Y N etc Riassume i privilegi attivi su tutti gli
+    ogetti della base dati</p>
+    <p>nome e’ grantee, creator e’ grantor T dice se e’ Relazione o
+    Vista</p>
+    <p>E’ normale che il creatore dia a se stesso tutti i privilegi,
+    viene messo in automatico alla sua <code>GRANT</code>.</p>
+    <p>Revoca riorsiva</p>
+    <p>Tolgo all’utente bersaglio, e ricosrivamente a tutti gli utenti
+    che lo avevano ricevuto</p>
+    <p>Una buona idea e’ pensarla come se fosse una wuery su una
+    tabella</p>
+    <p>Prendo come grantor quello che ha appena perso il privilegio, e
+    come tabella e privilegio sono quelli appena revocati: se li trovo
+    li levo.</p>
+    <p>Quando ci sono gli 0 vuol dire che non gli ha concesso l’azione,
+    altrimenti c’e’ il tempo al quale e’ stato dato.</p>
+    <p>Per riuscire a risolvere la situazione facciamo un grafo per ogni
+    action (Insert, Select, Delete):</p>
+    <ul>
+    <li>prendo una riga</li>
+    <li>aggiungo il grantor e il grantee</li>
+    <li>li collego scrivendo sull’arco il tempo al quale e’ stata
+    effettuata la concessione</li>
+    </ul>
+    <p>Poi valuto</p>
+    <ul>
+    <li>rimuovo gli archi con numero maggiore del tempo della
+    revoke</li>
+    </ul>
+    <p>TODO inserisci grafo disegnato dal prof</p>
+    </article>
+  </main>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script src="js/prism.min.js"></script>
+</body>

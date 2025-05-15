@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <link rel="stylesheet" href="css/latex.css">
+  <link rel="stylesheet" href="css/prism.css">
+  <link rel="stylesheet" href="css/index.css">
+</head>
+<body class="latex-dark">
+  <main>
+    <article>
+    <h1>Docker</h1>
+    <h2 id="running-a-container"><a href="#running-a-container">Running
+    a container</a></h2>
+    <p>Remember to add <code>-i</code> if you need interactive mode,
+    otherwise any command you run in the container will wait
+    indefinitely.<br />
+    After three C-c the container will exit with
+    <code>got 3 SIGTERM/SIGINTs, forcefully exiting</code></p>
+    <h2 id="detect-if-running-in-a-container"><a
+    href="#detect-if-running-in-a-container">Detect if running in a
+    container</a></h2>
+    <p>Docker creates an empty file named <code>.dockerenv</code> at the
+    root of the container’s filesystem:</p>
+    <pre class="language-bash"><code>#!/bin/bash
+
+if [ -f /.dockerenv ]; then
+  echo &quot;Running inside a Docker container (via .dockerenv check)&quot;
+else
+  echo &quot;Not running inside a Docker container (.dockerenv not found)&quot;
+fi</code></pre>
+    </article>
+  </main>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script src="js/prism.min.js"></script>
+</body>

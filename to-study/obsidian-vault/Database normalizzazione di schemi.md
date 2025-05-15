@@ -120,7 +120,7 @@ La relazione non e' in BCNF perché abbiamo dipendenze parziali dalla chiave, qu
 * $R_4(person,\ given\_name)$
 * $R_5(person,\ movie,\ character)$
 
-Abbiamo pero' iper-normalizzato, ad esempio per $R_1$ e $R_2$, tramite la [Regole di inferenza](Normalizzazione%20di%20schemi.md#Regole%20di%20inferenza) unione posso ottenere
+Abbiamo pero' iper-normalizzato, ad esempio per $R_1$ e $R_2$, tramite la [Regole di inferenza](Database%20normalizzazione%20di%20schemi.md#Regole%20di%20inferenza) unione posso ottenere
 
 * $R_1(movie,\ title,\ year)$ PK $movie$
 * $R_2(person,\ first\_name,\ last\_name,\ given\_name)$ PK $person$

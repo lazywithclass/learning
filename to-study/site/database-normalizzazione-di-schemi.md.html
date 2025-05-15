@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <link rel="stylesheet" href="css/latex.css">
+  <link rel="stylesheet" href="css/prism.css">
+  <link rel="stylesheet" href="css/index.css">
+</head>
+<body class="latex-dark">
+  <main>
+    <article>
+    <h1>Database normalizzazione di schemi</h1>
+    <pre class="table-of-contents"><code>title: 
+style: nestedList # TOC style (nestedList|nestedOrderedList|inlineFirstLevel)
+minLevel: 0 # Include headings from the specified level
+maxLevel: 0 # Include headings up to the specified level
+includeLinks: true # Make headings clickable
+hideWhenEmpty: false # Hide TOC if no headings are found
+debugInConsole: false # Print debug info in Obsidian console</code></pre>
+    <hr />
+    <p>Permette di stabilire la qualità di uno schema.</p>
+    <p>Normalizzazione: decomporre <span
+    class="math inline">\(R\)</span> in modo che esista una diversa
+    relazione per ogni dipendenza. Mantenere una relazione che contenga
+    la chiave della relazione di partenza.</p>
+    <p><span class="math display">\[
+    \begin{align}
+    &amp;\ R(person,\ first\_name,\ last\_name,\ given\_name,\ movie,\
+    title,\ year,\ character) \newline
+    \end{align}
+    \]</span></p>
+    <p>Cosa non va in questa tabella?</p>
+    <p>Ci sono attributi che descrivono diverse entità del contesto
+    cinematografico (ad esempio riguardo persone e film).<br />
+    Questo porta alla duplicazione se ad esempio qualcuno recita in
+    diverse pellicole.</p>
+    <h2 id="dipendenza-funzionale"><a
+    href="#dipendenza-funzionale">Dipendenza funzionale</a></h2>
+    <p>Una dipendenza funzionale <span class="math inline">\(X
+    \rightarrow Y\)</span> tra due sottoinsiemi di attributi <span
+    class="math inline">\(X\)</span> e <span
+    class="math inline">\(Y\)</span> di una stessa relazione R
+    stabilisce un vincolo sulle ennuple he possono formare uno stato di
+    relazione <span class="math inline">\(r\)</span> di <span
+    class="math inline">\(R\)</span>. <span
+    class="math inline">\(y\)</span> dipende funzionalmente da <span
+    class="math inline">\(x\)</span>. “Dato un x avrò lo stesso y?”</p>
+    <p><span class="math inline">\(X \rightarrow Y\)</span> non implica
+    <span class="math inline">\(Y \rightarrow X\)</span></p>
+    <p>Vuol dire che se prendo due qualunque record <span
+    class="math inline">\(t_1\)</span> e <span
+    class="math inline">\(t_2\)</span> che appartengono alla relazione
+    <span class="math inline">\(R\)</span>, allora <span
+    class="math inline">\(t_1[X] = t_2[X] \rightarrow t1[Y] =
+    t_2[Y]\)</span>.</p>
+    <p>Nell’esempio ci sono queste dipendenze:</p>
+    <ul>
+    <li><span class="math inline">\(movie \rightarrow title\)</span>,
+    prendendo dalla definizione <span class="math inline">\(t_1[movie] =
+    t_2[movie] \rightarrow t_1[title] = t_2[movie]\)</span></li>
+    <li><span class="math inline">\(person \rightarrow first\_name,\
+    last\_name,\ given\_name\)</span></li>
+    <li><span class="math inline">\(first\_name,\ last\_name \rightarrow
+    person\)</span> (dipendenza non corretta)</li>
+    <li><span class="math inline">\(person,\ movie \rightarrow
+    character\)</span></li>
+    <li><span class="math inline">\(movie \rightarrow year\)</span></li>
+    </ul>
+    <p>Ci aiutano a evidenziare quali sono le entità.</p>
+    <p>Vogliamo ottenere uno schema che
+    <label class="sidenote-toggle sidenote-number"></label><span
+    class="sidenote">Obiettivo della normalizzazione</span>:</p>
+    <ul>
+    <li>garantisca join senza perdita - se da <span
+    class="math inline">\(R_1\)</span> e <span
+    class="math inline">\(R_2\)</span> faccio join devo ritornare a
+    <span class="math inline">\(R\)</span> (ricostruzione di una
+    relazione dalle sue parti decomposte), non voglio nemmeno ottenere
+    righe che prima non c’erano</li>
+    <li>garantisca la conservazione delle dipendenze - se nel decomporre
+    <span class="math inline">\(R\)</span> gli attributi delle
+    dipendenze funzionali finiscono almeno in una entità</li>
+    </ul>
+    <p>Data <span class="math inline">\(R\)</span> e <span
+    class="math inline">\(R_1\)</span> e <span
+    class="math inline">\(R_2\)</span> come decomposizione, e’ senza
+    perdita se:</p>
+    <ul>
+    <li><span class="math inline">\(R_1 \cup R_2 = R\)</span></li>
+    <li><span class="math inline">\(R_1 \cap R_2 = R&#39;\)</span> dove
+    <span class="math inline">\(R&#39;\)</span> e’ chiave in <span
+    class="math inline">\(R_1\)</span> o in <span
+    class="math inline">\(R_2\)</span>, cioè l’attributo di join deve
+    essere chiave di uno dei due</li>
+    </ul>
+    <h3 id="regole-di-inferenza"><a href="#regole-di-inferenza">Regole
+    di inferenza</a></h3>
+    <p>Permettono di evidenziare dipendenze funzionali latenti.</p>
+    <p>Riflessiva <span class="math inline">\(Y \subseteq X\)</span>
+    (<span class="math inline">\(Y\)</span> contiene <span
+    class="math inline">\(X\)</span>) allora X -&gt; Y X = movie, title
+    Y = title movie, title -&gt; title</p>
+    <p>Arricchimento <span class="math inline">\(movie \rightarrow
+    year\)</span> allora <span class="math inline">\(movie,\ title
+    \rightarrow year,\ title\)</span></p>
+    <p>Transitiva <span class="math inline">\(X \rightarrow Y\)</span> e
+    <span class="math inline">\(Y \rightarrow Z\)</span> allora <span
+    class="math inline">\(X \rightarrow Z\)</span></p>
+    <p>Decomposizione <span class="math inline">\(X \rightarrow
+    YZ\)</span> allora <span class="math inline">\(X \rightarrow
+    Y\)</span> e <span class="math inline">\(X \rightarrow
+    Z\)</span></p>
+    <p>Unione <span class="math inline">\(X \rightarrow Y\)</span> e
+    <span class="math inline">\(X \rightarrow Z\)</span> allora <span
+    class="math inline">\(X \rightarrow YZ\)</span></p>
+    <p>Pseudo transitiva <span class="math inline">\(X \rightarrow
+    Y\)</span> e <span class="math inline">\(WY \rightarrow Z\)</span>
+    allora <span class="math inline">\(WX \rightarrow Z\)</span></p>
+    <p>L’insieme <span class="math inline">\(F^+\)</span> delle
+    dipendenze funzionali individuate dal progettista unito all’insieme
+    delle dipendenze inferite prende il nome di chiusura di <span
+    class="math inline">\(F\)</span>.</p>
+    <h2 id="forme-normali"><a href="#forme-normali">Forme
+    normali</a></h2>
+    <p>Strettamente legate al concetto di dipendenza funzionale.</p>
+    <p>Sono proprietà definite sulle relazione e basate sulle dipendenze
+    funzionali. Danno la conferma che non ci siano anomalie.</p>
+    <p>Date le dipendenze funzionali, raggiungo le forme normali.</p>
+    <ul>
+    <li>BCNF (Boyce-Codd)</li>
+    <li>3NF (un buono schema e’ qua)</li>
+    <li>2NF</li>
+    <li>1NF</li>
+    </ul>
+    <p>BCNF e’ il massimo ottenibile. Alcuni schemi non possono
+    raggiungere la BCNF.</p>
+    <p>In generale nella decomposizioni e’ bene tenere presenti
+    questioni di opportunità: ad esempio in alcuni casi e’ bene favorire
+    un minor numero di join.</p>
+    <p>Quando si controlla in che NF e’ la relazione e’ bene partire
+    dall’alto e controllare andando verso il basso, piuttosto che dal
+    basso e andando verso l’alto.</p>
+    <h3 id="boyce-codd-nf"><a href="#boyce-codd-nf">Boyce-Codd
+    NF</a></h3>
+    <p>Ogni volta che sussiste in <span class="math inline">\(R\)</span>
+    una dipendenza funzionale non banale <span class="math inline">\(X
+    \rightarrow A\)</span>, <span class="math inline">\(X\)</span> e’
+    una superchiave.</p>
+    <hr />
+    <p><span class="math inline">\(person\)</span> e <span
+    class="math inline">\(movie\)</span> sono la chiave.</p>
+    <p>La relazione non e’ in BCNF perché abbiamo dipendenze parziali
+    dalla chiave, quindi decompongo:</p>
+    <ul>
+    <li><span class="math inline">\(R_1(movie,\ title)\)</span></li>
+    <li><span class="math inline">\(R_2(movie,\ year)\)</span></li>
+    <li><span class="math inline">\(R_3(person,\ first\_name,\
+    last\_name)\)</span></li>
+    <li><span class="math inline">\(R_4(person,\
+    given\_name)\)</span></li>
+    <li><span class="math inline">\(R_5(person,\ movie,\
+    character)\)</span></li>
+    </ul>
+    <p>Abbiamo pero’ iper-normalizzato, ad esempio per <span
+    class="math inline">\(R_1\)</span> e <span
+    class="math inline">\(R_2\)</span>, tramite la <a
+    href="Database%20normalizzazione%20di%20schemi.md#Regole%20di%20inferenza">Regole
+    di inferenza</a> unione posso ottenere</p>
+    <ul>
+    <li><span class="math inline">\(R_1(movie,\ title,\ year)\)</span>
+    PK <span class="math inline">\(movie\)</span></li>
+    <li><span class="math inline">\(R_2(person,\ first\_name,\
+    last\_name,\ given\_name)\)</span> PK <span
+    class="math inline">\(person\)</span></li>
+    <li><span class="math inline">\(R_3(person,\ movie,\
+    character)\)</span> PK <span class="math inline">\(person\)</span>,
+    <span class="math inline">\(movie\)</span></li>
+    </ul>
+    <hr />
+    <p>Consideriamo ora questa <span class="math inline">\(R(person,\
+    country,\ movie)\)</span></p>
+    <ul>
+    <li>country e’ la sede della produzione del film, coincide con il
+    paese di residenza dell’attore durante le riprese</li>
+    </ul>
+    <p>Dipendenze funzionali:</p>
+    <ul>
+    <li><span class="math inline">\(movie \rightarrow
+    country\)</span></li>
+    <li><span class="math inline">\(person \rightarrow
+    country\)</span></li>
+    </ul>
+    <p>Chiave, che va ottenuta guardando i dati e non le dipendenze
+    funzionali, e’ composta da <span
+    class="math inline">\(movie\)</span> e <span
+    class="math inline">\(person\)</span></p>
+    <p>Normalizzazione:</p>
+    <ul>
+    <li><span class="math inline">\(R_1(movie,\ country)\)</span> PK
+    <span class="math inline">\(movie\)</span></li>
+    <li><span class="math inline">\(R_2(person,\ country)\)</span> PK
+    <span class="math inline">\(person\)</span></li>
+    </ul>
+    <p>Provando a fare</p>
+    <pre class="language-sql"><code>SELECT * 
+FROM R1 JOIN R2 ON R1.country = R2.country</code></pre>
+    <p>perderei la caratteristica di avere join senza perdita. Quindi
+    dobbiamo trovare una strada alternativa.<br />
+    E’ sempre possibile verificare se arriviamo ad avere join senza
+    perdita <label class="sidenote-toggle sidenote-number"></label>
+    <span class="sidenote">Verifica di join senza perdita</span>.</p>
+    <p>Data <span class="math inline">\(R\)</span> e <span
+    class="math inline">\(R_1\)</span> e <span
+    class="math inline">\(R_2\)</span> come decomposizione, e’ senza
+    perdita se:</p>
+    <ul>
+    <li><span class="math inline">\(R_1 \cup R_2 = R\)</span></li>
+    <li><span class="math inline">\(R_1 \cap R_2 = R&#39;\)</span> dove
+    <span class="math inline">\(R&#39;\)</span> e’ chiave in <span
+    class="math inline">\(R_1\)</span> o in <span
+    class="math inline">\(R_2\)</span>, cioè l’attributo di join deve
+    essere chiave di uno dei due</li>
+    </ul>
+    <p>Strada alternativa:</p>
+    <ul>
+    <li><span class="math inline">\(R_1(movie,\ country)\)</span></li>
+    <li><span class="math inline">\(R_2(person,\ country)\)</span></li>
+    <li><span class="math inline">\(R_3(person,\ movie)\)</span></li>
+    </ul>
+    <p>Unione degli attributi delle 3 mi porta agli attributi della
+    relazione iniziale, l’intersezione invece tra ognuna ha sempre un
+    attributo che e’ chiave.</p>
+    <p>Anche questa decomposizione sarebbe sbagliata:</p>
+    <ul>
+    <li><span class="math inline">\(R_1(person,\ country)\)</span> PK
+    person</li>
+    <li><span class="math inline">\(R_2(person,\ movie)\)</span> PK
+    person, movie</li>
+    </ul>
+    <p>Unione delle 2 mi porta alla relazione iniziale, l’intersezione
+    va bene; ma non e’ BCNF perché ho perso <span
+    class="math inline">\(movie \rightarrow country\)</span>.</p>
+    <hr />
+    <p>Consideriamo ora <span class="math inline">\(R(movie,\ country,\
+    agency)\)</span>, che descrive un film con i relativi paesi in cui
+    e’ stato distribuiti e per ciascuno di essi l’agenzia di
+    distribuzione. Si sappia che ogni agenzia e’ attiva in un solo
+    paese.</p>
+    <p>Chiave e’ <span class="math inline">\(movie,\
+    country\)</span></p>
+    <p>Le dipendenze sono:</p>
+    <ul>
+    <li><span class="math inline">\(movie,\ country \rightarrow
+    agency\)</span></li>
+    <li><span class="math inline">\(agency \rightarrow
+    country\)</span></li>
+    </ul>
+    <p>Quindi BCNF non e’ rispettata.</p>
+    <p>Normalizziamo:</p>
+    <ul>
+    <li><span class="math inline">\(R_1(agency,\ country)\)</span></li>
+    <li><span class="math inline">\(R_2(movie,\ country)\)</span></li>
+    </ul>
+    <p>Qualunque tipo di ricostruzione mi porta ad avere un problema,
+    oltretutto il join avverrebbe su un attributo non chiave.</p>
+    <p>Non possiamo arrivare a BCNF, perché tutti gli attributi sono
+    parte di una dipendenza funzionale
+    <label class="sidenote-toggle sidenote-number"></label> <span
+    class="sidenote">Irraggiungibilità di BCNF</span>.</p>
+    <h3 id="terza-forma-normale"><a href="#terza-forma-normale">Terza
+    forma normale</a></h3>
+    <p>Rilassamento di BCNF. Uno schema e’ in 3NF se per ogni dipendenza
+    funzionale non banale <span class="math inline">\(X \rightarrow
+    A\)</span> di <span class="math inline">\(R\)</span>, e’ soddisfatta
+    almeno una delle seguenti condizioni:</p>
+    <ul>
+    <li><span class="math inline">\(X\)</span> contiene una chiave di
+    <span class="math inline">\(R\)</span> (<span
+    class="math inline">\(X\)</span> e’ superchiave)</li>
+    <li><span class="math inline">\(A\)</span> appartiene ad almeno una
+    chiave di <span class="math inline">\(R\)</span></li>
+    </ul>
+    <p>(in sostanza mette le due condizioni in OR invece che in AND)</p>
+    <p>Per <span class="math inline">\(R(movie,\ country,\
+    agency)\)</span>, saremmo già in 3NF perché</p>
+    <ul>
+    <li><span class="math inline">\(movie,\ country \rightarrow
+    agency\)</span> rispetta BCNF</li>
+    <li><span class="math inline">\(agency \rightarrow country\)</span>
+    appartiene ad almeno una chiave di <span
+    class="math inline">\(R\)</span></li>
+    </ul>
+    <p>La 3NF e’ sempre raggiungibile.</p>
+    <hr />
+    <p>Consideriamo <span class="math inline">\(R(person,\ movie,\
+    birthdate)\)</span></p>
+    <p><span class="math inline">\(birthdate\)</span> dovrebbe essere in
+    una relazione dedicata. Le dipendenze funzionali possono mettere in
+    luce questa problematica.</p>
+    <p>Chiave di questa relazione? <span
+    class="math inline">\(person\)</span> e <span
+    class="math inline">\(movie\)</span>.<br />
+    Dipendenze funzionali su <span class="math inline">\(R\)</span>:</p>
+    <ul>
+    <li><span class="math inline">\(person \rightarrow
+    birthdate\)</span></li>
+    </ul>
+    <p>Non siamo in 3NF, decomponiamo:</p>
+    <ul>
+    <li><span class="math inline">\(R_1(person,\ birthdate)\)</span> PK
+    <span class="math inline">\(person\)</span></li>
+    <li><span class="math inline">\(R_2(person,\ movie)\)</span> PK
+    <span class="math inline">\(movie\)</span>, <span
+    class="math inline">\(person\)</span></li>
+    </ul>
+    <p>La differenza rispetto al solito e’ che ora non abbiamo altre
+    dipendenze, quindi scegliamo di creare una ulteriore relazione (la
+    seconda), che non era dipendenza funzionale.</p>
+    <p>Conservazione delle dipendenze: ok.<br />
+    join senza perdita: ok.</p>
+    <hr />
+    <p>Consideriamo <span class="math inline">\(R(person,\ city,\
+    country)\)</span>, che descrive il luogo di nascita di una persona
+    in termini di città e paese, dove le città hanno nome univoco/</p>
+    <p>Chiave: <span class="math inline">\(person\)</span><br />
+    Dipendenze funzionali:</p>
+    <ul>
+    <li><span class="math inline">\(person \rightarrow
+    city\)</span></li>
+    <li><span class="math inline">\(city \rightarrow
+    country\)</span></li>
+    </ul>
+    <p>La seconda dipendenza non soddisfa 3NF. Siamo in 2NF;
+    decomposizione:</p>
+    <ul>
+    <li><span class="math inline">\(R_1(person,\ city)\)</span> PK <span
+    class="math inline">\(person\)</span></li>
+    <li><span class="math inline">\(R_2(city,\ country)\)</span> PK
+    <span class="math inline">\(city\)</span></li>
+    </ul>
+    <p>E arriviamo in BCNF.</p>
+    <p>Conservazione delle dipendenze: ok.<br />
+    join senza perdita: ok.</p>
+    <h3 id="seconda-forma-normale"><a
+    href="#seconda-forma-normale">Seconda forma normale</a></h3>
+    <p>Dipendenza funzionale <span class="math inline">\(X \rightarrow
+    Y\)</span> e’ completa se la rimozione di qualsiasi attributo <span
+    class="math inline">\(A\)</span> da <span
+    class="math inline">\(X\)</span> comporta che la dipendenza non sia
+    più valida.</p>
+    <p>Non voglio che un attributo dipenda da un pezzo della chiave.</p>
+    <p>Quindi vuol dire che se la chiave e’ composta da un solo
+    attributo siamo sempre in 2NF.</p>
+    <hr />
+    <p>Consideriamo <span class="math inline">\(R(squadra,\ allenatore,\
+    citta,\ giocatore)\)</span>, dove:</p>
+    <ul>
+    <li>un giocatore può giocare in una sola squadra (o nessuna)</li>
+    <li>un allenatore può allenare una sola squadra (o nessuna)</li>
+    <li>una squadra ha un solo allenatore</li>
+    <li>una squadra ha diversi giocatori</li>
+    <li>una squadra appartiene ad una sola città</li>
+    </ul>
+    <p>Chiave: <span class="math inline">\(giocatore\)</span><br />
+    Dipendenze funzionali:</p>
+    <ul>
+    <li><span class="math inline">\(squadra \rightarrow
+    allenatore\)</span></li>
+    <li><span class="math inline">\(allenatore \rightarrow
+    squadra\)</span></li>
+    <li><span class="math inline">\(giocatore \rightarrow
+    squadra\)</span></li>
+    <li><span class="math inline">\(squadra \rightarrow
+    citta&#39;\)</span></li>
+    </ul>
+    <p>Siamo in 2NF, decomponiamo:</p>
+    <ul>
+    <li><span class="math inline">\(R_1(squadra,\ allenatore)\)</span>
+    PK <span class="math inline">\(squadra\)</span></li>
+    <li><span class="math inline">\(R_2(giocatore,\ squadra)\)</span> PK
+    <span class="math inline">\(giocatore\)</span></li>
+    <li><span class="math inline">\(R_3(squadra,\ citta&#39;)\)</span>
+    PK <span class="math inline">\(squadra\)</span></li>
+    </ul>
+    <p>Siamo in 3NF e non possiamo arrivare in BCNF, perché ci sono due
+    dipendenze reciproche.</p>
+    <p>Conservazione delle dipendenze: ok.<br />
+    join senza perdita: ok.</p>
+    <p>Potremmo anche avere:</p>
+    <ul>
+    <li><span class="math inline">\(R_1(squadra,\ allenatore,\
+    citta&#39;)\)</span> PK <span
+    class="math inline">\(squadra\)</span></li>
+    <li><span class="math inline">\(R_2(giocatore,\ squadra)\)</span> PK
+    <span class="math inline">\(giocatore\)</span></li>
+    </ul>
+    <p>Che mantiene tutte le caratteristiche dell’altra.</p>
+    <h3 id="prima-forma-normale"><a href="#prima-forma-normale">Prima
+    forma normale</a></h3>
+    <p>Tutti gli attributi sono valori atomici.</p>
+    </article>
+  </main>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script src="js/prism.min.js"></script>
+</body>

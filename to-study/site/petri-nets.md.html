@@ -13,42 +13,82 @@
     <article>
     <h1>Petri nets</h1>
     <p>Nascono per descrivere sistemi concorrenti.</p>
-    <h1 id="tool"><a href="#tool">Tool</a></h1>
-    <p>https://homes.di.unimi.it/bellettini/pnexec/</p>
+    <h2 id="definizione-informale"><a
+    href="#definizione-informale">Definizione informale</a></h2>
+    <p>Sono composte da</p>
     <ul>
-    <li>https://github.com/sarahtattersall/PIPE</li>
-    <li>quello che uso negli iframe piu’ sotto</li>
-    <li>https://petri.hp102.ru/pnet.html</li>
+    <li>posti - cerchi - di solito vengono usati nomi per
+    descriverli</li>
+    <li>token - assegnati a vari posti</li>
+    <li>transizioni - rettangoli - di solito verbi che modificano lo
+    stato</li>
+    <li>archi - connettono posti a transizioni, transizioni a posti</li>
     </ul>
-    <h1 id="note-sulla-sintassi"><a href="#note-sulla-sintassi">Note
-    sulla sintassi</a></h1>
-    <p>Marcatura: distribuzione dei token sui posti, piu’ formalmente e’
-    una funzione che assegna un intero non negativo ad ogni posto della
-    rete <span class="math inline">\(M(p)\)</span>: numero di gettoni in
-    Posto <span class="math inline">\(p\)</span> per Marcatura <span
-    class="math inline">\(M\)</span> Scatto: <span
-    class="math inline">\(M[t_1 &gt; M&#39;\)</span> <span
-    class="math inline">\(M\)</span> abilita <span
-    class="math inline">\(t1\)</span>: <span class="math inline">\(M[t_1
-    &gt;\)</span> I preset <span class="math inline">\(pre(t)\)</span>
-    sono i posti connessi alle transizioni, i postset <span
-    class="math inline">\(pos(t)\)</span> sono i posti connessi dalle
-    transizioni.</p>
-    <h1 id="differenza-con-fsm"><a href="#differenza-con-fsm">Differenza
-    con FSM</a></h1>
-    <ul>
-    <li>stato non e’ a livello di sistema, ma come composizione di stati
-    parziali</li>
-    <li>transizioni sono promosse a nodi (non piu’ archi), si limitano a
-    modificare una parte dello stato globale</li>
-    </ul>
-    <iframe src="iframes/petri/infinite.html" width="100%" height="100px">
-    </iframe>
+    <figure>
+    <a href="https://homes.di.unimi.it/bellettini/pnexec/index2.html?pn=%28LettorePronto%29%20700%2C0%0A_LettoreInizia_%201100%2C0%0A%28Biblioteca%29%201500%2C200%0A_ScrittoreInizia_%201900%2C0%0A%28ScrittorePronto%29%202300%2C0%0A%28LettoreLegge%29%201200%2C500%0A%28ScrittoreScrive%29%201800%2C500%0A_LettoreFinisce_%201200%2C800%0A_ScrittoreFinisce_%201800%2C800%0ALettorePronto%20-%3E%20LettoreInizia%0ALettoreInizia%20-%3E%20LettoreLegge%0ABiblioteca%20-%3E%20LettoreInizia%0ALettoreLegge%20-%3E%20LettoreFinisce%0ALettoreFinisce%20-%3E%20Biblioteca%0ALettoreFinisce%20-%3E%20LettorePronto%0AScrittorePronto%20-%3E%20ScrittoreInizia%0AScrittoreInizia%20-%3E%20ScrittoreScrive%0ABiblioteca%20-4%3E%20ScrittoreInizia%0AScrittoreScrive%20-%3E%20ScrittoreFinisce%0AScrittoreFinisce%20-4%3E%20Biblioteca%0AScrittoreFinisce%20-%3E%20ScrittorePronto%0A%40LettorePronto%3A4%0A%40Biblioteca%3A4%0A%40ScrittorePronto%3A2">
+    <img src="attachments/Pasted%20image%2020250513001211.png" > </a>
+    <figcaption>
+    Un esempio di Rete di Petri
+    </figcaption>
+    </figure>
+    <h2 id="token"><a href="#token">Token</a></h2>
+    <p>Posso assegnare più token per lo stesso posto, il numero di token
+    può quindi rappresentare il numero di istanze di quel tipo di posto
+    <label class="sidenote-toggle sidenote-number"></label>. <span
+    class="sidenote">I token non si spostano, i token si creano e si
+    distruggono!</span></p>
+    <p>Ad esempio “tre robot che producono un certo manufatto”.</p>
+    <p>Se non c’e’ un limite imposto dalle logiche di transizione un
+    posto può accettare infiniti token. Cosa che con una FSM non posso
+    modellare.</p>
+    <h2 id="stato"><a href="#stato">Stato</a></h2>
+    <p>Non e’ visto a livello di sistema ma come composizione di tanti
+    stati parziali</p>
+    <figure>
+    <a href="https://homes.di.unimi.it/bellettini/pnexec/index2.html?pn=%28LettorePronto%29%20700%2C0%0A_LettoreInizia_%201100%2C0%0A%28Biblioteca%29%201500%2C200%0A_ScrittoreInizia_%201900%2C0%0A%28ScrittorePronto%29%202300%2C0%0A%28LettoreLegge%29%201200%2C500%0A%28ScrittoreScrive%29%201800%2C500%0A_LettoreFinisce_%201200%2C800%0A_ScrittoreFinisce_%201800%2C800%0ALettorePronto%20-%3E%20LettoreInizia%0ALettoreInizia%20-%3E%20LettoreLegge%0ABiblioteca%20-%3E%20LettoreInizia%0ALettoreLegge%20-%3E%20LettoreFinisce%0ALettoreFinisce%20-%3E%20Biblioteca%0ALettoreFinisce%20-%3E%20LettorePronto%0AScrittorePronto%20-%3E%20ScrittoreInizia%0AScrittoreInizia%20-%3E%20ScrittoreScrive%0ABiblioteca%20-4%3E%20ScrittoreInizia%0AScrittoreScrive%20-%3E%20ScrittoreFinisce%0AScrittoreFinisce%20-4%3E%20Biblioteca%0AScrittoreFinisce%20-%3E%20ScrittorePronto%0A%40LettorePronto%3A4%0A%40Biblioteca%3A4%0A%40ScrittorePronto%3A2">
+    <img src="attachments/Pasted%20image%2020250513015952.png" > </a>
     <figcaption>
     Una rete di Petri e’ in grado di rappresentare infiniti stati
     </figcaption>
-    <h1 id="definizione-formale"><a
-    href="#definizione-formale">Definizione formale</a></h1>
+    </figure>
+    <h3 id="differenza-con-fsm"><a href="#differenza-con-fsm">Differenza
+    con FSM</a></h3>
+    <ul>
+    <li>stato non e’ a livello di sistema, ma come composizione di stati
+    parziali</li>
+    <li>transizioni sono promosse a nodi (non più archi), si limitano a
+    modificare una parte dello stato globale</li>
+    </ul>
+    <h2 id="archi"><a href="#archi">Archi</a></h2>
+    <p>Possono avere un peso, quindi posso esprimere situazioni
+    concorrenti. Se non scrivo nulla vuol dire peso 1.</p>
+    <p>Un arco <span class="b">in entrata</span> di una transizione, e’
+    un <span class="b">requirement</span>. Un arco <span class="b">in
+    uscita</span> da una transizione, crea dei token.</p>
+    <figure>
+    <img src="attachments/petri-gettoni-dopo.png"
+    alt="Esempio di archi in entrata e in uscita su T_1" />
+    <figcaption aria-hidden="true">Esempio di archi in entrata e in
+    uscita su <span class="math inline">\(T_1\)</span></figcaption>
+    </figure>
+    <h1 id="note-sulla-sintassi"><a href="#note-sulla-sintassi">Note
+    sulla sintassi</a></h1>
+    <p>Marcatura: distribuzione dei token sui posti, più formalmente e’
+    una funzione che assegna un intero non negativo ad ogni posto della
+    rete.<br />
+    <span class="math inline">\(M(p)\)</span>: numero di gettoni in
+    Posto <span class="math inline">\(p\)</span> per Marcatura <span
+    class="math inline">\(M\)</span><br />
+    Scatto: <span class="math inline">\(M[t_1 &gt; M&#39;\)</span><br />
+    <span class="math inline">\(M\)</span> abilita <span
+    class="math inline">\(t1\)</span>: <span class="math inline">\(M[t_1
+    &gt;\)</span><br />
+    I pre-set <span class="math inline">\(pre(t)\)</span> sono i posti
+    connessi alle transizioni, i post-set <span
+    class="math inline">\(pos(t)\)</span> sono i posti connessi dalle
+    transizioni.</p>
+    <h2 id="definizione-formale"><a
+    href="#definizione-formale">Definizione formale</a></h2>
     <p>E’ una 5-upla <span class="math inline">\([P, T; F, W,
     M_{0}]\)</span></p>
     <ul>
@@ -57,7 +97,8 @@
     transizioni</li>
     <li><span class="math inline">\(F\)</span> relazione di flusso -
     <span class="math inline">\(F \subseteq (P \times T) \cup (T \times
-    P)\)</span></li>
+    P)\)</span>, mette in relazione un posto con una transizione o una
+    transizione con un posto</li>
     <li><span class="math inline">\(W\)</span> la funzione peso
     (codominio senza <span class="math inline">\(0\)</span>) - <span
     class="math inline">\(W : F \rightarrow \\N^{+}\)</span></li>
@@ -65,20 +106,48 @@
     (iniziale) - <span class="math inline">\(M_0 : P \rightarrow
     \\N\)</span></li>
     </ul>
-    <p><span class="math inline">\(P \cup T\)</span> non puo’ essere
+    <p>Un identificatore o identifica un posto, o identifica una
+    transizione.</p>
+    <p><span class="math inline">\(P \cup T\)</span> non può essere
     vuoto <span class="math inline">\(P \cap T\)</span> e’ vuoto</p>
     <p><span class="math inline">\(pre(a) = { d \in (P \cup T) \ | \
     \langle d,a \rangle \in F }\)</span> <span
     class="math inline">\(post(a) = { d \in (P \cup T) \ | \ \langle a,d
     \rangle \in F }\)</span></p>
-    <p>Quindi i preset sono i posti connessi alle transizioni, i postset
-    sono i posti connessi dalle transizioni.</p>
-    <h2 id="definizione-di-m"><a href="#definizione-di-m">Definizione di
-    M'</a></h2>
+    <p>Quindi i pre-set sono i posti connessi alle transizioni, i
+    post-set sono i posti connessi dalle transizioni.</p>
+    <h2 id="transizioni"><a href="#transizioni">Transizioni</a></h2>
+    <p>Collegati a certi eventi, scattano quando sussistono certe
+    condizioni, se hanno abbastanza gettoni nei posti di ingresso.</p>
+    <h3 id="una-transizione-e-abilitata-ad-evolvere-quando"><a
+    href="#una-transizione-e-abilitata-ad-evolvere-quando">Una
+    transizione e’ abilitata ad evolvere quando</a></h3>
+    <p><span class="math inline">\(t \in T\)</span> e’ abilitata in
+    <span class="math inline">\(M\)</span> se e solo se <span
+    class="math inline">\(\forall p \in pre(t) \qquad M(p) \ge W(\langle
+    p, t \rangle)\)</span></p>
+    <p>Una transizione che non ha un posto prima di essa e’ abilitata a
+    scattare.<br />
+    Lo scatto di una transizione <span class="math inline">\(t\)</span>
+    in una marcatura <span class="math inline">\(M\)</span> produce una
+    nuova marcatura <span class="math inline">\(M&#39;\)</span>.</p>
+    <p>Ci può essere una sola transizione alla volta. Se ci sono più
+    transizioni abilitate non posso dire quale deve scattare, sono tutte
+    equiprobabili (non determinismo).</p>
+    <p>Scrivo <span class="math inline">\(M[t&gt;\)</span> e dico che
+    <span class="math inline">\(t\)</span> e’ abilitata in <span
+    class="math inline">\(M\)</span>.</p>
+    <h3 id="risultati-di-uno-scatto"><a
+    href="#risultati-di-uno-scatto">Risultati di uno scatto</a></h3>
+    <p>Lo scatto di una transizione <span
+    class="math inline">\(t\)</span> in una marcatura <span
+    class="math inline">\(M\)</span> produce una nuova marcatura <span
+    class="math inline">\(M&#39;\)</span>: <span
+    class="math inline">\(M[t&gt;M&#39;\)</span></p>
     <p>Notazione: <span class="math inline">\(\forall p \in pre(t)
     \setminus post(t)\)</span> significa “per tutti i posti che
-    appartengono al preset di <span class="math inline">\(t\)</span> ma
-    non appartengono al postset di <span
+    appartengono al pre-set di <span class="math inline">\(t\)</span> ma
+    non appartengono al post-set di <span
     class="math inline">\(t\)</span>”</p>
     <p><span class="math inline">\(W(\langle p,t \rangle)\)</span>
     numero di gettoni nell’arco</p>
@@ -94,77 +163,48 @@
     M&#39;(p) &amp;= M(p)
     \end{align}
     \]</span></p>
-    <p>Grazie all’ultima e’ possibile fare una analisi locale.</p>
-    <h1 id="esempio-di-rete"><a href="#esempio-di-rete">Esempio di
-    rete</a></h1>
-    <iframe src="iframes/petri/example.html" width="100%" height="350px">
-    </iframe>
-    <figcaption>
-    Un esempio di rete di Petri dove lettori condividono una risorsa e
-    scrittori se la contengono
-    </figcaption>
-    <p>Sono composte da</p>
-    <ul>
-    <li>posti - cerchi - di solito vengono usati nomi per
-    descriverli</li>
-    <li>token - assegnati a vari posti</li>
-    <li>transizioni - rettangoli - di solito verbi che modificano lo
-    stato</li>
-    <li>archi - connettono posti a transizioni, transizioni a posti</li>
-    </ul>
-    <h2 id="token"><a href="#token">Token</a></h2>
-    <p>Posso assegnare piu’ token per lo stesso posto, il numero di
-    token puo’ quindi rappresentare il numero di istanze di quel tipo di
-    posto. <label class="sidenote-toggle sidenote-number"></label> <span
-    class="sidenote">I token non si spostano, i token si creano e si
-    distruggono!</span></p>
-    <p>Ad esempio “tre robot che producono un certo manufatto”.</p>
-    <p>Se non c’e’ un limite imposto dalle logiche di transizione un
-    posto puo’ accettare infiniti token. Cosa che con una FSM non posso
-    modellare.</p>
-    <h2 id="transizioni"><a href="#transizioni">Transizioni</a></h2>
-    <p>Collegati a certi eventi, scattano quando sussitono certe
-    condizioni, se hanno abbastanza gettoni nei posti di ingresso</p>
-    <h3 id="una-transizione-e-abilitata-ad-evolvere-quando"><a
-    href="#una-transizione-e-abilitata-ad-evolvere-quando">Una
-    transizione e’ abilitata ad evolvere quando</a></h3>
-    <p><span class="math inline">\(t \in T\)</span> e’ abilitata in
-    <span class="math inline">\(M\)</span> se e solo se <span
-    class="math inline">\(\forall p \in pre(t) \qquad M(p) \ge W(\langle
-    p, t \rangle)\)</span></p>
-    <p>(questo vuol dire che se una transizione non ha un Posto prima di
-    essa e’ abilitata a scattare) Lo scatto di una transizione <span
-    class="math inline">\(t\)</span> in una marcatura <span
-    class="math inline">\(M\)</span> produce una nuova marcatura <span
-    class="math inline">\(M&#39;\)</span>.</p>
-    <p>Ci puo’ essere una sola transizione alla volta. Se ci sono piu’
-    transizioni abilitate non posso dire quale deve scattare, sono tutte
-    equiprobabili.</p>
+    <p>Grazie all’ultima e’ possibile fare una analisi locale. Non ho
+    bisogno di guardare tutto il sistema
+    <label class="sidenote-toggle sidenote-number"></label>.<span
+    class="sidenote">Passaggio fondamentale delle Reti di
+    Petri</span></p>
     <h4 id="esempi-di-transizioni"><a
     href="#esempi-di-transizioni">Esempi di transizioni</a></h4>
-    <iframe src="iframes/petri/transition-examples.html" width="100%" height="260px">
-    </iframe>
-    <figcaption>
-    Diverse transizioni, alcune sono abilitate a scattare altre no
-    </figcaption>
     <p>Discorsivamente: una transizione e’ abilitata ad evolvere se il
     numero di token nei posti di input e’ maggiore o uguale ai pesi
     degli archi connessi.</p>
+    <figure>
+    <img src="attachments/Pasted%20image%2020250512213108.png"
+    alt="Quali di queste transizioni sono abilitate a scattare?" />
+    <figcaption aria-hidden="true">Quali di queste transizioni sono
+    abilitate a scattare?</figcaption>
+    </figure>
+    <p>Sono abilitate: <span class="math inline">\(A\)</span>, <span
+    class="math inline">\(B\)</span>, <span
+    class="math inline">\(C\)</span>, <span
+    class="math inline">\(D\)</span>, <span
+    class="math inline">\(F\)</span>; per capire quando una transizione
+    e’ abilitata a scattare basta ricordarsi che <span
+    class="math inline">\(\forall p \in Pre(t) \qquad M(p) \geq
+    W(\langle p,t \rangle)\)</span></p>
     <h3 id="relazione-di-sequenza"><a
     href="#relazione-di-sequenza">Relazione di sequenza</a></h3>
     <p>Una transizione <span class="math inline">\(t_1\)</span> e’ in
     sequenza con una transizione <span
     class="math inline">\(t_2\)</span> in una marcatura <span
     class="math inline">\(M\)</span> se e solo se</p>
-    <p><span class="math inline">\(M[t_1&gt; \land \lnot M[t_2&gt; \land
-    M[t_1t_2&gt;\)</span></p>
-    <p>O piu’ umanamente: * <span class="math inline">\(t_1\)</span> e’
-    abilitata in <span class="math inline">\(M\)</span> * <span
-    class="math inline">\(t_2\)</span> non e’ abilitata in <span
-    class="math inline">\(M\)</span> * <span
-    class="math inline">\(t_2\)</span> e’ abilitata nella marcatura
-    <span class="math inline">\(M&#39;\)</span> prodotta dallo scatto
-    <span class="math inline">\(M[t_1&gt; M&#39;\)</span></p>
+    <p><span class="math inline">\(M[t_1&gt; \quad \land \quad \lnot
+    M[t_2&gt; \quad \land \quad M[t_1t_2&gt;\)</span></p>
+    <p>O più umanamente:</p>
+    <ul>
+    <li><span class="math inline">\(t_1\)</span> e’ abilitata in <span
+    class="math inline">\(M\)</span></li>
+    <li><span class="math inline">\(t_2\)</span> non e’ abilitata in
+    <span class="math inline">\(M\)</span></li>
+    <li><span class="math inline">\(t_2\)</span> e’ abilitata nella
+    marcatura <span class="math inline">\(M&#39;\)</span> prodotta dallo
+    scatto <span class="math inline">\(M[t_1&gt; M&#39;\)</span></li>
+    </ul>
     <p>Nel seguente esempio <span class="math inline">\(T0\)</span> e
     <span class="math inline">\(T1\)</span>, <span
     class="math inline">\(T0\)</span> e <span
@@ -183,45 +223,53 @@
     dalla situazione attuale.</p>
     <h3 id="relazione-di-conflitto"><a
     href="#relazione-di-conflitto">Relazione di conflitto</a></h3>
-    <p>Due transizioni <span class="math inline">\(t_1\)</span> e <span
-    class="math inline">\(t_2\)</span> sono in conflitto</p>
+    <h4 id="strutturale"><a href="#strutturale">Strutturale</a></h4>
+    <p>Dipende dalla topologia della rete non dalla marcatura, se e solo
+    se <span class="math inline">\(pre(t_1) \cap pre(t_2) \neq
+    \emptyset\)</span></p>
+    <h4 id="effettivo"><a href="#effettivo">Effettivo</a></h4>
+    <p>Sebbene le due transizioni possano scattare individualmente in
+    <span class="math inline">\(M\)</span> (sono entrambe abilitate),
+    c’e’ un problema se tentano di scattare simultaneamente o in
+    immediata successione.</p>
+    <p>Ho conflitto effettivo in una marcatura <span
+    class="math inline">\(M\)</span> se e solo se:</p>
     <ul>
-    <li>strutturale (dipende dalla topologia della rete non dalla
-    marcatura) se e solo se <span class="math inline">\(pre(t_1) \cap
-    pre(t_2) \neq \emptyset\)</span></li>
-    <li>effettivo in una marcatura <span
-    class="math inline">\(M\)</span> se e solo se:
-    <ul>
-    <li>riguardo il preset <span class="math inline">\(M[T_{1} &gt;
+    <li>riguardo il pre-set <span class="math inline">\(M[T_{1} &gt;
     \quad \land \quad M[t_{2} &gt; \quad \land \ \exists p \in
     pre(t_{1}) \cap pre(t_{2}) \quad M(p) &lt; W(\langle p,t_{1}
     \rangle) + W(\langle p,t_{2} \rangle)\)</span> “esiste un posto
     <span class="math inline">\(p\)</span> in ingresso a entrambe le
     transizioni che non ha abbastanza token per farle scattare
     entrambe”</li>
-    <li>riguardo il postset <span class="math inline">\(M[t_1&gt; \land
+    <li>riguardo il post-set <span class="math inline">\(M[t_1&gt; \land
     M[t_2 &gt; \land \lnot M[t_{1}t_{2} &gt;\)</span></li>
-    </ul></li>
     </ul>
     <p><img src="attachments/reti-petri-conflitti.png" /></p>
-    <p>Conflitto effettivo condizione sufficiente perche’ ci sia quello
-    strutturale. Conflitto strutturale condizione necessaria perche’ ci
-    sia quello effettivo.</p>
-    <p>Le due transizioni sono in conflitto * strutturale perche’ hanno
-    posti in comune * effettivo perche’ <span
-    class="math inline">\(P1\)</span> non ha sufficenti gettoni per
-    farle scattare entrambe, <span class="math inline">\(P0\)</span> si;
-    basta che ce ne sia uno di posto che non riesce a soddisfare le
-    esigenze. Se facessi scattare prima <span
-    class="math inline">\(T1\)</span> non ci sarebbe il conflitto
+    <p>Conflitto effettivo condizione sufficiente perché ci sia quello
+    strutturale.<br />
+    Conflitto strutturale condizione necessaria perché ci sia quello
     effettivo.</p>
-    <p>E’ possibile far scattare due transizioni assieme, purche’ ci
-    siano sufficienti Token.</p>
+    <p>Le due transizioni sono in conflitto</p>
+    <ul>
+    <li>strutturale perché hanno posti in comune</li>
+    <li>effettivo perché <span class="math inline">\(P1\)</span> non ha
+    sufficienti gettoni per farle scattare entrambe, <span
+    class="math inline">\(P0\)</span> si; basta che ce ne sia uno di
+    posto che non riesce a soddisfare le esigenze. Se facessi scattare
+    prima <span class="math inline">\(T1\)</span> non ci sarebbe il
+    conflitto effettivo.</li>
+    </ul>
+    <p>E’ possibile far scattare due transizioni assieme, purché ci
+    siano sufficienti token.</p>
     <h4 id="esempio-di-conflitti"><a
     href="#esempio-di-conflitti">Esempio di conflitti</a></h4>
     <p>Quali sono i conflitti qua?</p>
-    <p><img src="attachments/reti-di-petri-conflitti.png"
-    width="500" /></p>
+    <figure>
+    <img src="attachments/reti-di-petri-conflitti.png"
+    alt="Esempio di conflitti" />
+    <figcaption aria-hidden="true">Esempio di conflitti</figcaption>
+    </figure>
     <ul>
     <li>strutturali
     <ul>
@@ -236,35 +284,23 @@
     class="math inline">\(t_4\)</span></li>
     </ul></li>
     </ul>
-    <h3 id="concorrenza"><a href="#concorrenza">Concorrenza</a></h3>
-    <p>La si puo’ pensare come la relazione opposta alla relazione di
-    conflitto.</p>
-    <p>Due transizioni <span class="math inline">\(t_1\)</span> e <span
-    class="math inline">\(t_2\)</span> sono in concorrenza</p>
-    <ul>
-    <li>strutturale se e solo se <span class="math inline">\(pre(t_1)
-    \cap pre(t_2) = \emptyset\)</span> (la negazione del conflitto)</li>
-    <li>effettiva in una marcatura <span
-    class="math inline">\(M\)</span> se e solo se <span
-    class="math inline">\(M[T_{1} &gt; \quad \land \quad M[t_{2} &gt;
-    \quad \land \ \forall p \in pre(t_{1}) \cap pre(t_{2}) \quad M(p)
-    \geq W(\langle p,t_{1} \rangle) + W(\langle p,t_{2}
-    \rangle)\)</span></li>
-    </ul>
+    <h3 id="relazione-di-concorrenza"><a
+    href="#relazione-di-concorrenza">Relazione di concorrenza</a></h3>
+    <p>La si può pensare come la relazione opposta alla relazione di
+    conflitto.<br />
+    Concorrenza strutturale implica concorrenza effettiva, se sono
+    abilitate le transizioni.<br />
+    </p>
+    <h4 id="strutturale-1"><a href="#strutturale">Strutturale</a></h4>
+    <p>Se e solo se <span class="math inline">\(pre(t_1) \cap pre(t_2) =
+    \emptyset\)</span> (la negazione del conflitto)</p>
+    <h4 id="effettiva"><a href="#effettiva">Effettiva</a></h4>
+    <p>Se e solo se <span class="math inline">\(M[T_{1} &gt; \quad \land
+    \quad M[t_{2} &gt; \quad \land \ \forall p \in pre(t_{1}) \cap
+    pre(t_{2}) \quad M(p) \geq W(\langle p,t_{1} \rangle) + W(\langle
+    p,t_{2} \rangle)\)</span></p>
     <p>Vale a dire: “tutti i posti in ingresso a entrambe le transizioni
     hanno abbastanza token per farle scattare entrambe”</p>
-    <h2 id="archi"><a href="#archi">Archi</a></h2>
-    <p>Possono avere un peso, quindi posso esprimere situazioni
-    concorrenti. Se non scrivo nulla vuol dire peso 1.</p>
-    <p>Un arco <span class="b">in entrata</span> di una transizione, e’
-    un <span class="b">requirement</span>. Un arco <span class="b">in
-    uscita</span> da una transizione, crea dei token.</p>
-    <figure>
-    <img src="attachments/petri-gettoni-dopo.png" width="300"
-    alt="esempio di archi in entrata e in uscita su T1" />
-    <figcaption aria-hidden="true">esempio di archi in entrata e in
-    uscita su T1</figcaption>
-    </figure>
     <h1 id="insieme-di-raggiungibilita"><a
     href="#insieme-di-raggiungibilita">Insieme di
     raggiungibilita’</a></h1>
