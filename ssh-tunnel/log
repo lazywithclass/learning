@@ -1,0 +1,73 @@
+2025/05/26 15:46:26 autossh[399634]: port set to 0, monitoring disabled
+2025/05/26 15:46:26 autossh[399635]: checking for grace period, tries = 0
+2025/05/26 15:46:26 autossh[399635]: starting ssh (count 1)
+2025/05/26 15:46:26 autossh[399635]: ssh child pid is 399636
+2025/05/26 15:46:26 autossh[399635]: check on child 399636
+2025/05/26 15:46:26 autossh[399635]: clear alarm timer (0 secs left)
+2025/05/26 15:46:26 autossh[399635]: set alarm for 600 secs
+2025/05/26 15:46:26 autossh[399636]: child of 399635 execing /nix/store/lij02c29n6bwxma5wv7hxkxph20kil3l-openssh-9.9p2/bin/ssh
+2025/05/26 15:48:44 autossh[400136]: port set to 0, monitoring disabled
+2025/05/26 15:48:44 autossh[400137]: checking for grace period, tries = 0
+2025/05/26 15:48:44 autossh[400137]: starting ssh (count 1)
+2025/05/26 15:48:44 autossh[400137]: ssh child pid is 400138
+2025/05/26 15:48:44 autossh[400137]: check on child 400138
+2025/05/26 15:48:44 autossh[400137]: clear alarm timer (0 secs left)
+2025/05/26 15:48:44 autossh[400137]: set alarm for 600 secs
+2025/05/26 15:48:44 autossh[400138]: child of 400137 execing /nix/store/lij02c29n6bwxma5wv7hxkxph20kil3l-openssh-9.9p2/bin/ssh
+2025/05/26 15:49:48 autossh[400700]: port set to 0, monitoring disabled
+2025/05/26 15:49:48 autossh[400701]: checking for grace period, tries = 0
+2025/05/26 15:49:48 autossh[400701]: starting ssh (count 1)
+2025/05/26 15:49:48 autossh[400701]: ssh child pid is 400702
+2025/05/26 15:49:48 autossh[400701]: check on child 400702
+2025/05/26 15:49:48 autossh[400701]: clear alarm timer (0 secs left)
+2025/05/26 15:49:48 autossh[400701]: set alarm for 600 secs
+2025/05/26 15:49:48 autossh[400702]: child of 400701 execing /nix/store/lij02c29n6bwxma5wv7hxkxph20kil3l-openssh-9.9p2/bin/ssh
+2025/05/26 15:50:06 autossh[400701]: check on child 400702
+2025/05/26 15:50:06 autossh[400701]: ssh exited on signal 9, restarting ssh
+2025/05/26 15:50:06 autossh[400701]: expired child, returning 1
+2025/05/26 15:50:06 autossh[400701]: clear alarm timer (582 secs left)
+2025/05/26 15:50:06 autossh[400701]: checking for grace period, tries = 1
+2025/05/26 15:50:06 autossh[400701]: starting ssh (count 2)
+2025/05/26 15:50:06 autossh[400701]: ssh child pid is 400905
+2025/05/26 15:50:06 autossh[400701]: check on child 400905
+2025/05/26 15:50:06 autossh[400701]: clear alarm timer (0 secs left)
+2025/05/26 15:50:06 autossh[400701]: set alarm for 600 secs
+2025/05/26 15:50:06 autossh[400905]: child of 400701 execing /nix/store/lij02c29n6bwxma5wv7hxkxph20kil3l-openssh-9.9p2/bin/ssh
+2025/05/26 15:50:27 autossh[400701]: check on child 400905
+2025/05/26 15:50:27 autossh[400701]: ssh exited on signal 9, restarting ssh
+2025/05/26 15:50:27 autossh[400701]: expired child, returning 1
+2025/05/26 15:50:27 autossh[400701]: clear alarm timer (579 secs left)
+2025/05/26 15:50:27 autossh[400701]: checking for grace period, tries = 2
+2025/05/26 15:50:27 autossh[400701]: starting ssh (count 3)
+2025/05/26 15:50:27 autossh[400701]: ssh child pid is 401040
+2025/05/26 15:50:27 autossh[400701]: check on child 401040
+2025/05/26 15:50:27 autossh[400701]: clear alarm timer (0 secs left)
+2025/05/26 15:50:27 autossh[400701]: set alarm for 600 secs
+2025/05/26 15:50:27 autossh[401040]: child of 400701 execing /nix/store/lij02c29n6bwxma5wv7hxkxph20kil3l-openssh-9.9p2/bin/ssh
+2025/05/26 15:52:53 autossh[401393]: port set to 0, monitoring disabled
+2025/05/26 15:52:53 autossh[401394]: checking for grace period, tries = 0
+2025/05/26 15:52:53 autossh[401394]: starting ssh (count 1)
+2025/05/26 15:52:53 autossh[401394]: ssh child pid is 401395
+2025/05/26 15:52:53 autossh[401394]: check on child 401395
+2025/05/26 15:52:53 autossh[401394]: clear alarm timer (0 secs left)
+2025/05/26 15:52:53 autossh[401394]: set alarm for 600 secs
+2025/05/26 15:52:53 autossh[401395]: child of 401394 execing /nix/store/lij02c29n6bwxma5wv7hxkxph20kil3l-openssh-9.9p2/bin/ssh
+2025/05/26 15:53:28 autossh[401593]: port set to 0, monitoring disabled
+2025/05/26 15:53:28 autossh[401594]: checking for grace period, tries = 0
+2025/05/26 15:53:28 autossh[401594]: starting ssh (count 1)
+2025/05/26 15:53:28 autossh[401594]: ssh child pid is 401595
+2025/05/26 15:53:28 autossh[401594]: check on child 401595
+2025/05/26 15:53:28 autossh[401594]: clear alarm timer (0 secs left)
+2025/05/26 15:53:28 autossh[401594]: set alarm for 600 secs
+2025/05/26 15:53:28 autossh[401595]: child of 401594 execing /nix/store/lij02c29n6bwxma5wv7hxkxph20kil3l-openssh-9.9p2/bin/ssh
+2025/05/26 15:53:35 autossh[401594]: check on child 401595
+2025/05/26 15:53:35 autossh[401594]: ssh exited on signal 9, restarting ssh
+2025/05/26 15:53:35 autossh[401594]: expired child, returning 1
+2025/05/26 15:53:35 autossh[401594]: clear alarm timer (594 secs left)
+2025/05/26 15:53:35 autossh[401594]: checking for grace period, tries = 1
+2025/05/26 15:53:35 autossh[401594]: starting ssh (count 2)
+2025/05/26 15:53:35 autossh[401594]: ssh child pid is 401609
+2025/05/26 15:53:35 autossh[401594]: check on child 401609
+2025/05/26 15:53:35 autossh[401594]: clear alarm timer (0 secs left)
+2025/05/26 15:53:35 autossh[401594]: set alarm for 600 secs
+2025/05/26 15:53:35 autossh[401609]: child of 401594 execing /nix/store/lij02c29n6bwxma5wv7hxkxph20kil3l-openssh-9.9p2/bin/ssh
