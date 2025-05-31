@@ -15,6 +15,10 @@ Don't take the item on the left before entering the first biome, it curses you.
 
 This is almost like a journal, so I can come back later and try to discover as many secrets.
 
+## 1541933618
+
+Second holy mountain with lottery and tinkering (pick lottery), healing wand in the next biome.
+
 ### 98744047
 
 Great fun, chance to create a laser wand. Got destroyed by [Skoude](https://noita.fandom.com/wiki/Skoude), didn't know how to face him.
