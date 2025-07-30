@@ -1,11 +1,11 @@
-{ nixpkgs ? import <nixpkgs> {} }:
+{ pkgs ? import <nixpkgs> {} }:
 
 let
-  pkgs = [
-    nixpkgs.sbcl 
+in pkgs.mkShell {
+  buildInputs = with pkgs; [
+    sbcl
   ];
-in
-  nixpkgs.stdenv.mkDerivation {
-    name = "env";
-    buildInputs = pkgs;
-  }
+
+  shellHook = ''
+  '';
+}
