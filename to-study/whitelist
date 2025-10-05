@@ -22,11 +22,14 @@ law-of-demeter.md.html
 obsidian-vault/NixOS.md
 nixos.md.html
 
-obsidian-vault/Petri nets.md
-petri-nets.md.html
+obsidian-vault/Reti di calcolatori.md
+reti-di-calcolatori.md.html
 
-obsidian-vault/Relational algebra.md
-relational-algebra.md.html
+obsidian-vault/Reti di Petri.md
+reti-di-petri.md.html
+
+obsidian-vault/Algebra relazionale.md
+algebra-relazionale.md.html
 
 obsidian-vault/SOLID.md
 solid.md.html

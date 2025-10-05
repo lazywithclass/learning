@@ -91,8 +91,8 @@
     lo stesso privilegio non sia stato concesso anche da altri.</p>
     <p>Un utente puo’ solo revocare privilegi che esso stesso ha
     concesso.</p>
-    <p>“Un DBA può revocare i privilegi ad un altro DBA” ?
-    <code>create user stefano with superuser, password stefano</code></p>
+    <p>“Un DBA può revocare i privilegi ad un altro DBA” ?</p>
+    <p><code>create user stefano with superuser, password stefano</code></p>
     <hr />
     <pre class="language-sql"><code>-- userA (owner del database imdb) segue
 GRANT SELECT ON imdb.movie TO userB WITH GRANT OPTION;
@@ -102,16 +102,16 @@ GRANT SELECT ON imdb.movie TO userB WITH GRANT OPTION;
     href="#sysauth-e-syscolauth">Sysauth e syscolauth</a></h2>
     <p>Sono tabelle del catalogo relazionale.</p>
     <p>La tabella con Y N etc Riassume i privilegi attivi su tutti gli
-    ogetti della base dati</p>
-    <p>nome e’ grantee, creator e’ grantor T dice se e’ Relazione o
-    Vista</p>
+    oggetti della base dati</p>
+    <p><code>nome</code> e’ grantee, <code>creator</code> e’ grantor,
+    <code>T</code> dice se e’ Relazione o Vista</p>
     <p>E’ normale che il creatore dia a se stesso tutti i privilegi,
     viene messo in automatico alla sua <code>GRANT</code>.</p>
-    <p>Revoca riorsiva</p>
-    <p>Tolgo all’utente bersaglio, e ricosrivamente a tutti gli utenti
+    <p>Revoca ricorsiva</p>
+    <p>Tolgo all’utente bersaglio, e ricorsivamente a tutti gli utenti
     che lo avevano ricevuto</p>
-    <p>Una buona idea e’ pensarla come se fosse una wuery su una
-    tabella</p>
+    <p>Una buona idea e’ pensarla come se fosse una query su una
+    tabella.</p>
     <p>Prendo come grantor quello che ha appena perso il privilegio, e
     come tabella e privilegio sono quelli appena revocati: se li trovo
     li levo.</p>

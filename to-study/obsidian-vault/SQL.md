@@ -30,7 +30,7 @@ DCL: comandi sul controllo
 	* ad esempio `SELECT DISTINCT movie FROM imdb.genre` (elimina i duplicati, rendendo il risultato "come fosse in algebra relazionale")
 	* `SELECT DISTINCT movie, genre FROM imdb.genre` perché `DISTINCT` lavora sull'intera clausola `SELECT`
 * `order by` ordina ciò che restituiamo, e' l'ultima cosa che viene fatta; si può specificare `DESC` per più attributi in base alle necessita'
-  Si puo' fare `ORDER BY 2` per riferirsi alla colonna `2`
+  Si può fare `ORDER BY 2` per riferirsi alla colonna `2`
 * `extract` permette di prendere parti di una data come ad esempio `WHERE extract(YEAR FROM birth_date) = '1971'`
 * `as` e' l'equivalente di $\rho$ nell'algebra relazionale
 * `::` e' l'operatore di cast `SELECT extract(year) from birth_date)::char(4) from imdb.person`
@@ -159,7 +159,6 @@ EXPLAIN ANALYZE ...
 ## Query correlata
 
 Molto inefficiente
-TODO espandere
 
 ## Query ricorsive
 
@@ -290,7 +289,6 @@ WITH RECURSIVE search_sim(movie, t_movie, distance) AS(
 )
 ```
 
----
 ## Esercizi
 
 ![IMDB Schema](attachments/imdb-schema.png)
@@ -879,4 +877,7 @@ WHERE count > (SELECT m FROM mean)
 ```
 
 
+---
+
+TODO aggiungere publications.publication e le altre tabelle
 

@@ -1,0 +1,10 @@
+{
+  "theme": "obsidian",
+  "cssTheme": "Things",
+  "interfaceFontFamily": "Monaco",
+  "textFontFamily": "Monaco",
+  "monospaceFontFamily": "Monaco",
+  "enabledCssSnippets": [
+    "rpg"
+  ]
+}

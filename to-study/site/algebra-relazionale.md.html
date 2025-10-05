@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <link rel="stylesheet" href="css/latex.css">
+  <link rel="stylesheet" href="css/prism.css">
+  <link rel="stylesheet" href="css/index.css">
+</head>
+<body class="latex-dark">
+  <main>
+    <article>
+    <h1>Algebra relazionale</h1>
+    <p><a href="Database%20intro.md">Database intro</a></p>
+    <p>Linguaggio di interrogazione procedurale che definisce le
+    operazioni necessarie per estrarre dati da una o più relazioni di un
+    database.</p>
+    <p>Qualunque operazione produce una relazione.</p>
+    <p>DQL, quindi non si modificano i dati, si interrogano
+    solamente.</p>
+    <h2 id="eserciziario"><a href="#eserciziario">Eserciziario</a></h2>
+    <p>Si veda <a
+    href="https://spdp.di.unimi.it/papers/EserciziarioBD.pdf">l’eserciziario</a>
+    di</p>
+    <ul>
+    <li>Sara Foresti</li>
+    <li>Eros Pedrini</li>
+    <li>Sabrina de Capitani di Vimercati</li>
+    </ul>
+    <h2 id="principio-fondamentale"><a
+    href="#principio-fondamentale">Principio fondamentale</a></h2>
+    <p>Una tupla alla volta: non abbiamo possibilità di vedere tutti i
+    dati assieme, ma solo una tupla alla volta, quindi le dobbiamo
+    mettere a fianco una all’altra.</p>
+    <h2 id="operatori"><a href="#operatori">Operatori</a></h2>
+    <p>Operatori unari: * proiezione <span
+    class="math inline">\(\pi\)</span> * selezione <span
+    class="math inline">\(\sigma\)</span> * ridenominazione <span
+    class="math inline">\(\rho\)</span></p>
+    <p>Operatori binari insiemistici: * unione * intersezione *
+    sottrazione</p>
+    <p>Operatori binari di join: * <span
+    class="math inline">\(\theta\)</span> join * equi join * natural
+    join</p>
+    <h3 id="insiemistici"><a href="#insiemistici">Insiemistici</a></h3>
+    <p>Ricorda che le relazioni in un database sono insiemi, vedi <a
+    href="Database%20intro.md#Modello%20relazionale">Modello
+    relazionale</a>.</p>
+    <p><span class="sidenote">Precondizioni</span> Per poter fare
+    unione, intersezione, differenza le relazioni devono avere pari
+    grado, e attributo per attributo sono compatibili (le relazioni che
+    partecipano non possono avere vincoli di dominio
+    diversi)<label class="sidenote-toggle sidenote-number"></label>.</p>
+    <h4 id="unione"><a href="#unione">Unione</a></h4>
+    <p>Date <span class="math inline">\(R_1\)</span> e <span
+    class="math inline">\(R_2\)</span> restituisce gli elementi
+    appartenenti a <span class="math inline">\(R_1\)</span> o <span
+    class="math inline">\(R_2\)</span> (presi una volta, non ci devono
+    essere duplicati)</p>
+    <p><span class="math inline">\(movie\_a \cup movie\_b = { r_1 \in
+    movie\_a \lor r_2 \in movie\_b }\)</span></p>
+    <p>Produce il medesimo grado della relazione di partenza e
+    cardinalità pari a cardinalità di <span
+    class="math inline">\(movie\_a\)</span> a cui vanno sommati i record
+    di <span class="math inline">\(movie\_b\)</span> (escludendo i
+    duplicati, perché dal punto di vista matematico sono lo stesso
+    individuo).</p>
+    <p>Il nome della colonna e’ quello della relazione di sinistra.</p>
+    <p>Se avessi</p>
+    <ul>
+    <li>in movie_a (003, ‘shutter island’, ‘2010’, 138)</li>
+    <li>in movie_b (003, ‘shutter island’, ‘2010’, 120)</li>
+    </ul>
+    <p>E ne facessi l’unione otterrei entrambi i record perché sono due
+    individui diversi.</p>
+    <h4 id="intersezione"><a href="#intersezione">Intersezione</a></h4>
+    <p>Date <span class="math inline">\(R_1\)</span> e <span
+    class="math inline">\(R_2\)</span> restituisce gli elementi
+    appartenenti a <span class="math inline">\(R_1\)</span> e <span
+    class="math inline">\(R_2\)</span>.</p>
+    <p><span class="math inline">\(movie\_a \cup movie\_b = { r_1 \in
+    movie\_a \land r_2 \in movie\_b }\)</span></p>
+    <p>Produce il medesimo grado della relazione di partenza e
+    cardinalità pari agli elementi in comune.</p>
+    <h4 id="differenza"><a href="#differenza">Differenza</a></h4>
+    <p>Date <span class="math inline">\(R_1\)</span> e <span
+    class="math inline">\(R_2\)</span> restituisce gli elementi
+    appartenenti a <span class="math inline">\(R_1\)</span> e non a
+    <span class="math inline">\(R_2\)</span>. La differenza non e’ una
+    operazione simmetrica.</p>
+    <p>Principio logico fondamentale in algebra relazionale: per trovare
+    un estremo (il massimo o il minimo), si prende l’insieme di tutti i
+    candidati e si sottrae l’insieme di tutti i candidati che non sono
+    l’estremo.<br />
+    Ciò che rimane è, per forza, l’estremo che cercavamo.</p>
+    <h3 id="selezione-sigma"><a href="#selezione-sigma">Selezione
+    \sigma</a></h3>
+    <p>Risponde alla domanda “Quali record della relazione voglio
+    considerare?”</p>
+    <p>Accetta un predicato, quindi posso usare <code>AND</code>,
+    <code>OR</code>, <code>NOT</code>; conserva il grado e la
+    cardinalità e’ minore o uguale a quella di partenza.</p>
+    <p>Esempio: voglio trovare le pellicole del 2010 <span
+    class="math display">\[
+    \begin{align}
+    &amp;\ \sigma_{year=&#39;2010&#39;}\ movie \newline
+    \end{align}
+    \]</span></p>
+    <p>Scorre i record uno a uno, quindi e’ una valutazione locale, non
+    globale, quindi non può essere usata per quei casi dove si vogliono
+    ottenere valori relativi al globale.</p>
+    <h3 id="proiezione-pi"><a href="#proiezione-pi">Proiezione
+    \pi</a></h3>
+    <p>Seleziona solo l’insieme di attributi che voglio mostrare nel
+    risultato. Riduce il grado e la cardinalità e’ uguale a quella di
+    partenza.</p>
+    <p>E’ possibile che applicando una proiezione si possano ottenere
+    righe uguali, in questo caso record uguali collassano in uno
+    solo.</p>
+    <p>Chiedersi sempre se e’ il caso di ridurre gli attributi
+    applicando una proiezione.</p>
+    <h3 id="prodotto-cartesiano"><a href="#prodotto-cartesiano">Prodotto
+    cartesiano</a></h3>
+    <p><span class="math display">\[
+    \begin{align}
+    &amp;\ R_1(A,\ B) \newline
+    &amp;\ R_2(C,\ D) \newline
+    \end{align}
+    \]</span></p>
+    <table>
+    <thead>
+    <tr class="header">
+    <th>A</th>
+    <th>B</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="odd">
+    <td>a1</td>
+    <td>b1</td>
+    </tr>
+    <tr class="even">
+    <td>a2</td>
+    <td>b3</td>
+    </tr>
+    </tbody>
+    </table>
+    <table>
+    <thead>
+    <tr class="header">
+    <th>C</th>
+    <th>D</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="odd">
+    <td>c1</td>
+    <td>d1</td>
+    </tr>
+    <tr class="even">
+    <td>c2</td>
+    <td>d2</td>
+    </tr>
+    <tr class="odd">
+    <td>c3</td>
+    <td>d3</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><span class="math inline">\(R_1 \times R_2\)</span> produce una
+    relazione avente come grado la somma dei gradi delle relazioni, e
+    una cardinalità che e’ il prodotto delle cardinalità delle
+    relazioni</p>
+    <table>
+    <thead>
+    <tr class="header">
+    <th>A</th>
+    <th>B</th>
+    <th>C</th>
+    <th>D</th>
+    <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="odd">
+    <td>a1</td>
+    <td>b1</td>
+    <td>c1</td>
+    <td>d1</td>
+    <td></td>
+    </tr>
+    <tr class="even">
+    <td>a1</td>
+    <td>b1</td>
+    <td>c2</td>
+    <td>d2</td>
+    <td></td>
+    </tr>
+    <tr class="odd">
+    <td>a1</td>
+    <td>b1</td>
+    <td>c3</td>
+    <td>d3</td>
+    <td></td>
+    </tr>
+    <tr class="even">
+    <td>a2</td>
+    <td>b2</td>
+    <td>c1</td>
+    <td>d1</td>
+    <td></td>
+    </tr>
+    <tr class="odd">
+    <td>a2</td>
+    <td>b2</td>
+    <td>c2</td>
+    <td>d2</td>
+    <td></td>
+    </tr>
+    <tr class="even">
+    <td>a2</td>
+    <td>b2</td>
+    <td>c3</td>
+    <td>d3</td>
+    <td></td>
+    </tr>
+    </tbody>
+    </table>
+    <h3 id="ridenominazione-rho"><a
+    href="#ridenominazione-rho">Ridenominazione \rho</a></h3>
+    <p>Data <span class="math inline">\(R_1(A,\ B,\ C)\)</span> se
+    scrivo <span class="math inline">\(\rho_{C\rightarrow D}
+    R_1\)</span> ottengo <span class="math inline">\(R_1(A,\ B,\
+    D)\)</span>.</p>
+    <h3 id="join-bowtie"><a href="#join-bowtie">Join \bowtie</a></h3>
+    <h3 id="theta-join"><a href="#theta-join">\theta join</a></h3>
+    <p>Il prodotto cartesiano ritorna tutte le combinazioni, ma non
+    tutte le righe concorrono al risultato di questo join, solo quelle
+    dove la chiave primaria della relazione di sinistra e la chiave
+    esterna della relazione di destra sono le stesse.</p>
+    <p>Quindi e’ una selezione sul risultato del prodotto cartesiano.
+    <span class="math inline">\(\theta\)</span> e’ il predicato che
+    rappresenta questa selezione.</p>
+    <h3 id="equi-join"><a href="#equi-join">Equi join</a></h3>
+    <p>Join che hanno una uguaglianza come predicato.</p>
+    <h3 id="join-naturale"><a href="#join-naturale-">Join naturale
+    *</a></h3>
+    <p>Equi join che considera l’eguaglianza degli attributi con il
+    medesimo nome nelle due relazioni. Eventuali attributi con lo stesso
+    nome collassano in uno solo.</p>
+    <p><span class="math display">\[
+    \begin{align}
+    &amp;\ R_1(A,\ B) \newline
+    &amp;\ R_2(B,\ C) \newline
+    &amp;\ R_1 * R_2 \rightarrow (A,\ B,\ C) \newline
+    \end{align}
+    \]</span> Come si vede nell’ultima riga <span
+    class="math inline">\(B\)</span> compare una volta sola.</p>
+    <h3 id="divisione"><a href="#divisione">Divisione</a></h3>
+    <p>Vediamo questo operatore con un esempio <span
+    class="math display">\[
+    \begin{align}
+    &amp;\ movie\_production(name,\ country) \newline
+    &amp;\ country(name) \newline
+    \end{align}
+    \]</span> Permettere di evidenziare una interazione tra tuple di due
+    tabelle: “vuole restituire quei record della tabella <span
+    class="math inline">\(R_1\)</span> che sono in relazione con tutte
+    le tuple della relazione <span class="math inline">\(R_2\)</span>”,
+    nell’esempio la divisione restituirebbe quelle pellicole che sono
+    state prodotte in tutti i paesi.</p>
+    <p>Viene definita come l’opposto al prodotto cartesiano.</p>
+    <p><span class="sidenote">Numeratore e denominatore</span> Al
+    denominatore metto elementi che vogliamo siano in relazione con il
+    soggetto di “tutti”. Al numeratore metto una relazione i cui
+    attributi contengono gli attributi al denominatore, e che voglio
+    portare nel risultato
+    <label class="sidenote-toggle sidenote-number"></label>.</p>
+    <p>Dal punto di vista formale, date due relazioni <span
+    class="math inline">\(R(XY)\)</span> e <span
+    class="math inline">\(S(Y)\)</span> posso applicare la divisione
+    <span class="math inline">\(R/S\)</span> se lo schema <span
+    class="math inline">\(S\)</span> ha un insieme di attributi
+    contenuto nello schema <span class="math inline">\(R\)</span>, con
+    stesso dominio e stesso nome.</p>
+    <p><span class="math inline">\(R/S\)</span> ha come schema la
+    differenza tra lo schema di <span class="math inline">\(R\)</span> e
+    lo schema di <span class="math inline">\(S\)</span>, quindi in
+    questo caso e’ definita su <span class="math inline">\(X\)</span>.
+    <span class="math display">\[
+    \begin{align}
+    &amp;\ R/S(X) = \{ t_1\ su\ X\ |\ \forall\ t_2 \in S, \exists t \in
+    R\ con \ t[X] = t_1 \land t[Y] = t_2  \} \newline
+    \end{align}
+    \]</span></p>
+    <p>Nell’esempio vogliamo trovare un record che ha <span
+    class="math inline">\(country.name\)</span> pari a <span
+    class="math inline">\(movie\_production.country\)</span>, a parità
+    di <span class="math inline">\(movie\_production.name\)</span>.</p>
+    <p>Altro esempio</p>
+    <p><span class="math inline">\(R\)</span> | a | b | | — | — | | a1 |
+    b1 | | a2 | b1 | | a1 | b2 |</p>
+    <p><span class="math inline">\(S\)</span> | b | | — | | b1 | | b2 |
+    Dobbiamo trovare un valore di <span
+    class="math inline">\(R.a\)</span> per il quale troviamo in <span
+    class="math inline">\(S\)</span> un record di <span
+    class="math inline">\(R\)</span> per cui quel valore di <span
+    class="math inline">\(a\)</span> compare. <span
+    class="math inline">\(R/S\)</span> darebbe</p>
+    <p><span class="math inline">\(R/S\)</span> | a | | — | | a1 | La
+    divisione e’ utile quando non so a priori cosa ho a
+    denominatore.</p>
+    <h4 id="ulteriore-spiegazione"><a
+    href="#ulteriore-spiegazione">Ulteriore spiegazione</a></h4>
+    <p><a
+    href="https://www2.cs.arizona.edu/~mccann/research/divpresentation.pdf">Ottima
+    spiegazione</a>.</p>
+    <p>Date due relazioni <span class="math inline">\(R\)</span> e <span
+    class="math inline">\(S\)</span>, <span class="math inline">\(R \div
+    S\)</span> identifica i valori in <span
+    class="math inline">\(R\)</span> che possono essere combinati con
+    tutti i valori in <span class="math inline">\(S\)</span>. E’
+    l’inverso del prodotto cartesiano.</p>
+    <p><img src="relational-algebra-cartesian-product.png"
+    alt="relational-algebra-cartesian-product.png" /> <img
+    src="relational-algebra-division.png"
+    alt="relational-algebra-division.png" /></p>
+    <figure>
+    <img src="relational-algebra-in-short.png"
+    alt="relational-algebra-in-short.png" />
+    <figcaption
+    aria-hidden="true">relational-algebra-in-short.png</figcaption>
+    </figure>
+    <p>If <span class="math inline">\(U = R \times S\)</span> then <span
+    class="math inline">\(U \div S = R\)</span> e <span
+    class="math inline">\(U \div R = S\)</span>.</p>
+    <h4 id="riguardo-all"><a href="#riguardo-all">Riguardo
+    “all”</a></h4>
+    <p>Per “trovare tutti gli X che Y”, posso: * “trovare tutti gli X
+    che non Y”, e poi * “rimuovere da X cio’ che ho appena trovato”</p>
+    <p>Per “trovare gli X che sono Y in tutti gli Z”, posso: * “trovare
+    tutte le possibili combinazioni” All * da All rimuovo i record che
+    verificano la condizione, cosi ottengo Opposite * dai record
+    esistenti rimuovo Opposite</p>
+    <h3 id="quando-uso-la-sottrazione-e-quando-la-divisione"><a
+    href="#quando-uso-la-sottrazione-e-quando-la-divisione">Quando uso
+    la sottrazione e quando la divisione?</a></h3>
+    <table style="width:100%;">
+    <colgroup>
+    <col style="width: 50%" />
+    <col style="width: 15%" />
+    <col style="width: 33%" />
+    </colgroup>
+    <thead>
+    <tr class="header">
+    <th>Tipo di query “per tutti”</th>
+    <th>Operatore ideale</th>
+    <th>Esempio</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="odd">
+    <td>Entità associate a tutti gli elementi di un sottoinsieme
+    specifico (il divisore è “sicuro”)</td>
+    <td>Divisione</td>
+    <td>Clienti che hanno acquistato tutti i prodotti comprati dal
+    cliente <code>C1</code></td>
+    </tr>
+    <tr class="even">
+    <td>Entità dove tutti i suoi elementi associati (insieme dinamico)
+    soddisfano una proprietà</td>
+    <td>Sottrazione</td>
+    <td>Conferenze dove tutti gli iscritti vengono da fuori città</td>
+    </tr>
+    <tr class="odd">
+    <td>Entità che hanno una relazione con tutti gli elementi di una
+    anagrafica completa (gestendo i casi limite)</td>
+    <td>Sottrazione e prodotto cartesiano</td>
+    <td>Medici che hanno visitato tutti i pazienti registrati in
+    anagrafica</td>
+    </tr>
+    <tr class="even">
+    <td></td>
+    <td></td>
+    <td></td>
+    </tr>
+    </tbody>
+    </table>
+    <p>Nel caso di “clienti che hanno acquistato tutti i prodotti
+    comprati da un dato cliente” e’ matematicamente impossibile che ci
+    sia un prodotto che non sia mai stato acquistato da nessuno (per
+    definizione, è stato acquistato almeno da <code>C1</code>!)</p>
+    <h2 id="suggerimenti"><a href="#suggerimenti">Suggerimenti</a></h2>
+    <p>Cercare di limitare quanto più possibile il grado di una
+    relazione, in modo da fare che le relazioni si possano combinare più
+    facilmente.</p>
+    <h2 id="esercizi-con-lo-schema-imdb"><a
+    href="#esercizi-con-lo-schema-imdb">Esercizi con lo schema
+    IMDB</a></h2>
+    <figure>
+    <img src="attachments/imdb-schema.png" alt="IMDB Schema" />
+    <figcaption aria-hidden="true">IMDB Schema</figcaption>
+    </figure>
+    <ul>
+    <li>Trovare le pellicole del 2010 che non sono thriller</li>
+    </ul>
+    <p>Procedura:</p>
+    <ul>
+    <li>relazione <span class="math inline">\(R_1\)</span>: una
+    relazione con grado 1 che contiene l’attributo id e i record dei
+    movie prodotti nell’anno 2010</li>
+    <li>relazione <span class="math inline">\(R_2\)</span>: una
+    relazione con grado 1 che contiene l’attributo <span
+    class="math inline">\(genre.movie\)</span> delle pellicole
+    thriller</li>
+    <li>quindi posso fare <span class="math inline">\(R_1 -
+    R_2\)</span></li>
+    </ul>
+    <p>Sto cercando l’assenza di qualcosa, quindi devo usare la
+    sottrazione o un join esterno.</p>
+    <p><span class="math display">\[
+    \begin{align}
+    &amp;\ R_1 = \sigma_{year=&#39;2010&#39;}\ movie \newline
+    &amp;\ R_2 = \sigma_{genre=&#39;thriller&#39;}\ genre \newline
+    &amp;\ \pi_{id}\ R_1 - \pi_{movie} R_2 \newline
+    \end{align}
+    \]</span></p>
+    <p><span class="sidenote">Usare la proiezione per ottenere relazioni
+    confrontabili in termini di sottrazione</span> Siccome <span
+    class="math inline">\(R_1\)</span> ha 3 attributi, e <span
+    class="math inline">\(R_2\)</span> ne ha 2 queste due relazioni non
+    sono confrontabili ne per numero ne per dominio
+    <label class="sidenote-toggle sidenote-number"></label>. Anche se le
+    colonne hanno nome diverso hanno lo stesso tipo di dato, quindi sono
+    confrontabili.</p>
+    <ul>
+    <li>Trovare le pellicole che sono di genere “thriller” o
+    “crime”</li>
+    </ul>
+    <p>Procedura:</p>
+    <ul>
+    <li><p>trovo le pellicole di genere “thriller”</p></li>
+    <li><p>prendo l’id dalla relazione precedente</p></li>
+    <li><p>trovo le pellicole di genere “crime”</p></li>
+    <li><p>prendo l’id dalla relazione precedente</p></li>
+    <li><p>unisco le due relazioni ottenute</p></li>
+    <li><p>Trovare le pellicole che sono di genere “comedy” e
+    “romantic”</p></li>
+    </ul>
+    <p>Appartenere ad entrambi i generi vuol dire avere due record in
+    cui c’e’ il codice della pellicola e ognuno dei due “genre”
+    voluti</p>
+    <p>Procedura:</p>
+    <ul>
+    <li>trovo le pellicole di genere “comedy”</li>
+    <li>prendo l’id dalla relazione precedente</li>
+    <li>trovo le pellicole di genere “romantic”</li>
+    <li>prendo l’id dalla relazione precedente</li>
+    <li>prendo l’intersezione delle due relazioni ottenute</li>
+    </ul>
+    <p><span class="math display">\[
+    \begin{align}
+    &amp;\ movie\_comedy = \sigma_{genre=&#39;comedy&#39;} genre
+    \newline
+    &amp;\ movie\_romance = \sigma_{genre=&#39;romance&#39;} genre
+    \newline
+    &amp;\ movie\_comedy\ \cap\ movie\_romance \newline
+    \end{align}
+    \]</span> E’ sbagliato perché il risultato e’ simile a</p>
+    <p>movie_comedy</p>
+    <table>
+    <thead>
+    <tr class="header">
+    <th>id</th>
+    <th>genre</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="odd">
+    <td>1</td>
+    <td>comedy</td>
+    </tr>
+    <tr class="even">
+    <td>2</td>
+    <td>comedy</td>
+    </tr>
+    </tbody>
+    </table>
+    <p>movie_romance</p>
+    <table>
+    <thead>
+    <tr class="header">
+    <th>id</th>
+    <th>genre</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="odd">
+    <td>3</td>
+    <td>romance</td>
+    </tr>
+    <tr class="even">
+    <td>1</td>
+    <td>romance</td>
+    </tr>
+    </tbody>
+    </table>
+    <p>Che non produce il risultato sperato perché non ci sono record
+    uguali su cui fare intersezione, quindi devo usare la
+    proiezione:</p>
+    <p><span class="math display">\[
+    \begin{align}
+    &amp;\ movie\_comedy = \sigma_{genre=&#39;comedy&#39;} genre
+    \newline
+    &amp;\ movie\_romance = \sigma_{genre=&#39;romance&#39;} genre
+    \newline
+    &amp;\ \pi_{movie}(movie\_comedy)\ \cap\ \pi_{movie}(movie\_romance)
+    \newline
+    \end{align}
+    \]</span> Soluzioni alternative? No! <span class="math display">\[
+    \begin{align}
+    &amp;\ R_1 = \sigma_{genre=&#39;comedy&#39;\ \land\
+    genre=&#39;romance&#39;}\ genre \newline
+    &amp;\ R_2 = \sigma_{genre=&#39;comedy&#39;\ \lor\
+    genre=&#39;romance&#39;}\ genre \newline
+    \end{align}
+    \]</span> <span class="math inline">\(R_2\)</span> e’ sbagliata
+    perché prendo anche le righe che soddisfano una delle due. <span
+    class="math inline">\(R_1\)</span> e’ sbagliata perché ogni riga
+    viene valutata individualmente, ma nessun record può avere entrambi,
+    quindi <span class="math inline">\(R_1\)</span> da sempre come
+    risultato <span class="math inline">\(\emptyset\)</span>.</p>
+    <ul>
+    <li>Trovare le persone che hanno interpretato come attore il
+    personaggio ‘Dexter’</li>
+    </ul>
+    <p><span class="math display">\[
+    \begin{align}
+    &amp;\ crew(movie,\ person,\ role,\ character) \newline
+    \end{align}
+    \]</span> <span class="math display">\[
+    \begin{align}
+    &amp;\ \pi_{person}(\sigma_{character=&#39;Dexter&#39;\ \land\
+    role=&#39;actor&#39;}\ crew) \newline
+    \end{align}
+    \]</span> In questo caso un record ha entrambi gli stessi attributi,
+    quindi posso usare <span class="math inline">\(\land\)</span>,
+    differentemente rispetto a prima.</p>
+    <p>Posso usare l’atomizzazione delle selezioni per ottimizzare la
+    query (l’operazione più selettiva va fatta per prima per poter dare
+    alla seconda un set più piccolo possibile su cui lavorare)</p>
+    <p><span class="math display">\[
+    \begin{align}
+    \pi_{person}(\sigma_{character=&#39;Dexter&#39;}(\sigma_{role=&#39;actor&#39;}\
+    crew))
+    \end{align}
+    \]</span> * Trovare il nome delle persone nate dopo il 2000 che
+    recitano in film thriller</p>
+    <p><span class="math display">\[
+    \begin{align}
+    &amp;\ movie(id,\ title) \newline
+    &amp;\ genre(movie,\ genre) \newline
+    &amp;\ crew(person,\ movie) \newline
+    &amp;\ person(id,\ given\_name,\ birth\_date) \newline
+    \end{align}
+    \]</span> Procediamo per step</p>
+    <p><span class="math display">\[
+    \begin{align}
+    &amp;\ person\_2000 = \sigma_{birth\_date\ \geq\
+    &#39;2000-01-01&#39;}\ person \newline
+    &amp;\ thriller = \sigma_{genre\ =\ &#39;thriller&#39;} genre
+    \newline
+    &amp;\ person\_2000\_crew = person\_2000\ \bowtie_{id=person}\ crew
+    \newline
+    &amp;\ \pi_{id,\ given\_name}(person\_2000\_crew\
+    \bowtie_{person\_2000\_crew.movie=movie\_thriller.movie}\ thriller
+    )\newline
+    \end{align}
+    \]</span></p>
+    <ul>
+    <li><p>Guardando lo schema IMDB dato a lezione</p></li>
+    <li><p>Trovare il titolo delle pellicole con valutazione (rating)
+    maggiore di 8 <span class="math display">\[
+    \begin{align}
+    &amp;\ movie\_rating = \rho_{id\rightarrow movie}(movie)\ *\ rating
+    \newline
+    &amp;\ \sigma_{score&gt;8}(movie\_rating) \newline
+    \end{align}
+    \]</span></p></li>
+    <li><p>Trovare le pellicole thriller con valutazione sopra 8 <span
+    class="math display">\[
+    \begin{align}
+    &amp;\ thriller\_movies =
+    \sigma_{genre=&#39;thriller&#39;}(\rho_{id\rightarrow movie}(movie)\
+    *\ genre) \newline
+    &amp;\ \sigma_{score&gt;8}(thriller\_movies) \newline
+    \end{align}
+    \]</span></p></li>
+    <li><p>Trovare il nome dei registi di film thriller <span
+    class="math display">\[
+    \begin{align}
+    &amp;\ thriller\_movies =
+    \pi_{movie}(\sigma_{genre=&#39;thriller&#39;}(\rho_{id\rightarrow
+    movie}(movie)\ *\ genre)) \newline
+    &amp;\ \sigma_{p\_role=&#39;director&#39;}(thriller\_movies * movie)
+    \newline
+    \end{align}
+    \]</span></p></li>
+    <li><p>Trovare i film le cui recensioni sono sempre superiori a 8
+    (non immediato!) <span class="math display">\[
+    \begin{align}
+    &amp;\ movies\_under\_8 = \pi_{movie}(\sigma_{score\leq
+    8}(\rho_{id\rightarrow movie}(movie) * rating)) \newline
+    &amp;\ \pi_{movie}(rating) - movies\_under\_8 \newline
+    \end{align}
+    \]</span></p></li>
+    <li><p>Trovare le pellicole distribuite (released) sia in USA sia in
+    FRA</p></li>
+    </ul>
+    <p><span class="math display">\[
+    \begin{align}
+    &amp;\ released\_usa =
+    \pi_{movie}(\sigma_{country=&#39;USA&#39;}(\rho_{id\rightarrow
+    movie}(movie)\ *\ released)) \newline
+    &amp;\ released\_fra =
+    \pi_{movie}(\sigma_{country=&#39;FRA&#39;}(\rho_{id\rightarrow
+    movie}(movie)\ *\ released)) \newline
+    &amp;\ released\_usa\ \cap\ released\_fra \newline
+    \end{align}
+    \]</span></p>
+    <ul>
+    <li>Trovare le pellicole che non sono prodotte in GBR <span
+    class="math display">\[
+    \begin{align}
+    &amp;\ \sigma_{country!=&#39;GBR&#39;}\rho_{id\rightarrow
+    movie}(movie) * produced \newline
+    \end{align}
+    \]</span></li>
+    </ul>
+    <p>Questa e’ sbagliata, perché potrei avere una situazione di questo
+    tipo</p>
+    <table>
+    <thead>
+    <tr class="header">
+    <th>movie</th>
+    <th>country</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="odd">
+    <td>m1</td>
+    <td>FRA</td>
+    </tr>
+    <tr class="even">
+    <td>m1</td>
+    <td>GBR</td>
+    </tr>
+    <tr class="odd">
+    <td>m2</td>
+    <td>FRA</td>
+    </tr>
+    </tbody>
+    </table>
+    <p>Non ci si può accontentare della selezione per via della presenza
+    di <span class="math inline">\(m1\)</span>, quindi devo fare la
+    sottrazione.</p>
+    <ul>
+    <li>Trovare titolo e anno dei film che sono thriller, drama, e
+    action</li>
+    </ul>
+    <p><span class="math display">\[
+    \begin{align}
+    &amp;\ movie(id,\ title,\ year) \newline
+    &amp;\ genre(movie,\ genre) \newline
+    &amp;\ \newline
+    &amp;\ G = \sigma_{genre=&#39;thriller&#39; \lor
+    genre=&#39;action&#39; \lor genre=&#39;drama&#39;} genre \newline
+    &amp;\ H = \rho_{movie\rightarrow id} G \newline
+    &amp;\ J = movie\ *\ H  \newline
+    &amp;\ J / \pi_{genre}G  \newline
+    \end{align}
+    \]</span> Il risultato e’ definito sulle colonne <span
+    class="math inline">\(id\)</span>, <span
+    class="math inline">\(title\)</span>, <span
+    class="math inline">\(year\)</span>.</p>
+    <p>Funzionerebbe anche con l’intersezione in questo caso, ma il
+    vantaggio della divisione e’ che non e’ necessario specificare a
+    priori come e’ composto il divisore.</p>
+    <h2 id="esercizi-usando-uno-schema-simile-a-quello-dellesame"><a
+    href="#esercizi-usando-uno-schema-simile-a-quello-dellesame">Esercizi
+    usando uno schema simile a quello dell’esame</a></h2>
+    <p><span class="math display">\[
+    \begin{align}
+    &amp;\ continent(\underline{id},\ name) \newline
+    &amp;\ country(\underline{id},\ name,\ continent(continent),\
+    currency) \newline
+    &amp;\ city(\underline{id},\ name,\ country(country),\ population)
+    \newline
+    &amp;\ politician(\underline{id},\ name,\ birth\_place(country),\
+    gender,\ birth\_date,\ party) \newline
+    &amp;\ govern(\underline{city(city),\ head(politician),\
+    election\_year}) \newline
+    &amp;\ country\_borders(\underline{country\_a(country),\
+    country\_b(country)}) \newline
+    \end{align}
+    \]</span></p>
+    <ul>
+    <li>Trovare il nome dei politici che non hanno governato città con
+    più’ di 500.000 abitanti</li>
+    </ul>
+    <p>A: seleziono città con più di 500k abitanti B: seleziono da
+    govern i politici che hanno governato le città in A tolgo da
+    politician i politici in B</p>
+    <p>Ha senso prendere da politician piuttosto che da govern come
+    sottrazione di partenza, perché voglio tenere anche quelli che non
+    hanno mai governato.</p>
+    <ul>
+    <li><p>Trovare il nome delle città in cui non e’ utilizzato il
+    dollaro come moneta</p></li>
+    <li><p>Trovare i paesi che non confinano con l’italia</p></li>
+    </ul>
+    <p>A: trovare i paesi che confinano con ITA B: sottrarre A
+    dall’elenco di tutti i country</p>
+    <p><span class="math display">\[
+    \begin{align}
+    &amp;\ A = \pi_{country\_b}(\sigma_{country\_a\ =\ &#39;IT&#39;}\
+    country\_borders) \newline
+    &amp;\ B = \pi_{country\_a}(\sigma_{country\_b\ =\ &#39;IT&#39;}\
+    country\_borders) \newline
+    &amp;\ C = A \cup B \newline
+    &amp;\ \pi_{id}(country) - C \newline
+    \end{align}
+    \]</span></p>
+    <p>Devo ottenere <span class="math inline">\(A\)</span> e <span
+    class="math inline">\(B\)</span> perché ITA puo’ apparire sia come
+    <span class="math inline">\(country\_a\)</span> che <span
+    class="math inline">\(country\_b\)</span></p>
+    <p>Non c’e’ bisogno di ridenominare l’id in <span
+    class="math inline">\(A\)</span> e <span
+    class="math inline">\(B\)</span>, perché conta il dominio del dato,
+    non il suo nome.</p>
+    <ul>
+    <li>Trovare i politici che hanno governato tutte le città di San
+    Marino <span class="math display">\[
+    \begin{align}
+    &amp;\ \pi_{city.id}(\sigma_{name=&#39;San Marino&#39;} (country)\
+    \bowtie_{city.country = country.id}\ city) \newline
+    &amp;\ \pi_{head,\ city}(govern) / \rho_{id\rightarrow city}A
+    \newline
+    \end{align}
+    \]</span> Vogliamo sapere quali sono i politici in relazione con
+    tutte le città di San Marino, quindi serve la divisione.</li>
+    </ul>
+    <p>Se non togliamo <span
+    class="math inline">\(election\_year\)</span> allora otteniamo quei
+    politici che nello stesso anno hanno governato città di San
+    Marino.</p>
+    <ul>
+    <li><p>Trovare le città governate da più di un politico dopo il 2020
+    <span class="math display">\[
+    \begin{align}
+    &amp;\ A = \pi_{head,\ city}(\sigma_{election\_year \gt 2020}\
+    govern) \newline
+    &amp;\ B = \rho_{city\rightarrow city&#39;,\ head\rightarrow
+    head&#39;}\ A \newline
+    &amp;\ \pi_{city}(A \bowtie_{city=city&#39;\ \land\
+    head&lt;&gt;head&#39;} B) \newline
+    \end{align}
+    \]</span> Essendo che non siamo in grado di contare possiamo mettere
+    in join <span class="math inline">\(A\)</span> con se’ stessa, in
+    modo da poterli comparare.</p></li>
+    <li><p>Trovare città che sono state governate da politici sia di
+    destra sia di sinistra <span class="math display">\[
+    \begin{align}
+    &amp;\ A = govern\bowtie_{head=id}(politician) \newline
+    &amp;\ governate\_destra =
+    \pi_{city}(\sigma_{party=&#39;destra&#39;} A) \newline
+    &amp;\ governate\_sinistra =
+    \pi_{city}(\sigma_{party=&#39;sinistra&#39;} A) \newline
+    &amp;\ governate\_destra \cap governate\_sinistra \newline
+    \end{align}
+    \]</span> Soluzione alternativa con join <span
+    class="math display">\[
+    \begin{align}
+    &amp;\ A = govern\bowtie_{head=id}(politician) \newline
+    &amp;\ B = \sigma_{party=&#39;destra&#39;\ \lor\
+    party=&#39;sinistra&#39;}\ A \newline
+    &amp;\ C = \rho_{party\rightarrow party&#39;,\ city\rightarrow
+    city&#39;}(B) \newline
+    &amp;\ A\ \bowtie_{city=city&#39;\ \land\ party&lt;&gt;party&#39;} C
+    \newline
+    \end{align}
+    \]</span></p></li>
+    <li><p>Trovare le pellicole prodotte in due paesi diversi (e’ un
+    self join, rivedi come si fa a chiamare in modi diversi la stessa
+    tabella)</p></li>
+    </ul>
+    </article>
+  </main>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script src="js/prism.min.js"></script>
+</body>

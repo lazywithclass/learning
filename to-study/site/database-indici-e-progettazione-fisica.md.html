@@ -52,7 +52,7 @@
     <ul>
     <li><code>char</code>: 4 byte x char -&gt; 12 byte</li>
     <li><code>integer</code>: 8 byte</li>
-    <li><code>bytea</code>: non posso saperlo, viene memorizzato in un
+    <li><code>byte</code>: non posso saperlo, viene memorizzato in un
     altro blocco, e referenziato nel blocco dove ci sono gli altri
     campi</li>
     </ul>
@@ -61,12 +61,9 @@
     ottimizzato, per fare in modo che la ricerca sia particolarmente
     performante.</p>
     <p>Il costo di ricerca all’interno di un blocco e’ irrisorio.</p>
-    <p>TODO Controllare se e’ corretta la divisione strutture primarie e
-    secondarie</p>
     <h2 id="struttura-primaria-dei-file"><a
     href="#struttura-primaria-dei-file">Struttura primaria dei
     file</a></h2>
-    <p>TODO riempi da slide</p>
     <p>“Come finiscono i dati nei blocchi?”; criterio con cui disponiamo
     i record nei blocchi:</p>
     <ul>
@@ -91,7 +88,11 @@
     href="#struttura-sequenziale-ordinata">Struttura sequenziale
     ordinata</a></h4>
     <p>Ordinamento di un campo detto pseudo-chiave</p>
-    <h3 id="hash"><a href="#hash">Hash</a></h3>
+    <h2 id="campi-di-ordinamento"><a href="#campi-di-ordinamento">Campi
+    di ordinamento</a></h2>
+    <h3 id="strutture-ad-accesso-calcolato"><a
+    href="#strutture-ad-accesso-calcolato">Strutture ad accesso
+    calcolato</a></h3>
     <p>La funzione di hashing deve garantire una buona equi
     distribuzione dei dati.</p>
     <h3 id="indici-primari"><a href="#indici-primari">Indici
@@ -106,8 +107,8 @@
     class="math inline">\(k\)</span> e’ valore della chiave e <span
     class="math inline">\(p\)</span> e’ il puntatore alla posizione di
     memoria del record.</p>
-    <h2 id="strutture-secondarie"><a
-    href="#strutture-secondarie">Strutture secondarie</a></h2>
+    <h3 id="strutture-secondarie"><a
+    href="#strutture-secondarie">Strutture secondarie</a></h3>
     <p>Ci permettono di raggiungere i dati in modo efficiente, indici
     (alberi). Es. <code>CREATE INDEX</code>.</p>
     <p>Possiamo usarle anche per memorizzare dati.</p>

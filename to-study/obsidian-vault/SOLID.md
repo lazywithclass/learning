@@ -24,11 +24,18 @@ https://www.youtube.com/watch?v=BSaAMQVq01E
 
 http://butunclebob.com/ArticleS.UncleBob.PrinciplesOfOod
 
+
+
+
+```table-of-contents
+```
+
+
 > When considering whether a particular design is appropriate or not, one must not simply view the solution in isolation. One must view it in terms of the reasonable assumptions that will be made by the users of that design.
 
 -- [Validity is not Intrinsic](cpp-report_engineering-notebook_liskov-substitution-principle.pdf)
 
-# Single responsibility principle
+## Single responsibility principle
 
 [The Single Responsibility Principle - The Clean Code Blog](https://blog.cleancoder.com/uncle-bob/2014/05/08/SingleReponsibilityPrinciple.html)
 
@@ -54,19 +61,19 @@ This is the reason we do not put SQL in JSPs. This is the reason we do not gener
 
 ![img|300](https://cdn-images-1.medium.com/max/640/0*11cZSBOkR82nknwy.png)
 
-## Benefici
+### Benefici
 
 * ridotto impatto a seguito di modifiche perche' ogni classe si concentra su uno specifico aspetto o funzionalita' del sistema
 * mantenibilita' aumentata perche' posso intervenire su una classe, ad esempio con un refactor, senza che queste modifiche impattino su un'altra
 * facilita il riutilizzo perche' siccome e' chiaro di cosa si occupano e non hanno un alto livello di accoppiamento con le altre classi, posso usarle anche in altri ambiti
 
-## Related patterns
+### Related patterns
 
 * [Decorator](Design%20Pattern.md#Decorator): per decentralizzare le varie aggiunte, ognuna in una classe decoratrice, invece di avere una god class
 * [Strategy](Design%20Pattern.md#Strategy): per scegliere quale algoritmo usare, la strategia si occupa di un certo compito, ignorando cio' che ha attorno
 * [Factory](Design%20Pattern.md#Factory): delego la creazione di ogni specifico oggetto
 
-# Open-Closed principle
+## Open-Closed principle
 
 [Engineering Notebook columns for The C++ Report - The Open-Closed Principle](https://courses.cs.duke.edu/fall07/cps108/papers/ocp.pdf)
 
@@ -83,13 +90,13 @@ Permette di ottenere:
 * mantenibilita' attraverso l'estensibilita'
 
 [Dynamic binding](Java.md#Dynamic%20binding) e' un aspetto chiave di OOP, perche' permette di chiamare codice non ancora scritto: cioe' riconoscendo il tipo concreto dal tipo apparente solo a runtime, tengo aperta la possibilita' di future estensioni.
-## Related patterns
+### Related patterns
 
 * [Template](Design%20Pattern.md#Template): definisce lo scheletro di un algoritmo in una classe base, alcuni passaggi vengono lasciati da implementare alle sottoclassi, senza modificare la classe originale
 * [Adapter - page 139](Design%20Pattern.md#Adapter%20-%20page%20139): riusare classi in nuovi contesti senza modificarle direttamente
 * [Strategy](Design%20Pattern.md#Strategy): ogni  algoritmo e' incapsulato nella sua classe che implementa una interfaccia condivisa
 
-# Liskov substitution principle
+## Liskov substitution principle
 
 [Engineering Notebook columns for The C++ Report - The Liskov Substitution Principle](https://www.cs.utexas.edu/~downing/papers/LSP-1996.pdf)
 
@@ -126,7 +133,7 @@ So:
   <u>They must accept anything that the base class accepts</u>
 * derived classes must conform to all the postconditions of the base $\rightarrow$ their behaviours and outputs must not violate any of the contraints established for the base class; users of the base class must not be confused by the output of the derived class
 
-# Interface segregation
+## Interface segregation
 
 [Engineering Notebook columns for The C++ Report - The Interface Segregation Principle](https://www.cs.utexas.edu/~downing/papers/ISP-1996.pdf)
 
@@ -146,11 +153,11 @@ Questo principio permette di raggiungere un grado basso di accoppiamento tra gli
 
 ![interface-segregation|400](interface-segregation-example.png)
 
-## Related patterns
+### Related patterns
 
 * [Observer](Design%20Pattern.md#Observer): un solo metodo `update()` che e' l'unico interesse del Subject
 
-# Dependency inversion
+## Dependency inversion
 
 [Engineering Notebook columns for The C++ Report - The Dependency Inversion Principle](https://www.labri.fr/perso/clement/enseignements/ao/DIP.pdf)
 
@@ -162,20 +169,24 @@ Le astrazioni non dovrebbero dipendere dai dettagli. Programmare verso le interf
 "Depend on stuff more concrete than me"
 
 This is pure gold: https://blog.cleancoder.com/uncle-bob/2016/01/04/ALittleArchitecture.html
-## Benefici
+### Benefici
 
 * testabilita' perche' posso mockare con semplificita' una interfaccia invece di portarmi dietro un intero albero di implementazioni
 * flessibilita' perche' posso variare l'implementazione in base alle necessita', quindi ad esempio passare un database PostgreSQL a MySQL
 * ridotto accoppiamento perche' dei cambiamenti nei moduli di basso livello non impattano i moduli di alto livello
-## Related patterns
+### Related patterns
 
 * [Factory method](Design%20Pattern.md#Factory%20method): definisce una interfaccia per la creazione di un oggetto, ma consente alle sottoclassi di decidere quale classe istanziare
 * [Abstract factory](Design%20Pattern.md#Abstract%20factory): fornisce un'interfaccia per la creazione di famiglie di oggetti correlati o dipendenti senza specificare le loro classi concrete
 * [Composite](Design%20Pattern.md#Composite): trattare uniformemente parti e insiemi, il client non sa se sta parlando con una parte o un insieme
 
-# Esempi
+## The Primeagean on it
 
-## Dependency Inversion e Open Close
+<iframe width="560" height="315" src="https://www.youtube.com/embed/TT_RLWmIsbY?si=tsnE7M-qaeAjZ6Lr" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+## Esempi
+
+### Dependency Inversion e Open Close
 
 > Identificare gli aspetti della applicazione che cambiano e separarli da cio' che rimane fisso
 

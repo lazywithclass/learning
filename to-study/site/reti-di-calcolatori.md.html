@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <link rel="stylesheet" href="css/latex.css">
+  <link rel="stylesheet" href="css/prism.css">
+  <link rel="stylesheet" href="css/index.css">
+</head>
+<body class="latex-dark">
+  <main>
+    <article>
+    <h1>Reti di calcolatori</h1>
+    <p>“Come funziona Internet”</p>
+    <h2 id="info-sul-corso"><a href="#info-sul-corso">Info sul
+    corso</a></h2>
+    <p>Teoria: https://myariel.unimi.it/course/view.php?id=9026<br />
+    Laboratorio:</p>
+    <p>Seconda meta’ di Ottobre parte il laboratorio.<br />
+    Non ci sono slide.</p>
+    <p>F. Halsall<br />
+    Networking e Internet<br />
+    Pearson - 5a ed</p>
+    <p>A. Tanenbaum<br />
+    Reti di Calcolatori<br />
+    Pearson - 6a ed</p>
+    <p>Esame di teoria con 10 domande aperte.<br />
+    Esame di laboratorio prevede un “progettino” da fare in sede
+    d’esame.<br />
+    <strong>Teoria e laboratorio vanno dati nello stesso
+    appello</strong>, ci sara’ prima teoria e poi laboratorio a distanza
+    di un paio di giorni.</p>
+    <p>Il corso di teoria finisce a Dicembre, laboratorio potrebbe
+    sforare Gennaio.</p>
+    <h2 id="lezione-1---2509"><a href="#lezione-1---2509">Lezione 1 -
+    25/09</a></h2>
+    <p>Rete: sistema che collega apparati remoti, fornisce la
+    connettività.</p>
+    <p>Connettività: fisica o wireless. Mobile se effettivamente
+    l’apparato può muoversi nello spazio.</p>
+    <p>Da <code>A</code> a <code>B</code> voglio mandare un messaggio
+    Whatsapp.<br />
+    La rete collega <code>A</code> con <code>B</code> tramite un server:
+    <code>A</code> parla con il server, capisco se <code>B</code> e’
+    raggiungibile e come posso raggiungerla.</p>
+    <p>“Come connetto il server con il client?”, c’e’ quasi sempre un
+    server che funge da sponda. In una comunicazione peer-to-peer un
+    client e’ sia client che server di se stesso.</p>
+    <p>Le reti sono due e radicalmente diverse:</p>
+    <ul>
+    <li>rete di accesso - consente all’apparato di garantire la
+    connettività verso la destinazione
+    <ul>
+    <li>LAN - sia wireless che wired</li>
+    <li>rete cellulare - per meta’ rete wireless per meta’ rete fissa,
+    ad un certo punto si connette ad Internet</li>
+    </ul></li>
+    <li>rete fissa - distribuisce a destinazione (Internet e’
+    questo)</li>
+    </ul>
+    <p>Noi ci occuperemo di:</p>
+    <ul>
+    <li>LAN wired</li>
+    <li>rete fissa</li>
+    </ul>
+    <p>Caratteristiche della rete fissa</p>
+    <ul>
+    <li>indirizzamento, devo essere in grado di indirizzare in modo
+    univoco (IP)</li>
+    <li>affidabilità (TCP)</li>
+    <li>quality of service</li>
+    </ul>
+    <p>IP e TCP sono componenti software. La rete TCP/IP e’ di fatto la
+    rete Internet.<br />
+    Importante capire che diversi scenari hanno diverse esigenze in
+    merito a queste caratteristiche. L’affidabilità non ha costo zero,
+    in termini di delay; e’ più importante la velocità che
+    l’affidabilità.</p>
+    <h2 id="lezione-2---3009"><a href="#lezione-2---3009">Lezione 2 -
+    30/09</a></h2>
+    <p>Ad alto livello definiamo una rete come composta da * rete di
+    accesso - collegamento tra utente finale e provider, può essere
+    wireless (tipicamente broadcast) * rete fissa - la parte che si
+    occupa dell’indirizzamento e dell’instradamento (tipicamente punto a
+    punto)</p>
+    <p>Ogni flusso di dati necessita di un tipo di servizio, erogato
+    dalla rete.<br />
+    Ad esempio potrei volere un servizio di affidabilità, oppure di
+    velocità.</p>
+    <p>Ci sono due tipologie di controllo della comunicazione: *
+    centralizzato - si comunica attraverso un server che centralizza la
+    comunicazione * distribuito - peer to peer, il controllo e’
+    equamente distribuito tra i peer (ognuno fa sia da client che da
+    server)</p>
+    <figure>
+    <img style="width: 300px;" src="attachments/Pasted%20image%2020251002230433.png" >
+    <figcaption>
+    Esempio di rete
+    </figcaption>
+    </figure>
+    <p>Come si vede dall’immagine una rete non e’ totalmente connessa,
+    ad esempio 1 non e’ connesso a 3.<br />
+    A causa di questa non connessione abbiamo il problema
+    dell’instradamento: non sappiamo a priori senza conoscere la
+    topologia della rete quale sara’ il percorso che dovremo prendere
+    per arrivare a destinazione, inoltre voglio poter: * ottimizzare il
+    numero di hop; oppure * ottimizzare il tempo</p>
+    <p>Nel caso di un percorso congestionato potrebbe accadere che un
+    percorso con più hop sia più veloce. E’ la funzione di instradamento
+    (o di routing) che sceglie la strada nella rete.</p>
+    <p>Il router e’ quell’apparato che data la fotografia della rete
+    (deve conoscerne la topologia) determina la strada verso la
+    destinazione, relativamente alla metrica che ci interessa (numero di
+    hop o tempo).</p>
+    <figure>
+    <img style="width: 300px;" src="attachments/Pasted%20image%2020251002231234.png" >
+    <figcaption>
+    Esplodiamo il nodo 3 per vedere più in dettaglio
+    </figcaption>
+    </figure>
+    <p>Il tempo per passare da un apparato ad un altro e’ influenzato
+    anche dal tempo di processamento interno, ad esempio con il
+    riempirsi delle code il traffico potrebbe subire rallentamenti.
+    Inoltre il buffer overflow e’ dietro l’angolo nei router, dovuto
+    alla gestione della memoria al loro interno.</p>
+    <h3 id="reti-a-pacchetto"><a href="#reti-a-pacchetto">Reti a
+    pacchetto</a></h3>
+    <p>Immaginiamo di dover trasferire un file da 5Mb e che deve essere
+    instradato, chiaramente non ci sta nelle porte di I/O, quindi la
+    soluzione e’ frammentare in pacchetti a dimensione massima fissa,
+    questo risolve il problema ma pone due nuovi problemi: *
+    frammentazione - qualcuno deve occuparsi di questo all’ingresso
+    della rete fissa * ricombinazione - qualcuno deve occuparsi di
+    questo all’uscita</p>
+    <p>Importante notare come questa frammentazione sia trasparente al
+    di fuori della rete, questo perché come in programmazione strati
+    superiori non conoscono i dettagli degli strati inferiori, su cui
+    costruiscono le loro peculiarità; un ulteriore punto importante e’
+    che la comunicazione avviene sempre e solo allo stesso livello.</p>
+    <h3 id="frammentazione"><a
+    href="#frammentazione">Frammentazione</a></h3>
+    <p>Ogni pacchetto deve poter raggiungere la destinazione e deve
+    poter essere assemblato.</p>
+    <h4 id="header"><a href="#header">Header</a></h4>
+    <p>Contiene meta-informazioni riguardo il pacchetto, ad esempio: *
+    sorgente * destinazione * ordine di arrivo * etc</p>
+    <h4 id="payload"><a href="#payload">Payload</a></h4>
+    <p>L’informazione per come e’ arrivata alla rete.</p>
+    <h3 id="concetti-di-comunicazione-affidabile"><a
+    href="#concetti-di-comunicazione-affidabile">Concetti di
+    comunicazione affidabile</a></h3>
+    <p>La rete deve essere affidabile: non devo perdere nulla, non devo
+    avere duplicati, e in ricezione devo ottenere i pacchetti nello
+    stesso ordine. Si parla di duplicazione perché potrebbe succedere
+    che per raggiungere l’affidabilità la rete mandi più volte un
+    pacchetto.</p>
+    <p>Nel caso l’affidabilità non sia richiesta ho il netto vantaggio
+    della semplicità, questo porta ad una maggiore velocità.</p>
+    <p>Internet per raggiungere l’affidabilità predilige una gestione ai
+    margini, per evitare di caricare troppo la rete.</p>
+    <h3 id="protocollo"><a href="#protocollo">Protocollo</a></h3>
+    <p>Un insieme di regole comuni tra apparati distribuiti.<br />
+    Una macchina parla con un’altra se condivide lo stesso insieme di
+    protocolli.</p>
+    <figure>
+    <img style="width: 300px;" src="attachments/Pasted%20image%2020251002234406.png" >
+    <figcaption>
+    Esempio di protocollo affidabile
+    </figcaption>
+    </figure>
+    <p>Si può notare come l’ACK e il timer (T) permettono di assicurarsi
+    che un pacchetto (PKT) sia stato ricevuto, o che sia necessaria una
+    ritrasmissione. ### Clock</p>
+    <figure>
+    <img style="width: 300px;" src="attachments/Pasted%20image%2020251002234531.png" >
+    <figcaption>
+    Esempio di come il clock aiuta nell’invio di bit
+    </figcaption>
+    </figure>
+    <h2 id="lezione-3---0210"><a href="#lezione-3---0210">Lezione 3 -
+    02/10</a></h2>
+    <p>“Come possiamo ottenere affidabilità tra due punti connessi
+    fisicamente all’interno di una rete?” Tramite l’ACK.</p>
+    <p>Il timer va dimensionato in modo da essere maggiore del RTT
+    (Round Trip Time)</p>
+    <h3 id="tempi-di-trasmissione-e-propagazione"><a
+    href="#tempi-di-trasmissione-e-propagazione">Tempi di trasmissione e
+    propagazione</a></h3>
+    <figure>
+    <img style="width: 300px;" src="attachments/Pasted%20image%2020251005151743.png" >
+    <figcaption>
+    Calcolo del RTT
+    </figcaption>
+    </figure>
+    <p>Quindi</p>
+    <ul>
+    <li><span class="math inline">\(RTT = t_x + 2t_p\)</span> dove <span
+    class="math inline">\(t_x\)</span> e’ il tempo di trasmissione e
+    <span class="math inline">\(t_p\)</span> e’ il tempo di
+    propagazione</li>
+    <li><span class="math inline">\(t_x = n \div b\)</span> dove <span
+    class="math inline">\(n\)</span> e’ la grandezza del pacchetto in
+    bit e <span class="math inline">\(b\)</span> e’ la banda in bit al
+    secondo</li>
+    <li><span class="math inline">\(t_p = l \div v\)</span> dove <span
+    class="math inline">\(l\)</span> e’ la lunghezza del cavo in metri e
+    <span class="math inline">\(v\)</span> e’ la velocità di
+    propagazione in metri al secondo</li>
+    </ul>
+    <p>Posso aggiungere un 15% o 20% per dare il tempo alle code di
+    smaltire il loro carico.</p>
+    <p>Importante notare che:</p>
+    <ul>
+    <li>il tempo di propagazione e’ in funzione della lunghezza del
+    cavo, per lunghezze di qualche chilometro non influisce, per
+    lunghezze superiori potrebbe influire di molto.</li>
+    <li>il tempo di propagazione non dipende dalla dimensione del
+    pacchetto</li>
+    </ul>
+    <figure>
+    <img style="width: 300px;" src="attachments/Pasted%20image%2020251005152410.png" >
+    <figcaption>
+    Differenza tra tempo di trasmissione e tempo di propagazione
+    </figcaption>
+    </figure>
+    <h3 id="la-necessita-di-uno-standard"><a
+    href="#la-necessita-di-uno-standard">La necessita’ di uno
+    standard</a></h3>
+    <p>Lo standard nasce perché ho bisogno di far parlare due macchine
+    soddisfacendo al requisito di affidabilità.</p>
+    <figure>
+    <img style="width: 300px;" src="attachments/Pasted%20image%2020251005152944.png" >
+    <figcaption>
+    Comunicazione tra nodi richiede uno standard
+    </figcaption>
+    </figure>
+    <ul>
+    <li>ISO - International Standard Organization</li>
+    <li>OSI - Open System Interconnection</li>
+    <li>IETF - Internet Engineering Task Force, partita da OSI per dare
+    standard ad internet, TCP e IP nascono da qui</li>
+    </ul>
+    <h3 id="visione-di-insieme"><a href="#visione-di-insieme">Visione di
+    insieme</a></h3>
+    <figure>
+    <img style="width: 300px;" src="attachments/Pasted%20image%2020251005153247.png" >
+    <figcaption>
+    Passaggio del pacchetto tra i livelli
+    </figcaption>
+    </figure>
+    <figure>
+    <img style="width: 300px;" src="attachments/Pasted%20image%2020251005153547.png" >
+    <figcaption>
+    Comunicazione tra sistemi con dettaglio sui livelli
+    </figcaption>
+    </figure>
+    <p>Ogni livello aggiunge un pezzo all’header, che servira’ poi al
+    ricevente.</p>
+    <figure>
+    <img style="width: 300px;" src="attachments/Pasted%20image%2020251005153733.png" >
+    <figcaption>
+    L’header cresce (o decresce) man mano che si scende (o si sale) nei
+    livelli
+    </figcaption>
+    </figure>
+    </article>
+  </main>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script src="js/prism.min.js"></script>
+</body>

@@ -5,7 +5,25 @@ tags:
   - italian
 ---
 
+```table-of-contents
+```
+
+## Esercizi
+
+Vedi [Eserciziario](Algebra%20relazionale.md#Eserciziario)
+
+## Introduzione
+
+TODO RICORDATI DI SEGNARE DA QUALCHE PARTE CHE DA SCHEMA logico
+A ER DEVI METTERE (0,N) SUGLI ATTRIBUTI DOVE SERVE
+
+chiave primaria + chiave esterna -> entita' debole
+
+"type" di solito compare quando si riassume una gerarchia in una superclasse
+
+
 Come costruire un database, come progettarlo.
+
 
 ![Attività di progettazione](attachments/Pasted%20image%2020250420190513.png)
 
@@ -158,7 +176,7 @@ Attributi opzionali sono denotati da un $*$.
   $Curano.paziente \rightarrow Paziente.tessera\_sanitaria$
 
 * Prossima associazione $Visita$: $Visita(\underline{medico,\ paziente,\ ambulatorio,\ data\_visita})$, e quindi aggiungo le specifiche per la chiavi esterne\
-  $Vistita.medico \rightarrow Medico.matricola$\
+  $Visita.medico \rightarrow Medico.matricola$\
   $Visita.paziente \rightarrow Paziente.tessera\_sanitaria$\
   $Visita.ambulatorio \rightarrow Ambulatorio.numero$
 

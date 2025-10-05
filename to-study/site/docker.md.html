@@ -12,6 +12,16 @@
   <main>
     <article>
     <h1>Docker</h1>
+    <h2 id="dev-containers"><a href="#dev-containers">Dev
+    containers</a></h2>
+    <p>Example configuration</p>
+    <pre><code>{  
+  &quot;name&quot;: &quot;Kuder Dev Container&quot;,  
+  &quot;image&quot;: &quot;kuder:latest&quot;,  
+  &quot;workspaceMount&quot;: &quot;source=${localWorkspaceFolder},target=/app,type=bind&quot;,  
+  &quot;workspaceFolder&quot;: &quot;/app&quot;,  
+  &quot;forwardPorts&quot;: [7888]  
+}</code></pre>
     <h2 id="running-a-container"><a href="#running-a-container">Running
     a container</a></h2>
     <p>Remember to add <code>-i</code> if you need interactive mode,
@@ -31,6 +41,10 @@ if [ -f /.dockerenv ]; then
 else
   echo &quot;Not running inside a Docker container (.dockerenv not found)&quot;
 fi</code></pre>
+    <h2 id="override-entrypoint"><a href="#override-entrypoint">Override
+    ENTRYPOINT</a></h2>
+    <p>Just pass <code>--entrypoint</code> to
+    <code>docker run ...</code></p>
     </article>
   </main>
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>

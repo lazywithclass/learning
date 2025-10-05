@@ -5,7 +5,7 @@ tags:
 ---
 Domande 
 
-- * cosa e' un test ideale? (+)
+- cosa e' un test ideale? (+)
 * perche' TDD e' una buona tecnica? Tecnica di requisiti o tecnica di design o di progettazione? Cos'e'? (+)
 - quando un criterio di selezione è valido e quando è affidabile
 - terminologia degli errori

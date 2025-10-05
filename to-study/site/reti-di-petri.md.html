@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <link rel="stylesheet" href="css/latex.css">
+  <link rel="stylesheet" href="css/prism.css">
+  <link rel="stylesheet" href="css/index.css">
+</head>
+<body class="latex-dark">
+  <main>
+    <article>
+    <h1>Reti di Petri</h1>
+    <p><code>table-of-contents style:nestedOrderedList</code></p>
+    <p>Nascono per descrivere sistemi concorrenti.</p>
+    <h2 id="perché-studiamo-le-reti-di-petri"><a
+    href="#perch-studiamo-le-reti-di-petri">Perché’ studiamo le Reti di
+    Petri?</a></h2>
+    <p>La comprensione di un sistema può migliorare, lo esprimo con le
+    Reti di Petri:</p>
+    <ul>
+    <li>descrivo ciò’ che voglio che accada</li>
+    <li>verifico che quella proprietà accada</li>
+    </ul>
+    <p>Scrivo specifiche in modo più chiaro, controllo che siano
+    corrette. Molto spesso gli errori sono nelle specifiche, perdo dei
+    particolari.</p>
+    <p>Non si parla di garantire che il codice sia corretto.</p>
+    <h2 id="definizione-informale"><a
+    href="#definizione-informale">Definizione informale</a></h2>
+    <p>Sono composte da</p>
+    <ul>
+    <li>posti - cerchi - di solito vengono usati nomi per
+    descriverli</li>
+    <li>token - assegnati a vari posti</li>
+    <li>transizioni - rettangoli - di solito verbi che modificano lo
+    stato</li>
+    <li>archi - connettono posti a transizioni, transizioni a posti</li>
+    </ul>
+    <figure>
+    <a href="https://homes.di.unimi.it/bellettini/pnexec/index2.html?pn=%28LettorePronto%29%20700%2C0%0A_LettoreInizia_%201100%2C0%0A%28Biblioteca%29%201500%2C200%0A_ScrittoreInizia_%201900%2C0%0A%28ScrittorePronto%29%202300%2C0%0A%28LettoreLegge%29%201200%2C500%0A%28ScrittoreScrive%29%201800%2C500%0A_LettoreFinisce_%201200%2C800%0A_ScrittoreFinisce_%201800%2C800%0ALettorePronto%20-%3E%20LettoreInizia%0ALettoreInizia%20-%3E%20LettoreLegge%0ABiblioteca%20-%3E%20LettoreInizia%0ALettoreLegge%20-%3E%20LettoreFinisce%0ALettoreFinisce%20-%3E%20Biblioteca%0ALettoreFinisce%20-%3E%20LettorePronto%0AScrittorePronto%20-%3E%20ScrittoreInizia%0AScrittoreInizia%20-%3E%20ScrittoreScrive%0ABiblioteca%20-4%3E%20ScrittoreInizia%0AScrittoreScrive%20-%3E%20ScrittoreFinisce%0AScrittoreFinisce%20-4%3E%20Biblioteca%0AScrittoreFinisce%20-%3E%20ScrittorePronto%0A%40LettorePronto%3A4%0A%40Biblioteca%3A4%0A%40ScrittorePronto%3A2">
+    <img src="attachments/Pasted%20image%2020250513001211.png" > </a>
+    <figcaption>
+    Un esempio di Rete di Petri
+    </figcaption>
+    </figure>
+    <h2 id="token"><a href="#token">Token</a></h2>
+    <p>Posso assegnare più token per lo stesso posto, il numero di token
+    può quindi rappresentare il numero di istanze di quel tipo di posto
+    <label class="sidenote-toggle sidenote-number"></label>. <span
+    class="sidenote">I token non si spostano, i token si creano e si
+    distruggono!</span></p>
+    <p>Ad esempio “tre robot che producono un certo manufatto”.</p>
+    <p>Se non c’e’ un limite imposto dalle logiche di transizione un
+    posto può accettare infiniti token. Cosa che con una FSM non posso
+    modellare.</p>
+    <h2 id="stato"><a href="#stato">Stato</a></h2>
+    <p>Non e’ visto a livello di sistema ma come composizione di tanti
+    stati parziali</p>
+    <figure>
+    <img src="attachments/Pasted%20image%2020250513015952.png" >
+    <figcaption>
+    Una rete di Petri e’ in grado di rappresentare infiniti stati
+    </figcaption>
+    </figure>
+    <h3 id="differenza-con-fsm"><a href="#differenza-con-fsm">Differenza
+    con FSM</a></h3>
+    <ul>
+    <li>stato non e’ a livello di sistema, ma come composizione di stati
+    parziali</li>
+    <li>transizioni sono promosse a nodi (non più archi), si limitano a
+    modificare una parte dello stato globale</li>
+    </ul>
+    <h2 id="archi"><a href="#archi">Archi</a></h2>
+    <p>Possono avere un peso, quindi posso esprimere situazioni
+    concorrenti. Se non scrivo nulla vuol dire peso 1.</p>
+    <p>Un arco <span class="b">in entrata</span> di una transizione, e’
+    un <span class="b">requirement</span>. Un arco <span class="b">in
+    uscita</span> da una transizione, crea dei token.</p>
+    <figure>
+    <img src="attachments/petri-gettoni-dopo.png"
+    alt="Esempio di archi in entrata e in uscita su T_1" />
+    <figcaption aria-hidden="true">Esempio di archi in entrata e in
+    uscita su <span class="math inline">\(T_1\)</span></figcaption>
+    </figure>
+    <h2 id="note-sulla-sintassi"><a href="#note-sulla-sintassi">Note
+    sulla sintassi</a></h2>
+    <p>Marcatura: distribuzione dei token sui posti, più formalmente e’
+    una funzione che assegna un intero non negativo ad ogni posto della
+    rete.<br />
+    <span class="math inline">\(M(p)\)</span>: numero di gettoni in
+    Posto <span class="math inline">\(p\)</span> per Marcatura <span
+    class="math inline">\(M\)</span><br />
+    Scatto: <span class="math inline">\(M[t_1 &gt; M&#39;\)</span><br />
+    <span class="math inline">\(M\)</span> abilita <span
+    class="math inline">\(t1\)</span>: <span class="math inline">\(M[t_1
+    &gt;\)</span><br />
+    I pre-set <span class="math inline">\(pre(t)\)</span> sono i posti
+    connessi alle transizioni, i post-set <span
+    class="math inline">\(pos(t)\)</span> sono i posti connessi dalle
+    transizioni.</p>
+    <h2 id="nota-sulla-località"><a href="#nota-sulla-localit">Nota
+    sulla località</a></h2>
+    <p>I vantaggi di avere questa proprietà sono:</p>
+    <ul>
+    <li>possibilità di avere multi-threading</li>
+    <li>maggiore chiarezza nel comprendere o modificare una rete, perché
+    non devo considerare il tutto, ma solo una porzione</li>
+    </ul>
+    <h2 id="definizione-formale"><a
+    href="#definizione-formale">Definizione formale</a></h2>
+    <p>E’ una 5-upla <span class="math inline">\([P, T; F, W,
+    M_{0}]\)</span></p>
+    <ul>
+    <li><span class="math inline">\(P\)</span> insieme dei posti</li>
+    <li><span class="math inline">\(T\)</span> insieme delle
+    transizioni</li>
+    <li><span class="math inline">\(F\)</span> relazione di flusso -
+    <span class="math inline">\(F \subseteq (P \times T) \cup (T \times
+    P)\)</span>, mette in relazione un posto con una transizione o una
+    transizione con un posto</li>
+    <li><span class="math inline">\(W\)</span> la funzione peso
+    (codominio senza <span class="math inline">\(0\)</span>) - <span
+    class="math inline">\(W : F \rightarrow \\N^{+}\)</span></li>
+    <li><span class="math inline">\(M_{0}\)</span> la funzione marcatura
+    (iniziale) - <span class="math inline">\(M_0 : P \rightarrow
+    \\N\)</span></li>
+    </ul>
+    <p>Un identificatore o identifica un posto, o identifica una
+    transizione.</p>
+    <p><span class="math inline">\(P \cup T\)</span> non può essere
+    vuoto <span class="math inline">\(P \cap T\)</span> e’ vuoto</p>
+    <p><span class="math inline">\(pre(a) = { d \in (P \cup T) \ | \
+    \langle d,a \rangle \in F }\)</span> <span
+    class="math inline">\(post(a) = { d \in (P \cup T) \ | \ \langle a,d
+    \rangle \in F }\)</span></p>
+    <p>Quindi i pre-set sono i posti connessi alle transizioni, i
+    post-set sono i posti connessi dalle transizioni.</p>
+    <h2 id="transizioni"><a href="#transizioni">Transizioni</a></h2>
+    <p>Collegati a certi eventi, scattano quando sussistono certe
+    condizioni, se hanno abbastanza gettoni nei posti di ingresso.</p>
+    <h3 id="una-transizione-e-abilitata-ad-evolvere-quando"><a
+    href="#una-transizione-e-abilitata-ad-evolvere-quando">Una
+    transizione e’ abilitata ad evolvere quando</a></h3>
+    <p><span class="math inline">\(t \in T\)</span> e’ abilitata in
+    <span class="math inline">\(M\)</span> se e solo se <span
+    class="math inline">\(\forall p \in pre(t) \qquad M(p) \ge W(\langle
+    p, t \rangle)\)</span></p>
+    <p>Una transizione che non ha un posto prima di essa e’ abilitata a
+    scattare.<br />
+    Lo scatto di una transizione <span class="math inline">\(t\)</span>
+    in una marcatura <span class="math inline">\(M\)</span> produce una
+    nuova marcatura <span class="math inline">\(M&#39;\)</span>.</p>
+    <p>Ci può essere una sola transizione alla volta. Se ci sono più
+    transizioni abilitate non posso dire quale deve scattare, sono tutte
+    equiprobabili (non determinismo).</p>
+    <p>Scrivo <span class="math inline">\(M[t&gt;\)</span> e dico che
+    <span class="math inline">\(t\)</span> e’ abilitata in <span
+    class="math inline">\(M\)</span>.</p>
+    <h3 id="risultati-di-uno-scatto"><a
+    href="#risultati-di-uno-scatto">Risultati di uno scatto</a></h3>
+    <p>Lo scatto di una transizione <span
+    class="math inline">\(t\)</span> in una marcatura <span
+    class="math inline">\(M\)</span> produce una nuova marcatura <span
+    class="math inline">\(M&#39;\)</span>: <span
+    class="math inline">\(M[t&gt;M&#39;\)</span></p>
+    <p>Notazione: <span class="math inline">\(\forall p \in pre(t)
+    \setminus post(t)\)</span> significa “per tutti i posti che
+    appartengono al pre-set di <span class="math inline">\(t\)</span> ma
+    non appartengono al post-set di <span
+    class="math inline">\(t\)</span>”</p>
+    <p><span class="math inline">\(W(\langle p,t \rangle)\)</span>
+    numero di gettoni nell’arco</p>
+    <p><span class="math display">\[
+    \begin{align}
+    &amp;\forall p \in pre(t) \setminus post(t) &amp;\qquad M&#39;(p)
+    &amp;= M(p) - W(\langle p,t \rangle) \\
+    &amp;\forall p \in post(t) \setminus pre(t) &amp;\qquad M&#39;(p)
+    &amp;= M(p) + W(\langle t,p \rangle) \\
+    &amp;\forall p \in post(t) \cap pre(t) &amp;\qquad M&#39;(p) &amp;=
+    M(p) - W(\langle p,t \rangle) + W(\langle t,p \rangle) \\
+    &amp;\forall p \in P \setminus (pre(t) \cup post(t)) &amp;\qquad
+    M&#39;(p) &amp;= M(p)
+    \end{align}
+    \]</span></p>
+    <p>Grazie all’ultima e’ possibile fare una analisi locale. Non ho
+    bisogno di guardare tutto il sistema
+    <label class="sidenote-toggle sidenote-number"></label>.<span
+    class="sidenote">Passaggio fondamentale delle Reti di
+    Petri</span></p>
+    <h4 id="esempi-di-transizioni"><a
+    href="#esempi-di-transizioni">Esempi di transizioni</a></h4>
+    <p>Discorsivamente: una transizione e’ abilitata ad evolvere se il
+    numero di token nei posti di input e’ maggiore o uguale ai pesi
+    degli archi connessi.</p>
+    <figure>
+    <img src="attachments/Pasted%20image%2020250512213108.png"
+    alt="Quali di queste transizioni sono abilitate a scattare?" />
+    <figcaption aria-hidden="true">Quali di queste transizioni sono
+    abilitate a scattare?</figcaption>
+    </figure>
+    <p>Sono abilitate: <span class="math inline">\(A\)</span>, <span
+    class="math inline">\(B\)</span>, <span
+    class="math inline">\(C\)</span>, <span
+    class="math inline">\(D\)</span>, <span
+    class="math inline">\(F\)</span>; per capire quando una transizione
+    e’ abilitata a scattare basta ricordarsi che <span
+    class="math inline">\(\forall p \in Pre(t) \qquad M(p) \geq
+    W(\langle p,t \rangle)\)</span></p>
+    <h3 id="relazione-di-sequenza"><a
+    href="#relazione-di-sequenza">Relazione di sequenza</a></h3>
+    <p>Una transizione <span class="math inline">\(t_1\)</span> e’ in
+    sequenza con una transizione <span
+    class="math inline">\(t_2\)</span> in una marcatura <span
+    class="math inline">\(M\)</span> se e solo se</p>
+    <p><span class="math inline">\(M[t_1&gt; \quad \land \quad \lnot
+    M[t_2&gt; \quad \land \quad M[t_1t_2&gt;\)</span></p>
+    <p>O più umanamente:</p>
+    <ul>
+    <li><span class="math inline">\(t_1\)</span> e’ abilitata in <span
+    class="math inline">\(M\)</span></li>
+    <li><span class="math inline">\(t_2\)</span> non e’ abilitata in
+    <span class="math inline">\(M\)</span></li>
+    <li><span class="math inline">\(t_2\)</span> e’ abilitata nella
+    marcatura <span class="math inline">\(M&#39;\)</span> prodotta dallo
+    scatto <span class="math inline">\(M[t_1&gt; M&#39;\)</span></li>
+    </ul>
+    <p>Nel seguente esempio <span class="math inline">\(T0\)</span> e
+    <span class="math inline">\(T1\)</span>, <span
+    class="math inline">\(T0\)</span> e <span
+    class="math inline">\(T2\)</span>, <span
+    class="math inline">\(T3\)</span> e <span
+    class="math inline">\(T2\)</span></p>
+    <figure>
+    <img src="attachments/reti-di-petri-sequenza-esempio.png"
+    alt="Esempi di transizioni in sequenza" />
+    <figcaption aria-hidden="true">Esempi di transizioni in
+    sequenza</figcaption>
+    </figure>
+    <p><span class="math inline">\(T0\)</span> e <span
+    class="math inline">\(T6\)</span> no perche’ <span
+    class="math inline">\(T6\)</span> necessita di un token in <span
+    class="math inline">\(P5\)</span>, che manca. <span
+    class="math inline">\(T1\)</span> e <span
+    class="math inline">\(T0\)</span> no perche’ <span
+    class="math inline">\(T1\)</span> non e’ abilitata.</p>
+    <p>Nota che se una transizione e’ in sequenza con un’altra dipende
+    dalla situazione attuale.</p>
+    <h3 id="relazione-di-conflitto"><a
+    href="#relazione-di-conflitto">Relazione di conflitto</a></h3>
+    <h4 id="strutturale"><a href="#strutturale">Strutturale</a></h4>
+    <p>Dipende dalla topologia della rete non dalla marcatura, se e solo
+    se <span class="math inline">\(pre(t_1) \cap pre(t_2) \neq
+    \emptyset\)</span></p>
+    <h4 id="effettivo"><a href="#effettivo">Effettivo</a></h4>
+    <p>Sebbene le due transizioni possano scattare individualmente in
+    <span class="math inline">\(M\)</span> (sono entrambe abilitate),
+    c’e’ un problema se tentano di scattare simultaneamente o in
+    immediata successione.</p>
+    <p>Ho conflitto effettivo in una marcatura <span
+    class="math inline">\(M\)</span> se e solo se:</p>
+    <ul>
+    <li>riguardo il pre-set <span class="math inline">\(M[T_{1} &gt;
+    \quad \land \quad M[t_{2} &gt; \quad \land \ \exists p \in
+    pre(t_{1}) \cap pre(t_{2}) \quad M(p) &lt; W(\langle p,t_{1}
+    \rangle) + W(\langle p,t_{2} \rangle)\)</span> “esiste un posto
+    <span class="math inline">\(p\)</span> in ingresso a entrambe le
+    transizioni che non ha abbastanza token per farle scattare
+    entrambe”</li>
+    <li>riguardo il post-set <span class="math inline">\(M[t_1&gt; \land
+    M[t_2 &gt; \land \lnot M[t_{1}t_{2} &gt;\)</span></li>
+    </ul>
+    <figure>
+    <img src="attachments/reti-petri-conflitti.png"
+    alt="Esempi di transizioni in conflitto" />
+    <figcaption aria-hidden="true">Esempi di transizioni in
+    conflitto</figcaption>
+    </figure>
+    <p>Conflitto effettivo condizione sufficiente perché ci sia quello
+    strutturale.<br />
+    Conflitto strutturale condizione necessaria perché ci sia quello
+    effettivo.</p>
+    <p>Le due transizioni sono in conflitto</p>
+    <ul>
+    <li>strutturale perché hanno posti in comune</li>
+    <li>effettivo perché <span class="math inline">\(P1\)</span> non ha
+    sufficienti gettoni per farle scattare entrambe, <span
+    class="math inline">\(P0\)</span> si; basta che ce ne sia uno di
+    posto che non riesce a soddisfare le esigenze. Se facessi scattare
+    prima <span class="math inline">\(T1\)</span> non ci sarebbe il
+    conflitto effettivo.</li>
+    </ul>
+    <p>E’ possibile far scattare due transizioni assieme, purché ci
+    siano sufficienti token.</p>
+    <h4 id="esempio-di-conflitti"><a
+    href="#esempio-di-conflitti">Esempio di conflitti</a></h4>
+    <p>Quali sono i conflitti qua?</p>
+    <figure>
+    <img src="attachments/reti-di-petri-conflitti.png"
+    alt="Esempio di conflitti" />
+    <figcaption aria-hidden="true">Esempio di conflitti</figcaption>
+    </figure>
+    <ul>
+    <li>strutturali
+    <ul>
+    <li><span class="math inline">\(t_3\)</span> e <span
+    class="math inline">\(t_4\)</span></li>
+    <li><span class="math inline">\(t_2\)</span> e <span
+    class="math inline">\(t_6\)</span></li>
+    </ul></li>
+    <li>effettivi
+    <ul>
+    <li><span class="math inline">\(t_3\)</span> e <span
+    class="math inline">\(t_4\)</span></li>
+    </ul></li>
+    </ul>
+    <h3 id="relazione-di-concorrenza"><a
+    href="#relazione-di-concorrenza">Relazione di concorrenza</a></h3>
+    <p>La si può pensare come la relazione opposta alla relazione di
+    conflitto.<br />
+    Concorrenza strutturale implica concorrenza effettiva, se sono
+    abilitate le transizioni.<br />
+    </p>
+    <h4 id="strutturale-1"><a href="#strutturale">Strutturale</a></h4>
+    <p>Se e solo se <span class="math inline">\(pre(t_1) \cap pre(t_2) =
+    \emptyset\)</span> (la negazione del conflitto)</p>
+    <h4 id="effettiva"><a href="#effettiva">Effettiva</a></h4>
+    <p>Se e solo se <span class="math inline">\(M[T_{1} &gt; \quad \land
+    \quad M[t_{2} &gt; \quad \land \ \forall p \in pre(t_{1}) \cap
+    pre(t_{2}) \quad M(p) \geq W(\langle p,t_{1} \rangle) + W(\langle
+    p,t_{2} \rangle)\)</span></p>
+    <p>Vale a dire: “tutti i posti in ingresso a entrambe le transizioni
+    hanno abbastanza token per farle scattare entrambe”</p>
+    <h2 id="insieme-di-raggiungibilità"><a
+    href="#insieme-di-raggiungibilit">Insieme di
+    raggiungibilità</a></h2>
+    <p><span class="math inline">\(R\)</span> e’ l’insieme di
+    raggiungibilità, che e’ il più piccolo insieme di marcature tale
+    che:</p>
+    <ul>
+    <li><p><span class="math inline">\(M \in R(P/T, M)\)</span><br />
+    <label for="sn-3" class="sidenote-toggle sidenote-number"></label>
+    <span class="sidenote"><span class="math inline">\(P/T\)</span> sono
+    le Reti di Petri fin qua viste (Posti Transizioni)</span></p></li>
+    <li><p><span class="math inline">\((M&#39; \in R(P/T, M) \  \land \
+    \exists t \in T \ M&#39;[t&gt; M&#39;&#39;) \implies M&#39;&#39; \in
+    R(P/T, M)\)</span></p></li>
+    </ul>
+    <p>Tutte le marcature raggiungibili da una corretta play della Rete
+    di Petri.</p>
+    <h2 id="proprietà-di-limitatezza"><a
+    href="#propriet-di-limitatezza">Proprietà di limitatezza</a></h2>
+    <p><span class="math inline">\(P/T\)</span> con Marcatura <span
+    class="math inline">\(M\)</span> si dice limitata se e solo se</p>
+    <p><span class="math inline">\(\exists k \in \mathbb{N} \quad
+    \forall M&#39; \in R(P/T, M) \ \forall p \in P \quad M&#39;(p) \le
+    k\)</span></p>
+    <p>Cioè se riesco a fissare un numero massimo di token per ognuno
+    dei posti.</p>
+    <figure>
+    <a href="https://homes.di.unimi.it/bellettini/pnexec/index2.html?pn=%28P0%29%20200%2C0%0A%28P1%29%20600%2C0%0A_T0_%20400%2C0%0A%0AP0%20-%3E%20T0%0AT0%20-%3E%20P0%0AT0%20-%3E%20P1%0A%0A%40P0%3A1">
+    <img src="attachments/Pasted%20image%2020250515222150.png" > </a>
+    <figcaption>
+    Esempio di rete illimitata
+    </figcaption>
+    </figure>
+    <p>Dal momento che <span class="math inline">\(T0\)</span> può
+    scattare indefinitamente e aggiungere continuamente token in <span
+    class="math inline">\(P1\)</span> il numero di token in <span
+    class="math inline">\(P1\)</span> può crescere senza limiti.</p>
+    <p>La seguente invece non e’ illimitata, ho sempre un solo token, a
+    prescindere dal fatto che ci sia un ciclo infinito.</p>
+    <figure>
+    <a href="https://homes.di.unimi.it/bellettini/pnexec/index2.html?pn=%28P0%29%20200%2C0%0A%28P1%29%20600%2C0%0A_T1_%20400%2C200%0A_T0_%20400%2C0%0A%0AP0%20-%3E%20T0%0AT0%20-%3E%20P1%0AP1%20-%3E%20T1%0AT1%20-%3E%20P0%0A%0A%40P0%3A1">
+    <img src="attachments/Pasted%20image%2020250515222607.png" > </a>
+    <figcaption>
+    Esempio di rete con un ciclo, ma limitata
+    </figcaption>
+    </figure>
+    <p>Infinitezza nella sequenza degli scatti non corrisponde sempre ad
+    infinitezza nelle marcature raggiungibili.</p>
+    <h2 id="legame-con-automi-a-stati-finiti"><a
+    href="#legame-con-automi-a-stati-finiti">Legame con automi a stati
+    finiti</a></h2>
+    <p>Se la rete di Petri e’ limitata, allora l’insieme di
+    raggiungibilità finito, allora esiste un automa a stati finiti
+    corrispondente che ne descrive il comportamento.</p>
+    <p>Gli stati sono le possibili marcature dell’insieme di
+    raggiungibilità.</p>
+    <h2 id="vitalità-di-una-transizione"><a
+    href="#vitalit-di-una-transizione">Vitalità di una
+    transizione</a></h2>
+    <p>Una transizione <span class="math inline">\(t\)</span> in una
+    marcatura <span class="math inline">\(M\)</span> si dice viva.</p>
+    <p>Una rete si dice viva se tutte le sue transizioni sono vive.</p>
+    <h3 id="grado-0---morta"><a href="#grado-0---morta">Grado 0 -
+    morta</a></h3>
+    <p>Non e’ abilitata in <span class="math inline">\(M\)</span> e in
+    nessuna delle marcatura raggiungibili da <span
+    class="math inline">\(M\)</span> allora</p>
+    <p><span class="math display">\[\forall M&#39; \in R(P/T, M) \quad
+    \lnot M&#39;[t&gt;\]</span></p>
+    <p>Non sono più capace di far scattare una transizione.</p>
+    <p>Esempio: se c’e’ una transizione che rappresenta lo scoppio di
+    una centrale nucleare, il fatto che la transizione sia dimostrabile
+    che e’ morta e’ una cosa molto piacevole. La centrale non può
+    esplodere per il motivo rappresentato dalla transizione.</p>
+    <h3 id="grado-1"><a href="#grado-1">Grado 1</a></h3>
+    <p>Esiste almeno una marcatura raggiungibile da <span
+    class="math inline">\(M\)</span> in cui <span
+    class="math inline">\(t\)</span> e’ abilitata</p>
+    <p><span class="math inline">\(\exists M&#39; \in R(P/T, M) \quad
+    M[t&gt;\)</span></p>
+    <p>Posso essere in grado di spegnere la centrale nucleare in maniera
+    sicura.</p>
+    <h3 id="grado-2"><a href="#grado-2">Grado 2</a></h3>
+    <p>Per ogni numero <span class="math inline">\(k\)</span> (quindi
+    grande a piacere) esiste almeno una sequenza di scatti ammissibile
+    da <span class="math inline">\(M\)</span> in cui la transizione
+    <span class="math inline">\(t\)</span> scatta <span
+    class="math inline">\(k\)</span> volte</p>
+    <p><span class="math inline">\(\forall k \in \mathbb{N} \quad M[..t\
+    ..t^1 \ ..t^{k-1} \ ..t^k&gt;\)</span></p>
+    <p>Quindi il questo caso posso dire “grande a piacere ma non
+    infinite volte”.</p>
+    <h3 id="grado-3"><a href="#grado-3">Grado 3</a></h3>
+    <p>Esiste almeno una sequenza ammissibile da <span
+    class="math inline">\(M\)</span> in cui la transizione <span
+    class="math inline">\(t\)</span> scatta infinite volte.</p>
+    <h3 id="grado-4---viva"><a href="#grado-4---viva">Grado 4 -
+    viva</a></h3>
+    <p>In qualunque Marcatura raggiungibile da <span
+    class="math inline">\(M\)</span>, <span
+    class="math inline">\(t\)</span> non e’ morta</p>
+    <p><span class="math inline">\(\forall M&#39; \in R(P/T, M) \quad
+    \exists M&#39;&#39; \in R(P/T, M&#39;) \quad
+    M&#39;&#39;[t&gt;\)</span></p>
+    <p>Una rete si dice viva quando tutte le sue transizioni sono
+    vive.</p>
+    <h2 id="esempi"><a href="#esempi">Esempi</a></h2>
+    <figure>
+    <a href="https://homes.di.unimi.it/bellettini/pnexec/index2.html?pn=%28P0%29%20200%2C0%0A%28P1%29%20600%2C0%0A_T1_%20400%2C200%0A_T0_%20400%2C0%0A%0AP0%20-%3E%20T0%0AP1%20-%3E%20T0%0AP0%20-%3E%20T1%0AT1%20-%3E%20P1%0A%0A%40P0%3A1">
+    <img src="attachments/Pasted%20image%2020250515223025.png" > </a>
+    <figcaption>
+    Esempi di vitalita’
+    </figcaption>
+    </figure>
+    <ul>
+    <li><span class="math inline">\(T0\)</span> e’ morta</li>
+    <li><span class="math inline">\(T1\)</span> e’ di grado 1</li>
+    </ul>
+    <figure>
+    <a href="https://homes.di.unimi.it/bellettini/pnexec/index2.html?pn=%28P0%29%20200%2C0%0A%28P1%29%20600%2C0%0A_T1_%20400%2C200%0A_T0_%20400%2C0%0A_T2_%20200%2C%20200%0A%0AP0%20-%3E%20T0%0AP1%20-%3E%20T0%0AP0%20-%3E%20T1%0AT1%20-%3E%20P1%0AP0%20-%3E%20T2%0AT2%20-%3E%20P0%0A%0A%40P0%3A1">
+    <img src="attachments/Pasted%20image%2020250515223825.png" > </a>
+    <figcaption>
+    Cosa cambia cosi?
+    </figcaption>
+    </figure>
+    <ul>
+    <li><span class="math inline">\(T0\)</span> resta morta</li>
+    <li><span class="math inline">\(T1\)</span> resta di grado 1</li>
+    <li><span class="math inline">\(T2\)</span> e’ di grado 3</li>
+    </ul>
+    <h2 id="estensioni"><a href="#estensioni">Estensioni</a></h2>
+    <h3 id="capacita-dei-posti"><a href="#capacita-dei-posti">Capacita’
+    dei posti</a></h3>
+    <p>Posso fissare un massimo numero di Token ammissibili per un
+    Posto. La regola di abilitazione cambia con una aggiunta:</p>
+    <ul>
+    <li><span class="math inline">\(\forall p \in pre(t) \qquad M(p) \ge
+    W(\langle p, t \rangle)\)</span> (preesistente)</li>
+    <li><span class="math inline">\(\forall p \in post(t) \qquad M(p) +
+    W(\langle t,p \rangle) \le K(p)\)</span></li>
+    </ul>
+    <p>Dove <span class="math inline">\(K(p)\)</span> e’ la capacita’ di
+    <span class="math inline">\(p\)</span>.</p>
+    <h3 id="posto-complementare"><a href="#posto-complementare">Posto
+    complementare</a></h3>
+    <p>Un posto <span class="math inline">\(p_c\)</span> si dice
+    complementare rispetto ad un posto <span
+    class="math inline">\(p\)</span> quando ha archi di pari peso verso
+    le stesse transizioni di <span class="math inline">\(p\)</span>, ma
+    con verso opposto.</p>
+    <p>Grazie ai posti complementari “reti con capacita’ di posti
+    possono essere tradotte in rete senza capacita’ di posti” senza
+    complicare troppo la cosa.</p>
+    <p><span class="math inline">\(\forall t \in pre(p) \quad \exists
+    \langle p_{c}, t \rangle \in F \quad W(\langle p_{c},t \rangle) =
+    W(\langle t,p \rangle)\)</span></p>
+    <p><span class="math inline">\(\forall t \in post(p) \quad \exists
+    \langle t,p_{c} \rangle \in F \quad W(\langle t, p_{c} \rangle) =
+    W(\langle p,t \rangle)\)</span></p>
+    <figure>
+    <img src="attachments/Pasted%20image%2020250127183519.png"
+    alt="Un esempio di introduzione di posto complementare, in nero la rete prima, in verde dopo, notare i token sui due posti complementari" />
+    <figcaption aria-hidden="true">Un esempio di introduzione di posto
+    complementare, in nero la rete prima, in verde dopo, notare i token
+    sui due posti complementari</figcaption>
+    </figure>
+    <p>Algoritmo per l’introduzione di un posto complementare:</p>
+    <ul>
+    <li>aggiungere il posto complementare (o piu’ di uno come
+    nell’esempio)</li>
+    <li>la marcatura iniziale e’ (ad esempio per <span
+    class="math inline">\(p_1\)</span>) <span
+    class="math inline">\(M&#39;_0(p&#39;_1) = K(p_1) - M_0(p_1) = 2 - 1
+    = 1\)</span></li>
+    <li>si aggiungono gli archi verso le direzioni opposte nelle
+    transizioni interessate</li>
+    </ul>
+    <h3 id="archi-inibitori"><a href="#archi-inibitori">Archi
+    inibitori</a></h3>
+    <p>A differenza dei normali archi, permettono di dire che non deve
+    essere presente alcun token affinché la transizione sia abilitata
+    (richiedono la mancanza di gettoni in un posto perché la transizione
+    sia abilitata).</p>
+    <p>In caso di rete limitata la potenza espressiva di una rete che
+    sfrutta gli archi inibitori non cambia, perché esistendo un limite
+    massimo di gettoni <span class="math inline">\(k\)</span>
+    all’interno della rete e’ sufficiente creare un posto complementare
+    a <span class="math inline">\(p\)</span> detto <span
+    class="math inline">\(p_c\)</span> tale che</p>
+    <p><span class="math display">\[M(p) + M(p_c) &lt; k \]</span></p>
+    <h2 id="rete-pura"><a href="#rete-pura">Rete pura</a></h2>
+    <p>Una rete e’ detta pura se <span class="math inline">\(\forall t
+    \in T \quad pre(t) \cap post(t) = \emptyset\)</span></p>
+    <p>Il vantaggio di una rete pura e’ la semplicità di lettura che si
+    ottiene, perché non avendo archi da e verso la stessa transizione
+    viene più semplice ragionare</p>
+    <ul>
+    <li>su regole di scatto</li>
+    <li>sull’ambiguità di ciò che si sta osservando</li>
+    <li>ci sono problemi nell’implementazione di archi inibitori</li>
+    </ul>
+    <p>Nel caso di un rete non pura la regola per lo scatto di una
+    transizione cambia: devono essere considerati anche i posti nel
+    post-set che sono anche nel preset.</p>
+    <h2 id="eliminare-i-pesi-degli-archi"><a
+    href="#eliminare-i-pesi-degli-archi">Eliminare i pesi degli
+    archi</a></h2>
+    <p>Per semplificare la rete.</p>
+    <p>Voglio eliminare i pesi in maniera atomica, in modo che non sia
+    distinguibile lo stato intermedio.<br />
+    Creo un nuovo posto e una nuova transizione.</p>
+    <p><img
+    src="attachments/reti-di-petri-eliminazione-archi.png" /></p>
+    <p>Per 2 gettoni in uscita da una transizione posso:</p>
+    <ul>
+    <li>x TODO vedi notebook</li>
+    </ul>
+    <p>Per 2 gettoni in entrata ad una transizione e’ un delirio, perché
+    devo creare una macchina a stati finiti per contare i gettoni in
+    uscita.</p>
+    <h2 id="rete-conservativa-rispetto-ad-una-funzione-h"><a
+    href="#rete-conservativa-rispetto-ad-una-funzione-h">Rete
+    conservativa rispetto ad una funzione H</a></h2>
+    <p>Una rete P/T con marcatura <span
+    class="math inline">\(M_0\)</span> si dice conservativa rispetto ad
+    una funzione <span class="math inline">\(H:P \rightarrow
+    \mathbb{N}^+\)</span> (quindi <span class="math inline">\(H\)</span>
+    deve esistere) se e solo se:</p>
+    <p><span class="math display">\[
+    \begin{align}
+    &amp;\ \forall M \in R(P/T,M_0) \quad \sum\nolimits_{p\in P}
+    H(p)M(p) = \sum\nolimits_{p\in P}H(p)M_0(p) \newline
+    \end{align}
+    \]</span></p>
+    <h2 id="rete-strettamente-conservativa"><a
+    href="#rete-strettamente-conservativa">Rete strettamente
+    conservativa</a></h2>
+    <p>“Tanti gettoni creo, tanti ne distruggo”</p>
+    <p><span class="math display">\[
+    \begin{align}
+    &amp;\ \forall M \in R(P/T,M_0) \quad \sum\nolimits_{p\in P} M(p) =
+    \sum\nolimits_{p\in P}M_0(p) \newline
+    \end{align}
+    \]</span> Posso anche esprimerla in questo modo:</p>
+    <p><span class="math display">\[
+    \begin{align}
+    &amp;\ \forall M \in R(P/T,M_0) \quad \sum\nolimits_{p\in pre(t)}
+    W(\langle p,t \rangle) = \sum\nolimits_{p\in post(t)}W(\langle t,p
+    \rangle) \newline
+    \end{align}
+    \]</span></p>
+    <p>Che vuol dire: il numero di gettoni distrutti dallo scatto di una
+    transizione e’ uguale al numero di gettoni che crea.</p>
+    <p>E’ una condizione dinamica, perché <span
+    class="math inline">\(t\)</span> deve essere non morta, quindi non
+    riesco a farlo staticamente.</p>
+    <h3 id="legame-con-limitatezza"><a
+    href="#legame-con-limitatezza">Legame con limitatezza</a></h3>
+    <p>Se la rete e’ illimitata sicuramente non e’ conservativa.<br />
+    Se la rete e’ conservativa allora e’ limitata.</p>
+    <p>TODO Esempio di rete limitata ma non conservativa.</p>
+    <h2 id="stato-base-e-stato-reversibile"><a
+    href="#stato-base-e-stato-reversibile">Stato base e stato
+    reversibile</a></h2>
+    <p>Una marcatura <span class="math inline">\(M&#39;\)</span> e’
+    detta stato base se</p>
+    <p><span class="math display">\[
+    \begin{align}
+    &amp;\ \forall M \in R(P/T,M_0) \quad M&#39; \in R(P/T,M) \newline
+    \end{align}
+    \]</span></p>
+    <p>“Ovunque io arrivi lo stato che chiamo stato base e’ comunque
+    raggiungibile”.</p>
+    <p>Quando la marcatura iniziale e’ lo stato base allora la rete e’
+    reversibile.</p>
+    <h2 id="tecniche-di-analisi"><a href="#tecniche-di-analisi">Tecniche
+    di analisi</a></h2>
+    <p>Possibili domande:</p>
+    <ul>
+    <li>può essere raggiunta una determinata marcatura?</li>
+    <li>e’ possibile una certa sequenza di scatti?</li>
+    <li>esiste uno stato di deadlock?</li>
+    <li>la rete (o una certa transizione) e’ viva?</li>
+    </ul>
+    <p>Tecniche per ottenere ciò:</p>
+    <ul>
+    <li>dinamiche
+    <ul>
+    <li>albero (grafo) delle marcature raggiungibili</li>
+    <li>albero (grafo) della copertura delle marcature
+    raggiungibili</li>
+    </ul></li>
+    <li>statiche (strutturali)
+    <ul>
+    <li>identificazione P-invarianti</li>
+    <li>identificazione T-invarianti</li>
+    </ul></li>
+    </ul>
+    <h3 id="albero-di-raggiungibilità"><a
+    href="#albero-di-raggiungibilit">Albero di raggiungibilità</a></h3>
+    <p>Non ci sa dire se una rete e’ limitata o no.</p>
+    <p>Può anche servire a verificare se valgono le proprietà che ho
+    scelto per la rete che ho disegnato.</p>
+    <ol type="1">
+    <li>crea la radice corrispondente alla marcatura iniziale, etichetta
+    il nodo come nuovo</li>
+    <li>finché esistono nodi etichettati nuovo esegui i seguenti passi:
+    <ol type="1">
+    <li>seleziona una marcatura <span class="math inline">\(M\)</span>
+    con etichetta nuovo e toglie etichetta</li>
+    <li>se <span class="math inline">\(M\)</span> e’ identica ad una
+    marcatura sul cammino dalla radice ad <span
+    class="math inline">\(M\)</span> etichetta <span
+    class="math inline">\(M\)</span> come duplicata e passa ad un’altra
+    marcatura</li>
+    <li>se nessuna transizione e’ abilitata in M, etichetta la marcatura
+    come finale</li>
+    <li>finché esistono transizione abilitate in <span
+    class="math inline">\(M\)</span> eseguiti seguenti per ogni
+    transizione <span class="math inline">\(t\)</span> abilitata in
+    <span class="math inline">\(M\)</span>:
+    <ol type="1">
+    <li>crea la marcatura <span class="math inline">\(M&#39;\)</span>
+    prodotta dallo scatto di <span class="math inline">\(t\)</span></li>
+    <li>crea un nodo corrispondente a <span
+    class="math inline">\(M&#39;\)</span>, aggiungi un arco da <span
+    class="math inline">\(M\)</span> a <span
+    class="math inline">\(M&#39;\)</span> ed etichetta <span
+    class="math inline">\(M&#39;\)</span> come nuovo</li>
+    </ol></li>
+    </ol></li>
+    </ol>
+    <p>A questo punto una volta che ho tutti gli stati posso facilmente
+    controllare se ci sono stati illegali, ad esempio controllandoli uno
+    per uno vedo che</p>
+    <ul>
+    <li>non ci può mai essere sia <span
+    class="math inline">\(LettoriAttivi\)</span> che <span
+    class="math inline">\(ScrittoriAttivi\)</span> contemporaneamente,
+    ovvero che non ci siano valori <span
+    class="math inline">\(&gt;0\)</span> in posizione 2 e in posizione
+    5</li>
+    <li>non ci può mai essere più di uno scrittore attivo
+    contemporaneamente, ovvero che non ci sia mai un valore <span
+    class="math inline">\(&gt;1\)</span> in posizione 5</li>
+    </ul>
+    <p><img src="attachments/Pasted%20image%2020250518124120.png" /></p>
+    <h3 id="copribilità"><a href="#copribilit">Copribilità</a></h3>
+    <p>Una Marcatura <span class="math inline">\(M\)</span> copre una
+    Marcatura <span class="math inline">\(M&#39;\)</span> (<span
+    class="math inline">\(M&#39;\)</span> e’ coperta da <span
+    class="math inline">\(M\)</span>) se e solo se: <span
+    class="math inline">\(\forall p \in P \quad M(p) \ge
+    M&#39;(p)\)</span></p>
+    <p>I posti per cui <span class="math inline">\(M(p) &gt;
+    M&#39;(p)\)</span> si dice che sono coperti in maniera propria.</p>
+    <p>Una Marcatura <span class="math inline">\(M\)</span> e’ detta
+    copribile a partire da una marcatura <span
+    class="math inline">\(M&#39;\)</span> se esiste una marcatura <span
+    class="math inline">\(M&#39;&#39; \in R(P/T, M&#39;)\)</span> che
+    copre <span class="math inline">\(M\)</span>.</p>
+    <p>“Ho più gettoni posto per posto”.<br />
+    Copre in maniera propria se <span class="math inline">\(M(p) \gt
+    M&#39;(p)\)</span></p>
+    <p>E’ utile perché se <span class="math inline">\(M\)</span> e’ la
+    marcatura minima per abilitare <span
+    class="math inline">\(t\)</span></p>
+    <p><span class="math inline">\(\forall p \in pre(t) \quad M(p) =
+    W(\langle p,t \rangle)\)</span> e <span
+    class="math inline">\(\forall p \in P \setminus pre(t) \quad M(p) =
+    0\)</span></p>
+    <p>allora la transizione <span class="math inline">\(t\)</span> e’
+    morta se e solo se <span class="math inline">\(M\)</span> non e’
+    copribile a partire dalla Marcatura corrente.</p>
+    <p>Posso avere un albero di copertura, per generarlo c’e’ un
+    algoritmo simile a quello usato in precedenza per l’albero di
+    raggiungibilità (in grassetto la parte nuova):</p>
+    <ol type="1">
+    <li>crea la radice corrispondente alla marcatura iniziale, etichetta
+    il nodo come nuovo</li>
+    <li>finché esistono nodi etichettati nuovo esegui i seguenti passi:
+    <ol type="1">
+    <li>seleziona una marcatura <span class="math inline">\(M\)</span>
+    con etichetta nuovo e toglie etichetta</li>
+    <li>se <span class="math inline">\(M\)</span> e’ identica ad una
+    marcatura sul cammino dalla radice ad <span
+    class="math inline">\(M\)</span> etichetta <span
+    class="math inline">\(M\)</span> come duplicata e passa ad un’altra
+    marcatura</li>
+    <li>se nessuna transizione e’ abilitata in M, etichetta la marcatura
+    come finale</li>
+    <li>finché esistono transizione abilitate in <span
+    class="math inline">\(M\)</span> eseguiti seguenti per ogni
+    transizione <span class="math inline">\(t\)</span> abilitata in
+    <span class="math inline">\(M\)</span>:
+    <ol type="1">
+    <li>crea la marcatura <span class="math inline">\(M&#39;\)</span>
+    prodotta dallo scatto di <span class="math inline">\(t\)</span></li>
+    <li><strong>se sul cammino dalla radica a <span
+    class="math inline">\(M\)</span> esiste esiste una marcatura <span
+    class="math inline">\(M&#39;&#39;\)</span> coperta da <span
+    class="math inline">\(M&#39;\)</span>, modifica <span
+    class="math inline">\(M&#39;\)</span> scrivendo <span
+    class="math inline">\(\omega\)</span> in tutte le posizioni
+    corrispondenti a marcature proprie</strong></li>
+    <li>crea un nodo corrispondente a <span
+    class="math inline">\(M&#39;\)</span>, aggiungi un arco da <span
+    class="math inline">\(M\)</span> a <span
+    class="math inline">\(M&#39;\)</span> ed etichetta <span
+    class="math inline">\(M&#39;\)</span> come nuovo</li>
+    </ol></li>
+    </ol></li>
+    </ol>
+    <p>Nel momento in cui applico l’albero di copribilità ottengo tutti
+    i benefici dell’albero di raggiungibilità, più il fatto di poter
+    chiedere qualcosa anche se la rete non e’ limitata.</p>
+    <h3 id="analisi-di-copribilità"><a
+    href="#analisi-di-copribilit">Analisi di copribilità</a></h3>
+    <ul>
+    <li>una rete di Petri e’ limitata se <span
+    class="math inline">\(\omega\)</span> non compare in nessun nodo
+    dell’albero di copertura</li>
+    <li>una rete di Petri e’ binaria se nell’albero di copertura
+    compaiono solo 0 e 1</li>
+    <li>una transizione e’ morta se non appare come etichetta din un
+    arco dell’albero di copertura</li>
+    <li>condizione necessaria (non sufficiente) affinché una marcatura
+    <span class="math inline">\(M\)</span> sia raggiungibile e’
+    l’esistenza di un nodo etichettato con una marcatura che copra <span
+    class="math inline">\(M\)</span></li>
+    <li>non e’ possibile decidere se una rete e’ viva</li>
+    </ul>
+    <h3 id="albero-di-copertura"><a href="#albero-di-copertura">Albero
+    di copertura</a></h3>
+    <figure>
+    <img src="attachments/Pasted%20image%2020250524145754.png"
+    alt="Esempio di albero di copertura" />
+    <figcaption aria-hidden="true">Esempio di albero di
+    copertura</figcaption>
+    </figure>
+    <p>Partendo da questo albero di copertura vediamo cosa possiamo
+    capire.</p>
+    <ol type="1">
+    <li>essendo che ogni stato ha tre valori allora vuol dire che ci
+    sono tre posti</li>
+    <li>grazie a <span class="math inline">\(T_0\)</span> si ottengono
+    gettoni nel terzo posto, <span class="math inline">\(P_2\)</span>,
+    non sappiamo quali a causa di <span
+    class="math inline">\(\omega\)</span></li>
+    <li>mi chiedo <span class="math inline">\(T_0\)</span> e’ sempre
+    abilitata?</li>
+    </ol>
+    <h3 id="rappresentazione-matriciale"><a
+    href="#rappresentazione-matriciale">Rappresentazione
+    matriciale</a></h3>
+    <ul>
+    <li><span class="math inline">\(I\)</span> archi in input alle
+    transizioni</li>
+    <li><span class="math inline">\(O\)</span> archi in output alle
+    transizioni</li>
+    <li><span class="math inline">\(M\)</span> marcatura</li>
+    <li><span class="math inline">\(p\)</span> assegna un indice ad ogni
+    posto (un indice identifica un posto)</li>
+    <li><span class="math inline">\(t\)</span> assegna un indice ad ogni
+    transizione</li>
+    </ul>
+    <p><span class="math inline">\(0\)</span> e’ il NullObject pattern
+    per quanto riguarda le Reti di Petri.</p>
+    <figure>
+    <img src="attachments/Pasted%20image%2020250705105511.png"
+    alt="Esempio di utilizzo delle matrici per una rete già vista" />
+    <figcaption aria-hidden="true">Esempio di utilizzo delle matrici per
+    una rete già vista</figcaption>
+    </figure>
+    <p>La transizione <span class="math inline">\(t_j\)</span> e’
+    abilitata in una marcatura espressa dal vettore m se e solo se il
+    vettore colonna della matrice di input della colonna <span
+    class="math inline">\(j\)</span> e’ minore uguale elemento per
+    elemento a <span class="math inline">\(m\)</span>.</p>
+    <h3 id="matrice-di-incidenza"><a
+    href="#matrice-di-incidenza">Matrice di incidenza</a></h3>
+    <p>Risulta utile per ottimizzare il calcolo dello scatto di una
+    transizione. E’ sufficiente per stabilire la abilitazione solo se
+    <span class="math inline">\(pre(t) \cap post(t) =
+    \emptyset\)</span></p>
+    <h3 id="p-invarianti-e-t-invarianti"><a
+    href="#p-invarianti-e-t-invarianti">P-invarianti e
+    T-invarianti</a></h3>
+    <p>Proprietà dinamiche.</p>
+    <h4 id="p-invariante"><a href="#p-invariante">P-invariante</a></h4>
+    <p>Un vettore <span class="math inline">\(h\)</span> di dimensione
+    <span class="math inline">\(\mid P \mid\)</span> e’ un P-invariante
+    se e solo se: <span class="math inline">\(\forall m&#39; \in R(P/T,
+    m) \quad hm = hm&#39;\)</span></p>
+    <p>Capace di rendere costante la somma dei gettoni per una funzione
+    <span class="math inline">\(h\)</span> al variare della marcatura
+    per qualunque marcatura raggiungibile.</p>
+    <h2 id="reti-di-petri-temporizzate"><a
+    href="#reti-di-petri-temporizzate">Reti di Petri
+    Temporizzate</a></h2>
+    <p>Gettoni non più anonimi: ragiono sul tempo come contenuto
+    fondante.</p>
+    <p>Deterministico: succede o non succede; “la centrale nucleare non
+    può esplodere”  Stocastico: qualcosa governato da una probabilità;
+    “in media una transizione scatta quando…”; usato quando voglio
+    prestazioni</p>
+    <ul>
+    <li>soft real-time: “se schiaccio in Word un tasto non e’ un
+    problema enorme se il relativo carattere appare dopo 1 o 2 secondi”,
+    posso derogare alla deadline senza che ci sia perdita di valore</li>
+    <li>firm real-time: superata una deadline non sono più interessato:
+    “se nello streaming arriva un pacchetto audio dopo rispetto a quando
+    dovevo riprodurlo non mi interessa più”</li>
+    <li>hard real-time: non ci possono essere errori; “esplode la
+    centrale nucleare” non rimediabile</li>
+    </ul>
+    <p>“Come aggiungiamo il tempo alle Reti di Petri?”</p>
+    <ul>
+    <li>ritardi sui posti</li>
+    <li>ritardi sulle transizioni</li>
+    <li>tempi di scatto sulle transizioni</li>
+    </ul>
+    <h3 id="time-basic-nets"><a href="#time-basic-nets">Time Basic
+    Nets</a></h3>
+    <p>Noi vediamo le Time Basic Nets:</p>
+    <ul>
+    <li>tempo associato alle transizioni</li>
+    <li>tempo associato ai gettoni</li>
+    <li>vengono associati
+    <ul>
+    <li>degli intervalli di tempi di scatto possibili</li>
+    <li>definiti in modo dinamico</li>
+    <li>come funzioni che possono fare riferimento ai tempi dei singoli
+    gettoni in ingresso</li>
+    </ul></li>
+    <li>niente capacita’ sui posti ne pesi sugli archi</li>
+    </ul>
+    <p>Una transizione e’ abilitata a scattare quando i gettoni nel
+    preset sono disponibili, guardando gli enab-time. L’enab-time e’ il
+    massimo tra i tempi legati ad ogni token.</p>
+    <p>I token in uscita hanno stesso tempo del tempo di scatto della
+    transizione.</p>
+    <h4 id="formalmente"><a href="#formalmente">Formalmente</a></h4>
+    <p>&lt;P, T, O; F, tf, <span
+    class="math inline">\(m_0\)</span>&gt;</p>
+    <ul>
+    <li>P,T; F come nelle Reti di Petri normali</li>
+    <li>O e’ un insieme numerico (il dominio temporale)</li>
+    <li>tf associa ad ogni transizione una funziona temporale <span
+    class="math inline">\(tf_t\)</span></li>
+    <li><span class="math inline">\(m_0: P \rightarrow \{ (\theta,
+    mul(\theta)) \ |\ \theta \in O \}\)</span>, e’ un multi-insieme: ad
+    ogni posto associa un <span class="math inline">\(\theta\)</span>
+    con una certa molteplicità (es. 5 token con tempo 7, 2 con tempo 9,
+    1 con tempo 10); esprime la marcatura iniziale</li>
+    </ul>
+    <h4 id="semantica-debole"><a href="#semantica-debole">Semantica
+    debole</a></h4>
+    <p>Utile per modellare eventi solo parzialmente definiti, eventi non
+    modellati o modellizzabili una decisione umana un guasto.</p>
+    <ul>
+    <li>una transizione può scattare solo in uno degli istanti
+    identificata dalla sua funzione temporale</li>
+    <li>una transizione non può scattare prima di essere stata
+    abilitata</li>
+    <li>una transizione anche se abilitata non e’ forzata a
+    scattare</li>
+    </ul>
+    <p>Un guasto - la fiamma si spegne a causa del vento - e’ possibile
+    ma potrebbe anche non accadere mai.</p>
+    <figure>
+    <img src="attachments/Pasted%20image%2020250902230228.png"
+    alt="Esempio di semantica debole, se non avviene nei primi 10ms non avviene più" />
+    <figcaption aria-hidden="true">Esempio di semantica debole, se non
+    avviene nei primi 10ms non avviene più</figcaption>
+    </figure>
+    <p>Tre assiomi:</p>
+    <ol type="1">
+    <li>monotonicità rispetto alla marcatura iniziale città’
+    <ul>
+    <li>tutti i tempi di scatto di una sequenza di scatto devono essere
+    non minori di uno qualunque dei timestamp dei token della marcatura
+    iniziale</li>
+    <li>non deve contenere token prodotti nel futuro</li>
+    </ul></li>
+    <li>monotonicità dei tempi di scatto di una sequenza
+    <ul>
+    <li>tutti i tempi di scatto di una sequenza di scatti devono essere
+    ordinati nella sequenza in maniera monotonicamente non
+    decrescente</li>
+    <li>il tempo non torna indietro</li>
+    <li>due o più transizioni possono scattare nello stesso istante</li>
+    </ul></li>
+    <li>divergenza del tempo (non-zenonicità)
+    <ul>
+    <li>non e’ possibile avere un numero infinito di scatti in un
+    intervallo di tempo finito</li>
+    <li>il tempo avanza, non si può fermare e non e’ suddivisibile in
+    infinitesimi</li>
+    </ul></li>
+    </ol>
+    <p>Sequenze di scatti che soddisfano gli assiomi 1 e 3 sono chiamate
+    sequenze ammissibili in semantica debole.<br />
+    Se aggiungiamo anche l’assioma 2 ottieni sequenze ammissibili in
+    semantica monotonica debole, cioè gli scatti sono ordinati per tempo
+    di scatto crescente.</p>
+    <p>Con la semantica monotonica debole perdo in località, perché “se
+    qualcuno fa scattare una certa transizione, sono vincolato a non
+    poter far scattare nulla prima di quello scatto”.</p>
+    <p>Per ogni sequenza di scatti debole <span
+    class="math inline">\(s\)</span> esiste una sequenza di scatti
+    monotonica debole ottenibile per semplice permutazione delle
+    occorrenze degli scatti.</p>
+    <p>Semantica debole ci dice: “guardiamo localmente, guardiamo gli
+    insiemi di tempi di scatto calcolati sull’enab sui gettoni in
+    ingresso alla transizione, se non e’ vuoto, se vogliamo, possiamo
+    farla scattare”</p>
+    <h4 id="semantica-forte"><a href="#semantica-forte">Semantica
+    forte</a></h4>
+    <ul>
+    <li>una transizione può scattare solo in uno degli istanti
+    identificata dalla sua funzione temporale</li>
+    <li>una transizione non può scattare prima di essere stata
+    abilitata</li>
+    <li>una transizione deve scattare ad un suo possibile tempo di
+    scatto a meno che non venga disabilitata prima del proprio massimo
+    tempo di scatto ammissibile</li>
+    </ul>
+    <p>Il terzo punto e’ la differenza con la semantica debole. Non vuol
+    dire che debba scattare sempre, potrebbe non scattare sempre: ad
+    esempio una valvola da girare al tempo 5 ma al tempo 3 la centrale
+    nucleare esplode, quindi non c’e’ più valvola da girare.</p>
+    <p>Ulteriori assiomi:</p>
+    <ol start="4" type="1">
+    <li>Il massimo tempo di scatto di tutte le abilitazioni nella
+    marcatura iniziale deve essere maggiore o uguale del massimo
+    timestamp associato ad un token della marcatura: “Come faccio ad
+    avere quel token generato al tempo 18 se c’era qualcosa che doveva
+    accadere prima al tempo 15.”</li>
+    <li>una sequenza di scatti monotonica debole che parta da una
+    marcatura forte iniziale (rispetta assioma 4) e’ una sequenza di
+    scatti forte se per ogni scatto il tempo di scatto della transizione
+    non e’ maggiore del massimo tempo di scatto di un’altra transizione
+    abilitata: “non faccio avvenire qualcosa dopo il mio orizzonte
+    temporale”</li>
+    </ol>
+    <h4 id="mixed"><a href="#mixed">Mixed</a></h4>
+    <p>Alcune transizioni seguono la semantica forte, altre la semantica
+    debole.</p>
+    <h4 id="esempio"><a href="#esempio">Esempio</a></h4>
+    <figure>
+    <img src="attachments/Pasted%20image%2020250906133814.png"
+    alt="Esempio di Rete di Petri con mixed semantic" />
+    <figcaption aria-hidden="true">Esempio di Rete di Petri con mixed
+    semantic</figcaption>
+    </figure>
+    <ol type="1">
+    <li>mi chiedo quali sono le transizioni topologicamente
+    abilitate</li>
+    <li>aggiungiamo i vincoli delle time function</li>
+    </ol>
+    <p>Risposte</p>
+    <ol type="1">
+    <li>tutte e tre sono topologicamente abilitate</li>
+    <li>vedi sotto</li>
+    </ol>
+    <p>enab-time e’ il massimo dei tempi dei token.<br />
+    <span class="math inline">\((t_1,\ t_2)\)</span> vuol dire che <span
+    class="math inline">\(t_1\)</span> e’ il tempo minimo di scatto,
+    <span class="math inline">\(t_2\)</span> e’ il tempo massimo di
+    scatto.<br />
+    Tempo abilitazione <span class="math inline">\(T_1\)</span> e’
+    1.</p>
+    <p><img src="attachments/Pasted%20image%2020250906134119.png" /></p>
+    <h2 id="esercizi"><a href="#esercizi">Esercizi</a></h2>
+    <h3
+    id="trovare-una-rete-limitata-ma-non-conservativa-trovando-la-funzione-h."><a
+    href="#trovare-una-rete-limitata-ma-non-conservativa-trovando-la-funzione-h">Trovare
+    una rete limitata ma non conservativa, trovando la funzione
+    H.</a></h3>
+    <figure>
+    <a href="https://homes.di.unimi.it/bellettini/pnexec/index2.html?pn=%28P1%29%20100%2C0%0A%0A_T_%20350%2C%200%0AP1%20-%3E%20T%0A%0A%40P1%3A1%0A%0A">
+    <img src="attachments/Pasted%20image%2020250520000222.png" > </a>
+    <figcaption>
+    Rete limitata ma non conservativa
+    </figcaption>
+    </figure>
+    <figure>
+    <a href="https://homes.di.unimi.it/bellettini/pnexec/index2.html?pn=%28P1%29%20100%2C0%0A_T1_%20300%2C-100%0A%28P2%29%20500%2C%200%0A_T2_%20300%2C%20100%0A%0AP1%20-%3E%20T1%0AT1%20-%3E%20P2%0AP1%20-%3E%20T2%0AT2%20-2%3E%20P2%0A%0A%40P1%3A1">
+    <img src="attachments/Pasted%20image%2020250520001848.png" > </a>
+    <figcaption>
+    Rete limitata ma non conservativa, meno banale
+    </figcaption>
+    </figure>
+    <figure>
+    <a href="https://homes.di.unimi.it/bellettini/pnexec/index2.html?pn=%28P1%29%20100%2C0%0A_T1_%20300%2C-100%0A%28P2%29%20500%2C%200%0A_T2_%20300%2C%20100%0A_T3_%20300%2C%20200%0A%0AP1%20-%3E%20T1%0AT1%20-%3E%20P2%0AP1%20-%3E%20T2%0AT2%20-2%3E%20P2%0AP2%20-2%3E%20T3%0AT3%20-%3E%20P1%0A%0A%40P1%3A1">
+    <img src="attachments/Pasted%20image%2020250520002250.png" > </a>
+    <figcaption>
+    Rete limitata ma non conservativa, con sequenze infinite
+    </figcaption>
+    </figure>
+    <h3
+    id="riguardo-la-limitatezza-la-cardinalità-dellinsieme-di-raggiungibilità-e-infinito-oppure-no"><a
+    href="#riguardo-la-limitatezza-la-cardinalit-dellinsieme-di-raggiungibilit-e-infinito-oppure-no">Riguardo
+    la limitatezza, la cardinalità dell’insieme di raggiungibilità e’
+    infinito oppure no?</a></h3>
+    <h3 id="cosa-sappiamo-di-questa-rete"><a
+    href="#cosa-sappiamo-di-questa-rete">“Cosa sappiamo di questa
+    rete?”</a></h3>
+    <figure>
+    <img src="attachments/Pasted%20image%2020250518153635.png"
+    alt="Dall’albero di copribilità trovare informazioni riguardo la rete" />
+    <figcaption aria-hidden="true">Dall’albero di copribilità trovare
+    informazioni riguardo la rete</figcaption>
+    </figure>
+    </article>
+  </main>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script src="js/prism.min.js"></script>
+</body>

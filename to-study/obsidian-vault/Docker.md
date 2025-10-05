@@ -3,6 +3,20 @@ cssclasses:
 tags:
   - docker
 ---
+## Dev containers
+
+Example configuration
+
+```
+{  
+  "name": "Kuder Dev Container",  
+  "image": "kuder:latest",  
+  "workspaceMount": "source=${localWorkspaceFolder},target=/app,type=bind",  
+  "workspaceFolder": "/app",  
+  "forwardPorts": [7888]  
+}
+```
+
 ## Running a container
 
 Remember to add `-i` if you need interactive mode, otherwise any command you run in the container will wait indefinitely.\
@@ -21,3 +35,7 @@ else
   echo "Not running inside a Docker container (.dockerenv not found)"
 fi
 ```
+
+## Override `ENTRYPOINT`
+
+Just pass `--entrypoint` to `docker run ...`

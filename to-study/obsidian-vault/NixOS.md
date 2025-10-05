@@ -4,12 +4,17 @@ cssclasses:
 tags:
   - nixos
 ---
-FAQs
+## Look for config options
 
-https://nixos.wiki/wiki/FAQ
+https://nix-community.github.io/home-manager/options.xhtml
 
+or 
 
-## Run a command in a subshell
+```bash
+man home-configuration.nix
+```
+
+## Run a command in a sub-shell
 
 ```language-bash
 $ nix-shell -p cowsay --run "cowsay oh hai!"

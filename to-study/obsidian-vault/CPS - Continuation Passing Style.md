@@ -1,15 +1,9 @@
 
 [https://www.youtube.com/watch?v=2GfFlfToBCo](Tutorial Tuesday #1: Intro to continuations, call/cc, and CPS)
 
-### Continuations
-
-ABCs of learning continuations, always be learning about continuations.
-
-  
+## Continuations
 
 Continuation = "The rest of the work that has to happen to finish evaluation of your program"
-
-  
 
 Instead of representing the rest of the computation in the stack, we represent it in the heap.
 
@@ -21,7 +15,19 @@ Continuations allow you to
 
  * simulate exceptions, loops
 
-### APS - Accumulator Passing Style
+
+## CPS
+
+Continuation Passing Style
+  
+
+`(f v) = (fC v id)` where `f` is the function, `v` the value, `fC` the lifted function to work with continuations, `id` the identity function.
+
+TODO VAI A VEDERE ALLINIZIO DOVE DICE CHE CON L'ACC NON E' GARANTITO ... QUALCOSA
+
+https://fsharpforfunandprofit.com/posts/recursive-types-and-folds/
+
+## APS - Accumulator Passing Style
 
   
 
@@ -91,15 +97,3 @@ Again the shape is like `factAps`'s.
 And the interesting fact is that you can start off with a continuation that resumes from a previous computation, not necessarily from the beginning.
 
   
-
-### CPS
-
-  
-
-`(f v) = (fC v id)` where `f` is the function, `v` the value, `fC` the lifted function to work with continuations, `id` the identity function.
-
-  
-
-TODO VAI A VEDERE ALLINIZIO DOVE DICE CHE CON L'ACC NON E' GARANTITO ... QUALCOSA
-
-https://fsharpforfunandprofit.com/posts/recursive-types-and-folds/

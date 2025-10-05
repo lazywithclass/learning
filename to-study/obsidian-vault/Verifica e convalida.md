@@ -82,7 +82,7 @@ $$
 
 ### Criterio di selezione test
 
-Presi due test un criterio si dice <span class="b">affidabile</span> se entrambi i test hanno successo o entrambi falliscono.
+Presi due test un criterio si dice affidabile se entrambi i test hanno successo o entrambi falliscono.
 
 $$affidabile(C, P) \leftrightarrow \newline (\forall T_{1} \in C, \forall T_{2} \in C \ successo(T_{1}, P) \leftrightarrow successo(T_{2},P))$$
 

@@ -4,7 +4,7 @@ cssclasses:
   - software-engineering
   - italian
 ---
-
+3
 > [!warning] 
 > Questo documento e' incompleto, alcuni concetti che gia' conosco sono stati saltati
 

@@ -79,6 +79,7 @@ TODO integra da slide
 Un utente puo' solo revocare privilegi che esso stesso ha concesso. 
 
 "Un DBA può revocare i privilegi ad un altro DBA" ?
+
 `create user stefano with superuser, password stefano`
 
 
@@ -91,30 +92,23 @@ GRANT SELECT ON imdb.movie TO userB WITH GRANT OPTION;
 -- userB non puo' revocare il privilegio SELECT all'userA
 ```
 
-
-
 ## Sysauth e syscolauth
 
 Sono tabelle del catalogo relazionale.
 
+La tabella con Y N etc Riassume i privilegi attivi su tutti gli oggetti della base dati
 
-La tabella con Y N etc Riassume i privilegi attivi su tutti gli ogetti della base dati
-
-nome e' grantee, creator e' grantor
-T dice se e' Relazione o Vista
+`nome` e' grantee, `creator` e' grantor, `T` dice se e' Relazione o Vista
 
 E' normale che il creatore dia a se stesso tutti i privilegi, viene messo in automatico alla sua `GRANT`.
 
+Revoca ricorsiva
 
+Tolgo all'utente bersaglio, e ricorsivamente a tutti gli utenti che lo avevano ricevuto 
 
-Revoca riorsiva
-
-Tolgo all'utente bersaglio, e ricosrivamente a tutti gli utenti che lo avevano ricevuto 
-
-Una buona idea e' pensarla come se fosse una wuery su una tabella
+Una buona idea e' pensarla come se fosse una query su una tabella.
 
 Prendo come grantor quello che ha appena perso il privilegio, e come tabella e privilegio sono quelli appena revocati: se li trovo li levo.
-
 
 
 Quando ci sono gli 0 vuol dire che non gli ha concesso l'azione, altrimenti c'e' il tempo al quale e' stato dato.

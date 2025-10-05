@@ -45,7 +45,7 @@
     </ul></li>
     <li><code>order by</code> ordina ciò che restituiamo, e’ l’ultima
     cosa che viene fatta; si può specificare <code>DESC</code> per più
-    attributi in base alle necessita’ Si puo’ fare
+    attributi in base alle necessita’ Si può fare
     <code>ORDER BY 2</code> per riferirsi alla colonna
     <code>2</code></li>
     <li><code>extract</code> permette di prendere parti di una data come
@@ -179,7 +179,7 @@
     class="sourceCode sql"><code class="sourceCode sql"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">EXPLAIN</span> <span class="kw">ANALYZE</span> <span class="op">..</span>.</span></code></pre></div>
     <h2 id="query-correlata"><a href="#query-correlata">Query
     correlata</a></h2>
-    <p>Molto inefficiente TODO espandere</p>
+    <p>Molto inefficiente</p>
     <h2 id="query-ricorsive"><a href="#query-ricorsive">Query
     ricorsive</a></h2>
     <p>La tabella <code>sim</code> descrive similarità tra pellicole, la
@@ -300,7 +300,6 @@
 <span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">JOIN</span> sim si <span class="kw">ON</span> ss.s_movie <span class="op">=</span> si.movie1</span>
 <span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">WHERE</span> distance <span class="op">&lt;</span> <span class="dv">3</span></span>
 <span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-    <hr />
     <h2 id="esercizi"><a href="#esercizi">Esercizi</a></h2>
     <figure>
     <img src="attachments/imdb-schema.png" alt="IMDB Schema" />
@@ -819,6 +818,8 @@
 <span id="cb67-11"><a href="#cb67-11" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span>, (<span class="kw">SELECT</span> m <span class="kw">FROM</span> mean)</span>
 <span id="cb67-12"><a href="#cb67-12" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> cast_crew_num</span>
 <span id="cb67-13"><a href="#cb67-13" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> <span class="fu">count</span> <span class="op">&gt;</span> (<span class="kw">SELECT</span> m <span class="kw">FROM</span> mean)</span></code></pre></div>
+    <hr />
+    <p>TODO aggiungere publications.publication e le altre tabelle</p>
     </article>
   </main>
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>

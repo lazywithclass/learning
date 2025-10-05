@@ -40,6 +40,10 @@ $\Pi$ capital case
 
 $\displaystyle\sum_{i=0} ^{\infty} a_i x^i$
 
+$\sum\nolimits_{p\in P}$
+
+$\mid x \mid$
+
 $\lfloor a \rfloor$
 
 $\lceil a \rceil$

@@ -10,7 +10,7 @@ TODO PRENDERE INFO EXTRA DA
 * test driven development by example di Beck
 * e dal GOF
 
-All page numbers (i.e. pag.) are from [GoF's](https://en.wikipedia.org/wiki/Design_Patterns).
+All page numbers are from [GoF](https://en.wikipedia.org/wiki/Design_Patterns).
 
 # Abstract factory
 
@@ -30,6 +30,9 @@ Adatto una singola classe, staticamente, quindi proprio "quella classe".
 
 ![class adapter|300](class-adapter.png)
 
+Un esempio di Class Adapter e' l'adattamento di `State` ad essere osservabile che abbiamo usato molte volte in lab:
+
+![`State` adattato ad `Observable`](attachments/Pasted%20image%2020250630212146.png)
 ## Object Adapter
 
 Adatto un oggetto compatibile con una interfaccia, una gerarchia; perche' posso settare diversi adapter, in base all'esigenza.

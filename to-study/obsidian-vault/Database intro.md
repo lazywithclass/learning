@@ -8,7 +8,7 @@ tags:
 
 # Link utili
 
-[Relational algebra](Relational%20algebra.md)
+[Algebra relazionale](Algebra%20relazionale.md)
 [SQL](SQL.md)
 
 [Ambiente di esecuzione query](https://github.com/lazywithclass/learning/tree/master/postgresql)

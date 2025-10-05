@@ -26,6 +26,7 @@
     https://www.youtube.com/watch?v=TMuno5RZNeE
     https://www.youtube.com/watch?v=BSaAMQVq01E</p>
     <p>http://butunclebob.com/ArticleS.UncleBob.PrinciplesOfOod</p>
+    <pre class="table-of-contents"><code></code></pre>
     <blockquote>
     <p>When considering whether a particular design is appropriate or
     not, one must not simply view the solution in isolation. One must
@@ -35,9 +36,9 @@
     <p>– <a
     href="cpp-report_engineering-notebook_liskov-substitution-principle.pdf">Validity
     is not Intrinsic</a></p>
-    <h1 id="single-responsibility-principle"><a
+    <h2 id="single-responsibility-principle"><a
     href="#single-responsibility-principle">Single responsibility
-    principle</a></h1>
+    principle</a></h2>
     <p><a
     href="https://blog.cleancoder.com/uncle-bob/2014/05/08/SingleReponsibilityPrinciple.html">The
     Single Responsibility Principle - The Clean Code Blog</a></p>
@@ -82,7 +83,7 @@
     alt="img|300" />
     <figcaption aria-hidden="true">img|300</figcaption>
     </figure>
-    <h2 id="benefici"><a href="#benefici">Benefici</a></h2>
+    <h3 id="benefici"><a href="#benefici">Benefici</a></h3>
     <ul>
     <li>ridotto impatto a seguito di modifiche perche’ ogni classe si
     concentra su uno specifico aspetto o funzionalita’ del sistema</li>
@@ -93,8 +94,8 @@
     occupano e non hanno un alto livello di accoppiamento con le altre
     classi, posso usarle anche in altri ambiti</li>
     </ul>
-    <h2 id="related-patterns"><a href="#related-patterns">Related
-    patterns</a></h2>
+    <h3 id="related-patterns"><a href="#related-patterns">Related
+    patterns</a></h3>
     <ul>
     <li><a href="Design%20Pattern.md#Decorator">Decorator</a>: per
     decentralizzare le varie aggiunte, ognuna in una classe decoratrice,
@@ -105,8 +106,8 @@
     <li><a href="Design%20Pattern.md#Factory">Factory</a>: delego la
     creazione di ogni specifico oggetto</li>
     </ul>
-    <h1 id="open-closed-principle"><a
-    href="#open-closed-principle">Open-Closed principle</a></h1>
+    <h2 id="open-closed-principle"><a
+    href="#open-closed-principle">Open-Closed principle</a></h2>
     <p><a
     href="https://courses.cs.duke.edu/fall07/cps108/papers/ocp.pdf">Engineering
     Notebook columns for The C++ Report - The Open-Closed
@@ -135,7 +136,7 @@
     aspetto chiave di OOP, perche’ permette di chiamare codice non
     ancora scritto: cioe’ riconoscendo il tipo concreto dal tipo
     apparente solo a runtime, tengo aperta la possibilita’ di future
-    estensioni. ## Related patterns</p>
+    estensioni. ### Related patterns</p>
     <ul>
     <li><a href="Design%20Pattern.md#Template">Template</a>: definisce
     lo scheletro di un algoritmo in una classe base, alcuni passaggi
@@ -148,9 +149,9 @@
     algoritmo e’ incapsulato nella sua classe che implementa una
     interfaccia condivisa</li>
     </ul>
-    <h1 id="liskov-substitution-principle"><a
+    <h2 id="liskov-substitution-principle"><a
     href="#liskov-substitution-principle">Liskov substitution
-    principle</a></h1>
+    principle</a></h2>
     <p><a
     href="https://www.cs.utexas.edu/~downing/papers/LSP-1996.pdf">Engineering
     Notebook columns for The C++ Report - The Liskov Substitution
@@ -209,8 +210,8 @@
     outputs must not violate any of the contraints established for the
     base class; users of the base class must not be confused by the
     output of the derived class</p>
-    <h1 id="interface-segregation"><a
-    href="#interface-segregation">Interface segregation</a></h1>
+    <h2 id="interface-segregation"><a
+    href="#interface-segregation">Interface segregation</a></h2>
     <p><a
     href="https://www.cs.utexas.edu/~downing/papers/ISP-1996.pdf">Engineering
     Notebook columns for The C++ Report - The Interface Segregation
@@ -241,15 +242,15 @@
     <figcaption
     aria-hidden="true">interface-segregation|400</figcaption>
     </figure>
-    <h2 id="related-patterns-1"><a href="#related-patterns">Related
-    patterns</a></h2>
+    <h3 id="related-patterns-1"><a href="#related-patterns">Related
+    patterns</a></h3>
     <ul>
     <li><a href="Design%20Pattern.md#Observer">Observer</a>: un solo
     metodo <code>update()</code> che e’ l’unico interesse del
     Subject</li>
     </ul>
-    <h1 id="dependency-inversion"><a
-    href="#dependency-inversion">Dependency inversion</a></h1>
+    <h2 id="dependency-inversion"><a
+    href="#dependency-inversion">Dependency inversion</a></h2>
     <p><a
     href="https://www.labri.fr/perso/clement/enseignements/ao/DIP.pdf">Engineering
     Notebook columns for The C++ Report - The Dependency Inversion
@@ -264,7 +265,7 @@
     <p>“Depend on stuff more concrete than me”</p>
     <p>This is pure gold:
     https://blog.cleancoder.com/uncle-bob/2016/01/04/ALittleArchitecture.html
-    ## Benefici</p>
+    ### Benefici</p>
     <ul>
     <li><p>testabilita’ perche’ posso mockare con semplificita’ una
     interfaccia invece di portarmi dietro un intero albero di
@@ -273,7 +274,7 @@
     alle necessita’, quindi ad esempio passare un database PostgreSQL a
     MySQL</p></li>
     <li><p>ridotto accoppiamento perche’ dei cambiamenti nei moduli di
-    basso livello non impattano i moduli di alto livello ## Related
+    basso livello non impattano i moduli di alto livello ### Related
     patterns</p></li>
     <li><p><a href="Design%20Pattern.md#Factory%20method">Factory
     method</a>: definisce una interfaccia per la creazione di un
@@ -287,10 +288,14 @@
     trattare uniformemente parti e insiemi, il client non sa se sta
     parlando con una parte o un insieme</p></li>
     </ul>
-    <h1 id="esempi"><a href="#esempi">Esempi</a></h1>
-    <h2 id="dependency-inversion-e-open-close"><a
+    <h2 id="the-primeagean-on-it"><a href="#the-primeagean-on-it">The
+    Primeagean on it</a></h2>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/TT_RLWmIsbY?si=tsnE7M-qaeAjZ6Lr" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+    </iframe>
+    <h2 id="esempi"><a href="#esempi">Esempi</a></h2>
+    <h3 id="dependency-inversion-e-open-close"><a
     href="#dependency-inversion-e-open-close">Dependency Inversion e
-    Open Close</a></h2>
+    Open Close</a></h3>
     <blockquote>
     <p>Identificare gli aspetti della applicazione che cambiano e
     separarli da cio’ che rimane fisso</p>

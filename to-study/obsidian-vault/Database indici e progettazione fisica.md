@@ -45,18 +45,13 @@ Il tipo di dato `char` usa comunque tutto lo spazio specificato, il `varchar` no
 
 * `char`: 4 byte x char -> 12 byte
 * `integer`: 8 byte
-* `bytea`: non posso saperlo, viene memorizzato in un altro blocco, e referenziato nel blocco dove ci sono gli altri campi
+* `byte`: non posso saperlo, viene memorizzato in un altro blocco, e referenziato nel blocco dove ci sono gli altri campi
 
 Vincoli tipo `PRIMARY KEY` e `UNIQUE` sono di particolare interesse, sono indicizzati, quindi ad accesso ottimizzato, per fare in modo che la ricerca sia particolarmente performante.
 
 Il costo di ricerca all'interno di un blocco e' irrisorio.
 
-
-TODO Controllare se e' corretta la divisione strutture primarie e secondarie
-
 ## Struttura primaria dei file
-
-TODO riempi da slide
 
 "Come finiscono i dati nei blocchi?"; criterio con cui disponiamo i record nei blocchi:
 
@@ -85,7 +80,9 @@ Un affiancamento di strutture secondarie permette di velocizzare i passaggi crit
 
 Ordinamento di un campo detto pseudo-chiave
 
-### Hash
+## Campi di ordinamento
+
+### Strutture ad accesso calcolato
 
 La funzione di hashing deve garantire una buona equi distribuzione dei dati.
 
@@ -101,7 +98,7 @@ Alberi utilizzati per memorizzare dati.
 
 Ho $(k,\ p)$ dove $k$ e' valore della chiave e $p$ e' il puntatore alla posizione di memoria del record. 
 
-## Strutture secondarie
+### Strutture secondarie
 
 Ci permettono di raggiungere i dati in modo efficiente, indici (alberi). Es. `CREATE INDEX`.
 
