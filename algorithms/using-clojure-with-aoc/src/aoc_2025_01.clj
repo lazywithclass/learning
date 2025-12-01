@@ -19,42 +19,12 @@
             [p   \R  _] (recur (inc p) dir (dec clicks-left) zero-counts false)))))
 
 
-(move 50 \R 1)
-(move 50 \R 2)
-(move 50 \L 1)
-(move 50 \L 2)
-;; the following should return {:pos 50 :cnt 10}
-(move 50 \R 1000)
-
-
-;; (defn- move
-;;   "a move L that exceeds 0 is a movement L that starts from 99
-;;    a move R that exceeds 99 is a movement R that starts from 0"
-;;   [dir pos amount]
-;;   (match [dir pos amount]
-;;          [_   _   0] pos
-;;          [\L  0   a] (recur dir 99 (dec a))
-;;          [\L  p   a] (recur dir (dec p) (dec a))
-;;          [\R  99  a] (recur dir 0  (dec a))
-;;          [\R  p   a] (recur dir (inc p) (dec a))))
-
-
 (defn moves [start-pos instructions]
   (reduce (fn [[tot pos-count] [dir amount]]
             (let [{pos :pos cnt :cnt} (move (:pos pos-count) dir amount)]
-              (println "Moving from" (:pos pos-count) "to" pos "with" cnt "zero-crossings, total so far" tot)
               [(+ tot cnt) {:pos pos}]))
           [0 {:pos start-pos :cnt 0}]
           instructions))
-
-
-;; (defn moves [start-pos instructions]
-;;   (reduce (fn [[res pos] [dir amount]]
-;;             (if (= (move dir pos amount) 0)
-;;               [(inc res) (move dir pos amount)]
-;;               [res (move dir pos amount)]))
-;;           [0 start-pos]
-;;           instructions))
 
 
 (defn parse-input [s]
