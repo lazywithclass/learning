@@ -64,7 +64,6 @@
        (str/split-lines s)))
 
 
-(println "ASDASDASD")
 (->> "aoc_2025_01.input"
      io/resource
      slurp
