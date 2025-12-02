@@ -14,6 +14,8 @@
                  [org.clojure/core.match "1.1.0"]
                  [org.clojure/tools.cli "1.2.245"]]
 
+  :plugins      [[lein-javadoc "0.3.0"]]
+
   :target-path "target/%s"
 
   :source-paths ["src"]
