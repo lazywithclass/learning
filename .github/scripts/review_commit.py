@@ -1,53 +1,105 @@
 import os
+import sys
+import base64
 import google.generativeai as genai
 from github import Github
 
-# 1. Setup Configuration
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
 REPO_NAME = os.getenv("REPO_NAME")
 COMMIT_SHA = os.getenv("COMMIT_SHA")
+PROMPT_FILE = os.getenv("PROMPT_FILE", "prompt.md")
 
-# Configure Gemini
+CONTEXT_DIRECTORY = "algorithms/using-clojure-with-aoc"
+
 genai.configure(api_key=GEMINI_API_KEY)
 model = genai.GenerativeModel("gemini-flash-latest")
 
-def get_commit_changes():
-    """Fetches the specific changes (diffs) for the current commit."""
-    g = Github(GITHUB_TOKEN)
-    repo = g.get_repo(REPO_NAME)
-    commit = repo.get_commit(COMMIT_SHA)
+def load_prompt_instructions(filepath):
+    """Reads the custom prompt instructions from a file."""
+    if not os.path.exists(filepath):
+        print(f"Error: Prompt file '{filepath}' not found.")
+        sys.exit(1)
+        
+    try:
+        with open(filepath, "r", encoding="utf-8") as f:
+            return f.read().strip()
+    except Exception as e:
+        print(f"Error reading prompt file: {e}")
+        sys.exit(1)
+
+def get_project_context(repo, commit_sha):
+    """
+    Fetches the full content of all files in the CONTEXT_DIRECTORY
+    at the state of the current commit.
+    """
+    print(f"Fetching project context from: {CONTEXT_DIRECTORY}...")
+    context_data = ""
+    file_count = 0
     
+    try:
+        tree = repo.get_git_tree(commit_sha, recursive=True)
+        
+        for element in tree.tree:
+            if element.path.startswith(CONTEXT_DIRECTORY) and element.type == "blob":
+                valid_extensions = ('.clj', '.edn', '.md', '.txt', '.xml', '.yml')
+                if not element.path.endswith(valid_extensions):
+                    continue
+
+                blob = repo.get_git_blob(element.sha)
+                if blob.encoding == "base64":
+                    content = base64.b64decode(blob.content).decode('utf-8', errors='replace')
+                else:
+                    content = blob.content
+
+                context_data += f"\n\n--- Context File: {element.path} ---\n"
+                context_data += content
+                file_count += 1
+                
+    except Exception as e:
+        print(f"Warning: Could not fetch project context: {e}")
+    
+    print(f"  - Loaded {file_count} files for context.")
+    return context_data
+
+def get_commit_changes(repo, commit):
+    """Fetches the specific changes (diffs) for the current commit."""
     diff_data = ""
     file_count = 0
     
     for file in commit.files:
-        # Optional: Filter again to ensure we only review specific extensions or folders
-        # if not file.filename.startswith("src/"): continue 
-        
-        if file.patch:  # Only include files that have text changes (not binary files)
-            diff_data += f"\n\n--- File: {file.filename} ---\n"
+        if file.patch:  # Only include files that have text changes
+            diff_data += f"\n\n--- Diff: {file.filename} ---\n"
             diff_data += file.patch
             file_count += 1
             
-    return repo, commit, diff_data, file_count
+    return diff_data, file_count
 
-def generate_review(diff_text):
-    """Sends the diff to Gemini for review."""
-    prompt = f"""
-    You are a senior code reviewer. Review the following code changes (git diff).
+def generate_review(diff_text, project_context, base_instructions):
+    """
+    Sends the diff + full project context to Gemini.
+    """
+    final_prompt = f"""
+    {base_instructions}
+
+    =========================================
+    PART 1: PROJECT CONTEXT
+    (Use these files to understand definitions, imports, and architecture. Do not review these files unless they are also in the diff.)
     
-    Instructions:
-    1. Focus on bugs, security vulnerabilities, and code clarity.
-    2. Be concise. Do not summarize what the code does; purely critique it.
-    3. If the code looks good, just say "LGTM".
-    4. Use Markdown formatting.
+    {project_context}
+
+    =========================================
+    PART 2: CODE CHANGES TO REVIEW
+    (Focus your critique/review specifically on these changes)
     
-    Code Changes:
     {diff_text}
     """
     
-    response = model.generate_content(prompt)
+    # Calculate rough token count (4 chars ~= 1 token) to avoid surprises, 
+    # though Gemini Flash handles 1M+ tokens easily.
+    print(f"Sending prompt (~{len(final_prompt)//4} tokens)...")
+    
+    response = model.generate_content(final_prompt)
     return response.text
 
 def main():
@@ -55,18 +107,23 @@ def main():
         print("Error: GEMINI_API_KEY is missing.")
         return
 
-    print(f"Fetching commit {COMMIT_SHA}...")
-    repo, commit, diff_data, file_count = get_commit_changes()
+    g = Github(GITHUB_TOKEN)
+    repo = g.get_repo(REPO_NAME)
+    commit = repo.get_commit(COMMIT_SHA)
+
+    print(f"Loading prompt from {PROMPT_FILE}...")
+    base_instructions = load_prompt_instructions(PROMPT_FILE)
+
+    print(f"Fetching commit changes {COMMIT_SHA}...")
+    diff_data, diff_file_count = get_commit_changes(repo, commit)
     
-    if file_count == 0:
+    if diff_file_count == 0:
         print("No reviewable text changes found.")
         return
 
-    print(f"Sending {len(diff_data)} characters of code to Gemini...")
-    review = generate_review(diff_data)
-    
+    project_context = get_project_context(repo, COMMIT_SHA)
+    review = generate_review(diff_data, project_context, base_instructions)
     print("Posting review to GitHub...")
-    # This posts a comment directly on the commit SHA
     commit.create_comment(f"## 🤖 Gemini AI Review\n\n{review}")
     print("Done!")
 
