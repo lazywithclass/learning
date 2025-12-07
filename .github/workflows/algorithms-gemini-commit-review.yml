@@ -1,0 +1,40 @@
+name: Gemini Commit Review
+
+on:
+  push:
+    paths:
+      - 'algorithms/using-clojure-with-aoc/**'
+
+permissions:
+  contents: read
+  # This permission is required to post comments on commits
+  statuses: write
+  commit-statuses: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  review_commit:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      statuses: write
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install Dependencies
+        run: pip install google-generativeai PyGithub
+
+      - name: Run Gemini Review
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO_NAME: ${{ github.repository }}
+          COMMIT_SHA: ${{ github.sha }}
+        run: python .github/scripts/review_commit.py
