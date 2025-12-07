@@ -3,7 +3,7 @@ name: Gemini Commit Review
 on:
   push:
     paths:
-      - 'algorithms/using-clojure-with-aoc/**'
+      - 'algorithms/using-clojure/**'
 
 permissions:
   contents: write
