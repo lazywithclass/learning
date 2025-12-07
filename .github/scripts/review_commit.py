@@ -8,9 +8,12 @@ GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
 REPO_NAME = os.getenv("REPO_NAME")
 COMMIT_SHA = os.getenv("COMMIT_SHA")
-PROMPT_FILE = os.getenv("PROMPT_FILE", "prompt.md")
 
-CONTEXT_DIRECTORY = "algorithms/using-clojure-with-aoc"
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+default_prompt_path = os.path.join(SCRIPT_DIR, "prompt.md")
+PROMPT_FILE = os.getenv("PROMPT_FILE", default_prompt_path)
+
+CONTEXT_DIRECTORY = "algorithms/using-clojure"
 
 genai.configure(api_key=GEMINI_API_KEY)
 model = genai.GenerativeModel("gemini-flash-latest")

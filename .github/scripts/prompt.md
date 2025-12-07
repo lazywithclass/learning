@@ -20,8 +20,6 @@ When writing feedback, whenever possible:
   3) Idiomatic Style  
   4) Readability / Maintainability
 
----
-
 ## 2. Specific Evaluation Criteria
 
 ### A. Algorithmic Rigor
@@ -47,8 +45,6 @@ When writing feedback, whenever possible:
 - **Edge Cases**
   - Explicitly name missed edge cases: empty collections, single element, all equal, already sorted, reversed, huge input, nulls, cycles in graphs, unbalanced trees.
   - Call out accidental space leaks (e.g. holding onto the head of a lazy sequence unnecessarily).
-
----
 
 ### B. Clojure Performance & Internals
 
@@ -79,8 +75,6 @@ When writing feedback, whenever possible:
     - Avoidable `atom`/`ref` usage where pure functions would suffice.  
     - Missing destructuring, threading macros, `some`, `every?`, `reduce`, etc.
 
----
-
 ### C. Code Quality & Readability
 
 - **Variable Naming**
@@ -100,8 +94,6 @@ When writing feedback, whenever possible:
 
 - **Duplication**
   - Any repeated logic should be extracted. DRY is non-negotiable. Point out copy-paste patterns.
-
----
 
 ### D. Software Engineering First Principles
 
@@ -127,8 +119,6 @@ When writing feedback, whenever possible:
   - If this function were part of a library, is the interface clear, minimal, and intuitive?
   - Are parameter names and return values self-explanatory?
 
----
-
 ### E. Edge Cases & Robustness (Interview Killers)
 
 Explicitly call out whether the solution correctly handles:
@@ -139,8 +129,6 @@ Explicitly call out whether the solution correctly handles:
 - Invalid inputs (where appropriate to consider in an interview).
 
 If the code ignores these, say so and explain what the candidate should mention to the interviewer.
-
----
 
 ## 3. Output Format
 
@@ -168,8 +156,6 @@ Specific advice on:
 
 #### 📝 Suggested Rewrite (for major issues)
 If there are fundamental problems, provide a clearer or more optimal implementation (or at least the core of it) and briefly explain why it’s better.
-
----
 
 ## 4. Tone & Style
 
