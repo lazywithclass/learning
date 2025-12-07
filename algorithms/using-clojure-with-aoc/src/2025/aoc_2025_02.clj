@@ -30,14 +30,16 @@
 
 (defn parse-input [s]
   (->> (re-seq #"(\d+)-(\d+)" s)
-       (map (fn [[_ a b]] ;; _ is to ignore the full match
-              [(Long/parseLong a) (Long/parseLong b)]))))
+       ;; _ is to ignore the full match
+       (map (fn [[_ a b]] [a b]))))
 
 
+;; TODO I dont like that I have to parseLong multiple times
 (->> "aoc_2025_02.input"
      io/resource
      slurp
      parse-input
+     (map (fn [[a b]] [(Long/parseLong a) (Long/parseLong b)]))
      (mapcat unroll-range)
      (map (fn [n] (->> (str n) seq)))
      (filter is-invalid?)
