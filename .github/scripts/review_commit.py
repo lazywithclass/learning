@@ -10,7 +10,7 @@ COMMIT_SHA = os.getenv("COMMIT_SHA")
 
 # Configure Gemini
 genai.configure(api_key=GEMINI_API_KEY)
-model = genai.GenerativeModel("gemini-1.5-flash")
+model = genai.GenerativeModel("gemini-flash-latest")
 
 def get_commit_changes():
     """Fetches the specific changes (diffs) for the current commit."""
