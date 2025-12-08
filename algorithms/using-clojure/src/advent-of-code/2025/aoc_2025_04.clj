@@ -35,27 +35,24 @@
 ;; Consider your complete diagram of the paper roll locations. How many rolls of paper can be accessed by a forklift?
 
 
+(defn- calculate-deltas []
+  (for [r [-1 0 1]
+        c [-1 0 1]
+        :when (not (and (zero? r) (zero? c)))]
+    [r c]))
+
+
 (defn neighbours [lines]
   (let [rows (count lines)
         cols (count (first lines))
-        deltas [[-1 -1] [-1 0] [-1 1]
-                [ 0 -1]        [0  1]
-                [ 1 -1] [ 1 0] [1  1]]]
+        deltas (calculate-deltas)]
     (for [rr (range rows)
-          rc (range cols)]
-      (reduce (fn [acc neighbour-cell] (cond
-                                         (and
-                                            (= (get-in lines [rr rc]) \@)
-                                            (= neighbour-cell \@))
-                                         (inc acc)
-
-                                         (= (get-in lines [rr rc]) \.)
-                                         10
-
-                                         :else acc))
-              0
-              (map (fn [[r c]]
-                     (get-in lines [(+ rr r) (+ rc c)])) deltas)))))
+          rc (range cols)
+          :when (= (get-in lines [rr rc]) \@)]
+      (->> deltas
+           (map (fn [[r c]] (get-in lines [(+ rr r) (+ rc c)])))
+           (filter #(= % \@))
+           count))))
 
 
 (defn- parse-input [s]
