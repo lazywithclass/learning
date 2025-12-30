@@ -39,10 +39,8 @@
 
 
 (defn solve [operations]
-  (->> operations
-       (map (fn [operation]
-              ;; TODO remove reverse
-              (apply (first (reverse operation)) (rest (reverse operation)))))))
+  (map (fn [col] (apply (last col) (butlast col)))
+       operations))
 
 
 ;; even simpler and stunning solution
