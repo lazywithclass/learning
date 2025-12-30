@@ -12,7 +12,8 @@
                  [org.slf4j/slf4j-api "2.0.9"]
                  [ch.qos.logback/logback-classic "1.5.18"]
                  [org.clojure/core.match "1.1.0"]
-                 [org.clojure/tools.cli "1.2.245"]]
+                 [org.clojure/tools.cli "1.2.245"]
+                 [criterium "0.4.6"]]
 
   :plugins      [[lein-javadoc "0.3.0"]]
 
