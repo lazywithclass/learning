@@ -1,6 +1,8 @@
 (ns aoc-2025-07
+  (:import [clojure.lang IPersistentSortedSet])
   (:require [clojure.string :as str]
             [clojure.pprint :as pp]
+            [clojure.lang.IPersistentSortedSet]
             [clojure.java.io :as io]
             [criterium.core :refer [bench quick-bench]]))
 
@@ -122,26 +124,26 @@
 (defn apply-beams [beam-idxs splitter-idxs]
   (loop [beams beam-idxs
          splitters splitter-idxs
-         new-beams []
+         ^IPersistentSortedSet next-beams (sorted-set)
          count 0]
     (let [beam (first beams)
           splitter (first splitters)]
       (cond
         (nil? beam)
-        [(vec (sort (set new-beams))) count]
+        [(vec next-beams) count]
 
         (= beam splitter)
         (recur (rest beams)
                (rest splitters)
-               (conj new-beams (dec splitter) (inc splitter))
+               (conj next-beams (dec splitter) (inc splitter))
                (inc count))
 
         (< splitter beam)
-        (recur beams (rest splitters) new-beams count)
+        (recur beams (rest splitters) next-beams count)
 
         :else
         ;; beam passes through without splitting
-        (recur (rest beams) splitters (conj new-beams (first beams)) count)))))
+        (recur (rest beams) splitters (conj next-beams (first beams)) count)))))
 
 
 ;; (solve [7] [[7]])
@@ -158,24 +160,12 @@
                     (+ count (second (apply-beams beams first-splitters))))))))
 
 
-(defn indexes-of
-  "returns the indexes at which char appears in chars"
-  [chars char]
-  (loop [cs chars
-         idx 0
-         idxs []]
-    (let [curr (first cs)]
-      (cond
-        (empty? cs)   idxs
-        (= curr char) (recur (rest cs) (inc idx) (conj idxs idx))
-        :else         (recur (rest cs)  (inc idx) idxs)))))
-
-
 (defn parse-input [input]
   (->> input
        str/split-lines
-       (#(map (fn [line] (indexes-of (seq line) \^)) %))
-       (#(filter (complement empty?) %))))
+       (map (fn [line] 
+               (keep-indexed #(when (= %2 \^) %1) line)))
+       (filter seq)))
 
 
 (->> "aoc_2025_07.input"
