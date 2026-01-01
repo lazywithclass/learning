@@ -148,16 +148,17 @@
 
 ;; (solve [7] [[7]])
 (defn solve
-  [beam-idxs splitter-idxs]
-   (loop [beams beam-idxs
-          splitters splitter-idxs
-          count 0]
-     (let [first-splitters (first splitters)]
-     (cond
-       (empty? first-splitters) count
-       :else (recur (first (apply-beams beams first-splitters))
-                    (rest splitters)
-                    (+ count (second (apply-beams beams first-splitters))))))))
+  [beam-idxs splitter-layers]
+   (loop [current-beams beam-idxs
+          remaining-layers splitter-layers
+          total-splits 0]
+     (let [current-splitters (first remaining-layers)]
+       (cond
+         (empty? current-splitters) total-splits
+         :else (let [[next-beams split-count] (apply-beams current-beams current-splitters)]
+                 (recur next-beams
+                        (rest remaining-layers)
+                        (+ total-splits split-count)))))))
 
 
 (defn parse-input [input]
