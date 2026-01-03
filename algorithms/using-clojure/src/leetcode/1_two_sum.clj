@@ -31,7 +31,11 @@
 ;;   is it there?
 ;;     if so finished
 ;;     if not continue
-(defn find-tot [^PersistentVector numbers target]
+;;
+;; this solution does one pass too much to build the map
+;; the solution is to build the map while iterating and considering it
+;; as the set of non working solutions
+(defn find-tot-not-there-yet [^PersistentVector numbers target]
   (let [m (reduce-kv
            (fn [m idx n] (assoc m n idx))
            {}
@@ -42,6 +46,20 @@
         (if (m wanted)
           [(m num) (m wanted)]
           (recur (rest nums)))))))
+
+
+;; processed stores {value index} for already processed numbers
+;; the idea is that if the map hasnt seen the missing number yet
+;; we need to continue recurring
+(defn find-tot [^PersistentVector numbers target]
+  (loop [i 0
+         processed {}]
+      (let [num              (nth numbers i)
+            complement       (- target num)
+            complement-index (get processed complement)]
+        (if complement-index
+          [complement-index i]
+          (recur (inc i) (assoc processed num i))))))
 
 
 (reduce-kv (fn [m k v] (assoc m k v)) {} [1 2 3 4 5])
