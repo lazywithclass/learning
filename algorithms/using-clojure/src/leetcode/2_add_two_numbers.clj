@@ -57,13 +57,13 @@
 
 ;; this is a better approach
 (defn sum-lists [l1 l2]
-  (letfn [(sum-step [l1 l2 carry]
+  (letfn [(sum-step [l1 l2 ^long carry]
             (lazy-seq
               (if (and (empty? l1) (empty? l2) (zero? carry))
                 nil
                 (let [n1  (or (first l1) 0)
                       n2  (or (first l2) 0)
-                      tot (+ n1 n2 carry)]
+                      ^long tot (+ n1 n2 carry)]
                   (cons (rem tot 10)
                         (sum-step (rest l1) (rest l2) (quot tot 10)))))))]
     (sum-step l1 l2 0)))
