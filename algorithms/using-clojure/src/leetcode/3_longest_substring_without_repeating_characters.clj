@@ -3,9 +3,10 @@
 
 
 ;; Given a sequence, find the length of the longest subsequence without duplicate characters.
+;; (I've changed the text of the problem, from string to sequence)
 
 
-;; following solution uses too much space, O(n)
+;; following solution uses too much space
 ;; I also mistakenly returned the whole longest subseq, instead just the len is required
 (defn longest-substr [^PersistentVector s]
   (loop [idx 0
@@ -25,24 +26,24 @@
         (recur (inc idx) (assoc seen element idx) (conj current element) longest)))))
 
 
-;; O(1) space
+;; optimized version for space
 (defn longest-substr [^PersistentVector s]
-  (loop [win-beg 0
-         win-end 0
+  (loop [^long left 0
+         ^long right 0
          seen {}
-         max-len 0]
-    (let [element (get s win-beg)]
+         ^long max-len 0]
+    (let [element (get s right)]
       (if (nil? element)
         max-len
-        (let [prev-idx (get seen element)
-              new-end  (if (and prev-idx (>= prev-idx win-end))
+        (let [^long prev-idx (get seen element)
+              ^long new-end  (if (and prev-idx (>= prev-idx left))
                          (inc prev-idx)
-                         win-end)
-              new-len  (- win-beg new-end -1)
-              new-max  (max max-len new-len)]
-          (recur (inc win-beg)
+                         left)
+              ^long new-len  (- right new-end -1)
+              ^long new-max  (max max-len new-len)]
+          (recur (inc right)
                  new-end
-                 (assoc seen element win-beg)
+                 (assoc seen element right)
                  new-max))))))
 
 
