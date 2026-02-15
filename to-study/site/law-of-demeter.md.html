@@ -6,59 +6,62 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <link rel="stylesheet" href="css/latex.css">
   <link rel="stylesheet" href="css/prism.css">
+  <link rel="stylesheet" href="css/prism-rainbow-parens.css">
   <link rel="stylesheet" href="css/index.css">
 </head>
 <body class="latex-dark">
   <main>
     <article>
     <h1>Law of Demeter</h1>
-    <figure>
-    <img src="attachments/Pasted%20image%2020250121212823.png"
-    alt="Demetra, dea greca della natura, dei raccolti, e delle messiCosi come i raccolti crescono in campi appositi, i moduli nel software devono operare all’interno dei loro campi di interazione, minimizzando le dipendenze, riducendo il diffondersi della conoscenza del loro funzionamento interno" />
-    <figcaption aria-hidden="true">Demetra, dea greca della natura, dei
-    raccolti, e
-    delle messi<label class="sidenote-toggle sidenote-number"></label><span
-    class="sidenote">Cosi come i raccolti crescono in campi appositi, i
-    moduli nel software devono operare all’interno dei loro campi di
-    interazione, minimizzando le dipendenze, riducendo il diffondersi
-    della conoscenza del loro funzionamento interno</span></figcaption>
-    </figure>
-    <h2 id="obiettivo"><a href="#obiettivo">Obiettivo</a></h2>
-    <p>Obiettivo e’ ridurre l’accoppiamento tra gli oggetti e promuovere
-    la modularità del codice. E’ anche chiamato <a
-    href="https://en.wikipedia.org/wiki/Law_of_Demeter">principle of
-    least knowledge</a>, o in modo colloquiale riassunto con “gli amici
-    dei miei amici non sono miei amici”. Anche citato in “tell don’t
-    ask”.</p>
-    <p>Maggiore e’ il numero di oggetti con cui parli, maggiore e’ la
-    probabilità di rompersi quando questi oggetti cambiano.</p>
-    <blockquote>
-    <p>The fundamental goal […] is to write shy code, code that doesn’t
-    reveal too much of itself to anyone else and doesn’t talk to others
-    any more than is necessary. Shy code keeps to itself, not like that
-    gossipy neighbor who’s involved in everyone else’s comings and
-    goings.</p>
-    </blockquote>
-    <p>– https://media.pragprog.com/articles/jan_03_enbug.pdf ##
-    Istruzioni</p>
-    <p>Limitare le interazioni tra gli oggetti ad un numero ristretto di
-    amici stretti. Meno conosco gli altri oggetti piu’ e’ facile che
-    possano cambiare. Il codice di un metodo dovrebbe accedere
-    solo<label class="sidenote-toggle sidenote-number"></label><span
-    class="sidenote">Limitazioni analoghe a quella che in programmazione
-    funzionale e’ una funzione pura</span> a:</p>
     <ul>
-    <li><code>this</code></li>
-    <li>i parametri</li>
-    <li>oggetti creati all’interno del metodo</li>
-    <li>(solo se proprio necessario) oggetti disponibili
-    globalmente</li>
+    <li><a href="#obiettivo" id="toc-obiettivo">Obiettivo</a></li>
     </ul>
-    <p>Un esempio di non applicazione potrebbe essere: “Faccio un
-    <code>get</code>, manipolo cio’ che ho ottenuto, e faccio un
-    <code>set</code>.”</p>
+<figure>
+<img src="attachments/Pasted%20image%2020250121212823.png"
+alt="Demetra, dea greca della natura, dei raccolti, e delle messiCosi come i raccolti crescono in campi appositi, i moduli nel software devono operare all’interno dei loro campi di interazione, minimizzando le dipendenze, riducendo il diffondersi della conoscenza del loro funzionamento interno" />
+<figcaption aria-hidden="true">Demetra, dea greca della natura, dei
+raccolti, e
+delle messi<label class="sidenote-toggle sidenote-number"></label><span
+class="sidenote">Cosi come i raccolti crescono in campi appositi, i
+moduli nel software devono operare all’interno dei loro campi di
+interazione, minimizzando le dipendenze, riducendo il diffondersi della
+conoscenza del loro funzionamento interno</span></figcaption>
+</figure>
+<h2 id="obiettivo"><a href="#obiettivo">Obiettivo</a></h2>
+<p>Obiettivo e’ ridurre l’accoppiamento tra gli oggetti e promuovere la
+modularità del codice. E’ anche chiamato <a
+href="https://en.wikipedia.org/wiki/Law_of_Demeter">principle of least
+knowledge</a>, o in modo colloquiale riassunto con “gli amici dei miei
+amici non sono miei amici”. Anche citato in “tell don’t ask”.</p>
+<p>Maggiore e’ il numero di oggetti con cui parli, maggiore e’ la
+probabilità di rompersi quando questi oggetti cambiano.</p>
+<blockquote>
+<p>The fundamental goal […] is to write shy code, code that doesn’t
+reveal too much of itself to anyone else and doesn’t talk to others any
+more than is necessary. Shy code keeps to itself, not like that gossipy
+neighbor who’s involved in everyone else’s comings and goings.</p>
+</blockquote>
+<p>– https://media.pragprog.com/articles/jan_03_enbug.pdf ##
+Istruzioni</p>
+<p>Limitare le interazioni tra gli oggetti ad un numero ristretto di
+amici stretti. Meno conosco gli altri oggetti piu’ e’ facile che possano
+cambiare. Il codice di un metodo dovrebbe accedere
+solo<label class="sidenote-toggle sidenote-number"></label><span
+class="sidenote">Limitazioni analoghe a quella che in programmazione
+funzionale e’ una funzione pura</span> a:</p>
+<ul>
+<li><code>this</code></li>
+<li>i parametri</li>
+<li>oggetti creati all’interno del metodo</li>
+<li>(solo se proprio necessario) oggetti disponibili globalmente</li>
+</ul>
+<p>Un esempio di non applicazione potrebbe essere: “Faccio un
+<code>get</code>, manipolo cio’ che ho ottenuto, e faccio un
+<code>set</code>.”</p>
     </article>
   </main>
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   <script src="js/prism.min.js"></script>
+  <script src="js/prism-rainbow-parens.js"></script>
+  <script>Prism.highlightAll();</script>
 </body>

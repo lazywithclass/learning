@@ -5,8 +5,7 @@ tags:
   - fsm
   - italian
 ---
-
-```table-of-contents style:nestedOrderedList
+```table-of-contents
 ```
 
 Nascono per descrivere sistemi concorrenti.

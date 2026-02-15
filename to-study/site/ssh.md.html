@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <link rel="stylesheet" href="css/latex.css">
+  <link rel="stylesheet" href="css/prism.css">
+  <link rel="stylesheet" href="css/prism-rainbow-parens.css">
+  <link rel="stylesheet" href="css/index.css">
+</head>
+<body class="latex-dark">
+  <main>
+    <article>
+    <h1>ssh</h1>
+    <ul>
+    <li><a href="#cleanly-closing-a-tunnel"
+    id="toc-cleanly-closing-a-tunnel">Cleanly closing a tunnel</a></li>
+    </ul>
+<h2 id="cleanly-closing-a-tunnel"><a
+href="#cleanly-closing-a-tunnel">Cleanly closing a tunnel</a></h2>
+<p><a href="https://unix.stackexchange.com/a/525388/4855">source</a></p>
+<p>```bash CTRL_SOCKET=/app/docker/tunnel-socket<br />
+echo “SSH tunnel: starting”<br />
+ssh   -q   -M -S “$CTRL_SOCKET”   -o “StrictHostKeyChecking=no” -o
+“UserKnownHostsFile=/dev/null”   -i ./docker/tunnel_key   -f -N -D 8443
+user@host</p>
+<p>echo “SSH tunnel: started”</p>
+<p>sleep 10</p>
+<p>echo “SSH tunnel: killing”<br />
+ssh -S “$CTRL_SOCKET” -O exit user@host</p>
+    </article>
+  </main>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script src="js/prism.min.js"></script>
+  <script src="js/prism-rainbow-parens.js"></script>
+  <script>Prism.highlightAll();</script>
+</body>

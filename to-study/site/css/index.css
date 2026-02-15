@@ -28,6 +28,10 @@ h6 a {
   text-decoration: none !important;
 }
 
+pre.table-of-contents {
+  display: none;
+}
+
 iframe {
   border: none !important;
 }

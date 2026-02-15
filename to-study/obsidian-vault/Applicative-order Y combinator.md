@@ -28,6 +28,7 @@ Start with a length function defined for the empty list
  eternity)
 ```
 
+
 `eternity` is a function that never returns.
 This is the length function defined for a list of length 1, instead of eternity there's another instance of the function itself, allowing for an extra "iteration".
 `eternity` is the value passed to `length` at the last "iteration".

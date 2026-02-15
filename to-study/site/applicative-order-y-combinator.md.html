@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <link rel="stylesheet" href="css/latex.css">
+  <link rel="stylesheet" href="css/prism.css">
+  <link rel="stylesheet" href="css/prism-rainbow-parens.css">
+  <link rel="stylesheet" href="css/index.css">
+</head>
+<body class="latex-dark">
+  <main>
+    <article>
+    <h1>Applicative-order Y combinator</h1>
+    <ul>
+    <li><a href="#the-y-combinator" id="toc-the-y-combinator">The Y
+    combinator</a>
+    <ul>
+    <li><a href="#starting-step" id="toc-starting-step">Starting
+    step</a></li>
+    <li><a href="#refactoring-step"
+    id="toc-refactoring-step">Refactoring step</a></li>
+    <li><a href="#nobody-cares-what-function-we-pass-to-make-length"
+    id="toc-nobody-cares-what-function-we-pass-to-make-length">“Nobody
+    cares what function we pass to make-length”</a></li>
+    <li><a
+    href="#it-no-longer-contains-the-function-that-looks-like-length"
+    id="toc-it-no-longer-contains-the-function-that-looks-like-length">“It
+    no longer contains the function that looks like length”</a></li>
+    <li><a href="#so-what-do-we-got" id="toc-so-what-do-we-got">So, what
+    do we got?</a></li>
+    </ul></li>
+    </ul>
+<pre class="language-table-of-contents"><code></code></pre>
+<h2 id="the-y-combinator"><a href="#the-y-combinator">The Y
+combinator</a></h2>
+<p>(or actually Z combinator, as I’ve later discovered)</p>
+<p>This started with The Little Schemer (which is also the source of all
+these examples), and it stumped me for more time than I like to
+admit.</p>
+<p>Code is in Scheme.</p>
+<h3 id="starting-step"><a href="#starting-step">Starting step</a></h3>
+<p>Start with a length function defined for the empty list</p>
+<pre class="language-scheme"><code>((lambda (length)
+   (lambda (l)
+     (cond
+       ((null? l) 0)
+       (else (add1 (length (cdr l)))))))
+ eternity)</code></pre>
+<p><code>eternity</code> is a function that never returns. This is the
+length function defined for a list of length 1, instead of eternity
+there’s another instance of the function itself, allowing for an extra
+“iteration”. <code>eternity</code> is the value passed to
+<code>length</code> at the last “iteration”.</p>
+<pre class="language-scheme"><code>((lambda (length)
+   (lambda (l)
+     (cond
+       ((null? l) 0)
+       (else (add1 (length (cdr l)))))))
+ ((lambda (length)
+   (lambda (l)
+     (cond
+       ((null? l) 0)
+       (else (add1 (length (cdr l)))))))
+  eternity))</code></pre>
+<h3 id="refactoring-step"><a href="#refactoring-step">Refactoring
+step</a></h3>
+<p>As this grows it’s easier to spot the duplication. Let’s remove
+that.</p>
+<p>The following</p>
+<pre class="language-scheme"><code>(lambda (length)
+   (lambda (l)
+     (cond
+       ((null? l) 0)
+       (else (add1 (length (cdr l)))))))</code></pre>
+<p>receives the <code>length</code> function, but you could think of it
+as “being” the <code>length</code> function. So let’s receive it as
+parameter in a function and apply it to eternity.</p>
+<pre class="language-scheme"><code>((lambda (make-length)
+   (make-length eternity))
+ (lambda (length)
+   (lambda (l)
+     (cond
+       ((null? l) 0)
+       (else (add1 (length (cdr l))))))))</code></pre>
+<p>Now it’s easier to show the <code>length</code> function for a list
+of length <code>&lt;= 3</code>, we just need to prepare for such
+scenario in the first part</p>
+<pre class="language-scheme"><code>((lambda (make-length)
+   (make-length 
+    (make-length
+     (make-length
+      (make-length eternity)))))
+ (lambda (length)
+   (lambda (l)
+     (cond
+       ((null? l) 0)
+       (else (add1 (length (cdr l))))))))</code></pre>
+<h3 id="nobody-cares-what-function-we-pass-to-make-length"><a
+href="#nobody-cares-what-function-we-pass-to-make-length">“Nobody cares
+what function we pass to make-length”</a></h3>
+<p>(pag. 165)</p>
+<p>That is because at the last iteration we’re going to following the
+<code>(null? l)</code> branch of the <code>cond</code>, because there
+are no more elements left in the list, so we don’t care what we
+initially pass to <code>make-length</code>.</p>
+<p>So we get</p>
+<pre class="language-scheme"><code>((lambda (make-length)
+   (make-length make-length))
+ (lambda (make-length)
+   (lambda (l)
+     (cond
+       ((null? l) 0)
+       (else (add1 ((make-length make-length) 
+                    (cdr l))))))))</code></pre>
+<p>So that we bootstrap at the beginning passing
+<code>make-length</code> to itself (as we said anything will do), and
+then we add one more step just before going on with recursion once more.
+So we’re expanding the <code>length</code> function on the fly when we
+find ourselves in the need “for one more”.</p>
+<h3 id="it-no-longer-contains-the-function-that-looks-like-length"><a
+href="#it-no-longer-contains-the-function-that-looks-like-length">“It no
+longer contains the function that looks like length”</a></h3>
+<p>So we add another lambda-layer</p>
+<pre class="language-scheme"><code>((lambda (make-length)
+   (make-length make-length))
+ (lambda (make-length)
+   ((lambda (length)
+      (lambda (l)
+        (cond
+          ((null? l) 0)
+          (else (add1 (length (cdr l)))))))
+    (make-length make-length))))</code></pre>
+<p>But this never stops, because Scheme evaluates expressions in
+applicative order, so</p>
+<pre class="language-scheme"><code>(f (g x))</code></pre>
+<p>means that <code>g</code> is applied to <code>x</code> and then
+<code>f</code> is applied onto the result. So we use a thunk to get lazy
+evaluation.</p>
+<p>First we start with the previous definition, and we add the
+<code>lambda</code></p>
+<pre class="language-scheme"><code>((lambda (make-length)
+   (make-length make-length))
+ (lambda (make-length)
+   (lambda (l)
+     (cond
+       ((null? l) 0)
+       (else (add1 ((lambda (x) ((make-length make-length) x)) 
+                    (cdr l))))))))</code></pre>
+<p>Then we move this new <code>lambda</code> out to get the
+<code>length</code> function</p>
+<pre class="language-scheme"><code>((lambda (make-length)
+   (make-length make-length))
+ (lambda (make-length)
+   ;; len function
+   ((lambda (length)
+     (lambda (l)
+       (cond
+         ((null? l) 0)
+         (else (add1 (length (cdr l)))))))
+    ;; len function
+    (lambda (x) ((make-length make-length) x)))))</code></pre>
+<p>Now we extract the <code>length</code> function</p>
+<pre class="language-scheme"><code>((lambda (len)
+  ((lambda (make-length)
+     (make-length make-length))
+   (lambda (make-length)
+     (len (lambda (x) ((make-length make-length) x))))))
+ ;; pass the functional to the combinator
+ (lambda (length) 
+   (lambda (l) 
+     (cond 
+       ((null? l) 0) 
+       (else (add1 (length (cdr l))))))))</code></pre>
+<p>And the first part is the Applicative-order Y Combinator.</p>
+<p>The functional is like a “template” that says “given a
+<code>length</code> function, here’s how to build a <code>length</code>
+function.” Y finds the function that, when you plug it into that
+template, you get itself back out. The functional isn’t recursive, but
+it describes recursion; Y “ties the knot” and produces the actual
+recursive function.</p>
+<h3 id="so-what-do-we-got"><a href="#so-what-do-we-got">So, what do we
+got?</a></h3>
+<p>The outer</p>
+<pre class="language-scheme"><code>(lambda (make-length)
+  (make-length make-length))</code></pre>
+<p>produces the first <code>length</code> function while the inner one
+adds one more step right at the last moment, when we decided we need to
+recur one more time (at least) to find the result.</p>
+    </article>
+  </main>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script src="js/prism.min.js"></script>
+  <script src="js/prism-rainbow-parens.js"></script>
+  <script>Prism.highlightAll();</script>
+</body>
