@@ -39,3 +39,9 @@ fi
 ## Override `ENTRYPOINT`
 
 Just pass `--entrypoint` to `docker run ...`
+
+## Space issues
+
+`docker system df` to get how much space is being used, reclaimed is what the next command clears.
+
+`docker system prune -a --volumes` "BURN THEM ALL!"
