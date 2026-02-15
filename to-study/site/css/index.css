@@ -28,7 +28,11 @@ h6 a {
   text-decoration: none !important;
 }
 
-pre.table-of-contents {
+/* due to the way I add "language" in the pre-processing build step
+ * I have to specify the following awkwark selector
+ * 
+*/
+pre.language-table-of-contents {
   display: none;
 }
 
