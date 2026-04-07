@@ -1,0 +1,72 @@
+.canvas-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background-color: #f9f9f9;
+    overflow: hidden;
+}
+
+.node {
+    position: absolute;
+    border: 1px solid #ccc;
+    padding: 10px;
+    background: #fff;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+    border-radius: 4px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    overflow: hidden;
+}
+
+.node.file {
+    background-color: #e8f4fd;
+    border-color: #b3d9ff;
+}
+
+.node.text {
+    background-color: #fff;
+    color: #333;
+}
+
+.node.link {
+    background-color: #f0f8ff;
+    border-color: #87ceeb;
+}
+
+.node.group {
+    background-color: #f5f5f5;
+    border: 2px dashed #ccc;
+    font-weight: bold;
+}
+
+.node-text-content {
+    margin: 0;
+    line-height: 1.4;
+}
+
+.node-link-content {
+    display: block;
+    color: #0066cc;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.node-file-content {
+    margin: 0;
+}
+
+.edges-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.edge-line {
+    stroke: #666;
+    stroke-width: 2;
+    stroke-dasharray: 5,5;
+}

@@ -48,7 +48,7 @@ http://butunclebob.com/ArticleS.UncleBob.PrinciplesOfOod
 
 "Incoraggia un'alta coesione interna (tutti i metodi hanno a che fare con lo stesso obiettivo) e un alto disaccoppiamento esterno, porta ad una buona modularizzazione"
 
-"This principle is about people."
+"This principle is about people": "focus modules on the sources that cause them to change, it is people who request changes to software, and therefore it is people to whom our modules are responsible", people could be separated in roles and actors, two actors could be the same person, in that case they are playing two different roles.
 
 This is the reason we do not put SQL in JSPs. This is the reason we do not generate HTML in the modules that compute results. This is the reason that business rules should not know the database schema. This is the reason we separate concerns.
 

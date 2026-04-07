@@ -4,6 +4,13 @@ cssclasses:
 tags:
   - nixos
 ---
+## Regain disk space
+
+
+```shell
+$ nix store optimise
+```
+
 ## Look for config options
 
 https://nix-community.github.io/home-manager/options.xhtml

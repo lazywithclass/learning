@@ -1,0 +1,26 @@
+nat : type.
+succ : nat -> nat.
+0 : nat.
+1 = succ 0.
+2 = succ 1.
+3 = succ 2.
+4 = succ 3.
+5 = succ 4.
+6 = succ 5.
+7 = succ 6.
+8 = succ 7.
+9 = succ 8.
+
+plus : nat -> nat -> nat -> type.
+plus/z : plus 0 Y Y.
+plus/s : plus (succ X) Y (succ Z)
+         <- plus X Y Z.
+%mode plus +X +Y -Z.
+%query 1 1 plus 0 0 R.
+%query 1 1 plus 0 (succ 0) R.
+%query 1 1 plus (succ 0) (succ 0) R.
+
+
+% follows the GEB MU game proof
+
+
