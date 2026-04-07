@@ -1,0 +1,9 @@
+{:paths ["src"]
+ :deps
+ {org.clojure/clojure    {:mvn/version "1.12.0"}
+  org.clojure/core.async {:mvn/version "1.9.808-alpha1"}
+  org.clojure/data.xml   {:mvn/version "0.2.0-alpha8"}
+  clj-http/clj-http      {:mvn/version "3.13.0"}
+  io.github.clojure/core.async.flow-monitor
+    {:git/tag "v0.1.4" :git/sha "9b8c327"}}
+ :main-opts ["-m" "core-async-flow-spike.core"]}
