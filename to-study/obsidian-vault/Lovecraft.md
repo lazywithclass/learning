@@ -44,6 +44,8 @@ Un'illustrazione e una vecchia casa
 
 La paura in agguato
 
+La Casa Stregata
+
 ## C
 
 Innominabile
